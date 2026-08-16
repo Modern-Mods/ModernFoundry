@@ -61,3 +61,31 @@
 - Production build or compile-only check: not rerun; this change only gates the release step after the already-passing Gradle builds.
 - Manual validation: GitHub release lookup/publish was not run locally against the repositories; it requires GitHub Actions credentials.
 - Tests created or run: workflow YAML was parsed successfully and `git diff --check` was run.
+
+## 2026-08-16 - Fix Gradle wrapper permissions in GitHub Actions
+
+**Prompt / Task**
+- Fix the ModernFoundry GitHub workflow failure reporting `./gradlew: Permission denied` while building Hilt.
+
+**What Changed**
+- Added a wrapper-permission step that runs `chmod +x` for both `Hilt/gradlew` and `ModernFoundry/gradlew` before either build.
+
+**Steps Taken**
+- Used the workflow log to identify the failing command and inspected both repositories' tracked wrapper modes.
+- Confirmed both wrappers are tracked as mode `100644`, so executable permission cannot be assumed on the Ubuntu runner.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: ModernFoundry `.github/workflows/build.yml`.
+- Owning module/system: GitHub Actions Linux build setup.
+- Existing logic reused or extracted: the existing Hilt and ModernFoundry Gradle wrappers.
+- Net line change: one workflow step; no Java source changes.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The permission fix is applied once at the workspace root and covers both checked-out repositories before the included-build chain starts.
+
+**Build / Validation**
+- Production build or compile-only check: not rerun; the failure occurred before Gradle started and the fix only changes runner permissions.
+- Manual validation: GitHub Actions rerun is still required to confirm the remote runner proceeds past Hilt.
+- Tests created or run: tracked mode inspection, workflow YAML parse, and `git diff --check`.
