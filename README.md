@@ -73,6 +73,12 @@ The goal is for material choice, part choice, and modifier choice to create mean
 
 Modern Foundry is under active development. The current source is forked from the original MIT Source Code, and AI was utilzied to assist in the porting process, as well as create promotional material such as the thumbnail and banner art.
 
+## Automated builds and releases
+
+Pushes to `Neo/1.21.1` run the GitHub Actions workflow in `.github/workflows/build.yml`. It checks out the `main` branch of [Hilt](https://github.com/Modern-Mods/Hilt) beside Modern Foundry, builds Hilt first, and then builds Modern Foundry against that same Hilt checkout.
+
+Each new `mod_version` publishes a GitHub release marked **Latest** with the current `ModernFoundry-1.21.1-<version>-NeoForge.jar`. Builds still run on every push, but release creation is skipped when that version already has a release. Increment `mod_version` when a new release/build number is ready. Hilt follows the same rule on its `main` branch.
+
 ## Credits and attribution
 
 [Tinker's Construct - Original Mod](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct)
