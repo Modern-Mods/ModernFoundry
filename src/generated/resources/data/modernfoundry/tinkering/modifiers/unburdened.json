@@ -1,0 +1,29 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.1,
+      "operation": "add",
+      "stat": "modernfoundry:use_item_speed"
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "modernfoundry:player.use_item_speed",
+      "each_level": 0.05,
+      "operation": "addition",
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor/worn"
+      },
+      "tooltip_style": "percent"
+    }
+  ],
+  "tooltip_display": "always"
+}

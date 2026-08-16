@@ -1,0 +1,26 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:enchantment_ignoring_protection",
+      "level": 1,
+      "name": "minecraft:fire_protection"
+    },
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": {
+        "type": "hilt:and",
+        "predicates": [
+          "hilt:can_protect",
+          {
+            "type": "hilt:attacker",
+            "entity_type": "hilt:fire_immune",
+            "which": "causing"
+          }
+        ]
+      },
+      "each_level": 1.25
+    }
+  ],
+  "tooltip_display": "always"
+}

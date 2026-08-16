@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/slime/earth/bud_small",
+  "ingredient": {
+    "item": "modernfoundry:small_earth_slime_crystal_bud"
+  },
+  "rate": "gem",
+  "result": {
+    "amount": 250,
+    "tag": "c:slime"
+  },
+  "temperature": 50,
+  "time": 31
+}

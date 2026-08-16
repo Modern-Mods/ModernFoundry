@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/soup/mushroom",
+  "cast": {
+    "item": "minecraft:bowl"
+  },
+  "cast_consumed": true,
+  "cooling_time": 1,
+  "fluid": {
+    "amount": 250,
+    "tag": "c:mushroom_stew"
+  },
+  "result": "minecraft:mushroom_stew"
+}

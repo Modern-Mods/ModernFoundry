@@ -1,0 +1,169 @@
+package modernmods.modernfoundry.tools.modules;
+
+import lombok.Getter;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.UseAnim;
+import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.hilt.client.TooltipKey;
+import modernmods.hilt.data.loadable.mapping.SimpleRecordLoadable;
+import modernmods.hilt.data.loadable.primitive.EnumLoadable;
+import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.modernfoundry.library.modifiers.ModifierEntry;
+import modernmods.modernfoundry.library.modifiers.ModifierHooks;
+import modernmods.modernfoundry.library.modifiers.hook.armor.EquipmentChangeModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.InteractionSource;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.KeybindInteractModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.UsingToolModifierHook;
+import modernmods.modernfoundry.library.modifiers.modules.ModifierModule;
+import modernmods.modernfoundry.library.module.ModuleHook;
+import modernmods.modernfoundry.library.tools.capability.TinkerDataCapability;
+import modernmods.modernfoundry.library.tools.capability.TinkerDataKeys;
+import modernmods.modernfoundry.library.tools.context.EquipmentChangeContext;
+import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
+import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
+
+import java.util.List;
+
+/**
+ * Shared logic for {@link modernmods.modernfoundry.tools.data.ModifierIds#scope} and {@link modernmods.modernfoundry.tools.data.ModifierIds#zoom}.
+ * TODO 1.21: move to {@link modernmods.modernfoundry.tools.modules.interaction}
+ */
+public enum ZoomModule implements ModifierModule, GeneralInteractionModifierHook, KeybindInteractModifierHook, UsingToolModifierHook, EquipmentChangeModifierHook {
+  SPYGLASS(ModifierHooks.GENERAL_INTERACT, ModifierHooks.TOOL_USING, ModifierHooks.EQUIPMENT_CHANGE, ModifierHooks.ARMOR_INTERACT) {
+    @Override
+    public void onUsingTick(IToolStackView tool, ModifierEntry modifier, LivingEntity living, int useDuration, int timeLeft, ModifierEntry activeModifier) {
+      // running on first usage tick means zoom will work if another modifier clicks as well
+      if (timeLeft == useDuration) {
+        living.playSound(SoundEvents.SPYGLASS_USE, 1.0F, 1.0F);
+        if (living.level().isClientSide) {
+          setZoom(modifier, living, 0.1f);
+        }
+      }
+    }
+  },
+  SCOPE(ModifierHooks.GENERAL_INTERACT, ModifierHooks.TOOL_USING, ModifierHooks.EQUIPMENT_CHANGE) {
+    @Override
+    public void onUsingTick(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int useDuration, int timeLeft, ModifierEntry activeModifier) {
+      if (entity.level().isClientSide) {
+        int useTime = useDuration - timeLeft;
+        if (useTime > 0) {
+          float drawTime = tool.getPersistentData().getInt(GeneralInteractionModifierHook.KEY_DRAWTIME);
+          if (drawTime <= 0) {
+            drawTime = 20;
+          }
+          float fov = 1 - (0.6f * Math.min(useTime / drawTime, 1));
+          setZoom(modifier, entity, fov);
+        }
+      }
+    }
+  };
+
+  /** Loader instance */
+  public static final RecordLoadable<ZoomModule> LOADER = new SimpleRecordLoadable<>(new EnumLoadable<>(ZoomModule.class), "style", null, false);
+
+  @Getter
+  private final List<ModuleHook<?>> defaultHooks;
+
+  @SafeVarargs
+  ZoomModule(ModuleHook<? super ZoomModule>... hooks) {
+    defaultHooks = List.of(hooks);
+  }
+
+  @Override
+  public Integer getPriority() {
+    return 10; // just let everyone else go first
+  }
+
+  @Override
+  public RecordLoadable<ZoomModule> getLoader() {
+    return LOADER;
+  }
+
+
+  /* Helpers */
+
+  /** Starts spyglass style zooming */
+  private static void setZoom(ModifierEntry modifier, LivingEntity living, float amount) {
+    TinkerDataCapability.getCapability(living).ifPresent(data -> data.computeIfAbsent(TinkerDataKeys.FOV_MODIFIER).set(modifier.getId(), amount));
+  }
+
+  /** Stops zooming */
+  private static void stopZoom(ModifierEntry modifier, LazyOptional<TinkerDataCapability.Holder> tinkerData) {
+    tinkerData.ifPresent(data -> data.computeIfAbsent(TinkerDataKeys.FOV_MODIFIER).remove(modifier.getId()));
+  }
+
+  /** Stops zooming */
+  private static void stopZoom(ModifierEntry modifier, LivingEntity entity) {
+    stopZoom(modifier, TinkerDataCapability.getCapability(entity));
+  }
+
+
+  /* Start zooming */
+
+  @Override
+  public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
+    if (source == InteractionSource.RIGHT_CLICK) {
+      GeneralInteractionModifierHook.startUsing(tool, modifier.getId(), player, hand);
+      return InteractionResult.CONSUME;
+    }
+    return InteractionResult.PASS;
+  }
+
+  @Override
+  public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
+    player.playSound(SoundEvents.SPYGLASS_USE, 1.0F, 1.0F);
+    if (player.level().isClientSide) {
+      // TODO: consider allowing scope on helmets, is that even useful?
+      setZoom(modifier, player, 0.1f);
+    }
+    return true;
+  }
+
+
+  /* Zoom properties, only used if zooming starting the interaction */
+
+  @Override
+  public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    return ModifierUtil.blockWhileCharging(tool, UseAnim.SPYGLASS);
+  }
+
+  @Override
+  public int getUseDuration(IToolStackView tool, ModifierEntry modifier) {
+    return 1200;
+  }
+
+
+  /* Stop zooming */
+
+  @Override
+  public void stopInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot) {
+    player.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
+    if (player.level().isClientSide) {
+      stopZoom(modifier, player);
+    }
+  }
+
+  @Override
+  public void afterStopUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int useDuration, int timeLeft, ModifierEntry activeModifier) {
+    entity.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
+    if (entity.level().isClientSide) {
+      stopZoom(modifier, entity);
+    }
+  }
+
+  @Override
+  public void onUnequip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
+    if (context.getEntity().level().isClientSide) {
+      IToolStackView replacement = context.getReplacementTool();
+      if (replacement == null || replacement.getModifierLevel(modifier.getModifier()) == 0) {
+        stopZoom(modifier, context.getTinkerData());
+      }
+    }
+  }
+}

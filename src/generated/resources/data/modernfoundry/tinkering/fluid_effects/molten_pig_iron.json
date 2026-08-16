@@ -1,0 +1,30 @@
+{
+  "entity_effects": [
+    {
+      "type": "modernfoundry:conditional",
+      "effect": {
+        "type": "modernfoundry:damage",
+        "damage": 3.0,
+        "damage_type": {
+          "melee": "modernfoundry:fluid_fire_melee",
+          "ranged": "modernfoundry:fluid_fire_ranged"
+        }
+      },
+      "target": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:fire_immune"
+      }
+    },
+    {
+      "type": "modernfoundry:restore_hunger",
+      "can_always_eat": false,
+      "hunger": 2,
+      "representative_item": "modernfoundry:bacon",
+      "saturation": 0.7
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "modernfoundry:molten_pig_iron"
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "modernfoundry:block/platform/both",
+	"textures": {
+		"side": "modernfoundry:block/platform/cobalt_side",
+		"top":  "modernfoundry:block/platform/cobalt_top"
+	}
+}

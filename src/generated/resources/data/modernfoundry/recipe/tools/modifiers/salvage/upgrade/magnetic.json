@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/upgrade/magnetic",
+  "modifier": "modernfoundry:magnetic",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/melee/weapon"
+    },
+    {
+      "tag": "modernfoundry:modifiable/harvest"
+    },
+    {
+      "tag": "modernfoundry:modifiable/armor/worn"
+    }
+  ]
+}

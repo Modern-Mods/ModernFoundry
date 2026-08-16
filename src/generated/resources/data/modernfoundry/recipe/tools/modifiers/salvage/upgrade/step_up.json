@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/upgrade/step_up",
+  "modifier": "modernfoundry:step_up",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/leggings"
+  }
+}

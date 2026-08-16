@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/hepatizon/nugget",
+  "ingredient": {
+    "tag": "c:nuggets/hepatizon"
+  },
+  "material": "modernfoundry:hepatizon",
+  "needed": 9,
+  "value": 1
+}

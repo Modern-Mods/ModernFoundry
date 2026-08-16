@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/redstone/dust",
+  "ingredient": {
+    "tag": "c:dusts/redstone"
+  },
+  "material": "modernfoundry:redstone",
+  "needed": 4,
+  "value": 1
+}

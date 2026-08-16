@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:retextured_casting_basin",
+  "id": "modernfoundry:smeltery/casting/scorched/foundry_controller",
+  "cast": {
+    "tag": "modernfoundry:foundry_bricks"
+  },
+  "cast_consumed": true,
+  "cooling_time": 221,
+  "fluid": {
+    "amount": 1000,
+    "tag": "modernfoundry:molten_obsidian"
+  },
+  "result": "modernfoundry:foundry_controller"
+}

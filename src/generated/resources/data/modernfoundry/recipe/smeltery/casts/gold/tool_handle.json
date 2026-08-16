@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casts/gold/tool_handle",
+  "cast": {
+    "type": "modernfoundry:material",
+    "item": "modernfoundry:tool_handle"
+  },
+  "cast_consumed": true,
+  "cooling_time": 57,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_gold"
+  },
+  "result": "modernfoundry:tool_handle_cast",
+  "switch_slots": true
+}

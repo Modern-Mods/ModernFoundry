@@ -1,0 +1,19 @@
+{
+  "level_display": "modernfoundry:pluses",
+  "modules": [
+    {
+      "type": "modernfoundry:show_offhand",
+      "mode": "disallow_broken"
+    },
+    {
+      "type": "modernfoundry:shears",
+      "expanded": 1.0,
+      "per_level": 1.0
+    },
+    {
+      "type": "modernfoundry:show_interaction_source"
+    }
+  ],
+  "priority": 70,
+  "tooltip_display": "always"
+}

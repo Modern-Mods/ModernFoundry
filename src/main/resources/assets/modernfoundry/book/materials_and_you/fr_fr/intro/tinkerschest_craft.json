@@ -1,0 +1,7 @@
+{
+  "title": "Fabrication du Coffre du Modern Foundry",
+  "recipe": "modernfoundry:tables/tinkers_chest",
+  "description": [
+    { "text": "Une fois fabriqué, tu peux teindre le coffre dans la couleur de ton choix." }
+  ]
+}

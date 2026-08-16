@@ -1,0 +1,20 @@
+{
+  "constant": {
+    "fluid": {
+      "type": "modernfoundry:tank",
+      "full": "modernfoundry:item/tool/fishing_rod/fluid_full",
+      "partial": "modernfoundry:item/tool/fishing_rod/fluid_partial"
+    },
+    "tipped": {
+      "type": "modernfoundry:trait",
+      "model": {
+        "type": "modernfoundry:potion",
+        "texture": "modernfoundry:item/tool/fishing_rod/modifiers/tipped"
+      },
+      "modifier": "modernfoundry:tipped"
+    }
+  },
+  "modifiers": {
+    "modernfoundry:tank": "modernfoundry:item/tool/fishing_rod/modifiers/tank"
+  }
+}

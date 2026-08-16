@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "snowy=false": {
+            "model": "modernfoundry:block/slime/dirt/sky/grass"
+        },
+        "snowy=true": {
+            "model": "modernfoundry:block/slime/dirt/sky/snowy_grass"
+        }
+    }
+}

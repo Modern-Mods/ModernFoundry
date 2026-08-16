@@ -1,0 +1,16 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:trait",
+      "fixed_level": false,
+      "level": 1,
+      "name": "modernfoundry:fins",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ammo"
+      }
+    }
+  ],
+  "tooltip_display": "never"
+}

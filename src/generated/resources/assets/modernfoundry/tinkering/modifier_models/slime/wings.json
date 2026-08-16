@@ -1,0 +1,8 @@
+{
+  "modifiers": {
+    "modernfoundry:trim": {
+      "type": "modernfoundry:custom_trim",
+      "root": "modernfoundry:item/tool/armor/slime/wings/trim"
+    }
+  }
+}

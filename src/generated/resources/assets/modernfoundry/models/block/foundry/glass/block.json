@@ -1,0 +1,13 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "connection": {
+    "textures": {
+      "all": "cornerless_full"
+    }
+  },
+  "loader": "hilt:connected",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "modernfoundry:block/foundry/glass"
+  }
+}

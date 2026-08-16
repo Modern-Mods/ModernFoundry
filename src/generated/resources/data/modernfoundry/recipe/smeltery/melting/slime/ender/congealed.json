@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/slime/ender/congealed",
+  "ingredient": {
+    "item": "modernfoundry:ender_congealed_slime"
+  },
+  "result": {
+    "amount": 1000,
+    "fluid": "modernfoundry:ender_slime"
+  },
+  "temperature": 70,
+  "time": 64
+}

@@ -1,0 +1,23 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:sleeves"
+    },
+    {
+      "type": "modernfoundry:inventory",
+      "filter": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:throwable"
+      },
+      "limit": {
+        "flat": 16
+      },
+      "pattern": "modernfoundry:shuriken",
+      "slots": {
+        "each_level": 3
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

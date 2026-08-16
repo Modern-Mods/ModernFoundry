@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:insatiable"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:kinetic"
+      }
+    ]
+  }
+}

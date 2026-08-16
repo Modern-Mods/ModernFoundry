@@ -1,0 +1,12 @@
+{
+  "title": "Alloyer",
+  "image": {
+    "file": "modernfoundry:book/images/alloyer.png"
+  },
+  "text": [
+    {
+      "text": "Alloy Ahead!",
+      "paragraph": true
+    }
+	]
+}

@@ -1,0 +1,14 @@
+{
+  "values": [
+    "#modernfoundry:scorched_blocks",
+    "#modernfoundry:scorched_tanks",
+    "modernfoundry:foundry_controller",
+    "modernfoundry:scorched_ladder",
+    "modernfoundry:scorched_drain",
+    "modernfoundry:scorched_chute",
+    "modernfoundry:scorched_duct",
+    "modernfoundry:scorched_glass",
+    "modernfoundry:scorched_soul_glass",
+    "modernfoundry:scorched_tinted_glass"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/knightmetal/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/knightmetal"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "modernfoundry:molten_knightmetal"
+  },
+  "temperature": 1300,
+  "time": 225
+}

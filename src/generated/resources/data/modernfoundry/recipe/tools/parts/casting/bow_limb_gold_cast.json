@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:table_casting_material",
+  "id": "modernfoundry:tools/parts/casting/bow_limb_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/bow_limb"
+  },
+  "item_cost": 2,
+  "result": "modernfoundry:bow_limb"
+}

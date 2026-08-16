@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/uranium/gear_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/gear"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/uranium"
+    }
+  ],
+  "cooling_time": 122,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_uranium"
+  },
+  "result": {
+    "tag": "c:gears/uranium"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/ambidextrous",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "tag": "c:gems/diamond"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "tag": "c:strings"
+    },
+    {
+      "tag": "c:strings"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:ambidextrous",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/melee/unarmed"
+  }
+}

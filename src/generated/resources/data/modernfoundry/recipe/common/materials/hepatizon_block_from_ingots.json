@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "modernfoundry:hepatizon_block",
+  "key": {
+    "#": {
+      "tag": "c:ingots/hepatizon"
+    },
+    "*": {
+      "item": "modernfoundry:hepatizon_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "result": {
+    "id": "modernfoundry:hepatizon_block"
+  },
+  "show_notification": true
+}

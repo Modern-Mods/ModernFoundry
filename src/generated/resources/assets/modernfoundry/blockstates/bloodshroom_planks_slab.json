@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modernfoundry:block/wood/bloodshroom/slab"
+    },
+    "type=double": {
+      "model": "modernfoundry:block/wood/bloodshroom/planks"
+    },
+    "type=top": {
+      "model": "modernfoundry:block/wood/bloodshroom/slab_top"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/dagger",
+  "result": "modernfoundry:dagger",
+  "result_count": 2
+}

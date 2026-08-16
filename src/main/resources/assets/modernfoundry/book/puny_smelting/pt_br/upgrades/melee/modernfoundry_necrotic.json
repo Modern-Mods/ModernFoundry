@@ -1,0 +1,14 @@
+{
+  "modifier_id": "modernfoundry:necrotic",
+  "text": [
+    {
+      "text": "Colete a vida de seus inimigos para sobreviver por mais tempo."
+    }
+  ],
+  "tool_filter": "modernfoundry:modifiable/melee",
+  "effects": [
+    "Acertos críticos drenam a vida dos inimigos para curar você",
+    "Múltiplos níveis, aumenta a quantidade de roubo de vida por nível",
+    "Requer 1 slot de melhoria por nível"
+  ]
+}

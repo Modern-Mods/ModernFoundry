@@ -1,0 +1,13 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "blocks": "modernfoundry:can_melt",
+      "each_level": 6.0,
+      "percent": false,
+      "require_effective": true
+    }
+  ],
+  "tooltip_display": "always"
+}

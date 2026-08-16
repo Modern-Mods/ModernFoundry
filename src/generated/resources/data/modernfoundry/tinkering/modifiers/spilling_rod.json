@@ -1,0 +1,16 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:trait",
+      "fixed_level": false,
+      "level": 1,
+      "name": "modernfoundry:spilling",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/fishing_rods"
+      }
+    }
+  ],
+  "tooltip_display": "never"
+}

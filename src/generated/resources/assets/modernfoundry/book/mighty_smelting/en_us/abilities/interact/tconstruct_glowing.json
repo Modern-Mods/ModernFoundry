@@ -1,0 +1,15 @@
+{
+  "modifier_id": "modernfoundry:glowing",
+  "text": [
+    {
+      "text": "That's a bright idea."
+    }
+  ],
+  "tool_filter": "modernfoundry:modifiable/interactable",
+  "effects": [
+    "Interact to place glows, consuming durability",
+    "Bows can place glows by consuming arrows",
+    "Single level",
+    "Requires 1 ability slot"
+  ]
+}

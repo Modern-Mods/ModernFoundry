@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/drill_attack",
+  "modifier": "modernfoundry:drill_attack",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/interactable/charge"
+    },
+    {
+      "tag": "modernfoundry:modifiable/fishing_rods"
+    }
+  ]
+}

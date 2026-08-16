@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:part_builder_tool_recycling",
+  "id": "modernfoundry:tools/recycling/general",
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "tools": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "modernfoundry:modifiable/multipart"
+    },
+    "subtracted": {
+      "tag": "modernfoundry:modifiable/unrecyclable"
+    }
+  }
+}

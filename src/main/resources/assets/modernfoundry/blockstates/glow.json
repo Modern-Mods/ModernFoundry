@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=down": { "model": "modernfoundry:block/glow", "x": 90 },
+        "facing=up": { "model": "modernfoundry:block/glow", "x": -90 },
+        "facing=north": { "model": "modernfoundry:block/glow" },
+        "facing=east": { "model": "modernfoundry:block/glow", "y": 90 },
+        "facing=south": { "model": "modernfoundry:block/glow", "y": 180 },
+        "facing=west": { "model": "modernfoundry:block/glow", "y": 270 }
+    }
+}

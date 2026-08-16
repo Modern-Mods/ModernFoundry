@@ -1,0 +1,42 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.attack_speed",
+      "each_level": 0.05,
+      "operation": "multiply_total",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "modernfoundry:generic.bad_effect_duration_multiplier",
+      "each_level": 0.05,
+      "operation": "multiply_total",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
+    },
+    {
+      "type": "modernfoundry:armor_level",
+      "allow_broken": false,
+      "held_tag": "modernfoundry:modifiable/armor/held",
+      "key": "modernfoundry:crystalstrike_knockback"
+    }
+  ],
+  "tooltip_display": "always"
+}

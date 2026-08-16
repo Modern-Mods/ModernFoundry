@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/manyullyn/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/manyullyn"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/manyullyn"
+  },
+  "material": "modernfoundry:manyullyn",
+  "needed": 1,
+  "value": 9
+}

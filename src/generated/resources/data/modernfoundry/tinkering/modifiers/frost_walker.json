@@ -1,0 +1,32 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:block_damage",
+      "damage_source": {
+        "type": "hilt:damage_type",
+        "name": "minecraft:hot_floor"
+      }
+    },
+    {
+      "type": "modernfoundry:replace_fluid",
+      "radius": {
+        "each_level": 1.0,
+        "flat": 2.0
+      },
+      "replace": [
+        {
+          "block": "minecraft:frosted_ice",
+          "target": {
+            "type": "hilt:block_properties",
+            "block": "minecraft:water",
+            "properties": {
+              "level": "0"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "tooltip_display": "always"
+}

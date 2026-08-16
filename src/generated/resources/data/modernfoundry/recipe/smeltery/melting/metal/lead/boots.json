@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/lead/boots",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:armors/boots/lead"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:armors/boots/lead"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_lead",
+    "unit_size": 10
+  },
+  "temperature": 330,
+  "time": 87
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "modernfoundry:block/wood/bloodshroom/pressure_plate"
+    },
+    "powered=true": {
+      "model": "modernfoundry:block/wood/bloodshroom/pressure_plate_down"
+    }
+  }
+}

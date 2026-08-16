@@ -1,0 +1,28 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:max_armor_attribute",
+      "allow_broken": false,
+      "attribute": "minecraft:generic.knockback_resistance",
+      "each_level": 0.05,
+      "held_tag": "modernfoundry:modifiable/held",
+      "operation": "addition"
+    },
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": {
+        "type": "hilt:and",
+        "predicates": [
+          "hilt:can_protect",
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:protection/projectile"
+          }
+        ]
+      },
+      "each_level": 2.0
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modernfoundry:block/wood/enderbark/slab"
+    },
+    "type=double": {
+      "model": "modernfoundry:block/wood/enderbark/planks"
+    },
+    "type=top": {
+      "model": "modernfoundry:block/wood/enderbark/slab_top"
+    }
+  }
+}

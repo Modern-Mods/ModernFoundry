@@ -1,0 +1,24 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "drill_attack"
+      ]
+    },
+    {
+      "type": "modernfoundry:requirements",
+      "requirement": {
+        "type": "modernfoundry:has_modifier",
+        "check": "all",
+        "modifier": {
+          "type": "modernfoundry:tag",
+          "tag": "modernfoundry:drill_attacks"
+        }
+      },
+      "translation_key": "modifier.modernfoundry.drill_attack.requirements"
+    }
+  ],
+  "tooltip_display": "always"
+}

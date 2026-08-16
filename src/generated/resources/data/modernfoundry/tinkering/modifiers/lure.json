@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 1.0,
+      "operation": "add",
+      "stat": "modernfoundry:lure"
+    }
+  ],
+  "tooltip_display": "always"
+}

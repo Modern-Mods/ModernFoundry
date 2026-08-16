@@ -1,0 +1,16 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "slime": "modernfoundry:item/tool/armor/slime/wings/slime"
+  },
+  "modifier_maps": ["modernfoundry:slime/wings"],
+  "parts": [{ "name": "slime", "index": 0 }],
+  "first_modifiers": [ "modernfoundry:trim" ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/armor/slime/wings_broken"
+    }
+  ]
+}

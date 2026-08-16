@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:block/slime/vine/side",
+  "textures": {
+    "vine": "modernfoundry:block/slime/foliage/vine_middle"
+  }
+}

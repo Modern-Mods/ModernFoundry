@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "modernfoundry:scorched_brick"
+    },
+    "G": {
+      "type": "modernfoundry:no_container",
+      "match": [
+        {
+          "item": "modernfoundry:scorched_ingot_gauge"
+        },
+        {
+          "item": "modernfoundry:scorched_fuel_gauge"
+        }
+      ]
+    }
+  },
+  "pattern": [
+    "BGB",
+    "BBB"
+  ],
+  "result": {
+    "id": "modernfoundry:scorched_alloyer"
+  },
+  "show_notification": true
+}

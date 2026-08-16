@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/dawnstone/ingot_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/dawnstone"
+    },
+    {
+      "type": "hilt:tag_filled",
+      "registry": "minecraft:fluid",
+      "tag": "c:molten_dawnstone"
+    }
+  ],
+  "cooling_time": 63,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_dawnstone"
+  },
+  "result": {
+    "tag": "c:ingots/dawnstone"
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "formula": [
+        "$overslime",
+        "$level",
+        "min",
+        0.2,
+        "*",
+        1.0,
+        "+",
+        "$speed",
+        "*"
+      ],
+      "percent": true,
+      "require_effective": true,
+      "tool": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/broad"
+      },
+      "variables": {
+        "overslime": {
+          "type": "modernfoundry:mod_data",
+          "key": "modernfoundry:overslime",
+          "source": "persistent"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:mining_capacity",
+      "grant": {
+        "each_level": -1
+      },
+      "owner": "modernfoundry:overslime",
+      "run_before": true,
+      "tool": {
+        "type": "hilt:and",
+        "predicates": [
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:modifiable/harvest"
+          },
+          {
+            "type": "hilt:inverted",
+            "inverted_type": "hilt:tag",
+            "tag": "modernfoundry:modifiable/broad"
+          }
+        ]
+      }
+    },
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "formula": [
+        "$overslime",
+        5.0,
+        "$level",
+        "*",
+        "min",
+        5.0,
+        "/",
+        0.2,
+        "*",
+        1.0,
+        "+",
+        "$speed",
+        "*"
+      ],
+      "percent": true,
+      "require_effective": true,
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/broad"
+      },
+      "variables": {
+        "overslime": {
+          "type": "modernfoundry:mod_data",
+          "key": "modernfoundry:overslime",
+          "source": "persistent"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:mining_capacity",
+      "grant": {
+        "each_level": -5
+      },
+      "owner": "modernfoundry:overslime",
+      "run_before": true,
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/broad"
+      }
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.attack_speed",
+      "formula": [
+        "$overslime",
+        "$level",
+        "min",
+        0.15,
+        "*"
+      ],
+      "operation": "multiply_total",
+      "slots": [
+        "mainhand"
+      ],
+      "variables": {
+        "overslime": {
+          "type": "modernfoundry:mod_data",
+          "key": "modernfoundry:overslime",
+          "source": "persistent"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:melee_capacity",
+      "grant": {
+        "each_level": -1
+      },
+      "owner": "modernfoundry:overslime",
+      "run_before": true
+    },
+    {
+      "type": "modernfoundry:conditional_stat",
+      "formula": [
+        "$overslime",
+        "$level",
+        "min",
+        0.06,
+        "*",
+        "$multiplier",
+        "*",
+        "$value",
+        "+"
+      ],
+      "percent": false,
+      "stat": "modernfoundry:velocity",
+      "variables": {
+        "overslime": {
+          "type": "modernfoundry:mod_data",
+          "key": "modernfoundry:overslime",
+          "source": "persistent"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:conditional_stat",
+      "formula": [
+        "$overslime",
+        "$level",
+        "min",
+        0.06,
+        "*",
+        "$multiplier",
+        "*",
+        "$value",
+        "+"
+      ],
+      "percent": false,
+      "stat": "modernfoundry:draw_speed",
+      "variables": {
+        "overslime": {
+          "type": "modernfoundry:mod_data",
+          "key": "modernfoundry:overslime",
+          "source": "persistent"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:launch_capacity",
+      "grant": {
+        "each_level": -1
+      },
+      "owner": "modernfoundry:overslime",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ranged"
+      }
+    }
+  ],
+  "priority": 75,
+  "tooltip_display": "always"
+}

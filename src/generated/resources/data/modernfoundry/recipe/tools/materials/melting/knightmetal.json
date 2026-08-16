@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/knightmetal",
+  "input": "modernfoundry:knightmetal",
+  "result": {
+    "amount": 90,
+    "fluid": "modernfoundry:molten_knightmetal"
+  },
+  "temperature": 1300
+}

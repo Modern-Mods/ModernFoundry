@@ -1,0 +1,38 @@
+{
+  "layers": [
+    {
+      "type": "modernfoundry:material",
+      "index": 0,
+      "prefix": "modernfoundry:plate/plating_"
+    },
+    {
+      "type": "modernfoundry:first_present",
+      "options": [
+        {
+          "type": "modernfoundry:material_has_fallback",
+          "apply": {
+            "type": "modernfoundry:dyed",
+            "prefix": "modernfoundry:plate/maille_",
+            "suffix": "_metal"
+          },
+          "fallback": [
+            "metal",
+            "metal_contrast"
+          ],
+          "index": 1
+        },
+        {
+          "type": "modernfoundry:dyed",
+          "prefix": "modernfoundry:plate/maille_",
+          "suffix": "_cloth"
+        },
+        {
+          "type": "modernfoundry:material",
+          "index": 1,
+          "prefix": "modernfoundry:plate/maille_"
+        }
+      ]
+    },
+    "modernfoundry:trim"
+  ]
+}

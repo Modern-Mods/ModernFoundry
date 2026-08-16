@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:enchantment_converting",
+  "id": "modernfoundry:tools/modifiers/worktable/enchantment_converting/ability_book",
+  "inputs": [
+    {
+      "item": "modernfoundry:ichor_slime_crystal"
+    },
+    {
+      "tag": "c:gems/diamond"
+    }
+  ],
+  "match_book": true,
+  "modifier_predicate": {
+    "type": "modernfoundry:slot_type",
+    "slot": "abilities"
+  },
+  "name": "abilities",
+  "return_unenchanted": false
+}

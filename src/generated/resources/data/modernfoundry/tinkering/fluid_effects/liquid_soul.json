@@ -1,0 +1,37 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:scaling",
+      "effects": [
+        {
+          "effect": {
+            "type": "modernfoundry:place_block",
+            "block": "modernfoundry:soul_glass_pane"
+          },
+          "level": 1.0
+        },
+        {
+          "effect": {
+            "type": "modernfoundry:place_block",
+            "block": "modernfoundry:soul_glass"
+          },
+          "level": 4.0
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:damage",
+      "damage": 1.0,
+      "damage_type": {
+        "melee": "modernfoundry:fluid_spike_melee",
+        "ranged": "modernfoundry:fluid_spike_ranged"
+      }
+    }
+  ],
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:liquid_soul"
+  }
+}

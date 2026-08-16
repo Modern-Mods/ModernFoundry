@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/slimesteel/nugget_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "cooling_time": 21,
+  "fluid": {
+    "amount": 10,
+    "tag": "modernfoundry:molten_slimesteel"
+  },
+  "result": {
+    "tag": "c:nuggets/slimesteel"
+  }
+}

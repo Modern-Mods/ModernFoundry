@@ -1,0 +1,26 @@
+{
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 1,
+        "name": "modernfoundry:enderporting"
+      }
+    ],
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:warping"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:enderman_disguise"
+      }
+    ],
+    "modernfoundry:slime": [
+      {
+        "level": 1,
+        "name": "modernfoundry:magic_protection"
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/silver/helmet",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:armors/helmets/silver"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:armors/helmets/silver"
+  },
+  "result": {
+    "amount": 450,
+    "tag": "c:molten_silver",
+    "unit_size": 10
+  },
+  "temperature": 790,
+  "time": 134
+}

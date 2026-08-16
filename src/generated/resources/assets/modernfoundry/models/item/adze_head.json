@@ -1,0 +1,11 @@
+{
+  "parent": "neoforge:item/default",
+  "loader": "modernfoundry:material",
+  "offset": [
+    -5,
+    1
+  ],
+  "textures": {
+    "texture": "modernfoundry:item/tool/pickadze/adze"
+  }
+}

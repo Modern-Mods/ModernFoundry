@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:entangled"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:laces": [
+      {
+        "level": 1,
+        "name": "modernfoundry:entwined"
+      }
+    ]
+  }
+}

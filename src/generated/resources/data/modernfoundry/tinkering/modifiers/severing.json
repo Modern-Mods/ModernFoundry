@@ -1,0 +1,9 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:severing"
+    }
+  ],
+  "tooltip_display": "always"
+}

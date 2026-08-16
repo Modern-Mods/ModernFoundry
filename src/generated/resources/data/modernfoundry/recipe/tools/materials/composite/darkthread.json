@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/composite/darkthread",
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:molten_obsidian"
+  },
+  "input": "modernfoundry:string",
+  "output": "modernfoundry:darkthread",
+  "temperature": 1000
+}

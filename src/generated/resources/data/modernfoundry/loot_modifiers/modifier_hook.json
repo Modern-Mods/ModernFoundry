@@ -1,0 +1,8 @@
+{
+  "type": "modernfoundry:modifier_hook",
+  "conditions": [
+    {
+      "condition": "modernfoundry:block_or_entity"
+    }
+  ]
+}

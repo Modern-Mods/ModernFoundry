@@ -1,0 +1,13 @@
+{
+  "title": "Modern Foundry砧",
+  "item": "modernfoundry:tinkers_anvil",
+  "text": [
+    {
+      "text": "好了Modern Foundry，把你那沒用的Modern Foundry站扔到一邊，然後打造一個真正有用的Modern Foundry砧吧。只需要一錘，你便能夠打造最大、最強的工具。"
+    },
+    {
+      "text": "Modern Foundry砧只能用最好的合金製造。它不僅也允許你打造所有工具，不論小型還是寬型。它還允許你為工具附加最棒的強化，以及在你的工具做出任何修改之時為它重新命名。",	
+	    "paragraph": true
+    }
+  ]
+}

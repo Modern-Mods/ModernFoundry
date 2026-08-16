@@ -1,0 +1,59 @@
+[
+  {
+    "name": "group_general",
+    "type": "hilt:text",
+    "data": "abilities/general.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/general", "path": "abilities/general", "prefix": "general" }}
+  },
+  {
+    "name": "group_interact",
+    "type": "hilt:text",
+    "data": "abilities/interact.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/interaction", "path": "abilities/interact", "prefix": "interact" }}
+  },
+  {
+    "name": "group_melee",
+    "type": "hilt:text",
+    "data": "abilities/melee.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/melee", "path": "abilities/melee", "prefix": "melee" }}
+  },
+  {
+    "name": "group_harvest",
+    "type": "hilt:text",
+    "data": "abilities/harvest.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/harvest", "path": "abilities/harvest", "prefix": "harvest" }}
+  },
+  {
+    "name": "group_ranged",
+    "type": "hilt:text",
+    "data": "abilities/ranged.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/ranged", "path": "abilities/ranged", "prefix": "ranged" }}
+  },
+
+  {
+    "name": "group_armor",
+    "type": "hilt:text",
+    "data": "abilities/armor.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/armor/general", "path": "abilities/armor/general", "prefix": "armor" }}
+  },
+  {
+    "name": "group_armor.helmet",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/armor/helmet", "path": "abilities/armor/helmet", "prefix": "helmet" }}
+  },
+  {
+    "name": "group_armor.chestplate",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/armor/chestplate", "path": "abilities/armor/chestplate", "prefix": "chestplate" }}
+  },
+  {
+    "name": "group_armor.leggings",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/armor/leggings", "path": "abilities/armor/leggings", "prefix": "leggings" }}
+  },
+  {
+    "name": "group_armor.boots",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/armor/boots", "path": "abilities/armor/boots", "prefix": "boots" }}
+  },
+  {
+    "name": "group_armor.shield",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/armor/shield", "path": "abilities/armor/shield", "prefix": "shield" }}
+  }
+]

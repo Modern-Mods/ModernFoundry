@@ -1,0 +1,42 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:teleport_dodge",
+      "chance": {
+        "each_level": 0.1,
+        "flat": 0.1
+      },
+      "cooldown": {
+        "flat": 200
+      },
+      "damage_source": {
+        "type": "hilt:tag",
+        "tag": "minecraft:is_projectile"
+      }
+    },
+    {
+      "type": "modernfoundry:teleport_dodge",
+      "chance": {
+        "each_level": 0.05,
+        "flat": 0.05
+      },
+      "cooldown": {
+        "flat": 200
+      },
+      "damage_source": {
+        "type": "hilt:and",
+        "predicates": [
+          "hilt:has_entity",
+          {
+            "type": "hilt:inverted",
+            "inverted_type": "hilt:tag",
+            "tag": "minecraft:is_projectile"
+          }
+        ]
+      }
+    }
+  ],
+  "priority": 50,
+  "tooltip_display": "always"
+}

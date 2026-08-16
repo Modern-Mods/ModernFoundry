@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/leather",
+  "ingredient": {
+    "tag": "c:leather"
+  },
+  "material": "modernfoundry:leather",
+  "needed": 1,
+  "value": 1
+}

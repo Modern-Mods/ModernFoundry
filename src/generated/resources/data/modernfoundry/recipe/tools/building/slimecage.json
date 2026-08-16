@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:basin_tool_casting",
+  "id": "modernfoundry:tools/building/slimecage",
+  "cast": {
+    "item": "modernfoundry:ribcage"
+  },
+  "cast_purpose": "first_material",
+  "item_cost": 8,
+  "result": "modernfoundry:slimy_chestplate"
+}

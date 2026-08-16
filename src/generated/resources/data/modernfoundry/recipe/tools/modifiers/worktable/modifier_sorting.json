@@ -1,0 +1,7 @@
+{
+  "type": "modernfoundry:modifier_sorting",
+  "id": "modernfoundry:tools/modifiers/worktable/modifier_sorting",
+  "inputs": {
+    "item": "minecraft:compass"
+  }
+}

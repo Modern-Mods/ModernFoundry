@@ -1,0 +1,82 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:material_stats",
+      "primary_part": 0,
+      "stat_types": [
+        "modernfoundry:plating_shield",
+        "modernfoundry:limb"
+      ]
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        },
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_traits",
+      "hooks": [
+        "modernfoundry:rebalanced_trait"
+      ],
+      "material_index": 1,
+      "stat_type": "modernfoundry:limb"
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:block_amount": 10.0,
+        "modernfoundry:harvest_tier": "minecraft:stone",
+        "modernfoundry:knockback_resistance": 0.1,
+        "modernfoundry:mining_speed": 6.0
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 2,
+        "defense": 1,
+        "upgrades": 1
+      }
+    },
+    {
+      "type": "modernfoundry:melting_fluid_effective",
+      "ignore_tier": false,
+      "inverted_type": "hilt:tag",
+      "predicate_type": "hilt:inverted",
+      "tag": "modernfoundry:mineable/melting_blacklist",
+      "temperature": 1500
+    },
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:force_melting"
+    },
+    {
+      "type": "modernfoundry:vein_aoe",
+      "max_distance": 0
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 2,
+          "name": "modernfoundry:melting"
+        },
+        {
+          "level": 1,
+          "name": "modernfoundry:tank"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:dual_option_interaction"
+    }
+  ]
+}

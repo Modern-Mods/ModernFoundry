@@ -1,0 +1,29 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:armor_level",
+      "allow_broken": true,
+      "key": "modernfoundry:soul_belt"
+    },
+    {
+      "type": "modernfoundry:requirements",
+      "display_modifiers": [
+        {
+          "level": 1,
+          "name": "modernfoundry:soulbound"
+        }
+      ],
+      "requirement": {
+        "type": "modernfoundry:has_modifier",
+        "check": "all",
+        "modifier": {
+          "type": "modernfoundry:single",
+          "modifier": "modernfoundry:soulbound"
+        }
+      },
+      "translation_key": "modifier.modernfoundry.soul_belt.requirements"
+    }
+  ],
+  "tooltip_display": "always"
+}

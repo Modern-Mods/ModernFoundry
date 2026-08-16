@@ -1,0 +1,8 @@
+{
+  "modifiers": {
+    "modernfoundry:dyed": {
+      "type": "modernfoundry:dyed",
+      "texture": "modernfoundry:item/tool/armor/travelers/shield/modifiers/dyed_broken"
+    }
+  }
+}

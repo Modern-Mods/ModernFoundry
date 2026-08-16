@@ -1,0 +1,39 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/bonking",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "item": "modernfoundry:ichor_slime_crystal"
+    },
+    {
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "item": "modernfoundry:ichor_congealed_slime"
+    },
+    {
+      "item": "modernfoundry:ichor_congealed_slime"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:bonking",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/durability"
+      },
+      {
+        "tag": "modernfoundry:modifiable/interactable/charge"
+      }
+    ]
+  }
+}

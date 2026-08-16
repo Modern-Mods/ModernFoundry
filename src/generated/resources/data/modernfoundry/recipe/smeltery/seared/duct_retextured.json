@@ -1,0 +1,21 @@
+{
+  "type": "hilt:crafting_shaped_retextured",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "tag": "modernfoundry:smeltery_bricks"
+    },
+    "C": {
+      "tag": "c:ingots/gold"
+    }
+  },
+  "match_all": false,
+  "pattern": [
+    "C#C"
+  ],
+  "result": {
+    "id": "modernfoundry:seared_duct"
+  },
+  "show_notification": true,
+  "texture": "#"
+}

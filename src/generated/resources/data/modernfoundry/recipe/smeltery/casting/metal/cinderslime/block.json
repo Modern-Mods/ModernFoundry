@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/metal/cinderslime/block",
+  "cooling_time": 203,
+  "fluid": {
+    "amount": 810,
+    "tag": "modernfoundry:molten_cinderslime"
+  },
+  "result": {
+    "tag": "c:storage_blocks/cinderslime"
+  }
+}

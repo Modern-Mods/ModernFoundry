@@ -1,0 +1,8 @@
+{
+  "loader": "modernfoundry:material_block",
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "modernfoundry:block/storage/fallback"
+  },
+  "material": "all"
+}

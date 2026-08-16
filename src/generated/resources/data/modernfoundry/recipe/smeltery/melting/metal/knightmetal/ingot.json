@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/knightmetal/ingot",
+  "ingredient": {
+    "tag": "c:ingots/knightmetal"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "modernfoundry:molten_knightmetal"
+  },
+  "temperature": 1300,
+  "time": 75
+}

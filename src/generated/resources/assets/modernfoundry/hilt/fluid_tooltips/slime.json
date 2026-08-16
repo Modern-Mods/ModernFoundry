@@ -1,0 +1,17 @@
+{
+  "tag": "modernfoundry:tooltips/slime",
+  "units": [
+    {
+      "key": "gui.modernfoundry.fluid.block",
+      "needed": 2250
+    },
+    {
+      "key": "gui.modernfoundry.fluid.slimeball",
+      "needed": 250
+    },
+    {
+      "key": "gui.mantle.fluid.drop",
+      "needed": 50
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tables/recycling/twilightforest/arctic_boots",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:maille": {
+      "count": 4,
+      "item": "twilightforest:arctic_fur"
+    }
+  },
+  "tool": {
+    "item": "twilightforest:arctic_boots"
+  }
+}

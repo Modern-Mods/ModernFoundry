@@ -1,0 +1,16 @@
+{
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 1,
+        "name": "modernfoundry:valiant"
+      }
+    ],
+    "modernfoundry:shell": [
+      {
+        "level": 1,
+        "name": "modernfoundry:loyal"
+      }
+    ]
+  }
+}

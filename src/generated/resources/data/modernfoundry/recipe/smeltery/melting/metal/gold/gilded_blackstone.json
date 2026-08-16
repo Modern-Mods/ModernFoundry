@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/metal/gold/gilded_blackstone",
+  "byproducts": [
+    {
+      "amount": 90,
+      "tag": "c:molten_copper"
+    }
+  ],
+  "ingredient": {
+    "item": "minecraft:gilded_blackstone"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 30,
+    "tag": "c:molten_gold"
+  },
+  "temperature": 700,
+  "time": 33
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "block/cake_slice4",
+  "textures": {
+    "particle": "modernfoundry:block/slime/cake/earth_side",
+    "bottom":   "modernfoundry:block/slime/cake/earth_bottom",
+    "top":      "modernfoundry:block/slime/cake/earth_top",
+    "side":     "modernfoundry:block/slime/cake/earth_side",
+    "inside":   "modernfoundry:block/slime/cake/earth_inner"
+  }
+}

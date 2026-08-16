@@ -1,0 +1,7 @@
+{
+    "parent": "modernfoundry:block/platform/side",
+    "textures": {
+		"side":     "modernfoundry:block/platform/iron_side",
+		"particle": "modernfoundry:block/platform/iron_top"
+    }
+}

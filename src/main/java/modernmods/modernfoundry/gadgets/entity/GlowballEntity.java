@@ -1,0 +1,90 @@
+package modernmods.modernfoundry.gadgets.entity;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.server.level.ServerEntity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import modernmods.modernfoundry.compat.neoforged.neoforge.entity.IEntityAdditionalSpawnData;
+import modernmods.modernfoundry.compat.neoforged.neoforge.network.NetworkHooks;
+import modernmods.modernfoundry.gadgets.TinkerGadgets;
+import modernmods.modernfoundry.shared.TinkerCommons;
+
+import javax.annotation.Nonnull;
+
+/** @deprecated use {@link modernmods.modernfoundry.tools.entity.ThrownShuriken} */
+@Deprecated
+public class GlowballEntity extends ThrowableItemProjectile implements IEntityAdditionalSpawnData {
+  public GlowballEntity(EntityType<? extends GlowballEntity> p_i50159_1_, Level p_i50159_2_) {
+    super(p_i50159_1_, p_i50159_2_);
+  }
+
+  public GlowballEntity(Level worldIn, LivingEntity throwerIn) {
+    super(TinkerGadgets.glowBallEntity.get(), throwerIn, worldIn);
+  }
+
+  public GlowballEntity(Level worldIn, double x, double y, double z) {
+    super(TinkerGadgets.glowBallEntity.get(), x, y, z, worldIn);
+  }
+
+  @Override
+  protected Item getDefaultItem() {
+    return TinkerGadgets.glowBall.get();
+  }
+
+  @SuppressWarnings("ConstantConditions")  // getType() enforces the class type
+  @Override
+  protected void onHit(HitResult result) {
+    Level level = level();
+    if (!level.isClientSide) {
+      BlockPos position = null;
+      Direction direction = Direction.DOWN;
+
+      if (result.getType() == HitResult.Type.ENTITY) {
+        position = ((EntityHitResult) result).getEntity().blockPosition();
+      }
+
+      if (result.getType() == HitResult.Type.BLOCK) {
+        BlockHitResult blockHit = (BlockHitResult) result;
+        position = blockHit.getBlockPos().relative(blockHit.getDirection());
+        direction = blockHit.getDirection().getOpposite();
+      }
+
+      if (position != null) {
+        TinkerCommons.glowBlock.get().addGlow(level, position, direction);
+      }
+    }
+
+    if (!level.isClientSide) {
+      level.broadcastEntityEvent(this, (byte) 3);
+      this.discard();
+    }
+  }
+
+  @Override
+  public void writeSpawnData(FriendlyByteBuf buffer) {
+    ItemStack.OPTIONAL_STREAM_CODEC.encode((RegistryFriendlyByteBuf)buffer, this.getItem());
+  }
+
+  @Override
+  public void readSpawnData(FriendlyByteBuf additionalData) {
+    this.setItem(ItemStack.OPTIONAL_STREAM_CODEC.decode((RegistryFriendlyByteBuf)additionalData));
+  }
+
+  @Nonnull
+  @Override
+  public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity entity) {
+    return NetworkHooks.getEntitySpawningPacket(this);
+  }
+}

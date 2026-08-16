@@ -1,0 +1,54 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        "modernfoundry:bow_limb",
+        "modernfoundry:bow_grip",
+        "modernfoundry:bowstring"
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 0.0,
+        "modernfoundry:attack_speed": 1.0
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:durability": 2.0
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 3
+      }
+    },
+    {
+      "type": "modernfoundry:fixed_material_name",
+      "index": 0
+    }
+  ]
+}

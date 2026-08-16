@@ -1,0 +1,11 @@
+{
+  "type": "hilt:fill_item",
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:sky_slime"
+  },
+  "input": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": "modernfoundry:sky_slime_bottle"
+}

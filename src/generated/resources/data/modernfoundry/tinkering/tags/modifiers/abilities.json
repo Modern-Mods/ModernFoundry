@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#modernfoundry:abilities/general",
+    "#modernfoundry:abilities/interaction",
+    "#modernfoundry:abilities/melee",
+    "#modernfoundry:abilities/harvest",
+    "#modernfoundry:abilities/armor",
+    "#modernfoundry:abilities/ranged"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:table_filling",
+  "id": "modernfoundry:smeltery/casting/filling/copper_can",
+  "container": "modernfoundry:copper_can",
+  "fluid_amount": 90
+}

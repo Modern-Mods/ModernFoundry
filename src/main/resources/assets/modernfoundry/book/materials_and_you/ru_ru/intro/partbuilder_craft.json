@@ -1,0 +1,5 @@
+{
+  "title": "Создание формирователя частей",
+  "recipe": "modernfoundry:tables/part_builder",
+  "grid_size": "small"
+}

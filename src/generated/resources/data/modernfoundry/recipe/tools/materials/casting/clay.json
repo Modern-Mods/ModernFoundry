@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/casting/clay",
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:molten_clay"
+  },
+  "output": "modernfoundry:clay",
+  "temperature": 450
+}

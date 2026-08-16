@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/knightslime/nugget_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "cooling_time": 23,
+  "fluid": {
+    "amount": 10,
+    "tag": "modernfoundry:molten_knightslime"
+  },
+  "result": {
+    "tag": "c:nuggets/knightslime"
+  }
+}

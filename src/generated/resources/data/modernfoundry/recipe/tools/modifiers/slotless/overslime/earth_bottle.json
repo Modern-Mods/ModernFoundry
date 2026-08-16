@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:overslime_modifier",
+  "id": "modernfoundry:tools/modifiers/slotless/overslime/earth_bottle",
+  "ingredient": {
+    "item": "modernfoundry:earth_slime_bottle"
+  },
+  "restore_amount": 20,
+  "tools": {
+    "tag": "modernfoundry:modifiable/durability"
+  }
+}

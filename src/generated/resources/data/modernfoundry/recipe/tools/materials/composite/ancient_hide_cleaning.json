@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/composite/ancient_hide_cleaning",
+  "fluid": {
+    "amount": 50,
+    "tag": "modernfoundry:venom"
+  },
+  "input": "modernfoundry:ancient_hide",
+  "output": "modernfoundry:leather",
+  "temperature": 10
+}

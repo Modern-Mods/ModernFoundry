@@ -1,0 +1,15 @@
+{
+  "parent": "modernfoundry:block/template/pane/side",
+  "connection": {
+    "predicate": "pane",
+    "textures": {
+      "pane": "cornerless_full"
+    }
+  },
+  "loader": "hilt:connected",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "edge": "modernfoundry:block/foundry/glass_top",
+    "pane": "modernfoundry:block/foundry/soul_glass"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "values": [
+    "modernfoundry:blast_protection",
+    "modernfoundry:fire_protection",
+    "modernfoundry:magic_protection",
+    "modernfoundry:melee_protection",
+    "modernfoundry:projectile_protection",
+    "modernfoundry:dragonborn",
+    "modernfoundry:shulking",
+    "modernfoundry:turtle_shell"
+  ]
+}

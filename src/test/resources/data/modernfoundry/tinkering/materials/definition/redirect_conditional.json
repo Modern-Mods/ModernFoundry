@@ -1,0 +1,16 @@
+{
+  "redirect": [
+    {
+      "id": "modernfoundry:full",
+      "condition": {
+        "type": "neoforge:false"
+      }
+    },
+    {
+      "id": "modernfoundry:minimal",
+      "condition": {
+        "type": "neoforge:true"
+      }
+    }
+  ]
+}

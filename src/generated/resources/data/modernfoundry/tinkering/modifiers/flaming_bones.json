@@ -1,0 +1,28 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:effect_immunity",
+      "effect": "modernfoundry:conductive",
+      "max_level": {
+        "each_level": 1
+      }
+    },
+    {
+      "type": "modernfoundry:armor_attack_mob_effect",
+      "damage_source": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:protection/melee"
+      },
+      "effect": "modernfoundry:conductive",
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 100.0,
+        "random": 100.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/metal/manyullyn/block",
+  "cooling_time": 216,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_manyullyn"
+  },
+  "result": {
+    "tag": "c:storage_blocks/manyullyn"
+  }
+}

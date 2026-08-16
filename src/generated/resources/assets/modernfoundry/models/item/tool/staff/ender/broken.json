@@ -1,0 +1,33 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff",
+  "textures": {
+    "tool": "modernfoundry:item/tool/staff/ender_broken",
+    "large_tool": "modernfoundry:item/tool/staff/ender_large_broken"
+  },
+  "large": true,
+  "modifier_maps": [
+    "modernfoundry:staff/ender/broken",
+    "modernfoundry:staff/ender",
+    "modernfoundry:staff/broken",
+    "modernfoundry:staff"
+  ],
+  "modifier_roots": {
+    "small": [
+      "modernfoundry:item/tool/staff/modifiers/ender/broken/",
+      "modernfoundry:item/tool/staff/modifiers/ender/",
+      "modernfoundry:item/tool/staff/modifiers/broken/",
+      "modernfoundry:item/tool/staff/modifiers/"
+    ],
+    "large": [
+      "modernfoundry:item/tool/staff/large_modifiers/ender/broken/",
+      "modernfoundry:item/tool/staff/large_modifiers/ender/",
+      "modernfoundry:item/tool/staff/large_modifiers/broken/",
+      "modernfoundry:item/tool/staff/large_modifiers/"
+    ]
+  },
+  "first_modifiers": [
+    "modernfoundry:dyed",
+    "modernfoundry:embellishment"
+  ]
+}

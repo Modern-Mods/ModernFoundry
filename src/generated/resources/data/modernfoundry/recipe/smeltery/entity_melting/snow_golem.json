@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/snow_golem",
+  "damage": 2,
+  "entity": {
+    "type": "minecraft:snow_golem"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "minecraft:water"
+  }
+}

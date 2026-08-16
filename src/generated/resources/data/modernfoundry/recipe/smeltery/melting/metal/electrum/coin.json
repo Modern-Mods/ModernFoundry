@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/coin",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:coins/electrum"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:coins/electrum"
+  },
+  "result": {
+    "amount": 30,
+    "tag": "c:molten_electrum"
+  },
+  "temperature": 760,
+  "time": 39
+}

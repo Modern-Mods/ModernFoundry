@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "modernfoundry:nether_grout"
+  },
+  "result": {
+    "id": "modernfoundry:scorched_brick"
+  }
+}

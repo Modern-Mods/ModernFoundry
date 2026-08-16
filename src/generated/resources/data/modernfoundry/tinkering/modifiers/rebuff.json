@@ -1,0 +1,26 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:restore_lost_health",
+      "chance": {
+        "flat": 1.0
+      },
+      "durability_usage": {
+        "each_level": 1
+      },
+      "effect_level": {
+        "each_level": 1
+      },
+      "percentage": {
+        "flat": 0.5
+      },
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      }
+    }
+  ],
+  "priority": 25,
+  "tooltip_display": "always"
+}

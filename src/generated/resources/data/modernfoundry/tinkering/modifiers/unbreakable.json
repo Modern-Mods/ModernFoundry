@@ -1,0 +1,58 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:requirements",
+      "display_modifiers": [
+        {
+          "level": 1,
+          "name": "modernfoundry:netherite"
+        },
+        {
+          "level": 5,
+          "name": "modernfoundry:reinforced"
+        }
+      ],
+      "requirement": {
+        "type": "hilt:and",
+        "predicates": [
+          {
+            "type": "modernfoundry:has_modifier",
+            "check": "all",
+            "modifier": {
+              "type": "modernfoundry:single",
+              "modifier": "modernfoundry:netherite"
+            }
+          },
+          {
+            "type": "modernfoundry:has_modifier",
+            "check": "all",
+            "level": {
+              "min": 5
+            },
+            "modifier": {
+              "type": "modernfoundry:single",
+              "modifier": "modernfoundry:reinforced"
+            }
+          }
+        ]
+      },
+      "translation_key": "modifier.modernfoundry.unbreakable.requirements"
+    },
+    {
+      "type": "modernfoundry:durability_color",
+      "color": "FFFFFF"
+    },
+    {
+      "type": "modernfoundry:reduce_tool_damage",
+      "cause": {
+        "type": "hilt:inverted",
+        "inverted_type": "modernfoundry:tag",
+        "tag": "modernfoundry:durability/bypass_reinforced"
+      },
+      "flat": 1.0
+    }
+  ],
+  "priority": 125,
+  "tooltip_display": "always"
+}

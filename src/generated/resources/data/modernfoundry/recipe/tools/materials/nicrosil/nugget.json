@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/nicrosil/nugget",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/nicrosil"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/nicrosil"
+  },
+  "material": "modernfoundry:nicrosil",
+  "needed": 9,
+  "value": 1
+}

@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/nugget",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/constantan"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/constantan"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_constantan"
+  },
+  "temperature": 920,
+  "time": 21
+}

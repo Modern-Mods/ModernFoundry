@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/tool_belt",
+  "level": 1,
+  "modifier": "modernfoundry:tool_belt",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/leggings"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.15,
+      "operation": "multiply_base",
+      "stat": "modernfoundry:mining_speed"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.1,
+      "operation": "add",
+      "stat": "modernfoundry:accuracy"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.15,
+      "operation": "add",
+      "stat": "modernfoundry:knockback_resistance"
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.knockback_resistance",
+      "each_level": 0.1,
+      "operation": "multiply_base",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      }
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.movement_speed",
+      "each_level": -0.1,
+      "operation": "multiply_base",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ]
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.gravity",
+      "each_level": 0.05,
+      "operation": "multiply_total",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
+    }
+  ],
+  "tooltip_display": "always"
+}

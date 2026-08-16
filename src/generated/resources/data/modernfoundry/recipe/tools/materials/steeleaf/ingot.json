@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/steeleaf/ingot",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/steeleaf"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/steeleaf"
+  },
+  "material": "modernfoundry:steeleaf",
+  "needed": 1,
+  "value": 1
+}

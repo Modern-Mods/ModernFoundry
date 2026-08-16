@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/enderium/nugget_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/enderium"
+    }
+  ],
+  "cooling_time": 25,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_enderium"
+  },
+  "result": {
+    "tag": "c:nuggets/enderium"
+  }
+}

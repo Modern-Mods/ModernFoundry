@@ -1,0 +1,38 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/glowing",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "item": "minecraft:glowstone"
+    },
+    {
+      "item": "minecraft:daylight_detector"
+    },
+    {
+      "item": "minecraft:shroomlight"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:glowing",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/durability"
+      },
+      [
+        {
+          "tag": "modernfoundry:modifiable/interactable"
+        },
+        {
+          "tag": "modernfoundry:modifiable/armor/boots"
+        }
+      ]
+    ]
+  }
+}

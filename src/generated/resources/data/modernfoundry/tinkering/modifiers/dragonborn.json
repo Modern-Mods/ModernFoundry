@@ -1,0 +1,21 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:max_armor_attribute",
+      "allow_broken": false,
+      "attribute": "modernfoundry:player.critical_damage",
+      "each_level": 0.05,
+      "held_tag": "modernfoundry:modifiable/held",
+      "operation": "addition",
+      "tooltip_style": "percent"
+    },
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "each_level": 2.5,
+      "wearing_entity": "modernfoundry:airborne"
+    }
+  ],
+  "tooltip_display": "always"
+}

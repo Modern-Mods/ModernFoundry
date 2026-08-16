@@ -1,0 +1,26 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:move_block",
+      "push": true,
+      "sound": "modernfoundry:slime_sling"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "add",
+      "effect": "minecraft:slowness",
+      "level": 1,
+      "time": 100
+    },
+    {
+      "type": "modernfoundry:push_entity",
+      "each_level": 1.0
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "modernfoundry:sky_slime"
+  }
+}

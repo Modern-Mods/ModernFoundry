@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/seared/fluid_cannon",
+  "byproducts": [
+    {
+      "amount": 1000,
+      "fluid": "modernfoundry:seared_stone"
+    },
+    {
+      "amount": 1250,
+      "fluid": "modernfoundry:molten_glass"
+    }
+  ],
+  "ingredient": {
+    "item": "modernfoundry:seared_fluid_cannon"
+  },
+  "result": {
+    "amount": 450,
+    "tag": "c:molten_copper"
+  },
+  "temperature": 500,
+  "time": 125
+}

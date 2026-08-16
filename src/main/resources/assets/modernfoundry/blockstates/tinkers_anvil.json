@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "modernfoundry:block/table/tinkers_anvil", "y":  90 },
+    "facing=south": { "model": "modernfoundry:block/table/tinkers_anvil", "y": 270 },
+    "facing=west":  { "model": "modernfoundry:block/table/tinkers_anvil" },
+    "facing=east":  { "model": "modernfoundry:block/table/tinkers_anvil", "y": 180 }
+  }
+}

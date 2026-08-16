@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/clay_ball",
+  "ingredient": {
+    "item": "minecraft:clay_ball"
+  },
+  "material": "modernfoundry:clay",
+  "needed": 1,
+  "value": 1
+}

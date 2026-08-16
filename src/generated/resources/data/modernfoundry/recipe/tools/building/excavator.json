@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/excavator",
+  "result": "modernfoundry:excavator",
+  "result_count": 1
+}

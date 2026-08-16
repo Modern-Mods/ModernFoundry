@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:table_filling",
+  "id": "modernfoundry:smeltery/casting/filling/bucket",
+  "container": "minecraft:bucket",
+  "fluid_amount": 1000
+}

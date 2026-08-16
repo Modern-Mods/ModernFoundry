@@ -1,0 +1,10 @@
+{
+  "stats": {
+    "modernfoundry:binding": {},
+    "modernfoundry:bowstring": {},
+    "modernfoundry:laces": {
+      "repair_amount": 87
+    },
+    "modernfoundry:maille": {}
+  }
+}

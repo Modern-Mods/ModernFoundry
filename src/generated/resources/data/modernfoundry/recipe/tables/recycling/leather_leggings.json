@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tables/recycling/leather_leggings",
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:maille": {
+      "count": 7,
+      "item": "minecraft:leather"
+    }
+  },
+  "tool": [
+    {
+      "item": "minecraft:leather_leggings"
+    },
+    {
+      "item": "minecraft:leather_horse_armor"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/enderium/gear_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/gear"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/enderium"
+    }
+  ],
+  "cooling_time": 152,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_enderium"
+  },
+  "result": {
+    "tag": "c:gears/enderium"
+  }
+}

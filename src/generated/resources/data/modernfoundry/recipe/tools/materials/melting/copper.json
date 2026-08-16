@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/copper",
+  "input": "modernfoundry:copper",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_copper"
+  },
+  "temperature": 500
+}

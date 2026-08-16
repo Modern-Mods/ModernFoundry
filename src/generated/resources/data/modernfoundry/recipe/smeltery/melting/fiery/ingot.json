@@ -1,0 +1,25 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/fiery/ingot",
+  "byproducts": [
+    {
+      "amount": 90,
+      "tag": "c:molten_iron"
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/fiery"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/fiery"
+  },
+  "result": {
+    "amount": 250,
+    "fluid": "modernfoundry:fiery_liquid"
+  },
+  "temperature": 1500,
+  "time": 80
+}

@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/blazing_bone",
+  "ingredient": {
+    "item": "modernfoundry:blazing_bone"
+  },
+  "material": "modernfoundry:blazing_bone",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "index",
+    "type": "hilt:index",
+    "data": "modifiers/index.json"
+  },
+  {
+    "name": "traits",
+    "type": "hilt:text",
+    "data": "modifiers/traits.json"
+  },
+  {
+    "name": "upgrades",
+    "type": "hilt:text",
+    "data": "modifiers/upgrades.json"
+  },
+  {
+    "name": "slotless",
+    "type": "hilt:text",
+    "data": "modifiers/slotless.json"
+  },
+  {
+    "name": "abilities",
+    "type": "hilt:text",
+    "data": "modifiers/abilities.json"
+  },
+  {
+    "name": "defense",
+    "type": "hilt:text",
+    "data": "modifiers/defense.json"
+  }
+]

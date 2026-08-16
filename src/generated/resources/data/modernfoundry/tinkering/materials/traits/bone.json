@@ -1,0 +1,32 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:pierce"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 1,
+        "name": "modernfoundry:spike"
+      }
+    ],
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:piercing_guard"
+      }
+    ],
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:strong_bones"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:skeleton_disguise"
+      }
+    ]
+  }
+}

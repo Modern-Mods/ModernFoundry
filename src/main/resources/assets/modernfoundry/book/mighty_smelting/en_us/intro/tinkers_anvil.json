@@ -1,0 +1,13 @@
+{
+  "title": "Modern Foundry's Anvil",
+  "item": "modernfoundry:tinkers_anvil",
+  "text": [
+    {
+      "text": "Alright Modern Foundry, it's time to put that puny Modern Foundry Station away and create the mighty Modern Foundry's Anvil. The ability to create the biggest and best tools is simply one hammer pound away."
+    },
+    {
+      "text": "This anvil can only be made with the finest of alloys, but will bring you the broadest of tools. They allow you to make the best modifiers, and let you rename tools during any modification.",
+	  "paragraph": true
+    }
+  ]
+}

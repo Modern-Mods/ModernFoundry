@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/returning_level_1",
+  "level": 1,
+  "modifier": "modernfoundry:returning",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/melee/weapon"
+    },
+    {
+      "tag": "modernfoundry:modifiable/harvest"
+    }
+  ]
+}

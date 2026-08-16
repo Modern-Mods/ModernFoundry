@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/compat/the_one_probe",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "theoneprobe"
+    }
+  ],
+  "modifier": "modernfoundry:the_one_probe",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/armor/helmets"
+    },
+    {
+      "tag": "modernfoundry:modifiable/held"
+    }
+  ]
+}

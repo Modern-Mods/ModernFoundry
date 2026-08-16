@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/slime/earth/dirt",
+  "cast": {
+    "item": "minecraft:dirt"
+  },
+  "cast_consumed": true,
+  "cooling_time": 73,
+  "fluid": {
+    "amount": 500,
+    "tag": "c:slime"
+  },
+  "result": "modernfoundry:earth_slime_dirt"
+}

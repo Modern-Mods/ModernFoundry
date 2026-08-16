@@ -1,0 +1,57 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "formula": [
+        "$lost",
+        "$max",
+        "/",
+        "sqrt",
+        "$level",
+        "*",
+        0.01,
+        "*",
+        1.0,
+        "+",
+        "$speed",
+        "*"
+      ],
+      "percent": true,
+      "require_effective": true,
+      "variables": {
+        "lost": "modernfoundry:tool_lost_durability",
+        "max": {
+          "type": "modernfoundry:stat_multiplier",
+          "stat": "modernfoundry:durability"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:conditional_melee_damage",
+      "formula": [
+        "$lost",
+        "$max",
+        "/",
+        "sqrt",
+        "$level",
+        "*",
+        -0.005,
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "lost": "modernfoundry:tool_lost_durability",
+        "max": {
+          "type": "modernfoundry:stat_multiplier",
+          "stat": "modernfoundry:durability"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

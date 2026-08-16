@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:table_casting_composite",
+  "id": "modernfoundry:tools/parts/casting/hammer_head_composite",
+  "item_cost": 8,
+  "result": "modernfoundry:hammer_head"
+}

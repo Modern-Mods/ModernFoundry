@@ -1,0 +1,11 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:material_repair",
+      "durability": 140,
+      "material": "modernfoundry:string"
+    }
+  ],
+  "tooltip_display": "always"
+}

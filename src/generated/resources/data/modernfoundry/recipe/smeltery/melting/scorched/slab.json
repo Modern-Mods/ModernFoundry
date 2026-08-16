@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/scorched/slab",
+  "ingredient": [
+    {
+      "item": "modernfoundry:scorched_bricks_slab"
+    },
+    {
+      "item": "modernfoundry:scorched_bricks_slab"
+    },
+    {
+      "item": "modernfoundry:scorched_road_slab"
+    }
+  ],
+  "result": {
+    "amount": 500,
+    "fluid": "modernfoundry:scorched_stone"
+  },
+  "temperature": 500,
+  "time": 75
+}

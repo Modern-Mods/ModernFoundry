@@ -1,0 +1,11 @@
+{
+  "type": "hilt:fill_item",
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:ichor"
+  },
+  "input": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": "modernfoundry:ichor_slime_bottle"
+}

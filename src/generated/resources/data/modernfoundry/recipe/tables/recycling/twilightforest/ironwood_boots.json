@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tables/recycling/twilightforest/ironwood_boots",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:ingot": {
+      "count": 4,
+      "tag": "c:ingots/ironwood"
+    }
+  },
+  "tool": {
+    "item": "twilightforest:ironwood_boots"
+  }
+}

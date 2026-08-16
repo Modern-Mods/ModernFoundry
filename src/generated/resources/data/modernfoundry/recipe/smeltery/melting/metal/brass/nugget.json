@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/brass/nugget",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/brass"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/brass"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_brass"
+  },
+  "temperature": 605,
+  "time": 18
+}

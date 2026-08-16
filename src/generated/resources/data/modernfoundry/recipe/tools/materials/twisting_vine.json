@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/twisting_vine",
+  "ingredient": {
+    "item": "minecraft:twisting_vines"
+  },
+  "material": "modernfoundry:twisting_vine",
+  "needed": 1,
+  "value": 1
+}

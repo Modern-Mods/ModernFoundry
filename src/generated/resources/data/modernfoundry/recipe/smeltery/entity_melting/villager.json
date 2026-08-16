@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/villager",
+  "damage": 5,
+  "entity": {
+    "tag": "c:villagers"
+  },
+  "result": {
+    "amount": 25,
+    "fluid": "modernfoundry:molten_emerald"
+  }
+}

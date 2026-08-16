@@ -1,0 +1,19 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:conditional",
+      "block": {
+        "type": "modernfoundry:harvest_tier",
+        "tier": "minecraft:iron"
+      },
+      "effect": {
+        "type": "modernfoundry:break_block",
+        "hardness": 5.0
+      }
+    }
+  ],
+  "fluid": {
+    "amount": 25,
+    "tag": "modernfoundry:molten_quartz"
+  }
+}

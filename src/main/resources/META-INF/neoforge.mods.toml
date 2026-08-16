@@ -1,0 +1,50 @@
+modLoader="javafml"
+loaderVersion="${loader_range}"
+issueTrackerURL="https://github.com/Modern-Mods/ModernFoundry/issues"
+logoFile="logo.png"
+license="MIT"
+
+[[mods]]
+    modId="modernfoundry"
+    version="${version}"
+    displayName="Modern Foundry"
+    authors="Modern Mods"
+    description='''
+Build tools, refine materials, and master the Modern Foundry.
+    '''
+    displayURL="https://github.com/Modern-Mods/ModernFoundry"
+    
+[[dependencies.modernfoundry]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neo_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.modernfoundry]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.modernfoundry]]
+    modId="hilt"
+    type="required"
+    versionRange="${hilt_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.modernfoundry]]
+    modId="jei"
+    type="optional"
+    versionRange="${jei_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.modernfoundry]]
+    modId="jsonthings"
+    type="optional"
+    versionRange="${json_things_range}"
+    ordering="NONE"
+    side="BOTH"

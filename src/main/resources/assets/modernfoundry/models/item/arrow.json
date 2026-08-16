@@ -1,0 +1,23 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "head":    "modernfoundry:item/tool/ammo/arrow_head",
+    "shaft":   "modernfoundry:item/tool/ammo/arrow_shaft",
+    "feather": "modernfoundry:item/tool/ammo/arrow_feather"
+  },
+  "modifier_maps": ["modernfoundry:arrow"],
+  "first_modifiers": [ "modernfoundry:dyed" ],
+  "parts": [
+    { "name": "shaft",   "index": 1 },
+    { "name": "head",    "index": 0 },
+    { "name": "feather", "index": 2 }
+  ],
+  "display": {
+    "modernfoundry:thrown": {
+      "rotation": [ 0, 0, 90 ],
+      "scale": [ 1, 1, 1 ],
+      "translation": [ 2, -2, 0 ]
+    }
+  }
+}

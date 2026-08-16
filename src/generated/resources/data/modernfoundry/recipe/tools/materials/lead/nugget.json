@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/lead/nugget",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/lead"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/lead"
+  },
+  "material": "modernfoundry:lead",
+  "needed": 9,
+  "value": 1
+}

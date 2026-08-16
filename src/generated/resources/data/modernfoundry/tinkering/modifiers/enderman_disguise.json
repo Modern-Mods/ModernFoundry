@@ -1,0 +1,14 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:mob_disguise",
+      "entity": "minecraft:enderman"
+    },
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:endermask"
+    }
+  ],
+  "tooltip_display": "always"
+}

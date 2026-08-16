@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/electrum/plate_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/plate"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/electrum"
+    }
+  ],
+  "cooling_time": 59,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_electrum"
+  },
+  "result": {
+    "tag": "c:plates/electrum"
+  }
+}

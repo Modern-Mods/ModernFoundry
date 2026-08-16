@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:protection",
+      "attacker": "hilt:on_fire",
+      "damage_source": "hilt:can_protect",
+      "each_level": 1.25
+    }
+  ],
+  "tooltip_display": "always"
+}

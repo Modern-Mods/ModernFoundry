@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/pig_iron/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/pig_iron"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/pig_iron"
+  },
+  "material": "modernfoundry:pig_iron",
+  "needed": 1,
+  "value": 9
+}

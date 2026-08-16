@@ -1,0 +1,29 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/bulk_quiver",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "modernfoundry:sky_slime_vine"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "modernfoundry:sky_slime_vine"
+    },
+    {
+      "item": "modernfoundry:sky_slime_vine"
+    }
+  ],
+  "result": "modernfoundry:bulk_quiver",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/ranged/bows"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/double_jump",
+  "modifier": "modernfoundry:double_jump",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/boots"
+  }
+}

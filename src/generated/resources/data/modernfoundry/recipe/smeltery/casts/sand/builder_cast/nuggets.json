@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/sand/builder_cast/nuggets",
+  "pattern": "modernfoundry:nugget",
+  "pattern_item": {
+    "tag": "modernfoundry:casts/sand"
+  },
+  "result": "modernfoundry:nugget_sand_cast"
+}

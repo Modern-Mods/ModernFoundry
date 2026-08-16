@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_pewter",
+  "inputs": [
+    {
+      "amount": 90,
+      "tag": "c:molten_iron"
+    },
+    {
+      "amount": 90,
+      "tag": "c:molten_lead"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "tag": "c:molten_pewter"
+  },
+  "temperature": 400
+}

@@ -1,0 +1,32 @@
+{
+  "type": "modernfoundry:swappable_modifier",
+  "id": "modernfoundry:tools/modifiers/ability/crystalshot_quartz",
+  "allow_crystal": false,
+  "inputs": [
+    {
+      "item": "minecraft:nether_quartz_ore"
+    },
+    {
+      "item": "minecraft:blaze_rod"
+    },
+    {
+      "item": "minecraft:nether_quartz_ore"
+    },
+    {
+      "tag": "c:ingots/manyullyn"
+    },
+    {
+      "tag": "c:ingots/manyullyn"
+    }
+  ],
+  "result": {
+    "name": "modernfoundry:crystalshot",
+    "value": "quartz"
+  },
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/ranged/bows"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/quartz/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/quartz"
+  },
+  "result": {
+    "amount": 400,
+    "fluid": "modernfoundry:molten_quartz"
+  },
+  "temperature": 637,
+  "time": 110
+}

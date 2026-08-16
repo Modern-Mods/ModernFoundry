@@ -1,0 +1,72 @@
+package modernmods.modernfoundry.tools.modules.ranged.common;
+
+import net.minecraft.core.Direction.Axis;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.modernfoundry.common.Sounds;
+import modernmods.modernfoundry.library.json.LevelingInt;
+import modernmods.modernfoundry.library.modifiers.ModifierEntry;
+import modernmods.modernfoundry.library.modifiers.ModifierHooks;
+import modernmods.modernfoundry.library.modifiers.hook.ranged.ProjectileHitModifierHook;
+import modernmods.modernfoundry.library.modifiers.modules.ModifierModule;
+import modernmods.modernfoundry.library.module.HookProvider;
+import modernmods.modernfoundry.library.module.ModuleHook;
+import modernmods.modernfoundry.library.tools.nbt.ModDataNBT;
+import modernmods.modernfoundry.library.tools.nbt.ModifierNBT;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+/** Module causing arrows to bounce */
+public record ProjectileBounceModule(LevelingInt bounces) implements ModifierModule, ProjectileHitModifierHook {
+  private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ProjectileBounceModule>defaultHooks(ModifierHooks.PROJECTILE_HIT, ModifierHooks.PROJECTILE_HIT_CLIENT);
+  public static final RecordLoadable<ProjectileBounceModule> LOADER = RecordLoadable.create(LevelingInt.LOADABLE.directField(ProjectileBounceModule::bounces), ProjectileBounceModule::new);
+
+  @Override
+  public RecordLoadable<ProjectileBounceModule> getLoader() {
+    return LOADER;
+  }
+
+  @Override
+  public List<ModuleHook<?>> getDefaultHooks() {
+    return DEFAULT_HOOKS;
+  }
+
+  @Override
+  public Integer getPriority() {
+    // run earlier as bounce should not count as hitting the block yet
+    return 110;
+  }
+
+  @Override
+  public boolean onProjectileHitsBlock(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity owner) {
+    ResourceLocation key = modifier.getId();
+    int bounces = persistentData.getInt(key);
+    if (bounces < this.bounces.compute(modifier.getEffectiveLevel())) {
+      Vec3 motion = projectile.getDeltaMovement();
+      Axis axis = hit.getDirection().getAxis();
+      double amount = axis.choose(motion.x, motion.y, motion.z);
+      if (Math.abs(amount) > 0.3f) {
+        motion = motion.scale(0.9f).with(axis, amount * -1f);
+        projectile.setDeltaMovement(motion);
+        projectile.setYRot((float)(Mth.atan2(motion.x, motion.z) * (180 / Math.PI)));
+        projectile.setXRot((float)(Mth.atan2(motion.y, motion.horizontalDistance()) * (180 / Math.PI)));
+        projectile.yRotO = projectile.getYRot();
+        projectile.xRotO = projectile.getXRot();
+
+        // mark a bounce as happened, block future modifiers
+        persistentData.putInt(key, bounces + 1);
+        if (!projectile.level().isClientSide) {
+          projectile.playSound(Sounds.SLIMY_BOUNCE.getSound());
+        }
+        return true;
+      }
+    }
+    return false;
+  }
+}

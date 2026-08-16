@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/seared_stone",
+  "input": "modernfoundry:seared_stone",
+  "result": {
+    "amount": 250,
+    "fluid": "modernfoundry:seared_stone"
+  },
+  "temperature": 600
+}

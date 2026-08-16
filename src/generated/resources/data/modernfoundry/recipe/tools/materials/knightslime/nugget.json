@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/knightslime/nugget",
+  "ingredient": {
+    "tag": "c:nuggets/knightslime"
+  },
+  "material": "modernfoundry:knightslime",
+  "needed": 9,
+  "value": 1
+}

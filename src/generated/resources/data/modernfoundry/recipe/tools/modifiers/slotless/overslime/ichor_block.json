@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:overslime_modifier",
+  "id": "modernfoundry:tools/modifiers/slotless/overslime/ichor_block",
+  "ingredient": {
+    "item": "modernfoundry:ichor_slime"
+  },
+  "restore_amount": 900,
+  "tools": {
+    "tag": "modernfoundry:modifiable/durability"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "stats": {
+    "modernfoundry:arrow_shaft": {},
+    "modernfoundry:binding": {},
+    "modernfoundry:grip": {
+      "accuracy": 0.15,
+      "durability": -0.2,
+      "melee_damage": 2.75
+    },
+    "modernfoundry:handle": {
+      "durability": -0.2,
+      "melee_damage": 0.1,
+      "melee_speed": 0.15,
+      "mining_speed": 0.0
+    },
+    "modernfoundry:head": {
+      "durability": 357,
+      "melee_attack": 2.75,
+      "mining_speed": 4.0,
+      "mining_tier": "minecraft:diamond"
+    },
+    "modernfoundry:limb": {
+      "accuracy": -0.05,
+      "draw_speed": 0.15,
+      "durability": 357,
+      "velocity": -0.1
+    },
+    "modernfoundry:ribcage": {
+      "repair_amount": 357
+    },
+    "modernfoundry:shield_core": {},
+    "modernfoundry:skull": {
+      "durability": 157
+    }
+  }
+}

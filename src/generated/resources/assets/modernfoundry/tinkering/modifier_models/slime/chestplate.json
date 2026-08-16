@@ -1,0 +1,8 @@
+{
+  "modifiers": {
+    "modernfoundry:trim": {
+      "type": "modernfoundry:armor_trim",
+      "slot": "chestplate"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "modernfoundry:reinforced": "modernfoundry:normal",
+  "modernfoundry:emerald":    "modernfoundry:normal",
+  "modernfoundry:diamond":    "modernfoundry:normal",
+  "modernfoundry:netherite":  "modernfoundry:normal",
+  "modernfoundry:overforced": "modernfoundry:normal",
+  "modernfoundry:overslime":  "modernfoundry:overslime",
+
+  "modernfoundry:haste":      { "type": "modernfoundry:normal", "luminosity": 7 },
+  "modernfoundry:blasting":   "modernfoundry:normal",
+  "modernfoundry:lightspeed": { "type": "modernfoundry:normal", "luminosity": 15 },
+  "modernfoundry:hydraulic":  "modernfoundry:normal",
+
+  "modernfoundry:knockback":   "modernfoundry:normal",
+  "modernfoundry:fiery":       { "type": "modernfoundry:normal", "luminosity": 10 },
+  "modernfoundry:experienced": "modernfoundry:normal",
+  "modernfoundry:magnetic":    "modernfoundry:normal",
+
+  "modernfoundry:antiaquatic":   "modernfoundry:normal",
+  "modernfoundry:bane_of_sssss": "modernfoundry:normal",
+  "modernfoundry:cooling":       "modernfoundry:normal",
+  "modernfoundry:smite":         "modernfoundry:normal",
+  "modernfoundry:sharpness":     "modernfoundry:normal",
+
+  "modernfoundry:luck":        "modernfoundry:normal",
+  "modernfoundry:silky":       "modernfoundry:normal",
+  "modernfoundry:unbreakable": { "type": "modernfoundry:normal", "luminosity": 2 },
+  "modernfoundry:firestarter": "modernfoundry:normal",
+  
+  "modernfoundry:tank": "modernfoundry:tank",
+  "modernfoundry:tank_handler": "modernfoundry:tank",
+  "modernfoundry:bucketing": "modernfoundry:fluid",
+
+  "modernfoundry:tipped": "modernfoundry:potion",
+  "modernfoundry:smashing": "modernfoundry:smashing_fluid",
+
+  "modernfoundry:golden":        "modernfoundry:normal",
+  "modernfoundry:embellishment": "modernfoundry:material",
+  "modernfoundry:dyed":          "modernfoundry:dyed",
+  "modernfoundry:trim":          "modernfoundry:trim"
+}

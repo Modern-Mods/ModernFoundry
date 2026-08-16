@@ -1,0 +1,25 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/shield",
+  "textures": {
+    "cuirass": "modernfoundry:item/tool/armor/travelers/shield/cuirass",
+    "wood":    "modernfoundry:item/tool/armor/travelers/shield/wood"
+  },
+  "modifier_maps": ["modernfoundry:travelers/shield"],
+  "modifier_roots": [ "modernfoundry:item/tool/armor/travelers/shield/modifiers/" ],
+  "first_modifiers": [ "modernfoundry:dyed" ],
+  "parts": [
+    { "name": "wood", "index": 0 },
+    { "name": "cuirass", "index": 1 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:charging": 2 },
+      "model": "modernfoundry:item/armor/travelers/shield_blocking"
+    },
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/armor/travelers/shield_broken"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:table_casting_material",
+  "id": "modernfoundry:tools/parts/casting/broad_blade_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/broad_blade"
+  },
+  "item_cost": 8,
+  "result": "modernfoundry:broad_blade"
+}

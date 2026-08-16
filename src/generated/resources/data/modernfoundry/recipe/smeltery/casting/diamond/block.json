@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/diamond/block",
+  "cooling_time": 250,
+  "fluid": {
+    "amount": 900,
+    "tag": "modernfoundry:molten_diamond"
+  },
+  "result": {
+    "tag": "c:storage_blocks/diamond"
+  }
+}

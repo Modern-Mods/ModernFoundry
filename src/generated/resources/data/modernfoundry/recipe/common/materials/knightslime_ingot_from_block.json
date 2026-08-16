@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:knightslime_ingot",
+  "ingredients": [
+    {
+      "item": "modernfoundry:knightslime_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:knightslime_ingot"
+  }
+}

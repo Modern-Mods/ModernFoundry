@@ -1,0 +1,20 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "plating": "modernfoundry:item/tool/armor/plate/boots/plating",
+    "maille":  "modernfoundry:item/tool/armor/plate/boots/maille"
+  },
+  "modifier_maps": ["modernfoundry:plate/boots"],
+  "first_modifiers": [ "modernfoundry:dyed", "modernfoundry:trim" ],
+  "parts": [
+    { "name": "plating", "index": 0 },
+    { "name": "maille",  "index": 1 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/armor/plate/boots_broken"
+    }
+  ]
+}

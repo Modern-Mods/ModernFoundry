@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:tipped_tool_transform",
+  "id": "modernfoundry:tools/building/arrow_from_tipped",
+  "input": {
+    "type": "hilt:potion_display",
+    "item": "minecraft:tipped_arrow"
+  },
+  "materials": [
+    "modernfoundry:flint",
+    "modernfoundry:wood",
+    "modernfoundry:feather"
+  ],
+  "modifier": "modernfoundry:tipped",
+  "result": "modernfoundry:arrow",
+  "slot_layout": "modernfoundry:tinker_station"
+}

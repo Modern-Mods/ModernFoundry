@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/ironwood/block",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:storage_blocks/ironwood"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:storage_blocks/ironwood"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/ironwood"
+  },
+  "material": "modernfoundry:ironwood",
+  "needed": 1,
+  "value": 9
+}

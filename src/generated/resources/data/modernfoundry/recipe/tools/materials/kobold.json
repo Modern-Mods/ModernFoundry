@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/kobold",
+  "ingredient": {
+    "tag": "c:raw_nuggets/cobalt"
+  },
+  "material": "modernfoundry:kobold",
+  "needed": 1,
+  "value": 1
+}

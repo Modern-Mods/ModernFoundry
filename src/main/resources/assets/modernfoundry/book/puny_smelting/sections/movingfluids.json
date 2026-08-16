@@ -1,0 +1,52 @@
+[
+  {
+    "name": "thruul",
+    "type": "hilt:image_text",
+    "data": "movingfluids/thruul.json"
+  },
+  {
+    "name": "moving_fluids",
+    "type": "hilt:image_text",
+    "data": "movingfluids/intro.json"
+  },
+  {
+    "name": "faucets",
+    "type": "hilt:image_text",
+    "data": "movingfluids/faucet.json"
+  },
+  {
+    "name": "faucets2",
+    "type": "hilt:text",
+    "data": "movingfluids/faucet2.json"
+  },
+  {
+    "name": "channels",
+    "type": "hilt:image_text",
+    "data": "movingfluids/channel.json"
+  },
+  {
+    "name": "channels2",
+    "type": "hilt:text",
+    "data": "movingfluids/channel2.json"
+  },
+  {
+    "name": "copper_cans",
+    "type": "hilt:text",
+    "data": "movingfluids/copper_can.json"
+  },
+  {
+    "name": "copper_cans_craft",
+    "type": "hilt:crafting",
+    "data": "movingfluids/copper_can_craft.json"
+  },
+  {
+    "name": "gauge",
+    "type": "hilt:showcase",
+    "data": "movingfluids/gauge.json"
+  },
+  {
+    "name": "fluid_cannon",
+    "type": "hilt:showcase",
+    "data": "movingfluids/fluid_cannon.json"
+  }
+]

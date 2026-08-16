@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/aluminum/coin_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/coin"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:coins/aluminum"
+    }
+  ],
+  "cooling_time": 27,
+  "fluid": {
+    "amount": 30,
+    "tag": "c:molten_aluminum"
+  },
+  "result": {
+    "tag": "c:coins/aluminum"
+  }
+}

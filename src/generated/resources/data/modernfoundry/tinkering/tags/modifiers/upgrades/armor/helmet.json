@@ -1,0 +1,11 @@
+{
+  "values": [
+    "modernfoundry:item_frame",
+    "modernfoundry:respiration",
+    "modernfoundry:minimap",
+    {
+      "id": "modernfoundry:headlight",
+      "required": false
+    }
+  ]
+}

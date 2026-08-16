@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/slime/ichor/congealed",
+  "cooling_time": 190,
+  "fluid": {
+    "amount": 1000,
+    "tag": "modernfoundry:ichor"
+  },
+  "result": "modernfoundry:ichor_congealed_slime"
+}

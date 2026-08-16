@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/quartz/andesite",
+  "cast": {
+    "tag": "c:cobblestone"
+  },
+  "cast_consumed": true,
+  "cooling_time": 41,
+  "fluid": {
+    "amount": 50,
+    "tag": "modernfoundry:molten_quartz"
+  },
+  "result": "minecraft:andesite"
+}

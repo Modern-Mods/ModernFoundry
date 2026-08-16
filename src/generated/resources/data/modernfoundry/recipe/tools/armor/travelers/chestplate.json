@@ -1,0 +1,53 @@
+{
+  "type": "modernfoundry:crafting_shaped_materials",
+  "id": "modernfoundry:tools/armor/travelers/chestplate",
+  "category": "equipment",
+  "extra_materials": [
+    "modernfoundry:leather"
+  ],
+  "key": {
+    "c": [
+      {
+        "type": "modernfoundry:material_value",
+        "material": {
+          "type": "hilt:and",
+          "predicates": [
+            {
+              "type": "hilt:or",
+              "predicates": [
+                "modernfoundry:castable",
+                "modernfoundry:composite"
+              ]
+            },
+            {
+              "type": "modernfoundry:stat_type",
+              "stat_type": "modernfoundry:plating_chestplate"
+            }
+          ]
+        },
+        "value": 1
+      },
+      {
+        "type": "modernfoundry:material",
+        "item": "modernfoundry:fake_ingot",
+        "material": {
+          "type": "modernfoundry:stat_type",
+          "stat_type": "modernfoundry:plating_chestplate"
+        }
+      }
+    ],
+    "l": {
+      "tag": "c:leather"
+    }
+  },
+  "parts": "c",
+  "pattern": [
+    "l l",
+    "lcl",
+    "lcl"
+  ],
+  "result": {
+    "item": "modernfoundry:travelers_chestplate"
+  },
+  "show_notification": true
+}

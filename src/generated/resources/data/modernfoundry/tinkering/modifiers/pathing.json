@@ -1,0 +1,31 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:campfire_extinguish"
+    },
+    {
+      "type": "modernfoundry:tool_action_transform",
+      "require_ground": true,
+      "sound": "minecraft:item.shovel.flatten",
+      "tool_action": "shovel_flatten"
+    },
+    {
+      "type": "modernfoundry:tool_action_walk_transform",
+      "radius": {
+        "each_level": 1.0,
+        "flat": 0.5
+      },
+      "sound": "minecraft:item.shovel.flatten",
+      "tool_action": "shovel_flatten"
+    },
+    {
+      "type": "modernfoundry:show_offhand",
+      "mode": "disallow_broken"
+    },
+    {
+      "type": "modernfoundry:show_interaction_source"
+    }
+  ],
+  "tooltip_display": "always"
+}

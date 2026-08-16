@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/signalum/nugget",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/signalum"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/signalum"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_signalum"
+  },
+  "temperature": 999,
+  "time": 22
+}

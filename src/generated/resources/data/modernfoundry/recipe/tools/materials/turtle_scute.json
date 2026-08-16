@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/turtle_scute",
+  "ingredient": {
+    "item": "minecraft:turtle_scute"
+  },
+  "material": "modernfoundry:turtle",
+  "needed": 1,
+  "value": 1
+}

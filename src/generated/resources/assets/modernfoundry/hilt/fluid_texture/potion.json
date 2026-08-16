@@ -1,0 +1,5 @@
+{
+  "color": "FFF800F8",
+  "flowing": "modernfoundry:fluid/potion/flowing",
+  "still": "modernfoundry:fluid/potion/still"
+}

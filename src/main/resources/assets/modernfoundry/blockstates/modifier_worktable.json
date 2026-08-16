@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "modernfoundry:block/table/modifier_worktable"
+        },
+        "facing=south": {
+            "model": "modernfoundry:block/table/modifier_worktable",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "modernfoundry:block/table/modifier_worktable",
+            "y": 270
+        },
+        "facing=east": {
+            "model": "modernfoundry:block/table/modifier_worktable",
+            "y": 90
+        }
+    }
+}

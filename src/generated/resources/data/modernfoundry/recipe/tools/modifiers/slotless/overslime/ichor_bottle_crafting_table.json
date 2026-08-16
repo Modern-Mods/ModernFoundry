@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:crafting_overslime_modifier",
+  "id": "modernfoundry:tools/modifiers/slotless/overslime/ichor_bottle_crafting_table",
+  "ingredient": {
+    "item": "modernfoundry:ichor_slime_bottle"
+  },
+  "restore_amount": 100,
+  "tools": {
+    "tag": "modernfoundry:modifiable/durability"
+  }
+}

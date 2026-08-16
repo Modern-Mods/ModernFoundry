@@ -1,0 +1,28 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:inventory",
+      "pattern": "modernfoundry:shield_plus",
+      "slots": {
+        "each_level": 1
+      }
+    },
+    {
+      "type": "modernfoundry:shield_strap",
+      "on_key": [
+        "normal"
+      ]
+    },
+    {
+      "type": "modernfoundry:inventory_menu",
+      "on_key": "shift"
+    },
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:inventory_show_offhand"
+    }
+  ],
+  "priority": 120,
+  "tooltip_display": "always"
+}

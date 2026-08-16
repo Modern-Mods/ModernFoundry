@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "modernfoundry:block/storage/pig_iron/top",
+        "down":     "modernfoundry:block/storage/pig_iron/bottom",
+        "up":       "modernfoundry:block/storage/pig_iron/top",
+        "north":    "modernfoundry:block/storage/pig_iron/front",
+        "east":     "modernfoundry:block/storage/pig_iron/right",
+        "south":    "modernfoundry:block/storage/pig_iron/back",
+        "west":     "modernfoundry:block/storage/pig_iron/left"
+    }
+}

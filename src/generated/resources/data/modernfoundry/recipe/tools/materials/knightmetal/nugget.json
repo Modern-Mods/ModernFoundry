@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/knightmetal/nugget",
+  "ingredient": {
+    "tag": "c:nuggets/knightmetal"
+  },
+  "material": "modernfoundry:knightmetal",
+  "needed": 9,
+  "value": 1
+}

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/seared/brick_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/ingot"
+  },
+  "cooling_time": 89,
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:seared_stone"
+  },
+  "result": "modernfoundry:seared_brick"
+}

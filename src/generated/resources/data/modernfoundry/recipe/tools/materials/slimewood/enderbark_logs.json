@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/slimewood/enderbark_logs",
+  "ingredient": {
+    "tag": "modernfoundry:enderbark_logs"
+  },
+  "leftover": "modernfoundry:enderbark_planks",
+  "material": "modernfoundry:slimewood#enderbark",
+  "needed": 1,
+  "value": 4
+}

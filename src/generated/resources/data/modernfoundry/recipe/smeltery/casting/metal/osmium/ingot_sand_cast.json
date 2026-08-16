@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/osmium/ingot_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/osmium"
+    }
+  ],
+  "cooling_time": 66,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_osmium"
+  },
+  "result": {
+    "tag": "c:ingots/osmium"
+  }
+}

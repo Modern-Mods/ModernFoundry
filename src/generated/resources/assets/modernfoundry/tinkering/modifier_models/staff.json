@@ -1,0 +1,64 @@
+{
+  "modifiers": {
+    "modernfoundry:bucketing": [
+      {
+        "type": "modernfoundry:fluid",
+        "mask": "modernfoundry:item/tool/staff/modifiers/modernfoundry_bucketing_full",
+        "mask_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_bucketing_full"
+      },
+      {
+        "type": "modernfoundry:basic",
+        "texture": "modernfoundry:item/tool/staff/modifiers/modernfoundry_bucketing",
+        "texture_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_bucketing"
+      }
+    ],
+    "modernfoundry:diamond": {
+      "texture": "modernfoundry:item/tool/staff/modifiers/modernfoundry_diamond",
+      "texture_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_diamond"
+    },
+    "modernfoundry:embellishment": {
+      "type": "modernfoundry:material",
+      "texture": "modernfoundry:item/tool/staff/modifiers/modernfoundry_embellishment",
+      "texture_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_embellishment"
+    },
+    "modernfoundry:emerald": {
+      "texture": "modernfoundry:item/tool/staff/modifiers/modernfoundry_emerald",
+      "texture_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_emerald"
+    },
+    "modernfoundry:firestarter": {
+      "texture": "modernfoundry:item/tool/staff/modifiers/modernfoundry_firestarter",
+      "texture_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_firestarter"
+    },
+    "modernfoundry:netherite": {
+      "texture": "modernfoundry:item/tool/staff/modifiers/modernfoundry_netherite",
+      "texture_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_netherite"
+    },
+    "modernfoundry:overforced": {
+      "texture": "modernfoundry:item/tool/staff/modifiers/modernfoundry_overforced",
+      "texture_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_overforced"
+    },
+    "modernfoundry:reinforced": {
+      "texture": "modernfoundry:item/tool/staff/modifiers/modernfoundry_reinforced",
+      "texture_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_reinforced"
+    },
+    "modernfoundry:tank": [
+      {
+        "type": "modernfoundry:tank",
+        "full": "modernfoundry:item/tool/staff/modifiers/modernfoundry_tank_full",
+        "full_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_tank_full",
+        "partial": "modernfoundry:item/tool/staff/modifiers/modernfoundry_tank_partial",
+        "partial_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_tank_partial"
+      },
+      {
+        "type": "modernfoundry:basic",
+        "texture": "modernfoundry:item/tool/staff/modifiers/modernfoundry_tank",
+        "texture_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_tank"
+      }
+    ],
+    "modernfoundry:unbreakable": {
+      "luminosity": 2,
+      "texture": "modernfoundry:item/tool/staff/modifiers/modernfoundry_unbreakable",
+      "texture_large": "modernfoundry:item/tool/staff/large_modifiers/modernfoundry_unbreakable"
+    }
+  }
+}

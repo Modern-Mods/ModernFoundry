@@ -1,0 +1,44 @@
+[
+  {
+    "name": "group_general",
+    "type": "hilt:text",
+    "data": "no-load",
+    "extraData": {
+      "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/small", "path": "tools" }
+    }
+  },
+  {
+    "name": "group_ranged",
+    "type": "hilt:text",
+    "data": "no-load",
+    "extraData": { "modernfoundry:load_tools": [
+      { "tag": "modernfoundry:modifiable/ranged/small", "path": "tools" },
+      { "tag": "modernfoundry:modifiable/ammo",         "path": "tools" }
+    ]}
+  },
+  {
+    "name": "group_info",
+    "type": "hilt:text",
+    "data": "no-load"
+  },
+  {
+    "name": "repairing",
+    "type": "hilt:crafting",
+    "data": "tools/repairing.json"
+  },
+  {
+    "name": "part_swapping",
+    "type": "hilt:image_text",
+    "data": "tools/part_swapping.json"
+  },
+  {
+    "name": "material_swapping",
+    "type": "hilt:image_text",
+    "data": "tools/material_swapping.json"
+  },
+  {
+    "name": "recycling",
+    "type": "hilt:image_text",
+    "data": "tools/recycling.json"
+  }
+]

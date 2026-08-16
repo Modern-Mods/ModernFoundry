@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/skeletons",
+  "damage": 2,
+  "entity": [
+    {
+      "tag": "minecraft:skeletons"
+    },
+    {
+      "type": "minecraft:skeleton_horse"
+    }
+  ],
+  "result": {
+    "amount": 100,
+    "fluid": "minecraft:milk"
+  }
+}

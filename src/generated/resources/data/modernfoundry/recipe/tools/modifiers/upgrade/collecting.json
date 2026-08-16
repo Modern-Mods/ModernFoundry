@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/collecting",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "item": "minecraft:hopper"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:collecting",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/fishing_rods"
+  }
+}

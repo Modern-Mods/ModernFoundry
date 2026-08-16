@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "modernfoundry:stained_clear_glass",
+  "key": {
+    "#": {
+      "item": "modernfoundry:clear_glass"
+    },
+    "X": {
+      "tag": "c:dyes/black"
+    }
+  },
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "modernfoundry:black_clear_stained_glass"
+  },
+  "show_notification": true
+}

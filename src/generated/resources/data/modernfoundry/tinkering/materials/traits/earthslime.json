@@ -1,0 +1,20 @@
+{
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 1,
+        "name": "modernfoundry:drawback"
+      }
+    ],
+    "modernfoundry:slime": [
+      {
+        "level": 1,
+        "name": "modernfoundry:overgrowth"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:overslime"
+      }
+    ]
+  }
+}

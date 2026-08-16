@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/necrotic_bone",
+  "ingredient": {
+    "tag": "c:wither_bones"
+  },
+  "material": "modernfoundry:necrotic_bone",
+  "needed": 1,
+  "value": 1
+}

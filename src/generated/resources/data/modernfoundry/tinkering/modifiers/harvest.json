@@ -1,0 +1,16 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:harvest"
+    },
+    {
+      "type": "modernfoundry:show_offhand",
+      "mode": "disallow_broken"
+    },
+    {
+      "type": "modernfoundry:show_interaction_source"
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/autosmelt",
+  "modifier": "modernfoundry:autosmelt",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/harvest"
+    },
+    {
+      "tag": "modernfoundry:modifiable/fishing_rods"
+    }
+  ]
+}

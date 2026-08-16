@@ -1,0 +1,67 @@
+{
+  "input": "hilt:any",
+  "recipe_type": "minecraft:crafting",
+  "result": {
+    "type": "hilt:and",
+    "predicates": [
+      {
+        "type": "hilt:or",
+        "predicates": [
+          {
+            "type": "hilt:tag",
+            "tag": "minecraft:pickaxes"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "minecraft:axes"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "minecraft:shovels"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "minecraft:swords"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "minecraft:hoes"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "c:tools/shields"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "c:tools/bows"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "c:tools/crossbows"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "c:tools/fishing_rods"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "c:armors"
+          },
+          {
+            "type": "hilt:set",
+            "items": [
+              "minecraft:flint_and_steel",
+              "minecraft:shears",
+              "minecraft:brush"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:tag",
+        "tag": "modernfoundry:modifiable"
+      }
+    ]
+  }
+}

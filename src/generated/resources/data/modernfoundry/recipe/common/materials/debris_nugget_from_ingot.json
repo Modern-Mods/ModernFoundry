@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:debris_nugget",
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_scrap"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:debris_nugget"
+  }
+}

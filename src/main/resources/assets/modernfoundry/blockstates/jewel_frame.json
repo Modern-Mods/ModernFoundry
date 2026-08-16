@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "map=false": { "model": "modernfoundry:block/jewel_frame" },
+        "map=true": { "model": "modernfoundry:block/jewel_frame_map" }
+    }
+}

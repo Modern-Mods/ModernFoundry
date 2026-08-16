@@ -1,0 +1,26 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "plating": "modernfoundry:item/tool/armor/plate/chestplate/plating_broken",
+    "maille": "modernfoundry:item/tool/armor/plate/chestplate/maille_broken"
+  },
+  "modifier_maps": [
+    "modernfoundry:plate/chestplate_broken",
+    "modernfoundry:plate/chestplate"
+  ],
+  "first_modifiers": [
+    "modernfoundry:dyed",
+    "modernfoundry:trim"
+  ],
+  "parts": [
+    {
+      "name": "plating",
+      "index": 0
+    },
+    {
+      "name": "maille",
+      "index": 1
+    }
+  ]
+}

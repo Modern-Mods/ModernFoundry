@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/wood/planks/default",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_combination_filled",
+      "ignore": "modernfoundry:wood_variants/planks",
+      "match": "minecraft:planks"
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "minecraft:planks"
+    },
+    "subtracted": {
+      "tag": "modernfoundry:wood_variants/planks"
+    }
+  },
+  "material": "modernfoundry:wood",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/red_sand/builder_block/plates",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates"
+    }
+  ],
+  "pattern": "modernfoundry:plate",
+  "pattern_item": {
+    "tag": "c:sand/red"
+  },
+  "result": {
+    "count": 4,
+    "item": "modernfoundry:plate_red_sand_cast"
+  }
+}

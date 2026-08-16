@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/copper/plate_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/plate"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/copper"
+    }
+  ],
+  "cooling_time": 50,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_copper"
+  },
+  "result": {
+    "tag": "c:plates/copper"
+  }
+}

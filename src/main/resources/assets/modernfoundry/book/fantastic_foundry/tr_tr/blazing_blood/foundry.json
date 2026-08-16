@@ -1,0 +1,14 @@
+{
+  "title": "Dökümevi",
+  "image": {
+    "file": "modernfoundry:book/images/blaze_smeltery.png",
+    "width": 128,
+    "height": 73
+  },
+  "text": [
+    {
+      "text": "Gerçek bir Usta Modern Foundry yalnızca dökümevini blazelere götürür. Yalnızca yakıt ekle ve o bu aptallar daha ne olduğunu anlamadan onları soğurur. Sanıyorum ayrıca o alt kallama ocağı ile de yapabilirsin eğer zorundaysan.",
+      "paragraph": true
+    }
+  ]
+}

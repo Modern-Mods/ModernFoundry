@@ -1,0 +1,28 @@
+{
+  "name": "minecraft:gameplay/hero_of_the_village/fletcher_gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:arrow",
+          "weight": 10
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

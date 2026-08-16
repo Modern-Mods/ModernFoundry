@@ -1,0 +1,221 @@
+package modernmods.modernfoundry.smeltery.block.entity.component;
+import modernmods.modernfoundry.smeltery.block.entity.ILegacyCapabilityBlockEntity;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.model.data.ModelData;
+import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
+import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import modernmods.modernfoundry.common.multiblock.IMasterLogic;
+import modernmods.modernfoundry.library.client.model.ModelProperties;
+import modernmods.modernfoundry.library.fluid.FluidTankAnimated;
+import modernmods.modernfoundry.library.utils.NBTTags;
+import modernmods.modernfoundry.smeltery.TinkerSmeltery;
+import modernmods.modernfoundry.smeltery.block.component.SearedTankBlock;
+import modernmods.modernfoundry.smeltery.block.component.SearedTankBlock.TankType;
+import modernmods.modernfoundry.smeltery.block.entity.ITankBlockEntity;
+import modernmods.modernfoundry.smeltery.item.TankItem;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+public class TankBlockEntity extends SmelteryComponentBlockEntity implements ITankBlockEntity, ILegacyCapabilityBlockEntity {
+  /** Max capacity for the tank */
+  public static final int DEFAULT_CAPACITY = FluidType.BUCKET_VOLUME * 4;
+
+  /**
+   * Gets the capacity for the given block
+   * @param block  block
+   * @return  Capacity
+   */
+  public static int getCapacity(Block block) {
+    if (block instanceof ITankBlock) {
+      return ((ITankBlock) block).getCapacity();
+    }
+    return DEFAULT_CAPACITY;
+  }
+
+  /**
+   * Gets the capacity for the given item
+   * @param item  item
+   * @return  Capacity
+   */
+  public static int getCapacity(Item item) {
+    if (item instanceof BlockItem) {
+      return getCapacity(((BlockItem)item).getBlock());
+    }
+    return DEFAULT_CAPACITY;
+  }
+
+  /** Internal fluid tank instance */
+  protected final FluidTankAnimated tank;
+  /** Capability holder for the tank */
+  private final LazyOptional<IFluidHandler> holder;
+  /** Last comparator strength to reduce block updates */
+  private int lastStrength = -1;
+
+  public TankBlockEntity(BlockPos pos, BlockState state) {
+    this(pos, state, state.getBlock() instanceof ITankBlock tank
+                     ? tank
+                     : TinkerSmeltery.searedTank.get(TankType.FUEL_TANK));
+  }
+
+  /** Main constructor */
+  public TankBlockEntity(BlockPos pos, BlockState state, ITankBlock block) {
+    this(TinkerSmeltery.tank.get(), pos, state, block);
+  }
+
+  /** Extendable constructor */
+  @SuppressWarnings("WeakerAccess")
+  protected TankBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, ITankBlock block) {
+    super(type, pos, state);
+    tank = new FluidTankAnimated(block.getCapacity(), this);
+    holder = LazyOptional.of(() -> tank);
+  }
+
+  public FluidTankAnimated getTank() {
+    return tank;
+  }
+
+  public int getLastStrength() {
+    return lastStrength;
+  }
+
+  public void setLastStrength(int lastStrength) {
+    this.lastStrength = lastStrength;
+  }
+
+
+  /*
+   * Tank methods
+   */
+
+  @Nonnull
+  public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
+    if (capability == ForgeCapabilities.FLUID_HANDLER) {
+      return holder.cast();
+    }
+    return modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
+  }
+
+  public void invalidateCaps() {
+    // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent (was super.invalidateCaps();)
+    holder.invalidate();
+  }
+
+  @Nonnull
+  @Override
+  public ModelData getModelData() {
+    return ModelData.builder()
+                    .with(ModelProperties.FLUID_STACK, tank.getFluid())
+                    .with(ModelProperties.TANK_CAPACITY, tank.getCapacity()).build();
+  }
+
+  /** Updates the light for this tank using {@link SearedTankBlock#LIGHT} */
+  public static void updateLight(BlockEntity be, IFluidTank tank) {
+    Level level = be.getLevel();
+    if (level != null && !level.isClientSide) {
+      FluidStack fluid = tank.getFluid();
+      int light = fluid.isEmpty() ? 0 : fluid.getFluid().getFluidType().getLightLevel(fluid);
+      BlockState state = be.getBlockState();
+      if (light != state.getValue(SearedTankBlock.LIGHT)) {
+        level.setBlock(be.getBlockPos(), state.setValue(SearedTankBlock.LIGHT, light), Block.UPDATE_CLIENTS);
+      }
+    }
+  }
+
+  @Override
+  public void onTankContentsChanged() {
+    ITankBlockEntity.super.onTankContentsChanged();
+    if (this.level != null) {
+      updateLight(this, tank);
+      this.requestModelDataUpdate();
+    }
+  }
+
+  @Override
+  public void onLoad() {
+    super.onLoad();
+    if (level != null && !level.isClientSide) {
+      BlockPos masterPos = getMasterPos();
+      if (masterPos != null && level.getBlockEntity(masterPos) instanceof IMasterLogic master) {
+        master.onServantLoad(this);
+      }
+    }
+  }
+
+  /*
+   * NBT
+   */
+
+  /**
+   * Sets the tag on the stack based on the contained tank
+   * @param stack  Stack
+   */
+  public void setTankTag(ItemStack stack) {
+    TankItem.setTank(stack, tank);
+  }
+
+  /**
+   * Updates the tank from an NBT tag, used in the block
+   * @param nbt  tank NBT
+   */
+  public void updateTank(CompoundTag nbt) {
+    if (nbt.isEmpty()) {
+      tank.setFluid(FluidStack.EMPTY);
+    } else if (nbt.contains("FluidName")) {
+      tank.setFluid(TankItem.readFluid(nbt));
+      updateLight(this, tank);
+    } else {
+      tank.readFromNBT(level == null ? HolderLookup.Provider.create(java.util.stream.Stream.empty()) : level.registryAccess(), nbt);
+      updateLight(this, tank);
+    }
+  }
+
+  @Override
+  protected boolean shouldSyncOnUpdate() {
+    return true;
+  }
+
+  @Override
+  public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+    tank.setCapacity(getCapacity(getBlockState().getBlock()));
+    if (tag.contains(NBTTags.TANK)) {
+      tank.readFromNBT(registries, tag.getCompound(NBTTags.TANK));
+      updateLight(this, tank);
+    } else {
+      tank.setFluid(FluidStack.EMPTY);
+    }
+    super.loadAdditional(tag, registries);
+  }
+
+  @Override
+  public void saveSynced(CompoundTag tag, HolderLookup.Provider registries) {
+    super.saveSynced(tag, registries);
+    // want tank on the client on world load
+    if (!tank.isEmpty()) {
+      tag.put(NBTTags.TANK, tank.writeToNBT(registries, new CompoundTag()));
+    }
+  }
+
+  /** Interface for blocks to return their capacity */
+  public interface ITankBlock {
+    /** Gets the capacity for this tank */
+    int getCapacity();
+  }
+}

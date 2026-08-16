@@ -1,0 +1,31 @@
+{
+  "icon": {
+    "pattern": "modernfoundry:button_repair"
+  },
+  "input_slots": [
+    {
+      "icon": "modernfoundry:quartz",
+      "x": 11,
+      "y": 41
+    },
+    {
+      "icon": "modernfoundry:dust",
+      "x": 31,
+      "y": 30
+    },
+    {
+      "icon": "modernfoundry:lapis",
+      "x": 31,
+      "y": 50
+    }
+  ],
+  "tool_slot": {
+    "filter": {
+      "tag": "modernfoundry:modifiable"
+    },
+    "icon": "modernfoundry:pickaxe",
+    "x": 53,
+    "y": 41
+  },
+  "translation_key": "gui.modernfoundry.tinker_station.repair_limited"
+}

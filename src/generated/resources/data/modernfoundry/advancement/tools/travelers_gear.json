@@ -1,0 +1,84 @@
+{
+  "parent": "modernfoundry:tools/tinker_station",
+  "criteria": {
+    "crafted_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:travelers_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "crafted_chestplate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:travelers_chestplate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "crafted_helmet": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:travelers_helmet"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "crafted_leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:travelers_leggings"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.modernfoundry.tools.travelers_gear.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:travelers_helmet",
+      "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.tools.travelers_gear.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted_helmet"
+    ],
+    [
+      "crafted_chestplate"
+    ],
+    [
+      "crafted_leggings"
+    ],
+    [
+      "crafted_boots"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

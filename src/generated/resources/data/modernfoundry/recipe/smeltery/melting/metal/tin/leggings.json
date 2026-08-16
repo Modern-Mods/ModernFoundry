@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/tin/leggings",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:armors/leggings/tin"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:armors/leggings/tin"
+  },
+  "result": {
+    "amount": 630,
+    "tag": "c:molten_tin",
+    "unit_size": 10
+  },
+  "temperature": 225,
+  "time": 103
+}

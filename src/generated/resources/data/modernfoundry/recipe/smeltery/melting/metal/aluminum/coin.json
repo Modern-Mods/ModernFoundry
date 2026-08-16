@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/aluminum/coin",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:coins/aluminum"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:coins/aluminum"
+  },
+  "result": {
+    "amount": 30,
+    "tag": "c:molten_aluminum"
+  },
+  "temperature": 425,
+  "time": 31
+}

@@ -1,0 +1,26 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "head": "modernfoundry:item/tool/melting_pan/head_broken",
+    "handle": "modernfoundry:item/tool/melting_pan/handle"
+  },
+  "modifier_maps": [
+    "modernfoundry:melting_pan/broken",
+    "modernfoundry:melting_pan"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/melting_pan/modifiers/broken/",
+    "modernfoundry:item/tool/melting_pan/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "handle",
+      "index": 1
+    },
+    {
+      "name": "head",
+      "index": 0
+    }
+  ]
+}

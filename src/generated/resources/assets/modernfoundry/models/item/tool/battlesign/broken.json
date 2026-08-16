@@ -1,0 +1,26 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/battlesign",
+  "textures": {
+    "head": "modernfoundry:item/tool/battlesign/head_broken",
+    "handle": "modernfoundry:item/tool/battlesign/handle"
+  },
+  "modifier_maps": [
+    "modernfoundry:battlesign_broken",
+    "modernfoundry:battlesign"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/battlesign/modifiers/broken/",
+    "modernfoundry:item/tool/battlesign/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "head",
+      "index": 0
+    },
+    {
+      "name": "handle",
+      "index": 1
+    }
+  ]
+}

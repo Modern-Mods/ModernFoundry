@@ -1,0 +1,7 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/armor/plate/plate_leggings",
+  "result": "modernfoundry:plate_leggings",
+  "result_count": 1,
+  "slot_layout": "modernfoundry:plate_armor"
+}

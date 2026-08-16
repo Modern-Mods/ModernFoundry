@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/red_sand/molding/large_plate",
+  "material": {
+    "tag": "modernfoundry:casts/red_sand"
+  },
+  "pattern": {
+    "type": "modernfoundry:material",
+    "item": "modernfoundry:large_plate"
+  },
+  "result": "modernfoundry:large_plate_red_sand_cast"
+}

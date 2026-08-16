@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#modernfoundry:upgrades/general",
+    "#modernfoundry:upgrades/melee",
+    "#modernfoundry:upgrades/damage",
+    "#modernfoundry:upgrades/harvest",
+    "#modernfoundry:upgrades/armor",
+    "#modernfoundry:upgrades/ranged"
+  ]
+}

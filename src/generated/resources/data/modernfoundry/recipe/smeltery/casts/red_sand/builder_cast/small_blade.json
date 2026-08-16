@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/red_sand/builder_cast/small_blade",
+  "pattern": "modernfoundry:small_blade",
+  "pattern_item": {
+    "tag": "modernfoundry:casts/red_sand"
+  },
+  "result": "modernfoundry:small_blade_red_sand_cast"
+}

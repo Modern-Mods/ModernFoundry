@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casts/gold/ingots",
+  "cast": [
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "c:ingots"
+      },
+      "subtracted": {
+        "item": "modernfoundry:fake_ingot"
+      }
+    },
+    {
+      "type": "modernfoundry:material",
+      "item": "modernfoundry:fake_ingot"
+    }
+  ],
+  "cast_consumed": true,
+  "cooling_time": 57,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_gold"
+  },
+  "result": "modernfoundry:ingot_cast",
+  "switch_slots": true
+}

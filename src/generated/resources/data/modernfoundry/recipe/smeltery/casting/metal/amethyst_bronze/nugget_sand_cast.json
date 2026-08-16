@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/amethyst_bronze/nugget_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "cooling_time": 20,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_amethyst_bronze"
+  },
+  "result": {
+    "tag": "c:nuggets/amethyst_bronze"
+  }
+}

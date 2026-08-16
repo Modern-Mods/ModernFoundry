@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/scorched/lamp",
+  "cast": {
+    "item": "minecraft:glowstone"
+  },
+  "cast_consumed": true,
+  "cooling_time": 166,
+  "fluid": {
+    "amount": 1000,
+    "tag": "modernfoundry:scorched_stone"
+  },
+  "result": "modernfoundry:scorched_lamp"
+}

@@ -1,0 +1,91 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        {
+          "item": "modernfoundry:hammer_head",
+          "scale": 0.75
+        },
+        "modernfoundry:tough_handle",
+        "modernfoundry:tough_binding",
+        {
+          "item": "modernfoundry:large_plate",
+          "scale": 0.25
+        }
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 3.0,
+        "modernfoundry:attack_speed": 0.85
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:attack_damage": 1.25,
+        "modernfoundry:durability": 5.0,
+        "modernfoundry:mining_speed": 0.3
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 2
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 2,
+          "name": "modernfoundry:pierce"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "pickaxe_dig"
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "minecraft:mineable/pickaxe"
+    },
+    {
+      "type": "modernfoundry:vein_aoe",
+      "max_distance": 2
+    },
+    {
+      "type": "modernfoundry:melee_particle",
+      "particle": "modernfoundry:hammer_attack"
+    }
+  ]
+}

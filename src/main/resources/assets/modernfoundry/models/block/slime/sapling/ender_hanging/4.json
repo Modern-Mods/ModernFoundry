@@ -1,0 +1,7 @@
+{
+  "parent": "block/mangrove_propagule_hanging_4",
+  "textures": {
+    "propagule": "modernfoundry:block/slime/sapling/ender_hanging",
+    "particle": "modernfoundry:block/slime/sapling/ender_hanging"
+  }
+}

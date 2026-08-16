@@ -1,0 +1,26 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/tool/dagger/display",
+  "textures": {
+    "head": "modernfoundry:item/tool/dagger/blade_broken",
+    "crossguard": "modernfoundry:item/tool/dagger/crossguard"
+  },
+  "modifier_maps": [
+    "modernfoundry:dagger_broken",
+    "modernfoundry:dagger"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/dagger/modifiers/broken/",
+    "modernfoundry:item/tool/dagger/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "head",
+      "index": 0
+    },
+    {
+      "name": "crossguard",
+      "index": 1
+    }
+  ]
+}

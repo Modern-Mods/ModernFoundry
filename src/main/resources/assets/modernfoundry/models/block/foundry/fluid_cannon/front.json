@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:block/foundry/fluid_cannon/base",
+  "textures": {
+    "front": "modernfoundry:block/foundry/fluid_cannon/front"
+  }
+}

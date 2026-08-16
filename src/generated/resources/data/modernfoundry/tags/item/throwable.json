@@ -1,0 +1,21 @@
+{
+  "values": [
+    "minecraft:snowball",
+    "minecraft:egg",
+    "minecraft:ender_pearl",
+    "minecraft:splash_potion",
+    "minecraft:lingering_potion",
+    "minecraft:experience_bottle",
+    "minecraft:ender_eye",
+    "minecraft:firework_rocket",
+    "modernfoundry:efln_ball",
+    "modernfoundry:flint_shuriken",
+    "modernfoundry:quartz_shuriken",
+    "modernfoundry:glow_ball",
+    "#modernfoundry:modifiable/ammo/thrown",
+    {
+      "id": "twilightforest:ice_bomb",
+      "required": false
+    }
+  ]
+}

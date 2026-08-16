@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:searing"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:fire_protection"
+      }
+    ]
+  }
+}

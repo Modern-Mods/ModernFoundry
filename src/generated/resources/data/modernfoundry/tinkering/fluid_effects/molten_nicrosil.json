@@ -1,0 +1,50 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "modernfoundry:experienced",
+          "level": 1,
+          "time": 100
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "type": "neoforge:or",
+      "values": [
+        {
+          "type": "modernfoundry:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/nicrosil"
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:damage",
+      "damage": 3.0,
+      "damage_type": {
+        "melee": "modernfoundry:fluid_magic_melee",
+        "ranged": "modernfoundry:fluid_magic_ranged"
+      }
+    },
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "set",
+      "effect": "modernfoundry:experienced",
+      "level": 1,
+      "time": 100
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_nicrosil"
+  }
+}

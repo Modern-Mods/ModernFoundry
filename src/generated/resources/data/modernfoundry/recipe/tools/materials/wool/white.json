@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/wool/white",
+  "ingredient": {
+    "item": "minecraft:white_wool"
+  },
+  "material": "modernfoundry:wool#white",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,9 @@
+{
+  "modifiers": {
+    "modernfoundry:banner": {
+      "type": "modernfoundry:banner",
+      "prefix": "modernfoundry:item/tool/armor/plate/shield/banner_small/",
+      "prefix_large": "modernfoundry:item/tool/armor/plate/shield/banner_large/"
+    }
+  }
+}

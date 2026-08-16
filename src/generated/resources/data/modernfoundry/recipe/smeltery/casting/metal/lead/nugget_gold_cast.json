@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/lead/nugget_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/lead"
+    }
+  ],
+  "cooling_time": 14,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_lead"
+  },
+  "result": {
+    "tag": "c:nuggets/lead"
+  }
+}

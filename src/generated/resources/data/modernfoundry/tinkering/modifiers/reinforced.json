@@ -1,0 +1,57 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:reduce_tool_damage",
+      "cause": {
+        "type": "hilt:inverted",
+        "inverted_type": "modernfoundry:tag",
+        "tag": "modernfoundry:durability/bypass_reinforced"
+      },
+      "formula": [
+        0.025,
+        "$level",
+        "*",
+        11.0,
+        "$level",
+        "-",
+        "*"
+      ],
+      "modifier_level": {
+        "max": 5
+      },
+      "tool": {
+        "type": "modernfoundry:has_modifier",
+        "check": "all",
+        "level": 0,
+        "modifier": {
+          "type": "modernfoundry:single",
+          "modifier": "modernfoundry:unbreakable"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:reduce_tool_damage",
+      "cause": {
+        "type": "hilt:inverted",
+        "inverted_type": "modernfoundry:tag",
+        "tag": "modernfoundry:durability/bypass_reinforced"
+      },
+      "each_level": 0.05,
+      "flat": 0.5,
+      "modifier_level": {
+        "min": 6
+      },
+      "tool": {
+        "type": "modernfoundry:has_modifier",
+        "check": "all",
+        "level": 0,
+        "modifier": {
+          "type": "modernfoundry:single",
+          "modifier": "modernfoundry:unbreakable"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

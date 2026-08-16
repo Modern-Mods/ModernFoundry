@@ -1,0 +1,21 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:inventory_menu",
+      "on_key": "shift"
+    },
+    {
+      "type": "modernfoundry:smelting",
+      "multiplier": 10.0,
+      "output_pattern": "modernfoundry:result",
+      "pattern": "modernfoundry:fire",
+      "recipe_type": "minecraft:smelting",
+      "slots": {
+        "each_level": 1
+      }
+    }
+  ],
+  "priority": 110,
+  "tooltip_display": "always"
+}

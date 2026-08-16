@@ -1,0 +1,92 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:material_stats",
+      "primary_part": 0,
+      "stat_types": [
+        "modernfoundry:head",
+        "modernfoundry:head",
+        "modernfoundry:handle"
+      ]
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        },
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        },
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_traits",
+      "hooks": [
+        "modernfoundry:rebalanced_trait"
+      ],
+      "material_index": 1,
+      "stat_type": "modernfoundry:head"
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 3.0,
+        "modernfoundry:attack_speed": 0.9
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 3
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:charge_attack"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "axe_dig",
+        "shield_disable"
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "modernfoundry:mineable/hand_axe"
+    },
+    {
+      "type": "modernfoundry:box_aoe",
+      "bonus": {
+        "height": 5
+      },
+      "expansion_direction": "modernfoundry:height",
+      "expansions": [
+        {
+          "width": 1
+        },
+        {
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:melee_particle",
+      "particle": "modernfoundry:axe_attack"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/obsidian/nahuatl_fence",
+  "cast": {
+    "tag": "minecraft:wooden_fences"
+  },
+  "cast_consumed": true,
+  "cooling_time": 111,
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:molten_obsidian"
+  },
+  "result": "modernfoundry:nahuatl_fence"
+}

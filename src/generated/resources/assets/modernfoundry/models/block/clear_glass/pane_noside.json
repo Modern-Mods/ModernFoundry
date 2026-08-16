@@ -1,0 +1,13 @@
+{
+  "parent": "modernfoundry:block/template/pane/noside",
+  "connection": {
+    "predicate": "pane",
+    "textures": {
+      "pane": "cornerless_full"
+    }
+  },
+  "loader": "hilt:connected",
+  "textures": {
+    "pane": "modernfoundry:block/clear_glass"
+  }
+}

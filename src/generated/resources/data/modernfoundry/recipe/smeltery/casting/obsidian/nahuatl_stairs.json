@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/obsidian/nahuatl_stairs",
+  "cast": {
+    "tag": "minecraft:wooden_stairs"
+  },
+  "cast_consumed": true,
+  "cooling_time": 111,
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:molten_obsidian"
+  },
+  "result": "modernfoundry:nahuatl_stairs"
+}

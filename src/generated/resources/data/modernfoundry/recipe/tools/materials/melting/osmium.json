@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/osmium",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/osmium"
+    }
+  ],
+  "input": "modernfoundry:osmium",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_osmium"
+  },
+  "temperature": 975
+}

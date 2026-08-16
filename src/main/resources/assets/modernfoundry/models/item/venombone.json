@@ -1,0 +1,6 @@
+{
+    "parent": "item/bone",
+    "textures": {
+        "layer0": "modernfoundry:item/materials/venombone"
+    }
+}

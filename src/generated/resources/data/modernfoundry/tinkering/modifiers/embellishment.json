@@ -1,0 +1,9 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:embellishment"
+    }
+  ],
+  "tooltip_display": "tinker_station"
+}

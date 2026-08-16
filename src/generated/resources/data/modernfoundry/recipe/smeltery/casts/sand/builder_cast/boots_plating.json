@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/sand/builder_cast/boots_plating",
+  "pattern": "modernfoundry:boots_plating",
+  "pattern_item": {
+    "tag": "modernfoundry:casts/sand"
+  },
+  "result": "modernfoundry:boots_plating_sand_cast"
+}

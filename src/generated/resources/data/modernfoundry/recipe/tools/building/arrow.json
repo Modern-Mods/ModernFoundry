@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/arrow",
+  "result": "modernfoundry:arrow",
+  "result_count": 4
+}

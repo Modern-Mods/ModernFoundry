@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/clay/brick_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "cooling_time": 80,
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:molten_clay"
+  },
+  "result": "minecraft:brick"
+}

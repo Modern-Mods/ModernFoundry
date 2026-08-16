@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/queens_slime",
+  "input": "modernfoundry:queens_slime",
+  "result": {
+    "amount": 90,
+    "fluid": "modernfoundry:molten_queens_slime"
+  },
+  "temperature": 1150
+}

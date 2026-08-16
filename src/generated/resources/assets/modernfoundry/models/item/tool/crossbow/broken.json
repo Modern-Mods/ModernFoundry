@@ -1,0 +1,31 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/crossbow",
+  "textures": {
+    "limb": "modernfoundry:item/tool/crossbow/limb",
+    "body": "modernfoundry:item/tool/crossbow/body",
+    "bowstring": "modernfoundry:item/tool/crossbow/bowstring_broken"
+  },
+  "modifier_maps": [
+    "modernfoundry:crossbow/broken",
+    "modernfoundry:crossbow"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/crossbow/modifiers/broken/",
+    "modernfoundry:item/tool/crossbow/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "limb",
+      "index": 0
+    },
+    {
+      "name": "body",
+      "index": 1
+    },
+    {
+      "name": "bowstring",
+      "index": 2
+    }
+  ]
+}

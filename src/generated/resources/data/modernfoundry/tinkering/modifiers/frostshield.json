@@ -1,0 +1,32 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:capacity_bar",
+      "each_level": 100,
+      "multiplier": "modernfoundry:durability"
+    },
+    {
+      "type": "modernfoundry:durability_shield",
+      "cause": {
+        "type": "hilt:inverted",
+        "inverted_type": "modernfoundry:tag",
+        "tag": "modernfoundry:durability/bypass_frostshield"
+      },
+      "color": "AAFFFF"
+    },
+    {
+      "type": "modernfoundry:damage_to_capacity",
+      "multiplier": {
+        "flat": 1.0
+      },
+      "reduce_damage": true,
+      "source": {
+        "type": "hilt:tag",
+        "tag": "minecraft:is_freezing"
+      }
+    }
+  ],
+  "priority": 175,
+  "tooltip_display": "always"
+}

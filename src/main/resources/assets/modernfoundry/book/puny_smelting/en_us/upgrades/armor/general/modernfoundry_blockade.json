@@ -1,0 +1,14 @@
+{
+  "modifier_id": "modernfoundry:blockade",
+  "text": [
+    {
+      "text": "Seal your shield to prevent the damage from entering."
+    }
+  ],
+  "effects": [
+    "Increases maximum amount blocked",
+    "Multiple levels, each further increasing amount",
+    "Requires 1 upgrade slot per level",
+    "Requires blocking or parrying"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/meat_soup",
+  "damage": 2,
+  "entity": {
+    "types": [
+      "minecraft:chicken",
+      "minecraft:cow",
+      "minecraft:mooshroom",
+      "minecraft:pig",
+      "minecraft:rabbit",
+      "minecraft:sheep",
+      "minecraft:goat",
+      "minecraft:cod",
+      "minecraft:hoglin",
+      "minecraft:salmon",
+      "minecraft:tropical_fish"
+    ]
+  },
+  "result": {
+    "amount": 50,
+    "fluid": "modernfoundry:meat_soup"
+  }
+}

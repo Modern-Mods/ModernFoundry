@@ -1,0 +1,10 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:arrow_pierce",
+      "each_level": 1
+    }
+  ],
+  "tooltip_display": "always"
+}

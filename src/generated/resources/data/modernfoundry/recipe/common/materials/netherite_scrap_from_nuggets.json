@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "modernfoundry:netherite_scrap",
+  "key": {
+    "#": {
+      "tag": "c:nuggets/netherite_scrap"
+    },
+    "*": {
+      "item": "modernfoundry:debris_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "result": {
+    "id": "minecraft:netherite_scrap"
+  },
+  "show_notification": true
+}

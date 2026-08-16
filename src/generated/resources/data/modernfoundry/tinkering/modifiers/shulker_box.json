@@ -1,0 +1,18 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:trait",
+      "fixed_level": true,
+      "level": 1,
+      "name": "modernfoundry:pocket"
+    },
+    {
+      "type": "modernfoundry:trait",
+      "fixed_level": false,
+      "level": 1,
+      "name": "modernfoundry:pocket"
+    }
+  ],
+  "tooltip_display": "always"
+}

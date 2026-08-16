@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/boots",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:armors/boots/electrum"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:armors/boots/electrum"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_electrum",
+    "unit_size": 10
+  },
+  "temperature": 760,
+  "time": 118
+}

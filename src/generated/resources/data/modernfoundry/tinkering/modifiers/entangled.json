@@ -1,0 +1,43 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 6.0,
+      "operation": "add",
+      "stat": "modernfoundry:mining_speed"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.1,
+      "operation": "add",
+      "stat": "modernfoundry:knockback_resistance"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.15,
+      "operation": "add",
+      "stat": "modernfoundry:draw_speed"
+    },
+    {
+      "type": "modernfoundry:damage_on_unequip",
+      "damage": 1.0,
+      "damage_type": "modernfoundry:entangled",
+      "tool": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor/worn"
+      }
+    },
+    {
+      "type": "modernfoundry:damage_on_unequip",
+      "damage": 2.0,
+      "damage_type": "modernfoundry:entangled",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor/worn"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

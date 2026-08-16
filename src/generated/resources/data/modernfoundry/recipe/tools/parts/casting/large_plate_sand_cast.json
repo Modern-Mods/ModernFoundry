@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:table_casting_material",
+  "id": "modernfoundry:tools/parts/casting/large_plate_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/large_plate"
+  },
+  "cast_consumed": true,
+  "item_cost": 4,
+  "result": "modernfoundry:large_plate"
+}

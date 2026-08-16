@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/axes",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "modernfoundry:melting/invar/tools_costing_3"
+    }
+  ],
+  "ingredient": {
+    "tag": "modernfoundry:melting/invar/tools_costing_3"
+  },
+  "result": {
+    "amount": 270,
+    "tag": "c:molten_invar",
+    "unit_size": 10
+  },
+  "temperature": 900,
+  "time": 110
+}

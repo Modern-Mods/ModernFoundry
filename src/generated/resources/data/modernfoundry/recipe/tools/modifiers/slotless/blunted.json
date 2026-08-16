@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/slotless/blunted",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:blunted",
+  "tools": {
+    "tag": "modernfoundry:modifiable/interactable/left"
+  }
+}

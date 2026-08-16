@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:tinker_station_part_swapping",
+  "id": "modernfoundry:tables/tinker_station_part_swapping",
+  "max_stack_size": 16,
+  "tools": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "modernfoundry:modifiable/multipart"
+    },
+    "subtracted": {
+      "tag": "modernfoundry:modifiable/unswappable/parts"
+    }
+  }
+}

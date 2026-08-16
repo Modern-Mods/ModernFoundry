@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:block/template/lantern",
+  "textures": {
+    "lantern": "modernfoundry:block/foundry/lantern"
+  }
+}

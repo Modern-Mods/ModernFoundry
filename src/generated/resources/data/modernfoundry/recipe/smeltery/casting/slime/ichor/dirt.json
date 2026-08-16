@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/slime/ichor/dirt",
+  "cast": {
+    "item": "minecraft:dirt"
+  },
+  "cast_consumed": true,
+  "cooling_time": 134,
+  "fluid": {
+    "amount": 500,
+    "tag": "modernfoundry:ichor"
+  },
+  "result": "modernfoundry:ichor_slime_dirt"
+}

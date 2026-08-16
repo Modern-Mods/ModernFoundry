@@ -1,0 +1,20 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:max_armor_attribute",
+      "allow_broken": false,
+      "attribute": "modernfoundry:generic.crouch_damage_multiplier",
+      "each_level": -0.1,
+      "held_tag": "modernfoundry:modifiable/held",
+      "operation": "multiply_base"
+    },
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "each_level": 2.5,
+      "wearing_entity": "hilt:crouching"
+    }
+  ],
+  "tooltip_display": "always"
+}

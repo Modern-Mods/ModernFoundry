@@ -1,0 +1,8 @@
+{
+  "parent": "modernfoundry:block/template/controller",
+  "textures": {
+    "front": "modernfoundry:block/smeltery/controller/smeltery_unformed",
+    "bricks": "modernfoundry:block/smeltery/seared/bricks",
+    "back": "modernfoundry:block/smeltery/io/back"
+  }
+}

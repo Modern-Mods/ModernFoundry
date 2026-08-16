@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/defense/golden",
+  "modifier": "modernfoundry:golden",
+  "slots": {
+    "defense": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/worn"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:weapon_mob_effect",
+      "effect": "minecraft:wither",
+      "level": {
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 120.0
+      }
+    },
+    {
+      "type": "modernfoundry:tool_usage_mob_effect",
+      "chance": {
+        "flat": 0.25
+      },
+      "effect": "minecraft:wither",
+      "hooks": [
+        "modernfoundry:melee_hit",
+        "modernfoundry:monster_melee_hit",
+        "modernfoundry:projectile_launch",
+        "modernfoundry:projectile_shot",
+        "modernfoundry:projectile_thrown",
+        "modernfoundry:sling_launch"
+      ],
+      "level": {
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 120.0
+      }
+    },
+    {
+      "type": "modernfoundry:counter_mob_effect",
+      "chance": {
+        "each_level": 0.5
+      },
+      "effect": "minecraft:wither",
+      "level": {
+        "flat": 2.0
+      },
+      "time": {
+        "flat": 120.0
+      }
+    },
+    {
+      "type": "modernfoundry:counter_mob_effect",
+      "chance": {
+        "each_level": 0.1
+      },
+      "durability_usage": 0,
+      "effect": "minecraft:wither",
+      "level": {
+        "flat": 1.0
+      },
+      "target_self": true,
+      "time": {
+        "flat": 120.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

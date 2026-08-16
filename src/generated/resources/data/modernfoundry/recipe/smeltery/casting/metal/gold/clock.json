@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/gold/clock",
+  "cast": {
+    "item": "minecraft:redstone"
+  },
+  "cast_consumed": true,
+  "cooling_time": 114,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_gold"
+  },
+  "result": "minecraft:clock"
+}

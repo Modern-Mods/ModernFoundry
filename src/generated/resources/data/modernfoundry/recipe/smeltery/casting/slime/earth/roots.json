@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/slime/earth/roots",
+  "cast": {
+    "item": "modernfoundry:enderbark_roots"
+  },
+  "cast_consumed": true,
+  "cooling_time": 103,
+  "fluid": {
+    "amount": 1000,
+    "tag": "c:slime"
+  },
+  "result": "modernfoundry:earth_enderbark_roots"
+}

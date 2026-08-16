@@ -1,0 +1,10 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:mob_disguise",
+      "entity": "minecraft:skeleton"
+    }
+  ],
+  "tooltip_display": "always"
+}

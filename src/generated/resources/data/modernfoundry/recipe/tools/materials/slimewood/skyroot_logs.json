@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/slimewood/skyroot_logs",
+  "ingredient": {
+    "tag": "modernfoundry:skyroot_logs"
+  },
+  "leftover": "modernfoundry:skyroot_planks",
+  "material": "modernfoundry:slimewood#skyroot",
+  "needed": 1,
+  "value": 4
+}

@@ -1,0 +1,30 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:constant_enchantment",
+      "level": 1,
+      "name": "minecraft:silk_touch",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/harvest"
+      }
+    },
+    {
+      "type": "modernfoundry:armor_harvest_enchantment",
+      "level": 1,
+      "name": "minecraft:silk_touch",
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor/worn"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

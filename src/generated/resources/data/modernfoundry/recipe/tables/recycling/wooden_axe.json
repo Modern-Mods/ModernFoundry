@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tables/recycling/wooden_axe",
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:rod": {
+      "count": 8,
+      "item": "minecraft:stick"
+    }
+  },
+  "tool": [
+    {
+      "item": "minecraft:wooden_pickaxe"
+    },
+    {
+      "item": "minecraft:wooden_axe"
+    }
+  ]
+}

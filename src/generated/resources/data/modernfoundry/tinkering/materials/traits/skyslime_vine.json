@@ -1,0 +1,30 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:airborne"
+    },
+    {
+      "level": 1,
+      "name": "modernfoundry:overslime_friend"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:skyfall"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:overslime_friend"
+      }
+    ],
+    "modernfoundry:laces": [
+      {
+        "level": 1,
+        "name": "modernfoundry:leaping"
+      }
+    ]
+  }
+}

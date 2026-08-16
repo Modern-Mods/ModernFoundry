@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "modernfoundry:item/materials/silky_jewel"
+    }
+}

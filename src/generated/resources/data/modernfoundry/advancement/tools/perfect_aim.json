@@ -1,0 +1,51 @@
+{
+  "parent": "modernfoundry:tools/tinker_tool",
+  "criteria": {
+    "accuracy": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "hilt:and",
+              "predicates": [
+                {
+                  "type": "hilt:tag",
+                  "tag": "modernfoundry:modifiable/ranged/bows"
+                },
+                {
+                  "type": "modernfoundry:stat_in_range",
+                  "max": 1.0,
+                  "min": 1.0,
+                  "stat": "modernfoundry:accuracy"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.tools.perfect_aim.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:target"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.tools.perfect_aim.title"
+    }
+  },
+  "requirements": [
+    [
+      "accuracy"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

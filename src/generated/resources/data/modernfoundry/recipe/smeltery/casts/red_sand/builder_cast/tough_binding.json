@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/red_sand/builder_cast/tough_binding",
+  "pattern": "modernfoundry:tough_binding",
+  "pattern_item": {
+    "tag": "modernfoundry:casts/red_sand"
+  },
+  "result": "modernfoundry:tough_binding_red_sand_cast"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/aluminum",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/aluminum"
+    }
+  ],
+  "input": "modernfoundry:aluminum",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_aluminum"
+  },
+  "temperature": 425
+}

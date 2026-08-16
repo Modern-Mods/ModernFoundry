@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/iron/gear_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/iron"
+    }
+  ],
+  "cooling_time": 120,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_iron"
+  },
+  "result": {
+    "tag": "c:gears/iron"
+  }
+}

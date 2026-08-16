@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/invar/gear_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/invar"
+    }
+  ],
+  "cooling_time": 127,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_invar"
+  },
+  "result": {
+    "tag": "c:gears/invar"
+  }
+}

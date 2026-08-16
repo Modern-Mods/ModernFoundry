@@ -1,0 +1,9 @@
+{
+  "parent": "block/cake",
+  "textures": {
+    "particle": "modernfoundry:block/slime/cake/sky_side",
+    "bottom":   "modernfoundry:block/slime/cake/sky_bottom",
+    "top":      "modernfoundry:block/slime/cake/sky_top",
+    "side":     "modernfoundry:block/slime/cake/sky_side"
+  }
+}

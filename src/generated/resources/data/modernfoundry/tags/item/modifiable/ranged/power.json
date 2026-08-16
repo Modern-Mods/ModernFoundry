@@ -1,0 +1,8 @@
+{
+  "values": [
+    "modernfoundry:swasher",
+    "#modernfoundry:modifiable/ranged/longbows",
+    "#modernfoundry:modifiable/staffs",
+    "#modernfoundry:modifiable/fishing_rods"
+  ]
+}

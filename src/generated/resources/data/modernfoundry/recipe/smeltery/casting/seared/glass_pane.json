@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/seared/glass_pane",
+  "cast": {
+    "tag": "c:glass_panes/colorless"
+  },
+  "cast_consumed": true,
+  "cooling_time": 89,
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:seared_stone"
+  },
+  "result": "modernfoundry:seared_glass_pane"
+}

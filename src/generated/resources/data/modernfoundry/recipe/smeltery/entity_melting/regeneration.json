@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/regeneration",
+  "damage": 2,
+  "entity": {
+    "types": [
+      "minecraft:ghast",
+      "minecraft:axolotl"
+    ]
+  },
+  "result": {
+    "amount": 50,
+    "nbt": {
+      "Potion": "minecraft:regeneration"
+    },
+    "tag": "c:potion"
+  }
+}

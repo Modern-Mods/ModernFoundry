@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/diamond/geore/shard",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:geore_shards/diamond"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:geore_shards/diamond"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "modernfoundry:molten_diamond"
+  },
+  "temperature": 1450,
+  "time": 79
+}

@@ -1,0 +1,43 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/throwing",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "type": "modernfoundry:material",
+      "item": "modernfoundry:bow_limb"
+    },
+    {
+      "tag": "c:ingots/cinderslime"
+    },
+    {
+      "type": "modernfoundry:material",
+      "item": "modernfoundry:bow_grip"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:throwing",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/durability"
+      },
+      {
+        "tag": "modernfoundry:modifiable/interactable/charge"
+      },
+      [
+        {
+          "tag": "modernfoundry:modifiable/melee/weapon"
+        },
+        {
+          "tag": "modernfoundry:modifiable/harvest"
+        }
+      ]
+    ]
+  }
+}

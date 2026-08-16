@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:table_casting_material",
+  "id": "modernfoundry:tools/parts/casting/hammer_head_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/hammer_head"
+  },
+  "cast_consumed": true,
+  "item_cost": 8,
+  "result": "modernfoundry:hammer_head"
+}

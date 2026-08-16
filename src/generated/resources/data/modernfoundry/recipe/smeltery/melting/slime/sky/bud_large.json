@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/slime/sky/bud_large",
+  "ingredient": {
+    "item": "modernfoundry:large_sky_slime_crystal_bud"
+  },
+  "rate": "gem",
+  "result": {
+    "amount": 750,
+    "fluid": "modernfoundry:sky_slime"
+  },
+  "temperature": 10,
+  "time": 57
+}

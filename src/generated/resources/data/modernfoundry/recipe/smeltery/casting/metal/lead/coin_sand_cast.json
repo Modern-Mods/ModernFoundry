@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/lead/coin_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/coin"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:coins/lead"
+    }
+  ],
+  "cooling_time": 25,
+  "fluid": {
+    "amount": 30,
+    "tag": "c:molten_lead"
+  },
+  "result": {
+    "tag": "c:coins/lead"
+  }
+}

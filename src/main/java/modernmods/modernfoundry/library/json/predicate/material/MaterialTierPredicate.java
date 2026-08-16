@@ -1,0 +1,23 @@
+package modernmods.modernfoundry.library.json.predicate.material;
+
+import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.modernfoundry.library.json.IntRange;
+import modernmods.modernfoundry.library.materials.definition.IMaterial;
+
+/** Material predicate matching any tier within a range */
+public record MaterialTierPredicate(IntRange tier) implements MaterialDefinitionPredicate {
+  public static final IntRange TIER_RANGE = new IntRange(0, Integer.MAX_VALUE);
+  public static final RecordLoadable<MaterialTierPredicate> LOADER = RecordLoadable.create(
+    TIER_RANGE.requiredField("tier", MaterialTierPredicate::tier),
+    MaterialTierPredicate::new);
+
+  @Override
+  public boolean matches(IMaterial material) {
+    return tier.test(material.getTier());
+  }
+
+  @Override
+  public RecordLoadable<? extends MaterialPredicate> getLoader() {
+    return LOADER;
+  }
+}

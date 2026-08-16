@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_manyullyn",
+  "inputs": [
+    {
+      "amount": 270,
+      "tag": "c:molten_cobalt"
+    },
+    {
+      "amount": 90,
+      "tag": "modernfoundry:molten_debris"
+    }
+  ],
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_manyullyn"
+  },
+  "temperature": 1200
+}

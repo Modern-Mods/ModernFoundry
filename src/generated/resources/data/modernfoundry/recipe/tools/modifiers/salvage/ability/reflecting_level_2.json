@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/reflecting_level_2",
+  "level": {
+    "max": 3,
+    "min": 2
+  },
+  "modifier": "modernfoundry:reflecting",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/shields"
+  }
+}

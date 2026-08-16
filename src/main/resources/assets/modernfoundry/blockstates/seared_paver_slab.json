@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "modernfoundry:block/smeltery/slab/paver/slab" },
+        "type=top": { "model": "modernfoundry:block/smeltery/slab/paver/slab_top" },
+        "type=double": { "model": "modernfoundry:block/smeltery/slab/paver/slab_double" }
+    }
+}

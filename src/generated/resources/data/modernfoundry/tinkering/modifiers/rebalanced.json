@@ -1,0 +1,47 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:swappable_slot",
+      "slots": 1
+    },
+    {
+      "type": "modernfoundry:swappable_slot",
+      "hooks": [
+        "modernfoundry:volatile_data"
+      ],
+      "slots": 1,
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ancient"
+      }
+    },
+    {
+      "type": "modernfoundry:swappable_bonus_slot",
+      "bonus": "upgrades",
+      "match": "abilities",
+      "slots": -1,
+      "tool": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ancient"
+      }
+    },
+    {
+      "type": "modernfoundry:swappable_bonus_slot",
+      "bonus": "abilities",
+      "match": "abilities",
+      "slots": -1,
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ancient"
+      }
+    },
+    {
+      "type": "modernfoundry:swappable_tool_traits",
+      "hook": "modernfoundry:rebalanced_trait",
+      "match": "traits"
+    }
+  ],
+  "tooltip_display": "tinker_station"
+}

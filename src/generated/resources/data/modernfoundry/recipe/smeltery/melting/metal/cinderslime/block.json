@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/cinderslime/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/cinderslime"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "modernfoundry:molten_cinderslime"
+  },
+  "temperature": 1050,
+  "time": 203
+}

@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/enderium/coin_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/coin"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:coins/enderium"
+    }
+  ],
+  "cooling_time": 44,
+  "fluid": {
+    "amount": 30,
+    "tag": "c:molten_enderium"
+  },
+  "result": {
+    "tag": "c:coins/enderium"
+  }
+}

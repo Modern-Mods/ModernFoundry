@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/quartz/dust",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:dusts/quartz"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:dusts/quartz"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "modernfoundry:molten_quartz"
+  },
+  "temperature": 637,
+  "time": 41
+}

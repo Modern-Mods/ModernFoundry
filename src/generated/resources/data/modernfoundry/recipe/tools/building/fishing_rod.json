@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/fishing_rod",
+  "result": "modernfoundry:fishing_rod",
+  "result_count": 1
+}

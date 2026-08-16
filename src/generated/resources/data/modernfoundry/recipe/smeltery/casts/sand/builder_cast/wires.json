@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/sand/builder_cast/wires",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:wires"
+    }
+  ],
+  "pattern": "modernfoundry:wire",
+  "pattern_item": {
+    "tag": "modernfoundry:casts/sand"
+  },
+  "result": "modernfoundry:wire_sand_cast"
+}

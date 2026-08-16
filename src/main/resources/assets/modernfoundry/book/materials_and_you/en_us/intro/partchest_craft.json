@@ -1,0 +1,7 @@
+{
+  "title": "Part Chest Crafting",
+  "recipe": "modernfoundry:tables/part_chest",
+  "description": [
+    { "text": "Never know when you might need that unused tool part again later." }
+  ]
+}

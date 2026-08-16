@@ -1,0 +1,23 @@
+{
+  "type": "hilt:crafting_shaped_retextured",
+  "category": "misc",
+  "key": {
+    "p": {
+      "item": "modernfoundry:pattern"
+    },
+    "w": {
+      "tag": "modernfoundry:planklike"
+    }
+  },
+  "match_all": true,
+  "pattern": [
+    "ppp",
+    "w w",
+    "w w"
+  ],
+  "result": {
+    "id": "modernfoundry:tinker_station"
+  },
+  "show_notification": true,
+  "texture": "w"
+}

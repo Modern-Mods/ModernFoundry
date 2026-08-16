@@ -1,0 +1,17 @@
+{
+  "input": "hilt:any",
+  "recipe_type": [
+    "minecraft:smelting",
+    "minecraft:blasting"
+  ],
+  "result": {
+    "type": "hilt:and",
+    "predicates": [
+      {
+        "type": "hilt:tag",
+        "tag": "c:nuggets"
+      },
+      "modernfoundry:castable"
+    ]
+  }
+}

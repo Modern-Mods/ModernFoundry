@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tools/recycling/flint_and_brick",
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:shard": "minecraft:flint"
+  },
+  "tool": {
+    "item": "modernfoundry:flint_and_brick"
+  }
+}

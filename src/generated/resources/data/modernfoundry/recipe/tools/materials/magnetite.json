@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/magnetite",
+  "ingredient": {
+    "tag": "c:raw_nuggets/steel"
+  },
+  "material": "modernfoundry:magnetite",
+  "needed": 1,
+  "value": 1
+}

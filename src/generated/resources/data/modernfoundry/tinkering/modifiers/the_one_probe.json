@@ -1,0 +1,13 @@
+{
+  "condition": {
+    "type": "neoforge:mod_loaded",
+    "modid": "theoneprobe"
+  },
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:the_one_probe"
+    }
+  ],
+  "tooltip_display": "always"
+}

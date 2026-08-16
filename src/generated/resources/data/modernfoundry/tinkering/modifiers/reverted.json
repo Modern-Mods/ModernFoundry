@@ -1,0 +1,47 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:modifier_slot",
+      "flat": 1,
+      "name": "upgrades"
+    },
+    {
+      "type": "modernfoundry:modifier_slot",
+      "flat": 1,
+      "name": "upgrades",
+      "tool": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:set",
+        "items": [
+          "modernfoundry:slime_wings"
+        ]
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slot",
+      "flat": -1,
+      "name": "abilities",
+      "tool": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:set",
+        "items": [
+          "modernfoundry:slime_wings"
+        ]
+      }
+    },
+    {
+      "type": "modernfoundry:trait",
+      "fixed_level": true,
+      "level": 1,
+      "name": "modernfoundry:pocket",
+      "tool": {
+        "type": "hilt:set",
+        "items": [
+          "modernfoundry:slime_leggings"
+        ]
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

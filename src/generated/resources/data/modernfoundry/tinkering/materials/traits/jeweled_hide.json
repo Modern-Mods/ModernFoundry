@@ -1,0 +1,22 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:fortune"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:revitalizing"
+      }
+    ],
+    "modernfoundry:laces": [
+      {
+        "level": 1,
+        "name": "modernfoundry:fortunate"
+      }
+    ]
+  }
+}

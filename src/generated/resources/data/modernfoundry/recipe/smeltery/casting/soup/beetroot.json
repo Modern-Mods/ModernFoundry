@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/soup/beetroot",
+  "cast": {
+    "item": "minecraft:bowl"
+  },
+  "cast_consumed": true,
+  "cooling_time": 1,
+  "fluid": {
+    "amount": 250,
+    "tag": "c:beetroot_soup"
+  },
+  "result": "minecraft:beetroot_soup"
+}

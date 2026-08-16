@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "modernfoundry:block/wood/enderbark/log",
+    "side": "modernfoundry:block/wood/enderbark/log"
+  }
+}

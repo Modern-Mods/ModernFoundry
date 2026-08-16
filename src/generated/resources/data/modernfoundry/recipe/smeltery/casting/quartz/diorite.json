@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/quartz/diorite",
+  "cast": {
+    "item": "minecraft:andesite"
+  },
+  "cast_consumed": true,
+  "cooling_time": 41,
+  "fluid": {
+    "amount": 50,
+    "tag": "modernfoundry:molten_quartz"
+  },
+  "result": "minecraft:diorite"
+}

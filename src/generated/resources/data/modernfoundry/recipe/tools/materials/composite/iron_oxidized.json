@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/composite/iron_oxidized",
+  "fluid": {
+    "amount": 250,
+    "tag": "hilt:water"
+  },
+  "input": "modernfoundry:iron",
+  "output": "modernfoundry:iron#oxidized",
+  "temperature": 1
+}

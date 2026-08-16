@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/tin/nugget_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/tin"
+    }
+  ],
+  "cooling_time": 13,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_tin"
+  },
+  "result": {
+    "tag": "c:nuggets/tin"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "type": "modernfoundry:incremental_modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/fiery",
+  "allow_crystal": true,
+  "amount_per_item": 1,
+  "input": {
+    "item": "minecraft:blaze_powder"
+  },
+  "level": {
+    "max": 5
+  },
+  "needed_per_level": 25,
+  "result": "modernfoundry:fiery",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/melee"
+    },
+    {
+      "tag": "modernfoundry:modifiable/ranged/bows"
+    },
+    {
+      "tag": "modernfoundry:modifiable/fishing_rods"
+    },
+    {
+      "tag": "modernfoundry:modifiable/armor/worn"
+    },
+    {
+      "tag": "modernfoundry:modifiable/shields"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "modernfoundry:knightmetal_ingot",
+  "key": {
+    "#": {
+      "tag": "c:nuggets/knightmetal"
+    },
+    "*": {
+      "item": "modernfoundry:knightmetal_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "result": {
+    "id": "modernfoundry:knightmetal_ingot"
+  },
+  "show_notification": true
+}

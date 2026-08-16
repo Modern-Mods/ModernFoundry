@@ -1,0 +1,122 @@
+[
+  {
+    "name": "intro",
+    "data": "sections/intro.json",
+    "icon": {
+      "item": "modernfoundry:sky_slime_ball"
+    }
+  },
+  {
+    "name": "gadgets",
+    "data": "sections/gadgets.json",
+    "icon": {
+      "item": "modernfoundry:piggy_backpack"
+    }
+  },
+  {
+    "name": "staffs",
+    "icon": {
+      "item": "modernfoundry:sky_staff"
+    },
+    "data": "no-load",
+    "extraData": { "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/special", "path": "staffs", "sort": false }}
+  },
+  {
+    "name": "exploration",
+    "data": "sections/exploration.json",
+    "icon": {
+      "item": "modernfoundry:sky_slime_sapling"
+    }
+  },
+  {
+    "name": "melee_harvest_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:melee_harvest", "tag": "modernfoundry:book/distant" } },
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:broad_blade",
+        "nbt": { "Material": "modernfoundry:knightmetal" }
+      }
+    }
+  },
+  {
+    "name": "ranged_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ranged", "tag": "modernfoundry:book/distant" } },
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:bowstring",
+        "nbt": { "Material": "modernfoundry:enderslime_vine" }
+      }
+    }
+  },
+  {
+    "name": "armor_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:armor", "tag": "modernfoundry:book/distant" } },
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:maille",
+        "nbt": { "Material": "modernfoundry:dragon_scale" }
+      }
+    }
+  },
+  {
+    "name": "ammo_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ammo", "predicate": { "type":  "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/basic_ammo" }}},
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:arrow_head",
+        "nbt": { "Material": "modernfoundry:shulker" }
+      }
+    }
+  },
+  {
+    "name": "ancient_tools",
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:battlesign",
+        "nbt": {
+          "tic_broken": false,
+          "tic_display": true,
+          "Damage": 0,
+          "tic_materials": [
+            "modernfoundry:ui_render#head",
+            "modernfoundry:ui_render#handle"
+          ]
+        }
+      }
+    },
+    "data": "sections/ancient.json",
+    "extraData": { "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/ancient", "path": "ancient", "sort": false }}
+  },
+  {
+    "name": "armor",
+    "icon": {
+      "item": "modernfoundry:slime_boots"
+    },
+    "condition": {
+      "type": "modernfoundry:tag_not_empty",
+      "registry": "minecraft:item",
+      "tag": "modernfoundry:modifiable/book_armor/tinkers_gadgetry"
+    },
+    "data": "no-load",
+    "extraData": {
+      "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/book_armor/tinkers_gadgetry", "path": "armor", "sort": false }
+    }
+  },
+  {
+    "name": "materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:skull" } },
+    "icon": {
+      "item": "minecraft:skeleton_skull"
+    }
+  }
+]

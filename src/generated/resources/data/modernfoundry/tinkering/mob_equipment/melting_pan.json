@@ -1,0 +1,21 @@
+{
+  "entity": [
+    "minecraft:zombie",
+    "minecraft:zombie_villager",
+    "minecraft:husk"
+  ],
+  "equip": {
+    "chance": 0.05,
+    "materials": [
+      {
+        "type": "modernfoundry:ancient"
+      },
+      {
+        "type": "modernfoundry:ancient"
+      }
+    ],
+    "priority": 100,
+    "slot": "offhand",
+    "tool": "modernfoundry:melting_pan"
+  }
+}

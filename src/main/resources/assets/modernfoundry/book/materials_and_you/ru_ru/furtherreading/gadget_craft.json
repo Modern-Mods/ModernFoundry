@@ -1,0 +1,8 @@
+{
+  "title": "Создание гаджетов Modern Foundry",
+  "recipe": "modernfoundry:common/tinkers_gadgetry",
+  "grid_size": "small",
+  "description": [
+    { "text": "Об использовании слизи в повседневных делах. Руководство от Melvin о том, как мастеру найти материалы в мире." }
+  ]
+}

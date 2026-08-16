@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/refined_glowstone/nugget_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/refined_glowstone"
+    }
+  ],
+  "cooling_time": 20,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_refined_glowstone"
+  },
+  "result": {
+    "tag": "c:nuggets/refined_glowstone"
+  }
+}

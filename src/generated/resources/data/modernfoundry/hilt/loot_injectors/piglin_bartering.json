@@ -1,0 +1,64 @@
+{
+  "name": "minecraft:gameplay/piglin_bartering",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "fluid": {
+                "amount": 50,
+                "fluid": "modernfoundry:blazing_blood"
+              },
+              "function": "hilt:set_fluid"
+            },
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "modernfoundry:scorched_lantern",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:battlesign",
+          "weight": 5
+        },
+        {
+          "type": "modernfoundry:tool_part",
+          "material": {
+            "type": "modernfoundry:random",
+            "allow_hidden": true,
+            "material": {
+              "type": "hilt:tag",
+              "tag": "modernfoundry:bartered"
+            }
+          },
+          "tag": "modernfoundry:parts/bartered",
+          "weight": 8
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

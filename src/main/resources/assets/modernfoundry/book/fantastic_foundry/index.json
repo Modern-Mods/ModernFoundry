@@ -1,0 +1,93 @@
+[
+  {
+    "name": "intro",
+    "data": "sections/intro.json",
+    "icon": {
+      "item": "modernfoundry:ichor_slime_ball"
+    }
+  },
+   {
+    "name": "alloyer",
+    "data": "sections/alloyer.json",
+    "icon": {
+      "item": "modernfoundry:scorched_alloyer"
+    }
+  },
+  {
+    "name": "foundry",
+    "data": "sections/foundry.json",
+    "icon": {
+      "item": "modernfoundry:foundry_controller"
+    }
+  },
+  {
+    "name": "blazing_blood",
+    "data": "sections/blazing_blood.json",
+    "icon": {
+      "item": "modernfoundry:blazing_blood_bucket"
+    }
+  },
+  {
+    "name": "melee_harvest_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:melee_harvest", "tag": "modernfoundry:book/blazing_blood" } },
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:large_plate",
+        "nbt": { "Material": "modernfoundry:manyullyn" }
+      }
+    }
+  },
+  {
+    "name": "ranged_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ranged", "tag": "modernfoundry:book/blazing_blood" } },
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:bow_grip",
+        "nbt": { "Material": "modernfoundry:hepatizon" }
+      }
+    }
+  },
+  {
+    "name": "armor_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:armor", "tag": "modernfoundry:book/blazing_blood" } },
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:shield_core",
+        "nbt": { "Material": "modernfoundry:blazewood" }
+      }
+    }
+  },
+  {
+    "name": "armor",
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:plate_chestplate",
+        "nbt": {
+          "tic_broken": false,
+          "tic_display": true,
+          "Damage": 0,
+          "tic_materials": [
+            "modernfoundry:ui_render#extra",
+            "modernfoundry:ui_render#head"
+          ]
+        }
+      }
+    },
+    "condition": {
+      "type": "modernfoundry:tag_not_empty",
+      "registry": "minecraft:item",
+      "tag": "modernfoundry:modifiable/book_armor/fantastic_foundry"
+    },
+    "data": "no-load",
+    "extraData": {
+      "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/book_armor/fantastic_foundry", "path": "armor", "sort": false }
+    }
+  }
+]

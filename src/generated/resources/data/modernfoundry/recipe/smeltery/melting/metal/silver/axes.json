@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/silver/axes",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "modernfoundry:melting/silver/tools_costing_3"
+    }
+  ],
+  "ingredient": {
+    "tag": "modernfoundry:melting/silver/tools_costing_3"
+  },
+  "result": {
+    "amount": 270,
+    "tag": "c:molten_silver",
+    "unit_size": 10
+  },
+  "temperature": 790,
+  "time": 104
+}

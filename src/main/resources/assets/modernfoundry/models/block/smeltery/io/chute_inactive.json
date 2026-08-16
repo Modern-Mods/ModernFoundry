@@ -1,0 +1,9 @@
+{
+  "parent": "modernfoundry:block/template/chute",
+  "textures": {
+    "top": "modernfoundry:block/smeltery/io/chute_top_inactive",
+    "back": "modernfoundry:block/smeltery/io/back",
+    "bricks": "modernfoundry:block/smeltery/seared/bricks",
+    "side": "modernfoundry:block/smeltery/io/chute_side_inactive"
+  }
+}

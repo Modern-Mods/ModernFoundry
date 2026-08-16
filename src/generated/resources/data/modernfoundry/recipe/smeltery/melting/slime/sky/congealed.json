@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/slime/sky/congealed",
+  "ingredient": {
+    "item": "modernfoundry:sky_congealed_slime"
+  },
+  "result": {
+    "amount": 1000,
+    "fluid": "modernfoundry:sky_slime"
+  },
+  "temperature": 10,
+  "time": 57
+}

@@ -1,0 +1,13 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:projectile_fuse",
+      "particle": "minecraft:flame",
+      "time": {
+        "flat": 10
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

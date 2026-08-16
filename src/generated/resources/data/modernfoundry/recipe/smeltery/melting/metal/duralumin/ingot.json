@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/duralumin/ingot",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/duralumin"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/duralumin"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_duralumin"
+  },
+  "temperature": 625,
+  "time": 54
+}

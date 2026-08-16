@@ -1,0 +1,15 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:protection",
+      "attacker": {
+        "type": "hilt:mob_type",
+        "mobs": "minecraft:undead"
+      },
+      "damage_source": "hilt:can_protect",
+      "each_level": 1.25
+    }
+  ],
+  "tooltip_display": "always"
+}

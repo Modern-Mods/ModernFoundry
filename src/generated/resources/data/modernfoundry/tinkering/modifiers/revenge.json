@@ -1,0 +1,31 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:counter_mob_effect",
+      "chance": {
+        "flat": 1.0
+      },
+      "damage_source": {
+        "type": "hilt:attacker",
+        "entity_type": "hilt:any",
+        "which": "causing"
+      },
+      "direct_damage": "always",
+      "durability_usage": 0,
+      "effect": "minecraft:strength",
+      "level": {
+        "flat": 1.0
+      },
+      "target_self": true,
+      "time": {
+        "per_level": 200.0
+      }
+    },
+    {
+      "type": "modernfoundry:clear_effect_on_unequip",
+      "effect": "minecraft:strength"
+    }
+  ],
+  "tooltip_display": "always"
+}

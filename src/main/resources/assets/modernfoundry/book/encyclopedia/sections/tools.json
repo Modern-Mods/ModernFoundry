@@ -1,0 +1,36 @@
+[
+  {
+    "name": "group_small",
+    "type": "hilt:text",
+    "data": "tools/small.json",
+    "extraData": { "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/small", "path": "tools/small" }}
+  },
+  {
+    "name": "group_large",
+    "type": "hilt:text",
+    "data": "tools/broad.json",
+    "extraData": { "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/broad", "path": "tools/broad" }}
+  },
+  {
+    "name": "group_ranged",
+    "type": "hilt:text",
+    "data": "tools/ranged.json",
+    "extraData": { "modernfoundry:load_tools": [
+      { "tag": "modernfoundry:modifiable/ranged/small", "path": "tools/ranged" },
+      { "tag": "modernfoundry:modifiable/ranged/broad", "path": "tools/ranged" },
+      { "tag": "modernfoundry:modifiable/ammo",         "path": "tools/ranged" }
+    ]}
+  },
+  {
+    "name": "group_staff",
+    "type": "hilt:text",
+    "data": "tools/staff.json",
+    "extraData": { "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/special", "path": "tools/staff", "sort": false }}
+  },
+  {
+    "name": "group_ancient",
+    "type": "hilt:text",
+    "data": "tools/ancient.json",
+    "extraData": { "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/ancient", "path": "tools/ancient" }}
+  }
+]

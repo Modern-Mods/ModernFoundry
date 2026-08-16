@@ -1,0 +1,24 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:tool_damage_range",
+      "cause": {
+        "type": "hilt:inverted",
+        "inverted_type": "modernfoundry:tag",
+        "tag": "modernfoundry:durability/bypass_tanned"
+      },
+      "max": 1
+    },
+    {
+      "type": "modernfoundry:tool_damage_range",
+      "cause": {
+        "type": "modernfoundry:tag",
+        "tag": "modernfoundry:durability/secondary"
+      },
+      "max": 0
+    }
+  ],
+  "priority": 200,
+  "tooltip_display": "always"
+}

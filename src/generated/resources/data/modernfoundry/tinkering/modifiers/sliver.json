@@ -1,0 +1,46 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:inventory",
+      "filter": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:slimeball_ammo"
+      },
+      "limit": {
+        "flat": 32
+      },
+      "pattern": "modernfoundry:slimeball",
+      "slots": {
+        "each_level": 3
+      }
+    },
+    {
+      "type": "modernfoundry:trick_quiver"
+    },
+    {
+      "type": "modernfoundry:inventory_menu",
+      "on_key": "any"
+    },
+    {
+      "type": "modernfoundry:requirements",
+      "display_modifiers": [
+        {
+          "level": 1,
+          "name": "modernfoundry:slimeball"
+        }
+      ],
+      "requirement": {
+        "type": "modernfoundry:has_modifier",
+        "check": "all",
+        "modifier": {
+          "type": "modernfoundry:single",
+          "modifier": "modernfoundry:slimeball"
+        }
+      },
+      "translation_key": "modifier.modernfoundry.sliver.requirements"
+    }
+  ],
+  "priority": 70,
+  "tooltip_display": "always"
+}

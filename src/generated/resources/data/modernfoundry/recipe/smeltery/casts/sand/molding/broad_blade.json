@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/sand/molding/broad_blade",
+  "material": {
+    "tag": "modernfoundry:casts/sand"
+  },
+  "pattern": {
+    "type": "modernfoundry:material",
+    "item": "modernfoundry:broad_blade"
+  },
+  "result": "modernfoundry:broad_blade_sand_cast"
+}

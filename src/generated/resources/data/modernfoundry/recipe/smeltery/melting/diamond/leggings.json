@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/diamond/leggings",
+  "ingredient": {
+    "tag": "modernfoundry:melting/diamond/tools_costing_7"
+  },
+  "result": {
+    "amount": 700,
+    "fluid": "modernfoundry:molten_diamond",
+    "unit_size": 25
+  },
+  "temperature": 1450,
+  "time": 209
+}

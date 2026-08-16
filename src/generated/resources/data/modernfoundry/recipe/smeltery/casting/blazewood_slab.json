@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/blazewood_slab",
+  "cast": {
+    "item": "modernfoundry:bloodshroom_planks_slab"
+  },
+  "cast_consumed": true,
+  "cooling_time": 85,
+  "fluid": {
+    "amount": 100,
+    "tag": "modernfoundry:blazing_blood"
+  },
+  "result": "modernfoundry:blazewood_slab"
+}

@@ -1,0 +1,27 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.1,
+      "operation": "add",
+      "stat": "modernfoundry:velocity"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.5,
+      "operation": "add",
+      "stat": "modernfoundry:projectile_damage",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ammo/thrown"
+      }
+    },
+    {
+      "type": "modernfoundry:damage_on_shoot",
+      "damage": 1.0,
+      "damage_type": "modernfoundry:spiny"
+    }
+  ],
+  "tooltip_display": "always"
+}

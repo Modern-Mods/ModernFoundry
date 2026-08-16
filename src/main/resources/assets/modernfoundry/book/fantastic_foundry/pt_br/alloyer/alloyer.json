@@ -1,0 +1,12 @@
+{
+  "title": "Fundição de Ligas",
+  "image": {
+    "file": "modernfoundry:book/images/alloyer.png"
+  },
+  "text": [
+    {
+      "text": "Ligas à Frente!",
+      "paragraph": true
+    }
+	]
+}

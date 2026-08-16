@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:slime_balls",
+  "ingredients": [
+    {
+      "item": "modernfoundry:ender_slime"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:ender_slime_ball"
+  }
+}

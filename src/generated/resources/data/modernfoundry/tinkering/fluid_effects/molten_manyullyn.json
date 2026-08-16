@@ -1,0 +1,42 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "modernfoundry:bleeding",
+          "level": 1,
+          "time": 60
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:conditional",
+      "effect": {
+        "type": "modernfoundry:damage",
+        "damage": 4.0,
+        "damage_type": {
+          "melee": "modernfoundry:fluid_fire_melee",
+          "ranged": "modernfoundry:fluid_fire_ranged"
+        }
+      },
+      "target": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:fire_immune"
+      }
+    },
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "set",
+      "effect": "modernfoundry:bleeding",
+      "level": 1,
+      "time": 60
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_manyullyn"
+  }
+}

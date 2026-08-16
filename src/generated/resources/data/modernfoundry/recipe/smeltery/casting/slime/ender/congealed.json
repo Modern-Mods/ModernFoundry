@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/slime/ender/congealed",
+  "cooling_time": 106,
+  "fluid": {
+    "amount": 1000,
+    "tag": "modernfoundry:ender_slime"
+  },
+  "result": "modernfoundry:ender_congealed_slime"
+}

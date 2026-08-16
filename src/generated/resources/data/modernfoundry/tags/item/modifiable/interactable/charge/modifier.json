@@ -1,0 +1,7 @@
+{
+  "values": [
+    "modernfoundry:swasher",
+    "#modernfoundry:modifiable/interactable/right",
+    "#modernfoundry:modifiable/shields"
+  ]
+}

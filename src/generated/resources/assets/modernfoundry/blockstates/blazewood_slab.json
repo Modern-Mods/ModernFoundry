@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modernfoundry:block/wood/blazewood/slab"
+    },
+    "type=double": {
+      "model": "modernfoundry:block/wood/blazewood/planks"
+    },
+    "type=top": {
+      "model": "modernfoundry:block/wood/blazewood/slab_top"
+    }
+  }
+}

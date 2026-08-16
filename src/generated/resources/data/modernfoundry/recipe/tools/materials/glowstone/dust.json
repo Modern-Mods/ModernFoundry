@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/glowstone/dust",
+  "ingredient": {
+    "tag": "c:dusts/glowstone"
+  },
+  "material": "modernfoundry:glowstone",
+  "needed": 4,
+  "value": 1
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "modernfoundry:congealed_slime",
+  "key": {
+    "#": {
+      "tag": "c:slimeball/ender"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "id": "modernfoundry:ender_congealed_slime"
+  },
+  "show_notification": true
+}

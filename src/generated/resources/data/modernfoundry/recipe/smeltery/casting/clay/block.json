@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/clay/block",
+  "cooling_time": 160,
+  "fluid": {
+    "amount": 1000,
+    "tag": "modernfoundry:molten_clay"
+  },
+  "result": "minecraft:terracotta"
+}

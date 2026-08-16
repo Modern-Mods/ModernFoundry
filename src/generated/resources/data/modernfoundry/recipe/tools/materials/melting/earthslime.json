@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/earthslime",
+  "input": "modernfoundry:earthslime",
+  "result": {
+    "amount": 250,
+    "tag": "c:slime"
+  },
+  "temperature": 50
+}

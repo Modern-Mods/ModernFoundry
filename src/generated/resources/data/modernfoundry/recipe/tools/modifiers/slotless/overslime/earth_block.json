@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:overslime_modifier",
+  "id": "modernfoundry:tools/modifiers/slotless/overslime/earth_block",
+  "ingredient": {
+    "item": "minecraft:slime_block"
+  },
+  "restore_amount": 180,
+  "tools": {
+    "tag": "modernfoundry:modifiable/durability"
+  }
+}

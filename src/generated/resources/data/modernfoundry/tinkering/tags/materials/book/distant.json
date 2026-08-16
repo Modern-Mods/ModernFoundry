@@ -1,0 +1,27 @@
+{
+  "values": [
+    "modernfoundry:chorus",
+    "modernfoundry:whitestone",
+    "modernfoundry:knightmetal",
+    "modernfoundry:knightly",
+    "modernfoundry:knightslime",
+    "modernfoundry:enderslime_vine",
+    "modernfoundry:ancient",
+    "modernfoundry:shulker",
+    "modernfoundry:dragon_scale",
+    "modernfoundry:enderslime",
+    "modernfoundry:end_rod",
+    {
+      "id": "modernfoundry:ironwood",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:steeleaf",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:fiery",
+      "required": false
+    }
+  ]
+}

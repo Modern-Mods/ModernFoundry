@@ -1,0 +1,37 @@
+{
+  "parent": "modernfoundry:tools/tinker_station",
+  "criteria": {
+    "crafted_tool": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "modernfoundry:modifiable/multipart"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.modernfoundry.tools.tinker_tool.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:pickaxe",
+      "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.tools.tinker_tool.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted_tool"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

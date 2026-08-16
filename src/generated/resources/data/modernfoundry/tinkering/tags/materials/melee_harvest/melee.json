@@ -1,0 +1,37 @@
+{
+  "values": [
+    "modernfoundry:flint",
+    "modernfoundry:bone",
+    "modernfoundry:chorus",
+    "modernfoundry:scorched_stone",
+    "modernfoundry:necrotic_bone",
+    "modernfoundry:venombone",
+    "modernfoundry:weeping_vine",
+    "modernfoundry:nahuatl",
+    "modernfoundry:steel",
+    "modernfoundry:darkthread",
+    "modernfoundry:manyullyn",
+    "modernfoundry:blazing_bone",
+    "modernfoundry:knightmetal",
+    {
+      "id": "modernfoundry:silver",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:invar",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:pewter",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:necronium",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:nicrosil",
+      "required": false
+    }
+  ]
+}

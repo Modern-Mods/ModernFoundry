@@ -1,0 +1,94 @@
+[
+  {
+    "name": "intro",
+    "data": "sections/introduction.json",
+    "icon": {
+      "item": "modernfoundry:pattern"
+    }
+  },
+  {
+    "name": "melee_harvest_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:melee_harvest", "tier": { "min": 0, "max": 1 }, "predicate": { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" }}},
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:tool_binding",
+        "nbt": { "Material": "modernfoundry:rock#stone" }
+      }
+    }
+  },
+  {
+    "name": "ranged_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ranged", "tier": { "min": 0, "max": 1 }, "predicate": { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" }}},
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:bowstring",
+        "nbt": { "Material": "modernfoundry:string" }
+      }
+    }
+  },
+  {
+    "name": "ammo_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ammo", "tag": "modernfoundry:book/basic_ammo" }},
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:arrow_shaft",
+        "nbt": { "Material": "modernfoundry:bamboo" }
+      }
+    }
+  },
+  {
+    "name": "tools",
+    "data": "sections/tools.json",
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:pickaxe",
+        "nbt": {
+          "tic_broken": false,
+          "tic_display": true,
+          "Damage": 0,
+          "tic_materials": [
+            "modernfoundry:ui_render#head",
+            "modernfoundry:ui_render#handle",
+            "modernfoundry:ui_render#extra"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "armor",
+    "icon": {
+      "item": "minecraft:carved_pumpkin"
+    },
+    "condition": {
+      "type": "modernfoundry:tag_not_empty",
+      "registry": "minecraft:item",
+      "tag": "modernfoundry:modifiable/book_armor/materials_and_you"
+    },
+    "data": "no-load",
+    "extraData": {
+      "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/book_armor/materials_and_you", "path": "armor", "sort": false }
+    }
+  },
+  {
+    "name": "modifiers",
+    "data": "sections/modifiers.json",
+    "icon": {
+      "item": "minecraft:redstone"
+    }
+  },
+  {
+    "name": "further_reading",
+    "data": "sections/furtherreading.json",
+    "icon": {
+      "item": "modernfoundry:puny_smelting"
+    }
+  }
+]

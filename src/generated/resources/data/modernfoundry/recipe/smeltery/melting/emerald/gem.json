@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/emerald/gem",
+  "ingredient": {
+    "tag": "c:gems/emerald"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "modernfoundry:molten_emerald"
+  },
+  "temperature": 934,
+  "time": 64
+}

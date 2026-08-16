@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:cobalt_nugget",
+  "ingredients": [
+    {
+      "item": "modernfoundry:cobalt_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:cobalt_nugget"
+  }
+}

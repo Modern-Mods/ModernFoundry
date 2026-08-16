@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:overcast"
+    },
+    {
+      "level": 1,
+      "name": "modernfoundry:overslime"
+    }
+  ]
+}

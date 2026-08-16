@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/cobalt/seared_duct",
+  "byproducts": [
+    {
+      "amount": 1000,
+      "fluid": "modernfoundry:seared_stone"
+    }
+  ],
+  "ingredient": {
+    "item": "modernfoundry:seared_duct"
+  },
+  "result": {
+    "amount": 180,
+    "tag": "c:molten_gold"
+  },
+  "temperature": 700,
+  "time": 142
+}

@@ -1,0 +1,8 @@
+{
+  "type": "modernfoundry:tinker_station_damaging",
+  "id": "modernfoundry:tables/tinker_station_damaging/magma_bucket",
+  "damage_amount": 100,
+  "ingredient": {
+    "item": "modernfoundry:magma_bucket"
+  }
+}

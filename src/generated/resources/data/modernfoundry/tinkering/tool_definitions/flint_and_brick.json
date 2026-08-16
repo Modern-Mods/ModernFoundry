@@ -1,0 +1,55 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:durability": 100.0
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "upgrades": 1
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:firestarter"
+        },
+        {
+          "level": 1,
+          "name": "modernfoundry:fiery"
+        },
+        {
+          "level": 1,
+          "name": "modernfoundry:scorching"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:traits",
+      "hooks": [
+        "modernfoundry:rebalanced_trait"
+      ],
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:scorching"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_repair",
+      "material": "modernfoundry:seared_stone",
+      "stat_type": "modernfoundry:head"
+    },
+    {
+      "type": "modernfoundry:material_repair",
+      "material": "modernfoundry:scorched_stone",
+      "stat_type": "modernfoundry:head"
+    }
+  ]
+}

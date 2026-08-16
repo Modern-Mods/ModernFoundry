@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "modernfoundry:nahuatl_slab",
+  "key": {
+    "B": {
+      "item": "modernfoundry:nahuatl"
+    }
+  },
+  "pattern": [
+    "BBB"
+  ],
+  "result": {
+    "count": 6,
+    "id": "modernfoundry:nahuatl_slab"
+  },
+  "show_notification": true
+}

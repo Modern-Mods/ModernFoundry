@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.5,
+      "operation": "add",
+      "stat": "modernfoundry:projectile_damage"
+    }
+  ],
+  "tooltip_display": "always"
+}

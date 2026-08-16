@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "modernfoundry:block/geode/ichor/budding"
+    }
+  }
+}

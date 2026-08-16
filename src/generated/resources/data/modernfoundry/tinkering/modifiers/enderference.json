@@ -1,0 +1,43 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:enderference",
+      "hooks": [
+        "modernfoundry:projectile_launch",
+        "modernfoundry:projectile_shot",
+        "modernfoundry:projectile_thrown"
+      ]
+    },
+    {
+      "type": "modernfoundry:weapon_mob_effect",
+      "apply_before_melee": true,
+      "effect": "modernfoundry:enderference",
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 100.0
+      }
+    },
+    {
+      "type": "modernfoundry:counter_mob_effect",
+      "chance": {
+        "each_level": 0.25
+      },
+      "effect": "modernfoundry:enderference",
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 100.0
+      },
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/wood/bamboo/planks",
+  "ingredient": {
+    "item": "minecraft:bamboo_planks"
+  },
+  "material": "modernfoundry:bamboo",
+  "needed": 2,
+  "value": 1
+}

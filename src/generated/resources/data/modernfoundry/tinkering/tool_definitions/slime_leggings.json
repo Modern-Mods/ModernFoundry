@@ -1,0 +1,66 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:material_stats",
+      "primary_part": 0,
+      "stat_types": [
+        "modernfoundry:shell",
+        {
+          "scale": 1.5,
+          "stat": "modernfoundry:slime"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:fixed",
+          "material": "modernfoundry:shulker"
+        },
+        {
+          "type": "modernfoundry:fixed",
+          "material": "modernfoundry:blood"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_parts",
+      "parts": [
+        "modernfoundry:shell"
+      ]
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 2,
+        "upgrades": 3
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:shell_storage"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_traits",
+      "hooks": [
+        "modernfoundry:trim_trait"
+      ],
+      "material_index": 1,
+      "stat_type": "modernfoundry:slime"
+    },
+    {
+      "type": "modernfoundry:unique_material_name",
+      "index": 1
+    },
+    {
+      "type": "modernfoundry:fixed_material_name",
+      "index": 0
+    }
+  ]
+}

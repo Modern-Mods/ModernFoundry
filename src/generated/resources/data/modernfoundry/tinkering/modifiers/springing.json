@@ -1,0 +1,20 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:sling_leap",
+      "bias_upwards": true,
+      "drawtime_multiplier": 1.0,
+      "force_multiplier": {
+        "each_level": 1.05
+      },
+      "height_reduction": 2.0,
+      "leave_ground": true,
+      "target": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:elytra_flying"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/aluminum/nugget",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/aluminum"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/aluminum"
+  },
+  "material": "modernfoundry:aluminum",
+  "needed": 9,
+  "value": 1
+}

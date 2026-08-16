@@ -1,0 +1,15 @@
+{
+  "modifier_id": "modernfoundry:pierce",
+  "text": [
+    {
+      "text": "矢は(1×レベル)ポイントの防御を無視します。"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "modernfoundry:modifiable/ranged",
+  "effects": [
+    "段階的に適用できる",
+    "最大3レベル",
+    "レベルごとにアップグレードスロットが1つ必要"
+  ]
+}

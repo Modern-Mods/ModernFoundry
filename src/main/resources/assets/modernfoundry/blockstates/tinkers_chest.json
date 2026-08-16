@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "modernfoundry:block/table/chest/tinkers"
+        },
+        "facing=south": {
+            "model": "modernfoundry:block/table/chest/tinkers",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "modernfoundry:block/table/chest/tinkers",
+            "y": 270
+        },
+        "facing=east": {
+            "model": "modernfoundry:block/table/chest/tinkers",
+            "y": 90
+        }
+    }
+}

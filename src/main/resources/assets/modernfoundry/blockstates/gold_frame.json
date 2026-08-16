@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "map=false": { "model": "modernfoundry:block/gold_frame" },
+        "map=true": { "model": "modernfoundry:block/gold_frame_map" }
+    }
+}

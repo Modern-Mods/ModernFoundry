@@ -1,0 +1,14 @@
+{
+  "values": [
+    "modernfoundry:bulk_quiver",
+    "modernfoundry:trick_quiver",
+    "modernfoundry:crystalshot",
+    "modernfoundry:multishot",
+    "modernfoundry:ballista",
+    "modernfoundry:grapple",
+    "modernfoundry:channeling",
+    "modernfoundry:returning",
+    "modernfoundry:slimeball",
+    "modernfoundry:sliver"
+  ]
+}

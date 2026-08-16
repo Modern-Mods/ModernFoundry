@@ -1,0 +1,25 @@
+[
+  {
+    "name": "group_slotless",
+    "type": "hilt:text",
+    "data": "slotless/slotless.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:slotless/general", "path": "slotless/general", "prefix": "general" }}
+  },
+  {
+    "name": "damage_tools",
+    "type": "hilt:text_image",
+    "data": "slotless/damage_tools.json"
+  },
+  {
+    "name": "group_bonus_upgrades",
+    "type": "hilt:text",
+    "data": "slotless/bonus_upgrades.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:slotless/bonus", "path": "slotless/bonus", "prefix": "bonus" }}
+  },
+  {
+    "name": "group_cosmetic",
+    "type": "hilt:text",
+    "data": "slotless/cosmetic.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:slotless/cosmetic", "path": "slotless/cosmetic", "prefix": "cosmetic" }}
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#modernfoundry:upgrades/armor/general",
+    "#modernfoundry:upgrades/armor/helmet",
+    "#modernfoundry:upgrades/armor/chestplate",
+    "#modernfoundry:upgrades/armor/leggings",
+    "#modernfoundry:upgrades/armor/boots"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/red_sand/molding/gears",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears"
+    }
+  ],
+  "material": {
+    "tag": "modernfoundry:casts/red_sand"
+  },
+  "pattern": {
+    "tag": "c:gears"
+  },
+  "result": "modernfoundry:gear_red_sand_cast"
+}

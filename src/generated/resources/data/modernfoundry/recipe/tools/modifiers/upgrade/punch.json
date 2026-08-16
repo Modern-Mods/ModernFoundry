@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/punch",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:piston"
+    },
+    {
+      "item": "modernfoundry:sky_slime"
+    }
+  ],
+  "level": {
+    "max": 3
+  },
+  "result": "modernfoundry:punch",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/ranged/launcher"
+  }
+}

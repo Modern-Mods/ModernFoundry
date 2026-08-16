@@ -1,0 +1,94 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_melee_damage",
+      "formula": [
+        "$water",
+        "$level",
+        "*",
+        "$multiplier",
+        "*",
+        "$damage",
+        "+"
+      ],
+      "percent": false,
+      "variables": {
+        "water": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:water",
+          "fallback": 2.0,
+          "which": "target"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:conditional_power",
+      "formula": [
+        "$water",
+        2.0,
+        "/",
+        "$level",
+        "*",
+        "$multiplier",
+        "*",
+        "$damage",
+        "+"
+      ],
+      "percent": false,
+      "variables": {
+        "water": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:water",
+          "fallback": 2.0,
+          "which": "target"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:thorns",
+      "attacker": {
+        "type": "hilt:or",
+        "predicates": [
+          "hilt:eyes_in_water",
+          "hilt:feet_in_water"
+        ]
+      },
+      "chance": {
+        "each_level": 0.2
+      },
+      "constant_damage": {
+        "flat": 2.0
+      },
+      "damage_type": "modernfoundry:shock",
+      "durability_usage": 1,
+      "random_damage": {
+        "flat": 3.0
+      },
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      }
+    },
+    {
+      "type": "modernfoundry:thorns",
+      "attacker": "hilt:raining_at",
+      "chance": {
+        "each_level": 0.1
+      },
+      "constant_damage": {
+        "flat": 2.0
+      },
+      "damage_type": "modernfoundry:shock",
+      "durability_usage": 1,
+      "random_damage": {
+        "flat": 3.0
+      },
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

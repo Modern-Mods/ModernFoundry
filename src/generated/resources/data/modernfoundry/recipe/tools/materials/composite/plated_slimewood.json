@@ -1,0 +1,26 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/composite/plated_slimewood",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:or",
+      "values": [
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/brass"
+        },
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/zinc"
+        }
+      ]
+    }
+  ],
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_brass"
+  },
+  "input": "modernfoundry:slimewood",
+  "output": "modernfoundry:plated_slimewood",
+  "temperature": 605
+}

@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/brass/gear_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/brass"
+    }
+  ],
+  "cooling_time": 107,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_brass"
+  },
+  "result": {
+    "tag": "c:gears/brass"
+  }
+}

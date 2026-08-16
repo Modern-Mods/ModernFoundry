@@ -1,0 +1,13 @@
+{
+  "modifier_id": "modernfoundry:draconic",
+  "text": [
+    {
+      "text": "Даёт +1 слот для умений."
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+	"Одноразовый",
+    "Бесслотовый"
+  ]
+}

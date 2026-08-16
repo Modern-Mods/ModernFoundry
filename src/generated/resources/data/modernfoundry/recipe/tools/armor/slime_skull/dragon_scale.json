@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:basin_tool_casting",
+  "id": "modernfoundry:tools/armor/slime_skull/dragon_scale",
+  "cast": {
+    "item": "minecraft:dragon_head"
+  },
+  "cast_purpose": "consumed_offset",
+  "extra_materials": [
+    "modernfoundry:dragon_scale"
+  ],
+  "item_cost": 5,
+  "result": "modernfoundry:slime_helmet"
+}

@@ -1,0 +1,29 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/casting/pewter",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:or",
+      "values": [
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/pewter"
+        },
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/tin"
+        },
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/lead"
+        }
+      ]
+    }
+  ],
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_pewter"
+  },
+  "output": "modernfoundry:pewter",
+  "temperature": 400
+}

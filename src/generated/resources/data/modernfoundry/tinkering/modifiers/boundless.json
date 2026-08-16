@@ -1,0 +1,26 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "modernfoundry:generic.protection_cap",
+      "each_level": 0.05,
+      "flat": 0.05,
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      },
+      "tooltip_style": "percent"
+    }
+  ],
+  "tooltip_display": "always"
+}

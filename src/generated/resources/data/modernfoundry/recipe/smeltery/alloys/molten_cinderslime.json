@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_cinderslime",
+  "inputs": [
+    {
+      "amount": 90,
+      "tag": "c:molten_gold"
+    },
+    {
+      "amount": 250,
+      "tag": "modernfoundry:ichor"
+    },
+    {
+      "amount": 250,
+      "tag": "modernfoundry:scorched_stone"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "fluid": "modernfoundry:molten_cinderslime"
+  },
+  "temperature": 1050
+}

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/water/ice",
+  "ingredient": {
+    "item": "minecraft:ice"
+  },
+  "result": {
+    "amount": 1000,
+    "fluid": "minecraft:water"
+  },
+  "temperature": 0,
+  "time": 28
+}

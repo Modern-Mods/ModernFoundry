@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "modernfoundry:block/wood/bloodshroom/planks"
+  }
+}

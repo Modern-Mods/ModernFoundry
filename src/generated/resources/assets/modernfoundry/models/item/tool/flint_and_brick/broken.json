@@ -1,0 +1,15 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "tool": "modernfoundry:item/tool/flint_and_brick/tool_broken"
+  },
+  "modifier_maps": [
+    "modernfoundry:flint_and_brick_broken",
+    "modernfoundry:flint_and_brick"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/flint_and_bronze/modifiers/broken/",
+    "modernfoundry:item/tool/flint_and_bronze/modifiers/"
+  ]
+}

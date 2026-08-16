@@ -1,0 +1,180 @@
+{
+  "name": "minecraft:chests/bastion_treasure",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:battlesign",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:random",
+                  "allow_hidden": true,
+                  "material": {
+                    "type": "hilt:inverted",
+                    "inverted_type": "hilt:tag",
+                    "tag": "modernfoundry:exclude_from_loot"
+                  },
+                  "tier": {
+                    "max": 4,
+                    "min": 3
+                  }
+                },
+                {
+                  "type": "modernfoundry:random",
+                  "allow_hidden": true,
+                  "material": {
+                    "type": "hilt:inverted",
+                    "inverted_type": "hilt:tag",
+                    "tag": "modernfoundry:exclude_from_loot"
+                  },
+                  "tier": {
+                    "max": 4,
+                    "min": 3
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:plate_helmet",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:random",
+                  "allow_hidden": true,
+                  "material": {
+                    "type": "hilt:inverted",
+                    "inverted_type": "hilt:tag",
+                    "tag": "modernfoundry:exclude_from_loot"
+                  },
+                  "tier": {
+                    "max": 4,
+                    "min": 3
+                  }
+                },
+                {
+                  "type": "modernfoundry:random",
+                  "allow_hidden": true,
+                  "material": {
+                    "type": "hilt:inverted",
+                    "inverted_type": "hilt:tag",
+                    "tag": "modernfoundry:exclude_from_loot"
+                  },
+                  "tier": {
+                    "max": 4,
+                    "min": 3
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:plate_chestplate",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:random",
+                  "allow_hidden": true,
+                  "material": {
+                    "type": "hilt:inverted",
+                    "inverted_type": "hilt:tag",
+                    "tag": "modernfoundry:exclude_from_loot"
+                  },
+                  "tier": {
+                    "max": 4,
+                    "min": 3
+                  }
+                },
+                {
+                  "type": "modernfoundry:random",
+                  "allow_hidden": true,
+                  "material": {
+                    "type": "hilt:inverted",
+                    "inverted_type": "hilt:tag",
+                    "tag": "modernfoundry:exclude_from_loot"
+                  },
+                  "tier": {
+                    "max": 4,
+                    "min": 3
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:plate_leggings",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:random",
+                  "allow_hidden": true,
+                  "material": {
+                    "type": "hilt:inverted",
+                    "inverted_type": "hilt:tag",
+                    "tag": "modernfoundry:exclude_from_loot"
+                  },
+                  "tier": {
+                    "max": 4,
+                    "min": 3
+                  }
+                },
+                {
+                  "type": "modernfoundry:random",
+                  "allow_hidden": true,
+                  "material": {
+                    "type": "hilt:inverted",
+                    "inverted_type": "hilt:tag",
+                    "tag": "modernfoundry:exclude_from_loot"
+                  },
+                  "tier": {
+                    "max": 4,
+                    "min": 3
+                  }
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:plate_boots",
+          "weight": 6
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

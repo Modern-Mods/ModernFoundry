@@ -1,0 +1,8 @@
+{
+    "render_type": "minecraft:translucent",
+    "parent": "block/slime_block",
+    "textures": {
+        "particle": "modernfoundry:block/slime/storage/ender",
+        "texture": "modernfoundry:block/slime/storage/ender"
+    }
+}

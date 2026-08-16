@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/composite/fiery",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/fiery"
+    }
+  ],
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:fiery_liquid"
+  },
+  "input": "modernfoundry:iron",
+  "output": "modernfoundry:fiery",
+  "temperature": 1500
+}

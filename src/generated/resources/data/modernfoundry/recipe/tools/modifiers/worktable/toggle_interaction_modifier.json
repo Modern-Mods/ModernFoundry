@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:toggle_interaction",
+  "id": "modernfoundry:tools/modifiers/worktable/toggle_interaction_modifier",
+  "inputs": [
+    {
+      "item": "minecraft:lever"
+    }
+  ],
+  "tools": {
+    "tag": "modernfoundry:modifiable/interactable/dual"
+  }
+}

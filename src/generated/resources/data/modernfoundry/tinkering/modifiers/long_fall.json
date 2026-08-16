@@ -1,0 +1,34 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:requirements",
+      "display_modifiers": [
+        {
+          "level": 2,
+          "name": "modernfoundry:feather_falling"
+        }
+      ],
+      "requirement": {
+        "type": "modernfoundry:has_modifier",
+        "check": "all",
+        "level": {
+          "min": 2
+        },
+        "modifier": {
+          "type": "modernfoundry:single",
+          "modifier": "modernfoundry:feather_falling"
+        }
+      },
+      "translation_key": "modifier.modernfoundry.long_fall.requirements"
+    },
+    {
+      "type": "modernfoundry:block_damage",
+      "damage_source": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:protection/fall"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

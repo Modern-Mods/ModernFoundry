@@ -1,0 +1,24 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/soul_belt",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:recovery_compass"
+    },
+    {
+      "item": "minecraft:leather"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:soul_belt",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/leggings"
+  }
+}

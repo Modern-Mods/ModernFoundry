@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:tools/modifiers/obsidian_reinforcement",
+  "cast": {
+    "item": "modernfoundry:pattern"
+  },
+  "cast_consumed": true,
+  "cooling_time": 221,
+  "fluid": {
+    "amount": 1000,
+    "tag": "modernfoundry:molten_obsidian"
+  },
+  "result": "modernfoundry:obsidian_reinforcement"
+}

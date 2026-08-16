@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up":    { "model": "modernfoundry:block/foundry/gauge", "x":  90 },
+        "facing=down":  { "model": "modernfoundry:block/foundry/gauge", "x": 270 },
+        "facing=north": { "model": "modernfoundry:block/foundry/gauge", "y": 180 },
+        "facing=south": { "model": "modernfoundry:block/foundry/gauge" },
+        "facing=west":  { "model": "modernfoundry:block/foundry/gauge", "y":  90 },
+        "facing=east":  { "model": "modernfoundry:block/foundry/gauge", "y": 270 }
+    }
+}

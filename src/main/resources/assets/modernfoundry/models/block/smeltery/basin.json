@@ -1,0 +1,8 @@
+{
+  "parent": "modernfoundry:block/template/basin",
+  "textures": {
+    "top":    "modernfoundry:block/smeltery/casting/basin_top",
+    "side":   "modernfoundry:block/smeltery/casting/basin_side",
+    "bottom": "modernfoundry:block/smeltery/casting/basin_bottom"
+  }
+}

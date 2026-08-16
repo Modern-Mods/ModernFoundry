@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/cobalt/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/cobalt"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/cobalt"
+  },
+  "material": "modernfoundry:cobalt",
+  "needed": 1,
+  "value": 9
+}

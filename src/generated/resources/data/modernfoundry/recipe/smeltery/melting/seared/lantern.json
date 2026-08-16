@@ -1,0 +1,24 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/seared/lantern",
+  "byproducts": [
+    {
+      "amount": 250,
+      "fluid": "modernfoundry:molten_glass"
+    },
+    {
+      "amount": 30,
+      "tag": "c:molten_iron"
+    }
+  ],
+  "ingredient": {
+    "type": "modernfoundry:no_container",
+    "item": "modernfoundry:seared_lantern"
+  },
+  "result": {
+    "amount": 500,
+    "fluid": "modernfoundry:seared_stone"
+  },
+  "temperature": 600,
+  "time": 53
+}

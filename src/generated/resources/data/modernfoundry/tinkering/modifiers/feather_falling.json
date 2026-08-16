@@ -1,0 +1,23 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:protection/fall"
+      },
+      "each_level": 6.25,
+      "tool": {
+        "type": "modernfoundry:has_modifier",
+        "check": "all",
+        "level": 0,
+        "modifier": {
+          "type": "modernfoundry:single",
+          "modifier": "modernfoundry:long_fall"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

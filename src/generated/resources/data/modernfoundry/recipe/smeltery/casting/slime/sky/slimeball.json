@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/slime/sky/slimeball",
+  "cooling_time": 48,
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:sky_slime"
+  },
+  "result": "modernfoundry:sky_slime_ball"
+}

@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/metal/bendalloy/block",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:storage_blocks/bendalloy"
+    }
+  ],
+  "cooling_time": 100,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_bendalloy"
+  },
+  "result": {
+    "tag": "c:storage_blocks/bendalloy"
+  }
+}

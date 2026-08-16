@@ -1,0 +1,35 @@
+{
+  "stats": {
+    "modernfoundry:grip": {
+      "accuracy": 0.15,
+      "durability": -0.15,
+      "melee_damage": 2.0
+    },
+    "modernfoundry:limb": {
+      "accuracy": -0.05,
+      "draw_speed": 0.15,
+      "durability": 225,
+      "velocity": -0.15
+    },
+    "modernfoundry:maille": {},
+    "modernfoundry:plating_boots": {
+      "armor": 2.0,
+      "durability": 169
+    },
+    "modernfoundry:plating_chestplate": {
+      "armor": 6.0,
+      "durability": 208
+    },
+    "modernfoundry:plating_helmet": {
+      "armor": 2.0,
+      "durability": 143
+    },
+    "modernfoundry:plating_leggings": {
+      "armor": 4.0,
+      "durability": 195
+    },
+    "modernfoundry:plating_shield": {
+      "durability": 234
+    }
+  }
+}

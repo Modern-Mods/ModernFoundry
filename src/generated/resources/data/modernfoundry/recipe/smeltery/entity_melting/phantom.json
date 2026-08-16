@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/phantom",
+  "damage": 4,
+  "entity": {
+    "type": "minecraft:phantom"
+  },
+  "result": {
+    "amount": 50,
+    "nbt": {
+      "Potion": "minecraft:slow_falling"
+    },
+    "tag": "c:potion"
+  }
+}

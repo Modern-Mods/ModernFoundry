@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/steel/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/steel"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/steel"
+  },
+  "material": "modernfoundry:steel",
+  "needed": 1,
+  "value": 9
+}

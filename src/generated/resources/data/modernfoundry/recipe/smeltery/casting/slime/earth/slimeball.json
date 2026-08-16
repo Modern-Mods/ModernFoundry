@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/slime/earth/slimeball",
+  "cooling_time": 51,
+  "fluid": {
+    "amount": 250,
+    "tag": "c:slime"
+  },
+  "result": "minecraft:slime_ball"
+}

@@ -1,0 +1,11 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:fov",
+      "action": "increase",
+      "each_level": 0.05
+    }
+  ],
+  "tooltip_display": "always"
+}

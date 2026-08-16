@@ -1,0 +1,12 @@
+{
+  "modifiers": {
+    "modernfoundry:dyed": {
+      "type": "modernfoundry:dyed",
+      "texture": "modernfoundry:item/tool/armor/travelers/goggles/modifiers/dyed"
+    },
+    "modernfoundry:trim": {
+      "type": "modernfoundry:custom_trim",
+      "root": "modernfoundry:item/tool/armor/travelers/goggles/trim"
+    }
+  }
+}

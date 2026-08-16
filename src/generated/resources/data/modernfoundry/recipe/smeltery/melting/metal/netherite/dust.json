@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/netherite/dust",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:dusts/netherite"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:dusts/netherite"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_netherite"
+  },
+  "temperature": 1250,
+  "time": 55
+}

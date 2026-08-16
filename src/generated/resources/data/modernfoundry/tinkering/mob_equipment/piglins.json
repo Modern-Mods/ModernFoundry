@@ -1,0 +1,24 @@
+{
+  "entity": "#c:piglins",
+  "equip": {
+    "chance": 0.05,
+    "match": {
+      "type": "hilt:set",
+      "items": [
+        "minecraft:golden_sword",
+        "minecraft:golden_axe"
+      ]
+    },
+    "materials": [
+      {
+        "type": "modernfoundry:ancient"
+      },
+      {
+        "type": "modernfoundry:ancient"
+      }
+    ],
+    "priority": 100,
+    "slot": "mainhand",
+    "tool": "modernfoundry:battlesign"
+  }
+}

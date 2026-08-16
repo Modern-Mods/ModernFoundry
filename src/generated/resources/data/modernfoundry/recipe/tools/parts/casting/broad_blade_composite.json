@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:table_casting_composite",
+  "id": "modernfoundry:tools/parts/casting/broad_blade_composite",
+  "item_cost": 8,
+  "result": "modernfoundry:broad_blade"
+}

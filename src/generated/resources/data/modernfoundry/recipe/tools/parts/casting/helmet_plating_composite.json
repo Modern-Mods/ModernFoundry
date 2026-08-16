@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:table_casting_composite",
+  "id": "modernfoundry:tools/parts/casting/helmet_plating_composite",
+  "item_cost": 3,
+  "result": "modernfoundry:helmet_plating"
+}

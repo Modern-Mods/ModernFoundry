@@ -1,0 +1,26 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/axe",
+  "textures": {
+    "front":   "modernfoundry:item/tool/minotaur_axe/front",
+    "back":    "modernfoundry:item/tool/minotaur_axe/back",
+    "handle":  "modernfoundry:item/tool/pickaxe/handle"
+  },
+  "modifier_maps": ["modernfoundry:minotaur_axe"],
+  "modifier_roots": [ "modernfoundry:item/tool/minotaur_axe/modifiers/" ],
+  "parts": [
+    { "name": "handle", "index": 2 },
+    { "name": "front",  "index": 0 },
+    { "name": "back",   "index": 1 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:charging": 2 },
+      "model": "modernfoundry:item/tool/minotaur_axe/blocking"
+    },
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/tool/minotaur_axe/broken"
+    }
+  ]
+}

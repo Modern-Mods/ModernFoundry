@@ -1,0 +1,155 @@
+package modernmods.modernfoundry.tools.modules.interaction;
+
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import modernmods.modernfoundry.compat.neoforged.neoforge.common.IForgeShearable;
+import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.common.ItemAbilities;
+import modernmods.hilt.data.loadable.primitive.FloatLoadable;
+import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.modernfoundry.library.events.TinkerToolEvent.Result;
+import modernmods.modernfoundry.library.events.TinkerToolEvent.ToolShearEvent;
+import modernmods.modernfoundry.library.modifiers.ModifierEntry;
+import modernmods.modernfoundry.library.modifiers.ModifierHooks;
+import modernmods.modernfoundry.library.modifiers.hook.behavior.ToolActionModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.combat.ArmorLootingModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.combat.LootingModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.EntityInteractionModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.InteractionSource;
+import modernmods.modernfoundry.library.modifiers.modules.ModifierModule;
+import modernmods.modernfoundry.library.modifiers.modules.util.ModifierCondition;
+import modernmods.modernfoundry.library.modifiers.modules.util.ModifierCondition.ConditionalModule;
+import modernmods.modernfoundry.library.module.HookProvider;
+import modernmods.modernfoundry.library.module.ModuleHook;
+import modernmods.modernfoundry.library.tools.context.LootingContext;
+import modernmods.modernfoundry.library.tools.definition.module.ToolHooks;
+import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
+import modernmods.modernfoundry.library.tools.helper.ToolDamageUtil;
+import modernmods.modernfoundry.library.tools.item.IModifiable;
+import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
+import modernmods.modernfoundry.library.utils.Util;
+
+import java.util.List;
+
+/** Module implementing shearing on kamas, scythes, and swords */
+public record ShearsModule(float flatBonus, float perLevelBonus, float expandedBonus, ModifierCondition<IToolStackView> condition) implements ModifierModule, EntityInteractionModifierHook, ToolActionModifierHook, ConditionalModule<IToolStackView> {
+  private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<ShearsModule>defaultHooks(ModifierHooks.ENTITY_INTERACT, ModifierHooks.TOOL_ACTION);
+  public static final RecordLoadable<ShearsModule> LOADER = RecordLoadable.create(
+    FloatLoadable.FROM_ZERO.defaultField("flat", 0f, ShearsModule::flatBonus),
+    FloatLoadable.FROM_ZERO.defaultField("per_level", 0f, ShearsModule::perLevelBonus),
+    FloatLoadable.FROM_ZERO.defaultField("expanded", 0f, ShearsModule::expandedBonus),
+    ModifierCondition.TOOL_FIELD,
+    ShearsModule::new);
+
+  public ShearsModule(float flatBonus, float perLevelBonus, float expandedBonus) {
+    this(flatBonus, perLevelBonus, expandedBonus, ModifierCondition.ANY_TOOL);
+  }
+
+  @Override
+  public RecordLoadable<ShearsModule> getLoader() {
+    return LOADER;
+  }
+
+  @Override
+  public List<ModuleHook<?>> getDefaultHooks() {
+    return DEFAULT_HOOKS;
+  }
+
+  @Override
+  public boolean canPerformAction(IToolStackView tool, ModifierEntry modifier, ItemAbility toolAction) {
+    return condition.matches(tool, modifier) && (
+      toolAction == ItemAbilities.SHEARS_DIG ||
+      toolAction == ItemAbilities.SHEARS_HARVEST ||
+      toolAction == ItemAbilities.SHEARS_CARVE ||
+      toolAction == ItemAbilities.SHEARS_DISARM);
+  }
+
+  /** Runs the hook after shearing an entity */
+  private static void runShearHook(IToolStackView tool, Player player, Entity entity, boolean isTarget) {
+    for (ModifierEntry entry : tool.getModifierList()) {
+      entry.getHook(ModifierHooks.SHEAR_ENTITY).afterShearEntity(tool, entry, player, entity, isTarget);
+    }
+  }
+
+  /**
+   * Tries to shear an given entity, returns false if it fails and true if it succeeds
+   *
+   * @param itemStack the current item stack
+   * @param world the current world
+   * @param player the current player
+   * @param entity the entity to try to shear
+   * @param fortune the fortune to apply to the sheared entity
+   * @return if the sheering of the entity was performed or not
+   */
+  private static boolean shearEntity(ItemStack itemStack, IToolStackView tool, Level world, Player player, Entity entity, int fortune) {
+    // event to override entity shearing
+    Result result = new ToolShearEvent(itemStack, tool, world, player, entity, fortune).fire();
+    if (result != Result.DEFAULT) {
+      return result == Result.ALLOW;
+    }
+    // fallback to forge shearable
+    if (entity instanceof IForgeShearable target) {
+      if (!world.isClientSide) {
+        List<ItemStack> drops = target.onSheared(player, itemStack, world, entity.blockPosition(), fortune);
+        drops.forEach(stack -> ModifierUtil.dropItem(entity, stack));
+        return !drops.isEmpty();
+      }
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public InteractionResult beforeEntityUse(IToolStackView tool, ModifierEntry modifier, Player player, Entity target, InteractionHand hand, InteractionSource source) {
+    if (tool.isBroken() || !tool.getHook(ToolHooks.INTERACTION).canInteract(tool, modifier.getId(), source) || !condition.matches(tool, modifier)) {
+      return InteractionResult.PASS;
+    }
+    EquipmentSlot slotType = source.getSlot(hand);
+    ItemStack stack = player.getItemBySlot(slotType);
+
+    // use looting instead of fortune, as that is our hook with entity access
+    // modifier can always use tags or the nullable parameter to distinguish if needed
+    LootingContext context = new LootingContext(player, target, null, Util.getSlotType(hand));
+    int looting = LootingModifierHook.getLooting(tool, context, EnchantmentHelper.getItemEnchantmentLevel(player.registryAccess().holderOrThrow(Enchantments.LOOTING), player.getItemInHand(hand)));
+    looting = ArmorLootingModifierHook.getLooting(tool, context, looting);
+    Level world = player.getCommandSenderWorld();
+    if (shearEntity(stack, tool, world, player, target, looting)) {
+      boolean broken = ToolDamageUtil.damageAnimated(tool, 1, player, slotType, modifier.getId());
+      player.swing(hand);
+      player.sweepAttack();
+      runShearHook(tool, player, target, true);
+
+      // AOE shearing
+      if (!broken) {
+        // includes a flat bonus (legacy AOE), a level bonus (subtract 1 so it starts at level 2), and expanded
+        float expanded = flatBonus + perLevelBonus * (modifier.getEffectiveLevel() - 1) + expandedBonus * tool.getVolatileData().getInt(IModifiable.EXPANDED);
+        if (expanded > 0) {
+          for (LivingEntity aoeTarget : player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(expanded, 0.25D, expanded))) {
+            if (aoeTarget != player && aoeTarget != target && (!(aoeTarget instanceof ArmorStand) || !((ArmorStand)aoeTarget).isMarker())) {
+              if (shearEntity(stack, tool, world, player, aoeTarget, looting)) {
+                broken = ToolDamageUtil.damageAnimated(tool, 1, player, slotType, modifier.getId());
+                runShearHook(tool, player, aoeTarget, false);
+                if (broken) {
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      return InteractionResult.SUCCESS;
+    }
+
+    return InteractionResult.PASS;
+  }
+}

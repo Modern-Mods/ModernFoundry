@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/electrum/ingot",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/electrum"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/electrum"
+  },
+  "material": "modernfoundry:electrum",
+  "needed": 1,
+  "value": 1
+}

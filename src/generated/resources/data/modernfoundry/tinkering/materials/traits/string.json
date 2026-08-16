@@ -1,0 +1,26 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:stringy"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:laces": [
+      {
+        "level": 1,
+        "name": "modernfoundry:step_up"
+      }
+    ],
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:boon_of_sssss"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:spider_disguise"
+      }
+    ]
+  }
+}

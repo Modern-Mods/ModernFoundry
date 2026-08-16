@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/obsidian/dust",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:dusts/obsidian"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:dusts/obsidian"
+  },
+  "result": {
+    "amount": 250,
+    "fluid": "modernfoundry:molten_obsidian"
+  },
+  "temperature": 1000,
+  "time": 66
+}

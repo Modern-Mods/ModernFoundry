@@ -1,0 +1,18 @@
+package modernmods.modernfoundry.tools.item;
+
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.item.ItemStack;
+import modernmods.hilt.item.TooltipItem;
+
+/** Explosion immune tooltip item */
+public class DragonScaleItem extends TooltipItem {
+  public DragonScaleItem(Properties properties) {
+    super(properties);
+  }
+
+  @Override
+  public boolean canBeHurtBy(ItemStack stack, DamageSource damageSource) {
+    return !damageSource.is(DamageTypeTags.IS_EXPLOSION);
+  }
+}

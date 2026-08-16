@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/composite/necronium",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/uranium"
+    }
+  ],
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_uranium"
+  },
+  "input": "modernfoundry:necrotic_bone",
+  "output": "modernfoundry:necronium",
+  "temperature": 830
+}

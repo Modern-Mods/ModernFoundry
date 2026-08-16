@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "modernfoundry:block/foundry/scorched/bricks_slab" },
+    "type=top":    { "model": "modernfoundry:block/foundry/scorched/bricks_slab_top" },
+    "type=double": { "model": "modernfoundry:block/foundry/scorched/bricks" }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "minecraft:gameplay/fishing/treasure",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                }
+              ]
+            },
+            {
+              "fluid": {
+                "amount": 1000,
+                "fluid": "minecraft:lava"
+              },
+              "function": "hilt:set_fluid"
+            }
+          ],
+          "name": "modernfoundry:swasher"
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

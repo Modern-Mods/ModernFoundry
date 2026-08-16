@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/wool/cyan",
+  "ingredient": {
+    "item": "minecraft:cyan_wool"
+  },
+  "material": "modernfoundry:wool#cyan",
+  "needed": 1,
+  "value": 1
+}

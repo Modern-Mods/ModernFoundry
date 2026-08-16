@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:block/smeltery/fluid_cannon/base",
+  "textures": {
+    "bottom": "modernfoundry:block/smeltery/fluid_cannon/bottom_nozzle"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/queens_slime/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/queens_slime"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "modernfoundry:molten_queens_slime"
+  },
+  "temperature": 1150,
+  "time": 212
+}

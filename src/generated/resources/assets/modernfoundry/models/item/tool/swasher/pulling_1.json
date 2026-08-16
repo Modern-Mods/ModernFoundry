@@ -1,0 +1,35 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/tool/swasher/display",
+  "textures": {
+    "blade": "modernfoundry:item/tool/swasher/blade",
+    "barrel": "modernfoundry:item/tool/swasher/barrel_1",
+    "handle": "modernfoundry:item/tool/swasher/handle",
+    "tank": "modernfoundry:item/tool/swasher/tank"
+  },
+  "modifier_maps": [
+    "modernfoundry:swasher/1",
+    "modernfoundry:swasher"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/swasher/modifiers/1/",
+    "modernfoundry:item/tool/swasher/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "handle",
+      "index": 1
+    },
+    {
+      "name": "blade",
+      "index": 0
+    },
+    {
+      "name": "barrel",
+      "index": 2
+    },
+    {
+      "name": "tank"
+    }
+  ]
+}

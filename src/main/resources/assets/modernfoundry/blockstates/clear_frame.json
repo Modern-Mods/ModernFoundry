@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "map=false": { "model": "modernfoundry:block/clear_frame" },
+        "map=true": { "model": "modernfoundry:block/clear_frame_map" }
+    }
+}

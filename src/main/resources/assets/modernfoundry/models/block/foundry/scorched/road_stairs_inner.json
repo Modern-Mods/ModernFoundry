@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "modernfoundry:block/foundry/scorched/road",
+        "top":    "modernfoundry:block/foundry/scorched/road",
+        "side":   "modernfoundry:block/foundry/scorched/road"
+    }
+}

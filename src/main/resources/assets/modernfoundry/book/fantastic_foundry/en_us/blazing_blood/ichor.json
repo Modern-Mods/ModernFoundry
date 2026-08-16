@@ -1,0 +1,16 @@
+{
+  "title": "Ichor",
+  "item": [
+    "modernfoundry:ichor_slime_ball",
+    "modernfoundry:ichor_congealed_slime",
+    "modernfoundry:ichor_slime",
+    "modernfoundry:ichor_slime_crystal",
+    "modernfoundry:ichor_slime_crystal_block"
+  ],
+  "text": [
+    {
+      "text": "You can get blazing blood from melting ichor, though this is less ideal as you need a hotter fuel to melt it in the first place. It is ultimately a net gain though so it could be good to increase your supply after you get blazing blood from another source.",
+      "paragraph": true
+    }
+  ]
+}

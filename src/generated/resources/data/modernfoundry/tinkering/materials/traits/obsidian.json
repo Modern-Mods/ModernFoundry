@@ -1,0 +1,10 @@
+{
+  "perStat": {
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:blast_protection"
+      }
+    ]
+  }
+}

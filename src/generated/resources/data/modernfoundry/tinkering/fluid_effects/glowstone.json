@@ -1,0 +1,38 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "minecraft:glowing",
+          "level": 1,
+          "time": 200
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:place_block",
+      "block": "modernfoundry:glow"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "registry": "minecraft:fluid",
+      "tag": "c:glowstone"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "add",
+      "effect": "minecraft:glowing",
+      "level": 1,
+      "time": 200
+    }
+  ],
+  "fluid": {
+    "amount": 100,
+    "tag": "c:glowstone"
+  }
+}

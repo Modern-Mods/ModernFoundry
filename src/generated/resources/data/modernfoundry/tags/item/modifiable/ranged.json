@@ -1,0 +1,8 @@
+{
+  "values": [
+    "modernfoundry:javelin",
+    "#modernfoundry:modifiable/ranged/launcher",
+    "#modernfoundry:modifiable/ranged/small",
+    "#modernfoundry:modifiable/ranged/broad"
+  ]
+}

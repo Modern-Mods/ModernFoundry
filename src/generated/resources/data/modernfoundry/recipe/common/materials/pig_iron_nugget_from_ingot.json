@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:pig_iron_nugget",
+  "ingredients": [
+    {
+      "item": "modernfoundry:pig_iron_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:pig_iron_nugget"
+  }
+}

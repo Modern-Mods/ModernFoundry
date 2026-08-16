@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "modernfoundry:block/foundry/soul_glass/block"
+    }
+  }
+}

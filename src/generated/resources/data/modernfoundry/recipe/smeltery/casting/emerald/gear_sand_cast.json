@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/emerald/gear_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/emerald"
+    }
+  ],
+  "cooling_time": 136,
+  "fluid": {
+    "amount": 400,
+    "tag": "modernfoundry:molten_emerald"
+  },
+  "result": {
+    "tag": "c:gears/emerald"
+  }
+}

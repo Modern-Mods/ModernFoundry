@@ -1,0 +1,8 @@
+{
+    "render_type": "minecraft:cutout_mipped",
+    "parent": "modernfoundry:block/cube_overlay_side",
+    "textures": {
+        "overlay": "modernfoundry:block/slime/dirt/grass_snowy",
+        "all":     "modernfoundry:block/slime/dirt/ender"
+    }
+}

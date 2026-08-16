@@ -1,0 +1,92 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        {
+          "item": "modernfoundry:pick_head",
+          "scale": 0.5
+        },
+        "modernfoundry:tool_handle",
+        {
+          "item": "modernfoundry:adze_head",
+          "scale": 0.5
+        }
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 0.5,
+        "modernfoundry:attack_speed": 1.3
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 3
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:attack_damage": 1.15,
+        "modernfoundry:durability": 1.3,
+        "modernfoundry:mining_speed": 0.75
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:pathing"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "pickaxe_dig",
+        "shovel_dig"
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "modernfoundry:mineable/pickadze"
+    },
+    {
+      "type": "modernfoundry:max_tier",
+      "tier": "minecraft:gold"
+    },
+    {
+      "type": "modernfoundry:box_aoe",
+      "expansion_direction": "modernfoundry:side_hit",
+      "expansions": [
+        {
+          "height": 1
+        }
+      ]
+    }
+  ]
+}

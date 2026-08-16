@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/emerald/geore/bud_large",
+  "byproducts": [
+    {
+      "amount": 300,
+      "fluid": "modernfoundry:molten_diamond",
+      "rate": "gem"
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:geore_large_buds/emerald"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:geore_large_buds/emerald"
+  },
+  "rate": "gem",
+  "result": {
+    "amount": 300,
+    "fluid": "modernfoundry:molten_emerald"
+  },
+  "temperature": 934,
+  "time": 129
+}

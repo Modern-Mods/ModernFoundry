@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/casting/ender_pearl",
+  "fluid": {
+    "amount": 250,
+    "tag": "c:ender"
+  },
+  "output": "modernfoundry:ender_pearl",
+  "temperature": 477
+}

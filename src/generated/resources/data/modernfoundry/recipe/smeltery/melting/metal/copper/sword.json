@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/copper/sword",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "modernfoundry:melting/copper/tools_costing_2"
+    }
+  ],
+  "ingredient": {
+    "tag": "modernfoundry:melting/copper/tools_costing_2"
+  },
+  "result": {
+    "amount": 180,
+    "tag": "c:molten_copper",
+    "unit_size": 10
+  },
+  "temperature": 500,
+  "time": 71
+}

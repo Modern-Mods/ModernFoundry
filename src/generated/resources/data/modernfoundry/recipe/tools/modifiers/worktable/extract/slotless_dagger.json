@@ -1,0 +1,36 @@
+{
+  "type": "modernfoundry:extract_modifier",
+  "id": "modernfoundry:tools/modifiers/worktable/extract/slotless_dagger",
+  "inputs": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:wet_sponge"
+    }
+  ],
+  "leftovers": [
+    "minecraft:sponge"
+  ],
+  "modifier_predicate": {
+    "type": "hilt:and",
+    "predicates": [
+      {
+        "type": "hilt:inverted",
+        "inverted_type": "modernfoundry:tag",
+        "tag": "modernfoundry:extract_blacklist/tools"
+      },
+      "modernfoundry:slot_type",
+      {
+        "type": "hilt:inverted",
+        "inverted_type": "modernfoundry:tag",
+        "tag": "modernfoundry:extract_blacklist/slotless"
+      }
+    ]
+  },
+  "name": "slotless",
+  "tools": {
+    "amount_needed": 2,
+    "item": "modernfoundry:dagger"
+  }
+}

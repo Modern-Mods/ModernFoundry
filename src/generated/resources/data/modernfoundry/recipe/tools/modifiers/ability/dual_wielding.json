@@ -1,0 +1,39 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/dual_wielding",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "tag": "c:ingots/slimesteel"
+    },
+    {
+      "item": "minecraft:nautilus_shell"
+    },
+    {
+      "tag": "c:ingots/slimesteel"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:dual_wielding",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "type": "neoforge:difference",
+    "base": {
+      "type": "neoforge:intersection",
+      "children": [
+        {
+          "tag": "modernfoundry:modifiable/melee/weapon"
+        },
+        {
+          "tag": "modernfoundry:modifiable/interactable/right"
+        }
+      ]
+    },
+    "subtracted": {
+      "item": "modernfoundry:dagger"
+    }
+  }
+}

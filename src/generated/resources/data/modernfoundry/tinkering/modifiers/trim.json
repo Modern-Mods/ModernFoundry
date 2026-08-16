@@ -1,0 +1,23 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:trim"
+    },
+    {
+      "type": "modernfoundry:modifier_slot",
+      "each_level": 1,
+      "name": "defense",
+      "tool": {
+        "type": "hilt:inverted",
+        "hook": "modernfoundry:trim_trait",
+        "inverted_type": "modernfoundry:has_hook"
+      }
+    },
+    {
+      "type": "modernfoundry:swappable_tool_traits",
+      "hook": "modernfoundry:trim_trait"
+    }
+  ],
+  "tooltip_display": "tinker_station"
+}

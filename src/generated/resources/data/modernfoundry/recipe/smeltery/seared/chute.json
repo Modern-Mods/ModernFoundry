@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "modernfoundry:seared_brick"
+    },
+    "C": {
+      "tag": "c:ingots/copper"
+    }
+  },
+  "pattern": [
+    "#C#",
+    "   ",
+    "#C#"
+  ],
+  "result": {
+    "id": "modernfoundry:seared_chute"
+  },
+  "show_notification": true
+}

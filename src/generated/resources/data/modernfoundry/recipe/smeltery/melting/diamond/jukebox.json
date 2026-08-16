@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/diamond/jukebox",
+  "ingredient": {
+    "item": "minecraft:jukebox"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "modernfoundry:molten_diamond"
+  },
+  "temperature": 1450,
+  "time": 83
+}

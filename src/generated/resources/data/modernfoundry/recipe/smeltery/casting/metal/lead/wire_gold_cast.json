@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/lead/wire_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/wire"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:wires/lead"
+    }
+  ],
+  "cooling_time": 31,
+  "fluid": {
+    "amount": 45,
+    "tag": "c:molten_lead"
+  },
+  "result": {
+    "tag": "c:wires/lead"
+  }
+}

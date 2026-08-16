@@ -1,0 +1,40 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/tilling",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "type": "modernfoundry:material",
+      "item": "modernfoundry:small_blade"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "type": "modernfoundry:material",
+      "item": "modernfoundry:tool_binding"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:tilling",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/durability"
+      },
+      [
+        {
+          "tag": "modernfoundry:modifiable/interactable"
+        },
+        {
+          "tag": "modernfoundry:modifiable/armor/boots"
+        }
+      ]
+    ]
+  }
+}

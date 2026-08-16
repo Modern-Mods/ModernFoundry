@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/molten_debris/scrap",
+  "ingredient": {
+    "tag": "c:ingots/netherite_scrap"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "modernfoundry:molten_debris"
+  },
+  "temperature": 1175,
+  "time": 71
+}

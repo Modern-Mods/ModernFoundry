@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/nickel/dust",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:dusts/nickel"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:dusts/nickel"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_nickel"
+  },
+  "temperature": 950,
+  "time": 49
+}

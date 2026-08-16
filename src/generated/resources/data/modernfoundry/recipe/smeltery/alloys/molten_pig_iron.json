@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_pig_iron",
+  "inputs": [
+    {
+      "amount": 90,
+      "tag": "c:molten_iron"
+    },
+    {
+      "amount": 500,
+      "tag": "modernfoundry:meat_soup"
+    },
+    {
+      "amount": 250,
+      "tag": "c:honey"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "fluid": "modernfoundry:molten_pig_iron"
+  },
+  "temperature": 811
+}

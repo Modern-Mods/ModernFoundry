@@ -1,0 +1,8 @@
+{
+  "parent": "modernfoundry:block/template/ladder_base",
+  "textures": {
+    "top":      "modernfoundry:block/smeltery/seared/fancy_bricks",
+    "side":     "modernfoundry:block/smeltery/seared/ladder",
+    "bottom":   "modernfoundry:block/smeltery/seared/ladder"
+  }
+}

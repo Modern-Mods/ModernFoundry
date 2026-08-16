@@ -1,0 +1,8 @@
+{
+  "parent": "modernfoundry:block/template/table",
+  "textures": {
+    "side":   "modernfoundry:block/foundry/casting/table_side",
+    "top":    "modernfoundry:block/foundry/casting/table_plate",
+    "bottom": "modernfoundry:block/foundry/casting/table_bottom"
+  }
+}

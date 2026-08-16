@@ -1,0 +1,48 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:scaling",
+      "effects": [
+        {
+          "effect": {
+            "type": "modernfoundry:drop_item",
+            "item": "modernfoundry:seared_brick"
+          },
+          "level": 1.0
+        },
+        {
+          "effect": {
+            "type": "modernfoundry:place_block",
+            "block": "modernfoundry:seared_bricks_slab"
+          },
+          "level": 2.0
+        },
+        {
+          "effect": {
+            "type": "modernfoundry:place_block",
+            "block": "modernfoundry:seared_bricks"
+          },
+          "level": 4.0
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:damage",
+      "damage": 3.0,
+      "damage_type": {
+        "melee": "modernfoundry:fluid_impact_melee",
+        "ranged": "modernfoundry:fluid_impact_ranged"
+      }
+    },
+    {
+      "type": "modernfoundry:drop_item",
+      "item": "modernfoundry:seared_brick"
+    }
+  ],
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:seared_stone"
+  }
+}

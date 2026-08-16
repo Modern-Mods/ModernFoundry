@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/cheese_ingot_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/ingot"
+  },
+  "cooling_time": 2400,
+  "fluid": {
+    "amount": 250,
+    "tag": "c:milk"
+  },
+  "result": "modernfoundry:cheese_ingot"
+}

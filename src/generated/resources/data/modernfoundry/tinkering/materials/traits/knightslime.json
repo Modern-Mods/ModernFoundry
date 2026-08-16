@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:overwield"
+    },
+    {
+      "level": 1,
+      "name": "modernfoundry:overslime"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:overshield"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:overslime"
+      }
+    ]
+  }
+}

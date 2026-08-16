@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/red_sand/builder_cast/tool_handle",
+  "pattern": "modernfoundry:tool_handle",
+  "pattern_item": {
+    "tag": "modernfoundry:casts/red_sand"
+  },
+  "result": "modernfoundry:tool_handle_red_sand_cast"
+}

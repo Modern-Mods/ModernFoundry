@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/jeweled_hide",
+  "input": "modernfoundry:jeweled_hide",
+  "result": {
+    "amount": 100,
+    "fluid": "modernfoundry:molten_diamond"
+  },
+  "temperature": 1450
+}

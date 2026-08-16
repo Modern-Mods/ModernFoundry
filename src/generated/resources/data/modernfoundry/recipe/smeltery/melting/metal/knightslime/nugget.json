@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/knightslime/nugget",
+  "ingredient": {
+    "tag": "c:nuggets/knightslime"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "modernfoundry:molten_knightslime"
+  },
+  "temperature": 1125,
+  "time": 23
+}

@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_rose_gold",
+  "inputs": [
+    {
+      "amount": 90,
+      "tag": "c:molten_copper"
+    },
+    {
+      "amount": 90,
+      "tag": "c:molten_gold"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "tag": "c:molten_rose_gold"
+  },
+  "temperature": 550
+}

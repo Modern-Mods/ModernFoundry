@@ -1,0 +1,76 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:material_stats",
+      "primary_part": 0,
+      "stat_types": [
+        "modernfoundry:head",
+        "modernfoundry:limb",
+        "modernfoundry:bowstring"
+      ]
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        },
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        },
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_traits",
+      "hooks": [
+        "modernfoundry:rebalanced_trait"
+      ],
+      "material_index": 1,
+      "stat_type": "modernfoundry:limb"
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_speed": 1.2
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 3
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:war_charge"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "pickaxe_dig"
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "minecraft:mineable/pickaxe"
+    },
+    {
+      "type": "modernfoundry:circle_aoe",
+      "3D": false,
+      "diameter": 1
+    }
+  ]
+}

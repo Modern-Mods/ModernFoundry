@@ -1,0 +1,71 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:sequence",
+      "effects": [
+        {
+          "type": "modernfoundry:break_block"
+        },
+        {
+          "type": "modernfoundry:place_block"
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "add",
+      "effect": "minecraft:slowness",
+      "level": 1,
+      "time": 100
+    },
+    {
+      "type": "modernfoundry:conditional",
+      "effect": {
+        "type": "modernfoundry:mob_effect",
+        "action": "add",
+        "effect": "modernfoundry:returning",
+        "level": 1,
+        "time": 140
+      },
+      "target": {
+        "type": "hilt:has_effect",
+        "effect": "modernfoundry:returning"
+      }
+    },
+    {
+      "type": "modernfoundry:conditional",
+      "effect": {
+        "type": "modernfoundry:sequence",
+        "effects": [
+          {
+            "type": "modernfoundry:mob_effect",
+            "action": "set",
+            "effect": "modernfoundry:returning",
+            "level": 1,
+            "time": 140
+          },
+          {
+            "type": "modernfoundry:teleport",
+            "chances": {
+              "flat": 16
+            },
+            "diameter": {
+              "each_level": 8
+            }
+          }
+        ]
+      },
+      "target": {
+        "type": "hilt:inverted",
+        "effect": "modernfoundry:returning",
+        "inverted_type": "hilt:has_effect"
+      }
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "modernfoundry:ender_slime"
+  }
+}

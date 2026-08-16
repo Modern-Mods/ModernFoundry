@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/emerald/geore/shard",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:geore_shards/emerald"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:geore_shards/emerald"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "modernfoundry:molten_emerald"
+  },
+  "temperature": 934,
+  "time": 64
+}

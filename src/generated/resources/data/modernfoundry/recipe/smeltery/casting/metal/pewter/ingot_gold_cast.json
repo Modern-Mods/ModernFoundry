@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/pewter/ingot_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/ingot"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/pewter"
+    }
+  ],
+  "cooling_time": 46,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_pewter"
+  },
+  "result": {
+    "tag": "c:ingots/pewter"
+  }
+}

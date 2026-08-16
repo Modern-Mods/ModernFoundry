@@ -1,0 +1,27 @@
+[
+  {
+    "name": "travelers_goggles",
+    "type": "modernfoundry:tool",
+    "data": "armor/goggles.json"
+  },
+  {
+    "name": "travelers_vest",
+    "type": "modernfoundry:tool",
+    "data": "armor/vest.json"
+  },
+  {
+    "name": "travelers_pants",
+    "type": "modernfoundry:tool",
+    "data": "armor/pants.json"
+  },
+  {
+    "name": "travelers_boots",
+    "type": "modernfoundry:tool",
+    "data": "armor/boots.json"
+  },
+  {
+    "name": "travelers_shield",
+    "type": "modernfoundry:tool",
+    "data": "armor/shield.json"
+  }
+]

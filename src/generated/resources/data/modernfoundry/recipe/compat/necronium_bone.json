@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:compat/necronium_bone",
+  "cast": {
+    "tag": "c:wither_bones"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/uranium"
+    }
+  ],
+  "cooling_time": 61,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_uranium"
+  },
+  "result": "modernfoundry:necronium_bone"
+}

@@ -1,0 +1,26 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:fiery"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:ribcage": [
+      {
+        "level": 1,
+        "name": "modernfoundry:scorching"
+      }
+    ],
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:fireborn"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:blaze_disguise"
+      }
+    ]
+  }
+}

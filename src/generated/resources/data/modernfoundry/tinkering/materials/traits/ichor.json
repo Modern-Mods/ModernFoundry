@@ -1,0 +1,28 @@
+{
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 1,
+        "name": "modernfoundry:rebound"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:bounce"
+      }
+    ],
+    "modernfoundry:slime": [
+      {
+        "level": 1,
+        "name": "modernfoundry:godspeed"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:overslime"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:overslime_friend"
+      }
+    ]
+  }
+}

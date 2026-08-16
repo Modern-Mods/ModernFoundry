@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "modernfoundry:block/smeltery/seared/stone",
+        "top": "modernfoundry:block/smeltery/seared/stone",
+        "side": "modernfoundry:block/smeltery/seared/stone"
+    }
+}

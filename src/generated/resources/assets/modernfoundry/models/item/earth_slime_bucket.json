@@ -1,0 +1,6 @@
+{
+  "parent": "neoforge:item/bucket_drip",
+  "flip_gas": false,
+  "fluid": "modernfoundry:earth_slime",
+  "loader": "modernfoundry:fluid_container"
+}

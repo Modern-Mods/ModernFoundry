@@ -1,0 +1,98 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:fireball",
+      "ammo_modifiers": [
+        {
+          "level": 1,
+          "name": "modernfoundry:bounce"
+        }
+      ],
+      "damage_multiplier": 1.5,
+      "damage_type": {
+        "melee": "modernfoundry:fluid_impact_melee",
+        "ranged": "modernfoundry:fluid_impact_ranged"
+      },
+      "durability": {
+        "flat": 1
+      },
+      "options": [
+        {
+          "ammo_modifiers": [
+            {
+              "level": 2,
+              "name": "modernfoundry:drawback"
+            }
+          ],
+          "damage_multiplier": 0.67,
+          "match": {
+            "tag": "c:slimeball/earth"
+          }
+        },
+        {
+          "ammo_modifiers": [
+            {
+              "level": 1,
+              "name": "modernfoundry:freezing"
+            }
+          ],
+          "damage_type": {
+            "melee": "modernfoundry:fluid_cold_melee",
+            "ranged": "modernfoundry:fluid_cold_ranged"
+          },
+          "match": {
+            "tag": "c:slimeball/sky"
+          }
+        },
+        {
+          "ammo_modifiers": [
+            {
+              "level": 1,
+              "name": "modernfoundry:fiery"
+            }
+          ],
+          "damage_type": {
+            "melee": "modernfoundry:fluid_fire_melee",
+            "ranged": "modernfoundry:fluid_fire_ranged"
+          },
+          "match": {
+            "tag": "c:slimeball/ichor"
+          }
+        },
+        {
+          "ammo_modifiers": [
+            {
+              "level": 1,
+              "name": "modernfoundry:enderclearance"
+            }
+          ],
+          "damage_type": {
+            "melee": "modernfoundry:fluid_magic_melee",
+            "ranged": "modernfoundry:fluid_magic_ranged"
+          },
+          "match": {
+            "tag": "c:slimeball/ender"
+          }
+        },
+        {
+          "ammo_modifiers": [
+            {
+              "level": 1,
+              "name": "modernfoundry:explosive"
+            }
+          ],
+          "damage_type": {
+            "melee": "modernfoundry:mob_explosion_melee",
+            "ranged": "modernfoundry:mob_explosion_ranged"
+          },
+          "match": {
+            "item": "minecraft:magma_cream"
+          }
+        }
+      ],
+      "sound": "modernfoundry:slimy_bounce"
+    }
+  ],
+  "tooltip_display": "always"
+}

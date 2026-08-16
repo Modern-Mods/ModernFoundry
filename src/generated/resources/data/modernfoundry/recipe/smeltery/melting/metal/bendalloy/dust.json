@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/bendalloy/dust",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:dusts/bendalloy"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:dusts/bendalloy"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_bendalloy"
+  },
+  "temperature": 100,
+  "time": 25
+}

@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/signalum/ingot",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/signalum"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/signalum"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_signalum"
+  },
+  "temperature": 999,
+  "time": 66
+}

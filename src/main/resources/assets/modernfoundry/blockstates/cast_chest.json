@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "modernfoundry:block/table/chest/cast"
+        },
+        "facing=south": {
+            "model": "modernfoundry:block/table/chest/cast",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "modernfoundry:block/table/chest/cast",
+            "y": 270
+        },
+        "facing=east": {
+            "model": "modernfoundry:block/table/chest/cast",
+            "y": 90
+        }
+    }
+}

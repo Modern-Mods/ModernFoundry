@@ -1,0 +1,23 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.5,
+      "operation": "add",
+      "stat": "modernfoundry:attack_damage"
+    },
+    {
+      "type": "modernfoundry:weapon_mob_effect",
+      "apply_before_melee": true,
+      "effect": "modernfoundry:pierce",
+      "level": {
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 80.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

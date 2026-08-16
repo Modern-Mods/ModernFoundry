@@ -1,0 +1,10 @@
+{
+  "layers": [
+    {
+      "type": "modernfoundry:material",
+      "index": 0,
+      "prefix": "modernfoundry:slime/"
+    },
+    "modernfoundry:trim"
+  ]
+}

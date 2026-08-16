@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:modifier_repair",
+  "id": "modernfoundry:tools/modifiers/tasty",
+  "ingredient": {
+    "item": "modernfoundry:bacon"
+  },
+  "modifier": "modernfoundry:tasty",
+  "repair_amount": 25
+}

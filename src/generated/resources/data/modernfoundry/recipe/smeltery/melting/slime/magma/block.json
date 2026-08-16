@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/slime/magma/block",
+  "ingredient": {
+    "item": "minecraft:magma_block"
+  },
+  "result": {
+    "amount": 1000,
+    "tag": "c:magma"
+  },
+  "temperature": 300,
+  "time": 127
+}

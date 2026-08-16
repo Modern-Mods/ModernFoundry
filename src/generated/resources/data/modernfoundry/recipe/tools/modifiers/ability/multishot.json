@@ -1,0 +1,29 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/multishot",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:piston"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "item": "minecraft:piston"
+    },
+    {
+      "tag": "c:slimeball/ichor"
+    },
+    {
+      "tag": "c:slimeball/ichor"
+    }
+  ],
+  "result": "modernfoundry:multishot",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/ranged/crossbows"
+  }
+}

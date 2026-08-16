@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/slimesteel/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/slimesteel"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "modernfoundry:molten_slimesteel"
+  },
+  "temperature": 900,
+  "time": 190
+}

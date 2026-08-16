@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_nether",
+  "features": [
+    "modernfoundry:cobalt_ore_small",
+    "modernfoundry:cobalt_ore_large"
+  ],
+  "step": "underground_decoration"
+}

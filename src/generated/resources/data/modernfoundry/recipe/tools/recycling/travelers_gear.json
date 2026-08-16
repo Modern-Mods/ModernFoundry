@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:part_builder_tool_recycling",
+  "id": "modernfoundry:tools/recycling/travelers_gear",
+  "parts": [
+    "modernfoundry:repair_kit",
+    "modernfoundry:maille"
+  ],
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "tools": {
+    "ingredient": [
+      {
+        "item": "modernfoundry:travelers_helmet"
+      },
+      {
+        "item": "modernfoundry:travelers_chestplate"
+      },
+      {
+        "item": "modernfoundry:travelers_leggings"
+      },
+      {
+        "item": "modernfoundry:travelers_boots"
+      }
+    ]
+  }
+}

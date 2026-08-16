@@ -1,0 +1,39 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/seared/block",
+  "ingredient": [
+    {
+      "tag": "modernfoundry:seared_blocks"
+    },
+    {
+      "item": "modernfoundry:seared_ladder"
+    },
+    {
+      "item": "modernfoundry:seared_lamp"
+    },
+    {
+      "item": "modernfoundry:seared_cobble_wall"
+    },
+    {
+      "item": "modernfoundry:seared_bricks_wall"
+    },
+    {
+      "item": "modernfoundry:seared_cobble_stairs"
+    },
+    {
+      "item": "modernfoundry:seared_stone_stairs"
+    },
+    {
+      "item": "modernfoundry:seared_bricks_stairs"
+    },
+    {
+      "item": "modernfoundry:seared_paver_stairs"
+    }
+  ],
+  "result": {
+    "amount": 1000,
+    "fluid": "modernfoundry:seared_stone"
+  },
+  "temperature": 600,
+  "time": 107
+}

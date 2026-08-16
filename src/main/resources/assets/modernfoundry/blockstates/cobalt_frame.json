@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "map=false": { "model": "modernfoundry:block/cobalt_frame" },
+        "map=true": { "model": "modernfoundry:block/cobalt_frame_map" }
+    }
+}

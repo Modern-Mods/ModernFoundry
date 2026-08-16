@@ -1,0 +1,26 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:capacity_bar",
+      "each_level": 100,
+      "multiplier": "modernfoundry:durability"
+    },
+    {
+      "type": "modernfoundry:durability_shield",
+      "color": "7F7F7F"
+    },
+    {
+      "type": "modernfoundry:loot_to_capacity",
+      "amount": 3,
+      "chance": {
+        "each_level": 0.2
+      },
+      "consume": {
+        "tag": "modernfoundry:stoneshields"
+      }
+    }
+  ],
+  "priority": 175,
+  "tooltip_display": "always"
+}

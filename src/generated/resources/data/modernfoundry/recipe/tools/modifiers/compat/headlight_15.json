@@ -1,0 +1,33 @@
+{
+  "type": "modernfoundry:swappable_modifier",
+  "id": "modernfoundry:tools/modifiers/compat/headlight_15",
+  "allow_crystal": false,
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "headlight"
+    }
+  ],
+  "inputs": [
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:lantern"
+    },
+    {
+      "item": "minecraft:leather"
+    }
+  ],
+  "result": {
+    "name": "modernfoundry:headlight",
+    "value": "15"
+  },
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/helmets"
+  },
+  "variant_formatter": "modernfoundry:parameter"
+}

@@ -1,0 +1,38 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/metal/iron/ore_dense",
+  "byproducts": [
+    {
+      "amount": 540,
+      "rate": "metal",
+      "tag": "c:molten_steel"
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_combination_filled",
+      "match": [
+        "c:ores/iron",
+        "c:ore_rates/dense"
+      ]
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "c:ores/iron"
+      },
+      {
+        "tag": "c:ore_rates/dense"
+      }
+    ]
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 540,
+    "tag": "c:molten_iron"
+  },
+  "temperature": 800,
+  "time": 271
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "type": "hilt:blank"
+  },
+  {
+    "name": "thruul",
+    "type": "hilt:text",
+    "data": "introduction/thruul.json"
+  }
+]

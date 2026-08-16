@@ -1,0 +1,106 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        {
+          "item": "modernfoundry:broad_blade",
+          "scale": 0.75
+        },
+        {
+          "item": "modernfoundry:tough_handle",
+          "scale": 0.5
+        },
+        {
+          "item": "modernfoundry:tough_handle",
+          "scale": 0.5
+        },
+        {
+          "item": "modernfoundry:large_plate",
+          "scale": 0.25
+        }
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 3.0,
+        "modernfoundry:attack_speed": 1.0,
+        "modernfoundry:block_amount": 10.0
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:attack_damage": 1.5,
+        "modernfoundry:durability": 3.5,
+        "modernfoundry:mining_speed": 0.25
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 2
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 2,
+          "name": "modernfoundry:severing"
+        },
+        {
+          "level": 2,
+          "name": "modernfoundry:silky_shears"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "sword_dig"
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "c:mineable/sword"
+    },
+    {
+      "type": "modernfoundry:mining_speed_modifier",
+      "blocks": [
+        "minecraft:cobweb"
+      ],
+      "modifier": 7.5,
+      "predicate_type": "hilt:set"
+    },
+    {
+      "type": "modernfoundry:sweep_melee",
+      "range": 2.0
+    }
+  ]
+}

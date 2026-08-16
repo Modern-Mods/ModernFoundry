@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/diamond/geore/bud_small",
+  "byproducts": [
+    {
+      "amount": 90,
+      "fluid": "modernfoundry:molten_debris",
+      "rate": "metal"
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:geore_small_buds/diamond"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:geore_small_buds/diamond"
+  },
+  "rate": "gem",
+  "result": {
+    "amount": 100,
+    "fluid": "modernfoundry:molten_diamond"
+  },
+  "temperature": 1450,
+  "time": 79
+}

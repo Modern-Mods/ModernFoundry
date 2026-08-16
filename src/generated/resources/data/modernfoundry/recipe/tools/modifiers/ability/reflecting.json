@@ -1,0 +1,48 @@
+{
+  "type": "modernfoundry:multilevel_modifier",
+  "id": "modernfoundry:tools/modifiers/ability/reflecting",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 4,
+      "item": "modernfoundry:sky_congealed_slime"
+    },
+    {
+      "amount_needed": 4,
+      "item": "modernfoundry:ichor_congealed_slime"
+    },
+    {
+      "amount_needed": 4,
+      "item": "modernfoundry:sky_congealed_slime"
+    },
+    {
+      "amount_needed": 4,
+      "item": "modernfoundry:earth_congealed_slime"
+    },
+    {
+      "amount_needed": 4,
+      "item": "modernfoundry:earth_congealed_slime"
+    }
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "slots": {
+        "abilities": 1
+      }
+    },
+    {
+      "level": {
+        "max": 3,
+        "min": 2
+      },
+      "slots": {
+        "upgrades": 1
+      }
+    }
+  ],
+  "result": "modernfoundry:reflecting",
+  "tools": {
+    "tag": "modernfoundry:modifiable/shields"
+  }
+}

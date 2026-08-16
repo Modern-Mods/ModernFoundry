@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/bendalloy/nugget_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/bendalloy"
+    }
+  ],
+  "cooling_time": 11,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_bendalloy"
+  },
+  "result": {
+    "tag": "c:nuggets/bendalloy"
+  }
+}

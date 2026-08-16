@@ -1,0 +1,92 @@
+package modernmods.modernfoundry.plugin.jei;
+
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.category.extensions.vanilla.crafting.ICraftingCategoryExtension;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.Ingredient;
+import modernmods.hilt.client.SafeClientAccess;
+import modernmods.modernfoundry.library.recipe.ingredient.MaterialValueIngredient;
+import modernmods.modernfoundry.library.recipe.material.MaterialRecipeCache;
+import modernmods.modernfoundry.library.recipe.material.ShapedMaterialRecipe;
+import modernmods.modernfoundry.plugin.jei.material.MaterialsCraftingExtension;
+import modernmods.modernfoundry.plugin.jei.material.ShapedMaterialsExtension;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.IntStream;
+
+/**
+ * Logic to show {@link ShapedMaterialRecipe} in JEI
+ * @deprecated use {@link ShapedMaterialsExtension}
+ */
+@Deprecated
+public class ShapedMaterialExtension implements ICraftingCategoryExtension<ShapedMaterialRecipe> {
+  public static final ICraftingCategoryExtension<ShapedMaterialRecipe> INSTANCE = new ICraftingCategoryExtension<>() {
+    @Override
+    public void setRecipe(RecipeHolder<ShapedMaterialRecipe> holder, IRecipeLayoutBuilder builder, ICraftingGridHelper craftingGridHelper, IFocusGroup focuses) {
+      new ShapedMaterialExtension(holder.value()).setRecipe(builder, craftingGridHelper, focuses);
+    }
+
+    @Override
+    public Optional<ResourceLocation> getRegistryName(RecipeHolder<ShapedMaterialRecipe> holder) {
+      return Optional.of(holder.id());
+    }
+
+    @Override
+    public int getWidth(RecipeHolder<ShapedMaterialRecipe> holder) {
+      return holder.value().getWidth();
+    }
+
+    @Override
+    public int getHeight(RecipeHolder<ShapedMaterialRecipe> holder) {
+      return holder.value().getHeight();
+    }
+  };
+
+  private final ShapedMaterialRecipe recipe;
+  private final ItemStack plainResult;
+  private final List<ItemStack> result;
+  private final int[] materialSlots;
+  public ShapedMaterialExtension(ShapedMaterialRecipe recipe) {
+    this.recipe = recipe;
+    MaterialValueIngredient materials = recipe.getMaterial();
+    plainResult = recipe.getResultItem(Objects.requireNonNull(SafeClientAccess.getRegistryAccess()));
+    if (materials != null) {
+      this.result = MaterialRecipeCache.getAllRecipes().stream().filter(materials::test).flatMap(mat -> {
+        ItemStack stack = plainResult.copy();
+        recipe.setMaterial(stack, mat.getMaterial().getVariant());
+        // add one copy of the stack per item in the nested ingredient, so the lengths match up
+        return IntStream.range(0, mat.getIngredient().getItems().length).mapToObj(i -> stack);
+      }).toList();
+    } else {
+      this.result = List.of(plainResult);
+    }
+    List<Ingredient> inputs = recipe.getIngredients();
+    this.materialSlots = IntStream.range(0, inputs.size()).filter(i -> inputs.get(i).getCustomIngredient() instanceof MaterialValueIngredient).toArray();
+  }
+
+  @Override
+  public int getWidth() {
+    return recipe.getWidth();
+  }
+
+  @Override
+  public int getHeight() {
+    return recipe.getHeight();
+  }
+
+  @Override
+  public ResourceLocation getRegistryName() {
+    return recipe.getId();
+  }
+
+  @Override
+  public void setRecipe(IRecipeLayoutBuilder builder, ICraftingGridHelper craftingGridHelper, IFocusGroup focusGroup) {
+    MaterialsCraftingExtension.setRecipe(this, builder, craftingGridHelper, recipe, result, plainResult, materialSlots);
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/scorched/gauge",
+  "byproducts": [
+    {
+      "amount": 500,
+      "fluid": "modernfoundry:molten_quartz"
+    }
+  ],
+  "ingredient": {
+    "type": "modernfoundry:no_container",
+    "match": [
+      {
+        "item": "modernfoundry:scorched_fuel_gauge"
+      },
+      {
+        "item": "modernfoundry:scorched_ingot_gauge"
+      }
+    ]
+  },
+  "result": {
+    "amount": 1000,
+    "fluid": "modernfoundry:scorched_stone"
+  },
+  "temperature": 500,
+  "time": 100
+}

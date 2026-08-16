@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/blaze",
+  "damage": 2,
+  "entity": {
+    "type": "minecraft:blaze"
+  },
+  "result": {
+    "amount": 20,
+    "fluid": "modernfoundry:blazing_blood"
+  }
+}

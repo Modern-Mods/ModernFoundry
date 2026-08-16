@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/axes",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "modernfoundry:melting/constantan/tools_costing_3"
+    }
+  ],
+  "ingredient": {
+    "tag": "modernfoundry:melting/constantan/tools_costing_3"
+  },
+  "result": {
+    "amount": 270,
+    "tag": "c:molten_constantan",
+    "unit_size": 10
+  },
+  "temperature": 920,
+  "time": 111
+}

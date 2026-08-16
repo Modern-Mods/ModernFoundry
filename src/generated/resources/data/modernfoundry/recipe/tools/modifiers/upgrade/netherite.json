@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/netherite",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:netherite_upgrade_smithing_template"
+    },
+    {
+      "tag": "c:ingots/netherite"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:netherite",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/durability"
+  }
+}

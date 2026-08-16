@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/scorched/proxy_tank",
+  "byproducts": [
+    {
+      "amount": 1000,
+      "fluid": "modernfoundry:scorched_stone"
+    },
+    {
+      "amount": 300,
+      "fluid": "modernfoundry:molten_quartz"
+    }
+  ],
+  "ingredient": {
+    "item": "modernfoundry:scorched_proxy_tank"
+  },
+  "result": {
+    "amount": 500,
+    "fluid": "modernfoundry:molten_obsidian"
+  },
+  "temperature": 1000,
+  "time": 166
+}

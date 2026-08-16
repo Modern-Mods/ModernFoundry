@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/cinderslime/ingot",
+  "ingredient": {
+    "tag": "c:ingots/cinderslime"
+  },
+  "material": "modernfoundry:cinderslime",
+  "needed": 1,
+  "value": 1
+}

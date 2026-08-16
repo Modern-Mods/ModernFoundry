@@ -1,0 +1,9 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:kinetic"
+    }
+  ],
+  "tooltip_display": "always"
+}

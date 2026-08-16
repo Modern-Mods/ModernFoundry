@@ -1,0 +1,15 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:recurrent_protection",
+      "duration": {
+        "each_level": 100
+      },
+      "percent": {
+        "flat": 0.5
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

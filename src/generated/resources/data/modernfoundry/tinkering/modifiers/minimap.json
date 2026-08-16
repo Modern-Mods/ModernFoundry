@@ -1,0 +1,20 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:inventory",
+      "filter": "modernfoundry:map",
+      "limit": {
+        "flat": 1
+      },
+      "pattern": "modernfoundry:map",
+      "slots": {
+        "each_level": 3
+      }
+    },
+    {
+      "type": "modernfoundry:minimap"
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:bucket",
+    "minecraft:glass_bottle",
+    "minecraft:bowl",
+    "modernfoundry:copper_can",
+    "#modernfoundry:modifiable/ammo"
+  ]
+}

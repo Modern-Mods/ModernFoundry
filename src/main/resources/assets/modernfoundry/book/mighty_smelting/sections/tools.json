@@ -1,0 +1,31 @@
+[
+  {
+    "name": "group_general",
+    "data": "no-load",
+    "extraData": { "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/broad", "path": "tools" }}
+  },
+  {
+    "name": "group_ranged",
+    "data": "no-load",
+    "extraData": { "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/ranged/broad", "path": "tools" }}
+  },
+  {
+    "name": "group_info",
+    "data": "no-load"
+  },
+  {
+    "name": "tanks",
+    "type": "hilt:image_text",
+    "data": "tools/tanks.json"
+  },
+  {
+    "name": "tips",
+    "type": "hilt:text",
+    "data": "tools/tips.json"
+  },
+  {
+    "name": "designing",
+    "type": "hilt:text",
+    "data": "tools/designing.json"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:modifier_slot",
+      "each_level": 1,
+      "name": "upgrades"
+    },
+    {
+      "type": "modernfoundry:requirements",
+      "requirement": {
+        "type": "modernfoundry:has_modifier",
+        "check": "upgrades",
+        "level": 0,
+        "modifier": {
+          "type": "modernfoundry:single",
+          "modifier": "modernfoundry:forecast"
+        }
+      },
+      "translation_key": "modifier.modernfoundry.resurrected.requirements"
+    }
+  ],
+  "tooltip_display": "tinker_station"
+}

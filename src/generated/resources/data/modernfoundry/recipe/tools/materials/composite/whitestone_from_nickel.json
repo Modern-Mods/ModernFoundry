@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/composite/whitestone_from_nickel",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/nickel"
+    }
+  ],
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_nickel"
+  },
+  "input": "modernfoundry:rock",
+  "output": "modernfoundry:whitestone#composite",
+  "temperature": 950
+}

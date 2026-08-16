@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/ender/pearl",
+  "cooling_time": 82,
+  "fluid": {
+    "amount": 250,
+    "tag": "c:ender"
+  },
+  "result": "minecraft:ender_pearl"
+}

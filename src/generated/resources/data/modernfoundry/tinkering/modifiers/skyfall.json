@@ -1,0 +1,36 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.gravity",
+      "each_level": -0.1,
+      "flat": -0.05,
+      "operation": "multiply_total",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "modernfoundry:generic.safe_fall_distance",
+      "each_level": 1.0,
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ]
+    }
+  ],
+  "tooltip_display": "always"
+}

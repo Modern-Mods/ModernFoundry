@@ -1,0 +1,25 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/invar",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:or",
+      "values": [
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/invar"
+        },
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/nickel"
+        }
+      ]
+    }
+  ],
+  "input": "modernfoundry:invar",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_invar"
+  },
+  "temperature": 900
+}

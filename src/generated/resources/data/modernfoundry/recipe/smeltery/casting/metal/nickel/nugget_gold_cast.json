@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/nickel/nugget_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/nickel"
+    }
+  ],
+  "cooling_time": 22,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_nickel"
+  },
+  "result": {
+    "tag": "c:nuggets/nickel"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/uranium/block",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:storage_blocks/uranium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:storage_blocks/uranium"
+  },
+  "result": {
+    "amount": 810,
+    "tag": "c:molten_uranium"
+  },
+  "temperature": 830,
+  "time": 183
+}

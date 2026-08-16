@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/casting/enderslime",
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:ender_slime"
+  },
+  "output": "modernfoundry:enderslime",
+  "temperature": 70
+}

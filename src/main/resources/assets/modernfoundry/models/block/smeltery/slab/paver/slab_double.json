@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "modernfoundry:block/smeltery/seared/paver",
+    "side": "modernfoundry:block/smeltery/seared/paver_slab"
+  }
+}

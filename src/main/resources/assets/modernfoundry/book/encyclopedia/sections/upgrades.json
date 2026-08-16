@@ -1,0 +1,52 @@
+[
+  {
+    "name": "group_general",
+    "type": "hilt:text",
+    "data": "upgrades/general.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:upgrades/general", "path": "upgrades/general", "prefix": "general" }}
+  },
+  {
+    "name": "group_weapon",
+    "type": "hilt:text",
+    "data": "upgrades/melee.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:upgrades/melee", "path": "upgrades/melee", "prefix": "melee" }}
+  },
+  {
+    "name": "group_damage",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:upgrades/damage", "path": "upgrades/damage", "prefix": "damage" }}
+  },
+  {
+    "name": "group_harvest",
+    "type": "hilt:text",
+    "data": "upgrades/harvest.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:upgrades/harvest", "path": "upgrades/harvest", "prefix": "harvest" }}
+  },
+  {
+    "name": "group_ranged",
+    "type": "hilt:text",
+    "data": "upgrades/ranged.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:upgrades/ranged", "path": "upgrades/ranged", "prefix": "ranged" }}
+  },
+  {
+    "name": "group_armor",
+    "type": "hilt:text",
+    "data": "upgrades/armor.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:upgrades/armor/general", "path": "upgrades/armor/general", "prefix": "armor" }}
+  },
+  {
+    "name": "group_armor.helmet",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:upgrades/armor/helmet", "path": "upgrades/armor/helmet", "prefix": "helmet" }}
+  },
+  {
+    "name": "group_armor.chestplate",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:upgrades/armor/chestplate", "path": "upgrades/armor/chestplate", "prefix": "chestplate" }}
+  },
+  {
+    "name": "group_armor.leggings",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:upgrades/armor/leggings", "path": "upgrades/armor/leggings", "prefix": "leggings" }}
+  },
+  {
+    "name": "group_armor.boots",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:upgrades/armor/boots", "path": "upgrades/armor/boots", "prefix": "boots" }}
+  }
+]

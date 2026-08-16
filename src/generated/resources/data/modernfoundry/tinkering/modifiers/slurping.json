@@ -1,0 +1,28 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:slurping",
+      "duration": {
+        "flat": 21
+      },
+      "strength": {
+        "each_level": 1.0
+      }
+    },
+    {
+      "type": "modernfoundry:trait",
+      "fixed_level": true,
+      "level": 1,
+      "name": "modernfoundry:tank_handler"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 1000.0,
+      "operation": "add",
+      "stat": "modernfoundry:tank_capacity"
+    }
+  ],
+  "priority": 40,
+  "tooltip_display": "always"
+}

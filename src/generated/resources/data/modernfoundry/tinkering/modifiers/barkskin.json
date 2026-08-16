@@ -1,0 +1,16 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:capacity_bar",
+      "flat": 100,
+      "multiplier": "modernfoundry:durability"
+    },
+    {
+      "type": "modernfoundry:durability_shield",
+      "color": "B9B3AC"
+    }
+  ],
+  "priority": 200,
+  "tooltip_display": "always"
+}

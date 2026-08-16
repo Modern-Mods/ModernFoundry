@@ -1,0 +1,14 @@
+{
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 1,
+        "name": "modernfoundry:fins_ammo"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:lure_rod"
+      }
+    ]
+  }
+}

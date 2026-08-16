@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/quartz/block",
+  "cooling_time": 115,
+  "fluid": {
+    "amount": 400,
+    "tag": "modernfoundry:molten_quartz"
+  },
+  "result": {
+    "tag": "c:storage_blocks/quartz"
+  }
+}

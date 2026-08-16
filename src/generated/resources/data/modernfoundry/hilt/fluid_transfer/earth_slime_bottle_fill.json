@@ -1,0 +1,11 @@
+{
+  "type": "hilt:fill_item",
+  "fluid": {
+    "amount": 250,
+    "tag": "c:slime"
+  },
+  "input": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": "modernfoundry:earth_slime_bottle"
+}

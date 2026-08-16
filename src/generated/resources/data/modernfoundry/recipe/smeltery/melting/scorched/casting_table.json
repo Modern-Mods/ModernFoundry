@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/scorched/casting_table",
+  "byproducts": [
+    {
+      "amount": 40,
+      "tag": "c:molten_gold"
+    }
+  ],
+  "ingredient": {
+    "item": "modernfoundry:scorched_table"
+  },
+  "result": {
+    "amount": 1750,
+    "fluid": "modernfoundry:scorched_stone"
+  },
+  "temperature": 500,
+  "time": 125
+}

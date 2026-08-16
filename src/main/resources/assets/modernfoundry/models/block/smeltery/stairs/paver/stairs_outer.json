@@ -1,0 +1,8 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": {
+        "bottom": "modernfoundry:block/smeltery/seared/paver",
+        "top": "modernfoundry:block/smeltery/seared/paver",
+        "side": "modernfoundry:block/smeltery/seared/paver_slab"
+    }
+}

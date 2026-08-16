@@ -1,0 +1,19 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:block_damage",
+      "damage_source": {
+        "type": "hilt:damage_type",
+        "name": "minecraft:on_fire"
+      }
+    },
+    {
+      "type": "modernfoundry:fiery_armor_attack",
+      "seconds": {
+        "each_level": 5
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

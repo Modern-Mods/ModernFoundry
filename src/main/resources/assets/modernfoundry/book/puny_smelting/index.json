@@ -1,0 +1,138 @@
+[
+  {
+    "name": "intro",
+    "data": "sections/introduction.json",
+    "icon": {
+      "item": "modernfoundry:blank_red_sand_cast"
+    }
+  },
+  {
+    "name": "melter",
+    "data": "sections/melting.json",
+    "icon": {
+      "item": "modernfoundry:seared_melter"
+    }
+  },
+  {
+    "name": "moving_fluids",
+    "data": "sections/movingfluids.json",
+    "icon": {
+      "item": "modernfoundry:seared_channel"
+    }
+  },
+  {
+    "name": "casting",
+    "data": "sections/casting.json",
+    "icon": {
+      "item": "modernfoundry:ingot_red_sand_cast"
+    }
+  },
+  {
+    "name": "melee_harvest_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:melee_harvest", "tier": 2, "predicate": {
+      "type": "hilt:or",
+      "predicates": [
+        { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" },
+        { "type": "hilt:load_condition", "conditions": [{ "type": "hilt:tag_filled", "tag": "modernfoundry:whitestone_ingots" }], "if_true": { "type": "modernfoundry:id", "id": "modernfoundry:whitestone" }}
+      ]
+    }}},
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:small_axe_head",
+        "nbt": { "Material": "modernfoundry:seared_stone" }
+      }
+    }
+  },
+  {
+    "name": "ranged_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ranged", "tier": 2, "predicate": { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" }}},
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:bow_grip",
+        "nbt": { "Material": "modernfoundry:slimewood" }
+      }
+    }
+  },
+  {
+    "name": "armor_materials",
+    "data": "no-load",
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:armor", "tier": { "min": 0, "max": 2 }, "predicate":  { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" } } },
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:leggings_plating",
+        "nbt": { "Material": "modernfoundry:gold" }
+      }
+    }
+  },
+  {
+    "name": "armor",
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:travelers_chestplate",
+        "nbt": {
+          "tic_broken": false,
+          "tic_display": true,
+          "tic_materials": [
+            "modernfoundry:ui_render#extra_large",
+            "modernfoundry:ui_render#handle"
+          ]
+        }
+      }
+    },
+    "condition": {
+      "type": "modernfoundry:tag_not_empty",
+      "registry": "minecraft:item",
+      "tag": "modernfoundry:modifiable/book_armor/puny_smelting"
+    },
+    "data": "no-load",
+    "extraData": {
+      "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/book_armor/puny_smelting", "path": "armor", "sort": false }
+    }
+  },
+  {
+    "name": "upgrades",
+    "data": "sections/upgrades.json",
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:creative_slot",
+        "nbt": {
+          "slot": "upgrades"
+        }
+      }
+    }
+  },
+  {
+    "name": "slotless",
+    "data": "sections/slotless.json",
+    "icon": {
+      "item": {
+        "type": "forge:nbt",
+        "item": "modernfoundry:creative_slot",
+        "nbt": {
+          "slot": "slotless"
+        }
+      }
+    }
+  },
+  {
+    "name": "worktable",
+    "data": "sections/worktable.json",
+    "icon": {
+      "item": "modernfoundry:modifier_worktable"
+    }
+  },
+  {
+    "name": "further_reading",
+    "data": "sections/further_reading.json",
+    "icon": {
+      "item": "modernfoundry:mighty_smelting"
+    }
+  }
+]

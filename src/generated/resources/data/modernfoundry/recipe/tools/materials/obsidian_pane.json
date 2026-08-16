@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/obsidian_pane",
+  "ingredient": {
+    "item": "modernfoundry:obsidian_pane"
+  },
+  "material": "modernfoundry:obsidian",
+  "needed": 1,
+  "value": 1
+}

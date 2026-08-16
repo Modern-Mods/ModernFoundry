@@ -1,0 +1,10 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:soulspeed",
+      "flat": 1
+    }
+  ],
+  "tooltip_display": "always"
+}

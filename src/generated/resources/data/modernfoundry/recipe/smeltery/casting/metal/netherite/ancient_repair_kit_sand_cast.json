@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/netherite/ancient_repair_kit_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/repair_kit"
+  },
+  "cast_consumed": true,
+  "cooling_time": 101,
+  "fluid": {
+    "amount": 180,
+    "tag": "modernfoundry:molten_debris"
+  },
+  "result": {
+    "item": "modernfoundry:repair_kit",
+    "nbt": {
+      "Material": "modernfoundry:ancient"
+    }
+  }
+}

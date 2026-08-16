@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "hanging=false": { "model": "modernfoundry:block/foundry/tank/lantern" },
+    "hanging=true": { "model": "modernfoundry:block/foundry/tank/lantern_hanging" }
+  }
+}

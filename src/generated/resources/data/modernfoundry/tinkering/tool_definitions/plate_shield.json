@@ -1,0 +1,67 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:material_stats",
+      "primary_part": 1,
+      "stat_types": [
+        "modernfoundry:shield_core",
+        "modernfoundry:plating_shield"
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_parts",
+      "parts": [
+        "modernfoundry:shield_core"
+      ]
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": {
+            "max": 2,
+            "min": 1
+          }
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": {
+            "max": 2,
+            "min": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:block_amount": 100.0,
+        "modernfoundry:block_angle": 180.0
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "defense": 3,
+        "upgrades": 2
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:blocking"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:attack_interaction"
+    },
+    {
+      "type": "modernfoundry:fixed_material_name",
+      "index": 1
+    }
+  ]
+}

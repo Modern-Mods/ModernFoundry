@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:incremental_modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/sharpness_from_block",
+  "allow_crystal": false,
+  "amount_per_item": 4,
+  "input": {
+    "tag": "c:storage_blocks/quartz"
+  },
+  "leftover": "minecraft:quartz",
+  "level": {
+    "max": 5
+  },
+  "needed_per_level": 36,
+  "result": "modernfoundry:sharpness",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/melee"
+  }
+}

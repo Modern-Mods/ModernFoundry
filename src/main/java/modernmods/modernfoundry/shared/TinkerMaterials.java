@@ -1,0 +1,136 @@
+package modernmods.modernfoundry.shared;
+
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters;
+import net.minecraft.world.item.CreativeModeTab.Output;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
+import net.neoforged.neoforge.common.crafting.IngredientType;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.registries.RegisterEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import modernmods.hilt.registration.object.FenceBuildingBlockObject;
+import modernmods.hilt.registration.object.ItemObject;
+import modernmods.hilt.registration.object.MetalItemObject;
+import modernmods.modernfoundry.common.TinkerModule;
+import modernmods.modernfoundry.library.json.predicate.material.MaterialDefinitionPredicate;
+import modernmods.modernfoundry.library.json.predicate.material.MaterialHasPartPredicate;
+import modernmods.modernfoundry.library.json.predicate.material.MaterialIdPredicate;
+import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
+import modernmods.modernfoundry.library.json.predicate.material.MaterialStatTypePredicate;
+import modernmods.modernfoundry.library.json.predicate.material.MaterialTierPredicate;
+import modernmods.modernfoundry.library.json.predicate.material.MaterialVariantPredicate;
+import modernmods.modernfoundry.library.recipe.ingredient.MaterialIngredient;
+import modernmods.modernfoundry.library.recipe.ingredient.MaterialValueIngredient;
+import modernmods.modernfoundry.shared.block.KnightMetalBlock;
+import modernmods.modernfoundry.shared.block.OrientableBlock;
+import modernmods.modernfoundry.shared.block.SlimesteelBlock;
+import modernmods.modernfoundry.tools.TinkerToolParts;
+import modernmods.modernfoundry.tools.data.material.MaterialIds;
+
+import java.util.function.Consumer;
+
+import static modernmods.modernfoundry.TConstruct.getResource;
+
+/**
+ * Contains bommon blocks and items used in crafting materials
+ */
+@SuppressWarnings("unused")
+public final class TinkerMaterials extends TinkerModule {
+  // ores
+  public static final MetalItemObject cobalt = BLOCKS.registerMetal("cobalt", metalBuilder(MapColor.COLOR_BLUE), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  public static final MetalItemObject steel = BLOCKS.registerMetal("steel", metalBuilder(MapColor.STONE), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  // tier 3
+  public static final MetalItemObject slimesteel     = BLOCKS.registerMetal("slimesteel", () -> new SlimesteelBlock(metalBuilder(MapColor.WARPED_WART_BLOCK).noOcclusion()), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  public static final MetalItemObject amethystBronze = BLOCKS.registerMetal("amethyst_bronze", metalBuilder(MapColor.COLOR_PURPLE), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  public static final MetalItemObject roseGold       = BLOCKS.registerMetal("rose_gold", metalBuilder(MapColor.TERRACOTTA_WHITE), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  public static final MetalItemObject pigIron        = BLOCKS.registerMetal("pig_iron", () -> new OrientableBlock(metalBuilder(MapColor.COLOR_PINK)), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  // tier 4
+  public static final MetalItemObject cinderslime = BLOCKS.registerMetal("cinderslime", () -> new SlimesteelBlock(metalBuilder(MapColor.COLOR_ORANGE).sound(SoundType.NETHERITE_BLOCK).noOcclusion()), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  public static final MetalItemObject queensSlime = BLOCKS.registerMetal("queens_slime", metalBuilder(MapColor.COLOR_GREEN).sound(SoundType.NETHERITE_BLOCK), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  public static final MetalItemObject manyullyn   = BLOCKS.registerMetal("manyullyn", metalBuilder(MapColor.COLOR_PURPLE).sound(SoundType.NETHERITE_BLOCK), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  public static final MetalItemObject hepatizon   = BLOCKS.registerMetal("hepatizon", metalBuilder(MapColor.TERRACOTTA_BLUE).sound(SoundType.NETHERITE_BLOCK), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  public static final MetalItemObject knightmetal = BLOCKS.registerMetal("knightmetal", () -> new KnightMetalBlock(metalBuilder(MapColor.GRASS).sound(SoundType.NETHERITE_BLOCK).noOcclusion()), TOOLTIP_BLOCK_ITEM, ITEM_PROPS);
+  public static final MetalItemObject knightslime = BLOCKS.registerMetal("knightslime", () -> new SlimesteelBlock(metalBuilder(MapColor.COLOR_BLACK).noOcclusion()), BLOCK_ITEM, ITEM_PROPS);
+  // future
+  public static final MetalItemObject soulsteel   = BLOCKS.registerMetal("soulsteel", metalBuilder(MapColor.COLOR_BROWN).noOcclusion(), BLOCK_ITEM, ITEM_PROPS);
+
+  // nuggets
+  public static final ItemObject<Item> copperNugget = ITEMS.register("copper_nugget", ITEM_PROPS);
+  public static final ItemObject<Item> netheriteNugget = ITEMS.register("netherite_nugget", ITEM_PROPS);
+  public static final ItemObject<Item> debrisNugget = ITEMS.register("debris_nugget", TOOLTIP_ITEM);
+
+  // non-metal
+  public static final ItemObject<Item> necroticBone = ITEMS.register("necrotic_bone", TOOLTIP_ITEM);
+  public static final ItemObject<Item> venombone = ITEMS.register("venombone", TOOLTIP_ITEM);
+  public static final ItemObject<Item> blazingBone = ITEMS.register("blazing_bone", TOOLTIP_ITEM);
+  public static final ItemObject<Item> necroniumBone = ITEMS.register("necronium_bone", TOOLTIP_ITEM);
+  public static final FenceBuildingBlockObject nahuatl = BLOCKS.registerFenceBuilding("nahuatl", builder(MapColor.COLOR_PURPLE, SoundType.WOOD).instrument(NoteBlockInstrument.BASS).requiresCorrectToolForDrops().strength(25f, 300f), BLOCK_ITEM);
+  public static final FenceBuildingBlockObject blazewood = BLOCKS.registerFenceBuilding("blazewood", woodBuilder(MapColor.TERRACOTTA_RED).requiresCorrectToolForDrops().strength(25f, 300f).lightLevel(s -> 7), BLOCK_ITEM);
+
+  public static final DeferredHolder<? super IngredientType<MaterialIngredient>, IngredientType<MaterialIngredient>> materialIngredient = INGREDIENT_TYPES.register("material", () -> new IngredientType<>(MaterialIngredient.Serializer.INSTANCE.codec(), MaterialIngredient.Serializer.INSTANCE.streamCodec()));
+  public static final DeferredHolder<? super IngredientType<MaterialValueIngredient>, IngredientType<MaterialValueIngredient>> materialValueIngredient = INGREDIENT_TYPES.register("material_value", () -> new IngredientType<>(MaterialValueIngredient.Serializer.INSTANCE.codec(), MaterialValueIngredient.Serializer.INSTANCE.streamCodec()));
+
+  /*
+   * Serializers
+   */
+  @SubscribeEvent
+  void registerSerializers(RegisterEvent event) {
+    if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER) {
+      MaterialPredicate.LOADER.register(getResource("variant"), MaterialVariantPredicate.LOADER);
+      MaterialPredicate.LOADER.register(getResource("id"), MaterialIdPredicate.LOADER);
+      MaterialPredicate.LOADER.register(getResource("has_part"), MaterialHasPartPredicate.LOADER);
+      MaterialPredicate.LOADER.register(getResource("stat_type"), MaterialStatTypePredicate.LOADER);
+      MaterialPredicate.LOADER.register(getResource("castable"), MaterialPredicate.CASTABLE.getLoader());
+      MaterialPredicate.LOADER.register(getResource("composite"), MaterialPredicate.COMPOSITE.getLoader());
+      MaterialPredicate.LOADER.register(getResource("craftable"), MaterialDefinitionPredicate.CRAFTABLE.getLoader());
+      MaterialPredicate.LOADER.register(getResource("not_hidden"), MaterialDefinitionPredicate.NOT_HIDDEN.getLoader());
+      MaterialPredicate.LOADER.register(getResource("registered"), MaterialDefinitionPredicate.REGISTERED.getLoader());
+      MaterialPredicate.LOADER.register(getResource("tier"), MaterialTierPredicate.LOADER);
+    }
+  }
+
+  /** Adds all relevant items to the creative tab, called by general tab */
+  public static void addTabItems(ItemDisplayParameters itemDisplayParameters, Output output) {
+    // non-metals
+    // necrotic bone is in world
+    output.accept(venombone);
+    output.accept(blazingBone);
+    acceptIfMaterial(output, necroniumBone, MaterialIds.necronium);
+    accept(output, nahuatl);
+    accept(output, blazewood);
+
+    // natural ores
+    output.accept(copperNugget);
+    accept(output, cobalt);
+    accept(output, steel);
+    output.accept(debrisNugget);
+    // mod alloys
+    accept(output, slimesteel);
+    accept(output, amethystBronze);
+    accept(output, roseGold);
+    accept(output, pigIron);
+    accept(output, cinderslime);
+    accept(output, queensSlime);
+    accept(output, manyullyn);
+    accept(output, hepatizon);
+    output.accept(netheriteNugget);
+    accept(output, knightmetal);
+    accept(output, knightslime);
+    // fake storage items make more sense here than tool parts
+    Consumer<ItemStack> consumer = output::accept;
+    TinkerToolParts.fakeIngot.get().addVariants(consumer, "");
+    TinkerToolParts.fakeStorageBlockItem.get().addVariants(consumer, "");
+    // future: soulsteel
+  }
+
+  /** Adds a metal to the tab */
+  private static void accept(Output output, MetalItemObject metal) {
+    output.accept(metal.getIngot());
+    output.accept(metal.getNugget());
+    output.accept(metal.get());
+  }
+}

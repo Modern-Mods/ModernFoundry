@@ -1,0 +1,13 @@
+{
+  "loader": "hilt:retextured",
+  "parent": "modernfoundry:block/table/table",
+  "textures": {
+    "particle": "modernfoundry:block/table/part_builder_top",
+    "top": "modernfoundry:block/table/part_builder_top",
+    "side": "modernfoundry:block/table/side",
+    "leg": "modernfoundry:block/table/side",
+    "bottom": "modernfoundry:block/table/bottom",
+    "legBottom": "modernfoundry:block/table/bottom"
+  },
+  "retextured": [ "leg", "legBottom" ]
+}

@@ -1,0 +1,16 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "blocks": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:requires_tool"
+      },
+      "each_level": 1.0,
+      "percent": false,
+      "require_effective": false
+    }
+  ],
+  "tooltip_display": "always"
+}

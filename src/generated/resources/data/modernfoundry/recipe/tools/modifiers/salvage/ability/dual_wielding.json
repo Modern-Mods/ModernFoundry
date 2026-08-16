@@ -1,0 +1,25 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/dual_wielding",
+  "modifier": "modernfoundry:dual_wielding",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "type": "neoforge:difference",
+    "base": {
+      "type": "neoforge:intersection",
+      "children": [
+        {
+          "tag": "modernfoundry:modifiable/melee/weapon"
+        },
+        {
+          "tag": "modernfoundry:modifiable/interactable/right"
+        }
+      ]
+    },
+    "subtracted": {
+      "item": "modernfoundry:dagger"
+    }
+  }
+}

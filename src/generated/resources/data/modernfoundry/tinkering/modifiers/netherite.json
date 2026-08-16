@@ -1,0 +1,55 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:rarity",
+      "rarity": "rare"
+    },
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:indestructible"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.2,
+      "operation": "multiply_base",
+      "stat": "modernfoundry:durability"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 1.0,
+      "operation": "add",
+      "stat": "modernfoundry:armor_toughness"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.05,
+      "operation": "add",
+      "stat": "modernfoundry:knockback_resistance"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.2,
+      "operation": "multiply_base",
+      "stat": "modernfoundry:attack_damage"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.25,
+      "operation": "multiply_base",
+      "stat": "modernfoundry:mining_speed"
+    },
+    {
+      "type": "modernfoundry:set_stat",
+      "stat": "modernfoundry:harvest_tier",
+      "value": "minecraft:netherite"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.1,
+      "operation": "multiply_base",
+      "stat": "modernfoundry:velocity"
+    }
+  ],
+  "tooltip_display": "always"
+}

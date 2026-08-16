@@ -1,0 +1,14 @@
+{
+  "modifier_id": "modernfoundry:lightspeed",
+  "text": [
+    {
+      "text": "The light flows through your tool and helps the tool mine faster."
+    }
+  ],
+  "tool_filter": "modernfoundry:modifiable/harvest",
+  "effects": [
+    "Mines well lit blocks faster",
+    "Multiple levels, increases speed further with each level",
+    "Requires 1 upgrade slot per level"
+  ]
+}

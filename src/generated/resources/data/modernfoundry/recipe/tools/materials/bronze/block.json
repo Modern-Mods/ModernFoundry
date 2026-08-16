@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/bronze/block",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:storage_blocks/bronze"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:storage_blocks/bronze"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/bronze"
+  },
+  "material": "modernfoundry:bronze",
+  "needed": 1,
+  "value": 9
+}

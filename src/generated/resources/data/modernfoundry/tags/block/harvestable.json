@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:pumpkin",
+    "minecraft:beehive",
+    "minecraft:bee_nest",
+    "#modernfoundry:harvestable/crops",
+    "#modernfoundry:harvestable/interact",
+    "#modernfoundry:harvestable/stackable"
+  ]
+}

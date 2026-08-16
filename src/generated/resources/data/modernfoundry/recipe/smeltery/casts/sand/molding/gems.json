@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/sand/molding/gems",
+  "material": {
+    "tag": "modernfoundry:casts/sand"
+  },
+  "pattern": {
+    "tag": "c:gems"
+  },
+  "result": "modernfoundry:gem_sand_cast"
+}

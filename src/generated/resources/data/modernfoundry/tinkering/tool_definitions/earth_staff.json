@@ -1,0 +1,68 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:accuracy": 0.9,
+        "modernfoundry:block_amount": 35.0,
+        "modernfoundry:block_angle": 140.0,
+        "modernfoundry:durability": 800.0,
+        "modernfoundry:projectile_damage": 1.0,
+        "modernfoundry:use_item_speed": 0.4
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 2,
+        "defense": 3,
+        "upgrades": 2
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:overslime_friend"
+        },
+        {
+          "level": 1,
+          "name": "modernfoundry:reach"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:traits",
+      "hooks": [
+        "modernfoundry:rebalanced_trait"
+      ],
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:reach"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_repair",
+      "material": "modernfoundry:slimewood",
+      "stat_type": "modernfoundry:limb"
+    },
+    {
+      "type": "modernfoundry:box_aoe",
+      "expansion_direction": "modernfoundry:pitch",
+      "expansions": [
+        {
+          "depth": 2
+        },
+        {
+          "height": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:dual_option_interaction"
+    }
+  ]
+}

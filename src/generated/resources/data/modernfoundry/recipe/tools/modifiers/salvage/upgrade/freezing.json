@@ -1,0 +1,25 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/upgrade/freezing",
+  "modifier": "modernfoundry:freezing",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/melee"
+    },
+    {
+      "tag": "modernfoundry:modifiable/ranged/bows"
+    },
+    {
+      "tag": "modernfoundry:modifiable/fishing_rods"
+    },
+    {
+      "tag": "modernfoundry:modifiable/armor/worn"
+    },
+    {
+      "tag": "modernfoundry:modifiable/shields"
+    }
+  ]
+}

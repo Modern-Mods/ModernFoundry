@@ -1,0 +1,36 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/bouncy",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "amount_needed": 4,
+      "item": "modernfoundry:sky_congealed_slime"
+    },
+    {
+      "amount_needed": 4,
+      "item": "modernfoundry:ichor_congealed_slime"
+    },
+    {
+      "amount_needed": 4,
+      "item": "modernfoundry:sky_congealed_slime"
+    },
+    {
+      "amount_needed": 4,
+      "item": "modernfoundry:earth_congealed_slime"
+    },
+    {
+      "amount_needed": 4,
+      "item": "modernfoundry:earth_congealed_slime"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:bouncy",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/boots"
+  }
+}

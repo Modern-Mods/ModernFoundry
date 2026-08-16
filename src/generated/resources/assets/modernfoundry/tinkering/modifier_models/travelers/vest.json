@@ -1,0 +1,12 @@
+{
+  "modifiers": {
+    "modernfoundry:dyed": {
+      "type": "modernfoundry:dyed",
+      "texture": "modernfoundry:item/tool/armor/travelers/vest/modifiers/dyed"
+    },
+    "modernfoundry:trim": {
+      "type": "modernfoundry:armor_trim",
+      "slot": "chestplate"
+    }
+  }
+}

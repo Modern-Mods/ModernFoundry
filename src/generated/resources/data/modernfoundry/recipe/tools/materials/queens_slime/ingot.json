@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/queens_slime/ingot",
+  "ingredient": {
+    "tag": "c:ingots/queens_slime"
+  },
+  "material": "modernfoundry:queens_slime",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,24 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/soulbound",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:echo_shard"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:soulbound",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "modernfoundry:modifiable"
+    },
+    "subtracted": {
+      "tag": "modernfoundry:modifiable/single_use"
+    }
+  }
+}

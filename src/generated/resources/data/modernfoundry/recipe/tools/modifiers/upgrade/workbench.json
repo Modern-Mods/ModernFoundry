@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/workbench",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:crafting_table"
+    },
+    {
+      "item": "minecraft:leather"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:workbench",
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/leggings"
+  }
+}

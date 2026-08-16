@@ -1,0 +1,16 @@
+{
+  "modifier_id": "modernfoundry:slurping",
+  "text": [
+    {
+      "text": "Ele era o número um!"
+    }
+  ],
+  "tool_filter": "modernfoundry:modifiable/armor",
+  "effects": [
+    "Bebe fluidos armazenados no capacete",
+    "Tecla de Atalho é usada para beber",
+    "Requer 1 slot de habilidade por nível",
+    "Níveis mais altos consomem mais fluido para efeitos mais fortes"
+  ]
+}
+

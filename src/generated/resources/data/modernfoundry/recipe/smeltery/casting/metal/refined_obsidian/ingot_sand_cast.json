@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/refined_obsidian/ingot_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/refined_obsidian"
+    }
+  ],
+  "cooling_time": 80,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_refined_obsidian"
+  },
+  "result": {
+    "tag": "c:ingots/refined_obsidian"
+  }
+}

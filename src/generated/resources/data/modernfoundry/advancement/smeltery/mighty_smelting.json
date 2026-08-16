@@ -1,0 +1,38 @@
+{
+  "parent": "modernfoundry:smeltery/melter",
+  "criteria": {
+    "crafted_book": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:mighty_smelting"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.modernfoundry.smeltery.mighty_smelting.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:mighty_smelting"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.smeltery.mighty_smelting.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted_book"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

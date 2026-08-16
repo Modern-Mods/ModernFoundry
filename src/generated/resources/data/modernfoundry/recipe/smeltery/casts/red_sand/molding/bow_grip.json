@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/red_sand/molding/bow_grip",
+  "material": {
+    "tag": "modernfoundry:casts/red_sand"
+  },
+  "pattern": {
+    "type": "modernfoundry:material",
+    "item": "modernfoundry:bow_grip"
+  },
+  "result": "modernfoundry:bow_grip_red_sand_cast"
+}

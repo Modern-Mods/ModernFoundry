@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/red_sand/builder_block/bow_grip",
+  "pattern": "modernfoundry:bow_grip",
+  "pattern_item": {
+    "tag": "c:sand/red"
+  },
+  "result": {
+    "count": 4,
+    "item": "modernfoundry:bow_grip_red_sand_cast"
+  }
+}

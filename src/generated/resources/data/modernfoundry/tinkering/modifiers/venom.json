@@ -1,0 +1,32 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:weapon_mob_effect",
+      "effect": "modernfoundry:venom",
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 100.0,
+        "random": 100.0
+      }
+    },
+    {
+      "type": "modernfoundry:counter_mob_effect",
+      "chance": {
+        "flat": 0.15
+      },
+      "effect": "modernfoundry:venom",
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 100.0,
+        "random": 100.0
+      }
+    }
+  ],
+  "priority": 150,
+  "tooltip_display": "always"
+}

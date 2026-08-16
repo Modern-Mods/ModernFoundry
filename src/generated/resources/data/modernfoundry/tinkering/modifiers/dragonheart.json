@@ -1,0 +1,44 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:adjust_damage",
+      "damage_source": "hilt:can_protect",
+      "formula": [
+        "$protection",
+        "$max_health",
+        "$level",
+        2.0,
+        "*",
+        "-",
+        1.0,
+        "max",
+        "min"
+      ],
+      "holder": {
+        "type": "modernfoundry:variable_range",
+        "interval": "right_open",
+        "min": 2.0,
+        "variable": {
+          "type": "modernfoundry:attribute",
+          "attribute": "minecraft:generic.max_health"
+        }
+      },
+      "hooks": [
+        "modernfoundry:modify_damage"
+      ],
+      "percent": false,
+      "tooltip_value": 1.0,
+      "variables": {
+        "max_health": {
+          "type": "modernfoundry:entity",
+          "attribute": "minecraft:generic.max_health",
+          "entity_type": "modernfoundry:attribute",
+          "fallback": 20.0,
+          "which": "target"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/leggings",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:armors/leggings/constantan"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:armors/leggings/constantan"
+  },
+  "result": {
+    "amount": 630,
+    "tag": "c:molten_constantan",
+    "unit_size": 10
+  },
+  "temperature": 920,
+  "time": 169
+}

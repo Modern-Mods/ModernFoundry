@@ -1,0 +1,65 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff",
+  "textures": {
+    "tool":       "modernfoundry:item/tool/staff/earth",
+    "large_tool": "modernfoundry:item/tool/staff/earth_large"
+  },
+  "large": true,
+  "modifier_maps": ["modernfoundry:staff/earth", "modernfoundry:staff"],
+  "modifier_roots": {
+    "small": [ "modernfoundry:item/tool/staff/modifiers/earth/", "modernfoundry:item/tool/staff/modifiers/" ],
+    "large": [ "modernfoundry:item/tool/staff/large_modifiers/earth/", "modernfoundry:item/tool/staff/large_modifiers/" ]
+  },
+  "first_modifiers": [ "modernfoundry:dyed", "modernfoundry:embellishment" ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:charging": 1 },
+      "model": "modernfoundry:item/tool/staff/earth/charging_1"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.4 },
+      "model": "modernfoundry:item/tool/staff/earth/charging_2"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.7 },
+      "model": "modernfoundry:item/tool/staff/earth/charging_3"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.9 },
+      "model": "modernfoundry:item/tool/staff/earth/charging_4"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 1.0 },
+      "model": "modernfoundry:item/tool/staff/earth/charging_5"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2 },
+      "model": "modernfoundry:item/tool/staff/earth/blocking"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.05 },
+      "model": "modernfoundry:item/tool/staff/earth/blocking_1"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.4 },
+      "model": "modernfoundry:item/tool/staff/earth/blocking_2"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.7 },
+      "model": "modernfoundry:item/tool/staff/earth/blocking_3"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.9 },
+      "model": "modernfoundry:item/tool/staff/earth/blocking_4"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 1.0 },
+      "model": "modernfoundry:item/tool/staff/earth/blocking_5"
+    },
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/tool/staff/earth/broken"
+    }
+  ]
+}

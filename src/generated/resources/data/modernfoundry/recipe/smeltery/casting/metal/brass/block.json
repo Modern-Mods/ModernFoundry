@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/metal/brass/block",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:storage_blocks/brass"
+    }
+  ],
+  "cooling_time": 161,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_brass"
+  },
+  "result": {
+    "tag": "c:storage_blocks/brass"
+  }
+}

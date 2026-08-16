@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/duralumin/nugget_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/duralumin"
+    }
+  ],
+  "cooling_time": 18,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_duralumin"
+  },
+  "result": {
+    "tag": "c:nuggets/duralumin"
+  }
+}

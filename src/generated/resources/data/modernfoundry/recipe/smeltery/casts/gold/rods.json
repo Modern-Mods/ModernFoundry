@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casts/gold/rods",
+  "cast": {
+    "tag": "c:rods"
+  },
+  "cast_consumed": true,
+  "cooling_time": 57,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_gold"
+  },
+  "result": "modernfoundry:rod_cast",
+  "switch_slots": true
+}

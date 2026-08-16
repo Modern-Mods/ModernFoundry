@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/plate",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/electrum"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:plates/electrum"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_electrum"
+  },
+  "temperature": 760,
+  "time": 59
+}

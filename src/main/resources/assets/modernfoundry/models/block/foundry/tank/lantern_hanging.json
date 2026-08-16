@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:block/template/lantern_hanging",
+  "textures": {
+    "lantern": "modernfoundry:block/foundry/lantern"
+  }
+}

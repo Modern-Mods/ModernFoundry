@@ -1,0 +1,383 @@
+{
+  "parent": "modernfoundry:smeltery/gold_casting",
+  "criteria": {
+    "adze_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:adze_head_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "boots_plating": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:boots_plating_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "bow_grip": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:bow_grip_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "bow_limb": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:bow_limb_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "broad_axe_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:broad_axe_head_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "broad_blade": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:broad_blade_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "chestplate_plating": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:chestplate_plating_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "gem": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:gem_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "hammer_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:hammer_head_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "helmet_plating": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:helmet_plating_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:ingot_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "large_plate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:large_plate_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leggings_plating": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:leggings_plating_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "maille": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:maille_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "nugget": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:nugget_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pick_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:pick_head_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "repair_kit": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:repair_kit_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:rod_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "small_axe_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:small_axe_head_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "small_blade": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:small_blade_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "tool_binding": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:tool_binding_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "tool_handle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:tool_handle_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "tough_binding": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:tough_binding_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "tough_handle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:tough_handle_cast"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.smeltery.cast_collector.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:hammer_head_cast"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.smeltery.cast_collector.title"
+    }
+  },
+  "requirements": [
+    [
+      "ingot"
+    ],
+    [
+      "nugget"
+    ],
+    [
+      "gem"
+    ],
+    [
+      "rod"
+    ],
+    [
+      "repair_kit"
+    ],
+    [
+      "pick_head"
+    ],
+    [
+      "small_axe_head"
+    ],
+    [
+      "small_blade"
+    ],
+    [
+      "adze_head"
+    ],
+    [
+      "hammer_head"
+    ],
+    [
+      "broad_blade"
+    ],
+    [
+      "broad_axe_head"
+    ],
+    [
+      "large_plate"
+    ],
+    [
+      "tool_binding"
+    ],
+    [
+      "tough_binding"
+    ],
+    [
+      "tool_handle"
+    ],
+    [
+      "tough_handle"
+    ],
+    [
+      "bow_limb"
+    ],
+    [
+      "bow_grip"
+    ],
+    [
+      "helmet_plating"
+    ],
+    [
+      "chestplate_plating"
+    ],
+    [
+      "leggings_plating"
+    ],
+    [
+      "boots_plating"
+    ],
+    [
+      "maille"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

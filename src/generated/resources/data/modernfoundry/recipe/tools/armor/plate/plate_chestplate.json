@@ -1,0 +1,7 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/armor/plate/plate_chestplate",
+  "result": "modernfoundry:plate_chestplate",
+  "result_count": 1,
+  "slot_layout": "modernfoundry:plate_armor"
+}

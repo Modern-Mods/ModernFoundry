@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:knightmetal_nugget",
+  "ingredients": [
+    {
+      "item": "modernfoundry:knightmetal_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:knightmetal_nugget"
+  }
+}

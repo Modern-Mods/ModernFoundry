@@ -1,0 +1,50 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "modernfoundry:enderference",
+          "level": 1,
+          "time": 200
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "type": "neoforge:or",
+      "values": [
+        {
+          "type": "modernfoundry:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/enderium"
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:damage",
+      "damage": 4.0,
+      "damage_type": {
+        "melee": "modernfoundry:fluid_magic_melee",
+        "ranged": "modernfoundry:fluid_magic_ranged"
+      }
+    },
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "set",
+      "effect": "modernfoundry:enderference",
+      "level": 1,
+      "time": 200
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_enderium"
+  }
+}

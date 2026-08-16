@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:fishing_bobber",
+    "modernfoundry:fishing_bobber",
+    {
+      "id": "#c:reflecting/preserve_owner",
+      "required": false
+    }
+  ]
+}

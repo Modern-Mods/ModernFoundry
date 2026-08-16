@@ -1,0 +1,52 @@
+{
+  "stats": {
+    "modernfoundry:binding": {},
+    "modernfoundry:bowstring": {},
+    "modernfoundry:grip": {
+      "accuracy": 0.25,
+      "durability": -0.3,
+      "melee_damage": 1.0
+    },
+    "modernfoundry:handle": {
+      "durability": -0.3,
+      "melee_damage": 0.0,
+      "melee_speed": 0.1,
+      "mining_speed": 0.1
+    },
+    "modernfoundry:head": {
+      "durability": 175,
+      "melee_attack": 1.0,
+      "mining_speed": 9.0,
+      "mining_tier": "minecraft:gold"
+    },
+    "modernfoundry:limb": {
+      "accuracy": 0.15,
+      "draw_speed": 0.15,
+      "durability": 175,
+      "velocity": -0.25
+    },
+    "modernfoundry:maille": {},
+    "modernfoundry:plating_boots": {
+      "armor": 1.0,
+      "durability": 117
+    },
+    "modernfoundry:plating_chestplate": {
+      "armor": 5.0,
+      "durability": 144
+    },
+    "modernfoundry:plating_helmet": {
+      "armor": 2.0,
+      "durability": 99
+    },
+    "modernfoundry:plating_leggings": {
+      "armor": 3.0,
+      "durability": 135
+    },
+    "modernfoundry:plating_shield": {
+      "durability": 162
+    },
+    "modernfoundry:skull": {
+      "durability": 175
+    }
+  }
+}

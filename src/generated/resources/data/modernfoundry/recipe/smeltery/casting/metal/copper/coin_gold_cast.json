@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/copper/coin_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/coin"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:coins/copper"
+    }
+  ],
+  "cooling_time": 29,
+  "fluid": {
+    "amount": 30,
+    "tag": "c:molten_copper"
+  },
+  "result": {
+    "tag": "c:coins/copper"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/amethyst",
+  "ingredient": {
+    "tag": "c:gems/amethyst"
+  },
+  "material": "modernfoundry:amethyst",
+  "needed": 1,
+  "value": 1
+}

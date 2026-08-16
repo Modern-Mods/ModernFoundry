@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/obsidian/chest",
+  "byproducts": [
+    {
+      "amount": 250,
+      "tag": "c:ender"
+    }
+  ],
+  "ingredient": {
+    "item": "minecraft:ender_chest"
+  },
+  "result": {
+    "amount": 8000,
+    "fluid": "modernfoundry:molten_obsidian"
+  },
+  "temperature": 1000,
+  "time": 332
+}

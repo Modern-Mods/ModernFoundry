@@ -1,0 +1,16 @@
+{
+  "title": "ихор",
+  "item": [
+    "modernfoundry:ichor_slime_ball",
+    "modernfoundry:ichor_congealed_slime",
+    "modernfoundry:ichor_slime",
+    "modernfoundry:ichor_slime_crystal",
+    "modernfoundry:ichor_slime_crystal_block"
+  ],
+  "text": [
+    {
+      "text": "Вы можете получить пылающую кровь, расплавив ихор, хотя это менее идеальный вариант, поскольку вам нужно более горячее топливо, чтобы расплавить его. В конечном итоге это чистая выгода, поэтому было бы полезно увеличить запас после того, как вы получите пылающую кровь из другого источника.",
+      "paragraph": true
+    }
+  ]
+}

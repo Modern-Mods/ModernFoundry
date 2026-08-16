@@ -1,0 +1,12 @@
+{
+  "stats": {
+    "modernfoundry:binding": {},
+    "modernfoundry:bowstring": {},
+    "modernfoundry:laces": {
+      "repair_amount": 140
+    },
+    "modernfoundry:skull": {
+      "durability": 140
+    }
+  }
+}

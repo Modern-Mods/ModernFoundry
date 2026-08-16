@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:melting_fuel",
+  "id": "modernfoundry:smeltery/melting/fuel/solid",
+  "rate": 8,
+  "temperature": 800
+}

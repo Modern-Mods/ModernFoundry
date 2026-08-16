@@ -1,0 +1,30 @@
+{
+  "redirect": [
+    {
+      "condition": {
+        "type": "hilt:tag_filled",
+        "tag": "c:ingots/lead"
+      },
+      "id": "modernfoundry:lead"
+    },
+    {
+      "condition": {
+        "type": "neoforge:or",
+        "values": [
+          {
+            "type": "hilt:tag_filled",
+            "tag": "c:ingots/invar"
+          },
+          {
+            "type": "hilt:tag_filled",
+            "tag": "c:ingots/nickel"
+          }
+        ]
+      },
+      "id": "modernfoundry:invar"
+    },
+    {
+      "id": "modernfoundry:iron"
+    }
+  ]
+}

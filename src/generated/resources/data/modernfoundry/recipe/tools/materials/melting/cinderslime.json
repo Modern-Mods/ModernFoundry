@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/cinderslime",
+  "input": "modernfoundry:cinderslime",
+  "result": {
+    "amount": 90,
+    "fluid": "modernfoundry:molten_cinderslime"
+  },
+  "temperature": 1050
+}

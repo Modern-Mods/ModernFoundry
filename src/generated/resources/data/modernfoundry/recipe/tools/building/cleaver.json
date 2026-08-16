@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/cleaver",
+  "result": "modernfoundry:cleaver",
+  "result_count": 1
+}

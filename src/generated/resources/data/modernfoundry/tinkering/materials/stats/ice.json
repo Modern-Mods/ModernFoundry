@@ -1,0 +1,10 @@
+{
+  "stats": {
+    "modernfoundry:arrow_head": {},
+    "modernfoundry:repair_kit": {},
+    "modernfoundry:shield_core": {},
+    "modernfoundry:skull": {
+      "durability": 75
+    }
+  }
+}

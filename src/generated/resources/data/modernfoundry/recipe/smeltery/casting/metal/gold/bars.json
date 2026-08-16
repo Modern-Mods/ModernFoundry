@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/gold/bars",
+  "cooling_time": 33,
+  "fluid": {
+    "amount": 30,
+    "tag": "c:molten_gold"
+  },
+  "result": "modernfoundry:gold_bars"
+}

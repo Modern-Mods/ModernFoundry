@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/clay/block",
+  "ingredient": {
+    "item": "minecraft:clay"
+  },
+  "result": {
+    "amount": 1000,
+    "fluid": "modernfoundry:molten_clay"
+  },
+  "temperature": 450,
+  "time": 48
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "type": "hilt:blank"
+  },
+  {
+    "name": "intro",
+    "type": "hilt:text",
+    "data": "intro/intro.json"
+  }
+]

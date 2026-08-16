@@ -1,0 +1,30 @@
+{
+  "stats": {
+    "modernfoundry:arrow_shaft": {},
+    "modernfoundry:binding": {},
+    "modernfoundry:grip": {
+      "accuracy": 0.0,
+      "durability": 0.0,
+      "melee_damage": 0.0
+    },
+    "modernfoundry:handle": {
+      "durability": 0.0,
+      "melee_damage": 0.0,
+      "melee_speed": 0.0,
+      "mining_speed": 0.0
+    },
+    "modernfoundry:head": {
+      "durability": 60,
+      "melee_attack": 0.0,
+      "mining_speed": 2.0,
+      "mining_tier": "minecraft:wood"
+    },
+    "modernfoundry:limb": {
+      "accuracy": 0.0,
+      "draw_speed": 0.0,
+      "durability": 60,
+      "velocity": 0.0
+    },
+    "modernfoundry:shield_core": {}
+  }
+}

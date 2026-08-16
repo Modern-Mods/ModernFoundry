@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_knightslime",
+  "inputs": [
+    {
+      "amount": 90,
+      "tag": "c:molten_cobalt"
+    },
+    {
+      "amount": 250,
+      "tag": "modernfoundry:ender_slime"
+    },
+    {
+      "amount": 250,
+      "tag": "modernfoundry:molten_obsidian"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "fluid": "modernfoundry:molten_knightslime"
+  },
+  "temperature": 1125
+}

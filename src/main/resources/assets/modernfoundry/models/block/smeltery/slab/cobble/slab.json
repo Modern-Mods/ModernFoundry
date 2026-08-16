@@ -1,0 +1,8 @@
+{
+    "parent": "block/slab",
+    "textures": {
+        "bottom": "modernfoundry:block/smeltery/seared/cobble",
+        "top": "modernfoundry:block/smeltery/seared/cobble",
+        "side": "modernfoundry:block/smeltery/seared/cobble"
+    }
+}

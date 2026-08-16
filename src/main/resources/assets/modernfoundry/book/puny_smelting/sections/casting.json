@@ -1,0 +1,47 @@
+[
+  {
+    "name": "casting",
+    "type": "hilt:image_text",
+    "data": "casting/intro.json"
+  },
+  {
+    "name": "sand_cast",
+    "type": "hilt:text",
+    "data": "casting/sandcast.json"
+  },
+  {
+    "name": "sand_cast2",
+    "type": "hilt:image_text",
+    "data": "casting/sandcast2.json"
+  },
+  {
+    "name": "sand_cast_craft",
+    "type": "hilt:crafting",
+    "data": "casting/sandcast_craft.json"
+  },
+  {
+    "name": "sand_cast3",
+    "type": "hilt:image_text",
+    "data": "casting/sandcast3.json"
+  },
+  {
+    "name": "gold_cast",
+    "type": "hilt:image_text",
+    "data": "casting/goldcast.json"
+  },
+  {
+    "name": "other_cast",
+    "type": "hilt:image_text",
+    "data": "casting/othercast.json"
+  },
+  {
+    "name": "automation",
+    "type": "hilt:image_text",
+    "data": "casting/automation.json"
+  },
+  {
+    "name": "casting_tank",
+    "type": "hilt:showcase",
+    "data": "casting/casting_tank.json"
+  }
+]

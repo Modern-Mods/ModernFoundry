@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:steel_ingot",
+  "ingredients": [
+    {
+      "item": "modernfoundry:steel_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:steel_ingot"
+  }
+}

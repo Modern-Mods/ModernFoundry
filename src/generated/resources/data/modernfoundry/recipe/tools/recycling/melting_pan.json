@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:part_builder_tool_recycling",
+  "id": "modernfoundry:tools/recycling/melting_pan",
+  "parts": [
+    "modernfoundry:repair_kit",
+    "modernfoundry:bow_limb"
+  ],
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "tools": {
+    "item": "modernfoundry:melting_pan"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "neoforge:swim_speed",
+      "each_level": 0.1,
+      "operation": "multiply_total",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ]
+    },
+    {
+      "type": "modernfoundry:constant_enchantment",
+      "level": 1,
+      "name": "minecraft:respiration"
+    }
+  ],
+  "tooltip_display": "always"
+}

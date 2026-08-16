@@ -1,0 +1,7 @@
+{
+  "title": "Fabrication de l’Atelier du Modern Foundry",
+  "recipe": "modernfoundry:tables/tinker_station",
+  "description": [
+    { "text": "Avec un peu de chance, il te reste quelques patrons. Sinon, tu peux toujours en fabriquer d’autres." }
+  ]
+}

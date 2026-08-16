@@ -1,0 +1,11 @@
+{
+  "values": [
+    "modernfoundry:embellishment",
+    "modernfoundry:dyed",
+    "modernfoundry:trim",
+    "modernfoundry:creative_slot",
+    "modernfoundry:stat_override",
+    "modernfoundry:shiny",
+    "modernfoundry:golden"
+  ]
+}

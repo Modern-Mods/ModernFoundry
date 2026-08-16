@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/sand/builder_cast/plates",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates"
+    }
+  ],
+  "pattern": "modernfoundry:plate",
+  "pattern_item": {
+    "tag": "modernfoundry:casts/sand"
+  },
+  "result": "modernfoundry:plate_sand_cast"
+}

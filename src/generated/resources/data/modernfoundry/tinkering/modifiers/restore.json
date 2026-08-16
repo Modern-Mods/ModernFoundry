@@ -1,0 +1,29 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:restore_lost_health",
+      "chance": {
+        "flat": 0.15
+      },
+      "durability_usage": {
+        "each_level": 1
+      },
+      "effect_level": {
+        "flat": 1
+      },
+      "hooks": [
+        "modernfoundry:modify_hurt",
+        "modernfoundry:tooltip"
+      ],
+      "percentage": {
+        "flat": 0.25
+      },
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

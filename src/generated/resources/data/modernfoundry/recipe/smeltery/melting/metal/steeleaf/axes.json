@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steeleaf/axes",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "modernfoundry:melting/steeleaf/tools_costing_3"
+    }
+  ],
+  "ingredient": {
+    "tag": "modernfoundry:melting/steeleaf/tools_costing_3"
+  },
+  "result": {
+    "amount": 270,
+    "fluid": "modernfoundry:molten_steeleaf",
+    "unit_size": 10
+  },
+  "temperature": 934,
+  "time": 111
+}

@@ -1,0 +1,91 @@
+{
+  "level_display": {
+    "type": "modernfoundry:unique",
+    "first_unique": false,
+    "unique_until": 3
+  },
+  "modules": [
+    {
+      "type": "modernfoundry:constant_enchantment",
+      "level": 1,
+      "name": "minecraft:fortune",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/harvest"
+      }
+    },
+    {
+      "type": "modernfoundry:armor_harvest_enchantment",
+      "level": 1,
+      "name": "minecraft:fortune",
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor/worn"
+      }
+    },
+    {
+      "type": "modernfoundry:weapon_looting",
+      "level": 1,
+      "tool": {
+        "type": "hilt:or",
+        "predicates": [
+          {
+            "type": "hilt:set",
+            "items": [
+              "minecraft:air"
+            ]
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:modifiable/melee"
+          }
+        ]
+      }
+    },
+    {
+      "type": "modernfoundry:armor_looting",
+      "level": 1,
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor/worn"
+      }
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 1.0,
+      "operation": "add",
+      "stat": "modernfoundry:sea_luck"
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.luck",
+      "each_level": 1.0,
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

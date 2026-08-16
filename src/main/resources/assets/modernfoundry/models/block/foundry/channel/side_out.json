@@ -1,0 +1,7 @@
+{
+  "parent": "modernfoundry:block/template/channel/side",
+  "textures": {
+    "texture": "modernfoundry:block/foundry/scorched/stone_side",
+    "top":     "modernfoundry:block/foundry/channel_out"
+  }
+}

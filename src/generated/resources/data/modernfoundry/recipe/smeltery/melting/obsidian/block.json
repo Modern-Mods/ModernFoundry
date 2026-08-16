@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/obsidian/block",
+  "ingredient": {
+    "tag": "c:obsidian"
+  },
+  "result": {
+    "amount": 1000,
+    "fluid": "modernfoundry:molten_obsidian"
+  },
+  "temperature": 1000,
+  "time": 133
+}

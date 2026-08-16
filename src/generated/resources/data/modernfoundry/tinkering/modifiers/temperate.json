@@ -1,0 +1,138 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "formula": [
+        "$temperature",
+        0.75,
+        "!-",
+        "non-negative",
+        "$level",
+        "*",
+        6.0,
+        "*",
+        "$multiplier",
+        "*",
+        "$speed",
+        "+"
+      ],
+      "percent": false,
+      "require_effective": true,
+      "variables": {
+        "temperature": {
+          "type": "modernfoundry:biome_temperature",
+          "fallback": -0.5
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:conditional_stat",
+      "formula": [
+        "$temperature",
+        0.75,
+        "!-",
+        "non-negative",
+        "$level",
+        "*",
+        0.120000005,
+        "*",
+        "$multiplier",
+        "*",
+        "$value",
+        "+"
+      ],
+      "percent": false,
+      "stat": "modernfoundry:draw_speed",
+      "variables": {
+        "temperature": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:biome_temperature",
+          "fallback": -0.5
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "formula": [
+        "$temperature",
+        0.75,
+        "!-",
+        "non-negative",
+        "$level",
+        "*",
+        "$protection",
+        "+"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      },
+      "variables": {
+        "temperature": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:biome_temperature",
+          "fallback": 0.75,
+          "which": "target"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:reduce_tool_damage",
+      "cause": {
+        "type": "hilt:inverted",
+        "inverted_type": "modernfoundry:tag",
+        "tag": "modernfoundry:durability/bypass_reinforced"
+      },
+      "formula": [
+        "$temperature",
+        0.75,
+        "-",
+        "non-negative",
+        "$level",
+        "*",
+        1.6,
+        "*",
+        "duplicate",
+        "duplicate",
+        11.0,
+        "!-",
+        "*",
+        0.025,
+        "*",
+        "swap",
+        "duplicate",
+        5.0,
+        ">=",
+        "swap",
+        5.0,
+        "-",
+        0.05,
+        "*",
+        0.75,
+        "+",
+        "*",
+        "max"
+      ],
+      "reinforced_tooltip": true,
+      "tool": {
+        "type": "modernfoundry:has_modifier",
+        "check": "all",
+        "level": 0,
+        "modifier": {
+          "type": "modernfoundry:single",
+          "modifier": "modernfoundry:unbreakable"
+        }
+      },
+      "variables": {
+        "temperature": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:biome_temperature",
+          "fallback": 2.0
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

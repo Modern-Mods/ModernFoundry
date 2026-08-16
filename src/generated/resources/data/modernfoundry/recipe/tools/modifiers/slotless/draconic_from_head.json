@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/slotless/draconic_from_head",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:dragon_head"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:draconic",
+  "tools": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "modernfoundry:modifiable/bonus_slots"
+    },
+    "subtracted": {
+      "tag": "modernfoundry:modifiable/skulls"
+    }
+  }
+}

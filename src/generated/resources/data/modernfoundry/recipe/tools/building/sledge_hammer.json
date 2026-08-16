@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/sledge_hammer",
+  "result": "modernfoundry:sledge_hammer",
+  "result_count": 1
+}

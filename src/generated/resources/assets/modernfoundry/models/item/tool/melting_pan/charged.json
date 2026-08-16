@@ -1,0 +1,30 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "head": "modernfoundry:item/tool/melting_pan/head",
+    "handle": "modernfoundry:item/tool/melting_pan/handle",
+    "overlay": "modernfoundry:item/tool/melting_pan/overlay_charged"
+  },
+  "modifier_maps": [
+    "modernfoundry:melting_pan/charged",
+    "modernfoundry:melting_pan"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/melting_pan/modifiers/charged/",
+    "modernfoundry:item/tool/melting_pan/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "handle",
+      "index": 1
+    },
+    {
+      "name": "head",
+      "index": 0
+    },
+    {
+      "name": "overlay"
+    }
+  ]
+}

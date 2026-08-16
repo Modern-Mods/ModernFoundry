@@ -1,0 +1,115 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        {
+          "item": "modernfoundry:broad_axe_head",
+          "scale": 0.75
+        },
+        "modernfoundry:tough_handle",
+        {
+          "item": "modernfoundry:pick_head",
+          "scale": 0.25
+        },
+        "modernfoundry:tough_binding"
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 5.0,
+        "modernfoundry:attack_speed": 0.6
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:attack_damage": 1.65,
+        "modernfoundry:durability": 4.25,
+        "modernfoundry:mining_speed": 0.3
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 2
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:stripping"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "axe_dig",
+        "shield_disable"
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "minecraft:mineable/axe"
+    },
+    {
+      "type": "modernfoundry:conditional_aoe",
+      "condition": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:tree_log"
+      },
+      "if_false": {
+        "type": "modernfoundry:box_aoe",
+        "bonus": {
+          "height": 5
+        },
+        "expansion_direction": "modernfoundry:height",
+        "expansions": [
+          {
+            "width": 1
+          },
+          {
+            "depth": 1
+          }
+        ]
+      },
+      "if_true": {
+        "type": "modernfoundry:tree_aoe",
+        "depth_bonus": 0,
+        "width_bonus": 0
+      }
+    },
+    {
+      "type": "modernfoundry:melee_particle",
+      "particle": "modernfoundry:axe_attack"
+    }
+  ]
+}

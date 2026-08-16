@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:block/foundry/controller/alloyer",
+  "textures": {
+    "front": "modernfoundry:block/foundry/controller/alloyer_active"
+  }
+}

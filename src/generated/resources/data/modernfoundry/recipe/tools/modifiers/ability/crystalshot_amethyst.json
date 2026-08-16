@@ -1,0 +1,32 @@
+{
+  "type": "modernfoundry:swappable_modifier",
+  "id": "modernfoundry:tools/modifiers/ability/crystalshot_amethyst",
+  "allow_crystal": false,
+  "inputs": [
+    {
+      "item": "minecraft:amethyst_cluster"
+    },
+    {
+      "item": "minecraft:blaze_rod"
+    },
+    {
+      "item": "minecraft:amethyst_cluster"
+    },
+    {
+      "tag": "c:ingots/manyullyn"
+    },
+    {
+      "tag": "c:ingots/manyullyn"
+    }
+  ],
+  "result": {
+    "name": "modernfoundry:crystalshot",
+    "value": "amethyst"
+  },
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/ranged/bows"
+  }
+}

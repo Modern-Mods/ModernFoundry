@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tables/recycling/stone_sword",
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:block": {
+      "count": 2,
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "tool": [
+    {
+      "item": "minecraft:stone_sword"
+    },
+    {
+      "item": "minecraft:stone_hoe"
+    }
+  ]
+}

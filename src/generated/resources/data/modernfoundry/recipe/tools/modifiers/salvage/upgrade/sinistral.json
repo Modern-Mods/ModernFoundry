@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/upgrade/sinistral",
+  "modifier": "modernfoundry:sinistral",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/ranged/crossbows"
+      },
+      {
+        "tag": "modernfoundry:modifiable/interactable/left"
+      }
+    ]
+  }
+}

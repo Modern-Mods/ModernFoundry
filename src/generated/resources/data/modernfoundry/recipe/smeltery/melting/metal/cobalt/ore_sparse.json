@@ -1,0 +1,38 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/metal/cobalt/ore_sparse",
+  "byproducts": [
+    {
+      "amount": 25,
+      "fluid": "modernfoundry:molten_diamond",
+      "rate": "gem"
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_combination_filled",
+      "match": [
+        "c:ores/cobalt",
+        "c:ore_rates/sparse"
+      ]
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:intersection",
+    "children": [
+      {
+        "tag": "c:ores/cobalt"
+      },
+      {
+        "tag": "c:ore_rates/sparse"
+      }
+    ]
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_cobalt"
+  },
+  "temperature": 950,
+  "time": 97
+}

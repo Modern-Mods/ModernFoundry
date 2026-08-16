@@ -1,0 +1,13 @@
+{
+  "title": "Thruul",
+  "image": {
+    "file": "modernfoundry:book/images/thruul.png",
+    "width": 120,
+    "height": 120
+  },
+  "text": [
+    {
+      "text": "何を見ているんだModern Foundry？こんなにハンサムで格好いい人は見たことがないだろう？"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/shuriken",
+  "result": "modernfoundry:shuriken",
+  "result_count": 4,
+  "slot_layout": "modernfoundry:thrown_ammo"
+}

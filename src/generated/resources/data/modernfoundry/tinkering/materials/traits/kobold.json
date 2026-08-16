@@ -1,0 +1,10 @@
+{
+  "perStat": {
+    "modernfoundry:shell": [
+      {
+        "level": 1,
+        "name": "modernfoundry:cobalamin"
+      }
+    ]
+  }
+}

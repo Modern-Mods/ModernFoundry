@@ -1,0 +1,17 @@
+[
+  {
+    "name": "melee_harvest",
+    "type": "modernfoundry:melee_harvest_material",
+    "data": "ancient/material/melee_harvest.json"
+  },
+  {
+    "name": "ranged",
+    "type": "modernfoundry:ranged_material",
+    "data": "ancient/material/ranged.json"
+  },
+  {
+    "name": "armor",
+    "type": "modernfoundry:armor_material",
+    "data": "ancient/material/armor.json"
+  }
+]

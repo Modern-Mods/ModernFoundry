@@ -1,0 +1,22 @@
+{
+  "values": [
+    "modernfoundry:seared_melter",
+    "modernfoundry:smeltery_controller",
+    "modernfoundry:foundry_controller",
+    "modernfoundry:seared_lantern",
+    "modernfoundry:scorched_lantern",
+    "modernfoundry:seared_fluid_cannon",
+    "modernfoundry:scorched_fluid_cannon",
+    "modernfoundry:end_fluid_cannon",
+    "modernfoundry:seared_casting_tank",
+    "modernfoundry:scorched_proxy_tank",
+    "modernfoundry:seared_fuel_tank",
+    "modernfoundry:seared_fuel_gauge",
+    "modernfoundry:seared_ingot_tank",
+    "modernfoundry:seared_ingot_gauge",
+    "modernfoundry:scorched_fuel_tank",
+    "modernfoundry:scorched_fuel_gauge",
+    "modernfoundry:scorched_ingot_tank",
+    "modernfoundry:scorched_ingot_gauge"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tables/recycling/bow",
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:bowstring": {
+      "count": 3,
+      "item": "minecraft:string"
+    },
+    "modernfoundry:rod": {
+      "count": 3,
+      "item": "minecraft:stick"
+    }
+  },
+  "tool": {
+    "item": "minecraft:bow"
+  }
+}

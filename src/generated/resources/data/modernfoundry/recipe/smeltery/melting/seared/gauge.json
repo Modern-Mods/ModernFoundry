@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/seared/gauge",
+  "byproducts": [
+    {
+      "amount": 5000,
+      "fluid": "modernfoundry:molten_glass"
+    }
+  ],
+  "ingredient": {
+    "type": "modernfoundry:no_container",
+    "match": [
+      {
+        "item": "modernfoundry:seared_fuel_gauge"
+      },
+      {
+        "item": "modernfoundry:seared_ingot_gauge"
+      }
+    ]
+  },
+  "result": {
+    "amount": 1000,
+    "fluid": "modernfoundry:seared_stone"
+  },
+  "temperature": 600,
+  "time": 107
+}

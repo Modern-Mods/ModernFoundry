@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:basin_tool_casting",
+  "id": "modernfoundry:tools/armor/slime_skull/blaze",
+  "cast": {
+    "item": "modernfoundry:blaze_head"
+  },
+  "cast_purpose": "consumed_offset",
+  "extra_materials": [
+    "modernfoundry:blaze"
+  ],
+  "item_cost": 5,
+  "result": "modernfoundry:slime_helmet"
+}

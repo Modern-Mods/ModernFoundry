@@ -1,0 +1,62 @@
+{
+  "color": "FF809912",
+  "fallbacks": [
+    "slime_metal",
+    "metal"
+  ],
+  "generator": {
+    "supported_stats": [
+      "modernfoundry:head",
+      "modernfoundry:handle",
+      "modernfoundry:binding",
+      "modernfoundry:repair_kit",
+      "modernfoundry:limb",
+      "modernfoundry:grip",
+      "modernfoundry:armor_plating",
+      "modernfoundry:plating_helmet",
+      "modernfoundry:plating_chestplate",
+      "modernfoundry:plating_leggings",
+      "modernfoundry:plating_boots",
+      "modernfoundry:plating_shield",
+      "modernfoundry:maille",
+      "modernfoundry:armor_maille"
+    ],
+    "transformer": {
+      "type": "modernfoundry:grey_to_sprite",
+      "palette": [
+        {
+          "color": "FF000000",
+          "grey": 0
+        },
+        {
+          "color": "FFC8C8C8",
+          "grey": 63,
+          "path": "modernfoundry:generator/queens_slime_border"
+        },
+        {
+          "grey": 102,
+          "path": "modernfoundry:generator/queens_slime_border"
+        },
+        {
+          "color": "FFE1E1E1",
+          "grey": 140,
+          "path": "modernfoundry:generator/queens_slime"
+        },
+        {
+          "grey": 178,
+          "path": "modernfoundry:generator/queens_slime"
+        },
+        {
+          "color": "FFE1E1E1",
+          "grey": 216,
+          "path": "modernfoundry:generator/queens_slime_highlight"
+        },
+        {
+          "grey": 255,
+          "path": "modernfoundry:generator/queens_slime_highlight"
+        }
+      ]
+    }
+  },
+  "luminosity": 9
+}

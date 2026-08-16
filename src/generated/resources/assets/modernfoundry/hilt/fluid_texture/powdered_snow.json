@@ -1,0 +1,5 @@
+{
+  "color": "FFFFFFFF",
+  "flowing": "modernfoundry:fluid/powdered_snow/flowing",
+  "still": "modernfoundry:fluid/powdered_snow/still"
+}

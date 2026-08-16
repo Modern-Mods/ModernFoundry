@@ -1,0 +1,20 @@
+[
+  {
+    "name": "group_general",
+    "type": "hilt:text",
+    "data": "slotless/general.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:slotless/general", "path": "slotless/general", "prefix": "general" }}
+  },
+  {
+    "name": "group_bonus",
+    "type": "hilt:text",
+    "data": "slotless/bonus.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:slotless/bonus", "path": "slotless/bonus", "prefix": "bonus" }}
+  },
+  {
+    "name": "group_cosmetic",
+    "type": "hilt:text",
+    "data": "slotless/cosmetic.json",
+    "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:slotless/cosmetic", "path": "slotless/cosmetic", "prefix": "cosmetic" }}
+  }
+]

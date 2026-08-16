@@ -1,0 +1,13 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_stat",
+      "each_level": 1.0,
+      "entity": "modernfoundry:airborne",
+      "percent": false,
+      "stat": "modernfoundry:projectile_damage"
+    }
+  ],
+  "tooltip_display": "always"
+}

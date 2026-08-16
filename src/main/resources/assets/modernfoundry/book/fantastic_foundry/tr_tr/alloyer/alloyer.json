@@ -1,0 +1,12 @@
+{
+  "title": "Alaşımlayıcı",
+  "image": {
+    "file": "modernfoundry:book/images/alloyer.png"
+  },
+  "text": [
+    {
+      "text": "Alaşım İleri!",
+      "paragraph": true
+    }
+	]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/minimap",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:compass"
+    },
+    {
+      "tag": "c:slimeballs"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": "modernfoundry:minimap",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/helmets"
+  }
+}

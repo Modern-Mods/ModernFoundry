@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/red_sand/molding/leggings_plating",
+  "material": {
+    "tag": "modernfoundry:casts/red_sand"
+  },
+  "pattern": [
+    {
+      "type": "modernfoundry:material",
+      "item": "modernfoundry:leggings_plating"
+    },
+    {
+      "item": "modernfoundry:leggings_plating_dummy"
+    }
+  ],
+  "result": "modernfoundry:leggings_plating_red_sand_cast"
+}

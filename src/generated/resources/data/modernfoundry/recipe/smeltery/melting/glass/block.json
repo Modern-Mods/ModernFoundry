@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/glass/block",
+  "ingredient": {
+    "tag": "c:glass/silica"
+  },
+  "result": {
+    "amount": 1000,
+    "fluid": "modernfoundry:molten_glass"
+  },
+  "temperature": 750,
+  "time": 59
+}

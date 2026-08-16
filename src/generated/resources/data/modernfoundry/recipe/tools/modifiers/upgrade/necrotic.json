@@ -1,0 +1,34 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/necrotic",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "modernfoundry:necrotic_bone"
+    },
+    {
+      "item": "modernfoundry:ichor_congealed_slime"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    }
+  ],
+  "level": {
+    "max": 5
+  },
+  "result": "modernfoundry:necrotic",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/melee"
+    },
+    {
+      "tag": "modernfoundry:modifiable/ranged/bows"
+    },
+    {
+      "tag": "modernfoundry:modifiable/fishing_rods"
+    }
+  ]
+}

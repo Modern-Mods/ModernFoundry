@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#modernfoundry:abilities/armor/general",
+    "#modernfoundry:abilities/armor/helmet",
+    "#modernfoundry:abilities/armor/chestplate",
+    "#modernfoundry:abilities/armor/leggings",
+    "#modernfoundry:abilities/armor/boots",
+    "#modernfoundry:abilities/armor/shield"
+  ]
+}

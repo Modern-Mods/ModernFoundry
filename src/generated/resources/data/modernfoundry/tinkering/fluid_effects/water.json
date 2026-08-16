@@ -1,0 +1,42 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:conditional",
+      "block": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:or",
+        "predicates": [
+          "hilt:blocks_motion",
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:unreplacable_by_liquid"
+          }
+        ]
+      },
+      "effect": {
+        "type": "modernfoundry:break_block"
+      }
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:conditional",
+      "effect": {
+        "type": "modernfoundry:damage",
+        "damage": 2.0,
+        "damage_type": {
+          "melee": "modernfoundry:water_melee",
+          "ranged": "modernfoundry:water_ranged"
+        }
+      },
+      "target": "hilt:water_sensitive"
+    },
+    {
+      "type": "modernfoundry:extinguish"
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "fluid": "minecraft:water"
+  }
+}

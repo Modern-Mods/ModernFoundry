@@ -1,0 +1,38 @@
+{
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_constantan",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "type": "neoforge:or",
+      "values": [
+        {
+          "type": "modernfoundry:config",
+          "prop": "allow_ingotless_alloys"
+        },
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/constantan"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "amount": 90,
+      "tag": "c:molten_copper"
+    },
+    {
+      "amount": 90,
+      "tag": "c:molten_nickel"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "tag": "c:molten_constantan"
+  },
+  "temperature": 920
+}

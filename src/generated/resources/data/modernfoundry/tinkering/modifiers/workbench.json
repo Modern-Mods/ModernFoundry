@@ -1,0 +1,17 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:inventory_menu",
+      "on_key": "any"
+    },
+    {
+      "type": "modernfoundry:inventory_slot_menu"
+    },
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:inventory_crafting"
+    }
+  ],
+  "tooltip_display": "always"
+}

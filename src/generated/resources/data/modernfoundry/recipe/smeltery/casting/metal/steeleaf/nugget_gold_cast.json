@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/steeleaf/nugget_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/steeleaf"
+    }
+  ],
+  "cooling_time": 21,
+  "fluid": {
+    "amount": 10,
+    "tag": "modernfoundry:molten_steeleaf"
+  },
+  "result": {
+    "tag": "c:nuggets/steeleaf"
+  }
+}

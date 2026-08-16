@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "modernfoundry:block/foundry/scorched/bricks"
+  }
+}

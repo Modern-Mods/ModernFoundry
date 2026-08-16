@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/seared/fuel_tank",
+  "byproducts": [
+    {
+      "amount": 1000,
+      "fluid": "modernfoundry:molten_glass"
+    }
+  ],
+  "ingredient": {
+    "type": "modernfoundry:no_container",
+    "item": "modernfoundry:seared_fuel_tank"
+  },
+  "result": {
+    "amount": 2000,
+    "fluid": "modernfoundry:seared_stone"
+  },
+  "temperature": 600,
+  "time": 160
+}

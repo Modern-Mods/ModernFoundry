@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/sand/builder_cast/adze_head",
+  "pattern": "modernfoundry:adze_head",
+  "pattern_item": {
+    "tag": "modernfoundry:casts/sand"
+  },
+  "result": "modernfoundry:adze_head_sand_cast"
+}

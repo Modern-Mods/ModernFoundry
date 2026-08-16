@@ -1,0 +1,21 @@
+{
+  "level_display": {
+    "type": "modernfoundry:unique",
+    "first_unique": false,
+    "unique_until": 2
+  },
+  "modules": [
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:defer_offhand"
+    },
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:no_interaction",
+      "modifier_level": {
+        "min": 2
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

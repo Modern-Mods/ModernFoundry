@@ -1,0 +1,30 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff_charging",
+  "textures": {
+    "tool": "modernfoundry:item/tool/staff/ender_4",
+    "large_tool": "modernfoundry:item/tool/staff/ender_large_4"
+  },
+  "large": true,
+  "modifier_maps": [
+    "modernfoundry:staff/ender/4",
+    "modernfoundry:staff/ender",
+    "modernfoundry:staff"
+  ],
+  "modifier_roots": {
+    "small": [
+      "modernfoundry:item/tool/staff/modifiers/ender/4/",
+      "modernfoundry:item/tool/staff/modifiers/ender/",
+      "modernfoundry:item/tool/staff/modifiers/"
+    ],
+    "large": [
+      "modernfoundry:item/tool/staff/large_modifiers/ender/4/",
+      "modernfoundry:item/tool/staff/large_modifiers/ender/",
+      "modernfoundry:item/tool/staff/large_modifiers/"
+    ]
+  },
+  "first_modifiers": [
+    "modernfoundry:dyed",
+    "modernfoundry:embellishment"
+  ]
+}

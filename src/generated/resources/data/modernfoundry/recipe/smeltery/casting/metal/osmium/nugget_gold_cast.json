@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/osmium/nugget_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/osmium"
+    }
+  ],
+  "cooling_time": 22,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_osmium"
+  },
+  "result": {
+    "tag": "c:nuggets/osmium"
+  }
+}

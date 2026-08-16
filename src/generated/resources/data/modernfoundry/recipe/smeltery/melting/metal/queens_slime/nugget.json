@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/queens_slime/nugget",
+  "ingredient": {
+    "tag": "c:nuggets/queens_slime"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "modernfoundry:molten_queens_slime"
+  },
+  "temperature": 1150,
+  "time": 24
+}

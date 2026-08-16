@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/amethyst/glass",
+  "cast": {
+    "tag": "c:glass/colorless"
+  },
+  "cast_consumed": true,
+  "cooling_time": 97,
+  "fluid": {
+    "amount": 200,
+    "tag": "modernfoundry:molten_amethyst"
+  },
+  "result": "modernfoundry:clear_tinted_glass"
+}

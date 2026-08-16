@@ -1,0 +1,111 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        "modernfoundry:large_plate",
+        {
+          "item": "modernfoundry:tough_handle",
+          "scale": 0.5
+        },
+        "modernfoundry:tough_binding",
+        {
+          "item": "modernfoundry:tough_handle",
+          "scale": 0.5
+        }
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 1.5,
+        "modernfoundry:attack_speed": 1.0
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:attack_damage": 1.2,
+        "modernfoundry:durability": 3.75,
+        "modernfoundry:mining_speed": 0.3
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 2
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 2,
+          "name": "modernfoundry:knockback"
+        },
+        {
+          "level": 1,
+          "name": "modernfoundry:pathing"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "shovel_dig"
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "minecraft:mineable/shovel"
+    },
+    {
+      "type": "modernfoundry:melee_particle",
+      "particle": "modernfoundry:bonk"
+    },
+    {
+      "type": "modernfoundry:box_aoe",
+      "bonus": {
+        "height": 1,
+        "width": 1
+      },
+      "expansion_direction": "modernfoundry:side_hit",
+      "expansions": [
+        {
+          "width": 1
+        },
+        {
+          "height": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:fixed_material_name",
+      "index": 0
+    }
+  ]
+}

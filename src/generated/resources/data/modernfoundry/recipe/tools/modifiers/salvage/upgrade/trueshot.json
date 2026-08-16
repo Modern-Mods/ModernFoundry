@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/upgrade/trueshot",
+  "modifier": "modernfoundry:trueshot",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/ranged"
+  }
+}

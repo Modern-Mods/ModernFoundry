@@ -1,0 +1,31 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/axe",
+  "textures": {
+    "front": "modernfoundry:item/tool/minotaur_axe/front_broken",
+    "back": "modernfoundry:item/tool/minotaur_axe/back",
+    "handle": "modernfoundry:item/tool/pickaxe/handle"
+  },
+  "modifier_maps": [
+    "modernfoundry:minotaur_axe_broken",
+    "modernfoundry:minotaur_axe"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/minotaur_axe/modifiers/broken/",
+    "modernfoundry:item/tool/minotaur_axe/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "handle",
+      "index": 2
+    },
+    {
+      "name": "front",
+      "index": 0
+    },
+    {
+      "name": "back",
+      "index": 1
+    }
+  ]
+}

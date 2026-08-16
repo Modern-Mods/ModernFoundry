@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/slime/ichor/bud_medium",
+  "byproducts": [
+    {
+      "amount": 400,
+      "fluid": "modernfoundry:ichor"
+    }
+  ],
+  "ingredient": {
+    "item": "modernfoundry:medium_ichor_slime_crystal_bud"
+  },
+  "rate": "gem",
+  "result": {
+    "amount": 20,
+    "fluid": "modernfoundry:blazing_blood"
+  },
+  "temperature": 1500,
+  "time": 120
+}

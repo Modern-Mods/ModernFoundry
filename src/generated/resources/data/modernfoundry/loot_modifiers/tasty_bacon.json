@@ -1,0 +1,45 @@
+{
+  "type": "hilt:add_entry",
+  "conditions": [
+    {
+      "condition": "modernfoundry:has_context_set",
+      "set": "minecraft:entity"
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "type": "#modernfoundry:bacon_producer"
+      }
+    },
+    {
+      "condition": "modernfoundry:has_modifier",
+      "modifier": "modernfoundry:tasty"
+    }
+  ],
+  "entry": {
+    "type": "minecraft:item",
+    "name": "modernfoundry:bacon"
+  },
+  "functions": [
+    {
+      "add": false,
+      "count": {
+        "type": "minecraft:uniform",
+        "max": 1,
+        "min": -2
+      },
+      "function": "minecraft:set_count"
+    },
+    {
+      "count": {
+        "type": "minecraft:uniform",
+        "max": 1,
+        "min": 0
+      },
+      "function": "minecraft:enchanted_count_increase",
+      "enchantment": "minecraft:looting"
+    }
+  ],
+  "post_conditions": []
+}

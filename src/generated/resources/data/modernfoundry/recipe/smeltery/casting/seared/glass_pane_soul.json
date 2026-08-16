@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/seared/glass_pane_soul",
+  "cast": {
+    "item": "modernfoundry:soul_glass_pane"
+  },
+  "cast_consumed": true,
+  "cooling_time": 89,
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:seared_stone"
+  },
+  "result": "modernfoundry:seared_soul_glass_pane"
+}

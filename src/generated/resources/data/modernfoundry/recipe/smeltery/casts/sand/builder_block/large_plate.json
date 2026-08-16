@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/sand/builder_block/large_plate",
+  "pattern": "modernfoundry:large_plate",
+  "pattern_item": {
+    "tag": "c:sand/colorless"
+  },
+  "result": {
+    "count": 4,
+    "item": "modernfoundry:large_plate_sand_cast"
+  }
+}

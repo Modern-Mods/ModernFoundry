@@ -1,0 +1,30 @@
+{
+  "name": "minecraft:chests/pillager_outpost",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:war_pick"
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "perStat": {
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:consecrated"
+      }
+    ],
+    "modernfoundry:melee_harvest": [
+      {
+        "level": 1,
+        "name": "modernfoundry:smite"
+      }
+    ],
+    "modernfoundry:ranged": [
+      {
+        "level": 1,
+        "name": "modernfoundry:holy"
+      }
+    ]
+  }
+}

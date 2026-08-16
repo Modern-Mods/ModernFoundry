@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/cheese_block",
+  "cooling_time": 6000,
+  "fluid": {
+    "amount": 1000,
+    "tag": "c:milk"
+  },
+  "result": "modernfoundry:cheese_block"
+}

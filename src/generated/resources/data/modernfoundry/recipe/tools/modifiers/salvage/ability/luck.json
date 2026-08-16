@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/luck",
+  "level": 1,
+  "modifier": "modernfoundry:luck",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/melee"
+    },
+    {
+      "tag": "modernfoundry:modifiable/harvest"
+    },
+    {
+      "tag": "modernfoundry:modifiable/ranged/launcher"
+    }
+  ]
+}

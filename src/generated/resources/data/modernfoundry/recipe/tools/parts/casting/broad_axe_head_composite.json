@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:table_casting_composite",
+  "id": "modernfoundry:tools/parts/casting/broad_axe_head_composite",
+  "item_cost": 8,
+  "result": "modernfoundry:broad_axe_head"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/bronze/ingot",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/bronze"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/bronze"
+  },
+  "material": "modernfoundry:bronze",
+  "needed": 1,
+  "value": 1
+}

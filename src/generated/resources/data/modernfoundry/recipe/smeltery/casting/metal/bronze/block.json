@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/metal/bronze/block",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:storage_blocks/bronze"
+    }
+  ],
+  "cooling_time": 171,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_bronze"
+  },
+  "result": {
+    "tag": "c:storage_blocks/bronze"
+  }
+}

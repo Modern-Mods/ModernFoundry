@@ -1,0 +1,35 @@
+{
+  "type": "modernfoundry:remove_modifier",
+  "id": "modernfoundry:tools/modifiers/worktable/remove_modifier_venom",
+  "inputs": [
+    {
+      "ingredient": [
+        {
+          "type": "hilt:fluid_container",
+          "amount": 1000,
+          "display": {
+            "item": "modernfoundry:venom_bucket"
+          },
+          "tag": "modernfoundry:venom"
+        },
+        {
+          "type": "hilt:fluid_container",
+          "amount": 250,
+          "display": {
+            "item": "modernfoundry:venom_bottle"
+          },
+          "tag": "modernfoundry:venom"
+        }
+      ]
+    }
+  ],
+  "modifier_predicate": {
+    "type": "hilt:inverted",
+    "inverted_type": "modernfoundry:tag",
+    "tag": "modernfoundry:remove_blacklist"
+  },
+  "name": "modifiers",
+  "tools": {
+    "tag": "modernfoundry:modifiable"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/aluminum/gear_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/aluminum"
+    }
+  ],
+  "cooling_time": 94,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_aluminum"
+  },
+  "result": {
+    "tag": "c:gears/aluminum"
+  }
+}

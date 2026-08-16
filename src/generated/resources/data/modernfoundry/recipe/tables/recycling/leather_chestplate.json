@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tables/recycling/leather_chestplate",
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:maille": {
+      "count": 8,
+      "item": "minecraft:leather"
+    }
+  },
+  "tool": {
+    "item": "minecraft:leather_chestplate"
+  }
+}

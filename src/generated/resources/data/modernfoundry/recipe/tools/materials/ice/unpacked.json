@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/ice/unpacked",
+  "ingredient": {
+    "item": "minecraft:ice"
+  },
+  "material": "modernfoundry:ice",
+  "needed": 9,
+  "value": 1
+}

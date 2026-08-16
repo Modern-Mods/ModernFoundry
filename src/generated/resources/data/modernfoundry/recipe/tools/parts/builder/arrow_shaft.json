@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:part_builder",
+  "id": "modernfoundry:tools/parts/builder/arrow_shaft",
+  "allow_uncraftable": true,
+  "cost": 1,
+  "pattern": "modernfoundry:arrow_shaft",
+  "pattern_item": [
+    {
+      "tag": "modernfoundry:patterns/default"
+    },
+    {
+      "item": "modernfoundry:arrow_cast"
+    }
+  ],
+  "result": {
+    "item": "modernfoundry:arrow_shaft"
+  }
+}

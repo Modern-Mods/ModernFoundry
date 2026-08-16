@@ -1,0 +1,12 @@
+[
+  {
+    "name": "foreward",
+    "type": "hilt:text",
+    "data": "intro/foreward.json"
+  },
+  {
+    "name": "focus",
+    "type": "hilt:text",
+    "data": "intro/focus.json"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "parent": "neoforge:item/default",
+  "loader": "modernfoundry:fluid_container",
+  "textures": {
+    "base": "modernfoundry:item/copper_can",
+    "fluid": "modernfoundry:item/copper_can_fluid"
+  }
+}

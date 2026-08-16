@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:table_casting_material",
+  "id": "modernfoundry:tools/parts/casting/leggings_plating_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/leggings_plating"
+  },
+  "item_cost": 5,
+  "result": "modernfoundry:leggings_plating"
+}

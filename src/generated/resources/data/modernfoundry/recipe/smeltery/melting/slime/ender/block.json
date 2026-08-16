@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/slime/ender/block",
+  "ingredient": {
+    "item": "modernfoundry:ender_slime"
+  },
+  "result": {
+    "amount": 2250,
+    "fluid": "modernfoundry:ender_slime"
+  },
+  "temperature": 70,
+  "time": 95
+}

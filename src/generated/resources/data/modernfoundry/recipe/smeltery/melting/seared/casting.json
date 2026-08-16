@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/seared/casting",
+  "ingredient": [
+    {
+      "item": "modernfoundry:seared_basin"
+    },
+    {
+      "item": "modernfoundry:seared_table"
+    }
+  ],
+  "result": {
+    "amount": 1750,
+    "fluid": "modernfoundry:seared_stone"
+  },
+  "temperature": 600,
+  "time": 134
+}

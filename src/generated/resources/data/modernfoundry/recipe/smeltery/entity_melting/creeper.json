@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:entity_melting",
+  "id": "modernfoundry:smeltery/entity_melting/creeper",
+  "damage": 2,
+  "entity": {
+    "type": "minecraft:creeper"
+  },
+  "result": {
+    "amount": 50,
+    "fluid": "modernfoundry:molten_glass"
+  }
+}

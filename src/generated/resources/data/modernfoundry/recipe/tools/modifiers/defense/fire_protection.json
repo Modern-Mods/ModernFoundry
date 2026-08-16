@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:incremental_modifier",
+  "id": "modernfoundry:tools/modifiers/defense/fire_protection",
+  "allow_crystal": true,
+  "amount_per_item": 1,
+  "input": {
+    "item": "modernfoundry:seared_reinforcement"
+  },
+  "needed_per_level": 5,
+  "result": "modernfoundry:fire_protection",
+  "slots": {
+    "defense": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/armor"
+    },
+    {
+      "tag": "modernfoundry:modifiable/held"
+    }
+  ]
+}

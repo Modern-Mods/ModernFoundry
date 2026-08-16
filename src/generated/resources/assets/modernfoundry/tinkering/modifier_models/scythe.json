@@ -1,0 +1,125 @@
+{
+  "modifiers": {
+    "modernfoundry:antiaquatic": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_antiaquatic",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_antiaquatic"
+    },
+    "modernfoundry:bane_of_sssss": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_bane_of_sssss",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_bane_of_sssss"
+    },
+    "modernfoundry:blasting": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_blasting",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_blasting"
+    },
+    "modernfoundry:bucketing": [
+      {
+        "type": "modernfoundry:fluid",
+        "mask": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_bucketing_full",
+        "mask_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_bucketing_full"
+      },
+      {
+        "type": "modernfoundry:basic",
+        "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_bucketing",
+        "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_bucketing"
+      }
+    ],
+    "modernfoundry:cooling": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_cooling",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_cooling"
+    },
+    "modernfoundry:diamond": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_diamond",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_diamond"
+    },
+    "modernfoundry:emerald": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_emerald",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_emerald"
+    },
+    "modernfoundry:experienced": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_experienced",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_experienced"
+    },
+    "modernfoundry:fiery": {
+      "luminosity": 10,
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_fiery",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_fiery"
+    },
+    "modernfoundry:glowing": {
+      "luminosity": 15,
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_glowing"
+    },
+    "modernfoundry:haste": {
+      "luminosity": 7,
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_haste",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_haste"
+    },
+    "modernfoundry:hydraulic": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_hydraulic",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_hydraulic"
+    },
+    "modernfoundry:knockback": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_knockback",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_knockback"
+    },
+    "modernfoundry:lightspeed": {
+      "luminosity": 15,
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_lightspeed",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_lightspeed"
+    },
+    "modernfoundry:luck": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_luck",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_luck"
+    },
+    "modernfoundry:magnetic": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_magnetic",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_magnetic"
+    },
+    "modernfoundry:necrotic": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_necrotic",
+    "modernfoundry:netherite": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_netherite",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_netherite"
+    },
+    "modernfoundry:overforced": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_overforced",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_overforced"
+    },
+    "modernfoundry:reinforced": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_reinforced",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_reinforced"
+    },
+    "modernfoundry:severing": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_severing",
+    "modernfoundry:sharpness": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_sharpness",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_sharpness"
+    },
+    "modernfoundry:silky": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_silky",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_silky"
+    },
+    "modernfoundry:smite": {
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_smite",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_smite"
+    },
+    "modernfoundry:soulbound": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_soulbound",
+    "modernfoundry:tank": [
+      {
+        "type": "modernfoundry:tank",
+        "full": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_tank_full",
+        "full_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_tank_full",
+        "partial": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_tank_partial",
+        "partial_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_tank_partial"
+      },
+      {
+        "type": "modernfoundry:basic",
+        "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_tank",
+        "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_tank"
+      }
+    ],
+    "modernfoundry:unbreakable": {
+      "luminosity": 2,
+      "texture": "modernfoundry:item/tool/scythe/modifiers/modernfoundry_unbreakable",
+      "texture_large": "modernfoundry:item/tool/scythe/large/modifiers/modernfoundry_unbreakable"
+    }
+  }
+}

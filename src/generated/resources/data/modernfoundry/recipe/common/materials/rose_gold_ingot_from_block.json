@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:rose_gold_ingot",
+  "ingredients": [
+    {
+      "item": "modernfoundry:rose_gold_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:rose_gold_ingot"
+  }
+}

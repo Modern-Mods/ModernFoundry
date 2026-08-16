@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:part_builder_tool_recycling",
+  "id": "modernfoundry:tools/recycling/plate_shield",
+  "parts": [
+    "modernfoundry:shield_core",
+    "modernfoundry:repair_kit"
+  ],
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "tools": {
+    "item": "modernfoundry:plate_shield"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Parça Sandığı Üretimi",
+  "recipe": "modernfoundry:tables/part_chest",
+  "description": [
+    { "text": "O kullanılmayan araç parçalarının ne zaman gerekeceğini bilemezsin." }
+  ]
+}

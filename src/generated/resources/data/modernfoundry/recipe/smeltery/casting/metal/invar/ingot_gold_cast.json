@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/invar/ingot_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/ingot"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/invar"
+    }
+  ],
+  "cooling_time": 63,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_invar"
+  },
+  "result": {
+    "tag": "c:ingots/invar"
+  }
+}

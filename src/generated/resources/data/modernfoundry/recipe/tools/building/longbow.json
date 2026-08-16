@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/longbow",
+  "result": "modernfoundry:longbow",
+  "result_count": 1
+}

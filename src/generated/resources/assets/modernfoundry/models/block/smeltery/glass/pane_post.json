@@ -1,0 +1,14 @@
+{
+  "parent": "modernfoundry:block/template/pane/post",
+  "connection": {
+    "predicate": "pane",
+    "textures": {
+      "pane": "cornerless_full"
+    }
+  },
+  "loader": "hilt:connected",
+  "textures": {
+    "edge": "modernfoundry:block/smeltery/seared_glass_top",
+    "pane": "modernfoundry:block/smeltery/seared_glass"
+  }
+}

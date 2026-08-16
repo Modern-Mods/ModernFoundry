@@ -1,0 +1,19 @@
+{
+  "parent": "modernfoundry:block/template/pane/noside",
+  "colors": [
+    {
+      "color": "FFF27FA5"
+    }
+  ],
+  "connection": {
+    "predicate": "pane",
+    "textures": {
+      "pane": "cornerless_full"
+    }
+  },
+  "loader": "hilt:connected",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "pane": "modernfoundry:block/clear_stained_glass"
+  }
+}

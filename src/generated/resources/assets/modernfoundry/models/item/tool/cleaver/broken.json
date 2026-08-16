@@ -1,0 +1,51 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/tall",
+  "textures": {
+    "head": "modernfoundry:item/tool/cleaver/head_broken",
+    "handle": "modernfoundry:item/tool/cleaver/handle",
+    "guard": "modernfoundry:item/tool/cleaver/guard",
+    "shield": "modernfoundry:item/tool/cleaver/shield_broken",
+    "large_head": "modernfoundry:item/tool/cleaver/large/head_broken",
+    "large_handle": "modernfoundry:item/tool/cleaver/large/handle",
+    "large_guard": "modernfoundry:item/tool/cleaver/large/guard",
+    "large_shield": "modernfoundry:item/tool/cleaver/large/shield_broken"
+  },
+  "modifier_maps": [
+    "modernfoundry:cleaver_broken",
+    "modernfoundry:cleaver"
+  ],
+  "modifier_roots": {
+    "small": [
+      "modernfoundry:item/tool/cleaver/modifiers/broken/",
+      "modernfoundry:item/tool/cleaver/modifiers/"
+    ],
+    "large": [
+      "modernfoundry:item/tool/cleaver/large/modifiers/broken/",
+      "modernfoundry:item/tool/cleaver/large/modifiers/"
+    ]
+  },
+  "large": true,
+  "large_offset": [
+    -2,
+    2
+  ],
+  "parts": [
+    {
+      "name": "handle",
+      "index": 1
+    },
+    {
+      "name": "head",
+      "index": 0
+    },
+    {
+      "name": "shield",
+      "index": 3
+    },
+    {
+      "name": "guard",
+      "index": 2
+    }
+  ]
+}

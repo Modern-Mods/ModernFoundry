@@ -1,0 +1,52 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_melee_damage",
+      "formula": [
+        "$armor_coverage",
+        1.6,
+        "*",
+        "$level",
+        "*",
+        "$multiplier",
+        "*",
+        "$damage",
+        "+"
+      ],
+      "percent": false,
+      "variables": {
+        "armor_coverage": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:armor_coverage",
+          "fallback": 1.0,
+          "which": "target"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:conditional_power",
+      "formula": [
+        "$armor_coverage",
+        0.8,
+        "*",
+        "$level",
+        "*",
+        "$multiplier",
+        "*",
+        "$damage",
+        "+"
+      ],
+      "percent": false,
+      "variables": {
+        "armor_coverage": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:armor_coverage",
+          "fallback": 1.0,
+          "which": "target"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

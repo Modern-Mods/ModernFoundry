@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/clay/pot",
+  "ingredient": {
+    "item": "minecraft:flower_pot"
+  },
+  "result": {
+    "amount": 750,
+    "fluid": "modernfoundry:molten_clay"
+  },
+  "temperature": 450,
+  "time": 96
+}

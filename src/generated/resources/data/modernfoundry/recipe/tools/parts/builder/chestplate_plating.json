@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:tools/parts/builder/chestplate_plating",
+  "cost": 6,
+  "material": "modernfoundry:rock",
+  "pattern": "modernfoundry:chestplate_plating",
+  "pattern_item": [
+    {
+      "tag": "modernfoundry:patterns/default"
+    },
+    {
+      "item": "modernfoundry:chestplate_plating_cast"
+    }
+  ],
+  "result": "modernfoundry:chestplate_plating_dummy"
+}

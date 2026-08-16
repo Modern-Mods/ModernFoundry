@@ -1,0 +1,17 @@
+{
+  "modifiers": {
+    "modernfoundry:diamond": "modernfoundry:item/tool/flint_and_brick/modifiers/modernfoundry_diamond",
+    "modernfoundry:emerald": "modernfoundry:item/tool/flint_and_brick/modifiers/modernfoundry_emerald",
+    "modernfoundry:glowing": {
+      "luminosity": 15,
+      "texture": "modernfoundry:item/tool/flint_and_brick/modifiers/modernfoundry_glowing"
+    },
+    "modernfoundry:netherite": "modernfoundry:item/tool/flint_and_brick/modifiers/modernfoundry_netherite",
+    "modernfoundry:overforced": "modernfoundry:item/tool/flint_and_brick/modifiers/modernfoundry_overforced",
+    "modernfoundry:reinforced": "modernfoundry:item/tool/flint_and_brick/modifiers/modernfoundry_reinforced",
+    "modernfoundry:unbreakable": {
+      "luminosity": 2,
+      "texture": "modernfoundry:item/tool/flint_and_brick/modifiers/modernfoundry_unbreakable"
+    }
+  }
+}

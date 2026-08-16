@@ -1,0 +1,60 @@
+{
+  "parent": "modernfoundry:foundry/structure",
+  "criteria": {
+    "scorched_lantern": {
+      "conditions": {
+        "items": [
+          {
+            "count": {
+              "min": 64
+            },
+            "items": [
+              "modernfoundry:scorched_lantern"
+            ],
+            "nbt": "{tank:{Amount:50,FluidName:\"modernfoundry:molten_manyullyn\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "seared_lantern": {
+      "conditions": {
+        "items": [
+          {
+            "count": {
+              "min": 64
+            },
+            "items": [
+              "modernfoundry:seared_lantern"
+            ],
+            "nbt": "{tank:{Amount:50,FluidName:\"modernfoundry:molten_manyullyn\"}}"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.foundry.manyullyn_lanterns.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:scorched_lantern",
+      "nbt": "{tank:{Amount:50,FluidName:\"modernfoundry:molten_manyullyn\"}}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.foundry.manyullyn_lanterns.title"
+    }
+  },
+  "requirements": [
+    [
+      "seared_lantern",
+      "scorched_lantern"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

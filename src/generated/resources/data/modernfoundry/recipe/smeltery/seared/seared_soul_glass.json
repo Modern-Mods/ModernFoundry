@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "G": {
+      "item": "modernfoundry:soul_glass"
+    },
+    "b": {
+      "item": "modernfoundry:seared_brick"
+    }
+  },
+  "pattern": [
+    " b ",
+    "bGb",
+    " b "
+  ],
+  "result": {
+    "id": "modernfoundry:seared_soul_glass"
+  },
+  "show_notification": true
+}

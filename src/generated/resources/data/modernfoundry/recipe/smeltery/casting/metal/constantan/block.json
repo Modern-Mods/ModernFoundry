@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/metal/constantan/block",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:storage_blocks/constantan"
+    }
+  ],
+  "cooling_time": 192,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_constantan"
+  },
+  "result": {
+    "tag": "c:storage_blocks/constantan"
+  }
+}

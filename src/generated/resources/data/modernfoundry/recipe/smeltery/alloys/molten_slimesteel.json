@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_slimesteel",
+  "inputs": [
+    {
+      "amount": 90,
+      "tag": "c:molten_iron"
+    },
+    {
+      "amount": 250,
+      "tag": "modernfoundry:sky_slime"
+    },
+    {
+      "amount": 250,
+      "tag": "modernfoundry:seared_stone"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "fluid": "modernfoundry:molten_slimesteel"
+  },
+  "temperature": 900
+}

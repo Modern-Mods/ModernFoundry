@@ -1,0 +1,98 @@
+[
+  {
+    "name": "index",
+    "type": "hilt:index",
+    "data": "smeltery/index.json"
+  },
+
+  {
+    "name": "features",
+    "type": "hilt:text",
+    "data": "smeltery/features.json"
+  },
+  {
+    "name": "controller",
+    "type": "hilt:image_text",
+    "data": "smeltery/controller.json"
+  },
+  {
+    "name": "hidden",
+    "type": "hilt:right_padding"
+  },
+  {
+    "name": "structure",
+    "type": "hilt:structure",
+    "data": "smeltery/multiblock.json"
+  },
+  {
+    "name": "structurereq",
+    "type": "hilt:text",
+    "data": "smeltery/structurerequirements.json"
+  },
+  {
+    "name": "alloying",
+    "type": "hilt:text",
+    "data": "smeltery/alloying.json"
+  },
+  {
+    "name": "hidden",
+    "type": "hilt:image_text",
+	"data": "smeltery/hottub.json"
+  },
+  {
+    "name": "sgui1",
+    "type": "hilt:image_text",
+    "data": "smeltery/gui1.json"
+  },
+  {
+    "name": "sgui2",
+    "type": "hilt:text",
+    "data": "smeltery/gui2.json"
+  },
+
+  {
+    "name": "seared_tanks",
+    "type": "hilt:showcase",
+    "data": "smeltery/tanks.json"
+  },
+  {
+    "name": "seared_blocks",
+    "type": "hilt:showcase",
+    "data": "smeltery/searedblocks.json"
+  },
+  {
+    "name": "seared_ladder",
+    "type": "hilt:showcase",
+    "data": "smeltery/searedladder.json"
+  },
+  {
+    "name": "seared_glass",
+    "type": "hilt:showcase",
+    "data": "smeltery/searedglass.json"
+  },
+  {
+    "name": "tinted_glass",
+    "type": "hilt:showcase",
+    "data": "smeltery/tinted_glass.json"
+  },
+  {
+    "name": "soul_glass",
+    "type": "hilt:showcase",
+    "data": "smeltery/soul_glass.json"
+  },
+  {
+    "name": "seared_drain",
+    "type": "hilt:showcase",
+    "data": "smeltery/seared_drain.json"
+  },
+  {
+    "name": "seared_duct",
+    "type": "hilt:showcase",
+    "data": "smeltery/seared_duct.json"
+  },
+  {
+    "name": "seared_chute",
+    "type": "hilt:showcase",
+    "data": "smeltery/seared_chute.json"
+  }
+ ]

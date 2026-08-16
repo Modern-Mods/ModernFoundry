@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/javelin",
+  "result": "modernfoundry:javelin",
+  "result_count": 1
+}

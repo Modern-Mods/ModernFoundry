@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/slimewood/bloodshroom_logs",
+  "ingredient": {
+    "tag": "modernfoundry:bloodshroom_logs"
+  },
+  "leftover": "modernfoundry:bloodshroom_planks",
+  "material": "modernfoundry:slimewood#bloodshroom",
+  "needed": 1,
+  "value": 4
+}

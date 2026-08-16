@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/electrum/nugget",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/electrum"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:nuggets/electrum"
+  },
+  "material": "modernfoundry:electrum",
+  "needed": 9,
+  "value": 1
+}

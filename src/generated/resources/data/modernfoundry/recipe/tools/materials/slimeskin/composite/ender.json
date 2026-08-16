@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/slimeskin/composite/ender",
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:ender_slime"
+  },
+  "input": "modernfoundry:leather",
+  "output": "modernfoundry:enderslime_vine#slimeskin",
+  "temperature": 70
+}

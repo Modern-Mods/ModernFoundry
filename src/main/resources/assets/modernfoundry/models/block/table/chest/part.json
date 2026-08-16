@@ -1,0 +1,10 @@
+{
+    "parent": "modernfoundry:block/table/chest/chest",
+    "textures": {
+        "side": "modernfoundry:block/chest/part/side",
+        "front": "modernfoundry:block/chest/part/front",
+        "top": "modernfoundry:block/chest/part/top",
+        "drawer_front": "modernfoundry:block/chest/part/drawer_front",
+        "drawer_side": "modernfoundry:block/chest/part/drawer_side"
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:incremental_modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/lightspeed_boots_from_block",
+  "allow_crystal": false,
+  "amount_per_item": 4,
+  "input": {
+    "item": "minecraft:glowstone"
+  },
+  "leftover": "minecraft:glowstone_dust",
+  "level": {
+    "max": 3
+  },
+  "needed_per_level": 64,
+  "result": "modernfoundry:lightspeed",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/boots"
+  }
+}

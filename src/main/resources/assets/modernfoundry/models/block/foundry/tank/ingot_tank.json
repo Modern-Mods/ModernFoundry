@@ -1,0 +1,7 @@
+{
+  "parent": "modernfoundry:block/template/tank_knob",
+  "textures": {
+    "top":  "modernfoundry:block/foundry/tank/tank_top",
+    "side": "modernfoundry:block/foundry/tank/ingot_tank"
+  }
+}

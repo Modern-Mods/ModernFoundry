@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "modernfoundry:block/slime/potted_sapling/ender"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "modernfoundry:seared_bricks_wall",
+  "key": {
+    "B": {
+      "item": "modernfoundry:seared_bricks"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BBB"
+  ],
+  "result": {
+    "count": 6,
+    "id": "modernfoundry:seared_bricks_wall"
+  },
+  "show_notification": true
+}

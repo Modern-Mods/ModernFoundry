@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:part_builder_tool_recycling",
+  "id": "modernfoundry:tools/recycling/war_pick",
+  "parts": [
+    "modernfoundry:pick_head",
+    "modernfoundry:bow_limb",
+    "modernfoundry:bowstring"
+  ],
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "tools": {
+    "item": "modernfoundry:war_pick"
+  }
+}

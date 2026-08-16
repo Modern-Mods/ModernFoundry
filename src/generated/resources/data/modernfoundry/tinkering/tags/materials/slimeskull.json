@@ -1,0 +1,26 @@
+{
+  "values": [
+    "modernfoundry:glass",
+    "modernfoundry:leather",
+    "modernfoundry:iron",
+    "modernfoundry:copper",
+    "modernfoundry:string",
+    "modernfoundry:darkthread",
+    "modernfoundry:bone",
+    "modernfoundry:ice",
+    "modernfoundry:necrotic_bone",
+    "modernfoundry:gold",
+    "modernfoundry:rose_gold",
+    "modernfoundry:pig_iron",
+    "modernfoundry:blaze",
+    "modernfoundry:ender_pearl",
+    "modernfoundry:dragon_scale",
+    "modernfoundry:venombone",
+    "modernfoundry:blazing_bone",
+    "modernfoundry:knightmetal",
+    {
+      "id": "modernfoundry:necronium",
+      "required": false
+    }
+  ]
+}

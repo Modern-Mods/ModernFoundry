@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/uranium/gear",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/uranium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:gears/uranium"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_uranium"
+  },
+  "temperature": 830,
+  "time": 122
+}

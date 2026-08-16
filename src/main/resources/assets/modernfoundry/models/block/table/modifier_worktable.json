@@ -1,0 +1,13 @@
+{
+  "loader": "hilt:retextured",
+  "parent": "modernfoundry:block/table/table",
+  "textures": {
+    "particle":  "modernfoundry:block/table/modifier_workstation_top",
+    "top":       "modernfoundry:block/table/modifier_workstation_top",
+    "side":      "modernfoundry:block/table/modifier_workstation_side",
+    "leg":       "modernfoundry:block/table/modifier_workstation_side",
+    "bottom":    "modernfoundry:block/table/modifier_workstation_top",
+    "legBottom": "modernfoundry:block/table/modifier_workstation_top"
+  },
+  "retextured": [ "leg", "legBottom" ]
+}

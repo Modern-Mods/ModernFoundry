@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "modernfoundry:block/wood/blazewood",
+    "side": "modernfoundry:block/wood/blazewood",
+    "top": "modernfoundry:block/wood/blazewood"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/refined_glowstone/leggings",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "modernfoundry:melting/refined_glowstone/tools_costing_7"
+    }
+  ],
+  "ingredient": {
+    "tag": "modernfoundry:melting/refined_glowstone/tools_costing_7"
+  },
+  "result": {
+    "amount": 630,
+    "tag": "c:molten_refined_glowstone",
+    "unit_size": 10
+  },
+  "temperature": 825,
+  "time": 161
+}

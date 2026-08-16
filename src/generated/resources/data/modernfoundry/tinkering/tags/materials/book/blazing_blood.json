@@ -1,0 +1,15 @@
+{
+  "values": [
+    "modernfoundry:manyullyn",
+    "modernfoundry:hepatizon",
+    "modernfoundry:queens_slime",
+    "modernfoundry:cinderslime",
+    "modernfoundry:blazing_bone",
+    "modernfoundry:blazewood",
+    "modernfoundry:jeweled_hide",
+    {
+      "id": "modernfoundry:nicrosil",
+      "required": false
+    }
+  ]
+}

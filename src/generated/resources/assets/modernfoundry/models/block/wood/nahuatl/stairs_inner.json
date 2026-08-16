@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "modernfoundry:block/wood/nahuatl",
+    "side": "modernfoundry:block/wood/nahuatl",
+    "top": "modernfoundry:block/wood/nahuatl"
+  }
+}

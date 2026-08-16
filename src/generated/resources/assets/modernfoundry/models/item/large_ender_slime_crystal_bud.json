@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:item/base/geode/large_bud",
+  "textures": {
+    "layer0": "modernfoundry:block/geode/ender/large_bud"
+  }
+}

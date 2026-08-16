@@ -1,0 +1,31 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/axe",
+  "textures": {
+    "head": "modernfoundry:item/tool/pickaxe/head_broken",
+    "handle": "modernfoundry:item/tool/pickaxe/handle",
+    "binding": "modernfoundry:item/tool/pickaxe/binding"
+  },
+  "modifier_maps": [
+    "modernfoundry:pickaxe_broken",
+    "modernfoundry:pickaxe"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/pickaxe/modifiers/broken/",
+    "modernfoundry:item/tool/pickaxe/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "handle",
+      "index": 1
+    },
+    {
+      "name": "head",
+      "index": 0
+    },
+    {
+      "name": "binding",
+      "index": 2
+    }
+  ]
+}

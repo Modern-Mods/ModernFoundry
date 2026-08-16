@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/rock/andesite",
+  "ingredient": {
+    "tag": "c:andesite"
+  },
+  "material": "modernfoundry:rock#andesite",
+  "needed": 1,
+  "value": 1
+}

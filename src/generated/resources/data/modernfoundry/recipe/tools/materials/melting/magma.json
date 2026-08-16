@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/magma",
+  "input": "modernfoundry:magma",
+  "result": {
+    "amount": 250,
+    "tag": "c:magma"
+  },
+  "temperature": 300
+}

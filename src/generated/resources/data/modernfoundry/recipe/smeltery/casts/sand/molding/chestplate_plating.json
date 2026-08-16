@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/sand/molding/chestplate_plating",
+  "material": {
+    "tag": "modernfoundry:casts/sand"
+  },
+  "pattern": [
+    {
+      "type": "modernfoundry:material",
+      "item": "modernfoundry:chestplate_plating"
+    },
+    {
+      "item": "modernfoundry:chestplate_plating_dummy"
+    }
+  ],
+  "result": "modernfoundry:chestplate_plating_sand_cast"
+}

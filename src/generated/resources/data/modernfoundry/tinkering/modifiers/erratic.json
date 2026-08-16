@@ -1,0 +1,16 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:material_variant_color",
+      "material": "modernfoundry:slimeball"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": -0.5,
+      "operation": "add",
+      "stat": "modernfoundry:accuracy"
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,14 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:indestructible"
+    },
+    {
+      "type": "modernfoundry:rarity",
+      "rarity": "uncommon"
+    }
+  ],
+  "tooltip_display": "always"
+}

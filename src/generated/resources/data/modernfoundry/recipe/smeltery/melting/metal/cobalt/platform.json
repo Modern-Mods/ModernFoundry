@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/cobalt/platform",
+  "ingredient": {
+    "item": "modernfoundry:cobalt_platform"
+  },
+  "result": {
+    "amount": 100,
+    "tag": "c:molten_cobalt"
+  },
+  "temperature": 950,
+  "time": 68
+}

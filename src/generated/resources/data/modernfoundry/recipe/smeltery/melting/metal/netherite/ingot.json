@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/netherite/ingot",
+  "ingredient": {
+    "tag": "c:ingots/netherite"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_netherite"
+  },
+  "temperature": 1250,
+  "time": 74
+}

@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:overgrowth",
+      "chance": {
+        "each_level": 0.05
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

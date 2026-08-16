@@ -1,0 +1,63 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:material_stats",
+      "primary_part": -1,
+      "stat_types": [
+        {
+          "scale": 1.6,
+          "stat": "modernfoundry:slime"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:fixed",
+          "material": "modernfoundry:blood"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:attack_damage": 0.4
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 4
+      }
+    },
+    {
+      "type": "modernfoundry:material_repair",
+      "durability": 672,
+      "material": "modernfoundry:phantom"
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:wings"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_traits",
+      "hooks": [
+        "modernfoundry:rebalanced_trait",
+        "modernfoundry:trim_trait"
+      ],
+      "material_index": 0,
+      "stat_type": "modernfoundry:slime"
+    },
+    {
+      "type": "modernfoundry:unique_material_name",
+      "index": 0
+    }
+  ]
+}

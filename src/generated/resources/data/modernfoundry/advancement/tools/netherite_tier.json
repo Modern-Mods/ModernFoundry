@@ -1,0 +1,43 @@
+{
+  "parent": "modernfoundry:tools/tinker_tool",
+  "criteria": {
+    "harvest_level": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:stat_in_set",
+              "stat": "modernfoundry:harvest_tier",
+              "values": [
+                "minecraft:netherite"
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.tools.netherite_tier.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.tools.netherite_tier.title"
+    }
+  },
+  "requirements": [
+    [
+      "harvest_level"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

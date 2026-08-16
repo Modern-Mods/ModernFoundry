@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/tungsten/ingot_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/ingot"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/tungsten"
+    }
+  ],
+  "cooling_time": 65,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_tungsten"
+  },
+  "result": {
+    "tag": "c:ingots/tungsten"
+  }
+}

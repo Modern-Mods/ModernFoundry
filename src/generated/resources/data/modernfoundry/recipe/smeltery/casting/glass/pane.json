@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/glass/pane",
+  "cooling_time": 98,
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:molten_glass"
+  },
+  "result": "modernfoundry:clear_glass_pane"
+}

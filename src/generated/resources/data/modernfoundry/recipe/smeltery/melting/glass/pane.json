@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/glass/pane",
+  "ingredient": {
+    "tag": "c:glass_panes/silica"
+  },
+  "result": {
+    "amount": 250,
+    "fluid": "modernfoundry:molten_glass"
+  },
+  "temperature": 750,
+  "time": 29
+}

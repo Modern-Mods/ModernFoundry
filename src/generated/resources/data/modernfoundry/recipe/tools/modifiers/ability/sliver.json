@@ -1,0 +1,29 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/sliver",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "modernfoundry:silky_cloth"
+    },
+    {
+      "item": "modernfoundry:sky_slime_vine"
+    },
+    {
+      "item": "modernfoundry:silky_cloth"
+    },
+    {
+      "item": "modernfoundry:sky_slime_vine"
+    },
+    {
+      "item": "modernfoundry:sky_slime_vine"
+    }
+  ],
+  "result": "modernfoundry:sliver",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/staffs"
+  }
+}

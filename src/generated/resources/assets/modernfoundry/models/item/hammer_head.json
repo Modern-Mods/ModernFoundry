@@ -1,0 +1,11 @@
+{
+  "parent": "neoforge:item/default",
+  "loader": "modernfoundry:material",
+  "offset": [
+    -3,
+    3
+  ],
+  "textures": {
+    "texture": "modernfoundry:item/tool/sledge_hammer/head"
+  }
+}

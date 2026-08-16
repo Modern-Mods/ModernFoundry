@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:item/base/geode/cluster",
+  "textures": {
+    "layer0": "modernfoundry:block/geode/earth/cluster"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/lumium/ingot_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/ingot"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/lumium"
+    }
+  ],
+  "cooling_time": 68,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_lumium"
+  },
+  "result": {
+    "tag": "c:ingots/lumium"
+  }
+}

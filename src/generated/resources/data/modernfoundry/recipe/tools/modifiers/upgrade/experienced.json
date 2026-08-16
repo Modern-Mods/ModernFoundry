@@ -1,0 +1,37 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/experienced",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "minecraft:experience_bottle"
+    }
+  ],
+  "level": {
+    "max": 5
+  },
+  "result": "modernfoundry:experienced",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/melee"
+    },
+    {
+      "tag": "modernfoundry:modifiable/harvest"
+    },
+    {
+      "tag": "modernfoundry:modifiable/ranged/launcher"
+    },
+    {
+      "tag": "modernfoundry:modifiable/armor/leggings"
+    }
+  ]
+}

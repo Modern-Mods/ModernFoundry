@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table_potion",
+  "id": "modernfoundry:smeltery/casting/filling/tipped_arrow",
+  "bottle": {
+    "item": "minecraft:arrow"
+  },
+  "cooling_time": 20,
+  "fluid": {
+    "amount": 50,
+    "tag": "c:potion"
+  },
+  "result": "minecraft:tipped_arrow"
+}

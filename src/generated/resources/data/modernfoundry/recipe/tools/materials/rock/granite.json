@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/rock/granite",
+  "ingredient": {
+    "tag": "c:granite"
+  },
+  "material": "modernfoundry:rock#granite",
+  "needed": 1,
+  "value": 1
+}

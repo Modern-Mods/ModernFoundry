@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/casting/silver",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/silver"
+    }
+  ],
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_silver"
+  },
+  "output": "modernfoundry:silver",
+  "temperature": 790
+}

@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steel/leggings",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "modernfoundry:melting/steel/tools_costing_7"
+    }
+  ],
+  "ingredient": {
+    "tag": "modernfoundry:melting/steel/tools_costing_7"
+  },
+  "result": {
+    "amount": 630,
+    "tag": "c:molten_steel",
+    "unit_size": 10
+  },
+  "temperature": 950,
+  "time": 171
+}

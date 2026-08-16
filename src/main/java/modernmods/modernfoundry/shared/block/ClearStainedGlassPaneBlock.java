@@ -1,0 +1,22 @@
+package modernmods.modernfoundry.shared.block;
+
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
+import modernmods.modernfoundry.shared.block.ClearStainedGlassBlock.GlassColor;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
+public class ClearStainedGlassPaneBlock extends ClearGlassPaneBlock {
+
+  private final GlassColor glassColor;
+  public ClearStainedGlassPaneBlock(Properties builder, GlassColor glassColor) {
+    super(builder);
+    this.glassColor = glassColor;
+  }
+
+  @Override
+  public Integer getBeaconColorMultiplier(BlockState state, LevelReader world, BlockPos pos, BlockPos beaconPos) {
+    return this.glassColor.getColor();
+  }
+}

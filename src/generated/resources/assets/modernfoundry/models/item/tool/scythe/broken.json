@@ -1,0 +1,51 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/tool/scythe/display",
+  "textures": {
+    "head": "modernfoundry:item/tool/scythe/head_broken",
+    "handle": "modernfoundry:item/tool/scythe/handle",
+    "binding": "modernfoundry:item/tool/scythe/binding",
+    "accessory": "modernfoundry:item/tool/scythe/accessory",
+    "large_head": "modernfoundry:item/tool/scythe/large/head_broken",
+    "large_handle": "modernfoundry:item/tool/scythe/large/handle",
+    "large_binding": "modernfoundry:item/tool/scythe/large/binding",
+    "large_accessory": "modernfoundry:item/tool/scythe/large/accessory"
+  },
+  "modifier_maps": [
+    "modernfoundry:scythe_broken",
+    "modernfoundry:scythe"
+  ],
+  "modifier_roots": {
+    "small": [
+      "modernfoundry:item/tool/scythe/modifiers/broken/",
+      "modernfoundry:item/tool/scythe/modifiers/"
+    ],
+    "large": [
+      "modernfoundry:item/tool/scythe/large/modifiers/broken/",
+      "modernfoundry:item/tool/scythe/large/modifiers/"
+    ]
+  },
+  "large": true,
+  "large_offset": [
+    -2,
+    2
+  ],
+  "parts": [
+    {
+      "name": "accessory",
+      "index": 3
+    },
+    {
+      "name": "handle",
+      "index": 1
+    },
+    {
+      "name": "head",
+      "index": 0
+    },
+    {
+      "name": "binding",
+      "index": 2
+    }
+  ]
+}

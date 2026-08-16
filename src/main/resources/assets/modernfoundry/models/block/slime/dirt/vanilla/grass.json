@@ -1,0 +1,9 @@
+{
+    "render_type": "minecraft:cutout_mipped",
+    "parent": "block/grass_block",
+    "textures": {
+        "top":      "modernfoundry:block/slime/dirt/grass_top",
+        "overlay":  "modernfoundry:block/slime/dirt/grass_overlay",
+        "side":     "modernfoundry:block/slime/dirt/vanilla_grass"
+    }
+}

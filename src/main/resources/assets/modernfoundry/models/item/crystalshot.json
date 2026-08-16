@@ -1,0 +1,15 @@
+{
+  "loader": "hilt:nbt_key",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "default":    "modernfoundry:item/arrow/crystalshot_random",
+    "amethyst":   "modernfoundry:item/arrow/amethyst",
+    "earthslime": "modernfoundry:item/arrow/earthslime",
+    "enderslime": "modernfoundry:item/arrow/enderslime",
+    "ichor":      "modernfoundry:item/arrow/ichor",
+    "quartz":     "modernfoundry:item/arrow/quartz",
+    "skyslime":   "modernfoundry:item/arrow/skyslime"
+  },
+  "nbt_key": "variant",
+  "extra_textures_key": "modernfoundry:crystalshot"
+}

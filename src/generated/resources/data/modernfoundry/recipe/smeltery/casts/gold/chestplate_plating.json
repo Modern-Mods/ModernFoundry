@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casts/gold/chestplate_plating",
+  "cast": [
+    {
+      "type": "modernfoundry:material",
+      "item": "modernfoundry:chestplate_plating"
+    },
+    {
+      "item": "modernfoundry:chestplate_plating_dummy"
+    }
+  ],
+  "cast_consumed": true,
+  "cooling_time": 57,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_gold"
+  },
+  "result": "modernfoundry:chestplate_plating_cast",
+  "switch_slots": true
+}

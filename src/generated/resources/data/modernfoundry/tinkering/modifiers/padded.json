@@ -1,0 +1,32 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:knockback",
+      "formula": [
+        "$knockback",
+        2.0,
+        "$level",
+        "^",
+        "/"
+      ]
+    },
+    {
+      "type": "modernfoundry:sling_force",
+      "formula": [
+        "$value",
+        2.0,
+        "$level",
+        "^",
+        "/"
+      ],
+      "percent": false,
+      "sling": {
+        "type": "modernfoundry:tag",
+        "tag": "modernfoundry:knockback_slings"
+      }
+    }
+  ],
+  "priority": 75,
+  "tooltip_display": "always"
+}

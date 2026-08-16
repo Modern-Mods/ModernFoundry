@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "modernfoundry:fancy_item_frame",
+  "key": {
+    "M": {
+      "tag": "c:gems/diamond"
+    },
+    "e": {
+      "item": "modernfoundry:obsidian_pane"
+    }
+  },
+  "pattern": [
+    " e ",
+    "eMe",
+    " e "
+  ],
+  "result": {
+    "id": "modernfoundry:diamond_item_frame"
+  },
+  "show_notification": true
+}

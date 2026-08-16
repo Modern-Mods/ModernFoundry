@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:craft_count",
+      "multiplier": {
+        "flat": 0.5
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

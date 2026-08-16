@@ -1,0 +1,80 @@
+package modernmods.modernfoundry.smeltery.block.entity;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
+import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import net.neoforged.neoforge.items.IItemHandler;
+import modernmods.hilt.block.entity.NameableBlockEntity;
+import modernmods.modernfoundry.TConstruct;
+import modernmods.modernfoundry.smeltery.TinkerSmeltery;
+import modernmods.modernfoundry.smeltery.block.entity.inventory.HeaterItemHandler;
+import modernmods.modernfoundry.smeltery.menu.SingleItemContainerMenu;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+/** Tile entity for the heater block below the melter */
+public class HeaterBlockEntity extends NameableBlockEntity implements ILegacyCapabilityBlockEntity {
+  private static final String TAG_ITEM = "item";
+  private static final Component TITLE = TConstruct.makeTranslation("gui", "heater");
+
+  private final HeaterItemHandler itemHandler = new HeaterItemHandler(this);
+  private final LazyOptional<IItemHandler> itemCapability = LazyOptional.of(() -> itemHandler);
+
+  protected HeaterBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    super(type, pos, state, TITLE);
+  }
+
+  public HeaterBlockEntity(BlockPos pos, BlockState state) {
+    this(TinkerSmeltery.heater.get(), pos, state);
+  }
+
+  @Nullable
+  @Override
+  public AbstractContainerMenu createMenu(int id, Inventory inventory, Player playerEntity) {
+    return new SingleItemContainerMenu(id, inventory, this);
+  }
+
+
+  /* Capability */
+
+  @Nonnull
+  public <C> LazyOptional<C> getCapability(Capability<C> capability, @Nullable Direction facing) {
+    if (capability == ForgeCapabilities.ITEM_HANDLER) {
+      return itemCapability.cast();
+    }
+    return modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
+  }
+
+  public void invalidateCaps() {
+    // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent (was super.invalidateCaps();)
+    itemCapability.invalidate();
+  }
+
+
+  /* NBT */
+
+  @Override
+  public void load(CompoundTag tags) {
+    super.load(tags);
+    if (tags.contains(TAG_ITEM, Tag.TAG_COMPOUND)) {
+      itemHandler.readFromNBT(tags.getCompound(TAG_ITEM));
+    }
+  }
+
+  @Override
+  public void saveAdditional(CompoundTag tags) {
+    super.saveAdditional(tags);
+    tags.put(TAG_ITEM, itemHandler.writeToNBT());
+  }
+}

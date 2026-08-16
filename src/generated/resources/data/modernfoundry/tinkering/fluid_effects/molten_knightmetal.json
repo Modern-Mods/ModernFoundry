@@ -1,0 +1,35 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "modernfoundry:pierce",
+          "level": 2,
+          "time": 100
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:damage",
+      "damage": 3.0,
+      "damage_type": {
+        "melee": "modernfoundry:fluid_spike_melee",
+        "ranged": "modernfoundry:fluid_spike_ranged"
+      }
+    },
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "set",
+      "effect": "modernfoundry:pierce",
+      "level": 2,
+      "time": 100
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "modernfoundry:molten_knightmetal"
+  }
+}

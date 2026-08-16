@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "modernfoundry:block/wood/enderbark/sign"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:max_armor_attribute",
+      "allow_broken": false,
+      "attribute": "neoforge:swim_speed",
+      "each_level": 0.1,
+      "held_tag": "modernfoundry:modifiable/held",
+      "operation": "multiply_total"
+    },
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "each_level": 2.5,
+      "tool": {
+        "type": "hilt:or",
+        "predicates": [
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:modifiable/armor/helmets"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:modifiable/armor/chestplate"
+          }
+        ]
+      },
+      "wearing_entity": "hilt:eyes_in_water"
+    },
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "each_level": 2.5,
+      "tool": {
+        "type": "hilt:or",
+        "predicates": [
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:modifiable/armor/leggings"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:modifiable/armor/boots"
+          }
+        ]
+      },
+      "wearing_entity": "hilt:feet_in_water"
+    }
+  ],
+  "tooltip_display": "always"
+}

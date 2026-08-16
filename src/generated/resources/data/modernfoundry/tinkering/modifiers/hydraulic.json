@@ -1,0 +1,41 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "formula": [
+        "$multiplier",
+        "$bonus",
+        "*",
+        "$level",
+        "*",
+        "$speed",
+        "+"
+      ],
+      "percent": false,
+      "require_effective": true,
+      "variables": {
+        "bonus": {
+          "type": "modernfoundry:entity",
+          "condition_type": "hilt:eyes_in_water",
+          "entity_type": "modernfoundry:conditional",
+          "fallback": 8.0,
+          "if_false": {
+            "type": "modernfoundry:conditional",
+            "condition_type": "hilt:raining_at",
+            "if_false": 0.0,
+            "if_true": 4.0
+          },
+          "if_true": {
+            "type": "modernfoundry:conditional",
+            "condition_type": "hilt:has_enchantment",
+            "enchantment": "minecraft:aqua_affinity",
+            "if_false": 40.0,
+            "if_true": 8.0
+          }
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

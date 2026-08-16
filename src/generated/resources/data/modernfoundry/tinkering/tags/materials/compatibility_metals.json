@@ -1,0 +1,33 @@
+{
+  "values": [
+    {
+      "id": "modernfoundry:silver",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:lead",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:aluminum",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:osmium",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:ironwood",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:steeleaf",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:fiery",
+      "required": false
+    },
+    "#modernfoundry:compatibility_metals/blocks"
+  ]
+}

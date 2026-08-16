@@ -1,0 +1,26 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:tool_usage_mob_effect",
+      "effect": "modernfoundry:magnetic",
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 40.0
+      }
+    },
+    {
+      "type": "modernfoundry:volatile_int",
+      "each_level": 1,
+      "flag": "modernfoundry:magnet"
+    },
+    {
+      "type": "modernfoundry:armor_level",
+      "allow_broken": false,
+      "key": "modernfoundry:magnet"
+    }
+  ],
+  "tooltip_display": "always"
+}

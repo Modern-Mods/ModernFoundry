@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/metal/silver/ore_singular",
+  "byproducts": [
+    {
+      "amount": 180,
+      "rate": "metal",
+      "tag": "c:molten_gold"
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "c:ores/silver"
+    },
+    "subtracted": {
+      "tag": "modernfoundry:non_singular_ore_rates"
+    }
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 180,
+    "tag": "c:molten_silver"
+  },
+  "temperature": 790,
+  "time": 150
+}

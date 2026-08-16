@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "modernfoundry:grout"
+  },
+  "result": {
+    "id": "modernfoundry:seared_brick"
+  }
+}

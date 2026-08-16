@@ -1,0 +1,48 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        "modernfoundry:chestplate_plating",
+        "modernfoundry:maille"
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": {
+            "max": 2,
+            "min": 1
+          }
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": {
+            "max": 2,
+            "min": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:attack_damage": 0.4
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "defense": 3,
+        "upgrades": 2
+      }
+    },
+    {
+      "type": "modernfoundry:fixed_material_name",
+      "index": 0
+    }
+  ]
+}

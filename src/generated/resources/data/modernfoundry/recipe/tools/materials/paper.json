@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/paper",
+  "ingredient": {
+    "item": "minecraft:paper"
+  },
+  "material": "modernfoundry:paper",
+  "needed": 1,
+  "value": 1
+}

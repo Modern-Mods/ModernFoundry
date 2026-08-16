@@ -1,0 +1,29 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:restrict_projectile_angle"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.1,
+      "operation": "add",
+      "stat": "modernfoundry:velocity",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ranged"
+      }
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.75,
+      "operation": "add",
+      "stat": "modernfoundry:projectile_damage",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ammo"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

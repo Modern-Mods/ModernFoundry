@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:fixed_material_swapping",
+  "id": "modernfoundry:tools/armor/slime_skull/swapping/ice",
+  "index": 0,
+  "ingredient": {
+    "item": "modernfoundry:stray_head"
+  },
+  "material": "modernfoundry:ice",
+  "max_stack_size": 16,
+  "repair_value": 6,
+  "tools": {
+    "tag": "modernfoundry:modifiable/skulls/swappable"
+  }
+}

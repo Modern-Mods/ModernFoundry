@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:turtle_shell"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:shell": [
+      {
+        "level": 1,
+        "name": "modernfoundry:turtles_grace"
+      }
+    ]
+  }
+}

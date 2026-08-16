@@ -1,0 +1,40 @@
+{
+  "color": "FF649832",
+  "fallbacks": [
+    "wood",
+    "stick"
+  ],
+  "generator": {
+    "supported_stats": [
+      "modernfoundry:limb",
+      "modernfoundry:grip",
+      "modernfoundry:repair_kit",
+      "modernfoundry:arrow_shaft",
+      "modernfoundry:shield_core",
+      "modernfoundry:wood"
+    ],
+    "transformer": {
+      "type": "modernfoundry:grey_to_sprite",
+      "palette": [
+        {
+          "color": "FF000000",
+          "grey": 0
+        },
+        {
+          "color": "FF404040",
+          "grey": 63,
+          "path": "modernfoundry:generator/cactus"
+        },
+        {
+          "color": "FF808080",
+          "grey": 102,
+          "path": "modernfoundry:generator/cactus"
+        },
+        {
+          "grey": 140,
+          "path": "modernfoundry:generator/cactus"
+        }
+      ]
+    }
+  }
+}

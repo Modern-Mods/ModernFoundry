@@ -1,0 +1,27 @@
+{
+  "entity": "minecraft:drowned",
+  "equip": {
+    "chance": 0.05,
+    "fluid": "modernfoundry:swasher/drowned",
+    "match": {
+      "type": "hilt:set",
+      "items": [
+        "minecraft:air"
+      ]
+    },
+    "materials": [
+      {
+        "type": "modernfoundry:ancient"
+      },
+      {
+        "type": "modernfoundry:ancient"
+      },
+      {
+        "type": "modernfoundry:ancient"
+      }
+    ],
+    "priority": 100,
+    "slot": "mainhand",
+    "tool": "modernfoundry:swasher"
+  }
+}

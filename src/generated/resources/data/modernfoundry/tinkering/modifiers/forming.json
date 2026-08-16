@@ -1,0 +1,18 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 1.0,
+      "operation": "add",
+      "stat": "modernfoundry:armor"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.05,
+      "operation": "add",
+      "stat": "modernfoundry:knockback_resistance"
+    }
+  ],
+  "tooltip_display": "always"
+}

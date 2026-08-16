@@ -1,0 +1,92 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:material_stats",
+      "primary_part": 0,
+      "stat_types": [
+        "modernfoundry:head",
+        "modernfoundry:handle",
+        "modernfoundry:grip"
+      ]
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        },
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        },
+        {
+          "type": "modernfoundry:random",
+          "allow_hidden": true
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_traits",
+      "hooks": [
+        "modernfoundry:rebalanced_trait"
+      ],
+      "material_index": 2,
+      "stat_type": "modernfoundry:grip"
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_speed": 1.5,
+        "modernfoundry:draw_speed": 1.5
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 3
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:spitting"
+        },
+        {
+          "level": 1,
+          "name": "modernfoundry:spilling"
+        },
+        {
+          "level": 1,
+          "name": "modernfoundry:silky_shears"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "sword_dig"
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "c:mineable/sword"
+    },
+    {
+      "type": "modernfoundry:mining_speed_modifier",
+      "blocks": [
+        "minecraft:cobweb"
+      ],
+      "modifier": 7.5,
+      "predicate_type": "hilt:set"
+    },
+    {
+      "type": "modernfoundry:fixed_material_name",
+      "index": 0
+    }
+  ]
+}

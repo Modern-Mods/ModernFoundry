@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "modernfoundry:seared_cobble_slab",
+  "key": {
+    "B": {
+      "item": "modernfoundry:seared_cobble"
+    }
+  },
+  "pattern": [
+    "BBB"
+  ],
+  "result": {
+    "count": 6,
+    "id": "modernfoundry:seared_cobble_slab"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/sand/builder_block/coins",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:coins"
+    }
+  ],
+  "pattern": "modernfoundry:coin",
+  "pattern_item": {
+    "tag": "c:sand/colorless"
+  },
+  "result": {
+    "count": 4,
+    "item": "modernfoundry:coin_sand_cast"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "modernfoundry:seared_stone_stairs",
+  "key": {
+    "B": {
+      "item": "modernfoundry:seared_stone"
+    }
+  },
+  "pattern": [
+    "B  ",
+    "BB ",
+    "BBB"
+  ],
+  "result": {
+    "count": 4,
+    "id": "modernfoundry:seared_stone_stairs"
+  },
+  "show_notification": true
+}

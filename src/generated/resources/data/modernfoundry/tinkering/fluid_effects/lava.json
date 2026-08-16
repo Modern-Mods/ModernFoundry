@@ -1,0 +1,35 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:place_block",
+      "block": "minecraft:fire",
+      "sound": "minecraft:item.firecharge.use"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:conditional",
+      "effect": {
+        "type": "modernfoundry:damage",
+        "damage": 1.0,
+        "damage_type": {
+          "melee": "modernfoundry:fluid_fire_melee",
+          "ranged": "modernfoundry:fluid_fire_ranged"
+        }
+      },
+      "target": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:fire_immune"
+      }
+    },
+    {
+      "type": "modernfoundry:fire",
+      "action": "add",
+      "time": 4
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "fluid": "minecraft:lava"
+  }
+}

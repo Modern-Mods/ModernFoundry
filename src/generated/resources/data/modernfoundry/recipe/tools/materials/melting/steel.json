@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/steel",
+  "input": "modernfoundry:steel",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_steel"
+  },
+  "temperature": 950
+}

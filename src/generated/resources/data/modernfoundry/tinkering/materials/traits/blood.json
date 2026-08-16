@@ -1,0 +1,18 @@
+{
+  "perStat": {
+    "modernfoundry:slime": [
+      {
+        "level": 1,
+        "name": "modernfoundry:reverted"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:overslime"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:overslime_friend"
+      }
+    ]
+  }
+}

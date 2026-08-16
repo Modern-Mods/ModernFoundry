@@ -1,0 +1,14 @@
+{
+  "parent": "modernfoundry:block/template/pane/noside_alt",
+  "connection": {
+    "predicate": "pane",
+    "textures": {
+      "pane": "cornerless_full"
+    }
+  },
+  "loader": "hilt:connected",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "pane": "modernfoundry:block/smeltery/soul_glass"
+  }
+}

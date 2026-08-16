@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:tools/modifiers/cobalt_reinforcement",
+  "cast": {
+    "item": "modernfoundry:pattern"
+  },
+  "cast_consumed": true,
+  "cooling_time": 65,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_cobalt"
+  },
+  "result": "modernfoundry:cobalt_reinforcement"
+}

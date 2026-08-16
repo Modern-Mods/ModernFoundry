@@ -1,0 +1,125 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        "modernfoundry:broad_blade",
+        {
+          "item": "modernfoundry:tough_handle",
+          "scale": 0.5
+        },
+        "modernfoundry:tough_binding",
+        {
+          "item": "modernfoundry:tough_handle",
+          "scale": 0.5
+        }
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 1.0,
+        "modernfoundry:attack_speed": 0.7
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:durability": 2.5,
+        "modernfoundry:mining_speed": 0.45
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 2
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "modernfoundry:tilling"
+        },
+        {
+          "level": 2,
+          "name": "modernfoundry:silky_shears"
+        },
+        {
+          "level": 1,
+          "name": "modernfoundry:harvest"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "modernfoundry:mineable/scythe"
+    },
+    {
+      "type": "modernfoundry:mining_speed_modifier",
+      "modifier": 0.3,
+      "predicate_type": "hilt:tag",
+      "tag": "minecraft:wool"
+    },
+    {
+      "type": "modernfoundry:mining_speed_modifier",
+      "blocks": [
+        "minecraft:vine",
+        "minecraft:glow_lichen"
+      ],
+      "modifier": 0.1,
+      "predicate_type": "hilt:set"
+    },
+    {
+      "type": "modernfoundry:box_aoe",
+      "bonus": {
+        "depth": 2,
+        "height": 1,
+        "width": 1
+      },
+      "expansion_direction": "modernfoundry:side_hit",
+      "expansions": [
+        {
+          "height": 1,
+          "width": 1
+        },
+        {
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:circle_melee",
+      "diameter": 2.0
+    },
+    {
+      "type": "modernfoundry:fixed_material_name",
+      "index": 0
+    }
+  ]
+}

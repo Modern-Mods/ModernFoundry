@@ -1,0 +1,26 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.5,
+      "operation": "add",
+      "stat": "modernfoundry:water_inertia"
+    },
+    {
+      "type": "modernfoundry:conditional_power",
+      "each_level": 1.0,
+      "percent": false,
+      "target": "hilt:underwater"
+    },
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:efln",
+      "hooks": [
+        "modernfoundry:projectile_launch",
+        "modernfoundry:projectile_shot"
+      ]
+    }
+  ],
+  "tooltip_display": "always"
+}

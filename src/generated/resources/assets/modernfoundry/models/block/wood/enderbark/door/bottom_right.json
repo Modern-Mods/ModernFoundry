@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "render_type": "minecraft:solid",
+  "textures": {
+    "bottom": "modernfoundry:block/wood/enderbark/door_bottom",
+    "top": "modernfoundry:block/wood/enderbark/door_top"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_netherite",
+  "inputs": [
+    {
+      "amount": 40,
+      "tag": "modernfoundry:molten_debris"
+    },
+    {
+      "amount": 40,
+      "tag": "c:molten_gold"
+    }
+  ],
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_netherite"
+  },
+  "temperature": 1250
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "modernfoundry:block/smeltery/basin" },
+    "facing=south": { "model": "modernfoundry:block/smeltery/basin", "y": 180 },
+    "facing=west":  { "model": "modernfoundry:block/smeltery/basin", "y": 270 },
+    "facing=east":  { "model": "modernfoundry:block/smeltery/basin", "y":  90 }
+  }
+}

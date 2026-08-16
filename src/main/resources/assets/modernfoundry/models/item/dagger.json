@@ -1,0 +1,28 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/tool/dagger/display",
+  "textures": {
+    "head":        "modernfoundry:item/tool/dagger/blade",
+    "crossguard":  "modernfoundry:item/tool/dagger/crossguard"
+  },
+  "modifier_maps": ["modernfoundry:dagger"],
+  "modifier_roots": [ "modernfoundry:item/tool/dagger/modifiers/" ],
+  "parts": [
+    { "name": "head",       "index": 0 },
+    { "name": "crossguard", "index": 1 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:charging": 1.75 },
+      "model": "modernfoundry:item/tool/dagger/throwing"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2 },
+      "model": "modernfoundry:item/tool/dagger/blocking"
+    },
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/tool/dagger/broken"
+    }
+  ]
+}

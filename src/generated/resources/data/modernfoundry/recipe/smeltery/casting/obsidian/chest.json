@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/obsidian/chest",
+  "cast": {
+    "item": "minecraft:ender_eye"
+  },
+  "cast_consumed": true,
+  "cooling_time": 625,
+  "fluid": {
+    "amount": 8000,
+    "tag": "modernfoundry:molten_obsidian"
+  },
+  "result": "minecraft:ender_chest"
+}

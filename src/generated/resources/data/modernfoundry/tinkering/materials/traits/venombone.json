@@ -1,0 +1,32 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:antitoxin"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 1,
+        "name": "modernfoundry:venom"
+      }
+    ],
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:venom"
+      }
+    ],
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:magic_bones"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:skeleton_disguise"
+      }
+    ]
+  }
+}

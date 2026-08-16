@@ -1,0 +1,14 @@
+{
+  "loader": "hilt:nbt_key",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "default": "modernfoundry:item/slot/default",
+    "slotless": "modernfoundry:item/slot/slotless",
+    "upgrades": "modernfoundry:item/slot/upgrade",
+    "abilities": "modernfoundry:item/slot/ability",
+    "souls": "modernfoundry:item/materials/hollow_gem",
+    "defense": "modernfoundry:item/slot/defense"
+  },
+  "nbt_key": "slot",
+  "extra_textures_key": "modernfoundry:creative_slot"
+}

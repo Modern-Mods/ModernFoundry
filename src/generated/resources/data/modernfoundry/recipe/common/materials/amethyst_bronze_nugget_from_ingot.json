@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:amethyst_bronze_nugget",
+  "ingredients": [
+    {
+      "item": "modernfoundry:amethyst_bronze_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:amethyst_bronze_nugget"
+  }
+}

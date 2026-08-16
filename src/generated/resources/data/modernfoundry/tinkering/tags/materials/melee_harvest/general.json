@@ -1,0 +1,45 @@
+{
+  "values": [
+    "modernfoundry:wood",
+    "modernfoundry:string",
+    "modernfoundry:vine",
+    "modernfoundry:leather",
+    "modernfoundry:iron",
+    "modernfoundry:slimewood",
+    "modernfoundry:slimesteel",
+    "modernfoundry:pig_iron",
+    "modernfoundry:rose_gold",
+    "modernfoundry:cobalt",
+    "modernfoundry:cinderslime",
+    "modernfoundry:queens_slime",
+    "modernfoundry:enderslime_vine",
+    {
+      "id": "modernfoundry:treated_wood",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:osmium",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:ironwood",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:plated_slimewood",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:electrum",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:steeleaf",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:fiery",
+      "required": false
+    }
+  ]
+}

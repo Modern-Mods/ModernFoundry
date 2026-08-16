@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/slime/ender/sapling",
+  "ingredient": {
+    "item": "modernfoundry:ender_slime_sapling"
+  },
+  "result": {
+    "amount": 250,
+    "fluid": "modernfoundry:ender_slime"
+  },
+  "temperature": 70,
+  "time": 53
+}

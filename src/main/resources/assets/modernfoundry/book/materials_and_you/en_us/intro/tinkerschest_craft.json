@@ -1,0 +1,7 @@
+{
+  "title": "Modern Foundry's Chest Crafting",
+  "recipe": "modernfoundry:tables/tinkers_chest",
+  "description": [
+    { "text": "After crafting, you can dye the chest any color you wish." }
+  ]
+}

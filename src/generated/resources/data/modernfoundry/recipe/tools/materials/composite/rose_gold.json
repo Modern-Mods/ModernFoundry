@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/composite/rose_gold",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_rose_gold"
+  },
+  "input": "modernfoundry:string",
+  "output": "modernfoundry:rose_gold",
+  "temperature": 550
+}

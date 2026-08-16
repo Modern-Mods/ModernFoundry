@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "modernfoundry:seared_brick"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "result": {
+    "count": 5,
+    "id": "modernfoundry:seared_channel"
+  },
+  "show_notification": true
+}

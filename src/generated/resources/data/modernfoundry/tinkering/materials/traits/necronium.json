@@ -1,0 +1,26 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:decay"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 2,
+        "name": "modernfoundry:decay"
+      }
+    ],
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:decayed_bones"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:wither_skeleton_disguise"
+      }
+    ]
+  }
+}

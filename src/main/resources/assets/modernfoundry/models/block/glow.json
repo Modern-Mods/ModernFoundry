@@ -1,0 +1,6 @@
+{
+    "parent": "modernfoundry:block/flat_in",
+    "textures": {
+        "all": "modernfoundry:block/glow"
+    }
+}

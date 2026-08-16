@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/diamond/geore/cluster",
+  "byproducts": [
+    {
+      "amount": 360,
+      "fluid": "modernfoundry:molten_debris",
+      "rate": "metal"
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:geore_clusters/diamond"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:geore_clusters/diamond"
+  },
+  "rate": "gem",
+  "result": {
+    "amount": 400,
+    "fluid": "modernfoundry:molten_diamond"
+  },
+  "temperature": 1450,
+  "time": 197
+}

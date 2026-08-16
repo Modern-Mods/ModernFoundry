@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/knightmetal/raw",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:raw_materials/knightmetal"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:raw_materials/knightmetal"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "modernfoundry:molten_knightmetal"
+  },
+  "temperature": 1300,
+  "time": 75
+}

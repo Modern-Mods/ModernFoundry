@@ -1,0 +1,4 @@
+package modernmods.modernfoundry.compat.neoforged.neoforge.capabilities;
+
+/** Compatibility shim for old Forge capability declarations. */
+public class CapabilityToken<T> {}

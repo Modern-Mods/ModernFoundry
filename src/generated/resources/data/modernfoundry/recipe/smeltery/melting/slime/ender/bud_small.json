@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/slime/ender/bud_small",
+  "ingredient": {
+    "item": "modernfoundry:small_ender_slime_crystal_bud"
+  },
+  "rate": "gem",
+  "result": {
+    "amount": 250,
+    "fluid": "modernfoundry:ender_slime"
+  },
+  "temperature": 70,
+  "time": 32
+}

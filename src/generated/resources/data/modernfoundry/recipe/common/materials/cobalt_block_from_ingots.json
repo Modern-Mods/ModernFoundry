@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "modernfoundry:cobalt_block",
+  "key": {
+    "#": {
+      "tag": "c:ingots/cobalt"
+    },
+    "*": {
+      "item": "modernfoundry:cobalt_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "result": {
+    "id": "modernfoundry:cobalt_block"
+  },
+  "show_notification": true
+}

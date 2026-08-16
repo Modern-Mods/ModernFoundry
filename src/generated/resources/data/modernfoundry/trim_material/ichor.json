@@ -1,0 +1,14 @@
+{
+  "asset_name": "modernfoundry_ichor",
+  "description": {
+    "color": "#FF970D",
+    "translate": "trim_material.modernfoundry.format",
+    "with": [
+      {
+        "translate": "material.modernfoundry.ichor"
+      }
+    ]
+  },
+  "ingredient": "modernfoundry:ichor_slime_crystal",
+  "item_model_index": 0.5
+}

@@ -1,0 +1,21 @@
+{
+  "modifiers": {
+    "modernfoundry:dyed": {
+      "type": "modernfoundry:material_has_fallback",
+      "fallback": "metal",
+      "if_false": {
+        "type": "modernfoundry:dyed",
+        "texture": "modernfoundry:item/tool/armor/plate/chestplate/maille"
+      },
+      "if_true": {
+        "type": "modernfoundry:dyed",
+        "texture": "modernfoundry:item/tool/armor/plate/chestplate/maille_metal"
+      },
+      "index": 1
+    },
+    "modernfoundry:trim": {
+      "type": "modernfoundry:armor_trim",
+      "slot": "chestplate"
+    }
+  }
+}

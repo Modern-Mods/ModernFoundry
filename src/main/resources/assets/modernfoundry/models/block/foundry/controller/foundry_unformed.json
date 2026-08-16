@@ -1,0 +1,8 @@
+{
+  "parent": "modernfoundry:block/template/controller",
+  "textures": {
+    "front": "modernfoundry:block/foundry/controller/foundry_unformed",
+    "bricks": "modernfoundry:block/foundry/scorched/bricks",
+    "back": "modernfoundry:block/foundry/io/back"
+  }
+}

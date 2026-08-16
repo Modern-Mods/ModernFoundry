@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "modernfoundry:block/wood/bloodshroom/log_top",
+    "side": "modernfoundry:block/wood/bloodshroom/log"
+  }
+}

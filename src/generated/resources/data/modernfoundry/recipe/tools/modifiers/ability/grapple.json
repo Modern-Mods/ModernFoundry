@@ -1,0 +1,25 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/grapple",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "item": "minecraft:chain"
+    },
+    {
+      "item": "minecraft:chain"
+    },
+    {
+      "tag": "c:ingots/slimesteel"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:grapple",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/fishing_rods"
+  }
+}

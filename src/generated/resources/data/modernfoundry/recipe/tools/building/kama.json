@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/kama",
+  "result": "modernfoundry:kama",
+  "result_count": 1
+}

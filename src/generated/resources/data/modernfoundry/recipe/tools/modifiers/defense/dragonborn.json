@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:incremental_modifier",
+  "id": "modernfoundry:tools/modifiers/defense/dragonborn",
+  "allow_crystal": true,
+  "amount_per_item": 1,
+  "input": {
+    "item": "modernfoundry:dragon_scale"
+  },
+  "needed_per_level": 5,
+  "result": "modernfoundry:dragonborn",
+  "slots": {
+    "defense": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor"
+  }
+}

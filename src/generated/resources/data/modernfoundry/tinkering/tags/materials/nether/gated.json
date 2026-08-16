@@ -1,0 +1,25 @@
+{
+  "values": [
+    "modernfoundry:twisting_vine",
+    "modernfoundry:weeping_vine",
+    "modernfoundry:scorched_stone",
+    "modernfoundry:necrotic_bone",
+    "modernfoundry:cobalt",
+    "modernfoundry:manyullyn",
+    "modernfoundry:hepatizon",
+    "modernfoundry:cinderslime",
+    "modernfoundry:queens_slime",
+    "modernfoundry:blazing_bone",
+    "modernfoundry:blazewood",
+    "modernfoundry:jeweled_hide",
+    "modernfoundry:glowstone",
+    "modernfoundry:ichor",
+    "modernfoundry:quartz",
+    "modernfoundry:blaze",
+    "modernfoundry:magma",
+    {
+      "id": "modernfoundry:necronium",
+      "required": false
+    }
+  ]
+}

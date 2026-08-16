@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:item/base/geode/medium_bud",
+  "textures": {
+    "layer0": "modernfoundry:block/geode/ender/medium_bud"
+  }
+}

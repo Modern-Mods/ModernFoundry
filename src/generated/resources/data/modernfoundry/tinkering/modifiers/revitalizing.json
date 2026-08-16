@@ -1,0 +1,40 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.max_health",
+      "each_level": 2.0,
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "boost"
+    },
+    {
+      "type": "modernfoundry:update_health",
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ]
+    },
+    {
+      "type": "modernfoundry:update_health",
+      "bonus": {
+        "each_level": 2.0
+      },
+      "slots": [
+        "mainhand",
+        "offhand"
+      ]
+    }
+  ],
+  "tooltip_display": "always"
+}

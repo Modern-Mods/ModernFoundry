@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.1,
+      "operation": "add",
+      "stat": "modernfoundry:knockback_resistance"
+    }
+  ],
+  "tooltip_display": "always"
+}

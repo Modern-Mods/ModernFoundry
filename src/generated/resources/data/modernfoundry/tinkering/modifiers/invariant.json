@@ -1,0 +1,90 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_melee_damage",
+      "formula": [
+        "$temperature",
+        0.75,
+        "-",
+        "abs",
+        1.25,
+        "!-",
+        "$level",
+        "*",
+        1.28,
+        "*",
+        "$multiplier",
+        "*",
+        "$damage",
+        "+"
+      ],
+      "percent": false,
+      "variables": {
+        "temperature": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:biome_temperature",
+          "fallback": 0.75,
+          "which": "attacker"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:conditional_stat",
+      "formula": [
+        "$temperature",
+        0.75,
+        "-",
+        "abs",
+        1.25,
+        "!-",
+        "$level",
+        "*",
+        0.120000005,
+        "*",
+        "$multiplier",
+        "*",
+        "$value",
+        "+"
+      ],
+      "percent": false,
+      "stat": "modernfoundry:accuracy",
+      "variables": {
+        "temperature": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:biome_temperature",
+          "fallback": 0.75
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "formula": [
+        "$temperature",
+        0.75,
+        "-",
+        "abs",
+        1.25,
+        "!-",
+        "$level",
+        "*",
+        "$protection",
+        "+"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      },
+      "variables": {
+        "temperature": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:biome_temperature",
+          "fallback": 0.75,
+          "which": "target"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

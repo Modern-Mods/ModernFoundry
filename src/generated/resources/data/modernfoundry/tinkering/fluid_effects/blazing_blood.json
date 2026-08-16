@@ -1,0 +1,41 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:place_block",
+      "block": "modernfoundry:glow"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:conditional",
+      "effect": {
+        "type": "modernfoundry:damage",
+        "damage": 2.0,
+        "damage_type": {
+          "melee": "modernfoundry:fluid_fire_melee",
+          "ranged": "modernfoundry:fluid_fire_ranged"
+        }
+      },
+      "target": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:fire_immune"
+      }
+    },
+    {
+      "type": "modernfoundry:fire",
+      "action": "add",
+      "time": 2
+    },
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "add",
+      "effect": "minecraft:glowing",
+      "level": 1,
+      "time": 100
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "modernfoundry:blazing_blood"
+  }
+}

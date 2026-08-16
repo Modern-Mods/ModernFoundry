@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/copper/block",
+  "ingredient": [
+    {
+      "tag": "c:storage_blocks/copper"
+    },
+    {
+      "item": "minecraft:waxed_copper_block"
+    }
+  ],
+  "leftover": {
+    "count": 1,
+    "tag": "c:ingots/copper"
+  },
+  "material": "modernfoundry:copper",
+  "needed": 1,
+  "value": 9
+}

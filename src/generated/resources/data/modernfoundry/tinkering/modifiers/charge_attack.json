@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_melee_damage",
+      "attacker": "hilt:sprinting",
+      "flat": 7.0,
+      "percent": false
+    }
+  ],
+  "tooltip_display": "always"
+}

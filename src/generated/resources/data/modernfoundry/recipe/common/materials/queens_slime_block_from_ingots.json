@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "modernfoundry:queens_slime_block",
+  "key": {
+    "#": {
+      "tag": "c:ingots/queens_slime"
+    },
+    "*": {
+      "item": "modernfoundry:queens_slime_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "result": {
+    "id": "modernfoundry:queens_slime_block"
+  },
+  "show_notification": true
+}

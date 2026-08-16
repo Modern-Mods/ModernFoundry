@@ -1,0 +1,9 @@
+{
+  "parent": "modernfoundry:block/template/ladder_base",
+  "textures": {
+    "particle": "modernfoundry:block/foundry/scorched/ladder",
+    "top":      "modernfoundry:block/foundry/scorched/road",
+    "side":     "modernfoundry:block/foundry/scorched/ladder",
+    "bottom":   "modernfoundry:block/foundry/scorched/ladder"
+  }
+}

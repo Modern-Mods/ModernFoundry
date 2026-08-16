@@ -1,0 +1,33 @@
+{
+  "level_display": "modernfoundry:pluses",
+  "modules": [
+    {
+      "type": "modernfoundry:trait",
+      "fixed_level": true,
+      "level": 1,
+      "name": "modernfoundry:tank_handler"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 1000.0,
+      "operation": "add",
+      "stat": "modernfoundry:tank_capacity"
+    },
+    {
+      "type": "modernfoundry:melting",
+      "nuggets_per_metal": {
+        "each_level": 3,
+        "flat": 9
+      },
+      "shards_per_gem": {
+        "each_level": 2,
+        "flat": 6
+      },
+      "temperature": {
+        "each_level": 500,
+        "flat": 500
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

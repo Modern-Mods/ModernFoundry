@@ -1,0 +1,33 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:max_armor_attribute",
+      "allow_broken": false,
+      "attribute": "modernfoundry:player.use_item_speed",
+      "each_level": 0.05,
+      "held_tag": "modernfoundry:modifiable/held",
+      "operation": "addition",
+      "tooltip_style": "percent"
+    },
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": {
+        "type": "hilt:and",
+        "predicates": [
+          "hilt:can_protect",
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:protection/melee"
+          },
+          {
+            "type": "hilt:inverted",
+            "inverted_type": "hilt:is_indirect"
+          }
+        ]
+      },
+      "each_level": 2.0
+    }
+  ],
+  "tooltip_display": "always"
+}

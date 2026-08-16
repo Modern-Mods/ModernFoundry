@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/brass/gear",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/brass"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:gears/brass"
+  },
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_brass"
+  },
+  "temperature": 605,
+  "time": 107
+}

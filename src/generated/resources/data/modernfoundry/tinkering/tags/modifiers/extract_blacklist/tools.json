@@ -1,0 +1,10 @@
+{
+  "values": [
+    "modernfoundry:embellishment",
+    "modernfoundry:dyed",
+    "modernfoundry:trim",
+    "modernfoundry:rebalanced",
+    "modernfoundry:overslime",
+    "#modernfoundry:remove_blacklist"
+  ]
+}

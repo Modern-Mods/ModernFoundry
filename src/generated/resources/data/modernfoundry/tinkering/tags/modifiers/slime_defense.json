@@ -1,0 +1,9 @@
+{
+  "values": [
+    "modernfoundry:melee_protection",
+    "modernfoundry:projectile_protection",
+    "modernfoundry:fire_protection",
+    "modernfoundry:magic_protection",
+    "modernfoundry:blast_protection"
+  ]
+}

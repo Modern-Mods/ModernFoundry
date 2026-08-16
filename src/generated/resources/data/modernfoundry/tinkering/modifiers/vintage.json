@@ -1,0 +1,69 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:modifier_slot",
+      "each_level": 1,
+      "name": "abilities"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": -0.1,
+      "operation": "multiply_all",
+      "stat": "modernfoundry:mining_speed"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": -0.1,
+      "operation": "multiply_all",
+      "stat": "modernfoundry:attack_speed"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": -0.1,
+      "operation": "multiply_all",
+      "stat": "modernfoundry:draw_speed"
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.attack_speed",
+      "each_level": -0.1,
+      "operation": "multiply_total",
+      "slots": [
+        "offhand"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor/held"
+      }
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.movement_speed",
+      "each_level": -0.1,
+      "operation": "multiply_total",
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ]
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:generic.gravity",
+      "each_level": 0.1,
+      "operation": "multiply_total",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
+    }
+  ],
+  "tooltip_display": "always"
+}

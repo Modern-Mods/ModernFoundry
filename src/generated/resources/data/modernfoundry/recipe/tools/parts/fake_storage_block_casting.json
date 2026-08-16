@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:basin_casting_material",
+  "id": "modernfoundry:tools/parts/fake_storage_block_casting",
+  "item_cost": 9,
+  "result": "modernfoundry:fake_storage_block"
+}

@@ -1,0 +1,27 @@
+{
+  "constant": {
+    "smashing": {
+      "type": "modernfoundry:trait",
+      "model": {
+        "type": "modernfoundry:fluid",
+        "mask": "modernfoundry:item/tool/ammo/arrow_modifiers/smashing",
+        "tank_helper": "modernfoundry:smashing"
+      },
+      "modifier": "modernfoundry:smashing"
+    },
+    "tipped": {
+      "type": "modernfoundry:trait",
+      "model": {
+        "type": "modernfoundry:potion",
+        "texture": "modernfoundry:item/tool/ammo/arrow_modifiers/tipped"
+      },
+      "modifier": "modernfoundry:tipped"
+    }
+  },
+  "modifiers": {
+    "modernfoundry:dyed": {
+      "type": "modernfoundry:dyed",
+      "texture": "modernfoundry:item/tool/ammo/arrow_modifiers/dyed"
+    }
+  }
+}

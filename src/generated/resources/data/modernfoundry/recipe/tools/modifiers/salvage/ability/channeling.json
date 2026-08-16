@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/channeling",
+  "modifier": "modernfoundry:channeling",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/melee/weapon"
+    },
+    {
+      "tag": "modernfoundry:modifiable/fishing_rods"
+    }
+  ]
+}

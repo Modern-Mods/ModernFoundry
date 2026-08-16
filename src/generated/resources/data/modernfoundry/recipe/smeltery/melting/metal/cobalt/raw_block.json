@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/metal/cobalt/raw_block",
+  "byproducts": [
+    {
+      "amount": 225,
+      "fluid": "modernfoundry:molten_diamond",
+      "rate": "gem"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:storage_blocks/raw_cobalt"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 810,
+    "tag": "c:molten_cobalt"
+  },
+  "temperature": 950,
+  "time": 389
+}

@@ -1,0 +1,8 @@
+{
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/sand_cast_pickup",
+  "material": {
+    "tag": "modernfoundry:casts/sand"
+  },
+  "result": "modernfoundry:blank_sand_cast"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/metal/knightmetal/block",
+  "cooling_time": 225,
+  "fluid": {
+    "amount": 810,
+    "tag": "modernfoundry:molten_knightmetal"
+  },
+  "result": {
+    "tag": "c:storage_blocks/knightmetal"
+  }
+}

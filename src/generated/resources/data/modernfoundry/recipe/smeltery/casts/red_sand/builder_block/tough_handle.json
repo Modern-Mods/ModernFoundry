@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/red_sand/builder_block/tough_handle",
+  "pattern": "modernfoundry:tough_handle",
+  "pattern_item": {
+    "tag": "c:sand/red"
+  },
+  "result": {
+    "count": 4,
+    "item": "modernfoundry:tough_handle_red_sand_cast"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "input": "hilt:any",
+  "recipe_type": [
+    "minecraft:smelting",
+    "minecraft:blasting"
+  ],
+  "result": {
+    "type": "hilt:and",
+    "predicates": [
+      {
+        "type": "hilt:tag",
+        "tag": "c:ingots"
+      },
+      {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:set",
+        "items": [
+          "minecraft:brick",
+          "modernfoundry:seared_brick",
+          "modernfoundry:scorched_brick"
+        ]
+      },
+      "modernfoundry:castable"
+    ]
+  }
+}

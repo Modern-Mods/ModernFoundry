@@ -1,0 +1,12 @@
+{
+  "values": [
+    "modernfoundry:melting_pan",
+    "modernfoundry:war_pick",
+    "modernfoundry:battlesign",
+    "modernfoundry:swasher",
+    {
+      "id": "modernfoundry:minotaur_axe",
+      "required": false
+    }
+  ]
+}

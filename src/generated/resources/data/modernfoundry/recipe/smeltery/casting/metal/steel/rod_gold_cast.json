@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/steel/rod_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/rod"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:rods/steel"
+    }
+  ],
+  "cooling_time": 46,
+  "fluid": {
+    "amount": 45,
+    "tag": "c:molten_steel"
+  },
+  "result": {
+    "tag": "c:rods/steel"
+  }
+}

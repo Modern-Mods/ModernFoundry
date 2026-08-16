@@ -1,0 +1,7 @@
+{
+  "parent": "modernfoundry:block/template/tank_knob",
+  "textures": {
+    "top":  "modernfoundry:block/smeltery/tank/tank_top",
+    "side": "modernfoundry:block/smeltery/tank/fuel_tank"
+  }
+}

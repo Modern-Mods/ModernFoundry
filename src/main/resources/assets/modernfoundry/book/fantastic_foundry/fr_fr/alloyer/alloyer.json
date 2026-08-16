@@ -1,0 +1,12 @@
+{
+  "title": "Alliage",
+  "image": {
+    "file": "modernfoundry:book/images/alloyer.png"
+  },
+  "text": [
+    {
+      "text": "Alliage à venir!",
+      "paragraph": true
+    }
+	]
+}

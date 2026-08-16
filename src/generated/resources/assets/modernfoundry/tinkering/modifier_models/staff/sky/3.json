@@ -1,0 +1,9 @@
+{
+  "modifiers": {
+    "modernfoundry:dyed": {
+      "type": "modernfoundry:dyed",
+      "texture": "modernfoundry:item/tool/staff/modifiers/sky/dyed_3",
+      "texture_large": "modernfoundry:item/tool/staff/large_modifiers/sky/dyed_3"
+    }
+  }
+}

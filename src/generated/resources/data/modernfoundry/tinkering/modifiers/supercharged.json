@@ -1,0 +1,22 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.1,
+      "operation": "add",
+      "stat": "modernfoundry:velocity"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.1,
+      "operation": "add",
+      "stat": "modernfoundry:velocity",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ammo/thrown"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

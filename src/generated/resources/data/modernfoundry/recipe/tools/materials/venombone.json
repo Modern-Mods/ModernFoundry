@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/venombone",
+  "ingredient": {
+    "item": "modernfoundry:venombone"
+  },
+  "material": "modernfoundry:venombone",
+  "needed": 1,
+  "value": 1
+}

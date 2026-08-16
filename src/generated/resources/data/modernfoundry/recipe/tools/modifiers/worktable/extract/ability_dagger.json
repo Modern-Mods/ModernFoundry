@@ -1,0 +1,34 @@
+{
+  "type": "modernfoundry:extract_modifier",
+  "id": "modernfoundry:tools/modifiers/worktable/extract/ability_dagger",
+  "inputs": [
+    {
+      "item": "modernfoundry:ichor_slime_crystal"
+    },
+    {
+      "item": "minecraft:wet_sponge"
+    }
+  ],
+  "leftovers": [
+    "minecraft:sponge"
+  ],
+  "modifier_predicate": {
+    "type": "hilt:and",
+    "predicates": [
+      {
+        "type": "hilt:inverted",
+        "inverted_type": "modernfoundry:tag",
+        "tag": "modernfoundry:extract_blacklist/tools"
+      },
+      {
+        "type": "modernfoundry:slot_type",
+        "slot": "abilities"
+      }
+    ]
+  },
+  "name": "abilities",
+  "tools": {
+    "amount_needed": 2,
+    "item": "modernfoundry:dagger"
+  }
+}

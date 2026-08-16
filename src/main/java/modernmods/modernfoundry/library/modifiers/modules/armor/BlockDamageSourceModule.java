@@ -1,0 +1,85 @@
+package modernmods.modernfoundry.library.modifiers.modules.armor;
+
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.TooltipFlag;
+import org.jetbrains.annotations.ApiStatus.Internal;
+import modernmods.hilt.client.TooltipKey;
+import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.hilt.data.predicate.damage.DamageSourcePredicate;
+import modernmods.modernfoundry.library.modifiers.Modifier;
+import modernmods.modernfoundry.library.modifiers.ModifierEntry;
+import modernmods.modernfoundry.library.modifiers.ModifierHooks;
+import modernmods.modernfoundry.library.modifiers.hook.armor.DamageBlockModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.display.TooltipModifierHook;
+import modernmods.modernfoundry.library.modifiers.modules.ModifierModule;
+import modernmods.modernfoundry.library.modifiers.modules.util.ModifierCondition;
+import modernmods.modernfoundry.library.modifiers.modules.util.ModifierCondition.ConditionalModule;
+import modernmods.modernfoundry.library.modifiers.modules.util.ModuleBuilder;
+import modernmods.modernfoundry.library.module.ModuleHook;
+import modernmods.modernfoundry.library.tools.context.EquipmentContext;
+import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
+import modernmods.modernfoundry.library.utils.Util;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+/**
+ * Module to block damage of the passed sources
+ * @param source  Predicate of sources to block
+ */
+public record BlockDamageSourceModule(IJsonPredicate<DamageSource> source, ModifierCondition<IToolStackView> condition) implements DamageBlockModifierHook, TooltipModifierHook, ModifierModule, ConditionalModule<IToolStackView> {
+  private static final List<ModuleHook<?>> DEFAULT_HOOKS = List.of(ModifierHooks.DAMAGE_BLOCK, ModifierHooks.TOOLTIP);
+  public static final RecordLoadable<BlockDamageSourceModule> LOADER = RecordLoadable.create(
+    DamageSourcePredicate.LOADER.defaultField("damage_source", BlockDamageSourceModule::source),
+    ModifierCondition.TOOL_FIELD,
+    BlockDamageSourceModule::new);
+
+  /** @apiNote Internal constructor, use {@link #source(IJsonPredicate)} */
+  @Internal
+  public BlockDamageSourceModule {}
+
+  @Override
+  public List<ModuleHook<?>> getDefaultHooks() {
+    return DEFAULT_HOOKS;
+  }
+
+  @Override
+  public boolean isDamageBlocked(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount) {
+    return condition.matches(tool, modifier) && this.source.matches(source);
+  }
+
+  @Override
+  public void addTooltip(IToolStackView tool, ModifierEntry entry, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
+    if (condition.matches(tool, entry)) {
+      Modifier modifier = entry.getModifier();
+      tooltip.add(modifier.applyStyle(Component.literal(Util.PERCENT_BOOST_FORMAT.format(1)).append(" ").append(Component.translatable(modifier.getTranslationKey() + ".resistance"))));
+    }
+  }
+
+  @Override
+  public RecordLoadable<BlockDamageSourceModule> getLoader() {
+    return LOADER;
+  }
+  
+
+  /* Builder */
+
+  public static Builder source(IJsonPredicate<DamageSource> source) {
+    return new Builder(source);
+  }
+
+  @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+  public static class Builder extends ModuleBuilder.Stack<Builder> {
+    private final IJsonPredicate<DamageSource> source;
+
+    public BlockDamageSourceModule build() {
+      return new BlockDamageSourceModule(source, condition);
+    }
+  }
+}

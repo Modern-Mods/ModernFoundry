@@ -1,0 +1,39 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:weapon_looting",
+      "level": 1,
+      "tool": {
+        "type": "hilt:or",
+        "predicates": [
+          {
+            "type": "hilt:set",
+            "items": [
+              "minecraft:air"
+            ]
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:modifiable/melee"
+          }
+        ]
+      }
+    },
+    {
+      "type": "modernfoundry:armor_looting",
+      "level": 1,
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor/worn"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

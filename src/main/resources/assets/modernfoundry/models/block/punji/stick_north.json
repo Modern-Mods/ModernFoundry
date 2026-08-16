@@ -1,0 +1,4 @@
+{
+  "parent": "modernfoundry:block/punji/stick",
+  "transform": { "translation": [ 0, 0, -0.5 ] }
+}

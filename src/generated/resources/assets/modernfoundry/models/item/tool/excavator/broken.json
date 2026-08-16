@@ -1,0 +1,51 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/tall",
+  "textures": {
+    "head": "modernfoundry:item/tool/excavator/head_broken",
+    "handle": "modernfoundry:item/tool/excavator/handle",
+    "grip": "modernfoundry:item/tool/excavator/grip",
+    "binding": "modernfoundry:item/tool/excavator/binding",
+    "large_head": "modernfoundry:item/tool/excavator/large/head_broken",
+    "large_handle": "modernfoundry:item/tool/excavator/large/handle",
+    "large_grip": "modernfoundry:item/tool/excavator/large/grip",
+    "large_binding": "modernfoundry:item/tool/excavator/large/binding"
+  },
+  "modifier_maps": [
+    "modernfoundry:excavator_broken",
+    "modernfoundry:excavator"
+  ],
+  "modifier_roots": {
+    "small": [
+      "modernfoundry:item/tool/excavator/modifiers/broken/",
+      "modernfoundry:item/tool/excavator/modifiers/"
+    ],
+    "large": [
+      "modernfoundry:item/tool/excavator/large/modifiers/broken/",
+      "modernfoundry:item/tool/excavator/large/modifiers/"
+    ]
+  },
+  "large": true,
+  "large_offset": [
+    -2,
+    2
+  ],
+  "parts": [
+    {
+      "name": "handle",
+      "index": 1
+    },
+    {
+      "name": "head",
+      "index": 0
+    },
+    {
+      "name": "grip",
+      "index": 3
+    },
+    {
+      "name": "binding",
+      "index": 2
+    }
+  ]
+}

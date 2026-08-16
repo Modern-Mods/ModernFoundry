@@ -1,0 +1,8 @@
+{
+    "parent": "modernfoundry:block/frame/base",
+    "textures": {
+        "particle": "modernfoundry:block/storage/manyullyn",
+        "wood": "modernfoundry:block/storage/manyullyn",
+        "back": "modernfoundry:block/item_frame_background"
+    }
+}

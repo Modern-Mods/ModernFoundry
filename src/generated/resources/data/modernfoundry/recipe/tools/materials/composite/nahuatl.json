@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/composite/nahuatl",
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:molten_obsidian"
+  },
+  "input": "modernfoundry:wood",
+  "output": "modernfoundry:nahuatl",
+  "temperature": 1000
+}

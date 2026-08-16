@@ -1,0 +1,26 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "plating": "modernfoundry:item/tool/armor/plate/leggings/plating_broken",
+    "maille": "modernfoundry:item/tool/armor/plate/leggings/maille_broken"
+  },
+  "modifier_maps": [
+    "modernfoundry:plate/leggings_broken",
+    "modernfoundry:plate/leggings"
+  ],
+  "first_modifiers": [
+    "modernfoundry:dyed",
+    "modernfoundry:trim"
+  ],
+  "parts": [
+    {
+      "name": "plating",
+      "index": 0
+    },
+    {
+      "name": "maille",
+      "index": 1
+    }
+  ]
+}

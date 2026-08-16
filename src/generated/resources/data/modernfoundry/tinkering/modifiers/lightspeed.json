@@ -1,0 +1,42 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "formula": [
+        3.0,
+        "$light",
+        5.0,
+        "-",
+        5.0,
+        "/",
+        "^",
+        "$level",
+        "*",
+        "$multiplier",
+        "*",
+        "$speed",
+        "+"
+      ],
+      "percent": false,
+      "require_effective": true,
+      "variables": {
+        "light": {
+          "type": "modernfoundry:block_light",
+          "fallback": 15.0,
+          "light_layer": "block"
+        }
+      }
+    },
+    {
+      "type": "modernfoundry:lightspeed_attribute",
+      "attribute": "minecraft:generic.movement_speed",
+      "damage_chance": 0.005,
+      "light_layer": "block",
+      "min_light": 5,
+      "operation": "addition",
+      "per_level": 9.0E-4
+    }
+  ],
+  "tooltip_display": "always"
+}

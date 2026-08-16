@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casts/gold/large_plate",
+  "cast": {
+    "type": "modernfoundry:material",
+    "item": "modernfoundry:large_plate"
+  },
+  "cast_consumed": true,
+  "cooling_time": 57,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_gold"
+  },
+  "result": "modernfoundry:large_plate_cast",
+  "switch_slots": true
+}

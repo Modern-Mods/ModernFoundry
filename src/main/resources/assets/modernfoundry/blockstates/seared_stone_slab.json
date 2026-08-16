@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "modernfoundry:block/smeltery/slab/stone/slab" },
+        "type=top": { "model": "modernfoundry:block/smeltery/slab/stone/slab_top" },
+        "type=double": { "model": "modernfoundry:block/smeltery/seared/stone" }
+    }
+}

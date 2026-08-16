@@ -1,0 +1,26 @@
+{
+  "level_display": "modernfoundry:pluses",
+  "modules": [
+    {
+      "type": "modernfoundry:inventory",
+      "pattern": "modernfoundry:tool_belt",
+      "slots": {
+        "each_level": 1,
+        "flat": 3
+      }
+    },
+    {
+      "type": "modernfoundry:tool_belt",
+      "on_key": [
+        "normal",
+        "control"
+      ]
+    },
+    {
+      "type": "modernfoundry:inventory_menu",
+      "on_key": "shift"
+    }
+  ],
+  "priority": 85,
+  "tooltip_display": "always"
+}

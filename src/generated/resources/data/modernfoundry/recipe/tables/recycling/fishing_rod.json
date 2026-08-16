@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tables/recycling/fishing_rod",
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:bowstring": {
+      "count": 2,
+      "item": "minecraft:string"
+    },
+    "modernfoundry:rod": {
+      "count": 3,
+      "item": "minecraft:stick"
+    }
+  },
+  "tool": {
+    "item": "minecraft:fishing_rod"
+  }
+}

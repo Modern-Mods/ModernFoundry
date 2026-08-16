@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "modernfoundry:scorched_brick"
+    },
+    "C": {
+      "item": "modernfoundry:obsidian_pane"
+    },
+    "G": {
+      "tag": "c:gems/quartz"
+    }
+  },
+  "pattern": [
+    "#G#",
+    "CGC",
+    "#G#"
+  ],
+  "result": {
+    "id": "modernfoundry:scorched_proxy_tank"
+  },
+  "show_notification": true
+}

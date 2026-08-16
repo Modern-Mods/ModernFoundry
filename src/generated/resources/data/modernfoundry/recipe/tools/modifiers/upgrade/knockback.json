@@ -1,0 +1,28 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/upgrade/knockback",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:piston"
+    },
+    {
+      "item": "minecraft:slime_block"
+    }
+  ],
+  "level": {
+    "max": 3
+  },
+  "result": "modernfoundry:knockback",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": [
+    {
+      "tag": "modernfoundry:modifiable/melee"
+    },
+    {
+      "tag": "modernfoundry:modifiable/armor/chestplate"
+    }
+  ]
+}

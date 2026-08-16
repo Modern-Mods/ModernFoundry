@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "snowy=false": {
+            "model": "modernfoundry:block/slime/dirt/ichor/grass"
+        },
+        "snowy=true": {
+            "model": "modernfoundry:block/slime/dirt/ichor/snowy_grass"
+        }
+    }
+}

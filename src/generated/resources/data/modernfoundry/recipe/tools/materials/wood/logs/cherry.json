@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/wood/logs/cherry",
+  "ingredient": {
+    "tag": "minecraft:cherry_logs"
+  },
+  "leftover": "minecraft:cherry_planks",
+  "material": "modernfoundry:wood",
+  "needed": 1,
+  "value": 4
+}

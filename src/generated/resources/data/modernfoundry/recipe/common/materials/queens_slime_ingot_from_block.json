@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:queens_slime_ingot",
+  "ingredients": [
+    {
+      "item": "modernfoundry:queens_slime_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:queens_slime_ingot"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:part_builder_tool_recycling",
+  "id": "modernfoundry:tools/recycling/battlesign",
+  "parts": [
+    "modernfoundry:large_plate",
+    "modernfoundry:repair_kit"
+  ],
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "tools": {
+    "item": "modernfoundry:battlesign"
+  }
+}

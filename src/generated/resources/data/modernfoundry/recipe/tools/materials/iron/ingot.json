@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/iron/ingot",
+  "ingredient": {
+    "tag": "c:ingots/iron"
+  },
+  "material": "modernfoundry:iron",
+  "needed": 1,
+  "value": 1
+}

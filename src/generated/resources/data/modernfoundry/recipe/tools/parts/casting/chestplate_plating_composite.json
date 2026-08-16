@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:table_casting_composite",
+  "id": "modernfoundry:tools/parts/casting/chestplate_plating_composite",
+  "item_cost": 6,
+  "result": "modernfoundry:chestplate_plating"
+}

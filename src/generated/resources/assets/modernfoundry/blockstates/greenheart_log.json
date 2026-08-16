@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "modernfoundry:block/wood/greenheart/log/log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "modernfoundry:block/wood/greenheart/log/log"
+    },
+    "axis=z": {
+      "model": "modernfoundry:block/wood/greenheart/log/log_horizontal",
+      "x": 90
+    }
+  }
+}

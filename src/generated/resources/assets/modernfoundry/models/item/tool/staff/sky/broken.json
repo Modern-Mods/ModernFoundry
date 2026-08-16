@@ -1,0 +1,33 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff",
+  "textures": {
+    "tool": "modernfoundry:item/tool/staff/sky_broken",
+    "large_tool": "modernfoundry:item/tool/staff/sky_large_broken"
+  },
+  "large": true,
+  "modifier_maps": [
+    "modernfoundry:staff/sky/broken",
+    "modernfoundry:staff/sky",
+    "modernfoundry:staff/broken",
+    "modernfoundry:staff"
+  ],
+  "modifier_roots": {
+    "small": [
+      "modernfoundry:item/tool/staff/modifiers/sky/broken/",
+      "modernfoundry:item/tool/staff/modifiers/sky/",
+      "modernfoundry:item/tool/staff/modifiers/broken/",
+      "modernfoundry:item/tool/staff/modifiers/"
+    ],
+    "large": [
+      "modernfoundry:item/tool/staff/large_modifiers/sky/broken/",
+      "modernfoundry:item/tool/staff/large_modifiers/sky/",
+      "modernfoundry:item/tool/staff/large_modifiers/broken/",
+      "modernfoundry:item/tool/staff/large_modifiers/"
+    ]
+  },
+  "first_modifiers": [
+    "modernfoundry:dyed",
+    "modernfoundry:embellishment"
+  ]
+}

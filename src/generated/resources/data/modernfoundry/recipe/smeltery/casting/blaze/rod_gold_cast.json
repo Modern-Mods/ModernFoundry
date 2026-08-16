@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/blaze/rod_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/rod"
+  },
+  "cooling_time": 85,
+  "fluid": {
+    "amount": 100,
+    "tag": "modernfoundry:blazing_blood"
+  },
+  "result": "minecraft:blaze_rod"
+}

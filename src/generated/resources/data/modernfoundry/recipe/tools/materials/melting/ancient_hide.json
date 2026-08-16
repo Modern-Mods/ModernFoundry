@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/ancient_hide",
+  "input": "modernfoundry:ancient_hide",
+  "result": {
+    "amount": 90,
+    "fluid": "modernfoundry:molten_debris"
+  },
+  "temperature": 1175
+}

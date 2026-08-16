@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=west":  { "model": "modernfoundry:block/end_fluid_cannon/front", "y": 270 },
+    "facing=south": { "model": "modernfoundry:block/end_fluid_cannon/front", "y": 180 },
+    "facing=north": { "model": "modernfoundry:block/end_fluid_cannon/front" },
+    "facing=east":  { "model": "modernfoundry:block/end_fluid_cannon/front", "y":  90 },
+    "facing=up":    { "model": "modernfoundry:block/end_fluid_cannon/up"   },
+    "facing=down":  { "model": "modernfoundry:block/end_fluid_cannon/down" }
+  }
+}

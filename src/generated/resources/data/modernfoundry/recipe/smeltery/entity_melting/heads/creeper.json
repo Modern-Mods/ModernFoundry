@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/entity_melting/heads/creeper",
+  "ingredient": {
+    "item": "minecraft:creeper_head"
+  },
+  "result": {
+    "amount": 250,
+    "fluid": "modernfoundry:molten_glass"
+  },
+  "temperature": 750,
+  "time": 98
+}

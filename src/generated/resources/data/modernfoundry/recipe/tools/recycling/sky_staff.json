@@ -1,0 +1,24 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tools/recycling/sky_staff",
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:block": {
+      "count": 2,
+      "item": "modernfoundry:skyroot_log"
+    },
+    "modernfoundry:crystal": {
+      "count": 2,
+      "item": "modernfoundry:sky_slime_crystal"
+    },
+    "modernfoundry:ingot": {
+      "count": 1,
+      "tag": "c:ingots/rose_gold"
+    }
+  },
+  "tool": {
+    "item": "modernfoundry:sky_staff"
+  }
+}

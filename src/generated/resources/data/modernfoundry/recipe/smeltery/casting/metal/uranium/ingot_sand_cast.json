@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/uranium/ingot_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/uranium"
+    }
+  ],
+  "cooling_time": 61,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_uranium"
+  },
+  "result": {
+    "tag": "c:ingots/uranium"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:quiver_inventory",
+      "pattern": "modernfoundry:arrow",
+      "slots": {
+        "each_level": 2
+      }
+    },
+    {
+      "type": "modernfoundry:bulk_quiver",
+      "check_standard_arrows": true
+    },
+    {
+      "type": "modernfoundry:inventory_menu",
+      "on_key": "any"
+    }
+  ],
+  "priority": 60,
+  "tooltip_display": "always"
+}

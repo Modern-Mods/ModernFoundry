@@ -1,0 +1,10 @@
+{
+  "values": [
+    "modernfoundry:pathing",
+    "modernfoundry:stripping",
+    "modernfoundry:tilling",
+    "modernfoundry:brushing",
+    "modernfoundry:splashing",
+    "modernfoundry:harvest"
+  ]
+}

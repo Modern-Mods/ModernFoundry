@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/entity_melting/heads/enderman",
+  "ingredient": {
+    "item": "modernfoundry:enderman_head"
+  },
+  "result": {
+    "amount": 500,
+    "tag": "c:ender"
+  },
+  "temperature": 477,
+  "time": 116
+}

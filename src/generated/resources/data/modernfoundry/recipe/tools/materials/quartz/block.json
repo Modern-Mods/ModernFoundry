@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/quartz/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/quartz"
+  },
+  "material": "modernfoundry:quartz",
+  "needed": 1,
+  "value": 4
+}

@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:basin_tool_casting",
+  "id": "modernfoundry:tools/armor/slimelytra",
+  "cast": {
+    "item": "minecraft:elytra"
+  },
+  "cast_purpose": "consumed",
+  "item_cost": 8,
+  "result": "modernfoundry:slime_wings"
+}

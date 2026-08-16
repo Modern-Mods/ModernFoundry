@@ -1,0 +1,9 @@
+{
+  "stats": {
+    "modernfoundry:arrow_head": {},
+    "modernfoundry:slime": {
+      "durability": 75,
+      "overslime_capacity": 150
+    }
+  }
+}

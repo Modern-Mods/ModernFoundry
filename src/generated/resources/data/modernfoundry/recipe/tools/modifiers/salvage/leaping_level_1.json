@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/leaping_level_1",
+  "level": 1,
+  "modifier": "modernfoundry:leaping",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/leggings"
+  }
+}

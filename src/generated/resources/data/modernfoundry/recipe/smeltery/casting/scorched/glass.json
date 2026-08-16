@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/scorched/glass",
+  "cast": {
+    "item": "modernfoundry:scorched_bricks"
+  },
+  "cast_consumed": true,
+  "cooling_time": 58,
+  "fluid": {
+    "amount": 100,
+    "tag": "modernfoundry:molten_quartz"
+  },
+  "result": "modernfoundry:scorched_glass"
+}

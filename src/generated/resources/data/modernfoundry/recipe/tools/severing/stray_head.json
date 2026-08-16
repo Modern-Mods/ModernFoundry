@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:severing",
+  "id": "modernfoundry:tools/severing/stray_head",
+  "entity": {
+    "type": "minecraft:stray"
+  },
+  "looting_bonus": 0.01,
+  "per_level_chance": 0.05,
+  "result": "modernfoundry:stray_head"
+}

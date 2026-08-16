@@ -1,0 +1,41 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        "modernfoundry:arrow_head",
+        "modernfoundry:arrow_head"
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random"
+        },
+        {
+          "type": "modernfoundry:random"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:projectile_damage": 1.5,
+        "modernfoundry:velocity": 1.5,
+        "modernfoundry:water_inertia": 0.8
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:projectile_damage": 2.0
+      }
+    },
+    {
+      "type": "modernfoundry:material_name",
+      "filter": "all"
+    }
+  ]
+}

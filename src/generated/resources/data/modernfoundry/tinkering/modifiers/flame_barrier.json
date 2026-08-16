@@ -1,0 +1,10 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:flame_barrier",
+      "each_level": 1.875
+    }
+  ],
+  "tooltip_display": "always"
+}

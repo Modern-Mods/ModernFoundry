@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:block/end_fluid_cannon/base",
+  "textures": {
+    "top": "modernfoundry:block/end_fluid_cannon/top_nozzle"
+  }
+}

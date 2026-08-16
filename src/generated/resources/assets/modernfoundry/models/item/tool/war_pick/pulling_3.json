@@ -1,0 +1,40 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/tool/war_pick/display",
+  "textures": {
+    "limb": "modernfoundry:item/tool/war_pick/limb",
+    "body": "modernfoundry:item/tool/war_pick/body",
+    "bowstring": "modernfoundry:item/tool/war_pick/bowstring_3"
+  },
+  "modifier_maps": [
+    "modernfoundry:war_pick/3",
+    "modernfoundry:war_pick"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/war_pick/modifiers/3/",
+    "modernfoundry:item/tool/war_pick/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "body",
+      "index": 1
+    },
+    {
+      "name": "bowstring",
+      "index": 2
+    },
+    {
+      "name": "limb",
+      "index": 0
+    }
+  ],
+  "ammo": {
+    "key": "modernfoundry:crossbow_ammo",
+    "flip": false,
+    "left": true,
+    "offset": [
+      1.0,
+      -1.0
+    ]
+  }
+}

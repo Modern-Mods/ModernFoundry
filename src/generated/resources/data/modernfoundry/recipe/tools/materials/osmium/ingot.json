@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/osmium/ingot",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/osmium"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/osmium"
+  },
+  "material": "modernfoundry:osmium",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,26 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "entity": {
+        "type": "hilt:inverted",
+        "inverted_type": "hilt:on_ground"
+      },
+      "flat": 4.0,
+      "hooks": [
+        "modernfoundry:break_speed"
+      ],
+      "percent": true,
+      "require_effective": false
+    },
+    {
+      "type": "modernfoundry:conditional_stat",
+      "entity": "modernfoundry:airborne",
+      "flat": 0.1,
+      "percent": false,
+      "stat": "modernfoundry:velocity"
+    }
+  ],
+  "tooltip_display": "always"
+}

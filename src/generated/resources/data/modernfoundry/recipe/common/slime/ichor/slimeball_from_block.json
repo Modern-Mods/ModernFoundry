@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:slime_balls",
+  "ingredients": [
+    {
+      "item": "modernfoundry:ichor_slime"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:ichor_slime_ball"
+  }
+}

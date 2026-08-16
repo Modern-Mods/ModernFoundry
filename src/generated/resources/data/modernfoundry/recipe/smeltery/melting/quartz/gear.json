@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/quartz/gear",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/quartz"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:gears/quartz"
+  },
+  "result": {
+    "amount": 400,
+    "fluid": "modernfoundry:molten_quartz"
+  },
+  "temperature": 637,
+  "time": 110
+}

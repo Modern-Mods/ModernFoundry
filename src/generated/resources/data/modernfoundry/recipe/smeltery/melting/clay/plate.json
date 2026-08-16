@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/clay/plate",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/brick"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:plates/brick"
+  },
+  "result": {
+    "amount": 250,
+    "fluid": "modernfoundry:molten_clay"
+  },
+  "temperature": 450,
+  "time": 48
+}

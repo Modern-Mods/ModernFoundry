@@ -1,0 +1,25 @@
+{
+  "values": [
+    "modernfoundry:pick_head",
+    "modernfoundry:hammer_head",
+    "modernfoundry:small_axe_head",
+    "modernfoundry:broad_axe_head",
+    "modernfoundry:small_blade",
+    "modernfoundry:broad_blade",
+    "modernfoundry:adze_head",
+    "modernfoundry:large_plate",
+    "modernfoundry:tool_binding",
+    "modernfoundry:tough_binding",
+    "modernfoundry:tool_handle",
+    "modernfoundry:tough_handle",
+    "modernfoundry:bow_limb",
+    "modernfoundry:bow_grip",
+    "modernfoundry:bowstring",
+    "modernfoundry:maille",
+    "modernfoundry:shield_core",
+    "modernfoundry:helmet_plating",
+    "modernfoundry:chestplate_plating",
+    "modernfoundry:leggings_plating",
+    "modernfoundry:boots_plating"
+  ]
+}

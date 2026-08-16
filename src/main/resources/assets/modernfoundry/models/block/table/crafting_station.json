@@ -1,0 +1,13 @@
+{
+  "loader": "hilt:retextured",
+  "parent": "modernfoundry:block/table/table",
+  "textures": {
+    "particle": "modernfoundry:block/table/crafting_station_top",
+    "top": "modernfoundry:block/table/crafting_station_top",
+    "side": "modernfoundry:block/table/crafting_station_side",
+    "leg": "modernfoundry:block/table/crafting_station_side",
+    "bottom": "modernfoundry:block/table/bottom",
+    "legBottom": "modernfoundry:block/table/bottom"
+  },
+  "retextured": [ "leg", "legBottom" ]
+}

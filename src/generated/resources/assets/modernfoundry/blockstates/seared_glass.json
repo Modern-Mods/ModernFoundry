@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "modernfoundry:block/smeltery/glass/block"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/red_sand/molding/ingots",
+  "material": {
+    "tag": "modernfoundry:casts/red_sand"
+  },
+  "pattern": [
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "c:ingots"
+      },
+      "subtracted": {
+        "item": "modernfoundry:fake_ingot"
+      }
+    },
+    {
+      "type": "modernfoundry:material",
+      "item": "modernfoundry:fake_ingot"
+    }
+  ],
+  "result": "modernfoundry:ingot_red_sand_cast"
+}

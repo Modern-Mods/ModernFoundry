@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/metal/cobalt/block",
+  "cooling_time": 194,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_cobalt"
+  },
+  "result": {
+    "tag": "c:storage_blocks/cobalt"
+  }
+}

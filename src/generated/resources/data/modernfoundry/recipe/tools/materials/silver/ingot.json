@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/silver/ingot",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/silver"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/silver"
+  },
+  "material": "modernfoundry:silver",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/gilded",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:gilded_blackstone"
+    }
+  ],
+  "result": "modernfoundry:gilded",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/bonus_slots"
+  }
+}

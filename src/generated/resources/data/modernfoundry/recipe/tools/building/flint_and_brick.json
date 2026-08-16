@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:flint"
+    },
+    [
+      {
+        "item": "modernfoundry:seared_brick"
+      },
+      {
+        "item": "modernfoundry:scorched_brick"
+      }
+    ]
+  ],
+  "result": {
+    "id": "modernfoundry:flint_and_brick"
+  }
+}

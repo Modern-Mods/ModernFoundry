@@ -1,0 +1,29 @@
+package modernmods.modernfoundry.library.json.variable.stat;
+
+import net.minecraft.world.entity.LivingEntity;
+import net.neoforged.neoforge.common.conditions.ICondition;
+import modernmods.hilt.data.loadable.mapping.ConditionalLoadable.ConditionalObject;
+import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
+import modernmods.modernfoundry.library.utils.Util;
+
+import javax.annotation.Nullable;
+
+/**
+ * Datagen helper for making conditional {@link ConditionalStatVariable}.
+ * @param ifTrue      Variable to use if all conditions are true.
+ * @param ifFalse     Variable to use if any condition is false.
+ * @param conditions  Conditions to evaluate.
+ */
+@SuppressWarnings("unused") // API
+public record LoadConditionStatVariable(ConditionalStatVariable ifTrue, ConditionalStatVariable ifFalse, ICondition... conditions) implements ConditionalStatVariable, ConditionalObject<ConditionalStatVariable> {
+  @Override
+  public float getValue(IToolStackView tool, @Nullable LivingEntity entity) {
+    return (Util.testConditions(conditions) ? ifTrue : ifFalse).getValue(tool, entity);
+  }
+
+  @Override
+  public RecordLoadable<? extends ConditionalStatVariable> getLoader() {
+    return ConditionalStatVariable.LOADER.getConditionalLoader();
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "condition": {
+    "type": "neoforge:or",
+    "values": [
+      {
+        "type": "modernfoundry:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "hilt:tag_filled",
+        "tag": "c:ingots/electrum"
+      },
+      {
+        "type": "neoforge:and",
+        "values": [
+          {
+            "type": "modernfoundry:config",
+            "prop": "allow_ingotless_alloys"
+          },
+          {
+            "type": "hilt:tag_filled",
+            "tag": "c:ingots/silver"
+          }
+        ]
+      }
+    ]
+  },
+  "craftable": false,
+  "hidden": false,
+  "sortOrder": 5,
+  "tier": 3
+}

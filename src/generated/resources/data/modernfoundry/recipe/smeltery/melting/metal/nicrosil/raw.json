@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/metal/nicrosil/raw",
+  "ingredient": {
+    "tag": "c:raw_materials/nicrosil"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_nicrosil"
+  },
+  "temperature": 1100,
+  "time": 104
+}

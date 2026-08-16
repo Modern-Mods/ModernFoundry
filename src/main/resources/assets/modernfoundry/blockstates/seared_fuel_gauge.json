@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "modernfoundry:block/smeltery/tank/fuel_gauge"}
+    }
+}

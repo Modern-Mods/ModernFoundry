@@ -1,0 +1,9 @@
+{
+  "values": [
+    "modernfoundry:seared_stone",
+    "modernfoundry:seared_cracked_bricks",
+    "modernfoundry:seared_cobble",
+    "modernfoundry:seared_paver",
+    "#modernfoundry:seared_bricks"
+  ]
+}

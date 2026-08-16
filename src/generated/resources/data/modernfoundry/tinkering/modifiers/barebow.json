@@ -1,0 +1,10 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:skip_inventory_ammo"
+    }
+  ],
+  "tooltip_display": "always"
+}

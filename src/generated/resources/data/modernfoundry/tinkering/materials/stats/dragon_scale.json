@@ -1,0 +1,12 @@
+{
+  "stats": {
+    "modernfoundry:arrow_head": {},
+    "modernfoundry:maille": {},
+    "modernfoundry:shell": {
+      "repair_amount": 100
+    },
+    "modernfoundry:skull": {
+      "durability": 120
+    }
+  }
+}

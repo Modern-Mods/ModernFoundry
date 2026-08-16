@@ -1,0 +1,17 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:mob_effect",
+      "effect": "minecraft:slowness",
+      "level": {
+        "per_level": 0.5
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

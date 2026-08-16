@@ -1,0 +1,28 @@
+{
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 1,
+        "name": "modernfoundry:amorphous"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:smashing_ammo"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:spilling_rod"
+      }
+    ],
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:self_destructive"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:creeper_disguise"
+      }
+    ]
+  }
+}

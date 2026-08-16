@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:slimesteel_nugget",
+  "ingredients": [
+    {
+      "item": "modernfoundry:slimesteel_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "modernfoundry:slimesteel_nugget"
+  }
+}

@@ -1,0 +1,98 @@
+package modernmods.modernfoundry.library.json;
+
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.stats.StatType;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import modernmods.modernfoundry.compat.neoforged.neoforge.common.TierSortingRegistry;
+import modernmods.hilt.client.TooltipKey;
+import modernmods.hilt.data.loadable.Loadable;
+import modernmods.hilt.data.loadable.Loadables;
+import modernmods.hilt.data.loadable.common.RegistryLoadable;
+import modernmods.hilt.data.loadable.primitive.EnumLoadable;
+import modernmods.hilt.data.loadable.primitive.StringLoadable;
+import modernmods.modernfoundry.library.materials.definition.IMaterial;
+import modernmods.modernfoundry.library.materials.definition.MaterialManager;
+import modernmods.modernfoundry.library.modifiers.Modifier;
+import modernmods.modernfoundry.library.modifiers.ModifierManager;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.InteractionSource;
+import modernmods.modernfoundry.library.recipe.melting.IMeltingContainer.OreRateType;
+import modernmods.modernfoundry.library.tools.item.IModifiable;
+import modernmods.modernfoundry.library.tools.part.IMaterialItem;
+import modernmods.modernfoundry.library.tools.part.IToolPart;
+
+import java.util.Set;
+
+@SuppressWarnings("deprecation")
+public class TinkerLoadables {
+  /* Enums */
+  private static final StringLoadable<Operation> OPERATION_ENUM = new EnumLoadable<>(Operation.class);
+  public static final StringLoadable<Operation> OPERATION = StringLoadable.DEFAULT.xmap((name, error) -> switch (name) {
+    case "addition" -> Operation.ADD_VALUE;
+    case "multiply_base" -> Operation.ADD_MULTIPLIED_BASE;
+    case "multiply_total" -> Operation.ADD_MULTIPLIED_TOTAL;
+    default -> OPERATION_ENUM.parseString(name, "operation");
+  }, (operation, error) -> OPERATION_ENUM.getString(operation));
+  public static final StringLoadable<EquipmentSlot> EQUIPMENT_SLOT = new EnumLoadable<>(EquipmentSlot.class);
+  public static final Loadable<Set<EquipmentSlot>> EQUIPMENT_SLOT_SET = EQUIPMENT_SLOT.set();
+  public static final StringLoadable<ArmorItem.Type> ARMOR_SLOT = new EnumLoadable<>(ArmorItem.Type.class);
+  public static final StringLoadable<LightLayer> LIGHT_LAYER = new EnumLoadable<>(LightLayer.class);
+  public static final StringLoadable<InteractionSource> INTERACTION_SOURCE = new EnumLoadable<>(InteractionSource.class);
+  public static final StringLoadable<OreRateType> ORE_RATE_TYPE = new EnumLoadable<>(OreRateType.class);
+  public static final StringLoadable<TooltipKey> TOOLTIP_KEY = new EnumLoadable<>(TooltipKey.class);
+
+  /* Registries */
+  public static final StringLoadable<StatType<?>> STAT_TYPE = new RegistryLoadable<>(BuiltInRegistries.STAT_TYPE);
+  public static final StringLoadable<ResourceLocation> CUSTOM_STAT = new RegistryLoadable<>(BuiltInRegistries.CUSTOM_STAT);
+  public static final StringLoadable<RecipeType<?>> RECIPE_TYPE = new RegistryLoadable<>(BuiltInRegistries.RECIPE_TYPE);
+
+  /* Tag keys */
+  public static final StringLoadable<TagKey<Modifier>> MODIFIER_TAGS = Loadables.tagKey(ModifierManager.REGISTRY_KEY);
+  public static final StringLoadable<TagKey<IMaterial>> MATERIAL_TAGS = Loadables.tagKey(MaterialManager.REGISTRY_KEY);
+
+  /* Mapped items */
+  public static final StringLoadable<IMaterialItem> MATERIAL_ITEM = instance(Loadables.ITEM, IMaterialItem.class, "Expected item to be instance of IMaterialItem");
+  public static final StringLoadable<IModifiable> MODIFIABLE_ITEM = instance(Loadables.ITEM, IModifiable.class, "Expected item to be instance of IModifiable");
+  public static final StringLoadable<IToolPart> TOOL_PART_ITEM = instance(Loadables.ITEM, IToolPart.class, "Expected item to be instance of IToolPart");
+  public static final StringLoadable<SimpleParticleType> SIMPLE_PARTICLE = instance(Loadables.PARTICLE_TYPE, SimpleParticleType.class, "Expected particle type to be instance of SimpleParticleType");
+  public static final StringLoadable<BlockItem> BLOCK_ITEM = instance(Loadables.ITEM, BlockItem.class, "Expected item to be instance of BlockItem");
+
+  /** Tier loadable from the forge tier sorting registry */
+  public static final StringLoadable<Tier> TIER = Loadables.RESOURCE_LOCATION.xmap((id, error) -> {
+    Tier tier = TierSortingRegistry.byName(id);
+    if (tier != null) {
+      return tier;
+    }
+    throw error.create("Unknown harvest tier " + id);
+  }, (tier, error) -> {
+    ResourceLocation id = TierSortingRegistry.getName(tier);
+    if (id != null) {
+      return id;
+    }
+    throw error.create("Attempt to serialize unregistered tier " + tier);
+  });
+
+  /* Loot tables */
+  /** Loadable for a loot entry instance */
+  public static final Loadable<LootPoolEntryContainer> LOOT_ENTRY = Loadables.LOOT_ENTRY;
+
+  /** Loadble requiring the argument to be an instance of the passed class */
+  @SuppressWarnings("unchecked")  // The type works when deserializing, so it works when serializing
+  public static <B, T> StringLoadable<T> instance(StringLoadable<B> loadable, Class<T> typeClass, String errorMsg) {
+    return loadable.comapFlatMap((base, error) -> {
+      if (typeClass.isInstance(base)) {
+        return typeClass.cast(base);
+      }
+      throw error.create(errorMsg);
+    }, t -> (B)t);
+  }
+}

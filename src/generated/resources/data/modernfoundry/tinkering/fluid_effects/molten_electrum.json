@@ -1,0 +1,54 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "minecraft:haste",
+          "level": 1,
+          "time": 160
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "type": "neoforge:or",
+      "values": [
+        {
+          "type": "modernfoundry:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/electrum"
+        },
+        {
+          "type": "hilt:tag_filled",
+          "tag": "c:ingots/silver"
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:damage",
+      "damage": 3.0,
+      "damage_type": {
+        "melee": "modernfoundry:fluid_magic_melee",
+        "ranged": "modernfoundry:fluid_magic_ranged"
+      }
+    },
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "set",
+      "effect": "minecraft:haste",
+      "level": 1,
+      "time": 160
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_electrum"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/sand/molding/helmet_plating",
+  "material": {
+    "tag": "modernfoundry:casts/sand"
+  },
+  "pattern": [
+    {
+      "type": "modernfoundry:material",
+      "item": "modernfoundry:helmet_plating"
+    },
+    {
+      "item": "modernfoundry:helmet_plating_dummy"
+    }
+  ],
+  "result": "modernfoundry:helmet_plating_sand_cast"
+}

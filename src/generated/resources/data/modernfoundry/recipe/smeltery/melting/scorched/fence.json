@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/scorched/fence",
+  "ingredient": {
+    "item": "modernfoundry:scorched_bricks_fence"
+  },
+  "result": {
+    "amount": 750,
+    "fluid": "modernfoundry:scorched_stone"
+  },
+  "temperature": 500,
+  "time": 50
+}

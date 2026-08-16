@@ -1,0 +1,53 @@
+{
+  "type": "modernfoundry:crafting_shaped_materials",
+  "id": "modernfoundry:tools/armor/travelers/pants",
+  "category": "equipment",
+  "extra_materials": [
+    "modernfoundry:leather"
+  ],
+  "key": {
+    "c": [
+      {
+        "type": "modernfoundry:material_value",
+        "material": {
+          "type": "hilt:and",
+          "predicates": [
+            {
+              "type": "hilt:or",
+              "predicates": [
+                "modernfoundry:castable",
+                "modernfoundry:composite"
+              ]
+            },
+            {
+              "type": "modernfoundry:stat_type",
+              "stat_type": "modernfoundry:plating_leggings"
+            }
+          ]
+        },
+        "value": 1
+      },
+      {
+        "type": "modernfoundry:material",
+        "item": "modernfoundry:fake_ingot",
+        "material": {
+          "type": "modernfoundry:stat_type",
+          "stat_type": "modernfoundry:plating_leggings"
+        }
+      }
+    ],
+    "l": {
+      "tag": "c:leather"
+    }
+  },
+  "parts": "c",
+  "pattern": [
+    "lll",
+    "c c",
+    "l l"
+  ],
+  "result": {
+    "item": "modernfoundry:travelers_leggings"
+  },
+  "show_notification": true
+}

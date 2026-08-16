@@ -1,0 +1,9 @@
+{
+  "parent": "modernfoundry:block/template/half_tank",
+  "textures": {
+    "top":    "modernfoundry:block/smeltery/tank/gauge_top",
+    "side":   "modernfoundry:block/smeltery/controller/melter_side",
+    "bottom": "modernfoundry:block/smeltery/seared/bricks",
+    "inside": "modernfoundry:block/smeltery/seared/bricks"
+  }
+}

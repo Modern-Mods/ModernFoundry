@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/plate",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/invar"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:plates/invar"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_invar"
+  },
+  "temperature": 900,
+  "time": 63
+}

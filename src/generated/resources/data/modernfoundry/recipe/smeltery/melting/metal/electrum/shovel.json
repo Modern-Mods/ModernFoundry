@@ -1,0 +1,20 @@
+{
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/shovel",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "modernfoundry:melting/electrum/tools_costing_1"
+    }
+  ],
+  "ingredient": {
+    "tag": "modernfoundry:melting/electrum/tools_costing_1"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_electrum",
+    "unit_size": 10
+  },
+  "temperature": 760,
+  "time": 59
+}

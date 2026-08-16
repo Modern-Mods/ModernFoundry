@@ -1,0 +1,42 @@
+{
+  "type": "modernfoundry:swappable_modifier",
+  "id": "modernfoundry:tools/modifiers/slotless/rebalanced_defense",
+  "allow_crystal": false,
+  "inputs": [
+    {
+      "tag": "c:nuggets/cobalt"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "tag": "c:nuggets/cobalt"
+    },
+    {
+      "item": "modernfoundry:earth_slime_crystal_block"
+    },
+    {
+      "item": "modernfoundry:earth_slime_crystal_block"
+    }
+  ],
+  "result": {
+    "name": "modernfoundry:rebalanced",
+    "value": "defense"
+  },
+  "tools": {
+    "type": "neoforge:intersection",
+    "children": [
+      [
+        {
+          "tag": "modernfoundry:modifiable/armor"
+        },
+        {
+          "tag": "modernfoundry:modifiable/held"
+        }
+      ],
+      {
+        "tag": "modernfoundry:modifiable/bonus_slots"
+      }
+    ]
+  }
+}

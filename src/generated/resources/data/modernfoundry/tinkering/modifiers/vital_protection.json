@@ -1,0 +1,32 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "formula": [
+        11.0,
+        "$health",
+        "-",
+        10.0,
+        "/",
+        "percent_clamp",
+        "$level",
+        "*",
+        2.5,
+        "*",
+        "$protection",
+        "+"
+      ],
+      "variables": {
+        "health": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:health",
+          "fallback": 0.0,
+          "which": "target"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

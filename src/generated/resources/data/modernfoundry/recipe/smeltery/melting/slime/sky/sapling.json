@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/slime/sky/sapling",
+  "ingredient": {
+    "item": "modernfoundry:sky_slime_sapling"
+  },
+  "result": {
+    "amount": 250,
+    "fluid": "modernfoundry:sky_slime"
+  },
+  "temperature": 10,
+  "time": 48
+}

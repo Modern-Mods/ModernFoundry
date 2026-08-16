@@ -1,0 +1,11 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:constant_enchantment",
+      "level": 1,
+      "name": "minecraft:swift_sneak"
+    }
+  ],
+  "tooltip_display": "always"
+}

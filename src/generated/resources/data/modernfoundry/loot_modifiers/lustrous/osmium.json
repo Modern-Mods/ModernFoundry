@@ -1,0 +1,52 @@
+{
+  "type": "hilt:add_entry",
+  "conditions": [
+    {
+      "condition": "hilt:block_tag",
+      "tag": "c:ores/osmium"
+    },
+    {
+      "condition": "hilt:tag_filled",
+      "tag": "c:nuggets/osmium"
+    },
+    {
+      "condition": "modernfoundry:has_modifier",
+      "modifier": "modernfoundry:lustrous"
+    }
+  ],
+  "entry": {
+    "type": "hilt:tag_preference",
+    "tag": "c:nuggets/osmium"
+  },
+  "functions": [
+    {
+      "add": false,
+      "count": {
+        "type": "minecraft:uniform",
+        "max": 4,
+        "min": 2
+      },
+      "function": "minecraft:set_count"
+    },
+    {
+      "formula": "minecraft:ore_drops",
+      "function": "modernfoundry:modifier_bonus",
+      "include_base": false,
+      "modifier": "modernfoundry:lustrous"
+    },
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
+  "post_conditions": [
+    {
+      "type": "hilt:inverted",
+      "condition": {
+        "type": "hilt:contains_item",
+        "ingredient": {
+          "tag": "c:ores/osmium"
+        }
+      }
+    }
+  ]
+}

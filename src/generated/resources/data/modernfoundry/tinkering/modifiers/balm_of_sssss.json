@@ -1,0 +1,21 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "modernfoundry:generic.bad_effect_duration_multiplier",
+      "each_level": 0.2,
+      "operation": "multiply_base",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
+    }
+  ],
+  "tooltip_display": "always"
+}

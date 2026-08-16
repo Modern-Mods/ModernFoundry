@@ -1,0 +1,14 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:volatile_flag",
+      "flag": "modernfoundry:shiny"
+    },
+    {
+      "type": "modernfoundry:rarity",
+      "rarity": "epic"
+    }
+  ],
+  "tooltip_display": "always"
+}

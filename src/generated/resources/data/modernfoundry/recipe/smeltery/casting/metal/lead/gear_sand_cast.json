@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/lead/gear_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:gears/lead"
+    }
+  ],
+  "cooling_time": 87,
+  "fluid": {
+    "amount": 360,
+    "tag": "c:molten_lead"
+  },
+  "result": {
+    "tag": "c:gears/lead"
+  }
+}

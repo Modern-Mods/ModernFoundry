@@ -1,0 +1,31 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/rod",
+  "textures": {
+    "rod": "modernfoundry:item/tool/fishing_rod/rod",
+    "string": "modernfoundry:item/tool/fishing_rod/string_cast",
+    "hook": "modernfoundry:item/tool/fishing_rod/hook_cast"
+  },
+  "modifier_maps": [
+    "modernfoundry:fishing_rod/cast",
+    "modernfoundry:fishing_rod"
+  ],
+  "modifier_roots": [
+    "modernfoundry:item/tool/fishing_rod/modifiers/cast/",
+    "modernfoundry:item/tool/fishing_rod/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "rod",
+      "index": 0
+    },
+    {
+      "name": "string",
+      "index": 1
+    },
+    {
+      "name": "hook",
+      "index": 2
+    }
+  ]
+}

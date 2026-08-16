@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "map=false": { "model": "modernfoundry:block/manyullyn_frame" },
+        "map=true": { "model": "modernfoundry:block/manyullyn_frame_map" }
+    }
+}

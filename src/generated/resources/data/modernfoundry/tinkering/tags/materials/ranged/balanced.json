@@ -1,0 +1,43 @@
+{
+  "values": [
+    "modernfoundry:wood",
+    "modernfoundry:chorus",
+    "modernfoundry:string",
+    "modernfoundry:vine",
+    "modernfoundry:leather",
+    "modernfoundry:slimewood",
+    "modernfoundry:necrotic_bone",
+    "modernfoundry:skyslime_vine",
+    "modernfoundry:slimesteel",
+    "modernfoundry:darkthread",
+    "modernfoundry:cobalt",
+    "modernfoundry:pig_iron",
+    "modernfoundry:blazing_bone",
+    "modernfoundry:jeweled_hide",
+    "modernfoundry:enderslime_vine",
+    {
+      "id": "modernfoundry:treated_wood",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:silver",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:ironwood",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:invar",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:pewter",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:steeleaf",
+      "required": false
+    }
+  ]
+}

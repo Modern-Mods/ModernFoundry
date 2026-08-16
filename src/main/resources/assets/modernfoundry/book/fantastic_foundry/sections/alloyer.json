@@ -1,0 +1,41 @@
+[
+  {
+    "name": "alloyer",
+    "type": "hilt:image_text",
+    "data": "alloyer/alloyer.json"
+  },
+  {
+    "name": "alloy",
+    "type": "hilt:text",
+    "data": "alloyer/features.json"
+  },
+  {
+    "name": "alloyergui1",
+    "type": "hilt:image_text",
+    "data": "alloyer/gui1.json"
+  },
+  {
+    "name": "alloyergui2",
+    "type": "hilt:text",
+    "data": "alloyer/gui2.json"
+  },
+  {
+    "name": "casting",
+    "type": "hilt:image_text",
+    "data": "alloyer/casting.json"
+  },
+  {
+    "name": "proxy_tank",
+    "type": "hilt:showcase",
+    "data": "alloyer/proxy_tank.json"
+  },
+  {
+    "name": "fluid_cannon",
+    "type": "hilt:showcase",
+    "data": "alloyer/fluid_cannon.json"
+  },
+  {
+    "type": "hilt:blank",
+    "data": "no-load"
+  }
+]

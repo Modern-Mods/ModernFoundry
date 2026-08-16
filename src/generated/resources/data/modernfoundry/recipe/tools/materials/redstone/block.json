@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/redstone/block",
+  "ingredient": {
+    "tag": "c:storage_blocks/redstone"
+  },
+  "leftover": {
+    "count": 4,
+    "item": "minecraft:redstone"
+  },
+  "material": "modernfoundry:redstone",
+  "needed": 4,
+  "value": 9
+}

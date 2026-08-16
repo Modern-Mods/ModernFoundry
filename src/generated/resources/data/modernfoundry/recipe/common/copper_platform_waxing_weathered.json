@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "modernfoundry:wax_copper_platform",
+  "ingredients": [
+    {
+      "item": "modernfoundry:weathered_copper_platform"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "id": "modernfoundry:waxed_weathered_copper_platform"
+  }
+}

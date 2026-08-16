@@ -1,0 +1,31 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:place_block",
+      "block": "minecraft:snow"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:conditional",
+      "effect": {
+        "type": "modernfoundry:damage",
+        "damage": 2.0,
+        "damage_type": {
+          "melee": "modernfoundry:fluid_cold_melee",
+          "ranged": "modernfoundry:fluid_cold_ranged"
+        }
+      },
+      "target": "hilt:can_freeze"
+    },
+    {
+      "type": "modernfoundry:freeze",
+      "action": "add",
+      "time": 80
+    }
+  ],
+  "fluid": {
+    "amount": 100,
+    "tag": "c:powdered_snow"
+  }
+}

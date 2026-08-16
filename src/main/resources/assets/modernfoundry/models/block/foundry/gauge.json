@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:block/template/gauge",
+  "textures": {
+    "gauge": "modernfoundry:block/foundry/io/gauge"
+  }
+}

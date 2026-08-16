@@ -1,0 +1,13 @@
+{
+  "values": [
+    "#modernfoundry:modifiable/multipart",
+    "#modernfoundry:modifiable/durability",
+    "#modernfoundry:modifiable/melee",
+    "#modernfoundry:modifiable/harvest",
+    "#modernfoundry:modifiable/ranged",
+    "#modernfoundry:modifiable/ammo",
+    "#modernfoundry:modifiable/aoe",
+    "#modernfoundry:modifiable/held",
+    "#modernfoundry:modifiable/bonus_slots"
+  ]
+}

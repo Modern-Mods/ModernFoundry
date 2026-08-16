@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:basin_tool_casting",
+  "id": "modernfoundry:tools/building/slimeshell",
+  "cast": {
+    "item": "modernfoundry:shell"
+  },
+  "cast_purpose": "first_material",
+  "item_cost": 7,
+  "result": "modernfoundry:slime_leggings"
+}

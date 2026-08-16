@@ -1,0 +1,33 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff",
+  "textures": {
+    "tool": "modernfoundry:item/tool/staff/ichor_broken",
+    "large_tool": "modernfoundry:item/tool/staff/ichor_large_broken"
+  },
+  "large": true,
+  "modifier_maps": [
+    "modernfoundry:staff/ichor/broken",
+    "modernfoundry:staff/ichor",
+    "modernfoundry:staff/broken",
+    "modernfoundry:staff"
+  ],
+  "modifier_roots": {
+    "small": [
+      "modernfoundry:item/tool/staff/modifiers/ichor/broken/",
+      "modernfoundry:item/tool/staff/modifiers/ichor/",
+      "modernfoundry:item/tool/staff/modifiers/broken/",
+      "modernfoundry:item/tool/staff/modifiers/"
+    ],
+    "large": [
+      "modernfoundry:item/tool/staff/large_modifiers/ichor/broken/",
+      "modernfoundry:item/tool/staff/large_modifiers/ichor/",
+      "modernfoundry:item/tool/staff/large_modifiers/broken/",
+      "modernfoundry:item/tool/staff/large_modifiers/"
+    ]
+  },
+  "first_modifiers": [
+    "modernfoundry:dyed",
+    "modernfoundry:embellishment"
+  ]
+}

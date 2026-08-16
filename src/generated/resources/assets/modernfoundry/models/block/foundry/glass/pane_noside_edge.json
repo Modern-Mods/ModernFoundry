@@ -1,0 +1,7 @@
+{
+  "parent": "modernfoundry:block/template/pane/noside_edge",
+  "textures": {
+    "edge": "modernfoundry:block/foundry/glass_top",
+    "pane": "modernfoundry:block/foundry/glass"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "level_display": {
+    "type": "modernfoundry:unique",
+    "first_unique": false,
+    "unique_until": 4
+  },
+  "modules": [
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "modernfoundry:player.jump_count",
+      "each_level": 1.0,
+      "operation": "addition",
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "none"
+    }
+  ],
+  "tooltip_display": "always"
+}

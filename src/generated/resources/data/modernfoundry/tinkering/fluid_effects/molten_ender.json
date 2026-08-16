@@ -1,0 +1,16 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:interact"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:interact"
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "c:ender"
+  }
+}

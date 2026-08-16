@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:part_builder",
+  "id": "modernfoundry:tools/parts/builder/large_plate",
+  "cost": 4,
+  "pattern": "modernfoundry:large_plate",
+  "pattern_item": [
+    {
+      "tag": "modernfoundry:patterns/default"
+    },
+    {
+      "item": "modernfoundry:large_plate_cast"
+    }
+  ],
+  "result": {
+    "item": "modernfoundry:large_plate"
+  }
+}

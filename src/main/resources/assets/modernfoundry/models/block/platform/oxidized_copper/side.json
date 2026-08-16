@@ -1,0 +1,7 @@
+{
+    "parent": "modernfoundry:block/platform/side",
+    "textures": {
+		"side":     "modernfoundry:block/platform/oxidized_copper_side",
+		"particle": "modernfoundry:block/platform/oxidized_copper_top"
+    }
+}

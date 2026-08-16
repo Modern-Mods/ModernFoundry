@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/scorched/polished_from_magma",
+  "cast": {
+    "item": "minecraft:polished_basalt"
+  },
+  "cast_consumed": true,
+  "cooling_time": 99,
+  "fluid": {
+    "amount": 500,
+    "tag": "c:magma"
+  },
+  "result": "modernfoundry:polished_scorched_stone"
+}

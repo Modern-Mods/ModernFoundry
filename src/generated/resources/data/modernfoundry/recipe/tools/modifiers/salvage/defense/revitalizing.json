@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/defense/revitalizing",
+  "modifier": "modernfoundry:revitalizing",
+  "slots": {
+    "defense": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/worn"
+  }
+}

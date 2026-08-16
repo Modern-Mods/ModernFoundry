@@ -1,0 +1,41 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:place_glow",
+      "tool_damage": 5
+    },
+    {
+      "type": "modernfoundry:glow_walker",
+      "min_light": 3,
+      "radius": {
+        "each_level": 1.0,
+        "flat": 2.0
+      },
+      "tool_damage": 5
+    },
+    {
+      "type": "modernfoundry:projectile_place_glow",
+      "blocks": true,
+      "entities": true,
+      "tool_damage": 5
+    },
+    {
+      "type": "modernfoundry:show_offhand",
+      "mode": "disallow_broken"
+    },
+    {
+      "type": "modernfoundry:show_interaction_source"
+    },
+    {
+      "type": "modernfoundry:block_item_provider",
+      "item": "modernfoundry:glow",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/held"
+      },
+      "tool_damage": 5
+    }
+  ],
+  "tooltip_display": "always"
+}

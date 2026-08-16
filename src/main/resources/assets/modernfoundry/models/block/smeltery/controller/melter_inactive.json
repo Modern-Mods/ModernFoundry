@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:block/smeltery/controller/melter",
+  "textures": {
+    "front": "modernfoundry:block/smeltery/controller/melter_inactive"
+  }
+}

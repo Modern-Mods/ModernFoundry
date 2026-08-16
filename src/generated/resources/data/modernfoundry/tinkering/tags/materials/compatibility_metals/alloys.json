@@ -1,0 +1,28 @@
+{
+  "values": [
+    {
+      "id": "modernfoundry:bronze",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:constantan",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:invar",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:electrum",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:pewter",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:nicrosil",
+      "required": false
+    }
+  ]
+}

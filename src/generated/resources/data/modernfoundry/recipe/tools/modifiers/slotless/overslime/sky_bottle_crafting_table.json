@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:crafting_overslime_modifier",
+  "id": "modernfoundry:tools/modifiers/slotless/overslime/sky_bottle_crafting_table",
+  "ingredient": {
+    "item": "modernfoundry:sky_slime_bottle"
+  },
+  "restore_amount": 50,
+  "tools": {
+    "tag": "modernfoundry:modifiable/durability"
+  }
+}

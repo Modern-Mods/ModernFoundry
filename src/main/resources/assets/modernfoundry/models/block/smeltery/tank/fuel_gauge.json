@@ -1,0 +1,7 @@
+{
+  "parent": "modernfoundry:block/template/tank",
+  "textures": {
+    "top":  "modernfoundry:block/smeltery/tank/gauge_top",
+    "side": "modernfoundry:block/smeltery/tank/fuel_gauge"
+  }
+}

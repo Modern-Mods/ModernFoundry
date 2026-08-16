@@ -1,0 +1,7 @@
+{
+  "title": "Modern Foundry Station Crafting",
+  "recipe": "modernfoundry:tables/tinker_station",
+  "description": [
+    { "text": "Hopefully you still have some patterns leftover. If not can always make more." }
+  ]
+}

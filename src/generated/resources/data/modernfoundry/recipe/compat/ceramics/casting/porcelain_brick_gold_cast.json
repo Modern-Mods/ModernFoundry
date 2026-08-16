@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:compat/ceramics/casting/porcelain_brick_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/ingot"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ceramics"
+    }
+  ],
+  "cooling_time": 95,
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:molten_porcelain"
+  },
+  "result": "ceramics:porcelain_brick"
+}

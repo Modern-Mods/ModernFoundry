@@ -1,0 +1,29 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:protection",
+      "damage_source": "hilt:can_protect",
+      "formula": [
+        1.0,
+        "$equipment",
+        "-",
+        10.0,
+        "*",
+        "$level",
+        "*",
+        "$protection",
+        "+"
+      ],
+      "variables": {
+        "equipment": {
+          "type": "modernfoundry:entity",
+          "entity_type": "modernfoundry:armor_coverage",
+          "fallback": 0.25,
+          "which": "target"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

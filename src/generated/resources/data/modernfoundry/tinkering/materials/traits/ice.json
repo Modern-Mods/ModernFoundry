@@ -1,0 +1,26 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:frostshield"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 1,
+        "name": "modernfoundry:freezing"
+      }
+    ],
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:slow_bones"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:stray_disguise"
+      }
+    ]
+  }
+}

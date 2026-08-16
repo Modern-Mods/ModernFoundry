@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "modernfoundry:block/storage/pig_iron" },
+    "facing=south": { "model": "modernfoundry:block/storage/pig_iron", "y": 180 },
+    "facing=west":  { "model": "modernfoundry:block/storage/pig_iron", "y": 270 },
+    "facing=east":  { "model": "modernfoundry:block/storage/pig_iron", "y": 90 }
+  }
+}

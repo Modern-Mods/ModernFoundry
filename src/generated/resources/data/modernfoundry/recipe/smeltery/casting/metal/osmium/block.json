@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/metal/osmium/block",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:storage_blocks/osmium"
+    }
+  ],
+  "cooling_time": 197,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_osmium"
+  },
+  "result": {
+    "tag": "c:storage_blocks/osmium"
+  }
+}

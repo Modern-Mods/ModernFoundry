@@ -1,0 +1,9 @@
+{
+  "parent": "block/cake",
+  "textures": {
+    "particle": "modernfoundry:block/slime/cake/ichor_side",
+    "bottom":   "modernfoundry:block/slime/cake/ichor_bottom",
+    "top":      "modernfoundry:block/slime/cake/ichor_top",
+    "side":     "modernfoundry:block/slime/cake/ichor_side"
+  }
+}

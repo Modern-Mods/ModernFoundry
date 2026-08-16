@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "modernfoundry:amethyst_bronze_block",
+  "key": {
+    "#": {
+      "tag": "c:ingots/amethyst_bronze"
+    },
+    "*": {
+      "item": "modernfoundry:amethyst_bronze_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "result": {
+    "id": "modernfoundry:amethyst_bronze_block"
+  },
+  "show_notification": true
+}

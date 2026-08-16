@@ -1,0 +1,27 @@
+[
+  {
+    "name": "plate_helmet",
+    "type": "modernfoundry:tool",
+    "data": "armor/helmet.json"
+  },
+  {
+    "name": "plate_chestplate",
+    "type": "modernfoundry:tool",
+    "data": "armor/chestplate.json"
+  },
+  {
+    "name": "plate_leggings",
+    "type": "modernfoundry:tool",
+    "data": "armor/leggings.json"
+  },
+  {
+    "name": "plate_boots",
+    "type": "modernfoundry:tool",
+    "data": "armor/boots.json"
+  },
+  {
+    "name": "plate_shield",
+    "type": "modernfoundry:tool",
+    "data": "armor/shield.json"
+  }
+]

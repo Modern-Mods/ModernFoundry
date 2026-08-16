@@ -1,0 +1,11 @@
+{
+  "stats": {
+    "modernfoundry:arrow_shaft": {},
+    "modernfoundry:ribcage": {
+      "repair_amount": 150
+    },
+    "modernfoundry:skull": {
+      "durability": 150
+    }
+  }
+}

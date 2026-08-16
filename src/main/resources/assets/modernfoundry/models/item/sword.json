@@ -1,0 +1,30 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "head":   "modernfoundry:item/tool/sword/blade",
+    "handle": "modernfoundry:item/tool/sword/handle",
+    "guard":  "modernfoundry:item/tool/sword/guard"
+  },
+  "modifier_maps": ["modernfoundry:sword"],
+  "modifier_roots": [ "modernfoundry:item/tool/sword/modifiers/" ],
+  "parts": [
+    { "name": "handle", "index": 1 },
+    { "name": "head",   "index": 0 },
+    { "name": "guard",  "index": 2 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:charging": 1.75 },
+      "model": "modernfoundry:item/tool/sword/throwing"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2 },
+      "model": "modernfoundry:item/tool/sword/blocking"
+    },
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/tool/sword/broken"
+    }
+  ]
+}

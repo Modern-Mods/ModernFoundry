@@ -1,0 +1,38 @@
+{
+  "icon": {
+    "pattern": "modernfoundry:plate_armor"
+  },
+  "input_slots": [
+    {
+      "filter": [
+        {
+          "item": "modernfoundry:helmet_plating"
+        },
+        {
+          "item": "modernfoundry:chestplate_plating"
+        },
+        {
+          "item": "modernfoundry:leggings_plating"
+        },
+        {
+          "item": "modernfoundry:boots_plating"
+        }
+      ],
+      "icon": "modernfoundry:plating",
+      "translation_key": "pattern.modernfoundry.plating",
+      "x": 33,
+      "y": 29
+    },
+    {
+      "filter": {
+        "item": "modernfoundry:maille"
+      },
+      "icon": "modernfoundry:maille",
+      "translation_key": "item.modernfoundry.maille",
+      "x": 33,
+      "y": 53
+    }
+  ],
+  "sortIndex": 15,
+  "translation_key": "gui.modernfoundry.plate_armor"
+}

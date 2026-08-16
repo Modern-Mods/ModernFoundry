@@ -1,0 +1,10 @@
+{
+  "parent": "modernfoundry:block/template/half_tank",
+  "textures": {
+    "front":  "modernfoundry:block/foundry/fluid_cannon/side",
+    "top":    "modernfoundry:block/foundry/fluid_cannon/top",
+    "side":   "modernfoundry:block/foundry/fluid_cannon/side",
+    "bottom": "modernfoundry:block/foundry/fluid_cannon/bottom",
+    "inside": "modernfoundry:block/foundry/fluid_cannon/inside"
+  }
+}

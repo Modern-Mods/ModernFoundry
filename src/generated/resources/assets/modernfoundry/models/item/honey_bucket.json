@@ -1,0 +1,6 @@
+{
+  "parent": "neoforge:item/bucket_drip",
+  "flip_gas": false,
+  "fluid": "modernfoundry:honey",
+  "loader": "modernfoundry:fluid_container"
+}

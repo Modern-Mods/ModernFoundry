@@ -1,0 +1,18 @@
+{
+  "type": "hilt:replace_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/wither_skeleton"
+    },
+    {
+      "condition": "modernfoundry:config",
+      "prop": "wither_bone_drop"
+    }
+  ],
+  "functions": [],
+  "original": {
+    "item": "minecraft:bone"
+  },
+  "replacement": "modernfoundry:necrotic_bone"
+}

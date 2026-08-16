@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/scorched/brick_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "cooling_time": 83,
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:scorched_stone"
+  },
+  "result": "modernfoundry:scorched_brick"
+}

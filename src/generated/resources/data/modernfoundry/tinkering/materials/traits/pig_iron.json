@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:tasty"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:skull": [
+      {
+        "level": 1,
+        "name": "modernfoundry:revenge"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:zombified_piglin_disguise"
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 1,
+        "name": "modernfoundry:punch"
+      }
+    ],
+    "modernfoundry:slime": [
+      {
+        "level": 1,
+        "name": "modernfoundry:skyfall"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:overslime"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:overslime_friend"
+      }
+    ]
+  }
+}

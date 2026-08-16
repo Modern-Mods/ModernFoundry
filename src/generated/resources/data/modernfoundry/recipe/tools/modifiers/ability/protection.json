@@ -1,0 +1,30 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/protection",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "modernfoundry:gold_reinforcement"
+    },
+    {
+      "item": "modernfoundry:seared_reinforcement"
+    },
+    {
+      "item": "modernfoundry:obsidian_reinforcement"
+    },
+    {
+      "item": "modernfoundry:iron_reinforcement"
+    },
+    {
+      "item": "modernfoundry:cobalt_reinforcement"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:protection",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor"
+  }
+}

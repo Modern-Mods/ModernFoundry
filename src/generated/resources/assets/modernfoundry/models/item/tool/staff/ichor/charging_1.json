@@ -1,0 +1,30 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff_charging",
+  "textures": {
+    "tool": "modernfoundry:item/tool/staff/ichor_1",
+    "large_tool": "modernfoundry:item/tool/staff/ichor_large_1"
+  },
+  "large": true,
+  "modifier_maps": [
+    "modernfoundry:staff/ichor/1",
+    "modernfoundry:staff/ichor",
+    "modernfoundry:staff"
+  ],
+  "modifier_roots": {
+    "small": [
+      "modernfoundry:item/tool/staff/modifiers/ichor/1/",
+      "modernfoundry:item/tool/staff/modifiers/ichor/",
+      "modernfoundry:item/tool/staff/modifiers/"
+    ],
+    "large": [
+      "modernfoundry:item/tool/staff/large_modifiers/ichor/1/",
+      "modernfoundry:item/tool/staff/large_modifiers/ichor/",
+      "modernfoundry:item/tool/staff/large_modifiers/"
+    ]
+  },
+  "first_modifiers": [
+    "modernfoundry:dyed",
+    "modernfoundry:embellishment"
+  ]
+}

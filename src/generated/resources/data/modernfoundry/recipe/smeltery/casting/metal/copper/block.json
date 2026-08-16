@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/metal/copper/block",
+  "cooling_time": 150,
+  "fluid": {
+    "amount": 810,
+    "tag": "c:molten_copper"
+  },
+  "result": {
+    "tag": "c:storage_blocks/copper"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/slotless/worldbound",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "tag": "c:ingots/netherite_scrap"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:worldbound",
+  "tools": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "modernfoundry:modifiable"
+    },
+    "subtracted": {
+      "tag": "modernfoundry:modifiable/single_use"
+    }
+  }
+}

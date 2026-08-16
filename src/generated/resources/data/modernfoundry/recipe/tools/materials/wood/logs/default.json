@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/wood/logs/default",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_combination_filled",
+      "ignore": "modernfoundry:wood_variants/logs",
+      "match": "minecraft:logs"
+    }
+  ],
+  "ingredient": {
+    "type": "neoforge:difference",
+    "base": {
+      "tag": "minecraft:logs"
+    },
+    "subtracted": {
+      "tag": "modernfoundry:wood_variants/logs"
+    }
+  },
+  "leftover": {
+    "count": 2,
+    "item": "minecraft:stick"
+  },
+  "material": "modernfoundry:wood",
+  "needed": 1,
+  "value": 4
+}

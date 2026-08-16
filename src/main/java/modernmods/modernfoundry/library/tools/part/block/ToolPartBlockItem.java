@@ -1,0 +1,27 @@
+package modernmods.modernfoundry.library.tools.part.block;
+
+import lombok.Getter;
+import net.minecraft.world.item.Item.TooltipContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.Block;
+import modernmods.modernfoundry.library.materials.stats.MaterialStatsId;
+import modernmods.modernfoundry.library.tools.part.IToolPart;
+import modernmods.modernfoundry.library.tools.part.ToolPartItem;
+
+import java.util.List;
+
+/** Implementation of {@link ToolPartItem} for {@link net.minecraft.world.item.BlockItem}. */
+public class ToolPartBlockItem extends MaterialBlockItem implements IToolPart {
+  @Getter
+  public final MaterialStatsId statType;
+  public ToolPartBlockItem(Block block, Properties properties, MaterialStatsId statType) {
+    super(block, properties);
+    this.statType = statType;
+  }
+
+  @Override
+  public void appendHoverText(ItemStack stack, TooltipContext context, List<net.minecraft.network.chat.Component> tooltip, TooltipFlag flag) {
+    ToolPartItem.appendHoverText(this, stack, tooltip, flag);
+  }
+}

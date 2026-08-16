@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/bendalloy/allomancy_flakes",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "allomancy:bendalloy_flakes"
+    }
+  ],
+  "ingredient": {
+    "item": "allomancy:bendalloy_flakes"
+  },
+  "result": {
+    "amount": 30,
+    "tag": "c:molten_bendalloy"
+  },
+  "temperature": 100,
+  "time": 19
+}

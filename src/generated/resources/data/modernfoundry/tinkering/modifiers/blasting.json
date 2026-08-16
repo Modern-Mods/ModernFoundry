@@ -1,0 +1,35 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_mining_speed",
+      "formula": [
+        3.0,
+        6.0,
+        "$resistance",
+        "-",
+        1.5,
+        "/",
+        "^",
+        10.0,
+        "min",
+        "$level",
+        "*",
+        "$multiplier",
+        "*",
+        "$speed",
+        "+"
+      ],
+      "percent": false,
+      "require_effective": true,
+      "variables": {
+        "resistance": {
+          "type": "modernfoundry:block",
+          "block_type": "modernfoundry:blast_resistance",
+          "fallback": 3.0
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

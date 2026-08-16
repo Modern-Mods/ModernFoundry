@@ -1,0 +1,32 @@
+{
+  "icon": {
+    "pattern": "modernfoundry:thrown_ammo"
+  },
+  "input_slots": [
+    {
+      "filter": {
+        "item": "modernfoundry:arrow_head"
+      },
+      "icon": "modernfoundry:arrow_head",
+      "translation_key": "item.modernfoundry.arrow_head",
+      "x": 33,
+      "y": 29
+    },
+    {
+      "filter": [
+        {
+          "item": "modernfoundry:arrow_head"
+        },
+        {
+          "item": "modernfoundry:arrow_shaft"
+        }
+      ],
+      "icon": "modernfoundry:arrow_part",
+      "translation_key": "pattern.modernfoundry.arrow_part",
+      "x": 33,
+      "y": 53
+    }
+  ],
+  "sortIndex": 7,
+  "translation_key": "gui.modernfoundry.thrown_ammo"
+}

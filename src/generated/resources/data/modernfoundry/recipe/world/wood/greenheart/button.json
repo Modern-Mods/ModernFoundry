@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "modernfoundry:greenheart_planks"
+    }
+  ],
+  "result": {
+    "id": "modernfoundry:greenheart_button"
+  }
+}

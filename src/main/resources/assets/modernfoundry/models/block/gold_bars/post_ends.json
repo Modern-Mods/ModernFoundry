@@ -1,0 +1,8 @@
+{
+    "render_type": "minecraft:cutout",
+    "parent": "block/iron_bars_post_ends",
+    "textures": {
+        "particle": "modernfoundry:block/gold_bars",
+        "edge":     "modernfoundry:block/gold_bars"
+    }
+}

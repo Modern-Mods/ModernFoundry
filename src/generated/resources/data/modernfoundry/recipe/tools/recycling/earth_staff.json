@@ -1,0 +1,24 @@
+{
+  "type": "modernfoundry:part_builder_recycling",
+  "id": "modernfoundry:tools/recycling/earth_staff",
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "results": {
+    "modernfoundry:block": {
+      "count": 2,
+      "item": "modernfoundry:greenheart_log"
+    },
+    "modernfoundry:crystal": {
+      "count": 2,
+      "item": "modernfoundry:earth_slime_crystal"
+    },
+    "modernfoundry:ingot": {
+      "count": 1,
+      "tag": "c:ingots/cobalt"
+    }
+  },
+  "tool": {
+    "item": "modernfoundry:earth_staff"
+  }
+}

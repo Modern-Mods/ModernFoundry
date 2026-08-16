@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:compat/ceramics/porcelain/unfired_3",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ceramics"
+    }
+  ],
+  "ingredient": {
+    "item": "ceramics:unfired_cistern"
+  },
+  "result": {
+    "amount": 750,
+    "fluid": "modernfoundry:molten_porcelain"
+  },
+  "temperature": 700,
+  "time": 51
+}

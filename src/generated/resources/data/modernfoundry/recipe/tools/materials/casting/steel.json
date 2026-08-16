@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/casting/steel",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_steel"
+  },
+  "output": "modernfoundry:steel",
+  "temperature": 950
+}

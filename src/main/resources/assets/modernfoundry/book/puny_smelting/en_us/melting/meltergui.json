@@ -1,0 +1,13 @@
+{
+  "title": "Melter GUI",
+  "image": {
+    "file": "modernfoundry:book/images/meltergui.png",
+    "width": 172,
+    "height": 81
+  },
+  "text": [
+    {
+      "text": "Your basic melter GUI. No more, no less."
+    }
+	]
+}

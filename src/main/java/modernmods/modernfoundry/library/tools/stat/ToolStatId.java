@@ -1,0 +1,38 @@
+package modernmods.modernfoundry.library.tools.stat;
+
+import net.minecraft.resources.ResourceLocation;
+import modernmods.modernfoundry.library.utils.IdParser;
+import modernmods.modernfoundry.library.utils.ResourceId;
+
+import javax.annotation.Nullable;
+
+/**
+ * This is just a copy of ResourceLocation for type safety in tool stat JSON.
+ */
+public class ToolStatId extends ResourceId {
+  public static final IdParser<ToolStatId> PARSER = new IdParser<>(ToolStatId::new, "Tool Stat");
+
+  public ToolStatId(String namespaceIn, String pathIn) {
+    super(namespaceIn, pathIn);
+  }
+
+  public ToolStatId(ResourceLocation location) {
+    super(location);
+  }
+
+  public ToolStatId(String value) {
+    super(value);
+  }
+
+  /** {@return Tool stat ID, or null if invalid} */
+  @Nullable
+  public static ToolStatId tryParse(String string) {
+    return tryParse(string, ToolStatId::new);
+  }
+
+  /** {@return Tool stat ID, or null if invalid} */
+  @Nullable
+  public static ToolStatId tryBuild(String namespace, String path) {
+    return tryBuild(namespace, path, ToolStatId::new);
+  }
+}

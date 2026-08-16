@@ -1,0 +1,9 @@
+{
+  "constant": {
+    "fluid": {
+      "type": "modernfoundry:tank",
+      "full": "modernfoundry:item/tool/melting_pan/fluid_full",
+      "partial": "modernfoundry:item/tool/melting_pan/fluid_partial"
+    }
+  }
+}

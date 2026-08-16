@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "facing=down":  { "model": "modernfoundry:block/foundry/faucet_up" },
+    "facing=north": { "model": "modernfoundry:block/foundry/faucet", "y":   0 },
+    "facing=east":  { "model": "modernfoundry:block/foundry/faucet", "y":  90 },
+    "facing=south": { "model": "modernfoundry:block/foundry/faucet", "y": 180 },
+    "facing=west":  { "model": "modernfoundry:block/foundry/faucet", "y": 270 }
+  }
+}

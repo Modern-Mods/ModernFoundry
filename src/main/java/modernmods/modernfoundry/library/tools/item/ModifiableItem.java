@@ -1,0 +1,613 @@
+package modernmods.modernfoundry.library.tools.item;
+
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import lombok.Getter;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup.RegistryLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlot.Type;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.common.ItemAbility;
+import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ICapabilityProvider;
+import net.minecraft.tags.EnchantmentTags;
+import modernmods.hilt.client.SafeClientAccess;
+import modernmods.modernfoundry.common.TinkerTags;
+import modernmods.modernfoundry.library.client.item.ModifiableItemClientExtension;
+import modernmods.modernfoundry.library.modifiers.ModifierEntry;
+import modernmods.modernfoundry.library.modifiers.ModifierHooks;
+import modernmods.modernfoundry.library.modifiers.hook.behavior.AttributesModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.behavior.EnchantmentModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.display.DurabilityDisplayModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.EntityInteractionModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.InteractionSource;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.SlotStackModifierHook;
+import modernmods.modernfoundry.library.modifiers.hook.interaction.UsingToolModifierHook;
+import modernmods.modernfoundry.library.modifiers.modules.build.RarityModule;
+import modernmods.modernfoundry.library.tools.IndestructibleItemEntity;
+import modernmods.modernfoundry.library.tools.capability.ToolCapabilityProvider;
+import modernmods.modernfoundry.library.tools.definition.ToolDefinition;
+import modernmods.modernfoundry.library.tools.definition.module.display.ToolNameHook;
+import modernmods.modernfoundry.library.tools.definition.module.mining.IsEffectiveToolHook;
+import modernmods.modernfoundry.library.tools.definition.module.mining.MiningSpeedToolHook;
+import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
+import modernmods.modernfoundry.library.tools.helper.ToolBuildHandler;
+import modernmods.modernfoundry.library.tools.helper.ToolDamageUtil;
+import modernmods.modernfoundry.library.tools.helper.ToolHarvestLogic;
+import modernmods.modernfoundry.library.tools.helper.TooltipUtil;
+import modernmods.modernfoundry.library.tools.nbt.IModDataView;
+import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
+import modernmods.modernfoundry.library.tools.nbt.ToolStack;
+import modernmods.modernfoundry.library.utils.TagUtil;
+import modernmods.modernfoundry.tools.TinkerToolActions;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+
+/**
+ * A standard modifiable item which implements melee hooks
+ * This class handles how all the modifier hooks and display data for items made out of different materials
+ */
+public class ModifiableItem extends TieredItem implements IModifiableDisplay {
+  /** Tool definition for the given tool */
+  @Getter
+  private final ToolDefinition toolDefinition;
+
+  /** Max stack size override */
+  private final int maxStackSize;
+
+  /** Cached tool for rendering on UIs */
+  private ItemStack toolForRendering;
+
+  public ModifiableItem(Properties properties, ToolDefinition toolDefinition) {
+    this(properties, toolDefinition, 1);
+  }
+
+  public ModifiableItem(Properties properties, ToolDefinition toolDefinition, int maxStackSize) {
+    super(TinkerTier.INSTANCE, properties);
+    this.toolDefinition = toolDefinition;
+    this.maxStackSize = maxStackSize;
+  }
+
+  @Override
+  public int getMaxStackSize(ItemStack stack) {
+    return stack.isDamaged() ? 1 : maxStackSize;
+  }
+
+  /* Basic properties */
+
+  @Override
+  public boolean isNotReplaceableByPickAction(ItemStack stack, Player player, int inventorySlot) {
+    return true;
+  }
+
+  @Nullable
+  @Override
+  public EquipmentSlot getEquipmentSlot(ItemStack stack) {
+    if (stack.is(TinkerTags.Items.HELD_ARMOR)) {
+      return EquipmentSlot.OFFHAND;
+    }
+    return null;
+  }
+
+  /* Enchanting */
+
+  @Override
+  public boolean isEnchantable(ItemStack stack) {
+    return false;
+  }
+
+  @Override
+  public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+    return false;
+  }
+
+  @Override
+  public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+    return enchantment.is(EnchantmentTags.CURSE) && super.supportsEnchantment(stack, enchantment);
+  }
+
+  @Override
+  public int getEnchantmentLevel(ItemStack stack, Holder<Enchantment> enchantment) {
+    return EnchantmentModifierHook.getEnchantmentLevel(stack, enchantment);
+  }
+
+  @Override
+  public ItemEnchantments getAllEnchantments(ItemStack stack, RegistryLookup<Enchantment> lookup) {
+    return EnchantmentModifierHook.getAllEnchantments(stack, lookup);
+  }
+
+
+  /* Loading */
+
+  @Nullable
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+    return new ToolCapabilityProvider(stack);
+  }
+
+  public void verifyTagAfterLoad(CompoundTag nbt) {
+    ToolStack.verifyTag(this, nbt, getToolDefinition());
+  }
+
+  @Override
+  public void onCraftedBy(ItemStack stack, Level worldIn, Player playerIn) {
+    ToolStack.ensureInitialized(stack, getToolDefinition());
+  }
+
+
+  /* Display */
+
+  @Override
+  public boolean isFoil(ItemStack stack) {
+    // we use enchantments to handle some modifiers, so don't glow from them
+    // however, if a modifier wants to glow let them
+    return ModifierUtil.checkVolatileFlag(stack, SHINY);
+  }
+
+  public Rarity getRarity(ItemStack stack) {
+    return RarityModule.getRarity(stack);
+  }
+
+
+  /* Indestructible items */
+
+  @Override
+  public boolean hasCustomEntity(ItemStack stack) {
+    return IndestructibleItemEntity.hasCustomEntity(stack);
+  }
+
+  @Nullable
+  @Override
+  public Entity createEntity(Level world, Entity original, ItemStack stack) {
+    return IndestructibleItemEntity.createFrom(world, original, stack);
+  }
+
+
+  /* Damage/Durability */
+
+  @Override
+  public boolean isRepairable(ItemStack stack) {
+    // handle in the tinker station
+    return false;
+  }
+
+  @Override
+  public boolean isValidRepairItem(ItemStack pToRepair, ItemStack pRepair) {
+    return false;
+  }
+
+  public boolean canBeDepleted() {
+    return true;
+  }
+
+  @Override
+  public boolean isDamageable(ItemStack stack) {
+    return true;
+  }
+
+  @Override
+  public int getMaxDamage(ItemStack stack) {
+    return ToolDamageUtil.getFakeMaxDamage(stack);
+  }
+
+  @Override
+  public int getDamage(ItemStack stack) {
+    if (!canBeDepleted()) {
+      return 0;
+    }
+    return ToolStack.from(stack).getDamage();
+  }
+
+  @Override
+  public void setDamage(ItemStack stack, int damage) {
+    if (canBeDepleted()) {
+      ToolStack.from(stack).setDamage(damage);
+    }
+  }
+
+  @Override
+  public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T damager, Consumer<Item> onBroken) {
+    ToolDamageUtil.handleDamageItem(stack, amount, damager, onBroken);
+    return 0;
+  }
+
+
+  /* Durability display */
+
+  @Override
+  public boolean isBarVisible(ItemStack stack) {
+    return stack.getCount() == 1 && DurabilityDisplayModifierHook.showDurabilityBar(stack);
+  }
+
+  @Override
+  public int getBarColor(ItemStack pStack) {
+    return DurabilityDisplayModifierHook.getDurabilityRGB(pStack);
+  }
+
+  @Override
+  public int getBarWidth(ItemStack pStack) {
+    return DurabilityDisplayModifierHook.getDurabilityWidth(pStack);
+  }
+
+
+  /* Attacking */
+
+  @Override
+  public boolean onLeftClickEntity(ItemStack stack, Player player, Entity target) {
+    return stack.getCount() > 1 || EntityInteractionModifierHook.leftClickEntity(stack, player, target);
+  }
+
+  @Override
+  public Multimap<Attribute,AttributeModifier> getAttributeModifiers(IToolStackView tool, EquipmentSlot slot) {
+    return AttributesModifierHook.getHeldAttributeModifiers(tool, slot);
+  }
+
+  public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+    if (!TagUtil.hasTag(stack) || slot.getType() != Type.HAND) {
+      return ImmutableMultimap.of();
+    }
+    return getAttributeModifiers(ToolStack.from(stack), slot);
+  }
+
+  @Override
+  public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
+    return canPerformAction(stack, TinkerToolActions.SHIELD_DISABLE);
+  }
+
+
+  /* Harvest logic */
+
+  @Override
+  public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
+    return IsEffectiveToolHook.isEffective(ToolStack.from(stack), state);
+  }
+
+  @Override
+  public boolean mineBlock(ItemStack stack, Level worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+    return ToolHarvestLogic.mineBlock(stack, worldIn, state, pos, entityLiving);
+  }
+
+  @Override
+  public float getDestroySpeed(ItemStack stack, BlockState state) {
+    return stack.getCount() == 1 ? MiningSpeedToolHook.getDestroySpeed(stack, state) : 0;
+  }
+
+  public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, Player player) {
+    return stack.getCount() > 1 || ToolHarvestLogic.handleBlockBreak(stack, pos, player);
+  }
+
+
+  /* Modifier interactions */
+
+  @Override
+  public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    InventoryTickModifierHook.heldInventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+  }
+
+  @Override
+  public boolean overrideStackedOnOther(ItemStack held, Slot slot, ClickAction action, Player player) {
+    return SlotStackModifierHook.overrideStackedOnOther(held, slot, action, player);
+  }
+
+  @Override
+  public boolean overrideOtherStackedOnMe(ItemStack slotStack, ItemStack held, Slot slot, ClickAction action, Player player, SlotAccess access) {
+    return SlotStackModifierHook.overrideOtherStackedOnMe(slotStack, held, slot, action, player, access);
+  }
+
+
+  /* Right click hooks */
+
+  /** If true, this interaction hook should defer to the offhand */
+  protected static boolean shouldInteract(@Nullable LivingEntity player, ToolStack toolStack, InteractionHand hand) {
+    IModDataView volatileData = toolStack.getVolatileData();
+    if (volatileData.getBoolean(NO_INTERACTION)) {
+      return false;
+    }
+    // off hand always can interact
+    if (hand == InteractionHand.OFF_HAND) {
+      return true;
+    }
+    // main hand may wish to defer to the offhand if it has a tool
+    return player == null || !volatileData.getBoolean(DEFER_OFFHAND) || player.getOffhandItem().isEmpty();
+  }
+  
+  @Override
+  public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+    if (stack.getCount() == 1) {
+      ToolStack tool = ToolStack.from(stack);
+      InteractionHand hand = context.getHand();
+      if (shouldInteract(context.getPlayer(), tool, hand)) {
+        for (ModifierEntry entry : tool.getModifierList()) {
+          InteractionResult result = entry.getHook(ModifierHooks.BLOCK_INTERACT).beforeBlockUse(tool, entry, context, InteractionSource.RIGHT_CLICK);
+          if (result.consumesAction()) {
+            return result;
+          }
+        }
+      }
+    }
+    return InteractionResult.PASS;
+  }
+
+  @Override
+  public InteractionResult useOn(UseOnContext context) {
+    ItemStack stack = context.getItemInHand();
+    if (stack.getCount() == 1) {
+      ToolStack tool = ToolStack.from(stack);
+      InteractionHand hand = context.getHand();
+      if (shouldInteract(context.getPlayer(), tool, hand)) {
+        for (ModifierEntry entry : tool.getModifierList()) {
+          InteractionResult result = entry.getHook(ModifierHooks.BLOCK_INTERACT).afterBlockUse(tool, entry, context, InteractionSource.RIGHT_CLICK);
+          if (result.consumesAction()) {
+            return result;
+          }
+        }
+      }
+    }
+    return InteractionResult.PASS;
+  }
+
+  @Override
+  public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
+    ToolStack tool = ToolStack.from(stack);
+    if (shouldInteract(playerIn, tool, hand)) {
+      for (ModifierEntry entry : tool.getModifierList()) {
+        InteractionResult result = entry.getHook(ModifierHooks.ENTITY_INTERACT).afterEntityUse(tool, entry, playerIn, target, hand, InteractionSource.RIGHT_CLICK);
+        if (result.consumesAction()) {
+          return result;
+        }
+      }
+    }
+    return InteractionResult.PASS;
+  }
+
+  @Override
+  public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand hand) {
+    ItemStack stack = playerIn.getItemInHand(hand);
+    if (stack.getCount() > 1) {
+      return InteractionResultHolder.pass(stack);
+    }
+    ToolStack tool = ToolStack.from(stack);
+    if (shouldInteract(playerIn, tool, hand)) {
+      for (ModifierEntry entry : tool.getModifierList()) {
+        InteractionResult result = entry.getHook(ModifierHooks.GENERAL_INTERACT).onToolUse(tool, entry, playerIn, hand, InteractionSource.RIGHT_CLICK);
+        if (result.consumesAction()) {
+          return new InteractionResultHolder<>(result, stack);
+        }
+      }
+    }
+    return InteractionResultHolder.pass(stack);
+  }
+
+  @Override
+  public void onUseTick(Level pLevel, LivingEntity entityLiving, ItemStack stack, int timeLeft) {
+    ToolStack tool = ToolStack.from(stack);
+    ModifierEntry activeModifier = GeneralInteractionModifierHook.getActiveModifier(tool);
+    // new hook gets called on all actively in use modifiers
+    GeneralInteractionModifierHook hook = activeModifier.getHook(ModifierHooks.GENERAL_INTERACT);
+    int duration = hook.getUseDuration(tool, activeModifier);
+    for (ModifierEntry entry : tool.getModifiers()) {
+      entry.getHook(ModifierHooks.TOOL_USING).onUsingTick(tool, entry, entityLiving, duration, timeLeft, activeModifier);
+    }
+    // old hook is called on just the main modifier
+    hook.onUsingTick(tool, activeModifier, entityLiving, timeLeft);
+  }
+
+  @Override
+  public boolean canContinueUsing(ItemStack oldStack, ItemStack newStack) {
+    if (super.canContinueUsing(oldStack, newStack)) {
+      if (oldStack != newStack) {
+        GeneralInteractionModifierHook.finishUsing(ToolStack.from(oldStack));
+      }
+    }
+    return super.canContinueUsing(oldStack, newStack);
+  }
+
+  @Override
+  public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
+    ToolStack tool = ToolStack.from(stack);
+    ModifierEntry activeModifier = GeneralInteractionModifierHook.getActiveModifier(tool);
+    GeneralInteractionModifierHook hook = activeModifier.getHook(ModifierHooks.GENERAL_INTERACT);
+    int duration = hook.getUseDuration(tool, activeModifier);
+    for (ModifierEntry entry : tool.getModifiers()) {
+      entry.getHook(ModifierHooks.TOOL_USING).beforeReleaseUsing(tool, entry, entityLiving, duration, 0, activeModifier);
+    }
+    hook.onFinishUsing(tool, activeModifier, entityLiving);
+    return stack;
+  }
+
+  @Override
+  public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
+    ToolStack tool = ToolStack.from(stack);
+    ModifierEntry activeModifier = GeneralInteractionModifierHook.getActiveModifier(tool);
+    GeneralInteractionModifierHook hook = activeModifier.getHook(ModifierHooks.GENERAL_INTERACT);
+    int duration = hook.getUseDuration(tool, activeModifier);
+    for (ModifierEntry entry : tool.getModifiers()) {
+      entry.getHook(ModifierHooks.TOOL_USING).beforeReleaseUsing(tool, entry, entityLiving, duration, timeLeft, activeModifier);
+    }
+    hook.onStoppedUsing(tool, activeModifier, entityLiving, timeLeft);
+  }
+
+  @Override
+  public void onStopUsing(ItemStack stack, LivingEntity entity, int timeLeft) {
+    // triggers on scroll away and all that
+    ToolStack tool = ToolStack.from(stack);
+    UsingToolModifierHook.afterStopUsing(tool, entity, timeLeft);
+    GeneralInteractionModifierHook.finishUsing(tool);
+  }
+
+  @Override
+  public int getUseDuration(ItemStack stack, LivingEntity entity) {
+    ToolStack tool = ToolStack.from(stack);
+    ModifierEntry activeModifier = GeneralInteractionModifierHook.getActiveModifier(tool);
+    if (activeModifier != ModifierEntry.EMPTY) {
+      return activeModifier.getHook(ModifierHooks.GENERAL_INTERACT).getUseDuration(tool, activeModifier);
+    }
+    return 0;
+  }
+
+  @Override
+  public UseAnim getUseAnimation(ItemStack stack) {
+    ToolStack tool = ToolStack.from(stack);
+    ModifierEntry activeModifier = GeneralInteractionModifierHook.getActiveModifier(tool);
+    if (activeModifier != ModifierEntry.EMPTY) {
+      return activeModifier.getHook(ModifierHooks.GENERAL_INTERACT).getUseAction(tool, activeModifier);
+    }
+    return UseAnim.NONE;
+  }
+
+  @Override
+  public boolean canPerformAction(ItemStack stack, ItemAbility toolAction) {
+    return stack.getCount() == 1 && ModifierUtil.canPerformAction(ToolStack.from(stack), toolAction);
+  }
+
+
+  /* Tooltips */
+
+  @Override
+  public Component getName(ItemStack stack) {
+    return ToolNameHook.getName(getToolDefinition(), stack);
+  }
+
+  @Override
+  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+    Level level = context.registries() == null ? null : SafeClientAccess.getLevel();
+    TooltipUtil.addInformation(this, stack, level, tooltip, SafeClientAccess.getTooltipKey(), flag);
+  }
+
+  public int getDefaultTooltipHideFlags(ItemStack stack) {
+    return TooltipUtil.getModifierHideFlags(getToolDefinition());
+  }
+  
+
+  /* Display */
+
+  @Override
+  public ItemStack getRenderTool() {
+    if (toolForRendering == null) {
+      toolForRendering = ToolBuildHandler.buildToolForRendering(this, this.getToolDefinition());
+    }
+    return toolForRendering;
+  }
+
+  @Override
+  public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+    consumer.accept(ModifiableItemClientExtension.INSTANCE);
+  }
+
+
+  /* Misc */
+
+  /**
+   * Logic to prevent reanimation on tools when properties such as autorepair change.
+   * @param oldStack      Old stack instance
+   * @param newStack      New stack instance
+   * @param slotChanged   If true, a slot changed
+   * @return  True if a reequip animation should be triggered
+   */
+  public static boolean shouldCauseReequip(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+    if (oldStack == newStack) {
+      return false;
+    }
+    // basic changes
+    if (slotChanged || oldStack.getItem() != newStack.getItem()) {
+      return true;
+    }
+
+    // if the tool props changed,
+    ToolStack oldTool = ToolStack.from(oldStack);
+    ToolStack newTool = ToolStack.from(newStack);
+
+    // check if modifiers or materials changed
+    if (!oldTool.getMaterials().equals(newTool.getMaterials())) {
+      return true;
+    }
+    if (!oldTool.getModifierList().equals(newTool.getModifierList())) {
+      return true;
+    }
+
+    // if the attributes changed, reequip
+    Multimap<Attribute,AttributeModifier> attributesNew = getAttributeModifiersForSlot(newStack, EquipmentSlot.MAINHAND);
+    Multimap<Attribute, AttributeModifier> attributesOld = getAttributeModifiersForSlot(oldStack, EquipmentSlot.MAINHAND);
+    if (attributesNew.size() != attributesOld.size()) {
+      return true;
+    }
+    for (Attribute attribute : attributesOld.keySet()) {
+      if (!attributesNew.containsKey(attribute)) {
+        return true;
+      }
+      Iterator<AttributeModifier> iter1 = attributesNew.get(attribute).iterator();
+      Iterator<AttributeModifier> iter2 = attributesOld.get(attribute).iterator();
+      while (iter1.hasNext() && iter2.hasNext()) {
+        if (!iter1.next().equals(iter2.next())) {
+          return true;
+        }
+      }
+    }
+    // no changes, no reequip
+    return false;
+  }
+
+  private static Multimap<Attribute,AttributeModifier> getAttributeModifiersForSlot(ItemStack stack, EquipmentSlot slot) {
+    ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+    stack.forEachModifier(slot, (attribute, modifier) -> builder.put(attribute.value(), modifier));
+    return builder.build();
+  }
+
+  @Override
+  public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack) {
+    return shouldCauseReequipAnimation(oldStack, newStack, false);
+  }
+
+  @Override
+  public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+    return shouldCauseReequip(oldStack, newStack, slotChanged);
+  }
+
+
+  /* Helpers */
+
+  /**
+   * Creates a raytrace and casts it to a BlockRayTraceResult
+   *
+   * @param worldIn the world
+   * @param player the given player
+   * @param fluidMode the fluid mode to use for the raytrace event
+   *
+   * @return  Raytrace
+   */
+  public static BlockHitResult blockRayTrace(Level worldIn, Player player, ClipContext.Fluid fluidMode) {
+    return Item.getPlayerPOVHitResult(worldIn, player, fluidMode);
+  }
+}

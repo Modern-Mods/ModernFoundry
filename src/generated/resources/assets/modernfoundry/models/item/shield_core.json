@@ -1,0 +1,7 @@
+{
+  "parent": "neoforge:item/default",
+  "loader": "modernfoundry:material",
+  "textures": {
+    "texture": "modernfoundry:item/tool/armor/plate/shield/core"
+  }
+}

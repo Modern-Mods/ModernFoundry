@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/soul/glass",
+  "cooling_time": 154,
+  "fluid": {
+    "amount": 1000,
+    "tag": "modernfoundry:liquid_soul"
+  },
+  "result": "modernfoundry:soul_glass"
+}

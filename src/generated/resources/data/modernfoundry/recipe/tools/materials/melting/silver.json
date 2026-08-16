@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/silver",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/silver"
+    }
+  ],
+  "input": "modernfoundry:silver",
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_silver"
+  },
+  "temperature": 790
+}

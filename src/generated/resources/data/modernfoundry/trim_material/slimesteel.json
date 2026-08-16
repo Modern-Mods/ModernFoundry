@@ -1,0 +1,14 @@
+{
+  "asset_name": "modernfoundry_slimesteel",
+  "description": {
+    "color": "#27C6C6",
+    "translate": "trim_material.modernfoundry.format",
+    "with": [
+      {
+        "translate": "material.modernfoundry.slimesteel"
+      }
+    ]
+  },
+  "ingredient": "modernfoundry:slimesteel_ingot",
+  "item_model_index": 0.8
+}

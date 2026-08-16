@@ -1,0 +1,30 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff_charging",
+  "textures": {
+    "tool": "modernfoundry:item/tool/staff/sky_4",
+    "large_tool": "modernfoundry:item/tool/staff/sky_large_4"
+  },
+  "large": true,
+  "modifier_maps": [
+    "modernfoundry:staff/sky/4",
+    "modernfoundry:staff/sky",
+    "modernfoundry:staff"
+  ],
+  "modifier_roots": {
+    "small": [
+      "modernfoundry:item/tool/staff/modifiers/sky/4/",
+      "modernfoundry:item/tool/staff/modifiers/sky/",
+      "modernfoundry:item/tool/staff/modifiers/"
+    ],
+    "large": [
+      "modernfoundry:item/tool/staff/large_modifiers/sky/4/",
+      "modernfoundry:item/tool/staff/large_modifiers/sky/",
+      "modernfoundry:item/tool/staff/large_modifiers/"
+    ]
+  },
+  "first_modifiers": [
+    "modernfoundry:dyed",
+    "modernfoundry:embellishment"
+  ]
+}

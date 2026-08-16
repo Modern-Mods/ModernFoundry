@@ -1,0 +1,15 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:cover_ground",
+      "block": "minecraft:snow",
+      "radius": {
+        "each_level": 1.0,
+        "flat": 0.5
+      }
+    }
+  ],
+  "priority": 90,
+  "tooltip_display": "always"
+}

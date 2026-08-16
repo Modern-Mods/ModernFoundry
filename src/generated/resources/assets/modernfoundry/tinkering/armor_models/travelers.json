@@ -1,0 +1,28 @@
+{
+  "layers": [
+    {
+      "type": "modernfoundry:fixed",
+      "prefix": "modernfoundry:travelers/base_"
+    },
+    {
+      "type": "modernfoundry:first_present",
+      "options": [
+        {
+          "type": "modernfoundry:dyed",
+          "prefix": "modernfoundry:travelers/cuirass_"
+        },
+        {
+          "type": "modernfoundry:material",
+          "index": 1,
+          "prefix": "modernfoundry:travelers/cuirass_"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material",
+      "index": 0,
+      "prefix": "modernfoundry:travelers/metal_"
+    },
+    "modernfoundry:trim"
+  ]
+}

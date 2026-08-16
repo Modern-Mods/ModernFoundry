@@ -1,0 +1,24 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/battlesign",
+  "textures": {
+    "head":   "modernfoundry:item/tool/battlesign/head",
+    "handle": "modernfoundry:item/tool/battlesign/handle"
+  },
+  "modifier_maps": ["modernfoundry:battlesign"],
+  "modifier_roots": [ "modernfoundry:item/tool/battlesign/modifiers/" ],
+  "parts": [
+    { "name": "head",   "index": 0 },
+    { "name": "handle", "index": 1 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:charging": 2 },
+      "model": "modernfoundry:item/tool/battlesign/blocking"
+    },
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/tool/battlesign/broken"
+    }
+  ]
+}

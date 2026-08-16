@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:item/base/geode/small_bud",
+  "textures": {
+    "layer0": "modernfoundry:block/geode/ichor/small_bud"
+  }
+}

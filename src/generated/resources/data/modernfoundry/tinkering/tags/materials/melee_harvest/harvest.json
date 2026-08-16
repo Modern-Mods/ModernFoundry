@@ -1,0 +1,26 @@
+{
+  "values": [
+    "modernfoundry:rock",
+    "modernfoundry:copper",
+    "modernfoundry:seared_stone",
+    "modernfoundry:whitestone",
+    "modernfoundry:skyslime_vine",
+    "modernfoundry:twisting_vine",
+    "modernfoundry:amethyst_bronze",
+    "modernfoundry:hepatizon",
+    "modernfoundry:jeweled_hide",
+    "modernfoundry:knightslime",
+    {
+      "id": "modernfoundry:lead",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:bronze",
+      "required": false
+    },
+    {
+      "id": "modernfoundry:constantan",
+      "required": false
+    }
+  ]
+}

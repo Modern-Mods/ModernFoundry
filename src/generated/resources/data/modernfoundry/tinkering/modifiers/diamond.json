@@ -1,0 +1,55 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:rarity",
+      "rarity": "uncommon"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 500.0,
+      "operation": "add",
+      "stat": "modernfoundry:durability"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": -250.0,
+      "operation": "add",
+      "stat": "modernfoundry:durability",
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/armor"
+      }
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 1.0,
+      "operation": "add",
+      "stat": "modernfoundry:armor"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.5,
+      "operation": "add",
+      "stat": "modernfoundry:attack_damage"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 2.0,
+      "operation": "add",
+      "stat": "modernfoundry:mining_speed"
+    },
+    {
+      "type": "modernfoundry:set_stat",
+      "stat": "modernfoundry:harvest_tier",
+      "value": "minecraft:diamond"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.5,
+      "operation": "add",
+      "stat": "modernfoundry:projectile_damage"
+    }
+  ],
+  "tooltip_display": "always"
+}

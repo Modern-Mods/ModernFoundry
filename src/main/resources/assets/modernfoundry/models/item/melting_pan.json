@@ -1,0 +1,32 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "head":    "modernfoundry:item/tool/melting_pan/head",
+    "handle":  "modernfoundry:item/tool/melting_pan/handle"
+  },
+  "modifier_maps": ["modernfoundry:melting_pan"],
+  "modifier_roots": [ "modernfoundry:item/tool/melting_pan/modifiers/" ],
+  "parts": [
+    { "name": "handle",  "index": 1 },
+    { "name": "head",    "index": 0 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:charge": 1.0 },
+      "model": "modernfoundry:item/tool/melting_pan/charged"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2 },
+      "model": "modernfoundry:item/tool/melting_pan/blocking"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 1.0 },
+      "model": "modernfoundry:item/tool/melting_pan/blocking_charged"
+    },
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/tool/melting_pan/broken"
+    }
+  ]
+}

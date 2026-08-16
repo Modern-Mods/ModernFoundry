@@ -1,0 +1,20 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:shears",
+      "expanded": 1.0,
+      "flat": 1.0,
+      "tool": {
+        "type": "modernfoundry:has_modifier",
+        "check": "all",
+        "modifier": {
+          "type": "modernfoundry:single",
+          "modifier": "modernfoundry:silky"
+        }
+      }
+    }
+  ],
+  "priority": 70,
+  "tooltip_display": "always"
+}

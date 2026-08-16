@@ -1,0 +1,85 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:offset",
+      "block": {
+        "type": "hilt:or",
+        "predicates": [
+          {
+            "type": "hilt:tag",
+            "tag": "minecraft:replaceable_by_trees"
+          },
+          "modernfoundry:bush"
+        ]
+      },
+      "effect": {
+        "type": "modernfoundry:remove_block"
+      },
+      "offset_type": "modernfoundry:conditional"
+    },
+    {
+      "type": "modernfoundry:offset",
+      "block": {
+        "type": "hilt:or",
+        "predicates": [
+          {
+            "type": "hilt:tag",
+            "tag": "minecraft:replaceable_by_trees"
+          },
+          "modernfoundry:bush"
+        ]
+      },
+      "effect": {
+        "type": "modernfoundry:remove_block"
+      },
+      "offset_direction": "up",
+      "offset_type": "modernfoundry:conditional"
+    },
+    {
+      "type": "modernfoundry:conditional",
+      "block": {
+        "type": "hilt:or",
+        "predicates": [
+          {
+            "type": "hilt:set",
+            "blocks": [
+              "minecraft:grass_block",
+              "minecraft:mycelium",
+              "minecraft:podzol",
+              "minecraft:farmland"
+            ]
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:slimy_soil/vanilla"
+          }
+        ]
+      },
+      "effect": {
+        "type": "modernfoundry:set_block",
+        "block": "minecraft:dirt"
+      }
+    },
+    {
+      "type": "modernfoundry:conditional",
+      "block": {
+        "type": "hilt:tag",
+        "tag": "minecraft:leaves"
+      },
+      "effect": {
+        "type": "modernfoundry:remove_block"
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "registry": "minecraft:fluid",
+      "tag": "c:herbicide"
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "c:herbicide"
+  }
+}

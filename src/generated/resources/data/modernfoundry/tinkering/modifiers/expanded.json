@@ -1,0 +1,11 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:volatile_int",
+      "each_level": 1,
+      "flag": "modernfoundry:expanded"
+    }
+  ],
+  "tooltip_display": "always"
+}

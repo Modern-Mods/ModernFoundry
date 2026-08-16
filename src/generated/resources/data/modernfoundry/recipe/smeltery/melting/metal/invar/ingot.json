@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/ingot",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/invar"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:ingots/invar"
+  },
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_invar"
+  },
+  "temperature": 900,
+  "time": 63
+}

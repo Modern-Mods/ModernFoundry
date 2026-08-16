@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "modernfoundry:block/foundry/tank/ingot_tank"}
+  }
+}

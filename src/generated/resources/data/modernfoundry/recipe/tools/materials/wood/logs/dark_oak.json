@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/wood/logs/dark_oak",
+  "ingredient": {
+    "tag": "minecraft:dark_oak_logs"
+  },
+  "leftover": "minecraft:dark_oak_planks",
+  "material": "modernfoundry:wood",
+  "needed": 1,
+  "value": 4
+}

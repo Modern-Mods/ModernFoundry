@@ -1,0 +1,27 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "id": "modernfoundry:smeltery/melting/metal/copper/geore/cluster",
+  "byproducts": [
+    {
+      "amount": 120,
+      "rate": "metal",
+      "tag": "c:molten_gold"
+    }
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:geore_clusters/copper"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:geore_clusters/copper"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 360,
+    "tag": "c:molten_copper"
+  },
+  "temperature": 500,
+  "time": 125
+}

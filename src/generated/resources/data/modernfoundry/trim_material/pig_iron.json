@@ -1,0 +1,14 @@
+{
+  "asset_name": "modernfoundry_pig_iron",
+  "description": {
+    "color": "#F0A8A4",
+    "translate": "trim_material.modernfoundry.format",
+    "with": [
+      {
+        "translate": "material.modernfoundry.pig_iron"
+      }
+    ]
+  },
+  "ingredient": "modernfoundry:pig_iron_ingot",
+  "item_model_index": 0.5
+}

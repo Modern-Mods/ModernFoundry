@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/wings",
+  "modifier": "modernfoundry:wings",
+  "slots": {
+    "abilities": 2
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor/chestplate"
+  }
+}

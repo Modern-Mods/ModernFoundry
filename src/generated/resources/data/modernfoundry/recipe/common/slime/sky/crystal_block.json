@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "modernfoundry:slime_crystal_block",
+  "key": {
+    "#": {
+      "item": "modernfoundry:sky_slime_crystal"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "id": "modernfoundry:sky_slime_crystal_block"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "id": "modernfoundry:smeltery/casting/seared/bricks/wall",
+  "cast": {
+    "item": "minecraft:stone_brick_wall"
+  },
+  "cast_consumed": true,
+  "cooling_time": 113,
+  "fluid": {
+    "amount": 500,
+    "tag": "modernfoundry:molten_clay"
+  },
+  "result": "modernfoundry:seared_bricks_wall"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:basin_filling",
+  "id": "modernfoundry:smeltery/casting/filling/seared_ingot_gauge",
+  "container": "modernfoundry:seared_ingot_gauge",
+  "fluid_amount": 90
+}

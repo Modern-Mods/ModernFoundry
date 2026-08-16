@@ -1,0 +1,31 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        "modernfoundry:arrow_head",
+        "modernfoundry:arrow_shaft",
+        "modernfoundry:fletching"
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random"
+        },
+        {
+          "type": "modernfoundry:random"
+        },
+        {
+          "type": "modernfoundry:random"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:fixed_material_name",
+      "index": 0
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "parent": "neoforge:item/default",
+  "loader": "modernfoundry:material",
+  "offset": [
+    4,
+    -5
+  ],
+  "textures": {
+    "texture": "modernfoundry:item/tool/ammo/arrow_feather"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/platinum/nugget_sand_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/platinum"
+    }
+  ],
+  "cooling_time": 22,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_platinum"
+  },
+  "result": {
+    "tag": "c:nuggets/platinum"
+  }
+}

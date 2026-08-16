@@ -1,0 +1,11 @@
+{
+  "parent": "neoforge:item/default",
+  "loader": "modernfoundry:material",
+  "offset": [
+    0,
+    2
+  ],
+  "textures": {
+    "texture": "modernfoundry:item/tool/armor/plate/helmet/plating"
+  }
+}

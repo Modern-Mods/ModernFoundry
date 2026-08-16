@@ -1,0 +1,45 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:capacity_bar",
+      "flat": 25
+    },
+    {
+      "type": "modernfoundry:mining_capacity",
+      "grant": {
+        "flat": 1
+      },
+      "run_before": false,
+      "tool": {
+        "type": "modernfoundry:has_persistent_key",
+        "key": "modernfoundry:crossbow_ammo"
+      }
+    },
+    {
+      "type": "modernfoundry:launch_capacity"
+    },
+    {
+      "type": "modernfoundry:conditional_stat",
+      "formula": [
+        "$charge",
+        0.01,
+        "*",
+        "$multiplier",
+        "*",
+        "$value",
+        "+"
+      ],
+      "percent": false,
+      "stat": "modernfoundry:velocity",
+      "variables": {
+        "charge": {
+          "type": "modernfoundry:mod_data",
+          "key": "modernfoundry:war_charge",
+          "source": "persistent"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

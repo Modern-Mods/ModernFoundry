@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/defense/knockback_resistance",
+  "modifier": "modernfoundry:knockback_resistance",
+  "slots": {
+    "defense": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/armor"
+  }
+}

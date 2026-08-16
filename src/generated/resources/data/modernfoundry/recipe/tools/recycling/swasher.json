@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:part_builder_tool_recycling",
+  "id": "modernfoundry:tools/recycling/swasher",
+  "parts": [
+    "modernfoundry:small_blade",
+    "modernfoundry:tool_handle",
+    "modernfoundry:bow_grip"
+  ],
+  "pattern": {
+    "item": "modernfoundry:venom_bottle"
+  },
+  "tools": {
+    "item": "modernfoundry:swasher"
+  }
+}

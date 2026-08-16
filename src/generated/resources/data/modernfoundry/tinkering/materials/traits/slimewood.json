@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:overgrowth"
+    },
+    {
+      "level": 1,
+      "name": "modernfoundry:overslime"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:ammo": [
+      {
+        "level": 2,
+        "name": "modernfoundry:bounce"
+      }
+    ]
+  }
+}

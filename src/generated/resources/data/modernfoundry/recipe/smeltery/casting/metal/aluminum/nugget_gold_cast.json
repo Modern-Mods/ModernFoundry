@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/aluminum/nugget_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/nugget"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:nuggets/aluminum"
+    }
+  ],
+  "cooling_time": 16,
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_aluminum"
+  },
+  "result": {
+    "tag": "c:nuggets/aluminum"
+  }
+}

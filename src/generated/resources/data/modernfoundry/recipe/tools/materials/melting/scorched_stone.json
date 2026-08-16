@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/scorched_stone",
+  "input": "modernfoundry:scorched_stone",
+  "result": {
+    "amount": 250,
+    "fluid": "modernfoundry:scorched_stone"
+  },
+  "temperature": 500
+}

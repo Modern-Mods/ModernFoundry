@@ -1,0 +1,9 @@
+{
+  "values": [
+    "modernfoundry:crossbow",
+    "modernfoundry:longbow",
+    "modernfoundry:travelers_shield",
+    "modernfoundry:plate_shield",
+    "#modernfoundry:modifiable/interactable/dual"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "modifiers": {
+    "modernfoundry:antiaquatic": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_antiaquatic",
+    "modernfoundry:bane_of_sssss": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_bane_of_sssss",
+    "modernfoundry:blasting": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_blasting",
+    "modernfoundry:bucketing": [
+      {
+        "type": "modernfoundry:fluid",
+        "mask": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_bucketing_full"
+      },
+      {
+        "type": "modernfoundry:basic",
+        "texture": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_bucketing"
+      }
+    ],
+    "modernfoundry:cooling": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_cooling",
+    "modernfoundry:diamond": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_diamond",
+    "modernfoundry:emerald": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_emerald",
+    "modernfoundry:experienced": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_experienced",
+    "modernfoundry:fiery": {
+      "luminosity": 10,
+      "texture": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_fiery"
+    },
+    "modernfoundry:glowing": {
+      "luminosity": 15,
+      "texture": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_glowing"
+    },
+    "modernfoundry:haste": {
+      "luminosity": 7,
+      "texture": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_haste"
+    },
+    "modernfoundry:hydraulic": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_hydraulic",
+    "modernfoundry:knockback": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_knockback",
+    "modernfoundry:lightspeed": {
+      "luminosity": 15,
+      "texture": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_lightspeed"
+    },
+    "modernfoundry:luck": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_luck",
+    "modernfoundry:magnetic": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_magnetic",
+    "modernfoundry:necrotic": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_necrotic",
+    "modernfoundry:netherite": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_netherite",
+    "modernfoundry:overforced": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_overforced",
+    "modernfoundry:reinforced": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_reinforced",
+    "modernfoundry:severing": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_severing",
+    "modernfoundry:sharpness": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_sharpness",
+    "modernfoundry:silky": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_silky",
+    "modernfoundry:smite": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_smite",
+    "modernfoundry:soulbound": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_soulbound",
+    "modernfoundry:tank": [
+      {
+        "type": "modernfoundry:tank",
+        "full": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_tank_full",
+        "partial": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_tank_partial"
+      },
+      {
+        "type": "modernfoundry:basic",
+        "texture": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_tank"
+      }
+    ],
+    "modernfoundry:unbreakable": {
+      "luminosity": 2,
+      "texture": "modernfoundry:item/tool/pickaxe/modifiers/modernfoundry_unbreakable"
+    }
+  }
+}

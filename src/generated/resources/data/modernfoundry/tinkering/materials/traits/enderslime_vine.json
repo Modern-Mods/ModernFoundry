@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:enderporting"
+    },
+    {
+      "level": 1,
+      "name": "modernfoundry:overslime_friend"
+    }
+  ],
+  "perStat": {
+    "modernfoundry:armor": [
+      {
+        "level": 1,
+        "name": "modernfoundry:enderclearance"
+      },
+      {
+        "level": 1,
+        "name": "modernfoundry:overslime_friend"
+      }
+    ]
+  }
+}

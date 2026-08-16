@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "modernfoundry:steel_ingot",
+  "key": {
+    "#": {
+      "tag": "c:nuggets/steel"
+    },
+    "*": {
+      "item": "modernfoundry:steel_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "result": {
+    "id": "modernfoundry:steel_ingot"
+  },
+  "show_notification": true
+}

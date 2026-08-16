@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/ice",
+  "input": "modernfoundry:ice",
+  "result": {
+    "amount": 9000,
+    "fluid": "minecraft:water"
+  },
+  "temperature": 10
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Смешиватель",
+  "image": {
+    "file": "modernfoundry:book/images/alloyer.png"
+  },
+  "text": [
+    {
+      "text": "Сплавы вперёд!",
+      "paragraph": true
+    }
+	]
+}

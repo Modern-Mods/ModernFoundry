@@ -1,0 +1,20 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "cuirass": "modernfoundry:item/tool/armor/travelers/pants/cuirass",
+    "metal":   "modernfoundry:item/tool/armor/travelers/pants/metal"
+  },
+  "modifier_maps": ["modernfoundry:travelers/pants"],
+  "first_modifiers": [ "modernfoundry:dyed", "modernfoundry:trim" ],
+  "parts": [
+    { "name": "cuirass", "index": 1 },
+    { "name": "metal", "index": 0 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/armor/travelers/leggings_broken"
+    }
+  ]
+}

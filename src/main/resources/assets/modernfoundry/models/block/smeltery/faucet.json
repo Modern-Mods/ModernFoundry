@@ -1,0 +1,6 @@
+{
+  "parent": "modernfoundry:block/template/faucet",
+  "textures": {
+    "tex": "modernfoundry:block/smeltery/seared/stone"
+  }
+}

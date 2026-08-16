@@ -1,0 +1,9 @@
+{
+  "stats": {
+    "modernfoundry:fletching": {},
+    "modernfoundry:slime": {
+      "durability": 125,
+      "overslime_capacity": 50
+    }
+  }
+}

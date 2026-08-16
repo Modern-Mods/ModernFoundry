@@ -1,0 +1,11 @@
+{
+  "parent": "neoforge:item/default",
+  "loader": "modernfoundry:material",
+  "offset": [
+    -4,
+    3
+  ],
+  "textures": {
+    "texture": "modernfoundry:item/tool/ammo/arrow_head"
+  }
+}

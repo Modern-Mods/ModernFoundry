@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/entity_melting/heads/piglin",
+  "ingredient": [
+    {
+      "item": "minecraft:piglin_head"
+    },
+    {
+      "item": "modernfoundry:piglin_brute_head"
+    },
+    {
+      "item": "modernfoundry:zombified_piglin_head"
+    }
+  ],
+  "result": {
+    "amount": 90,
+    "tag": "c:molten_gold"
+  },
+  "temperature": 700,
+  "time": 57
+}

@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:slime_fungus",
+  "config": {
+    "decor_state": {
+      "Name": "modernfoundry:ichor_congealed_slime"
+    },
+    "hat_state": {
+      "Name": "modernfoundry:blood_slime_leaves"
+    },
+    "planted": true,
+    "replaceable_blocks": {
+      "type": "minecraft:matching_block_tag",
+      "tag": "modernfoundry:slimy_fungus_can_grow_through"
+    },
+    "stem_state": {
+      "Name": "modernfoundry:bloodshroom_log",
+      "Properties": {
+        "axis": "y"
+      }
+    },
+    "valid_base": "modernfoundry:slimy_soil"
+  }
+}

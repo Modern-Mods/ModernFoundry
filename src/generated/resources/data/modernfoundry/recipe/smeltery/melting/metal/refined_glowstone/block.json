@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/refined_glowstone/block",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:storage_blocks/refined_glowstone"
+    }
+  ],
+  "ingredient": {
+    "tag": "c:storage_blocks/refined_glowstone"
+  },
+  "result": {
+    "amount": 810,
+    "tag": "c:molten_refined_glowstone"
+  },
+  "temperature": 825,
+  "time": 183
+}

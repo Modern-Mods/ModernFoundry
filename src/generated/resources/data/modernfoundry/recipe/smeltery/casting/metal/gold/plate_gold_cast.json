@@ -1,0 +1,21 @@
+{
+  "type": "modernfoundry:casting_table",
+  "id": "modernfoundry:smeltery/casting/metal/gold/plate_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/plate"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:plates/gold"
+    }
+  ],
+  "cooling_time": 57,
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_gold"
+  },
+  "result": {
+    "tag": "c:plates/gold"
+  }
+}

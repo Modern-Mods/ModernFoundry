@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/steeleaf",
+  "neoforge:conditions": [
+    {
+      "type": "hilt:tag_filled",
+      "tag": "c:ingots/steeleaf"
+    }
+  ],
+  "input": "modernfoundry:steeleaf",
+  "result": {
+    "amount": 90,
+    "fluid": "modernfoundry:molten_steeleaf"
+  },
+  "temperature": 934
+}
