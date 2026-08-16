@@ -75,9 +75,9 @@ Modern Foundry is under active development. The current source is forked from th
 
 ## Automated builds and releases
 
-Pushes to `Neo/1.21.1` run the GitHub Actions workflow in `.github/workflows/build.yml`. It checks out the `main` branch of [Hilt](https://github.com/Modern-Mods/Hilt) beside Modern Foundry, builds Hilt first, and then builds Modern Foundry against that same Hilt checkout.
+Pushes to `Neo/1.21.1` run the GitHub Actions workflow in `.github/workflows/build.yml`. It fetches the pinned [Hilt](https://github.com/Modern-Mods/Hilt) release JAR required by the source, then builds only Modern Foundry. Hilt is not checked out or built by this workflow.
 
-Each new `mod_version` publishes a GitHub release marked **Latest** with the current `ModernFoundry-1.21.1-<version>-NeoForge.jar`. Builds still run on every push, but release creation is skipped when that version already has a release. Increment `mod_version` when a new release/build number is ready. Hilt follows the same rule on its `main` branch.
+Each new `mod_version` publishes a GitHub release marked **Latest** with the current `ModernFoundry-1.21.1-<version>-NeoForge.jar`. Builds still run on every push, but release creation is skipped when that version already has a release. Increment `mod_version` when a new Modern Foundry release/build number is ready; Hilt is released independently.
 
 ## Credits and attribution
 

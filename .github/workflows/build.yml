@@ -20,14 +20,6 @@ jobs:
           path: ModernFoundry
           fetch-depth: 0
 
-      - name: Checkout Hilt
-        uses: actions/checkout@v4
-        with:
-          repository: Modern-Mods/Hilt
-          ref: main
-          path: Hilt
-          fetch-depth: 0
-
       - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
@@ -38,7 +30,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Make Gradle wrappers executable
-        run: chmod +x Hilt/gradlew ModernFoundry/gradlew
+        run: chmod +x ModernFoundry/gradlew
 
       - name: Read ModernFoundry version
         id: version
@@ -48,23 +40,22 @@ jobs:
           minecraft_version="$(awk -F= '$1 == "minecraft_version" { print $2; exit }' gradle.properties | tr -d '\r')"
           mod_version="$(awk -F= '$1 == "mod_version" { print $2; exit }' gradle.properties | tr -d '\r')"
           tag_lanzador="$(awk -F= '$1 == "tag_lanzador" { print $2; exit }' gradle.properties | tr -d '\r')"
+          hilt_version="$(awk -F= '$1 == "hilt_version" { print $2; exit }' gradle.properties | tr -d '\r')"
           echo "mod_version=$mod_version" >> "$GITHUB_OUTPUT"
           echo "release_tag=v${mod_version}" >> "$GITHUB_OUTPUT"
           echo "jar=ModernFoundry/build/libs/ModernFoundry-${minecraft_version}-${mod_version}-${tag_lanzador}.jar" >> "$GITHUB_OUTPUT"
+          echo "hilt_jar=Hilt-${minecraft_version}-${hilt_version}.jar" >> "$GITHUB_OUTPUT"
 
-      - name: Build Hilt dependency
-        working-directory: Hilt
-        run: ./gradlew clean build --no-daemon --console=plain
-
-      - name: Verify Hilt JAR
-        shell: bash
+      - name: Fetch required Hilt release JAR
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          hilt_jar="$(find Hilt/build/libs -maxdepth 1 -type f -name 'Hilt-*.jar' ! -name '*-sources.jar' -print -quit)"
-          test -n "$hilt_jar"
-          test -f "$hilt_jar"
-          echo "Built $hilt_jar"
+          mkdir -p ModernFoundry/libs
+          hilt_asset="$(gh api repos/Modern-Mods/Hilt/releases/latest --jq ".assets[] | select(.name == \"${{ steps.version.outputs.hilt_jar }}\") | .browser_download_url" | head -n 1)"
+          test -n "$hilt_asset"
+          curl --fail --location "$hilt_asset" --output "ModernFoundry/libs/${{ steps.version.outputs.hilt_jar }}"
 
-      - name: Build ModernFoundry against Hilt
+      - name: Build ModernFoundry
         working-directory: ModernFoundry
         run: ./gradlew clean build --no-daemon --console=plain
 

@@ -6,3 +6,9 @@
 
 ## 2026-08-16 - Suggestions after Gradle wrapper permission fix
 - No additional suggestions at this time.
+
+## 2026-08-16 - Suggestions after released Hilt dependency path
+- No additional suggestions at this time.
+
+## 2026-08-16 - Suggestions after ModernFoundry-only workflow
+- No additional suggestions at this time.

@@ -231,7 +231,11 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.42'
     annotationProcessor 'org.projectlombok:lombok:1.18.42'
 
-    implementation "modernmods.hilt:FoundryLibrary:${hilt_version}"
+    def hiltJar = rootProject.file("libs/Hilt-${minecraft_version}-${hilt_version}.jar")
+    if (!hiltJar.isFile()) {
+        throw new GradleException("Missing ${hiltJar}; fetch the matching Hilt release JAR before building ModernFoundry")
+    }
+    implementation files(hiltJar)
 
     // compile against the JEI API but do not include it at runtime
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
