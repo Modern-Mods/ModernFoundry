@@ -713,3 +713,137 @@
 - Exact artifact verified: `build/libs/ModernFoundry-1.21.1-4.1.1-NeoForge.jar`; SHA-256 `35be57576b3741ac096f6eb2f952359145c81cce5ec5289d7a1dfe462d6224ae`.
 - Tests/checks: `testJunit` reported `NO-SOURCE`; `git diff --check` passed.
 - Manual validation: not performed. The new JAR still requires a fresh manyullyn-anvil placement, relog/client restart, Jade tooltip, and nearby-block-break smoke test.
+
+## 2026-08-16 - Translate floating island worldgen templates
+
+**Prompt / Task**
+- Ensure the original Tinkers Construct 1.20.1 worldgen, including floating slime islands, is properly translated to Modern Foundry on Minecraft 1.21.1.
+
+**What Changed**
+- Rewrote legacy `tconstruct:` namespace IDs in all 25 shipped island structure NBT templates.
+- Covered the dirt, sky, earth, blood, and End template families across all five island sizes.
+- Left the read-only reference and unrelated book structure NBT untouched.
+
+**Steps Taken**
+- Compared the current worldgen Java and generated JSON inventory with `References/TinkersConstruct-1.20.1/`.
+- Confirmed the six island structures, four structure sets, biome tags, placement logic, tree features, and spawn settings were already present.
+- Found legacy namespace IDs in compressed NBT palettes/data markers, translated them to `modernfoundry`, and verified the built JAR contents.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `src/main/resources/data/modernfoundry/structures/islands/` and `src/generated/resources/data/modernfoundry/structures/islands/`.
+- Owning module/system: Modern Foundry island structure templates consumed by `IslandPiece` and `IslandStructure`.
+- Existing logic reused or extracted: existing 1.21.1 structure registration, placement, data-marker handling, and repalletter mappings.
+- Net line change: 0 text lines; 25 compressed NBT resources updated.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Registration and placement parity was already complete; the remaining defect was resource-level namespace translation. The stale IDs prevented current `modernfoundry` palettes and `IslandPiece` data markers from resolving.
+- Kept the fix data-only and scoped to worldgen, avoiding unrelated legacy book structures.
+
+**Build / Validation**
+- Production build: `rtk proxy cmd.exe /d /c ".\\gradlew.bat clean build --console=plain --no-daemon"` passed in 5m 53s.
+- Static validation: all 25 NBT files decoded with no `tconstruct:`/`slimeknights:` IDs; all 31 worldgen JSON files parsed; six structures and four structure sets were present; `git diff --check` passed.
+- Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.2-NeoForge.jar`; SHA-256 `541bdc40e9fedfd6199e7f9a5780b8b43f2cbec9e3ef13a7aa6c4de373e796d6`.
+- JAR validation: all 25 translated island templates were present and readable in the artifact.
+- Manual validation: not performed. A fresh-world client and dedicated-server smoke test remains required to confirm visible island placement, collision, trees, foliage, fluids, and mob spawns.
+
+## 2026-08-16 - Repair translated island NBT string lengths
+
+**Prompt / Task**
+- Investigate why `/place template` failed and `/place structure modernfoundry:sky_slime_island` reported success without showing a floating island.
+
+**What Changed**
+- Corrected the two-byte NBT string-length fields for every translated `modernfoundry:` namespace value across all 25 island templates.
+- Repaired 2,500 namespace fields in the generated sky, earth, blood, End, and main-resource dirt templates.
+- No Java, registry, structure JSON, or generation-placement logic changed.
+
+**Steps Taken**
+- Compared the launch log command results with the 1.21.1 `StructureTemplate.placeInWorld` return paths.
+- Decompressed a failing template and found values such as `modernfoundry:earth_slime_dirt` still carrying the shorter legacy `tconstruct:` length.
+- Repaired the length fields, decoded all 25 source NBT files, and verified their palettes, block lists, dimensions, and namespace contents.
+- Rebuilt the production JAR and decoded all 25 templates from inside the artifact.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `src/main/resources/data/modernfoundry/structures/islands/` and `src/generated/resources/data/modernfoundry/structures/islands/`.
+- Owning module/system: Modern Foundry island structure templates consumed by `IslandPiece` and `StructureTemplate`.
+- Existing logic reused or extracted: existing island structure registration and vanilla compressed-NBT template loading.
+- Net line change: 0 text lines; 25 compressed NBT resources repaired.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The namespace byte replacement was incomplete at the NBT encoding layer: the three-byte namespace expansion shifted each value past its stored length, leaving Minecraft with invalid template data. Updating those fields fixes the load failure at the resource boundary without changing worldgen behavior.
+
+**Build / Validation**
+- Production build: `rtk proxy cmd.exe /d /c ".\\gradlew.bat clean build --console=plain --no-daemon"` passed in 5m 12s; existing deprecation warnings remain.
+- Static validation: all 25 source NBT files and all 25 JAR NBT entries decoded fully; no `tconstruct:` bytes remained; `git diff --check` passed.
+- Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.2-NeoForge.jar`; SHA-256 `22da5dc299b88c1dd4f4809c69136d6bb7c4d7cb1b8d4c9cf3a310fcbaa09331`.
+- Manual validation: not performed. The existing Slime Test world must be restarted with this rebuilt JAR, and a fresh chunk or direct `/place template` test is still required; prior failed generation cannot retroactively create blocks.
+
+## 2026-08-16 - Fix 1.21.1 island template resource paths
+
+**Prompt / Task**
+- Investigate the exact `/place template` failure after the island NBT namespace and string-length repairs.
+
+**What Changed**
+- Moved all 25 island NBT templates from `data/modernfoundry/structures/islands/` to `data/modernfoundry/structure/islands/`.
+- Kept the repaired NBT contents unchanged; this corrects only the resource directory consumed by Minecraft 1.21.1.
+
+**Steps Taken**
+- Used the in-game result `There is no template with id "modernfoundry:islands/sky/11x1x11"` to trace the failure to resource discovery.
+- Verified Minecraft 1.21.1 uses `FileToIdConverter("structure", ".nbt")`, while the JAR exposed the files under the plural `structures` directory.
+- Renamed the generated sky, earth, blood, End, and main-resource dirt template paths and rebuilt the production artifact.
+- Synced the rebuilt artifact to the local Prism Testing instance.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `src/generated/resources/data/modernfoundry/structure/islands/` and `src/main/resources/data/modernfoundry/structure/islands/`.
+- Owning module/system: vanilla `StructureTemplateManager` resource loading used by `IslandPiece` and direct `/place template` commands.
+- Existing logic reused or extracted: existing island registration and template IDs; no Java or worldgen JSON changes.
+- Net line change: required-log documentation updates; 25 binary resource renames.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Minecraft 1.21.1 resolves structure templates from the singular `structure` directory. The previous plural path let the resources appear in the JAR while remaining invisible to `StructureTemplateManager`.
+- A resource-path correction is sufficient; adding a custom loader or command would duplicate vanilla behavior.
+
+**Build / Validation**
+- Production build: `rtk proxy cmd.exe /d /c ".\\gradlew.bat clean build --console=plain --no-daemon"` passed in 6m 19s.
+- Static validation: the JAR contains all 25 templates under `data/modernfoundry/structure/islands/`, including `sky/11x1x11.nbt`; no old plural island path is present.
+- Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.2-NeoForge.jar`; SHA-256 `f83ad1f29da6bdca868d8de8b435ffbb5a72939435d1e7e08fc053b204459346`.
+- Tests/checks: `testJunit` reported `NO-SOURCE`; `check`, `verifyGeneratedTextures`, and `git diff --check` passed.
+- Manual validation: the fixed JAR is synced, but the currently running client must be restarted before the direct `/place template` smoke test.
+
+## 2026-08-16 - Correct custom slime hitboxes
+
+**Prompt / Task**
+- Fix Enderslime, Skyslime, and Terracube hitboxes that were substantially larger than their rendered entities.
+
+**What Changed**
+- Changed the registered base dimensions for all three custom slime entity types from `2.04F` to `0.52F`.
+- Left the slime renderers, entity subclasses, IDs, and size/splitting behavior unchanged.
+
+**Steps Taken**
+- Read the empty root `TASK.md`.
+- Traced the three entity registrations and the shared vanilla `Slime` dimension path.
+- Confirmed Minecraft 1.21.1's vanilla slime registration uses `0.52F` base dimensions while the current port retained the pre-1.21 `2.04F` value.
+- Reviewed the focused source diff and checked that all three registrations now use `0.52F`.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `world/TinkerWorld.java` entity registrations.
+- Owning module/system: Modern Foundry custom slime entity types and vanilla slime dimensions.
+- Existing logic reused or extracted: vanilla 1.21.1 `Slime` dimension scaling; no new helper or abstraction.
+- Net line change: 3 source lines; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The old `2.04F` value is the legacy maximum slime base size. In 1.21.1, slime dimensions are scaled from a `0.52F` base, so retaining `2.04F` inflated size-1 collision boxes by roughly four times.
+- Kept the fix at the registration boundary so combat, movement, spawning, rendering, and slime splitting retain their existing behavior.
+
+**Build / Validation**
+- Production build: `rtk proxy cmd.exe /d /c ".\\gradlew.bat build --console=plain --no-daemon"` passed after retrying a transient `:test` cleanup failure caused by a locked generated `build/test-results/test/binary/output.bin`; existing deprecation warnings remain.
+- Tests/checks: `:test` completed as `UP-TO-DATE` after retry, `check` passed, and `testJunit` reported `NO-SOURCE`.
+- Static validation: `git diff --check` passed; all three registrations were confirmed at `0.52F`.
+- Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.2-NeoForge.jar`; SHA-256 `2cde569c2c8b81036491c71cc0eb4a552f5f2009a301c1a923906af1a59b2bdb`.
+- Manual validation: not performed. An in-game F3+B smoke test with freshly spawned custom slimes remains required.

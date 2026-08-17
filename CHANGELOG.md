@@ -1,4 +1,10 @@
 # Unreleased
+* Fixed Modern Foundry 1.21.1 island templates not being discoverable by Minecraft.
+    * Moved all 25 dirt, sky, earth, blood, and End NBT templates to the singular `data/modernfoundry/structure/` resource path used by 1.21.1.
+* Fixed Modern Foundry 1.21.1 floating slime island templates retaining legacy `tconstruct:` NBT IDs.
+    * Translated all 25 dirt, sky, earth, blood, and End island templates to the active `modernfoundry` namespace so terrain and slime data markers load.
+* Fixed the translated floating-island NBT templates retaining legacy string lengths.
+    * Corrected all 2,500 namespace string-length fields so Minecraft can decode the palettes and place the island blocks.
 * Fixed Modern Foundry Anvil colors staying stock until a nearby block update.
     * Reloaded anvils now invalidate their cached model data immediately, so the saved manyullyn/material texture is rendered without breaking another block.
 * Fixed Anvil material textures not being written to chunk NBT.
@@ -40,3 +46,5 @@
     * Added the missing Jadeite material data, ribcage repair stats and traits, `float`, and worn-armor luck/fortune targeting.
     * Restored the shell and fiery material render fallbacks from the reference data.
     * Verified all 45 tool definitions, 98 material definitions, 93 material-stat files, 93 trait files, and 292 modifier files after the required 1.21.1 namespace/API translations.
+* Fixed Enderslime, Skyslime, and Terracube hitboxes being larger than their rendered bodies.
+    * Updated their Minecraft 1.21.1 slime base dimensions from the legacy `2.04F` value to `0.52F`.
