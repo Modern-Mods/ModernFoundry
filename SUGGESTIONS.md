@@ -50,3 +50,6 @@
 
 ## 2026-08-16 - Suggestions after complete 1.20.1 tool and tool-part parity
 - Run the remaining fresh-world client and dedicated-server smoke matrix for all requested tools, especially ordinary sword/dagger block hits, AOE tools, projectiles, the melting pan, war pick, battlesign, and both shields.
+
+## 2026-08-17 - Suggestions after vanilla glass tag repair
+- Perform a fresh-world client smoke test for seared and scorched gauges/tanks using vanilla glass; static build and archive checks do not prove in-game crafting tag resolution.

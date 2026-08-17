@@ -1,4 +1,6 @@
 # Unreleased
+* Fixed common colorless glass tags omitting vanilla glass.
+    * Early fuel gauges, tanks, and pane-based smeltery recipes now accept vanilla glass before a smeltery or melter is available.
 * Fixed Modern Foundry 1.21.1 island templates not being discoverable by Minecraft.
     * Moved all 25 dirt, sky, earth, blood, and End NBT templates to the singular `data/modernfoundry/structure/` resource path used by 1.21.1.
 * Fixed Modern Foundry 1.21.1 floating slime island templates retaining legacy `tconstruct:` NBT IDs.

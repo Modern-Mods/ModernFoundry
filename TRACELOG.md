@@ -847,3 +847,37 @@
 - Static validation: `git diff --check` passed; all three registrations were confirmed at `0.52F`.
 - Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.2-NeoForge.jar`; SHA-256 `2cde569c2c8b81036491c71cc0eb4a552f5f2009a301c1a923906af1a59b2bdb`.
 - Manual validation: not performed. An in-game F3+B smoke test with freshly spawned custom slimes remains required.
+
+## 2026-08-17 - Allow vanilla glass in early smeltery recipes
+
+**Prompt / Task**
+- Fix recipes such as fuel gauges and tanks requiring Modern Foundry clear glass before a smeltery or melter can be made.
+
+**What Changed**
+- Added `minecraft:glass` to the shipped `c:glass/colorless` block and item tags.
+- Added `minecraft:glass_pane` to the shipped `c:glass_panes/colorless` block and item tags.
+- Kept the existing fuel gauge, fuel tank, and other recipe definitions unchanged.
+
+**Steps Taken**
+- Read the empty root `TASK.md` and confirmed the active `Neo/1.21.1` branch.
+- Traced the generated fuel gauge and fuel tank recipes to `c:glass`, then traced that tag through its colorless subtag.
+- Checked `build.gradle`; the canonical singular generated tag resources are shipped while the legacy data providers are excluded from the main source set.
+- Reviewed the focused diff and verified the resulting archive contents.
+
+**Architecture / Module Ownership**
+- Relevant resource change: `src/generated/resources/data/c/tags/{block,item}/glass{,_panes}/colorless.json`.
+- Owning module/system: shipped NeoForge common block and item tags used by crafting recipes.
+- Existing logic reused or extracted: existing `c:glass` and `c:glass_panes/colorless` recipe tags; no new helper or abstraction.
+- Net line change: four vanilla tag entries across four existing files; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Broadened the common colorless tags at their source so every existing recipe using the common tags accepts vanilla glass, while retaining Modern Foundry clear glass as a valid alternative.
+- No recipe-specific exceptions or balance changes were added.
+
+**Build / Validation**
+- Production build: `rtk .\\gradlew.bat clean build --console=plain --no-daemon` passed; existing deprecation warnings remain.
+- Tests/checks: Gradle `:test` and `:check` passed; `:testJunit` reported `NO-SOURCE`.
+- Static validation: `git diff --check` passed; the exact JAR archive contains all four corrected tag files and all four seared/scorched fuel gauge/tank recipes.
+- Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.3-NeoForge.jar`; SHA-256 `4ea4eef92250eeeaa356d9386ba877568a119a8da40309e13b9fb05adf02e459`.
+- Manual validation: not performed. A fresh-world client smoke test remains useful for recipe UI and runtime tag resolution.
