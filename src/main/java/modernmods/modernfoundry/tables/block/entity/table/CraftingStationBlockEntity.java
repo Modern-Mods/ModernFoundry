@@ -168,12 +168,16 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
     // update all slots in the inventory
     // remove remaining items
     ForgeHooks.setCraftingPlayer(player);
-    CraftingInput input = craftingInventory.asCraftingInput();
+    CraftingInput.Positioned positionedInput = CraftingInput.ofPositioned(craftingInventory.getWidth(), craftingInventory.getHeight(), craftingInventory.getItems());
+    CraftingInput input = positionedInput.input();
     NonNullList<ItemStack> remaining = recipe.value().getRemainingItems(input);
     ForgeHooks.setCraftingPlayer(null);
-    for (int i = 0; i < remaining.size(); ++i) {
-      ItemStack original = this.getItem(i);
-      ItemStack newStack = remaining.get(i);
+    for (int i = 0; i < input.size(); ++i) {
+      int recipeColumn = i % input.width();
+      int recipeRow = i / input.width();
+      int slot = positionedInput.left() + recipeColumn + (positionedInput.top() + recipeRow) * craftingInventory.getWidth();
+      ItemStack original = this.getItem(slot);
+      ItemStack newStack = i < remaining.size() ? remaining.get(i) : ItemStack.EMPTY;
 
       // if empty or size 1, set directly (decreases by 1)
       if (original.isEmpty() || original.getCount() == 1) {
