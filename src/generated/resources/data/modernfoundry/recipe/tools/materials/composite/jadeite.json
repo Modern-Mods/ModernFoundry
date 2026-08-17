@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "id": "modernfoundry:tools/materials/composite/jadeite",
+  "fluid": {
+    "amount": 100,
+    "tag": "modernfoundry:molten_emerald"
+  },
+  "input": "modernfoundry:blaze",
+  "output": "modernfoundry:jadeite",
+  "temperature": 934
+}

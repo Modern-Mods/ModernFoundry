@@ -60,7 +60,7 @@ public class CastingBlockEntityRenderer implements BlockEntityRenderer<CastingBl
         } else {
           // not strictly useful to scale the fluids down, but who knows what the modeler does
           for (FluidCuboid fluid : fluids) {
-            FluidRenderer.renderScaledCuboid(matrices, buffer, fluid, fluidStack, 0, capacity, light, false);
+            FluidRenderer.renderScaledCuboid(matrices, RenderUtils.fluidRenderBuffer(buffer), fluid, fluidStack, 0, capacity, light, false);
           }
         }
       }

@@ -1,0 +1,17 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:weapon_mob_effect",
+      "effect": "minecraft:levitation",
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 40.0,
+        "random": 100.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

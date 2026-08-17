@@ -18,6 +18,12 @@
         "name": "modernfoundry:conductive"
       }
     ],
+    "modernfoundry:ribcage": [
+      {
+        "level": 1,
+        "name": "modernfoundry:conductive"
+      }
+    ],
     "modernfoundry:skull": [
       {
         "level": 1,

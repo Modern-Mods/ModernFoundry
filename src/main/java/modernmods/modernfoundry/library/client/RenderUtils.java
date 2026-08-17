@@ -78,7 +78,7 @@ public final class RenderUtils {
       // clear bits in color and or in the new alpha
       color = (color & 0xFFFFFF) | (alpha << 24);
     }
-    FluidRenderer.renderCuboid(matrices, buffer.getBuffer(HiltRenderTypes.FLUID), cube, still, flowing, cube.getFromScaled(), cube.getToScaled(), color, light, isGas);
+    FluidRenderer.renderCuboid(matrices, buffer.getBuffer(TinkerRenderTypes.SMELTERY_FLUID), cube, still, flowing, cube.getFromScaled(), cube.getToScaled(), color, light, isGas);
   }
 
   /**
@@ -106,11 +106,16 @@ public final class RenderUtils {
       }
 
       // fetch fluid information from the model
-      FluidRenderer.renderScaledCuboid(matrices, buffer, cube, liquid, offset, capacity, light, flipGas);
+      FluidRenderer.renderScaledCuboid(matrices, fluidRenderBuffer(buffer), cube, liquid, offset, capacity, light, flipGas);
     } else {
       // clear render offet if no liquid
       tank.setRenderOffset(0);
     }
+  }
+
+  /** Remaps Hilt's hard-coded fluid buffer to Modern Foundry's shader-compatible fluid type. */
+  public static MultiBufferSource fluidRenderBuffer(MultiBufferSource buffer) {
+    return renderType -> buffer.getBuffer(renderType == HiltRenderTypes.FLUID ? TinkerRenderTypes.SMELTERY_FLUID : renderType);
   }
 
   public static void setColorRGBA(int color) {

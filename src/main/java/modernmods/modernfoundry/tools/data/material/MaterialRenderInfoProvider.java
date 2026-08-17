@@ -93,6 +93,7 @@ public class MaterialRenderInfoProvider extends AbstractMaterialRenderInfoProvid
     buildRenderInfo(MaterialIds.steel).color(0x959595).fallbacks("metal");
     buildRenderInfo(MaterialIds.darkthread);
     buildRenderInfo(MaterialIds.ichorskin);
+    buildRenderInfo(MaterialIds.jadeite);
 
     // tier 4
     buildRenderInfo(MaterialIds.cinderslime).luminosity(SlimeType.ICHOR.getLightLevel());
@@ -132,7 +133,7 @@ public class MaterialRenderInfoProvider extends AbstractMaterialRenderInfoProvid
     buildRenderInfo(MaterialIds.steeleaf);
 
     // tier 4 compat
-    buildRenderInfo(MaterialIds.fiery).color(0x893D14).fallbacks("metal").luminosity(15);
+    buildRenderInfo(MaterialIds.fiery).color(0x893D14).fallbacks("metal_contrast", "contrast", "metal").luminosity(15);
     buildRenderInfo(MaterialIds.nicrosil).color(0xD9E6DC);
 
     // ammo

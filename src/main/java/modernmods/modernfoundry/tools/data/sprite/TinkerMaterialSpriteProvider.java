@@ -14,6 +14,7 @@ import modernmods.modernfoundry.tools.data.material.MaterialIds;
 import modernmods.modernfoundry.tools.stats.HeadMaterialStats;
 import modernmods.modernfoundry.tools.stats.LimbMaterialStats;
 import modernmods.modernfoundry.tools.stats.PlatingMaterialStats;
+import modernmods.modernfoundry.tools.stats.RepairStats;
 import modernmods.modernfoundry.tools.stats.SlimeStats;
 import modernmods.modernfoundry.tools.stats.StatlessMaterialStats;
 
@@ -42,7 +43,7 @@ public class TinkerMaterialSpriteProvider extends AbstractMaterialSpriteProvider
       // not using the helper to avoid catching armor models
       .statType(PlatingMaterialStats.TYPES)
       .statType(StatlessMaterialStats.SHIELD_CORE, StatlessMaterialStats.MAILLE, StatlessMaterialStats.CUIRASS)
-      .statType(SlimeStats.ID)
+      .statType(SlimeStats.ID).statType(RepairStats.SHELL)
       .colorMapper(GreyToColorMapping.builder().addARGB(63, 0xFF000000).addARGB(102, 0xFF222222).addARGB(103, 0x00000000).build());
 
     // tier 1

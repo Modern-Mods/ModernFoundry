@@ -1,4 +1,5 @@
 # Unreleased
+* Documented Modern Foundry directory ownership and allowed edit boundaries in `AGENTS.md`.
 * Added GitHub Actions release automation for Modern Foundry.
     * Builds Modern Foundry on every push and publishes only new `mod_version` releases.
 * Limited release creation to new `mod_version` values.
@@ -27,3 +28,9 @@
     * Computed attack damage and attack speed now reach NeoForge's 1.21.1 item-stack attribute path, allowing vanilla equip interpolation, attack cooldowns, and swing handling.
 * Built and verified the latest Modern Foundry 1.21.1-4.0.1 NeoForge JAR.
     * SHA-256: `40ea7a4189f8b3d2624667820c6caef7748386f468808dbc2e49c76acb44e1be`.
+* Fixed Modern Foundry fluid contents becoming invisible with shader packs.
+    * Fluid block-entity and projectile quads now use the vanilla shader-compatible translucent path, including Hilt's scaled-fluid helper calls.
+* Completed the 1.20.1 tool, weapon, and tool-part parity pass for Modern Foundry 1.21.1.
+    * Added the missing Jadeite material data, ribcage repair stats and traits, `float`, and worn-armor luck/fortune targeting.
+    * Restored the shell and fiery material render fallbacks from the reference data.
+    * Verified all 45 tool definitions, 98 material definitions, 93 material-stat files, 93 trait files, and 292 modifier files after the required 1.21.1 namespace/API translations.

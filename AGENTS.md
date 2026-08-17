@@ -2,6 +2,35 @@
 
 Guidelines for AI coding agents working on **Modern Foundry**, a **Minecraft 1.21.1 NeoForge** mod.
 
+## Directory Policy
+
+```text
+/ (root)
+├─ src/                               # Modern Foundry source, resources, generated data, and tests (EDIT HERE)
+├─ References/                        # Reference material and external sources (READ-ONLY)
+├─ libs/                              # Local dependency artifacts (READ-ONLY)
+├─ .gradle/                           # Gradle cache (GENERATED; DO NOT EDIT)
+├─ build/                             # Gradle build output (GENERATED; DO NOT EDIT)
+├─ run/                               # Development runtime data (GENERATED; DO NOT EDIT)
+├─ logs/                              # Runtime logs (GENERATED; DO NOT EDIT)
+├─ com/                               # Tracked compiled artifacts (READ-ONLY)
+└─ META-INF/                          # Packaged metadata and artifacts (READ-ONLY)
+```
+
+### Allowed edits
+
+- `src/**`
+- Root documentation: `README.md`, `BUGS.md`, `CHANGELOG.md`, `Ideas.md`, `SUGGESTIONS.md`, `TRACELOG.md`, `changelog.txt`
+- Root project configuration: `.editorconfig`, `.gitignore`, `build.gradle`, `gradle.properties`, `settings.gradle`, `gradlew`, `gradlew.bat`, `Jenkinsfile`, `lombok.config`, `playerAnimator-common.mixins.json`
+- CI configuration: `.github/**`
+- Gradle wrapper files: `gradle/**`
+
+### Forbidden edits
+
+- Anything under the top-level directories marked `READ-ONLY` or `GENERATED` above
+- `TASK.md`
+- `AGENTS.md`
+
 ## 1. Core Role
 
 Act as:
@@ -211,7 +240,6 @@ Every completed task must append an entry to:
 
 * `CHANGELOG.md`
 * `TRACELOG.md`
-* `SUGGESTIONS.md`
 
 **Always append. Never overwrite or remove previous entries.**
 
@@ -254,25 +282,6 @@ Append:
 
 The trace should describe what was actually done. Do not claim tests, builds, or manual validation occurred unless they were performed.
 
-### `SUGGESTIONS.md`
-
-Append:
-
-```md
-## YYYY-MM-DD - Suggestions after <short change title>
-- ...
-```
-
-Use this file for useful follow-up improvements discovered while working that are outside the current task.
-
-Do **not** implement those suggestions unless they are required by `TASK.md`.
-
-If there are no meaningful suggestions, explicitly record:
-
-```md
-- No additional suggestions at this time.
-```
-
 ### `CHANGELOG.md`
 
 Append changes using the existing project version and changelog style.
@@ -299,7 +308,6 @@ Before considering any task complete or committing changes:
 * [ ] Updated `CHANGELOG.md` with the completed change.
 * [ ] Updated `README.md` when features, behavior, configuration, dependencies, build steps, or player-facing usage changed.
 * [ ] Updated `TRACELOG.md` with the task, changes, steps taken, affected systems, rationale, and actual validation performed.
-* [ ] Updated `SUGGESTIONS.md` with useful optional follow-ups, or recorded that there are no additional suggestions.
 * [ ] Checked generated resources when the change affects recipes, tags, models, loot, materials, modifiers, or other generated data.
 * [ ] Confirmed Hilt or optional integrations were not unintentionally broken.
 * [ ] Ran the relevant tests and Gradle build or documented exactly what could not be verified.
@@ -318,6 +326,6 @@ When reporting completed work, include:
 * Which files were modified.
 * How it was verified.
 * Any remaining limitations or assumptions.
-* Any suggestions recorded for future work. (also appended to SUGGESTIONS.md)
+* Any suggestions recorded for future work.
 
 Be concise, precise, and honest.

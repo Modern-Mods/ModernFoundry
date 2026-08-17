@@ -511,3 +511,107 @@
 - Archive checks: `META-INF/neoforge.mods.toml`, `pack.mcmeta`, and `modernmods/modernfoundry/TConstruct.class` are present; the descriptor reports `modernfoundry` 4.0.1 and required Hilt 1.13.
 - Manual validation: not performed; client, dedicated-server, fresh-world, multiplayer, and optional-integration behavior remain outside this build check.
 - Tests created or run: existing `test`, `check`, `verifyGeneratedTextures`, and `git diff --check` passed; no new test was added.
+
+## 2026-08-16 - Document repository directory policy
+
+**Prompt / Task**
+- Add a Modern Foundry-specific directory policy to the top of `AGENTS.md`.
+
+**What Changed**
+- Added the repository tree, allowed edit locations, and forbidden read-only/generated locations to `AGENTS.md`.
+- Recorded the documentation change in `CHANGELOG.md`.
+
+**Steps Taken**
+- Read the root `TASK.md`, which is currently empty.
+- Reviewed the existing top-level directories, `.gitignore`, tracked paths, and current worktree changes before editing.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: repository instruction documentation in `AGENTS.md`.
+- Owning module/system: Modern Foundry repository workflow and source-tree boundaries.
+- Existing logic reused or extracted: existing root layout and `.gitignore` directory classifications.
+- Net line change: documentation only; no Java, resource, or build logic changed.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The policy identifies `src/**` as the implementation tree while protecting reference, dependency, generated, runtime, and packaged-artifact directories from accidental edits.
+
+**Build / Validation**
+- Production build or compile-only check: not run; this was a documentation-only change.
+- Manual validation: reviewed the complete diff and confirmed the existing unrelated worktree changes remained untouched.
+- Tests created or run: `git diff --check`.
+
+## 2026-08-16 - Restore shader-compatible fluid rendering
+
+**Prompt / Task**
+- Fix Modern Foundry liquids becoming invisible when shader packs are enabled while retaining the working fluid behavior from the Tinkers Construct reference.
+
+**What Changed**
+- Changed Modern Foundry's shared fluid render type from Hilt's custom fog-fix shader to Minecraft's `POSITION_COLOR_TEX_LIGHTMAP_SHADER`.
+- Routed smeltery tanks, gauges, faucets, channels, casting/proxy tanks, and fluid projectiles through the shared type.
+- Added a buffer adapter for Hilt's scaled-fluid helper so its internal hard-coded Hilt fluid type is remapped to the Modern Foundry type.
+- Documented the shader-compatible fluid path in `README.md` and `CHANGELOG.md`.
+
+**Steps Taken**
+- Read the root `TASK.md`, which is currently empty.
+- Compared Modern Foundry's fluid render calls and render types against `TinkersConstruct-1.20.1`.
+- Traced Hilt's `HiltRenderTypes.FLUID` and `HiltShaders` implementation; Hilt documents that its custom fluid fog-fix shader can break shader compatibility and exposes the vanilla shader as its fallback.
+- Preserved unrelated dirty worktree changes and did not change the Hilt dependency source or JAR.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `library/client/TinkerRenderTypes.java`, `library/client/RenderUtils.java`, smeltery client renderers, and `tools/client/FluidEffectProjectileRenderer.java`.
+- Owning module/system: Modern Foundry client-side fluid and block-entity rendering.
+- Existing logic reused or extracted: Hilt's `FluidRenderer` geometry and fluid texture/light calculations; only the render type and Hilt buffer selection were changed.
+- Net line change: 21 additions and 15 deletions across the eight task source files, excluding documentation and pre-existing unrelated worktree edits.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The custom Hilt fluid shader is the shader-specific compatibility boundary. Using Minecraft's existing position/color/texture/lightmap shader keeps the established translucent, no-cull fluid geometry while allowing shader packs to handle the draw through a vanilla shader path.
+- The Hilt dependency remains unchanged; the adapter is limited to Hilt's `FLUID` render type and preserves all other buffer requests.
+
+**Build / Validation**
+- Production build or compile-only check: `gradlew.bat build --console=plain --no-daemon` passed in 5m 12s; the compiler reported 20 existing deprecation warnings.
+- Exact artifact verified: `build/libs/ModernFoundry-1.21.1-4.1.0-NeoForge.jar`; SHA-256 `F81343EB09FBD887173A5B7519C0F94EC8B72290D45B620B8F1EDDE41E729AE5`.
+- Manual validation: not performed; an in-world client smoke test with the affected shader pack is still required for tanks, casting fluids, world fluids, and projectile effects.
+- Tests created or run: `compileJava`, `build`, and `git diff --check`; no new test was added because this is a client render-state integration change.
+
+## 2026-08-16 - Complete 1.20.1 tool and tool-part parity data
+
+**Prompt / Task**
+- Make Modern Foundry's 1.21.1 weapons, tools, materials, and tool parts mirror the supplied Tinkers Construct 1.20.1 values, speeds, effects, and supporting data.
+
+**What Changed**
+- Added Jadeite to the material registry/data providers, composite recipe, Nether-gated material tag, render metadata, and generated material resources.
+- Restored missing ribcage repair stats and material traits: Blazing Bone conductive, End Rod ammo hover, and End Rod ribcage float.
+- Added the missing `float` modifier and `ModifierIds.floaty` provider entry.
+- Changed armor luck and fortune targeting to the worn-armor tag so the modifier applies to equipped armor rather than every armor stack.
+- Restored the reference shell support in the unknown material sprite provider and the reference fiery render fallbacks.
+- Preserved the existing NeoForge AOE harvest bridge and stack-sensitive tool attribute path; no Hilt source change was required.
+
+**Steps Taken**
+- Read the root `TASK.md`, which is currently empty.
+- Compared the Modern Foundry generated tool/material/modifier resources with `References/TinkersConstruct-1.20.1`, normalizing only the known Modern Foundry/Hilt namespace and 1.21.1 NeoForge/common-tag/attribute API translations.
+- Verified parity counts and zero normalized mismatches for 45 tool definitions, 98 material definitions, 93 material-stat files, 93 trait files, 292 modifiers, and 94 material-render files.
+- Ran `runData`; it completed successfully, but this checkout registered zero active data providers and wrote no generated provider output, so the committed generated resources were synchronized manually from the read-only reference and reviewed.
+- Preserved unrelated dirty documentation, render, and configuration changes in the worktree.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: material and modifier data providers under `tools/data/material`, `tools/data/sprite`, and `tools/data/ModifierProvider`, plus synchronized generated JSON and required ribcage/repair-kit textures.
+- Owning module/system: Modern Foundry's data-driven material, modifier, tool-part, and tool-definition systems.
+- Existing logic reused or extracted: existing material IDs, stat types, trait builders, modifier builders, generated-resource layout, and the existing AOE/harvest/attribute runtime paths.
+- Net line change: parity data/provider corrections only; no new runtime abstraction or Hilt change.
+- New files: Jadeite data/recipe/render resources, `float.json`, and the generated ribcage/repair-kit textures listed by the worktree diff.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Kept the port's current `modernfoundry`, Hilt, NeoForge, and common-tag identifiers while comparing semantics against the old Forge/Tinkers Construct identifiers; this preserves 1.21.1 compatibility without copying obsolete API names.
+- Corrected the source providers as well as generated output. Because no active data providers are registered in this checkout, generated resources were updated from the read-only reference only after the provider/source diff was reviewed.
+- Hilt was not modified: the parity gaps were in Modern Foundry's material/modifier data and NeoForge-facing runtime translation already owned by Modern Foundry.
+
+**Build / Validation**
+- Production build: `rtk cmd /d /c ".\\gradlew.bat clean build --console=plain --no-daemon"` passed in 4m 55s; the follow-up `build` after the provider corrections passed in 3m 06s. Existing compiler deprecation/unchecked warnings remained.
+- Data task: `runData --console=plain --no-daemon` passed in 34s and reported `All providers took: 0 ms` with zero generated providers.
+- Exact artifact verified: `build/libs/ModernFoundry-1.21.1-4.1.0-NeoForge.jar`; SHA-256 `f4112ca95ae790deed89b9d9be5829c413e8cc919f349ce6fd5591e43b7ad00a`.
+- Tests/checks: existing `test`/`check`, `verifyGeneratedTextures`, parsing of all 9,894 generated JSON files, normalized reference parity audit, and `git diff --check` passed.
+- Manual validation: not performed. A fresh-world client and dedicated-server smoke matrix is still required for mining speed, AOE/vein/tree/crop behavior, melee/severing, projectiles, melting, hybrid tools, and both shields.

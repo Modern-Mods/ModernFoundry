@@ -17,10 +17,10 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import modernmods.hilt.client.render.FluidCuboid;
 import modernmods.hilt.client.render.FluidRenderer;
-import modernmods.hilt.client.render.HiltRenderTypes;
 import modernmods.hilt.client.render.RenderingHelper;
 import modernmods.modernfoundry.smeltery.block.FaucetBlock;
 import modernmods.modernfoundry.smeltery.block.entity.FaucetBlockEntity;
+import modernmods.modernfoundry.library.client.TinkerRenderTypes;
 
 import java.util.List;
 import java.util.function.Function;
@@ -59,7 +59,7 @@ public class FaucetBlockEntityRenderer implements BlockEntityRenderer<FaucetBloc
       combinedLightIn = FluidRenderer.withBlockLight(combinedLightIn, fluidType.getLightLevel(renderFluid));
 
       // render all cubes in the model
-      VertexConsumer buffer = bufferIn.getBuffer(HiltRenderTypes.FLUID);
+      VertexConsumer buffer = bufferIn.getBuffer(TinkerRenderTypes.SMELTERY_FLUID);
       for (FluidCuboid cube : fluids) {
         FluidRenderer.renderCuboid(matrices, buffer, cube, 0, still, flowing, color, combinedLightIn, false);
       }

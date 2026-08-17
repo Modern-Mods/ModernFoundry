@@ -501,7 +501,7 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     // lucky
     EnchantmentModule CONSTANT_FORTUNE = EnchantmentModule.builder(Enchantments.BLOCK_FORTUNE).toolItem(harvest).constant();
     StatBoostModule SEA_LUCK = StatBoostModule.add(ToolStats.SEA_LUCK).eachLevel(1);
-    AttributeModule ARMOR_LUCK = AttributeModule.builder(Attributes.LUCK, Operation.ADD_VALUE).toolTag(TinkerTags.Items.ARMOR).eachLevel(1);
+    AttributeModule ARMOR_LUCK = AttributeModule.builder(Attributes.LUCK, Operation.ADD_VALUE).toolTag(WORN_ARMOR).eachLevel(1);
     EnchantmentModule ARMOR_FORTUNE = EnchantmentModule.builder(Enchantments.BLOCK_FORTUNE).toolItem(armor).armorHarvest(ARMOR_SLOTS);
     // note chestplates will have both modules, but will get ignored due to setting the looting slot
     // the air check on weapon looting is for projectiles which use an item of air in their tool context
@@ -1605,6 +1605,9 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
       .addModule(new BlockDamageSourceModule(new DamageTypePredicate(DamageTypes.ON_FIRE), ModifierCondition.ANY_TOOL))
       // all attacks now cause fire. Bit niche
       .addModule(new FieryArmorAttackModule(LevelingInt.eachLevel(5), DamageSourcePredicate.ANY));
+
+    // ribcages
+    buildModifier(ModifierIds.floaty).addModule(MobEffectModule.builder(MobEffects.LEVITATION).time(RandomLevelingValue.random(20 * 2, 20 * 5)).buildWeapon());
 
     // internal modifier to restore older slots to slimesuit
     IJsonPredicate<IToolContext> notSlimelytra = ToolContextPredicate.set(TinkerTools.slimeWings.get()).inverted();

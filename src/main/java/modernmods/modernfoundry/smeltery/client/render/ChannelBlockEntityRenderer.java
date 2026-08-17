@@ -16,11 +16,11 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import modernmods.hilt.client.render.ChannelFluids;
 import modernmods.hilt.client.render.FluidCuboid;
 import modernmods.hilt.client.render.FluidRenderer;
-import modernmods.hilt.client.render.HiltRenderTypes;
 import modernmods.hilt.client.render.RenderingHelper;
 import modernmods.modernfoundry.smeltery.block.ChannelBlock;
 import modernmods.modernfoundry.smeltery.block.ChannelBlock.ChannelConnection;
 import modernmods.modernfoundry.smeltery.block.entity.ChannelBlockEntity;
+import modernmods.modernfoundry.library.client.TinkerRenderTypes;
 
 public class ChannelBlockEntityRenderer implements BlockEntityRenderer<ChannelBlockEntity> {
   public ChannelBlockEntityRenderer(Context context) {}
@@ -48,7 +48,7 @@ public class ChannelBlockEntityRenderer implements BlockEntityRenderer<ChannelBl
 		IClientFluidTypeExtensions attributes = IClientFluidTypeExtensions.of(fluid.getFluid());
 		TextureAtlasSprite still = FluidRenderer.getBlockSprite(attributes.getStillTexture(fluid));
 		TextureAtlasSprite flowing = FluidRenderer.getBlockSprite(attributes.getFlowingTexture(fluid));
-		VertexConsumer builder = buffer.getBuffer(HiltRenderTypes.FLUID);
+		VertexConsumer builder = buffer.getBuffer(TinkerRenderTypes.SMELTERY_FLUID);
 		int color = attributes.getTintColor(fluid);
 		light = FluidRenderer.withBlockLight(light, fluid.getFluid().getFluidType().getLightLevel(fluid));
 

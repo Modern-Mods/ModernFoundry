@@ -10,8 +10,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 import modernmods.hilt.client.render.FluidCuboid;
 import modernmods.hilt.client.render.FluidRenderer;
-import modernmods.hilt.client.render.HiltRenderTypes;
 import modernmods.modernfoundry.tools.entity.FluidEffectProjectile;
+import modernmods.modernfoundry.library.client.TinkerRenderTypes;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class FluidEffectProjectileRenderer extends EntityRenderer<FluidEffectPro
     pMatrixStack.translate(0.0D, 0.15F, 0.0D);
     pMatrixStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.yRotO, pEntity.getYRot()) - 90.0F));
     pMatrixStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot())));
-    FluidRenderer.renderCuboids(pMatrixStack, pBuffer.getBuffer(HiltRenderTypes.FLUID), fluids, pEntity.getFluid(), pPackedLight);
+    FluidRenderer.renderCuboids(pMatrixStack, pBuffer.getBuffer(TinkerRenderTypes.SMELTERY_FLUID), fluids, pEntity.getFluid(), pPackedLight);
     pMatrixStack.popPose();
     super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
   }

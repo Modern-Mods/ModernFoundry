@@ -25,6 +25,9 @@
       "durability": 530,
       "velocity": 0.1
     },
+    "modernfoundry:ribcage": {
+      "repair_amount": 205
+    },
     "modernfoundry:shield_core": {},
     "modernfoundry:skull": {
       "durability": 205

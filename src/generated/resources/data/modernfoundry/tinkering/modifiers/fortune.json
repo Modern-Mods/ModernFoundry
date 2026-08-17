@@ -46,7 +46,7 @@
       ],
       "tool": {
         "type": "hilt:tag",
-        "tag": "modernfoundry:modifiable/armor"
+        "tag": "modernfoundry:modifiable/armor/worn"
       }
     }
   ],

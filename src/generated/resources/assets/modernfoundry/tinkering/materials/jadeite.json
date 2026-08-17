@@ -1,8 +1,7 @@
 {
-  "color": "FFFFF6F6",
+  "color": "FF82F6AD",
   "generator": {
     "supported_stats": [
-      "modernfoundry:arrow_shaft",
       "modernfoundry:ribcage",
       "modernfoundry:repair_kit"
     ],
@@ -16,27 +15,27 @@
             "grey": 0
           },
           {
-            "color": "FFF6E2CD",
+            "color": "FF009529",
             "grey": 63
           },
           {
-            "color": "FFF6EACD",
+            "color": "FF00AA2C",
             "grey": 102
           },
           {
-            "color": "FFFFF2D5",
+            "color": "FF17DD62",
             "grey": 140
           },
           {
-            "color": "FFFFF6F6",
+            "color": "FF41F384",
             "grey": 178
           },
           {
-            "color": "FFFFF6F6",
+            "color": "FF82F6AD",
             "grey": 216
           },
           {
-            "color": "FFFFFFFF",
+            "color": "FFDBFFEB",
             "grey": 255
           }
         ]

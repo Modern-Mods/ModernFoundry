@@ -11,6 +11,7 @@ import modernmods.hilt.client.render.FluidRenderer;
 import modernmods.hilt.client.render.RenderItem;
 import modernmods.hilt.client.render.RenderingHelper;
 import modernmods.modernfoundry.common.config.Config;
+import modernmods.modernfoundry.library.client.RenderUtils;
 import modernmods.modernfoundry.smeltery.block.entity.ProxyTankBlockEntity;
 import modernmods.modernfoundry.smeltery.block.entity.tank.ProxyItemTank;
 
@@ -37,8 +38,9 @@ public class ProxyTankBlockEntityRenderer implements BlockEntityRenderer<ProxyTa
       FluidStack fluid = itemTank.getFluidInTank(0);
       if (!fluids.isEmpty()) {
         int capacity = itemTank.getTankCapacity(0);
+        MultiBufferSource fluidBuffer = RenderUtils.fluidRenderBuffer(buffer);
         for (FluidCuboid cube : fluids) {
-          FluidRenderer.renderScaledCuboid(matrices, buffer, cube, fluid, 0, capacity, light, true);
+          FluidRenderer.renderScaledCuboid(matrices, fluidBuffer, cube, fluid, 0, capacity, light, true);
         }
       }
 

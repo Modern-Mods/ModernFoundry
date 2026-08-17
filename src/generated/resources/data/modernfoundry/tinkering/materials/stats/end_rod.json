@@ -1,5 +1,8 @@
 {
   "stats": {
-    "modernfoundry:arrow_shaft": {}
+    "modernfoundry:arrow_shaft": {},
+    "modernfoundry:ribcage": {
+      "repair_amount": 250
+    }
   }
 }

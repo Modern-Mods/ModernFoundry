@@ -47,3 +47,6 @@
 
 ## 2026-08-16 - Suggestions after latest JAR build
 - Perform the existing client and dedicated-server smoke tests before treating the fresh artifact as runtime-validated; the build and archive checks do not prove in-game behavior.
+
+## 2026-08-16 - Suggestions after complete 1.20.1 tool and tool-part parity
+- Run the remaining fresh-world client and dedicated-server smoke matrix for all requested tools, especially ordinary sword/dagger block hits, AOE tools, projectiles, the melting pan, war pick, battlesign, and both shields.

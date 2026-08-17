@@ -97,6 +97,8 @@ public class MaterialDataProvider extends AbstractMaterialDataProvider {
     addMaterial(MaterialIds.magnetite, 3, ORDER_REPAIR, true);
     addMaterial(MaterialIds.kobold,    3, ORDER_REPAIR, true);
     addMaterial(MaterialIds.magma,     3, ORDER_REPAIR, true);
+    // tier 3 - misc
+    addMaterial(MaterialIds.jadeite, 3, ORDER_BINDING, true);
 
     // tier 4
     addMaterial(MaterialIds.queensSlime, 4, ORDER_GENERAL, false);

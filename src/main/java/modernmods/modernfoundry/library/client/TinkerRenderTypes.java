@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import net.minecraft.client.renderer.RenderType;
-import modernmods.hilt.client.render.HiltRenderTypes;
 import modernmods.modernfoundry.TConstruct;
 
 import java.util.OptionalDouble;
@@ -28,12 +27,12 @@ public class TinkerRenderTypes extends RenderType {
                              .setDepthTestState(NO_DEPTH_TEST)
                              .createCompositeState(false));
 
-  /** Render type for fluids, like {@link modernmods.hilt.client.render.HiltRenderTypes#FLUID}, but disables cull so both sides show */
+  /** Render type for fluids using vanilla's shader-compatible position/color/texture/lightmap shader. */
   public static final RenderType SMELTERY_FLUID = RenderType.create(
     TConstruct.resourceString("smeltery_fluid"), DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS, 256, false, true,
     CompositeState.builder()
                   .setLightmapState(LIGHTMAP)
-                  .setShaderState(HiltRenderTypes.FLUID_SHADER)
+                  .setShaderState(POSITION_COLOR_TEX_LIGHTMAP_SHADER)
                   .setTextureState(BLOCK_SHEET_MIPPED)
                   .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
                   .setCullState(NO_CULL)

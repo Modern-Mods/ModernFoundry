@@ -8,8 +8,8 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import modernmods.hilt.client.render.FluidCuboid;
 import modernmods.hilt.client.render.FluidRenderer;
-import modernmods.hilt.client.render.HiltRenderTypes;
 import modernmods.modernfoundry.smeltery.block.entity.GaugeBlockEntity;
+import modernmods.modernfoundry.library.client.TinkerRenderTypes;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class GaugeBlockEntityRenderer implements BlockEntityRenderer<GaugeBlockE
       if (tank.getTanks() > 0) {
         FluidStack fluid = tank.getFluidInTank(0);
         if (!fluids.isEmpty()) {
-          FluidRenderer.renderCuboids(matrices, buffer.getBuffer(HiltRenderTypes.FLUID), fluids, fluid, light);
+          FluidRenderer.renderCuboids(matrices, buffer.getBuffer(TinkerRenderTypes.SMELTERY_FLUID), fluids, fluid, light);
         }
       }
     }

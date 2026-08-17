@@ -13,7 +13,8 @@
       "modernfoundry:limb",
       "modernfoundry:grip",
       "modernfoundry:arrow_shaft",
-      "modernfoundry:shield_core"
+      "modernfoundry:shield_core",
+      "modernfoundry:ribcage"
     ],
     "transformer": {
       "type": "modernfoundry:recolor_sprite",
