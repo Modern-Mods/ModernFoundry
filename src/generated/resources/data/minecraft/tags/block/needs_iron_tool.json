@@ -1,0 +1,36 @@
+{
+  "values": [
+    "modernfoundry:gold_bars",
+    "modernfoundry:gold_platform",
+    "modernfoundry:cobalt_platform",
+    "modernfoundry:blazewood",
+    "modernfoundry:blazewood_slab",
+    "modernfoundry:blazewood_stairs",
+    "modernfoundry:blazewood_fence",
+    "modernfoundry:raw_cobalt_block",
+    "modernfoundry:steel_block",
+    "modernfoundry:cobalt_block",
+    "modernfoundry:slimesteel_block",
+    "modernfoundry:cinderslime_block",
+    "modernfoundry:amethyst_bronze_block",
+    "modernfoundry:rose_gold_block",
+    "modernfoundry:pig_iron_block",
+    "modernfoundry:fake_storage_block",
+    "modernfoundry:ichor_slime_dirt",
+    "modernfoundry:ichor_earth_slime_grass",
+    "modernfoundry:ichor_sky_slime_grass",
+    "modernfoundry:earth_ichor_slime_grass",
+    "modernfoundry:sky_ichor_slime_grass",
+    "modernfoundry:ichor_ichor_slime_grass",
+    "modernfoundry:blood_ichor_slime_grass",
+    "modernfoundry:ichor_vanilla_slime_grass",
+    "modernfoundry:bloodshroom_log",
+    "modernfoundry:bloodshroom_wood",
+    "modernfoundry:seared_duct",
+    "modernfoundry:scorched_duct",
+    "modernfoundry:scorched_fluid_cannon",
+    "modernfoundry:tinkers_anvil",
+    "modernfoundry:scorched_anvil"
+  ]
+}
+

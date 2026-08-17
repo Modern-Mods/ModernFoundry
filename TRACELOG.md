@@ -948,3 +948,41 @@
 - Archive validation: the exact JAR contains the pickaxe tag, diamond-tool tag, and `data/modernfoundry/loot_table/blocks/cobalt_ore.json`, each containing `modernfoundry:cobalt_ore` where expected; `git diff --check` passed.
 - Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.4-NeoForge.jar`; SHA-256 `4a48afbf07d572ee50ef1c8ebaa94c93277575ce3ffc1765fd1a76d69b35418e`.
 - Manual validation: not performed; fresh-world Nether mining with diamond and netherite pickaxes remains the gameplay smoke-test gap.
+
+## 2026-08-17 - Restore complete block harvest-tag coverage
+
+**Prompt / Task**
+- Audit tool materials and block harvest levels against `References/TinkersConstruct-1.20.1/` and fix every incorrect or missing mining-level/tool-type assignment.
+
+**What Changed**
+- Restored the shipped `minecraft` mineable tags for axe, hoe, pickaxe, and shovel.
+- Restored the shipped Minecraft and NeoForge wood, stone, iron, gold, diamond, and netherite harvest-tier tags.
+- Kept `modernfoundry:cobalt_ore` in the Diamond tier only, so diamond and netherite tools qualify; removed it from the lower Iron/Gold assignments.
+- Kept `modernfoundry:seared_fuel_tank` and `modernfoundry:seared_melter` in Stone and out of Gold.
+- Confirmed the 93 material-stat files, including mining tier and speed, match the reference after `tconstruct` to `modernfoundry` namespace normalization.
+
+**Steps Taken**
+- Read the empty root `TASK.md` and confirmed the active `Neo/1.21.1` branch.
+- Compared all 10 shipped harvest/mineable tag files with the corresponding reference files, accounting for the intentional cobalt and seared-fuel-tier corrections.
+- Parsed every changed/new tag as JSON and checked the focused tag assignments directly.
+- Ran the clean production build and inspected the resulting archive for all harvest tags and the existing cobalt ore loot table.
+
+**Architecture / Module Ownership**
+- Relevant resource changes: `src/generated/resources/data/{minecraft,neoforge}/tags/block/` harvest and mineable JSON files.
+- Owning module/system: vanilla/NeoForge block harvest tags consumed by Minecraft's correct-tool-for-drops logic.
+- Existing logic reused or extracted: existing `BlockTagProvider` assignments, vanilla Diamond-tier inheritance for netherite, and the existing cobalt ore loot table; no Java code or loot-table rewrite was needed.
+- Net line change: 514 added lines and 1 removed line across 10 generated tag files; 7 new files and 3 updated files.
+- New files: axe, hoe, shovel, iron, gold, netherite, and wood harvest-tag JSON files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Fixed the shipped data at the tag layer where Minecraft decides whether a block breaks with correct drops, instead of adding custom block-break logic or duplicating loot behavior.
+- Preserved the requested Diamond+ boundary and existing material-stat values; no unrelated balance changes were introduced.
+
+**Build / Validation**
+- Production build: `rtk .\\gradlew.bat clean build --console=plain --no-daemon` passed in 7m37s; existing deprecation warnings remain.
+- Tests/checks: Gradle `:test` and `:check` passed; `:testJunit` reported `NO-SOURCE`.
+- Static validation: `git diff --check` passed; all 10 tag comparisons passed; all 93 material-stat comparisons passed.
+- Archive validation: the exact JAR contains all 10 harvest/tag entries and `data/modernfoundry/loot_table/blocks/cobalt_ore.json`; cobalt is Diamond-only and the cobalt loot table has pools/output.
+- Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.4-NeoForge.jar`; SHA-256 `145dfb244cdade4dc47faadbef504974e1bae2b509f5fea2f117e787ff0e8fb8`.
+- Manual validation: not performed. Fresh-world Nether mining with diamond and netherite pickaxes, plus client/dedicated-server smoke tests, remain outstanding.

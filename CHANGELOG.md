@@ -54,3 +54,8 @@
     * Verified all 45 tool definitions, 98 material definitions, 93 material-stat files, 93 trait files, and 292 modifier files after the required 1.21.1 namespace/API translations.
 * Fixed Enderslime, Skyslime, and Terracube hitboxes being larger than their rendered bodies.
     * Updated their Minecraft 1.21.1 slime base dimensions from the legacy `2.04F` value to `0.52F`.
+* Restored complete block harvest-tag coverage from the Tinkers Construct 1.20.1 reference.
+    * Restored the axe, hoe, pickaxe, and shovel mineable tags plus the wood, stone, iron, gold, diamond, and netherite tier tags.
+    * Kept cobalt ore Diamond+ and seared fuel tanks/melters Stone-tier; all 93 material-stat files match the reference after namespace translation.
+* Built and verified the updated Modern Foundry 1.21.1-4.1.4 NeoForge JAR.
+    * SHA-256: `145dfb244cdade4dc47faadbef504974e1bae2b509f5fea2f117e787ff0e8fb8`.

@@ -62,6 +62,8 @@ Tools store their materials, statistics, modifiers, and additional data as part 
 
 Modern Foundry extends the foundry theme into the world with slime materials, crystals, foliage, trees, grass, vines, blocks, heads, particles, structures, and custom entities. Earth, sky, ender, magma, and other slime-related content connect exploration and world generation back to the materials used in tool construction.
 
+Nether cobalt ore is a Diamond+ harvest block: diamond and netherite pickaxes can mine it for drops.
+
 ## The core progression
 
 1.  Gather ores, wood, patterns, and crafting components.
