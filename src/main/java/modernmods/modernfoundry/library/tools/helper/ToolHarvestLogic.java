@@ -223,6 +223,18 @@ public class ToolHarvestLogic {
    * @return  True if the block break is overridden.
    */
   public static boolean handleBlockBreak(ItemStack stack, BlockPos pos, Player player) {
+    return handleBlockBreak(stack, pos, player, BlockSideHitListener.getSideHit(player));
+  }
+
+  /**
+   * Handles a block break when the caller has the current hit face available.
+   * @param stack   Stack instance for breaking
+   * @param pos     Position to break
+   * @param player  Player instance
+   * @param sideHit Side of the block being hit, or null to use the tracked side
+   * @return True if the block break was overridden
+   */
+  public static boolean handleBlockBreak(ItemStack stack, BlockPos pos, Player player, @Nullable Direction sideHit) {
     // TODO: offhand harvest reconsidering
     /* this is a really dumb hack.
     // Basically when something with silktouch harvests a block from the offhand
@@ -245,19 +257,19 @@ public class ToolHarvestLogic {
 
     // if broken, clear the item stack temporarily then break
     ToolStack tool = ToolStack.from(stack);
-    Direction sideHit = BlockSideHitListener.getSideHit(player);
+    Direction hitFace = sideHit != null ? sideHit : BlockSideHitListener.getSideHit(player);
     ServerLevel world = serverPlayer.serverLevel();
     BlockState state = world.getBlockState(pos);
     if (tool.isBroken()) {
       // no harvest context
       player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-      ToolHarvestContext context = new ToolHarvestContext(world, serverPlayer, state, pos, sideHit,
+      ToolHarvestContext context = new ToolHarvestContext(world, serverPlayer, state, pos, hitFace,
         !player.isCreative() && state.canHarvestBlock(world, pos, player), false);
       breakBlock(tool, ItemStack.EMPTY, context, true);
       player.setItemInHand(InteractionHand.MAIN_HAND, stack);
     } else {
       // run standard breaking logic
-      runBlockBreak(stack, tool, state, pos, sideHit, serverPlayer, null);
+      runBlockBreak(stack, tool, state, pos, hitFace, serverPlayer, null);
     }
     return true;
   }

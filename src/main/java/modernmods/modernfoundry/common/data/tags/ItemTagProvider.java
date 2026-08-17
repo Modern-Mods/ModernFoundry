@@ -200,6 +200,8 @@ public class ItemTagProvider extends ItemTagsProvider {
     this.tag(Tags.Items.STORAGE_BLOCKS).addTag(amethystStorageBlockItems);
 
     // glass
+    this.tag(Tags.Items.GLASS)
+        .addTags(Tags.Items.GLASS_COLORLESS, Tags.Items.GLASS_TINTED, Tags.Items.GLASS_SILICA, Tags.Items.STAINED_GLASS);
     copy(Tags.Blocks.GLASS_SILICA, Tags.Items.GLASS_SILICA);
     copy(Tags.Blocks.GLASS_TINTED, Tags.Items.GLASS_TINTED);
     copy(TinkerTags.Blocks.GLASS_PANES_SILICA, TinkerTags.Items.GLASS_PANES_SILICA);

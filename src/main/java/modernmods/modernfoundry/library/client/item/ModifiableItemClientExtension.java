@@ -37,8 +37,8 @@ public class ModifiableItemClientExtension implements IClientItemExtensions {
       switch (anim) {
         // merged BLOCK and NONE - same code
         case NONE, BLOCK:
-          applyItemArmTransform(poseStack, equipProgress, sideOffset);
-          break;
+          // Let ItemInHandRenderer apply the vanilla arm transform.
+          return false;
 
         case EAT:
         case DRINK:
@@ -139,6 +139,10 @@ public class ModifiableItemClientExtension implements IClientItemExtensions {
             poseStack.mulPose(Axis.XP.rotationDegrees(xRot));
           }
           // end: applyBrushTransform
+          break;
+        default:
+          // Unhandled use animations belong to the vanilla renderer.
+          return false;
       }
     } else if (player.isAutoSpinAttack()) {
       applyItemArmTransform(poseStack, equipProgress, sideOffset);
@@ -146,18 +150,8 @@ public class ModifiableItemClientExtension implements IClientItemExtensions {
       poseStack.mulPose(Axis.YP.rotationDegrees(sideOffset * 105));
       poseStack.mulPose(Axis.ZP.rotationDegrees(sideOffset * -85));
     } else {
-      poseStack.translate(
-        sideOffset * -0.4f * Mth.sin(Mth.sqrt(swingProgress) * PI),
-        0.2f * Mth.sin(Mth.sqrt(swingProgress) * PI * 2),
-        -0.2f * Mth.sin(swingProgress * PI));
-      applyItemArmTransform(poseStack, equipProgress, sideOffset);
-      // begin: applyItemArmAttackTransform
-      poseStack.mulPose(Axis.YP.rotationDegrees(sideOffset * (45 + Mth.sin(swingProgress * swingProgress * (float)Math.PI) * -20)));
-      float rotation = Mth.sin(Mth.sqrt(swingProgress) * PI);
-      poseStack.mulPose(Axis.ZP.rotationDegrees(sideOffset * rotation * -20));
-      poseStack.mulPose(Axis.XP.rotationDegrees(rotation * -80));
-      poseStack.mulPose(Axis.YP.rotationDegrees(sideOffset * -45));
-      // end: applyItemArmAttackTransform
+      // Let ItemInHandRenderer apply vanilla equip and swing transforms.
+      return false;
     }
     return true;
   }

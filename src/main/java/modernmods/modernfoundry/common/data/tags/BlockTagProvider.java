@@ -29,6 +29,7 @@ import modernmods.modernfoundry.shared.TinkerMaterials;
 import modernmods.modernfoundry.shared.block.ClearStainedGlassBlock.GlassColor;
 import modernmods.modernfoundry.shared.block.SlimeType;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
+import modernmods.modernfoundry.smeltery.block.component.SearedTankBlock.TankType;
 import modernmods.modernfoundry.smeltery.data.SmelteryCompat;
 import modernmods.modernfoundry.smeltery.data.SmelteryCompat.CompatType;
 import modernmods.modernfoundry.tables.TinkerTables;
@@ -491,6 +492,8 @@ public class BlockTagProvider extends BlockTagsProvider {
     tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_GOLD_TOOL, TinkerSmeltery.searedLantern,   TinkerSmeltery.searedFaucet,   TinkerSmeltery.searedChannel,   TinkerSmeltery.searedBasin,   TinkerSmeltery.searedTable,   TinkerSmeltery.searedCastingTank);
     tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_GOLD_TOOL, TinkerSmeltery.scorchedLantern, TinkerSmeltery.scorchedFaucet, TinkerSmeltery.scorchedChannel, TinkerSmeltery.scorchedBasin, TinkerSmeltery.scorchedTable);
     tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_GOLD_TOOL, TinkerSmeltery.searedHeater, TinkerSmeltery.searedMelter, TinkerSmeltery.scorchedAlloyer);
+    this.tag(NEEDS_GOLD_TOOL).remove(TinkerSmeltery.searedTank.get(TankType.FUEL_TANK), TinkerSmeltery.searedMelter.get());
+    this.tag(NEEDS_STONE_TOOL).add(TinkerSmeltery.searedTank.get(TankType.FUEL_TANK), TinkerSmeltery.searedMelter.get());
     // tough seared + scorched
     tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_STONE_TOOL, TinkerSmeltery.searedDrain, TinkerSmeltery.searedChute, TinkerSmeltery.smelteryController, TinkerSmeltery.searedFluidCannon, TinkerSmeltery.copperGauge);
     tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, TinkerSmeltery.searedDuct, TinkerSmeltery.scorchedDuct, TinkerSmeltery.scorchedFluidCannon);

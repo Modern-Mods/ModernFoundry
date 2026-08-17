@@ -4,6 +4,11 @@
       "type": "minecraft:directory",
       "source": "fluid",
       "prefix": "fluid/"
+    },
+    {
+      "type": "minecraft:directory",
+      "source": "gui/tinker_pattern",
+      "prefix": "gui/tinker_pattern/"
     }
   ]
 }

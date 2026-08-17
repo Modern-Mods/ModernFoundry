@@ -29,6 +29,7 @@ The processing line is built around both seared and scorched structures. Dependi
 
 *   Melters, heaters, alloyers, Smeltery Controllers, and Foundry Controllers
 *   Seared and scorched tanks, casting tanks, gauges, drains, ducts, chutes, channels, and faucets
+*   Seared melters and fuel tanks use the common glass tag and are harvestable with a stone pickaxe
 *   Casting Tables and Casting Basins for parts, ingots, nuggets, gems, plates, gears, wires, and special components
 *   Fluid cannons, portable tanks, copper cans, and other fluid-handling tools
 *   Data-driven melting, alloying, casting, container-filling, and cast-duplication recipes
@@ -40,6 +41,10 @@ This makes the foundry more than a single machine: it is a connected production 
 The current tool library covers mining, excavation, farming, combat, ranged combat, exploration, and utility. Examples include pickaxes, sledge hammers, vein hammers, mattocks, pickadzes, excavators, hand axes, broad axes, kamas, scythes, daggers, swords, cleavers, longbows, crossbows, fishing rods, javelins, arrows, shurikens, throwing axes, staffs, melting pans, war picks, battlesigns, and swashers.
 
 The bundle also includes modifiable shields, slime-themed armor, slime wings, crystalshot ammunition, and other equipment built on the same material-and-modifier systems.
+
+Ordinary Modern Foundry tools and weapons use vanilla-style first-person equip, attack-speed cooldown, and swing animations.
+
+Server-side modifiable-tool block breaking uses the shared harvest path, preserving tool-specific area-of-effect mining and other block-break behavior.
 
 ### Materials, fluids, and traits
 

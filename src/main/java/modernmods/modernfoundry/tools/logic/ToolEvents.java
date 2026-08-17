@@ -38,6 +38,8 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent.LivingVisibilityEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock.Action;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -75,6 +77,9 @@ import modernmods.modernfoundry.library.tools.helper.ArmorUtil;
 import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
 import modernmods.modernfoundry.library.tools.helper.ToolAttackUtil;
 import modernmods.modernfoundry.library.tools.helper.ToolDamageUtil;
+import modernmods.modernfoundry.library.tools.helper.ToolHarvestLogic;
+import modernmods.modernfoundry.library.tools.item.ModifiableItem;
+import modernmods.modernfoundry.library.tools.item.ranged.ModifiableLauncherItem;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 import modernmods.modernfoundry.library.tools.nbt.ModDataNBT;
 import modernmods.modernfoundry.library.tools.nbt.ModifierNBT;
@@ -93,6 +98,34 @@ import java.util.Objects;
  */
 @EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.GAME)
 public class ToolEvents {
+  /** Replaces Forge's removed item-level block-start-break hook on NeoForge. */
+  @SubscribeEvent(priority = EventPriority.LOWEST)
+  static void onLeftClickBlock(LeftClickBlock event) {
+    if (event.getAction() != Action.START && event.getAction() != Action.STOP) {
+      return;
+    }
+    ItemStack stack = event.getItemStack();
+    boolean modifiableItem = stack.getItem() instanceof ModifiableItem;
+    boolean modifiableLauncher = stack.getItem() instanceof ModifiableLauncherItem;
+    if (!modifiableItem && !modifiableLauncher) {
+      return;
+    }
+    // Match ModifiableItem#onBlockStartBreak: stacked tools are not breakable.
+    if (modifiableItem && stack.getCount() > 1) {
+      if (event.getAction() == Action.START) {
+        event.setCanceled(true);
+      }
+      return;
+    }
+    // START precedes vanilla mining progress; STOP is the completed-break hook.
+    if (event.getAction() != Action.STOP || event.isCanceled() || event.getLevel().isClientSide()) {
+      return;
+    }
+    if (ToolHarvestLogic.handleBlockBreak(stack, event.getPos(), event.getEntity(), event.getFace())) {
+      event.setCanceled(true);
+    }
+  }
+
   @SuppressWarnings("removal")
   @SubscribeEvent
   static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
