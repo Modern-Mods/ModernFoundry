@@ -615,3 +615,101 @@
 - Exact artifact verified: `build/libs/ModernFoundry-1.21.1-4.1.0-NeoForge.jar`; SHA-256 `f4112ca95ae790deed89b9d9be5829c413e8cc919f349ce6fd5591e43b7ad00a`.
 - Tests/checks: existing `test`/`check`, `verifyGeneratedTextures`, parsing of all 9,894 generated JSON files, normalized reference parity audit, and `git diff --check` passed.
 - Manual validation: not performed. A fresh-world client and dedicated-server smoke matrix is still required for mining speed, AOE/vein/tree/crop behavior, melee/severing, projectiles, melting, hybrid tools, and both shields.
+
+## 2026-08-16 - Preserve anvil material textures across reloads
+
+**Prompt / Task**
+- Preserve a manyullyn/material texture on a Modern Foundry Anvil after a client restart.
+
+**What Changed**
+- Migrated `RetexturedTableBlockEntity` texture persistence to provider-aware `saveSynced` and `loadAdditional` hooks.
+- Migrated `TinkerStationBlockEntity` material persistence to the same active hooks, covering Tinkers and Scorched Anvils.
+- Kept the existing `texture` and `Material` NBT keys and dynamic model path unchanged.
+
+**Steps Taken**
+- Read the root `TASK.md`, which is currently empty.
+- Traced anvil placement through `TinkerStationBlock` and the shared retextured table block entity.
+- Verified the Hilt 1.13 save/load bridge and NeoForge 1.21.1 block-entity persistence signatures before changing the overrides.
+- Preserved unrelated generated, documentation, and configuration state in the worktree.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `tables/block/entity/table/RetexturedTableBlockEntity.java` and `TinkerStationBlockEntity.java`.
+- Owning module/system: Modern Foundry retextured table block entities and dynamic anvil model data.
+- Existing logic reused or extracted: existing texture/material serialization, `RetexturedHelper`, and `ModelProperties` model-data flow.
+- Net line change: 2 source lines net; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- NeoForge 1.21.1 loads world block entities through `loadAdditional` and saves them through provider-aware `saveAdditional`; Hilt delegates its synchronized data through the matching provider-aware `saveSynced` hook. The old no-provider overrides were not part of the disk path.
+- Fixed the shared persistence boundary so all retextured tables benefit, while leaving IDs, resource models, and gameplay behavior unchanged.
+
+**Build / Validation**
+- Production compile: `rtk proxy .\\gradlew.bat compileJava --console=plain --no-daemon` passed; existing deprecation warnings remained.
+- Production build: `rtk proxy .\\gradlew.bat build --console=plain --no-daemon` passed in 3m 45s, including `test`, `check`, and `verifyGeneratedTextures`.
+- Exact artifact verified: `build/libs/ModernFoundry-1.21.1-4.1.1-NeoForge.jar`; SHA-256 `002a0b5c486bb9505257827c9a1c0cdecfb8589d404d7ee3b067f28534aa6972`.
+- Tests/checks: `git diff --check` passed; `testJunit` reported `NO-SOURCE`.
+- Manual validation: not performed. A client smoke test placing a manyullyn anvil, restarting the client/world, and checking both anvil variants remains required.
+
+## 2026-08-16 - Write anvil textures through the chunk-save path
+
+**Prompt / Task**
+- Fix anvils still reverting to the stock appearance after relogging; Jade also showed the original untextured anvil.
+
+**What Changed**
+- Added provider-aware `saveAdditional` overrides to `RetexturedTableBlockEntity` and `TinkerStationBlockEntity`.
+- Persisted the existing `texture` and `Material` keys directly through the inventory block-entity disk-save path.
+- Retained `saveSynced` for update tags and `loadAdditional` for world/client loading.
+
+**Steps Taken**
+- Used the supplied screenshot as runtime evidence: the Jade pick-stack icon confirmed the block entity had fallen back to the default texture state.
+- Inspected Hilt 1.13 bytecode and found `InventoryBlockEntity.saveAdditional` writes inventory through `NameableBlockEntity` without delegating to Hilt's `saveSynced` bridge.
+- Added the missing disk-save hooks, rebuilt the project, and reviewed the complete diff.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `tables/block/entity/table/RetexturedTableBlockEntity.java` and `TinkerStationBlockEntity.java`.
+- Owning module/system: Modern Foundry retextured table block-entity persistence and dynamic anvil model data.
+- Existing logic reused or extracted: existing NBT keys, `RetexturedHelper`, `ModelProperties`, and provider-aware load/update hooks.
+- Net line change: 16 additional source lines; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The previous fix corrected the provider-aware sync/load signatures but did not cover the actual world-save override inherited from `InventoryBlockEntity`. Explicit `saveAdditional` serialization closes that gap without changing IDs, models, or gameplay behavior.
+
+**Build / Validation**
+- Production compile: `rtk proxy .\\gradlew.bat compileJava --console=plain --no-daemon` passed; existing deprecation warnings remained.
+- Production build: `rtk proxy .\\gradlew.bat build --console=plain --no-daemon` passed in 51s, including `test`, `check`, and `verifyGeneratedTextures`.
+- Exact artifact verified: `build/libs/ModernFoundry-1.21.1-4.1.1-NeoForge.jar`; SHA-256 `1e6ff9e9837e3058b51c71167cf1b88ed68aa58c311ac537e5911bafb64564c3`.
+- Tests/checks: `git diff --check` passed; `testJunit` reported `NO-SOURCE`.
+- Manual validation: not performed. The rebuilt JAR still requires the in-game manyullyn-anvil placement/relog/Jade smoke test.
+
+## 2026-08-16 - Refresh anvil model data after reload
+
+**Prompt / Task**
+- Fix manyullyn/material anvils that render as the stock white anvil after relogging and only regain their color after a nearby block is broken.
+
+**What Changed**
+- Replaced the ineffective `getModelData()` comparison in `RetexturedTableBlockEntity.textureUpdated()` with Hilt's existing `RetexturedHelper.onTextureUpdated(this)` refresh path.
+- Reloaded retextured tables now request fresh model data and send the normal block update, invalidating the client renderer cache immediately.
+- Kept the existing NBT keys, material/texture selection, block IDs, and model resources unchanged.
+
+**Steps Taken**
+- Used the nearby-block-break behavior to identify stale client model data rather than missing material persistence.
+- Traced the shared retextured-table update path and reused the existing Hilt helper instead of adding a second renderer refresh mechanism.
+- Rebuilt the project and reviewed the complete worktree diff.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `tables/block/entity/table/RetexturedTableBlockEntity.java`.
+- Owning module/system: Modern Foundry retextured table block entities and dynamic anvil model data.
+- Existing logic reused or extracted: Hilt `RetexturedHelper`, `ModelProperties` model-data flow, and the provider-aware persistence hooks from the preceding fix.
+- Net line change: replaced the dead comparison with one shared helper call; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The old comparison inspected model data after `texture` had already been changed, so it could compare equal and skip `requestModelDataUpdate()`. A neighboring block break then forced the rebuild, which exactly matched the reported behavior.
+- The shared helper is the smallest fix that covers every retextured table using this path without changing gameplay or save data.
+
+**Build / Validation**
+- Production build: `rtk proxy cmd.exe /d /c ".\\gradlew.bat build --console=plain --no-daemon"` passed in 55s, including `test`, `check`, and `verifyGeneratedTextures`.
+- Exact artifact verified: `build/libs/ModernFoundry-1.21.1-4.1.1-NeoForge.jar`; SHA-256 `35be57576b3741ac096f6eb2f952359145c81cce5ec5289d7a1dfe462d6224ae`.
+- Tests/checks: `testJunit` reported `NO-SOURCE`; `git diff --check` passed.
+- Manual validation: not performed. The new JAR still requires a fresh manyullyn-anvil placement, relog/client restart, Jade tooltip, and nearby-block-break smoke test.

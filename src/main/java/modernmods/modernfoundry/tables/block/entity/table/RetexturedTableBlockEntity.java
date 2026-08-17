@@ -2,6 +2,7 @@ package modernmods.modernfoundry.tables.block.entity.table;
 
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -44,16 +45,7 @@ public abstract class RetexturedTableBlockEntity extends TableBlockEntity implem
   }
 
   private void textureUpdated() {
-    // update the texture in BE data
-    if (level != null && level.isClientSide) {
-      Block normalizedTexture = texture == Blocks.AIR ? null : texture;
-      ModelData data = getModelData();
-      if (data.get(RetexturedHelper.BLOCK_PROPERTY) != normalizedTexture) {
-        requestModelDataUpdate();
-        BlockState state = getBlockState();
-        level.sendBlockUpdated(worldPosition, state, state, 0);
-      }
-    }
+    RetexturedHelper.onTextureUpdated(this);
   }
 
   @Override
@@ -67,16 +59,24 @@ public abstract class RetexturedTableBlockEntity extends TableBlockEntity implem
   }
 
   @Override
-  public void saveSynced(CompoundTag tags) {
-    super.saveSynced(tags);
+  public void saveSynced(CompoundTag tags, HolderLookup.Provider registries) {
+    super.saveSynced(tags, registries);
     if (texture != Blocks.AIR) {
       tags.putString(TAG_TEXTURE, getTextureName());
     }
   }
 
   @Override
-  public void load(CompoundTag tags) {
-    super.load(tags);
+  public void saveAdditional(CompoundTag tags, HolderLookup.Provider registries) {
+    super.saveAdditional(tags, registries);
+    if (texture != Blocks.AIR) {
+      tags.putString(TAG_TEXTURE, getTextureName());
+    }
+  }
+
+  @Override
+  public void loadAdditional(CompoundTag tags, HolderLookup.Provider registries) {
+    super.loadAdditional(tags, registries);
     if (tags.contains(TAG_TEXTURE, Tag.TAG_STRING)) {
       texture = RetexturedHelper.getBlock(tags.getString(TAG_TEXTURE));
       textureUpdated();

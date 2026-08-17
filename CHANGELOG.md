@@ -1,4 +1,10 @@
 # Unreleased
+* Fixed Modern Foundry Anvil colors staying stock until a nearby block update.
+    * Reloaded anvils now invalidate their cached model data immediately, so the saved manyullyn/material texture is rendered without breaking another block.
+* Fixed Anvil material textures not being written to chunk NBT.
+    * Added explicit provider-aware `saveAdditional` hooks because the inventory block-entity save path bypasses Hilt's synchronized-data hook.
+* Fixed Modern Foundry Anvils losing their material texture after a client/world restart.
+    * Migrated retextured table and anvil material block-entity persistence to NeoForge 1.21.1's provider-aware save/load hooks.
 * Documented Modern Foundry directory ownership and allowed edit boundaries in `AGENTS.md`.
 * Added GitHub Actions release automation for Modern Foundry.
     * Builds Modern Foundry on every push and publishes only new `mod_version` releases.
