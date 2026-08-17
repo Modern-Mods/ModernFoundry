@@ -53,3 +53,6 @@
 
 ## 2026-08-17 - Suggestions after vanilla glass tag repair
 - Perform a fresh-world client smoke test for seared and scorched gauges/tanks using vanilla glass; static build and archive checks do not prove in-game crafting tag resolution.
+
+## 2026-08-17 - Suggestions after latest JAR build
+- Perform the existing fresh-world client and dedicated-server smoke tests before treating the 4.1.4 JAR as runtime-validated.

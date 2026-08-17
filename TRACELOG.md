@@ -881,3 +881,70 @@
 - Static validation: `git diff --check` passed; the exact JAR archive contains all four corrected tag files and all four seared/scorched fuel gauge/tank recipes.
 - Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.3-NeoForge.jar`; SHA-256 `4ea4eef92250eeeaa356d9386ba877568a119a8da40309e13b9fb05adf02e459`.
 - Manual validation: not performed. A fresh-world client smoke test remains useful for recipe UI and runtime tag resolution.
+
+## 2026-08-17 - Build ModernFoundry 4.1.4 JAR
+
+**Prompt / Task**
+- Build the latest Modern Foundry JAR.
+
+**What Changed**
+- Produced the versioned 4.1.4 NeoForge JAR from the clean checkout.
+- No source or shipped resource changes were made.
+
+**Steps Taken**
+- Read the empty root `TASK.md` and confirmed the active `Neo/1.21.1` branch.
+- Checked `gradle.properties`, the local Hilt 1.13 dependency, and the clean worktree.
+- Ran `rtk .\\gradlew.bat clean build --console=plain --no-daemon`.
+- Inspected the exact primary JAR and confirmed its required descriptor, metadata, repaired glass tag, and fuel-tank recipe entries.
+
+**Architecture / Module Ownership**
+- Relevant artifact: `build/libs/ModernFoundry-1.21.1-4.1.4-NeoForge.jar`.
+- Owning module/system: Gradle production build and NeoForge JAR packaging.
+- Existing logic reused or extracted: existing Gradle wrapper, resource processing, tests, and packaging tasks.
+- Net line change: zero source/resource lines; build output is generated and ignored.
+- New files: none in the repository.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Used the clean build path to ensure the reported JAR was regenerated from the current version instead of relying on a stale artifact.
+
+**Build / Validation**
+- Production build: `rtk .\\gradlew.bat clean build --console=plain --no-daemon` passed in 7m49s; existing deprecation warnings remain.
+- Tests/checks: Gradle `:test` and `:check` passed; `:testJunit` reported `NO-SOURCE`.
+- Archive validation: `META-INF/neoforge.mods.toml`, `pack.mcmeta`, `data/c/tags/item/glass/colorless.json`, and the seared fuel-tank recipe are present.
+- Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.4-NeoForge.jar`; SHA-256 `238b86893f814f95341f1fff10bc3bab8c704633f1f17dddb387688f35768ada`.
+- Manual validation: not performed; client, dedicated-server, and fresh-world smoke tests remain outstanding.
+
+## 2026-08-17 - Make cobalt ore harvestable with diamond-tier tools
+
+**Prompt / Task**
+- Make Nether cobalt ore drop its ore output when mined with a diamond pickaxe; diamond+ includes netherite.
+
+**What Changed**
+- Added `modernfoundry:cobalt_ore` to `minecraft:mineable/pickaxe`.
+- Added `modernfoundry:cobalt_ore` to `minecraft:needs_diamond_tool`, so diamond and netherite tools qualify.
+- Updated the dormant `BlockTagProvider` to preserve the diamond-tier harvest requirement during future data generation.
+
+**Steps Taken**
+- Read the empty root `TASK.md` and confirmed the active `Neo/1.21.1` branch.
+- Traced `TinkerWorld.cobaltOre`, its `requiresCorrectToolForDrops()` property, the shipped vanilla harvest tags, and the existing cobalt ore loot table.
+- Found that the shipped pickaxe tag contained only the seared melter and fuel tank, while cobalt ore was absent from a vanilla harvest-tier tag.
+- Updated the canonical generated resources and the dormant provider without changing the existing loot table.
+
+**Architecture / Module Ownership**
+- Relevant source/resource changes: `common/data/tags/BlockTagProvider.java` and `data/minecraft/tags/block/{mineable/pickaxe,needs_diamond_tool}.json`.
+- Owning module/system: vanilla Minecraft block harvest tags and Modern Foundry cobalt ore loot data.
+- Existing logic reused or extracted: `requiresCorrectToolForDrops()`, vanilla diamond-tier tag semantics, and the existing `blocks/cobalt_ore` loot table.
+- Net line change: 9 additions and 2 removals across the source and shipped tag resources.
+- New files: `data/minecraft/tags/block/needs_diamond_tool.json`.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Kept the requested Diamond+ boundary at the vanilla tag layer; netherite inherits diamond-tier eligibility without a second custom rule or loot-table change.
+
+**Build / Validation**
+- Production build: `rtk .\\gradlew.bat clean build --console=plain --no-daemon` passed in 4m33s; existing deprecation warnings remain.
+- Tests/checks: Gradle `:test` and `:check` passed; `:testJunit` reported `NO-SOURCE`.
+- Archive validation: the exact JAR contains the pickaxe tag, diamond-tool tag, and `data/modernfoundry/loot_table/blocks/cobalt_ore.json`, each containing `modernfoundry:cobalt_ore` where expected; `git diff --check` passed.
+- Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.4-NeoForge.jar`; SHA-256 `4a48afbf07d572ee50ef1c8ebaa94c93277575ce3ffc1765fd1a76d69b35418e`.
+- Manual validation: not performed; fresh-world Nether mining with diamond and netherite pickaxes remains the gameplay smoke-test gap.

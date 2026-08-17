@@ -1,4 +1,8 @@
 # Unreleased
+* Fixed Nether cobalt ore drops when mined with diamond-tier tools.
+    * Added cobalt ore to the vanilla pickaxe and diamond-tool tags; netherite tools qualify through the vanilla diamond-tier tag.
+* Built and verified the latest Modern Foundry 1.21.1-4.1.4 NeoForge JAR.
+    * SHA-256: `238b86893f814f95341f1fff10bc3bab8c704633f1f17dddb387688f35768ada`.
 * Fixed common colorless glass tags omitting vanilla glass.
     * Early fuel gauges, tanks, and pane-based smeltery recipes now accept vanilla glass before a smeltery or melter is available.
 * Fixed Modern Foundry 1.21.1 island templates not being discoverable by Minecraft.
