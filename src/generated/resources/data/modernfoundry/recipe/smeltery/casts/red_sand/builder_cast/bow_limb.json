@@ -2,8 +2,6 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/red_sand/builder_cast/bow_limb",
   "pattern": "modernfoundry:bow_limb",
-  "pattern_item": {
-    "tag": "modernfoundry:casts/red_sand"
-  },
+  "pattern_item": "#modernfoundry:casts/red_sand",
   "result": "modernfoundry:bow_limb_red_sand_cast"
 }

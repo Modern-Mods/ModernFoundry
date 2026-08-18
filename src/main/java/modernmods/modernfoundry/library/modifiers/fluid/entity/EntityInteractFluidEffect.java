@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.ForgeHooks;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.library.modifiers.fluid.EffectLevel;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffect;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffectContext;
@@ -55,11 +55,9 @@ public enum EntityInteractFluidEffect implements FluidEffect<FluidEffectContext.
         InteractionResult result = ForgeHooks.onInteractEntityAt(player, target, new EntityHitResult(target, context.getLocation()), hand);
         // skipped: never spectator mode if we made it this far
         if (result == null) {
-          // no forge override, so find first success from vanilla hooks
-          result = target.interactAt(player, hit, hand);
-          if (!result.consumesAction()) {
-            result = player.interactOn(context.getTarget(), hand);
-          }
+          // 26.1.2 removed Entity#interactAt; Player#interactOn(entity, hand, location) now performs both the
+          // entity's interactAt and the player-on-entity interaction, so a single call replaces the old pair
+          result = player.interactOn(context.getTarget(), hand, hit);
         }
         // long range arm swinging
         if (result != InteractionResult.PASS) {

@@ -1,16 +1,12 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/red_sand/molding/leggings_plating",
-  "material": {
-    "tag": "modernfoundry:casts/red_sand"
-  },
+  "material": "#modernfoundry:casts/red_sand",
   "pattern": [
+    "modernfoundry:leggings_plating_dummy",
     {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:leggings_plating"
-    },
-    {
-      "item": "modernfoundry:leggings_plating_dummy"
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:leggings_plating"
     }
   ],
   "result": "modernfoundry:leggings_plating_red_sand_cast"

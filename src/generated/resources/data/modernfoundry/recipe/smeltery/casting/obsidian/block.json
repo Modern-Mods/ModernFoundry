@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/obsidian/block",
   "cooling_time": 221,
   "fluid": {
     "amount": 1000,
     "tag": "modernfoundry:molten_obsidian"
   },
+  "id": "modernfoundry:smeltery/casting/obsidian/block",
   "result": "minecraft:obsidian"
 }

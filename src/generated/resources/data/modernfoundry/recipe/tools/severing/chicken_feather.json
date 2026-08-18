@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:ageable_severing",
-  "id": "modernfoundry:tools/severing/chicken_feather",
   "adult_result": {
     "count": 2,
     "item": "minecraft:feather"
@@ -8,6 +7,7 @@
   "entity": {
     "type": "minecraft:chicken"
   },
+  "id": "modernfoundry:tools/severing/chicken_feather",
   "looting_bonus": 0.01,
   "per_level_chance": 0.05
 }

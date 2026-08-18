@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/slime/sky/block",
-  "cast": {
-    "item": "modernfoundry:sky_congealed_slime"
-  },
+  "cast": "modernfoundry:sky_congealed_slime",
   "cast_consumed": true,
   "cooling_time": 107,
   "fluid": {
     "amount": 1250,
     "tag": "modernfoundry:sky_slime"
   },
+  "id": "modernfoundry:smeltery/casting/slime/sky/block",
   "result": "modernfoundry:sky_slime"
 }

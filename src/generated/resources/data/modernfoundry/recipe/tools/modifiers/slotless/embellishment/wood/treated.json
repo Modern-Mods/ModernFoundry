@@ -1,30 +1,28 @@
 {
-  "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/treated",
-  "allow_crystal": false,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:treated_wood"
     }
   ],
+  "type": "modernfoundry:swappable_modifier",
+  "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/treated",
   "inputs": [
     {
-      "tag": "c:treated_wood"
+      "ingredient": "#c:treated_wood"
     },
     {
-      "item": "modernfoundry:pattern"
+      "ingredient": "modernfoundry:pattern"
     },
     {
-      "tag": "c:treated_wood"
+      "ingredient": "#c:treated_wood"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:treated_wood"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/wood"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/wood",
   "variant_formatter": "modernfoundry:material"
 }

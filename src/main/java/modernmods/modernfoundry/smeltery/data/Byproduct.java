@@ -2,8 +2,8 @@ package modernmods.modernfoundry.smeltery.data;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.registration.object.FluidObject;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.registration.object.FluidObject;
 import modernmods.modernfoundry.fluids.TinkerFluids;
 import modernmods.modernfoundry.library.data.recipe.IByproduct;
 import modernmods.modernfoundry.library.recipe.FluidValues;

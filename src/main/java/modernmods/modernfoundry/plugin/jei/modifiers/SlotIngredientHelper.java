@@ -4,7 +4,7 @@ import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import modernmods.modernfoundry.TConstruct;
@@ -41,12 +41,12 @@ public class SlotIngredientHelper implements IIngredientHelper<SlotCount> {
   }
 
   @Override
-  public String getUniqueId(SlotCount slots, UidContext context) {
+  public Object getUid(SlotCount slots, UidContext context) {
     return getName(slots);
   }
 
   @Override
-  public ResourceLocation getResourceLocation(SlotCount slots) {
+  public Identifier getIdentifier(SlotCount slots) {
     return TConstruct.getResource(getName(slots));
   }
 

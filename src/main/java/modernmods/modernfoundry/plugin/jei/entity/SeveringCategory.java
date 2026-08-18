@@ -5,23 +5,25 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IIngredientAcceptor;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.plugin.jei.HiltJEIConstants;
-import modernmods.hilt.plugin.jei.entity.EntityIngredientRenderer;
-import modernmods.hilt.recipe.ingredient.EntityIngredient;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.plugin.jei.MantleJEIConstants;
+import modernmods.mantle.plugin.jei.entity.EntityIngredientRenderer;
+import modernmods.mantle.recipe.ingredient.EntityIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.recipe.modifiers.severing.SeveringRecipe;
 import modernmods.modernfoundry.plugin.jei.TConstructJEIConstants;
 import modernmods.modernfoundry.tools.TinkerTools;
 
 public class SeveringCategory implements IRecipeCategory<SeveringRecipe> {
-  public static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
+  public static final Identifier BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "severing.title");
 
   /** Renderer instance to use in this category */
@@ -47,11 +49,27 @@ public class SeveringCategory implements IRecipeCategory<SeveringRecipe> {
   }
 
   @Override
+  public int getWidth() {
+    return 100;
+  }
+
+  @Override
+  public int getHeight() {
+    return 38;
+  }
+
+  @Override
+  public void draw(SeveringRecipe recipe, IRecipeSlotsView slots, GuiGraphicsExtractor graphics, double mouseX, double mouseY) {
+    // getBackground() was removed in JEI 27.x; draw our background ourselves
+    background.draw(graphics, 0, 0);
+  }
+
+  @Override
   public void setRecipe(IRecipeLayoutBuilder builder, SeveringRecipe recipe, IFocusGroup focuses) {
     EntityIngredient input = recipe.getIngredient();
     IIngredientAcceptor<?> entities = builder.addSlot(RecipeIngredientRole.INPUT, 3, 3)
-           .setCustomRenderer(HiltJEIConstants.ENTITY_TYPE, entityRenderer)
-           .addIngredients(HiltJEIConstants.ENTITY_TYPE, input.getDisplay());
+           .setCustomRenderer(MantleJEIConstants.ENTITY_TYPE, entityRenderer)
+           .addIngredients(MantleJEIConstants.ENTITY_TYPE, input.getDisplay());
     IIngredientAcceptor<?> eggs = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStacks(input.getEggs());
     builder.createFocusLink(entities, eggs);
 
@@ -60,7 +78,7 @@ public class SeveringCategory implements IRecipeCategory<SeveringRecipe> {
   }
 
   @Override
-  public ResourceLocation getRegistryName(SeveringRecipe recipe) {
+  public Identifier getRegistryName(SeveringRecipe recipe) {
     return recipe.getId();
   }
 }

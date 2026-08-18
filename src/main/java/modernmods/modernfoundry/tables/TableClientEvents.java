@@ -5,13 +5,13 @@ import modernmods.modernfoundry.compat.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+// 26.1: block/item color handlers removed (data-driven BlockTintSources/ItemTintSources in model JSON);
+// the tinkers-chest dye color must be re-expressed as a tint source. Old handlers dropped so the mod loads.
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import modernmods.hilt.client.render.InventoryBlockEntityRenderer;
+import modernmods.mantle.client.render.InventoryBlockEntityRenderer;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.ClientEventBase;
 import modernmods.modernfoundry.shared.block.entity.TableBlockEntity;
@@ -23,11 +23,11 @@ import modernmods.modernfoundry.tables.client.inventory.TinkerChestScreen;
 import modernmods.modernfoundry.tables.client.inventory.TinkerStationScreen;
 
 @SuppressWarnings("unused")
-@EventBusSubscriber(modid=TConstruct.MOD_ID, value=Dist.CLIENT, bus=Bus.MOD)
+@EventBusSubscriber(modid=TConstruct.MOD_ID, value=Dist.CLIENT)
 public class TableClientEvents extends ClientEventBase {
   @SubscribeEvent
   static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-    BlockEntityRendererProvider<TableBlockEntity> tableRenderer = InventoryBlockEntityRenderer::new;
+    BlockEntityRendererProvider<TableBlockEntity, net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState> tableRenderer = InventoryBlockEntityRenderer::new;
     event.registerBlockEntityRenderer(TinkerTables.craftingStationTile.get(), tableRenderer);
     event.registerBlockEntityRenderer(TinkerTables.tinkerStationTile.get(), tableRenderer);
     event.registerBlockEntityRenderer(TinkerTables.modifierWorktableTile.get(), tableRenderer);
@@ -46,21 +46,5 @@ public class TableClientEvents extends ClientEventBase {
     event.register(TinkerTables.tinkerChestContainer.get(), TinkerChestScreen::new);
   }
 
-  @SubscribeEvent
-  static void registerBlockColors(final RegisterColorHandlersEvent.Block event) {
-    event.register((state, world, pos, index) -> {
-      if (world != null && pos != null) {
-        BlockEntity te = world.getBlockEntity(pos);
-        if (te instanceof TinkersChestBlockEntity) {
-          return ((TinkersChestBlockEntity)te).getColor();
-        }
-      }
-      return -1;
-    }, TinkerTables.tinkersChest.get());
-  }
 
-  @SubscribeEvent
-  static void registerItemColors(final RegisterColorHandlersEvent.Item event) {
-    event.register((stack, index) -> ((DyeableLeatherItem)stack.getItem()).getColor(stack), TinkerTables.tinkersChest.asItem());
-  }
 }

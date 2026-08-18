@@ -1,99 +1,68 @@
 package modernmods.modernfoundry.smeltery.item;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ICapabilityProvider;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.transfer.ItemAccessResourceHandler;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import modernmods.modernfoundry.library.fluid.SimpleFluidResourceTank;
 import modernmods.modernfoundry.smeltery.block.entity.component.TankBlockEntity;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 /**
- * Handler that works with a tank item to adjust its tank in NBT
+ * Fluid handler that works with a tank item to adjust its tank in NBT.
+ * Values are stored per-item; the base handler scales them by the stack size.
  */
-@RequiredArgsConstructor
-public class TankItemFluidHandler implements IFluidHandlerItem, ICapabilityProvider {
-  private final LazyOptional<IFluidHandlerItem> holder = LazyOptional.of(() -> this);
-  private final TankItem tankItem;
-  @Getter
-  private final ItemStack container;
+public class TankItemFluidHandler extends ItemAccessResourceHandler<FluidResource> {
+  /** Item this handler was created for; if the item changes the handler reports empty */
+  private final Item validItem;
 
-  /** Gets the tank on the stack */
-  private FluidTank getTank() {
-    // TODO: can we directly use the nested tank as our fluid handler instead of doing this wrapper?
-    // might be more efficient, though it may require validating the stack size/NBT did not change externally
-    return tankItem.getTank(container);
+  public TankItemFluidHandler(ItemAccess itemAccess) {
+    super(itemAccess, 1);
+    this.validItem = itemAccess.getResource().getItem();
   }
 
-  /** Updates the container from the given tank */
-  private void updateContainer(FluidTank tank) {
-    TankItem.setTank(container, tank);
-  }
-
-  @Nonnull
-  @Override
-  public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-    return ForgeCapabilities.FLUID_HANDLER_ITEM.orEmpty(cap, holder);
+  /** Reads the per-item tank from the item */
+  private static SimpleFluidResourceTank readTank(ItemResource accessResource) {
+    return TankItem.getTank(accessResource.toStack(), 1);
   }
 
   @Override
-  public int getTanks() {
-    return 1;
-  }
-
-  @Nonnull
-  @Override
-  public FluidStack getFluidInTank(int tank) {
-    return getTank().getFluidInTank(tank);
-  }
-
-  @Override
-  public int getTankCapacity(int tank) {
-    return TankBlockEntity.getCapacity(container.getItem()) * container.getCount();
-  }
-
-  @Override
-  public boolean isFluidValid(int tank, FluidStack stack) {
-    return true;
-  }
-
-  @Override
-  public int fill(FluidStack resource, FluidAction action) {
-    FluidTank tank = getTank();
-    int didFill = tank.fill(resource, action);
-    if (didFill > 0 && action.execute()) {
-      updateContainer(tank);
+  protected FluidResource getResourceFrom(ItemResource accessResource, int index) {
+    if (!accessResource.is(validItem)) {
+      return FluidResource.EMPTY;
     }
-    return didFill;
+    return FluidResource.of(readTank(accessResource).getFluid());
   }
 
-  @Nonnull
   @Override
-  public FluidStack drain(FluidStack resource, FluidAction action) {
-    FluidTank tank = getTank();
-    FluidStack didDrain = tank.drain(resource, action);
-    if (!didDrain.isEmpty() && action.execute()) {
-      updateContainer(tank);
+  protected int getAmountFrom(ItemResource accessResource, int index) {
+    if (!accessResource.is(validItem)) {
+      return 0;
     }
-    return didDrain;
+    return readTank(accessResource).getFluidAmount();
   }
 
-  @Nonnull
   @Override
-  public FluidStack drain(int maxDrain, FluidAction action) {
-    FluidTank tank = getTank();
-    FluidStack didDrain = tank.drain(maxDrain, action);
-    if (!didDrain.isEmpty() && action.execute()) {
-      updateContainer(tank);
+  protected int getCapacity(int index, FluidResource resource) {
+    return TankBlockEntity.getCapacity(validItem);
+  }
+
+  @Override
+  public boolean isValid(int index, FluidResource resource) {
+    return itemAccess.getResource().is(validItem);
+  }
+
+  @Override
+  protected ItemResource update(ItemResource accessResource, int index, FluidResource newResource, int newAmount) {
+    if (!accessResource.is(validItem)) {
+      return ItemResource.EMPTY;
     }
-    return didDrain;
+    ItemStack stack = accessResource.toStack();
+    SimpleFluidResourceTank tank = TankItem.getTank(stack, 1);
+    tank.setFluid(newAmount == 0 ? FluidStack.EMPTY : newResource.toStack(newAmount));
+    TankItem.setTank(stack, tank);
+    return ItemResource.of(stack);
   }
 }

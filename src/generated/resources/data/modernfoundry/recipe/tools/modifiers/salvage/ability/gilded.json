@@ -5,7 +5,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/bonus_slots"
-  }
+  "tools": "#modernfoundry:modifiable/bonus_slots"
 }

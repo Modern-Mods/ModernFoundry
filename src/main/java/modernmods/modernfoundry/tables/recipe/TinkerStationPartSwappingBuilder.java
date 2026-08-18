@@ -3,13 +3,13 @@ package modernmods.modernfoundry.tables.recipe;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.library.recipe.tinkerstation.building.ToolMaterialSwappingRecipe;
 
 import java.util.ArrayList;
@@ -51,11 +51,11 @@ public class TinkerStationPartSwappingBuilder extends AbstractRecipeBuilder<Tink
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, Loadables.ITEM.getKey(tools.getItems()[0].getItem()));
+    save(consumer, Loadables.ITEM.getKey(tools.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)[0].getItem()));
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (fromTool) {
       consumer.accept(new LoadableFinishedRecipe<>(id, new ToolMaterialSwappingRecipe(id, tools, maxStackSize, extraRequirements), ToolMaterialSwappingRecipe.LOADER, null));
     } else {

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/cadmium/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/cadmium"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/cadmium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/cadmium/block",
+  "ingredient": "#c:storage_blocks/cadmium",
   "result": {
     "amount": 810,
     "tag": "c:molten_cadmium"

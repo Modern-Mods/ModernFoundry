@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.recipe.RecipeCacheInvalidator;
 import modernmods.modernfoundry.common.recipe.RecipeCacheInvalidator.DuelSidedListener;

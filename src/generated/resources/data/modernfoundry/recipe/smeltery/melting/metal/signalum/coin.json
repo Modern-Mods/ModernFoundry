@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/signalum/coin",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/signalum"
     }
   ],
-  "ingredient": {
-    "tag": "c:coins/signalum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/signalum/coin",
+  "ingredient": "#c:coins/signalum",
   "result": {
     "amount": 30,
     "tag": "c:molten_signalum"

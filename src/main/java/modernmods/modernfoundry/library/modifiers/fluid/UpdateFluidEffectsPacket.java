@@ -1,10 +1,10 @@
 package modernmods.modernfoundry.library.modifiers.fluid;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public record UpdateFluidEffectsPacket(List<FluidEffects.Entry> fluids) implemen
     int size = buffer.readVarInt();
     List<FluidEffects.Entry> entries = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {
-      ResourceLocation key = buffer.readResourceLocation();
+      Identifier key = buffer.readIdentifier();
       FluidEffects effects = FluidEffects.LOADABLE.decode(buffer, FluidEffectManager.contextBuilder(key).build());
       entries.add(new FluidEffects.Entry(key, effects));
     }
@@ -28,7 +28,7 @@ public record UpdateFluidEffectsPacket(List<FluidEffects.Entry> fluids) implemen
   public void encode(FriendlyByteBuf buffer) {
     buffer.writeVarInt(fluids.size());
     for (FluidEffects.Entry entry : fluids) {
-      buffer.writeResourceLocation(entry.name());
+      buffer.writeIdentifier(entry.name());
       FluidEffects.LOADABLE.encode(buffer, entry.effects());
     }
   }

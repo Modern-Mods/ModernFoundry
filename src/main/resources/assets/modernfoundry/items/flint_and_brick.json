@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/flint_and_brick",
+    "modifier_maps": [
+      "modernfoundry:flint_and_brick"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/flint_and_bronze/modifiers/"
+    ]
+  }
+}

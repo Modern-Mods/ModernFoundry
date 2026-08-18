@@ -8,6 +8,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -17,10 +18,10 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -40,7 +41,7 @@ public abstract class AbstractCastingCategory implements IRecipeCategory<IDispla
   private static final String KEY_COOLING_TIME = TConstruct.makeTranslationKey("jei", "time");
   private static final String KEY_CAST_KEPT = TConstruct.makeTranslationKey("jei", "casting.cast_kept");
   private static final String KEY_CAST_CONSUMED = TConstruct.makeTranslationKey("jei", "casting.cast_consumed");
-  protected static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/casting.png");
+  protected static final Identifier BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/casting.png");
 
   @Getter
   private final IDrawable background;
@@ -68,7 +69,19 @@ public abstract class AbstractCastingCategory implements IRecipeCategory<IDispla
   }
 
   @Override
-  public void draw(IDisplayableCastingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+  public int getWidth() {
+    return 117;
+  }
+
+  @Override
+  public int getHeight() {
+    return 54;
+  }
+
+  @Override
+  public void draw(IDisplayableCastingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor graphics, double mouseX, double mouseY) {
+    // getBackground() was removed in JEI 27.x; draw our background ourselves
+    background.draw(graphics, 0, 0);
     cachedArrows.getUnchecked(Math.max(1, recipe.getCoolingTime())).draw(graphics, 58, 18);
     block.draw(graphics, 38, 35);
     if (recipe.hasCast()) {
@@ -79,15 +92,14 @@ public abstract class AbstractCastingCategory implements IRecipeCategory<IDispla
     String coolingString = I18n.get(KEY_COOLING_TIME, coolingTime);
     Font fontRenderer = Minecraft.getInstance().font;
     int x = 72 - fontRenderer.width(coolingString) / 2;
-    graphics.drawString(fontRenderer, coolingString, x, 2, Color.GRAY.getRGB(), false);
+    graphics.text(fontRenderer, coolingString, x, 2, Color.GRAY.getRGB(), false);
   }
 
   @Override
-  public List<Component> getTooltipStrings(IDisplayableCastingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+  public void getTooltip(ITooltipBuilder tooltip, IDisplayableCastingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
     if (recipe.hasCast() && GuiUtil.isHovered((int)mouseX, (int)mouseY, 63, 39, 13, 11)) {
-      return Collections.singletonList(Component.translatable(recipe.isConsumed() ? KEY_CAST_CONSUMED : KEY_CAST_KEPT));
+      tooltip.add(Component.translatable(recipe.isConsumed() ? KEY_CAST_CONSUMED : KEY_CAST_KEPT));
     }
-    return Collections.emptyList();
   }
 
   @Override
@@ -97,7 +109,7 @@ public abstract class AbstractCastingCategory implements IRecipeCategory<IDispla
     // items
     List<ItemStack> casts = recipe.getCastItems();
     if (!casts.isEmpty()) {
-      IRecipeSlotBuilder cast = builder.addSlot(recipe.isConsumed() ? RecipeIngredientRole.INPUT : RecipeIngredientRole.CATALYST, 38, 19).addItemStacks(casts);
+      IRecipeSlotBuilder cast = builder.addSlot(recipe.isConsumed() ? RecipeIngredientRole.INPUT : RecipeIngredientRole.CRAFTING_STATION, 38, 19).addItemStacks(casts);
       // if the same size, tie a focus link to the output and cast; means we have material variants on both
       if (outputs.size() > 1 && casts.size() == outputs.size()) {
         builder.createFocusLink(output, cast);
@@ -109,7 +121,7 @@ public abstract class AbstractCastingCategory implements IRecipeCategory<IDispla
     int capacity = FluidValues.METAL_BLOCK;
     List<FluidStack> inputs = recipe.getFluids();
     IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, 3, 3)
-           .addTooltipCallback(FluidTooltipCallback.UNITS)
+           .addRichTooltipCallback(FluidTooltipCallback.UNITS)
            .setFluidRenderer(capacity, false, 32, 32)
            .setOverlay(tankOverlay, 0, 0)
            .addIngredients(NeoForgeTypes.FLUID_STACK, inputs);
@@ -119,7 +131,7 @@ public abstract class AbstractCastingCategory implements IRecipeCategory<IDispla
       h += 16;
     }
     IRecipeSlotBuilder faucet = builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 43, 8)
-           .addTooltipCallback(FluidTooltipCallback.UNITS)
+           .addRichTooltipCallback(FluidTooltipCallback.UNITS)
            .setFluidRenderer(1, false, 6, h)
            .addIngredients(NeoForgeTypes.FLUID_STACK, inputs);
 
@@ -128,7 +140,7 @@ public abstract class AbstractCastingCategory implements IRecipeCategory<IDispla
 
   @Nullable
   @Override
-  public ResourceLocation getRegistryName(IDisplayableCastingRecipe recipe) {
+  public Identifier getRegistryName(IDisplayableCastingRecipe recipe) {
     return recipe.getRecipeId();
   }
 }

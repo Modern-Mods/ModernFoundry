@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/tin/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/tin"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/tin"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/tin/plate",
+  "ingredient": "#c:plates/tin",
   "result": {
     "amount": 90,
     "tag": "c:molten_tin"

@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.json.predicate.modifier;
 
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierId;

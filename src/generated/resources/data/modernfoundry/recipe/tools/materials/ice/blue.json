@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/ice/blue",
-  "ingredient": {
-    "item": "minecraft:blue_ice"
-  },
+  "ingredient": "minecraft:blue_ice",
   "material": "modernfoundry:ice",
   "needed": 1,
   "value": 9

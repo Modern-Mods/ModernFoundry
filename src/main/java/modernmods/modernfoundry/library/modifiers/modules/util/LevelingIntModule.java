@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.modifiers.modules.util;
 
-import modernmods.hilt.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.field.LoadableField;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 

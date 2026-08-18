@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/pierce",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "modernfoundry:punji"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/pierce",
+  "input": "modernfoundry:punji",
   "level": {
     "max": 3
   },
@@ -15,11 +13,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/melee"
-    },
-    {
-      "tag": "modernfoundry:modifiable/ranged/launcher"
-    }
+    "#modernfoundry:modifiable/melee",
+    "#modernfoundry:modifiable/ranged/launcher"
   ]
 }

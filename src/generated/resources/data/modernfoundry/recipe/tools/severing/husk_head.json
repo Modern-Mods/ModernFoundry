@@ -1,9 +1,9 @@
 {
   "type": "modernfoundry:severing",
-  "id": "modernfoundry:tools/severing/husk_head",
   "entity": {
     "type": "minecraft:husk"
   },
+  "id": "modernfoundry:tools/severing/husk_head",
   "looting_bonus": 0.01,
   "per_level_chance": 0.05,
   "result": "modernfoundry:husk_head"

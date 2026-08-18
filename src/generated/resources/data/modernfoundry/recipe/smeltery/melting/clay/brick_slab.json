@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/clay/brick_slab",
-  "ingredient": {
-    "item": "minecraft:brick_slab"
-  },
+  "ingredient": "minecraft:brick_slab",
   "result": {
     "amount": 500,
     "fluid": "modernfoundry:molten_clay"

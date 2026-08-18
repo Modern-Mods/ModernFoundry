@@ -9,8 +9,8 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.tools.item.IModifiable;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 

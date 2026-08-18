@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "ingredient": "modernfoundry:nether_grout",
+  "result": {
+    "id": "modernfoundry:scorched_brick"
+  }
+}

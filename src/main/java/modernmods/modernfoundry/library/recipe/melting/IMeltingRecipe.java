@@ -5,8 +5,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import modernmods.hilt.recipe.ICustomOutputRecipe;
-import modernmods.hilt.registration.object.FluidObject;
+import modernmods.mantle.recipe.ICustomOutputRecipe;
+import modernmods.mantle.registration.object.FluidObject;
 import modernmods.modernfoundry.library.recipe.FluidValues;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
@@ -46,12 +46,11 @@ public interface IMeltingRecipe extends ICustomOutputRecipe<IMeltingContainer> {
   /* Recipe data */
 
   @Override
-  default RecipeType<?> getType() {
+  default RecipeType<? extends IMeltingRecipe> getType() {
     return TinkerRecipeTypes.MELTING.get();
   }
 
-  @Override
-  default ItemStack getToastSymbol() {
+    default ItemStack getToastSymbol() {
     return new ItemStack(TinkerSmeltery.searedMelter);
   }
 

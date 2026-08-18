@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/cinderslime/ingot",
-  "ingredient": {
-    "tag": "c:ingots/cinderslime"
-  },
+  "ingredient": "#c:ingots/cinderslime",
   "result": {
     "amount": 90,
     "fluid": "modernfoundry:molten_cinderslime"

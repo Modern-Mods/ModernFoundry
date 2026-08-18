@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/nickel/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/nickel"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/nickel"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/nickel/plate",
+  "ingredient": "#c:plates/nickel",
   "result": {
     "amount": 90,
     "tag": "c:molten_nickel"

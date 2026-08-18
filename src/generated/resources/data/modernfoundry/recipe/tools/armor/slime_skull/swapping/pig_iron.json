@@ -3,12 +3,10 @@
   "id": "modernfoundry:tools/armor/slime_skull/swapping/pig_iron",
   "index": 0,
   "ingredient": {
-    "item": "modernfoundry:zombified_piglin_head"
+    "ingredient": "modernfoundry:zombified_piglin_head"
   },
   "material": "modernfoundry:pig_iron",
   "max_stack_size": 16,
   "repair_value": 6,
-  "tools": {
-    "tag": "modernfoundry:modifiable/skulls/swappable"
-  }
+  "tools": "#modernfoundry:modifiable/skulls/swappable"
 }

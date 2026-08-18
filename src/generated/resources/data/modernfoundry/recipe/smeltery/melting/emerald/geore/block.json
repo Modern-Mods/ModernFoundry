@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/emerald/geore/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:geore_blocks/emerald"
     }
   ],
-  "ingredient": {
-    "tag": "c:geore_blocks/emerald"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/emerald/geore/block",
+  "ingredient": "#c:geore_blocks/emerald",
   "result": {
     "amount": 400,
     "fluid": "modernfoundry:molten_emerald"

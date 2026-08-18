@@ -1,6 +1,8 @@
 package modernmods.modernfoundry.smeltery.block.component;
 
 import net.minecraft.core.BlockPos;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,10 +26,10 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.HitResult;
-import modernmods.hilt.block.InventoryBlock;
-import modernmods.hilt.block.RetexturedBlock;
-import modernmods.hilt.util.BlockEntityHelper;
-import modernmods.hilt.util.RetexturedHelper;
+import modernmods.mantle.block.InventoryBlock;
+import modernmods.mantle.block.RetexturedBlock;
+import modernmods.mantle.util.BlockEntityHelper;
+import modernmods.mantle.util.RetexturedHelper;
 import modernmods.modernfoundry.smeltery.block.entity.component.DuctBlockEntity;
 import modernmods.modernfoundry.smeltery.block.entity.component.SmelteryComponentBlockEntity;
 
@@ -51,29 +53,16 @@ public class SearedDuctBlock extends InventoryBlock {
 
   /* Seared block interaction */
 
-  @SuppressWarnings("deprecation")
-  @Override
-  @Deprecated
-  public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-    if (!newState.is(this)) {
-      BlockEntityHelper.get(SmelteryComponentBlockEntity.class, worldIn, pos).ifPresent(te -> te.notifyMasterOfChange(pos, newState));
-    }
-    super.onRemove(state, worldIn, pos, newState, isMoving);
-  }
-
-  @Override
-  public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag pFlag) {
-    RetexturedHelper.addTooltip(stack, tooltip);
-  }
+  // Block-level tooltips were removed in 26.1; retextured tooltip is now supplied by the block item
 
   @Override
   public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
     SmelteryComponentBlockEntity.updateNeighbors(world, pos, state);
     RetexturedBlock.updateTextureBlock(world, pos, stack);
   }
-  
+
   @Override
-  public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+  protected ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
     return RetexturedBlock.getPickBlock(world, pos, state);
   }
 
@@ -88,7 +77,7 @@ public class SearedDuctBlock extends InventoryBlock {
   @Nullable
   @Override
   public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
-    return state.getValue(IN_STRUCTURE) ? PathType.DAMAGE_FIRE : PathType.OPEN;
+    return state.getValue(IN_STRUCTURE) ? PathType.FIRE : PathType.OPEN;
   }
 
   @Nullable

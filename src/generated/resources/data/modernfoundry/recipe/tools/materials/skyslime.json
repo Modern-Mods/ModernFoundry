@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/skyslime",
-  "ingredient": {
-    "item": "modernfoundry:sky_slime_crystal"
-  },
+  "ingredient": "modernfoundry:sky_slime_crystal",
   "material": "modernfoundry:skyslime",
   "needed": 1,
   "value": 1

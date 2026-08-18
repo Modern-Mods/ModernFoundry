@@ -1,13 +1,11 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/scorched/brick_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/ingot"
-  },
+  "cast": "#modernfoundry:casts/multi_use/ingot",
   "cooling_time": 83,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:scorched_stone"
   },
+  "id": "modernfoundry:smeltery/casting/scorched/brick_gold_cast",
   "result": "modernfoundry:scorched_brick"
 }

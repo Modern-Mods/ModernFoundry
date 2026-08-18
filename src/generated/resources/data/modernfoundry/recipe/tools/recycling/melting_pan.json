@@ -5,10 +5,8 @@
     "modernfoundry:repair_kit",
     "modernfoundry:bow_limb"
   ],
-  "pattern": {
-    "item": "modernfoundry:venom_bottle"
-  },
+  "pattern": "modernfoundry:venom_bottle",
   "tools": {
-    "item": "modernfoundry:melting_pan"
+    "ingredient": "modernfoundry:melting_pan"
   }
 }

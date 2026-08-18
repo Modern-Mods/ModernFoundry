@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.materials.stats;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 import org.junit.jupiter.api.Test;
-import modernmods.hilt.data.registry.IdAwareComponentRegistry;
+import modernmods.mantle.data.registry.IdAwareComponentRegistry;
 import modernmods.modernfoundry.fixture.MaterialFixture;
 import modernmods.modernfoundry.fixture.MaterialStatsFixture;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;

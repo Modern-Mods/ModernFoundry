@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/geore/shard",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:geore_shards/iron"
     }
   ],
-  "ingredient": {
-    "tag": "c:geore_shards/iron"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/iron/geore/shard",
+  "ingredient": "#c:geore_shards/iron",
   "result": {
     "amount": 90,
     "tag": "c:molten_iron"

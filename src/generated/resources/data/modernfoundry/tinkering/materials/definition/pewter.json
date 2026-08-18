@@ -7,7 +7,7 @@
         "prop": "force_integration_materials"
       },
       {
-        "type": "hilt:tag_filled",
+        "type": "mantle:tag_filled",
         "tag": "c:ingots/pewter"
       },
       {
@@ -21,11 +21,11 @@
             "type": "neoforge:or",
             "values": [
               {
-                "type": "hilt:tag_filled",
+                "type": "mantle:tag_filled",
                 "tag": "c:ingots/tin"
               },
               {
-                "type": "hilt:tag_filled",
+                "type": "mantle:tag_filled",
                 "tag": "c:ingots/lead"
               }
             ]

@@ -1,21 +1,19 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/steeleaf/ingot_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/ingot"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/steeleaf"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/single_use/ingot",
+  "cast_consumed": true,
   "cooling_time": 64,
   "fluid": {
     "amount": 90,
     "tag": "modernfoundry:molten_steeleaf"
   },
+  "id": "modernfoundry:smeltery/casting/metal/steeleaf/ingot_sand_cast",
   "result": {
     "tag": "c:ingots/steeleaf"
   }

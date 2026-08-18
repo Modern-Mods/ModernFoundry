@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/seared/lantern",
   "byproducts": [
     {
       "amount": 250,
@@ -11,9 +10,10 @@
       "tag": "c:molten_iron"
     }
   ],
+  "id": "modernfoundry:smeltery/melting/seared/lantern",
   "ingredient": {
-    "type": "modernfoundry:no_container",
-    "item": "modernfoundry:seared_lantern"
+    "neoforge:ingredient_type": "modernfoundry:no_container",
+    "match": "modernfoundry:seared_lantern"
   },
   "result": {
     "amount": 500,

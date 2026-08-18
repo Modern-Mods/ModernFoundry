@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/steel/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/steel"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/steel"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/steel/dust",
+  "ingredient": "#c:dusts/steel",
   "result": {
     "amount": 90,
     "tag": "c:molten_steel"

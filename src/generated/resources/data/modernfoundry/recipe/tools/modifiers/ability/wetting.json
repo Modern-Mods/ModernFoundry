@@ -1,23 +1,23 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/wetting",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/wetting",
   "inputs": [
     {
-      "tag": "c:dusts/redstone"
+      "ingredient": "#c:dusts/redstone"
     },
     {
-      "type": "modernfoundry:no_container",
-      "tag": "modernfoundry:tanks"
+      "neoforge:ingredient_type": "modernfoundry:no_container",
+      "match": "#modernfoundry:tanks"
     },
     {
-      "tag": "c:dusts/redstone"
+      "ingredient": "#c:dusts/redstone"
     },
     {
-      "tag": "c:ingots/copper"
+      "ingredient": "#c:ingots/copper"
     },
     {
-      "tag": "c:ingots/copper"
+      "ingredient": "#c:ingots/copper"
     }
   ],
   "result": "modernfoundry:wetting",
@@ -25,11 +25,7 @@
     "abilities": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/armor/leggings"
-    },
-    {
-      "tag": "modernfoundry:modifiable/shields"
-    }
+    "#modernfoundry:modifiable/armor/leggings",
+    "#modernfoundry:modifiable/shields"
   ]
 }

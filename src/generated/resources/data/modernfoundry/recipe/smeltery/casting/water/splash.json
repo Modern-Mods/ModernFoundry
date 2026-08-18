@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/water/splash",
-  "cast": {
-    "tag": "c:bottles/splash"
-  },
+  "cast": "#c:bottles/splash",
   "cast_consumed": true,
   "cooling_time": 1,
   "fluid": {
     "amount": 500,
-    "tag": "hilt:water"
+    "tag": "mantle:water"
   },
+  "id": "modernfoundry:smeltery/casting/water/splash",
   "result": {
     "item": "minecraft:splash_potion",
     "nbt": {

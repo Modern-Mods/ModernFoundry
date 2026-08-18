@@ -19,10 +19,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.apache.commons.lang3.tuple.Pair;
-import modernmods.hilt.inventory.EmptyItemHandler;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.inventory.EmptyItemHandler;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.config.Config;
 import modernmods.modernfoundry.shared.inventory.TriggeringMultiModuleContainerMenu;
@@ -146,7 +148,7 @@ public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMul
 
       // if we found something, add the side inventory
       if (inventoryTE != null) {
-        IItemHandlerModifiable handler = getItemHandler(inventoryTE, accessDir);
+        IItemHandler handler = getItemHandler(inventoryTE, accessDir);
         int invSlots = (handler == null ? EmptyItemHandler.INSTANCE : handler).getSlots();
         int columns = Mth.clamp((invSlots - 1) / 9 + 1, 3, 6);
         this.addSubContainer(new SideInventoryContainer<>(TinkerTables.craftingStationContainer.get(), containerId, inv, inventoryTE, accessDir, -6 - 18 * 6, 8, columns), false);
@@ -178,13 +180,13 @@ public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMul
   }
 
   @Nullable
-  private static IItemHandlerModifiable getItemHandler(BlockEntity tileEntity, @Nullable Direction direction) {
+  private static IItemHandler getItemHandler(BlockEntity tileEntity, @Nullable Direction direction) {
     Level level = tileEntity.getLevel();
     if (level == null) {
       return null;
     }
-    Object cap = level.getCapability(Capabilities.ItemHandler.BLOCK, tileEntity.getBlockPos(), tileEntity.getBlockState(), tileEntity, direction);
-    return cap instanceof IItemHandlerModifiable modifiable ? modifiable : null;
+    ResourceHandler<ItemResource> cap = level.getCapability(Capabilities.Item.BLOCK, tileEntity.getBlockPos(), tileEntity.getBlockState(), tileEntity, direction);
+    return cap == null ? null : IItemHandler.of(cap);
   }
 
 
@@ -194,7 +196,7 @@ public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMul
   public void updateScreen() {
     if (this.tile != null) {
       if (this.tile.getLevel() != null) {
-        if (this.tile.getLevel().isClientSide && FMLEnvironment.dist == Dist.CLIENT) {
+        if (this.tile.getLevel().isClientSide() && FMLEnvironment.getDist() == Dist.CLIENT) {
           ClientOnly.clientScreenUpdate();
         }
       }
@@ -207,7 +209,7 @@ public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMul
   public void error(final MutableComponent message) {
     if (this.tile != null) {
       if (this.tile.getLevel() != null) {
-        if (this.tile.getLevel().isClientSide && FMLEnvironment.dist == Dist.CLIENT) {
+        if (this.tile.getLevel().isClientSide() && FMLEnvironment.getDist() == Dist.CLIENT) {
           ClientOnly.clientError(message);
         }
       }
@@ -220,7 +222,7 @@ public class TabbedContainerMenu<TILE extends BlockEntity> extends TriggeringMul
   public void warning(final MutableComponent message) {
     if (this.tile != null) {
       if (this.tile.getLevel() != null) {
-        if (this.tile.getLevel().isClientSide && FMLEnvironment.dist == Dist.CLIENT) {
+        if (this.tile.getLevel().isClientSide() && FMLEnvironment.getDist() == Dist.CLIENT) {
           ClientOnly.clientWarning(message);
         }
       }

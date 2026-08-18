@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/constantan/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/constantan"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/constantan"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/dust",
+  "ingredient": "#c:dusts/constantan",
   "result": {
     "amount": 90,
     "tag": "c:molten_constantan"

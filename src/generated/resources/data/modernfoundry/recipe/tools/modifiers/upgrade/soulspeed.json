@@ -1,16 +1,16 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/soulspeed",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/soulspeed",
   "inputs": [
     {
-      "item": "minecraft:magma_block"
+      "ingredient": "minecraft:magma_block"
     },
     {
-      "item": "minecraft:crying_obsidian"
+      "ingredient": "minecraft:crying_obsidian"
     },
     {
-      "item": "minecraft:magma_block"
+      "ingredient": "minecraft:magma_block"
     }
   ],
   "level": {
@@ -20,7 +20,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/boots"
-  }
+  "tools": "#modernfoundry:modifiable/armor/boots"
 }

@@ -2,9 +2,9 @@ package modernmods.modernfoundry.fluids.data;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import net.minecraft.data.PackOutput;
-import modernmods.hilt.fluid.texture.AbstractFluidTextureProvider;
-import modernmods.hilt.fluid.texture.FluidTexture;
-import modernmods.hilt.registration.object.FluidObject;
+import modernmods.mantle.fluid.texture.AbstractFluidTextureProvider;
+import modernmods.mantle.fluid.texture.FluidTexture;
+import modernmods.mantle.registration.object.FluidObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.fluids.TinkerFluids;
 
@@ -210,6 +210,6 @@ public class FluidTextureProvider extends AbstractFluidTextureProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry Fluid Texture Providers";
+    return "Tinkers' Construct Fluid Texture Providers";
   }
 }

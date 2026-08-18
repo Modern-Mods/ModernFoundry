@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.recipe.casting;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.material.Fluid;
-import modernmods.hilt.recipe.container.ISingleStackContainer;
+import modernmods.mantle.recipe.container.ISingleStackContainer;
 
 import javax.annotation.Nullable;
 

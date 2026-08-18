@@ -5,7 +5,7 @@
     "icon": {
       "item": "minecraft:paper"
     },
-    "extraData": { "hilt:index": { "hidden": true }}
+    "extraData": { "mantle:index": { "hidden": true }}
   },
   {
     "name": "tools",

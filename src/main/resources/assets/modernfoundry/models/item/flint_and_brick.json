@@ -1,19 +1,6 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "neoforge:item/default",
   "textures": {
     "tool": "modernfoundry:item/tool/flint_and_brick/tool"
-  },
-  "modifier_maps": ["modernfoundry:flint_and_brick"],
-  "modifier_roots": [ "modernfoundry:item/tool/flint_and_bronze/modifiers/" ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/flint_and_brick/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/flint_and_brick/broken"
-    }
-  ]
+  }
 }

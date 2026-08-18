@@ -3,7 +3,7 @@ package modernmods.modernfoundry.smeltery.menu;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.DataSlot;
@@ -13,13 +13,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
-import modernmods.hilt.fluid.FluidTransferHelper;
-import modernmods.hilt.fluid.transfer.IFluidContainerTransfer.TransferDirection;
-import modernmods.hilt.fluid.transfer.IFluidContainerTransfer.TransferResult;
-import modernmods.hilt.inventory.SmartItemHandlerSlot;
-import modernmods.hilt.util.sync.ValidZeroDataSlot;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import modernmods.mantle.fluid.FluidTransferHelper;
+import modernmods.mantle.fluid.transfer.IFluidContainerTransfer.TransferDirection;
+import modernmods.mantle.fluid.transfer.IFluidContainerTransfer.TransferResult;
+import modernmods.mantle.inventory.SmartItemHandlerSlot;
+import modernmods.mantle.util.sync.ValidZeroDataSlot;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.shared.inventory.TriggeringBaseContainerMenu;
@@ -31,7 +34,7 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class MelterContainerMenu extends TriggeringBaseContainerMenu<MelterBlockEntity> {
-  public static final ResourceLocation TOOLTIP_FORMAT = TConstruct.getResource("melter");
+  public static final Identifier TOOLTIP_FORMAT = TConstruct.getResource("melter");
 
   @SuppressWarnings("MismatchedReadAndWriteOfArray")
   @Getter
@@ -55,7 +58,8 @@ public class MelterContainerMenu extends TriggeringBaseContainerMenu<MelterBlock
       if (world != null && world.getBlockState(down).is(TinkerTags.Blocks.FUEL_TANKS)) {
         BlockEntity te = world.getBlockEntity(down);
         if (te != null) {
-          IItemHandler handler = world.getCapability(Capabilities.ItemHandler.BLOCK, down, world.getBlockState(down), te, null);
+          var handlerRh = world.getCapability(Capabilities.Item.BLOCK, down, world.getBlockState(down), te, null);
+          IItemHandler handler = handlerRh == null ? null : IItemHandler.of(handlerRh);
           hasFuelSlot = handler != null;
           if (handler != null) {
             this.addSlot(new SmartItemHandlerSlot(handler, 0, 151, 32));
@@ -83,12 +87,13 @@ public class MelterContainerMenu extends TriggeringBaseContainerMenu<MelterBlock
     if (0 <= id && id <= 3 && !player.isSpectator()) {
       ItemStack held = getCarried();
       if (!held.isEmpty()) {
-        if (!player.level().isClientSide && tile != null) {
-          IFluidHandler tank = id < 2 ? tile.getTank() : tile.getFuelModule().getTank();
+        if (!player.level().isClientSide() && tile != null) {
+          ResourceHandler<FluidResource> tank = id < 2 ? tile.getTank() : tile.getFuelModule().getTank();
           TransferResult result;
           // even means drain fluid, odd means fill
           if ((id & 1) == 0) {
-            result = FluidTransferHelper.fillStack(tank, held, tank.getFluidInTank(0));
+            FluidStack current = tank.size() > 0 ? tank.getResource(0).toStack(tank.getAmountAsInt(0)) : FluidStack.EMPTY;
+            result = FluidTransferHelper.fillStack(tank, held, current);
           } else {
             result = FluidTransferHelper.interactWithStack(tank, held, TransferDirection.EMPTY_ITEM);
           }

@@ -3,15 +3,15 @@ package modernmods.modernfoundry.tools.recipe;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import modernmods.modernfoundry.compat.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.recipe.RecipeResult;
@@ -40,13 +40,13 @@ public class TippedToolTransformRecipe extends ToolBuildingRecipe {
     TippedToolTransformRecipe::new);
 
   protected final ModifierId modifier;
-  public TippedToolTransformRecipe(ResourceLocation id, String group, IModifiable output, @Nullable ResourceLocation layoutSlot, Ingredient ingredient, List<MaterialVariantId> materials, ModifierId modifier) {
+  public TippedToolTransformRecipe(Identifier id, String group, IModifiable output, @Nullable Identifier layoutSlot, Ingredient ingredient, List<MaterialVariantId> materials, ModifierId modifier) {
     super(id, group, output, 1, layoutSlot, List.of(ingredient), List.of(), materials);
     this.modifier = modifier;
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends TippedToolTransformRecipe> getSerializer() {
     return TinkerModifiers.tippedToolTransformRecipeSerializer.get();
   }
 
@@ -68,8 +68,8 @@ public class TippedToolTransformRecipe extends ToolBuildingRecipe {
         // if we found one, set its NBT into the result tool
         if (!stack.isEmpty()) {
           CompoundTag tag = TagUtil.getTag(stack);
-          if (tag != null && tag.contains(PotionUtils.TAG_POTION, Tag.TAG_STRING)) {
-            tool.getPersistentData().putString(modifier, tag.getString(PotionUtils.TAG_POTION));
+          if (tag != null && tag.contains(PotionUtils.TAG_POTION)) {
+            tool.getPersistentData().putString(modifier.getIdentifier(), tag.getStringOr(PotionUtils.TAG_POTION, ""));
           }
         }
       }
@@ -81,12 +81,12 @@ public class TippedToolTransformRecipe extends ToolBuildingRecipe {
   public List<ItemStack> getDisplayOutput() {
     if (displayOutput == null) {
       ItemStack result = super.getDisplayOutput().get(0);
-      displayOutput = Arrays.stream(ingredients.get(0).getItems())
+      displayOutput = Arrays.stream(ingredients.get(0).items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new))
         .map(stack -> {
           CompoundTag tag = TagUtil.getTag(stack);
           if (tag != null) {
             ItemStack copy = result.copy();
-            ToolStack.from(copy).getPersistentData().putString(modifier, tag.getString(PotionUtils.TAG_POTION));
+            ToolStack.from(copy).getPersistentData().putString(modifier.getIdentifier(), tag.getStringOr(PotionUtils.TAG_POTION, ""));
             return copy;
           }
           return result;

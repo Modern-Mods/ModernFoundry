@@ -5,31 +5,27 @@
     {
       "ingredient": [
         {
-          "type": "hilt:fluid_container",
+          "neoforge:ingredient_type": "mantle:fluid_container",
           "amount": 1000,
-          "display": {
-            "item": "modernfoundry:venom_bucket"
-          },
+          "display": "modernfoundry:venom_bucket",
           "tag": "modernfoundry:venom"
         },
         {
-          "type": "hilt:fluid_container",
+          "neoforge:ingredient_type": "mantle:fluid_container",
           "amount": 250,
-          "display": {
-            "item": "modernfoundry:venom_bottle"
-          },
+          "display": "modernfoundry:venom_bottle",
           "tag": "modernfoundry:venom"
         }
       ]
     }
   ],
   "modifier_predicate": {
-    "type": "hilt:inverted",
+    "type": "mantle:inverted",
     "inverted_type": "modernfoundry:tag",
     "tag": "modernfoundry:remove_blacklist"
   },
   "name": "modifiers",
   "tools": {
-    "tag": "modernfoundry:modifiable"
+    "ingredient": "#modernfoundry:modifiable"
   }
 }

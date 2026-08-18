@@ -1,17 +1,17 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/fins",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/fins",
   "inputs": [
     {
-      "tag": "minecraft:fishes"
+      "ingredient": "#minecraft:fishes"
     },
     {
-      "item": "minecraft:prismarine_bricks"
+      "ingredient": "minecraft:prismarine_bricks"
     },
     {
-      "tag": "minecraft:fishes"
+      "ingredient": "#minecraft:fishes"
     }
   ],
   "level": 1,
@@ -19,7 +19,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/melee/weapon"
-  }
+  "tools": "#modernfoundry:modifiable/melee/weapon"
 }

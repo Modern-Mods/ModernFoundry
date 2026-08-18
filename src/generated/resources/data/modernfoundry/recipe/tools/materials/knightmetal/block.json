@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/knightmetal/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/knightmetal"
-  },
+  "ingredient": "#c:storage_blocks/knightmetal",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/knightmetal"

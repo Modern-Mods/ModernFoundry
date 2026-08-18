@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "value": "twilightforest:fiery_chestplate"
+    }
+  ],
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/fiery/twilightforest_chestplate",
   "byproducts": [
     {
       "amount": 720,
@@ -8,12 +13,7 @@
       "unit_size": 10
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:fiery_chestplate"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/fiery/twilightforest_chestplate",
   "ingredient": {
     "item": "twilightforest:fiery_chestplate"
   },

@@ -2,24 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:paper"
-    },
-    {
-      "item": "minecraft:paper"
-    },
-    {
-      "item": "minecraft:paper"
-    },
-    {
-      "tag": "c:slimeballs"
-    },
-    {
-      "item": "modernfoundry:pattern"
-    },
-    {
-      "item": "modernfoundry:pattern"
-    }
+    "minecraft:paper",
+    "minecraft:paper",
+    "minecraft:paper",
+    "#c:slime_balls",
+    "modernfoundry:pattern",
+    "modernfoundry:pattern"
   ],
   "result": {
     "id": "minecraft:book"

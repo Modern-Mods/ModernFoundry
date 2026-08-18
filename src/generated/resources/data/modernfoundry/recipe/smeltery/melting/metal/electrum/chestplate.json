@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/electrum/chestplate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/chestplates/electrum"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/chestplates/electrum"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/chestplate",
+  "ingredient": "#c:armors/chestplates/electrum",
   "result": {
     "amount": 720,
     "tag": "c:molten_electrum",

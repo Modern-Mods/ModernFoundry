@@ -1,5 +1,5 @@
 {
-  "_comment": "Modern Foundry Common",
+  "_comment": "Tinkers Common",
 
   
   "block.modernfoundry.sky_slime": "Bloc Céletslime",
@@ -152,9 +152,9 @@
   "item.modernfoundry.knightslime_nugget": "Pépite de chevaleresqueslime",
   "item.modernfoundry.materials_and_you": "Les matériaux et vous",
   "item.modernfoundry.materials_and_you.tooltip": "Le livre d'introduction aux outils et matériaux\npar Selena",
-  "item.modernfoundry.encyclopedia": "Encyclopédie du Modern Foundry",
-  "item.modernfoundry.encyclopedia.tooltip": "Le livre de référence de tout Modern Foundry\npar Selena",
-  "item.modernfoundry.tinkers_gadgetry": "Gadgets de Modern Foundry",
+  "item.modernfoundry.encyclopedia": "Encyclopédie du bricolage",
+  "item.modernfoundry.encyclopedia.tooltip": "Le livre de référence de tout bricoleur\npar Selena",
+  "item.modernfoundry.tinkers_gadgetry": "Gadgets de Tinker",
   "item.modernfoundry.tinkers_gadgetry.tooltip": "Livre sur l'utilisation des slimes au quotidien\npar Melvin",
   "item.modernfoundry.puny_smelting": "La fonte pour les nuls",
   "item.modernfoundry.puny_smelting.tooltip": "Guide de la fonte et de la coulée pour débutants\npar Thruul M'Gon",
@@ -240,7 +240,7 @@
   "item.modernfoundry.copper_can.tooltip": "Contenant empilable, contient l'équivalent d'un lingot de liquide",
   "item.modernfoundry.copper_can.contents": "Contient: 1 lingot de %s",
 
-  "_comment": "Modern Foundry Patterns",
+  "_comment": "Tinkers Patterns",
 
   "pattern.modernfoundry.ingot": "Lingot",
   "pattern.modernfoundry.nugget": "Pépite",
@@ -286,7 +286,7 @@
   "pattern.modernfoundry.tough_handle": "Manche robuste",
   "pattern.modernfoundry.bow_grip": "Poignée d'arc",
 
-  "_comment": "Modern Foundry Gold Casts",
+  "_comment": "Tinkers Gold Casts",
 
   "item.modernfoundry.cast.cost": "Coût : %d",
   "item.modernfoundry.blank_cast": "Moule d'or vierge",
@@ -334,7 +334,7 @@
   "item.modernfoundry.boots_plating_cast": "Moule d'or pour plaquage de bottes",
   "item.modernfoundry.maille_cast": "Moule d'or pour maille",
 
-  "_comment": "Modern Foundry Sand Casts",
+  "_comment": "Tinkers Sand Casts",
 
   "item.modernfoundry.blank_sand_cast": "Moule de sable vierge",
   "item.modernfoundry.ingot_sand_cast": "Moule de sable pour lingot",
@@ -381,7 +381,7 @@
   "item.modernfoundry.boots_plating_sand_cast": "Moule de sable pour plaquage de bottes",
   "item.modernfoundry.maille_sand_cast": "Moule de sable pour maille",
 
-  "_comment": "Modern Foundry Red Sand Casts",
+  "_comment": "Tinkers Red Sand Casts",
 
   "item.modernfoundry.blank_red_sand_cast": "Moule de sable rouge vierge",
   "item.modernfoundry.ingot_red_sand_cast": "Moule de sable rouge pour lingot",
@@ -428,7 +428,7 @@
   "item.modernfoundry.boots_plating_red_sand_cast": "Moule de sable rouge pour plaquage de bottes",
   "item.modernfoundry.maille_red_sand_cast": "Moule de sable rouge pour maille",
 
-  "_comment": "Modern Foundry Fluids",
+  "_comment": "Tinkers Fluids",
 
   "block.modernfoundry.blazing_blood_fluid": "Sang flamboyant",
   "fluid.modernfoundry.blazing_blood": "Sang flamboyant",
@@ -810,7 +810,7 @@
   "fluid_effect.modernfoundry.drop_item": "Lâche %s",
   "fluid_effect.modernfoundry.explosion": "Explosion puissance %s",
 
-  "_comment": "Modern Foundry Gadgets",
+  "_comment": "Tinkers Gadgets",
 
   "block.modernfoundry.punji": "Piques punji",
   "block.modernfoundry.punji.tooltip": "Pointu! Et adhère aussi aux murs.",
@@ -852,24 +852,24 @@
   "block.modernfoundry.piglin_brute_head": "Tête de Piglin barbare",
   "block.modernfoundry.zombified_piglin_head": "Tête de Piglin zombifié",
 
-  "_comment": "Modern Foundry Tables",
+  "_comment": "Tinkers Tables",
 
   "block.modernfoundry.crafting_station": "Poste d'artisanat",
-  "block.modernfoundry.tinker_station": "Atelier de Modern Foundry",
-  "block.modernfoundry.tinker_anvil": "Enclume de Modern Foundry",
+  "block.modernfoundry.tinker_station": "Atelier de bricoleur",
+  "block.modernfoundry.tinker_anvil": "Enclume de bricoleur",
   "block.modernfoundry.scorched_anvil": "Enclume calcinée",
   "block.modernfoundry.tool_forge": "Forge à outils",
   "block.modernfoundry.part_builder": "Fabricant de pièces",
   "block.modernfoundry.modifier_worktable": "Établi",
   "block.modernfoundry.part_chest": "Coffre à pièces",
   "block.modernfoundry.part_chest.tooltip": "Contient jusqu'à 256 pièces d'outil différentes",
-  "block.modernfoundry.tinkers_chest": "Coffre du Modern Foundry",
+  "block.modernfoundry.tinkers_chest": "Coffre du bricoleur",
   "block.modernfoundry.tinkers_chest.tooltip": "Contient jusqu'à 64 piles de 16 objets",
   "block.modernfoundry.cast_chest": "Coffre à moules ou modèles de forme",
   "block.modernfoundry.cast_chest.tooltip": "Contient tous les moules pertinents",
   "item.modernfoundry.pattern": "modèle",
 
-  "_comment": "Modern Foundry Tools",
+  "_comment": "Tinkers Tools",
 
   "_comment_on_format_": "Ces formats permettent de mieux contrôler les séparateurs dans les noms de matériaux. Par défaut, l'espace est utilisé. Vous pouvez employer %1$s et %2$s pour changer l'ordre.",
   "item.modernfoundry.tool.format": "%s %s",
@@ -930,7 +930,7 @@
   "item.modernfoundry.crystalshot": "Cristal-visé-tiré",
   "entity.modernfoundry.crystalshot": "Cristal-visé-tiré",
 
-  "_comment": "Modern Foundry Tool Parts",
+  "_comment": "Tinkers Tool Parts",
 
   "item.modernfoundry.dummy_tool_part.tooltip": "Utilisé pour créer des moules, ne permet pas de fabriquer d'outils.",
   "item.modernfoundry.repair_kit": "Kit de réparation",
@@ -1037,7 +1037,7 @@
   "multiblock.modernfoundry.generic.invalid_ceiling_frame": "Bloc invalide sur les bords du plafond",
   "multiblock.modernfoundry.tiny.no_fuel_tank": "Doit être placé au-dessus d'un réservoir de carburant ou d'un chauffe-bloc pour fonctionner",
 
-  "_comment": "Modern Foundry Smeltery",
+  "_comment": "Tinkers Smeltery",
 
   "block.modernfoundry.grout": "Coulis durcissant",
   "block.modernfoundry.grout.tooltip": "Je suis Grout! (Coulis durcissant en anglais, pas simple à traduire lui ☺)",
@@ -1120,7 +1120,7 @@
   "block.modernfoundry.seared_chute": "Goulotte fondue",
   "block.modernfoundry.seared_chute.tooltip": "Entrée et sortie d'objets de la fonderie",
 
-  "_comment": "Modern Foundry Foundry",
+  "_comment": "Tinkers Foundry",
 
   "block.modernfoundry.nether_grout": "Coulis durcissant du nether",
   "block.modernfoundry.nether_grout.tooltip": "Je suis Grout! Ha ha...",
@@ -1201,7 +1201,7 @@
   "gui.modernfoundry.fluid.bottle": "%s Fioles",
   "gui.modernfoundry.fluid.hold_shift": "Maintenez §e§oShift§r§7 pour les seaux",
 
-  "_comment": "Modern Foundry World",
+  "_comment": "Tinkers World",
 
   "entity.modernfoundry.earth_slime": "Mondeslime",
   "item.modernfoundry.earth_slime_spawn_egg": "Œuf de mondeslime",
@@ -1426,7 +1426,7 @@
   "material.modernfoundry.rock.encyclopedia": "L'outil mine plus vite selon la moitié de la racine carrée du niveau du trait multiplié par la durabilité perdue",
   "material.modernfoundry.flint": "Silex",
   "material.modernfoundry.flint.basalt": "Basalte",
-  "material.modernfoundry.flint.flavor": "Cela va enflammer le cœur d'un Modern Foundry!",
+  "material.modernfoundry.flint.flavor": "Cela va enflammer le cœur d'un Tinker!",
   "material.modernfoundry.flint.encyclopedia": "Augmente les dégâts d'un quart de la racine carrée du niveau du trait multiplié par la durabilité perdue",
   "material.modernfoundry.bone": "Os",
   "material.modernfoundry.bone.flavor": "Je suis l'os de mon épée",
@@ -1447,7 +1447,7 @@
   "material.modernfoundry.chorus.armor": "A 25% de chances par niveau de téléporter au hasard les attaquants",
   "material.modernfoundry.string": "Ficelle",
   "material.modernfoundry.string.flavor": "Théoriquement le meilleur matériau.",
-  "material.modernfoundry.string.encyclopedia": "Permet de réparer l'outil avec de la ficelle à la station de Modern Foundry ou sur la table de craft",
+  "material.modernfoundry.string.encyclopedia": "Permet de réparer l'outil avec de la ficelle à la station de tinker ou sur la table de craft",
   "material.modernfoundry.string.skull_flavor": "Les araignées sont des maîtres des potions, leur secret pourrait-il améliorer mes potions…",
   "material.modernfoundry.string.skull_encyclopedia": "Prolonge de 25% la durée des effets positifs de potions",
   "material.modernfoundry.leather": "Cuir",
@@ -1542,7 +1542,7 @@
   "material.modernfoundry.cobalt.ranged": "Augmente la vitesse de tir et la vélocité de 5% par niveau",
   "material.modernfoundry.cobalt.armor": "Réduit les dégâts des attaques de mêlée de 10% par niveau, et augmente la vitesse de déplacement avec des objets de 5% par niveau maximum",
   "material.modernfoundry.manyullyn": "Manyullyn",
-  "material.modernfoundry.manyullyn.flavor": "Le métal que la plupart des Modern Foundry ne prononceront jamais correctement. Aussi appelé le métal qui coupe les étoiles.",
+  "material.modernfoundry.manyullyn.flavor": "Le métal que la plupart des Tinkers ne prononceront jamais correctement. Aussi appelé le métal qui coupe les étoiles.",
   "material.modernfoundry.manyullyn.encyclopedia": "Donne jusqu'à +2 dégâts par niveau, augmentation linéaire sur 8 coups consécutifs",
   "material.modernfoundry.manyullyn.ranged": "Les flèches gagnent jusqu'à +1 dégât par niveau (avant vélocité), augmentation linéaire sur 8 flèches consécutives",
   "material.modernfoundry.manyullyn.armor": "Augmente temporairement les dégâts de mêlée de 1 après avoir pris des dégâts, avec un maximum égal au total des niveaux de toutes les armures",
@@ -1694,7 +1694,7 @@
 
   "_comment": "Modifiers",
 
-  "key.categories.modernfoundry": "Modern Foundry",
+  "key.category.modernfoundry.modernfoundry": "Modern Foundry",
   "key.modernfoundry.helmet_interact": "Interaction du casque",
   "key.modernfoundry.leggings_interact": "Interaction des jambières",
   "modifier.modernfoundry.empty": "Modificateur invalide",
@@ -2771,13 +2771,13 @@
 
   "_comment": "GUIs",
 
-  "itemGroup.modernfoundry.general": "Objets généraux Modern Foundry",
-  "itemGroup.modernfoundry.tables": "Tables de Modern Foundry",
-  "itemGroup.modernfoundry.tools": "Outils de Modern Foundry",
-  "itemGroup.modernfoundry.tool_parts": "Pièces d'outil de Modern Foundry",
-  "itemGroup.modernfoundry.smeltery": "Fonderie de Modern Foundry",
-  "itemGroup.modernfoundry.fluids": "Fluides de Modern Foundry",
-  "itemGroup.modernfoundry.world": "Monde de Modern Foundry",
+  "itemGroup.modernfoundry.general": "Objets généraux Foundry",
+  "itemGroup.modernfoundry.tables": "Tables de Foundry",
+  "itemGroup.modernfoundry.tools": "Outils de Foundry",
+  "itemGroup.modernfoundry.tool_parts": "Pièces d'outil de Foundry",
+  "itemGroup.modernfoundry.smeltery": "Fonderie de Foundry",
+  "itemGroup.modernfoundry.fluids": "Fluides de Foundry",
+  "itemGroup.modernfoundry.world": "Monde de Foundry",
   "gui.modernfoundry.crafting_station": "Atelier de Fabrication",
   "gui.modernfoundry.crafting_station.uncraftable": "Cet objet ne peut pas être fabriqué pour le moment",
   "gui.modernfoundry.part_builder": "Fabricant de Pièces",
@@ -2787,10 +2787,10 @@
   "gui.modernfoundry.part_builder.trait": "Caractéristique",
   "gui.modernfoundry.part_builder.uncraftable": "Impossible à façonner",
   "gui.modernfoundry.part_builder.uncraftable.tooltip": "Ce matériau ne peut pas être façonné ici. Essayez la fonte ou d'autres méthodes.",
-  "gui.modernfoundry.tinkers_chest": "Coffre du Modern Foundry",
+  "gui.modernfoundry.tinkers_chest": "Coffre du Bricoleur",
   "gui.modernfoundry.cast_chest": "Coffre à Moules",
   "gui.modernfoundry.part_chest": "Coffre à Pièces",
-  "gui.modernfoundry.tinker_station": "Atelier de Modern Foundry",
+  "gui.modernfoundry.tinker_station": "Atelier de Bricolage",
   "gui.modernfoundry.tinker_station.repair_limited": "Réparer & Modifier",
   "gui.modernfoundry.tinker_station.repair_limited.description": "Permet de créer des outils de base et d'appliquer la plupart des modificateurs. Choisissez un modèle à gauche pour commencer.",
   "gui.modernfoundry.tinker_station.repair": "Réparer & Modifier",
@@ -2988,27 +2988,27 @@
   "jei.modernfoundry.modifiers.level.exact": "Pour le niveau : %s",
   "jei.modernfoundry.severing.title": "Séparation",
   "jei.modernfoundry.tinkering.tool_building": "Fabrication d'outils",
-  "jei.modernfoundry.tinkering.tool_building.anvil": "Les outils larges nécessitent l'enclume de Modern Foundry pour être créés ou pour échanger des pièces",
+  "jei.modernfoundry.tinkering.tool_building.anvil": "Les outils larges nécessitent l'enclume de Tinker pour être créés ou pour échanger des pièces",
   "jei.modernfoundry.part_builder.title": "Constructeur de Pièces",
   "jei.modernfoundry.part_builder.cost": "Coût : %s",
   "jei.modernfoundry.modifier_worktable.title": "Atelier de Modificateurs",
 
   "_comment": "Tool Advancements",
 
-  "advancements.modernfoundry.tools.materials_and_you.title": "Apprenti Modern Foundry",
+  "advancements.modernfoundry.tools.materials_and_you.title": "Apprenti Tinker",
   "advancements.modernfoundry.tools.materials_and_you.description": "Fabriquez le livre 'Matériaux et Vous', introduction à Modern Foundry",
   "advancements.modernfoundry.tools.part_builder.title": "Constructeur de Pièces",
   "advancements.modernfoundry.tools.part_builder.description": "Créez un constructeur de pièces, première étape pour fabriquer des outils",
   "advancements.modernfoundry.tools.make_part.title": "Pièces d'Outil",
   "advancements.modernfoundry.tools.make_part.description": "Fabriquez votre première pièce d'outil à l'aide d'un patron et d'un matériau dans le constructeur de pièces",
-  "advancements.modernfoundry.tools.tinker_station.title": "Atelier de Modern Foundry",
-  "advancements.modernfoundry.tools.tinker_station.description": "Créez un atelier de Modern Foundry pour assembler des pièces en outils",
-  "advancements.modernfoundry.tools.tinker_tool.title": "Modern Foundry Novice",
-  "advancements.modernfoundry.tools.tinker_tool.description": "Fabriquez votre premier outil Modern Foundry",
+  "advancements.modernfoundry.tools.tinker_station.title": "Atelier de Tinker",
+  "advancements.modernfoundry.tools.tinker_station.description": "Créez un atelier de Tinker pour assembler des pièces en outils",
+  "advancements.modernfoundry.tools.tinker_tool.title": "Tinker Novice",
+  "advancements.modernfoundry.tools.tinker_tool.description": "Fabriquez votre premier outil Tinker",
   "advancements.modernfoundry.tools.travelers_gear.title": "Voyageur",
   "advancements.modernfoundry.tools.travelers_gear.description": "Fabriquez un ensemble complet d'équipement du voyageur",
   "advancements.modernfoundry.tools.modified.title": "Modification",
-  "advancements.modernfoundry.tools.modified.description": "Appliquez un modificateur sur un outil Modern Foundry",
+  "advancements.modernfoundry.tools.modified.description": "Appliquez un modificateur sur un outil Tinker",
   "advancements.modernfoundry.tools.upgrade_slots.title": "Toutes les améliorations",
   "advancements.modernfoundry.tools.upgrade_slots.description": "Donnez 6 emplacements d'amélioration supplémentaires à un outil grâce à écrit, recapité, harmonieux, ressuscité et doré",
   "advancements.modernfoundry.tools.glass_cannon.title": "Canon de Verre",
@@ -3041,7 +3041,7 @@
   "advancements.modernfoundry.smeltery.structure.title": "La Fonderie Suprême",
   "advancements.modernfoundry.smeltery.structure.description": "Fabriquez un contrôleur de fonderie en coulant du cuivre en fusion, construisez une fonderie et ouvrez l'interface",
   "advancements.modernfoundry.smeltery.tinkers_anvil.title": "Fabrication d'Outils Avancée",
-  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Fabriquez une enclume de Modern Foundry en utilisant des alliages de la fonderie !",
+  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Fabriquez une enclume de Tinker en utilisant des alliages de la fonderie !",
   "advancements.modernfoundry.smeltery.tool_forge.title": "Forge d'Outils",
   "advancements.modernfoundry.smeltery.tool_forge.description": "Forgez chaque outil large dans l'enclume",
   "advancements.modernfoundry.smeltery.abilities.title": "Maître des Capacités",
@@ -3066,8 +3066,8 @@
 
   "_comment": "Gadget Advancements",
 
-  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Bric-à-brac du Modern Foundry",
-  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Fabriquez le Bric-à-brac du Modern Foundry pour commencer à explorer le monde",
+  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Bric-à-brac du Tinkerer",
+  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Fabriquez le Bric-à-brac du Tinkerer pour commencer à explorer le monde",
   "advancements.modernfoundry.world.earth_island.title": "Île de Slime terrestre",
   "advancements.modernfoundry.world.earth_island.description": "Repérez une île de slime terrestre dans l'océan",
   "advancements.modernfoundry.world.sky_island.title": "Île de céletslime",

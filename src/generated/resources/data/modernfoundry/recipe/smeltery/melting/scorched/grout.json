@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/scorched/grout",
-  "ingredient": {
-    "item": "modernfoundry:nether_grout"
-  },
+  "ingredient": "modernfoundry:nether_grout",
   "result": {
     "amount": 500,
     "fluid": "modernfoundry:scorched_stone"

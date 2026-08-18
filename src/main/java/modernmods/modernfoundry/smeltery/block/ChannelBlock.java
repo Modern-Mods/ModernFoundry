@@ -6,14 +6,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -32,9 +35,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import modernmods.hilt.datagen.HiltTags;
-import modernmods.hilt.util.BlockEntityHelper;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.datagen.MantleTags;
+import modernmods.mantle.util.BlockEntityHelper;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.utils.Util;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
@@ -167,7 +170,7 @@ public class ChannelBlock extends Block implements EntityBlock {
 	 */
 	private static boolean isFluidHandler(LevelAccessor world, Direction side, BlockPos pos) {
 		BlockEntity te = world.getBlockEntity(pos);
-		return te != null && world instanceof Level level && level.getCapability(Capabilities.FluidHandler.BLOCK, pos, world.getBlockState(pos), te, side) != null;
+		return te != null && world instanceof Level level && level.getCapability(Capabilities.Fluid.BLOCK, pos, world.getBlockState(pos), te, side) != null;
 	}
 
 	/**
@@ -231,7 +234,7 @@ public class ChannelBlock extends Block implements EntityBlock {
 	@SuppressWarnings("deprecation")
 	@Override
 	@Deprecated
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess ticks, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource random) {
 		// down only cares about connected or not
 		if (facing == Direction.DOWN) {
 			if (state.getValue(DOWN) && facingState.isAir()) {
@@ -262,10 +265,10 @@ public class ChannelBlock extends Block implements EntityBlock {
 	private BlockState interactWithSide(BlockState state, Level world, BlockPos pos, Player player, Direction side) {
 		if (side == Direction.DOWN) {
 			if (!state.getValue(DOWN) && canConnect(world, pos, side)) {
-				player.displayClientMessage(DOWN_OUT, true);
+				player.sendOverlayMessage(DOWN_OUT);
 				return state.setValue(DOWN, true);
 			} else if (state.getValue(DOWN)) {
-				player.displayClientMessage(DOWN_NONE, true);
+				player.sendOverlayMessage(DOWN_NONE);
 				return state.setValue(DOWN, false);
 			}
 		} else {
@@ -279,7 +282,7 @@ public class ChannelBlock extends Block implements EntityBlock {
 			if (newConnect == ChannelConnection.OUT && facingState.getBlock() != this && !isFluidHandler(world, side.getOpposite(), facingPos)) {
 				newConnect = newConnect.getNext(player.isShiftKeyDown());
 			}
-			player.displayClientMessage(SIDE_CONNECTION.get(newConnect), true);
+			player.sendOverlayMessage(SIDE_CONNECTION.get(newConnect));
 			return state.setValue(prop, newConnect);
 		}
 
@@ -288,9 +291,9 @@ public class ChannelBlock extends Block implements EntityBlock {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
     InteractionResult result = interact(state, world, pos, player, stack, hit);
-    return result == InteractionResult.SUCCESS ? ItemInteractionResult.SUCCESS : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    return result == InteractionResult.SUCCESS ? InteractionResult.SUCCESS : InteractionResult.PASS;
   }
 
 	@Override
@@ -307,7 +310,7 @@ public class ChannelBlock extends Block implements EntityBlock {
 				return InteractionResult.PASS;
 			}
 			// if they are holding a gauge, set the side to in to make it easier to place a gauge on it
-			if (hitFace != Direction.DOWN && stack.getItem() instanceof BlockItem blockItem && RegistryHelper.contains(HiltTags.Blocks.ATTACHED_GAUGES, blockItem.getBlock())) {
+			if (hitFace != Direction.DOWN && stack.getItem() instanceof BlockItem blockItem && RegistryHelper.contains(MantleTags.Blocks.ATTACHED_GAUGES, blockItem.getBlock())) {
 				// for sides, need to toggle the property on
 				if (hitFace != Direction.UP) {
 					EnumProperty<ChannelConnection> prop = DIRECTION_MAP.get(hitFace);
@@ -347,7 +350,7 @@ public class ChannelBlock extends Block implements EntityBlock {
 		// if we have changes, apply them and return success
 		if (newState != null) {
 			Direction finalSide = side;
-			if (!world.isClientSide) {
+			if (!world.isClientSide()) {
 				BlockEntityHelper.get(ChannelBlockEntity.class, world, pos).ifPresent(te -> te.refreshNeighbor(newState, finalSide));
 			}
 			world.setBlockAndUpdate(pos, newState);
@@ -360,16 +363,21 @@ public class ChannelBlock extends Block implements EntityBlock {
 	@SuppressWarnings("deprecation")
 	@Override
 	@Deprecated
-	public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-		super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
-		if (!worldIn.isClientSide) {
+	public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, @Nullable Orientation orientation, boolean isMoving) {
+		super.neighborChanged(state, worldIn, pos, blockIn, orientation, isMoving);
+		if (!worldIn.isClientSide()) {
 			boolean isPowered = worldIn.hasNeighborSignal(pos);
 			if (isPowered != state.getValue(POWERED)) {
 				state = state.setValue(POWERED, isPowered).setValue(DOWN, isPowered && canConnect(worldIn, pos, Direction.DOWN));
 				worldIn.setBlock(pos, state, Block.UPDATE_CLIENTS);
 			}
-      BlockEntityHelper.get(ChannelBlockEntity.class, worldIn, pos)
-                      .ifPresent(te -> te.removeCachedNeighbor(Util.directionFromOffset(pos, fromPos)));
+      // 26.1.2 replaced the fromPos argument with an Orientation; getFront() is the direction the update came from.
+      // May need in-game validation that the cached neighbor fluid-handler on that side is invalidated correctly.
+      if (orientation != null) {
+        Direction fromDir = orientation.getFront();
+        BlockEntityHelper.get(ChannelBlockEntity.class, worldIn, pos)
+                        .ifPresent(te -> te.removeCachedNeighbor(fromDir));
+      }
 		}
 	}
 
@@ -388,7 +396,7 @@ public class ChannelBlock extends Block implements EntityBlock {
   @Nullable
   @Override
   public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> givenType) {
-    return pLevel.isClientSide ? null : BlockEntityHelper.castTicker(givenType, TinkerSmeltery.channel.get(), ChannelBlockEntity.SERVER_TICKER);
+    return pLevel.isClientSide() ? null : BlockEntityHelper.castTicker(givenType, TinkerSmeltery.channel.get(), ChannelBlockEntity.SERVER_TICKER);
   }
 
   public enum ChannelConnection implements StringRepresentable {

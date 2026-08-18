@@ -1,0 +1,40 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/vein_hammer",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "head",
+        "index": 0
+      },
+      {
+        "name": "grip",
+        "index": 2
+      },
+      {
+        "name": "front",
+        "index": 3
+      }
+    ],
+    "large": true,
+    "large_offset": [
+      -2,
+      2
+    ],
+    "modifier_maps": [
+      "modernfoundry:vein_hammer"
+    ],
+    "small_modifier_roots": {
+      "small": [
+        "modernfoundry:item/tool/vein_hammer/modifiers/"
+      ],
+      "large": [
+        "modernfoundry:item/tool/vein_hammer/large/modifiers/"
+      ]
+    }
+  }
+}

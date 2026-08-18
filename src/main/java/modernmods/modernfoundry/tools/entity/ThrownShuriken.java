@@ -1,5 +1,9 @@
 package modernmods.modernfoundry.tools.entity;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.server.level.ServerLevel;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -24,7 +28,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import modernmods.hilt.util.CombatHelper;
+import modernmods.mantle.util.CombatHelper;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -175,8 +179,8 @@ public class ThrownShuriken extends Projectile implements ToolProjectile, Projec
       }
     }
 
-    // update position
-    this.checkInsideBlocks();
+    // update position (26.1.2 renamed checkInsideBlocks to applyEffectsFromBlocks)
+    this.applyEffectsFromBlocks();
     Vec3 movement = this.getDeltaMovement();
     double x = this.getX() + movement.x;
     double y = this.getY() + movement.y;
@@ -219,7 +223,7 @@ public class ThrownShuriken extends Projectile implements ToolProjectile, Projec
     } else {
       source = damageSources().thrown(this, this.getOwner());
     }
-    boolean hit = target.hurt(source, power);
+    boolean hit = target.hurtOrSimulate(source, power);
 
     if (hit && knockback > 0 && target instanceof LivingEntity living) {
       // knockback logic based on arrows
@@ -231,9 +235,9 @@ public class ThrownShuriken extends Projectile implements ToolProjectile, Projec
     }
 
     Level level = level();
-    if (!level.isClientSide) {
+    if (!level.isClientSide()) {
       if ((!hit || reclaim) && !this.isRemoved()) {
-        this.spawnAtLocation(stack.copy());
+        this.spawnAtLocation((ServerLevel) level, stack.copy());
       } else {
         level.broadcastEntityEvent(this, (byte) 3); // TODO: find the proper constant for this event ID
       }
@@ -247,7 +251,9 @@ public class ThrownShuriken extends Projectile implements ToolProjectile, Projec
 
     // TODO: can we stick in the block like an arrow instead?
     if (!this.isRemoved()) {
-      this.spawnAtLocation(stack.copy());
+      if (level() instanceof ServerLevel serverLevel) {
+        this.spawnAtLocation(serverLevel, stack.copy());
+      }
       this.discard();
     }
   }
@@ -302,24 +308,28 @@ public class ThrownShuriken extends Projectile implements ToolProjectile, Projec
   private static final String KEY_TASKS = "tasks";
 
   @Override
-  public void addAdditionalSaveData(CompoundTag tag) {
-    super.addAdditionalSaveData(tag);
-    tag.put(KEY_STACK, TagUtil.saveItem(this.stack, new CompoundTag()));
-    tag.putFloat(KEY_WATER_INERTIA, this.entityData.get(WATER_INERTIA));
+  public void addAdditionalSaveData(ValueOutput output) {
+    super.addAdditionalSaveData(output);
+    output.store(KEY_STACK, CompoundTag.CODEC, TagUtil.saveItem(this.stack, new CompoundTag()));
+    output.putFloat(KEY_WATER_INERTIA, this.entityData.get(WATER_INERTIA));
     if (!this.tasks.isEmpty()) {
-      tag.put(KEY_TASKS, this.tasks.serialize());
+      // ValueOutput has no raw-tag put, so wrap the task list in a compound stored via its codec
+      CompoundTag wrapper = new CompoundTag();
+      wrapper.put(KEY_TASKS, this.tasks.serialize());
+      output.store(KEY_TASKS, CompoundTag.CODEC, wrapper);
     }
   }
 
   @Override
-  public void readAdditionalSaveData(CompoundTag tag) {
-    super.readAdditionalSaveData(tag);
-    if (tag.contains(KEY_STACK, CompoundTag.TAG_COMPOUND)) {
-      setStack(TagUtil.readItem(tag.getCompound(KEY_STACK)));
-    }
-    this.entityData.set(WATER_INERTIA, tag.getFloat(KEY_WATER_INERTIA));
-    if (tag.contains(KEY_TASKS, CompoundTag.TAG_LIST)) {
-      this.tasks = Schedule.deserialize(tag.getList(KEY_TASKS, CompoundTag.TAG_COMPOUND));
-    }
+  public void readAdditionalSaveData(ValueInput input) {
+    super.readAdditionalSaveData(input);
+    input.read(KEY_STACK, CompoundTag.CODEC).ifPresent(t -> setStack(TagUtil.readItem(t)));
+    this.entityData.set(WATER_INERTIA, input.getFloatOr(KEY_WATER_INERTIA, 0f));
+    input.read(KEY_TASKS, CompoundTag.CODEC).ifPresent(wrapper -> {
+      ListTag list = wrapper.getListOrEmpty(KEY_TASKS);
+      if (!list.isEmpty()) {
+        this.tasks = Schedule.deserialize(list);
+      }
+    });
   }
 }

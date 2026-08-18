@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/sand/molding/small_axe_head",
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "material": "#modernfoundry:casts/sand",
   "pattern": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:small_axe_head"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:small_axe_head"
   },
   "result": "modernfoundry:small_axe_head_sand_cast"
 }

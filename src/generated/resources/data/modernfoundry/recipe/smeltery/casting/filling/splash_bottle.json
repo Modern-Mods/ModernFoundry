@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:casting_table_potion",
-  "id": "modernfoundry:smeltery/casting/filling/splash_bottle",
-  "bottle": {
-    "tag": "c:bottles/lingering"
-  },
+  "bottle": "#c:bottles/lingering",
   "fluid": {
     "amount": 250,
     "tag": "c:potion"
   },
+  "id": "modernfoundry:smeltery/casting/filling/splash_bottle",
   "result": "minecraft:lingering_potion"
 }

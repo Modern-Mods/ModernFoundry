@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/earth/ball",
-  "ingredient": {
-    "tag": "c:slimeball/earth"
-  },
+  "ingredient": "#c:slimeball/earth",
   "result": {
     "amount": 250,
     "tag": "c:slime"

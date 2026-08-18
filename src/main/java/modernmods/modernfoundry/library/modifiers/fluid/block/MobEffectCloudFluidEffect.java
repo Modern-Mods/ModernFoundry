@@ -6,7 +6,7 @@ import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.fluid.EffectLevel;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffect;

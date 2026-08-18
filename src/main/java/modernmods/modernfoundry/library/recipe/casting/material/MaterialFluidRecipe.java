@@ -1,17 +1,17 @@
 package modernmods.modernfoundry.library.recipe.casting.material;
 
 import lombok.Getter;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ICustomOutputRecipe;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ICustomOutputRecipe;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
@@ -36,7 +36,7 @@ public class MaterialFluidRecipe implements ICustomOutputRecipe<ICastingContaine
   public static final MaterialFluidRecipe EMPTY = new MaterialFluidRecipe(TConstruct.getResource("missingno"), FluidIngredient.EMPTY, 0, null, IMaterial.UNKNOWN_ID);
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   private final FluidIngredient fluid;
   @Getter
   private final int temperature;
@@ -47,7 +47,7 @@ public class MaterialFluidRecipe implements ICustomOutputRecipe<ICastingContaine
   @Getter
   private final MaterialVariant output;
 
-  public MaterialFluidRecipe(ResourceLocation id, FluidIngredient fluid, int temperature, @Nullable MaterialVariantId inputId, MaterialVariantId outputId) {
+  public MaterialFluidRecipe(Identifier id, FluidIngredient fluid, int temperature, @Nullable MaterialVariantId inputId, MaterialVariantId outputId) {
     this.id = id;
     this.fluid = fluid;
     this.temperature = temperature;
@@ -84,13 +84,14 @@ public class MaterialFluidRecipe implements ICustomOutputRecipe<ICastingContaine
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends MaterialFluidRecipe> getSerializer() {
     return TinkerSmeltery.materialFluidRecipe.get();
   }
 
   @Override
-  public RecipeType<?> getType() {
-    return TinkerRecipeTypes.DATA.get();
+  @SuppressWarnings("unchecked")
+  public RecipeType<? extends MaterialFluidRecipe> getType() {
+    return (RecipeType<? extends MaterialFluidRecipe>)(RecipeType<?>) TinkerRecipeTypes.DATA.get();
   }
 
   /** Checks that all materials in this recipe are known */

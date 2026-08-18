@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/nickel/oreberry",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "oreberriesreplanted:nickel_oreberry"
+      "type": "neoforge:registered",
+      "value": "oreberriesreplanted:nickel_oreberry"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/nickel/oreberry",
   "ingredient": {
     "item": "oreberriesreplanted:nickel_oreberry"
   },

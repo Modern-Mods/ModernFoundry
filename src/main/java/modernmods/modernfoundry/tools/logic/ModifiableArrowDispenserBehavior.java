@@ -2,7 +2,7 @@ package modernmods.modernfoundry.tools.logic;
 
 import net.minecraft.core.Position;
 import modernmods.modernfoundry.compat.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
-import net.minecraft.world.entity.projectile.AbstractArrow.Pickup;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow.Pickup;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;

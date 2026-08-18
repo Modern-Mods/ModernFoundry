@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/sword",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "head",
+        "index": 0
+      },
+      {
+        "name": "guard",
+        "index": 2
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:sword"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/sword/modifiers/"
+    ]
+  }
+}

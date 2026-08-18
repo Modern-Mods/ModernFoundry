@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/blazewood_stairs",
-  "cast": {
-    "item": "modernfoundry:bloodshroom_planks_stairs"
-  },
+  "cast": "modernfoundry:bloodshroom_planks_stairs",
   "cast_consumed": true,
   "cooling_time": 120,
   "fluid": {
     "amount": 200,
     "tag": "modernfoundry:blazing_blood"
   },
+  "id": "modernfoundry:smeltery/casting/blazewood_stairs",
   "result": "modernfoundry:blazewood_stairs"
 }

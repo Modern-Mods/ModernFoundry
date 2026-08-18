@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:entity_melting",
-  "id": "modernfoundry:smeltery/entity_melting/piglin",
   "damage": 4,
   "entity": {
     "types": [
@@ -9,6 +8,7 @@
       "minecraft:zombified_piglin"
     ]
   },
+  "id": "modernfoundry:smeltery/entity_melting/piglin",
   "result": {
     "amount": 10,
     "tag": "c:molten_gold"

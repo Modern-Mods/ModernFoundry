@@ -1,10 +1,11 @@
 package modernmods.modernfoundry.common.data.loot;
 
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.EntityTypePredicate;
+import modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.EntityTypePredicate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -19,13 +20,13 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.LootTableIdCondition;
-import modernmods.hilt.loot.AddEntryLootModifier;
-import modernmods.hilt.loot.ReplaceItemLootModifier;
-import modernmods.hilt.loot.condition.BlockTagLootCondition;
-import modernmods.hilt.loot.condition.ContainsItemModifierLootCondition;
-import modernmods.hilt.loot.entry.TagPreferenceLootEntry;
-import modernmods.hilt.recipe.condition.TagFilledCondition;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.loot.AddEntryLootModifier;
+import modernmods.mantle.loot.ReplaceItemLootModifier;
+import modernmods.mantle.loot.condition.BlockTagLootCondition;
+import modernmods.mantle.loot.condition.ContainsItemModifierLootCondition;
+import modernmods.mantle.loot.entry.TagPreferenceLootEntry;
+import modernmods.mantle.recipe.condition.TagFilledCondition;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.json.BlockOrEntityCondition;
@@ -42,7 +43,7 @@ import modernmods.modernfoundry.tools.modifiers.loot.ChrysophiliteLootCondition;
 import modernmods.modernfoundry.tools.modifiers.loot.HasModifierLootCondition;
 import modernmods.modernfoundry.tools.modifiers.loot.ModifierBonusLootFunction;
 
-import static modernmods.hilt.Hilt.commonResource;
+import static modernmods.mantle.Mantle.commonResource;
 
 public class GlobalLootModifiersProvider extends GlobalLootModifierProvider {
   public GlobalLootModifiersProvider(PackOutput output) {
@@ -53,7 +54,7 @@ public class GlobalLootModifiersProvider extends GlobalLootModifierProvider {
   @Override
   protected void start() {
     add("wither_bone", ReplaceItemLootModifier.builder(Ingredient.of(Items.BONE), ItemOutput.fromItem(TinkerMaterials.necroticBone))
-      .addCondition(LootTableIdCondition.builder(ResourceLocation.parse("entities/wither_skeleton")).build())
+      .addCondition(LootTableIdCondition.builder(Identifier.parse("entities/wither_skeleton")).build())
       .addCondition(ConfigEnabledCondition.WITHER_BONE_DROP)
       .build());
 
@@ -76,7 +77,7 @@ public class GlobalLootModifiersProvider extends GlobalLootModifierProvider {
     // chrysophilite modifier hook
     add("chrysophilite_modifier", AddEntryLootModifier.builder(LootItem.lootTableItem(Items.GOLD_NUGGET))
       .addCondition(new BlockTagLootCondition(TinkerTags.Blocks.CHRYSOPHILITE_ORES))
-      .addCondition(new ContainsItemModifierLootCondition(Ingredient.of(TinkerTags.Items.CHRYSOPHILITE_ORES)).inverted())
+      .addCondition(new ContainsItemModifierLootCondition(LazyTagIngredient.of(TinkerTags.Items.CHRYSOPHILITE_ORES)).inverted())
       .addCondition(ChrysophiliteLootCondition.INSTANCE)
       .addFunction(SetItemCountFunction.setCount(UniformGenerator.between(2, 6)).build())
       .addFunction(ChrysophiliteBonusFunction.oreDrops(false).build())
@@ -99,7 +100,7 @@ public class GlobalLootModifiersProvider extends GlobalLootModifierProvider {
   /** Adds lustrous for an ore */
   private void addLustrous(String name, boolean optional) {
     TagKey<Item> nuggets = TagKey.create(Registries.ITEM, commonResource("nuggets/" + name));
-    ResourceLocation ores = commonResource("ores/" + name);
+    Identifier ores = commonResource("ores/" + name);
     AddEntryLootModifier.Builder builder = AddEntryLootModifier.builder(TagPreferenceLootEntry.tagPreference(nuggets));
     builder.addCondition(new BlockTagLootCondition(TagKey.create(Registries.BLOCK, ores)))
            .addCondition(new ContainsItemModifierLootCondition(Ingredient.of(TagKey.create(Registries.ITEM, ores))).inverted());

@@ -5,8 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.network.packet.IThreadsafePacket;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.smeltery.block.entity.ChannelBlockEntity;
 
 /** Packet for when the flowing state changes on a channel side */

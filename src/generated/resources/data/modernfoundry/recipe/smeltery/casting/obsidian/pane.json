@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/obsidian/pane",
   "cooling_time": 111,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:molten_obsidian"
   },
+  "id": "modernfoundry:smeltery/casting/obsidian/pane",
   "result": "modernfoundry:obsidian_pane"
 }

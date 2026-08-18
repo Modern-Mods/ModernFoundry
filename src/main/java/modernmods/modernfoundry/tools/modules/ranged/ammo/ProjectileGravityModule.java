@@ -1,10 +1,10 @@
 package modernmods.modernfoundry.tools.modules.ranged.ammo;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -50,7 +50,7 @@ public record ProjectileGravityModule(LevelingInt delay) implements ModifierModu
 
   @Override
   public void onScheduledProjectileTask(IToolStackView tool, ModifierEntry modifier, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, int task) {
-    if (task == 0 && !projectile.level().isClientSide) {
+    if (task == 0 && !projectile.level().isClientSide()) {
       projectile.setNoGravity(false);
     }
   }

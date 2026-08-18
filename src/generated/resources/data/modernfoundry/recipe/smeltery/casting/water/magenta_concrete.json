@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/water/magenta_concrete",
-  "cast": {
-    "item": "minecraft:magenta_concrete_powder"
-  },
+  "cast": "minecraft:magenta_concrete_powder",
   "cast_consumed": true,
   "cooling_time": 30,
   "fluid": {
     "amount": 100,
     "fluid": "minecraft:water"
   },
+  "id": "modernfoundry:smeltery/casting/water/magenta_concrete",
   "result": "minecraft:magenta_concrete"
 }

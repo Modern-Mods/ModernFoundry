@@ -9,9 +9,9 @@ import com.google.gson.JsonObject;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.GenericDataProvider;
-import modernmods.hilt.data.gson.ResourceLocationSerializer;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.GenericDataProvider;
+import modernmods.mantle.data.gson.ResourceLocationSerializer;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.data.material.AbstractPartSpriteProvider.PartSpriteInfo;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
@@ -28,8 +28,12 @@ import java.util.concurrent.CompletableFuture;
 public class GeneratorPartTextureJsonGenerator extends GenericDataProvider {
   /** GSON adapter for material info deserializing */
   public static final Gson GSON = (new GsonBuilder())
-    .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
-    .registerTypeAdapter(MaterialStatsId.class, new ResourceLocationSerializer<>(MaterialStatsId::new, TConstruct.MOD_ID))
+    .registerTypeAdapter(Identifier.class, ResourceLocationSerializer.resourceLocation(TConstruct.MOD_ID))
+    .registerTypeAdapter(MaterialStatsId.class, (com.google.gson.JsonDeserializer<MaterialStatsId>) (element, type, ctx) -> {
+      String loc = net.minecraft.util.GsonHelper.convertToString(element, "location");
+      if (!loc.contains(":")) { loc = TConstruct.MOD_ID + ":" + loc; }
+      return new MaterialStatsId(loc);
+    })
     .setPrettyPrinting()
     .disableHtmlEscaping()
     .create();
@@ -57,7 +61,7 @@ public class GeneratorPartTextureJsonGenerator extends GenericDataProvider {
     if (!overrides.overrides.isEmpty()) {
       json.add("overrides", overrides.serialize());
     }
-    return saveJson(cache, ResourceLocation.fromNamespaceAndPath(modId, "generator_part_textures"), json);
+    return saveJson(cache, Identifier.fromNamespaceAndPath(modId, "generator_part_textures"), json);
   }
 
   @Override
@@ -66,20 +70,20 @@ public class GeneratorPartTextureJsonGenerator extends GenericDataProvider {
   }
 
   /** Class representing an override allowing a stat type to include a material withot modifying its render info */
-  public record StatOverride(Map<MaterialStatsId,Set<ResourceLocation>> overrides) {
+  public record StatOverride(Map<MaterialStatsId,Set<Identifier>> overrides) {
     public static final StatOverride EMPTY = new StatOverride(Collections.emptyMap());
 
     /** Checks if the material has the given override */
-    public boolean hasOverride(MaterialStatsId statsId, ResourceLocation location) {
+    public boolean hasOverride(MaterialStatsId statsId, Identifier location) {
       return overrides.getOrDefault(statsId, Collections.emptySet()).contains(location);
     }
 
     /** Serializes this to JSON */
     public JsonObject serialize() {
       JsonObject json = new JsonObject();
-      for (Entry<MaterialStatsId, Set<ResourceLocation>> entry : overrides.entrySet()) {
+      for (Entry<MaterialStatsId, Set<Identifier>> entry : overrides.entrySet()) {
         JsonArray array = new JsonArray();
-        for (ResourceLocation value : entry.getValue()) {
+        for (Identifier value : entry.getValue()) {
           array.add(value.toString());
         }
         json.add(entry.getKey().toString(), array);
@@ -89,10 +93,10 @@ public class GeneratorPartTextureJsonGenerator extends GenericDataProvider {
 
     @SuppressWarnings("UnusedReturnValue")
     public static class Builder {
-      private final Map<MaterialStatsId,ImmutableSet.Builder<ResourceLocation>> builder = new LinkedHashMap<>();
+      private final Map<MaterialStatsId,ImmutableSet.Builder<Identifier>> builder = new LinkedHashMap<>();
 
       /** Adds a texture to the builder */
-      public Builder add(MaterialStatsId statsId, ResourceLocation texture) {
+      public Builder add(MaterialStatsId statsId, Identifier texture) {
         builder.computeIfAbsent(statsId, id -> ImmutableSet.builder()).add(texture);
         return this;
       }
@@ -108,8 +112,8 @@ public class GeneratorPartTextureJsonGenerator extends GenericDataProvider {
           return EMPTY;
         }
 
-        ImmutableMap.Builder<MaterialStatsId,Set<ResourceLocation>> builder = ImmutableMap.builder();
-        for (Entry<MaterialStatsId,ImmutableSet.Builder<ResourceLocation>> entry : this.builder.entrySet()) {
+        ImmutableMap.Builder<MaterialStatsId,Set<Identifier>> builder = ImmutableMap.builder();
+        for (Entry<MaterialStatsId,ImmutableSet.Builder<Identifier>> entry : this.builder.entrySet()) {
           builder.put(entry.getKey(), entry.getValue().build());
         }
         return new StatOverride(builder.build());

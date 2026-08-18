@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.materials.traits;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import modernmods.hilt.data.listener.MergingJsonFileLoader;
+import modernmods.mantle.data.listener.MergingJsonFileLoader;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.fixture.MaterialStatsFixture;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;

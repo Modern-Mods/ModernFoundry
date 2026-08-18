@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.library.events.teleport;
 
+import net.minecraft.server.level.ServerLevel;
 import lombok.Getter;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +14,7 @@ public class SlimeslingTeleportEvent extends EntityTeleportEvent {
   @Getter
   private final ItemStack sling;
   public SlimeslingTeleportEvent(Entity entity, double targetX, double targetY, double targetZ, ItemStack sling) {
-    super(entity, targetX, targetY, targetZ);
+    super(entity, (ServerLevel) entity.level(), targetX, targetY, targetZ);
     this.sling = sling;
   }
 }

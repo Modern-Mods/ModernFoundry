@@ -2,8 +2,8 @@ package modernmods.modernfoundry.library.tools.definition.module.weapon;
 
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.module.HookProvider;
 import modernmods.modernfoundry.library.module.ModuleHook;
 import modernmods.modernfoundry.library.tools.context.ToolAttackContext;

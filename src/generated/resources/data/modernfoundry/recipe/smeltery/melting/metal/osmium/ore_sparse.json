@@ -1,6 +1,14 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "c:ores/osmium",
+        "c:ore_rates/sparse"
+      ]
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/osmium/ore_sparse",
   "byproducts": [
     {
       "amount": 90,
@@ -8,24 +16,12 @@
       "tag": "c:molten_iron"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_combination_filled",
-      "match": [
-        "c:ores/osmium",
-        "c:ore_rates/sparse"
-      ]
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/metal/osmium/ore_sparse",
   "ingredient": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "c:ores/osmium"
-      },
-      {
-        "tag": "c:ore_rates/sparse"
-      }
+      "#c:ores/osmium",
+      "#c:ore_rates/sparse"
     ]
   },
   "rate": "metal",

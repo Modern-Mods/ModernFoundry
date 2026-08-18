@@ -2,16 +2,16 @@ package modernmods.modernfoundry.library.recipe.melting;
 
 import com.google.common.collect.Streams;
 import lombok.Getter;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
 import modernmods.modernfoundry.common.config.Config;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.json.field.MergingListField;
@@ -35,7 +35,7 @@ public class OreMeltingRecipe extends MeltingRecipe {
   @Getter
   private final OreRateType oreType;
   private final List<OreRateType> byproductTypes;
-  protected OreMeltingRecipe(ResourceLocation id, String group, Ingredient input, FluidOutput output, int temperature, int time, List<FluidOutput> byproducts, OreRateType oreType, List<OreRateType> byproductTypes) {
+  protected OreMeltingRecipe(Identifier id, String group, Ingredient input, FluidOutput output, int temperature, int time, List<FluidOutput> byproducts, OreRateType oreType, List<OreRateType> byproductTypes) {
     super(id, group, input, output, temperature, time, byproducts);
     this.oreType = oreType;
     this.byproductTypes = byproductTypes;
@@ -66,7 +66,7 @@ public class OreMeltingRecipe extends MeltingRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends OreMeltingRecipe> getSerializer() {
     return TinkerSmeltery.oreMeltingSerializer.get();
   }
 }

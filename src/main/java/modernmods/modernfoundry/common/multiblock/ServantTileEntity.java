@@ -6,19 +6,21 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
-import modernmods.hilt.block.entity.HiltBlockEntity;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.block.entity.MantleBlockEntity;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.library.utils.TagUtil;
 import modernmods.modernfoundry.smeltery.block.component.SearedBlock;
 
 import javax.annotation.Nullable;
 
-public class ServantTileEntity extends HiltBlockEntity implements IServantLogic {
+public class ServantTileEntity extends MantleBlockEntity implements IServantLogic {
   private static final String TAG_MASTER_POS = "masterOffset";
   private static final String TAG_MASTER_BLOCK = "masterBlock";
 
@@ -122,14 +124,18 @@ public class ServantTileEntity extends HiltBlockEntity implements IServantLogic 
    * Reads the master from NBT
    * @param tags  NBT to read
    */
-  protected void readMaster(CompoundTag tags) {
-    BlockPos masterPos = TagUtil.readOptionalPos(tags, TAG_MASTER_POS, this.worldPosition);
+  protected void readMaster(ValueInput input) {
+    BlockPos relative = input.read(TAG_MASTER_POS, BlockPos.CODEC).orElse(null);
+    BlockPos masterPos = relative == null ? null : relative.offset(this.worldPosition);
     Block masterBlock = null;
     // if the master position is valid, get the master block
-    if (masterPos != null && tags.contains(TAG_MASTER_BLOCK, Tag.TAG_STRING)) {
-      ResourceLocation masterBlockName = ResourceLocation.tryParse(tags.getString(TAG_MASTER_BLOCK));
-      if (masterBlockName != null && ForgeRegistries.BLOCKS.containsKey(masterBlockName)) {
-        masterBlock = ForgeRegistries.BLOCKS.getValue(masterBlockName);
+    if (masterPos != null) {
+      String masterBlockStr = input.getStringOr(TAG_MASTER_BLOCK, "");
+      if (!masterBlockStr.isEmpty()) {
+        Identifier masterBlockName = Identifier.tryParse(masterBlockStr);
+        if (masterBlockName != null && ForgeRegistries.BLOCKS.containsKey(masterBlockName)) {
+          masterBlock = ForgeRegistries.BLOCKS.getValue(masterBlockName);
+        }
       }
     }
     // if both valid, set
@@ -140,26 +146,25 @@ public class ServantTileEntity extends HiltBlockEntity implements IServantLogic 
   }
 
   @Override
-  public void loadAdditional(CompoundTag tags, HolderLookup.Provider registries) {
-    super.loadAdditional(tags, registries);
-    readMaster(tags);
+  public void loadAdditional(ValueInput input) {
+    super.loadAdditional(input);
+    readMaster(input);
   }
 
   /**
-   * Writes the master position and master block to the given compound
-   * @param tags  Tags
+   * Writes the master position and master block to the given output
+   * @param output  Value output
    */
-  protected CompoundTag writeMaster(CompoundTag tags) {
+  protected void writeMaster(ValueOutput output) {
     if (masterPos != null && masterBlock != null) {
-      tags.put(TAG_MASTER_POS, NbtUtils.writeBlockPos(masterPos.subtract(this.worldPosition)));
-      tags.putString(TAG_MASTER_BLOCK, BuiltInRegistries.BLOCK.getKey(masterBlock).toString());
+      output.store(TAG_MASTER_POS, BlockPos.CODEC, masterPos.subtract(this.worldPosition));
+      output.putString(TAG_MASTER_BLOCK, BuiltInRegistries.BLOCK.getKey(masterBlock).toString());
     }
-    return tags;
   }
 
   @Override
-  public void saveAdditional(CompoundTag tags, HolderLookup.Provider registries) {
-    super.saveAdditional(tags, registries);
-    writeMaster(tags);
+  public void saveAdditional(ValueOutput output) {
+    super.saveAdditional(output);
+    writeMaster(output);
   }
 }

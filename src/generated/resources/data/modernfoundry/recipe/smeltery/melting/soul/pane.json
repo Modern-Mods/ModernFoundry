@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/soul/pane",
-  "ingredient": {
-    "item": "modernfoundry:soul_glass_pane"
-  },
+  "ingredient": "modernfoundry:soul_glass_pane",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:liquid_soul"

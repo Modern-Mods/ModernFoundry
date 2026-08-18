@@ -106,7 +106,7 @@
     "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:vein_hammer",
+      "id": "modernfoundry:vein_hammer",
       "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
     },
     "show_toast": true,

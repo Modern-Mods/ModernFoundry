@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/uranium/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/uranium"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/uranium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/uranium/nugget",
+  "ingredient": "#c:nuggets/uranium",
   "result": {
     "amount": 10,
     "tag": "c:molten_uranium"

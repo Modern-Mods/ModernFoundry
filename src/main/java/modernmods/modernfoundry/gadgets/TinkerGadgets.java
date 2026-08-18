@@ -15,12 +15,13 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.registration.object.EnumObject;
-import modernmods.hilt.registration.object.ItemObject;
+import modernmods.mantle.registration.object.EnumObject;
+import modernmods.mantle.registration.object.ItemObject;
 import modernmods.modernfoundry.common.TinkerModule;
 import modernmods.modernfoundry.gadgets.block.FoodCakeBlock;
 import modernmods.modernfoundry.gadgets.block.FoodCakeBlock.EffectCombination;
 import modernmods.modernfoundry.gadgets.block.InvertedCakeBlock;
+import modernmods.modernfoundry.gadgets.item.FoodCakeBlockItem;
 import modernmods.modernfoundry.gadgets.block.PunjiBlock;
 import modernmods.modernfoundry.gadgets.capability.PiggybackCapability;
 import modernmods.modernfoundry.gadgets.entity.EFLNEntity;
@@ -82,11 +83,11 @@ public final class TinkerGadgets extends TinkerModule {
     BlockBehaviour.Properties CAKE = builder(SoundType.WOOL).forceSolidOn().strength(0.5F).sound(SoundType.WOOL).pushReaction(PushReaction.DESTROY);
     cake = BLOCKS.registerEnum(FoliageType.values(), "cake", type -> {
       if (type == FoliageType.ICHOR) {
-        return new InvertedCakeBlock(CAKE, TinkerFood.ICHOR_CAKE, EffectCombination.BLOCK);
+        return new InvertedCakeBlock(CAKE, TinkerFood.ICHOR_CAKE, TinkerFood.ICHOR_CAKE_CONSUMABLE, EffectCombination.BLOCK);
       }
-      return new FoodCakeBlock(CAKE, TinkerFood.getCake(type), type == FoliageType.ENDER ? EffectCombination.ADD : EffectCombination.BLOCK);
-    }, UNSTACKABLE_BLOCK_ITEM);
-    magmaCake = BLOCKS.register("magma_cake", () -> new FoodCakeBlock(CAKE, TinkerFood.MAGMA_CAKE, EffectCombination.BLOCK), UNSTACKABLE_BLOCK_ITEM);
+      return new FoodCakeBlock(CAKE, TinkerFood.getCake(type), TinkerFood.getCakeConsumable(type), type == FoliageType.ENDER ? EffectCombination.ADD : EffectCombination.BLOCK);
+    }, b -> new FoodCakeBlockItem(b, UNSTACKABLE_PROPS));
+    magmaCake = BLOCKS.register("magma_cake", () -> new FoodCakeBlock(CAKE, TinkerFood.MAGMA_CAKE, TinkerFood.MAGMA_CAKE_CONSUMABLE, EffectCombination.BLOCK), b -> new FoodCakeBlockItem(b, UNSTACKABLE_PROPS));
   }
 
   // Shurikens

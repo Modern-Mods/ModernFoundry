@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.tools.modules.combat;
 
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,9 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.combat.MeleeHitModifierHook;
@@ -63,10 +64,10 @@ public record ChannelingModule(float clearChance, float rainChance, float thunde
         chance = clearChance;
       }
       // if the chance passes, spawn lightning
-      if (chance >= 1 || level.random.nextFloat() < chance) {
-        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level);
+      if (chance >= 1 || level.getRandom().nextFloat() < chance) {
+        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
         if (lightning != null) {
-          lightning.moveTo(Vec3.atBottomCenterOf(target));
+          lightning.snapTo(Vec3.atBottomCenterOf(target));
           if (attacker instanceof ServerPlayer player) {
             lightning.setCause(player);
           }

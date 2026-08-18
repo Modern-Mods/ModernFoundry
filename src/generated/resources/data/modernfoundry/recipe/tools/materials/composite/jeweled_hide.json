@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/composite/jeweled_hide",
   "fluid": {
     "amount": 100,
     "tag": "modernfoundry:molten_diamond"
   },
+  "id": "modernfoundry:tools/materials/composite/jeweled_hide",
   "input": "modernfoundry:leather",
   "output": "modernfoundry:jeweled_hide",
   "temperature": 1450

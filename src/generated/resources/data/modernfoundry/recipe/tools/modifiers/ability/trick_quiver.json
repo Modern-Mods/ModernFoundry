@@ -1,22 +1,22 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/trick_quiver",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/trick_quiver",
   "inputs": [
     {
-      "item": "modernfoundry:silky_cloth"
+      "ingredient": "modernfoundry:silky_cloth"
     },
     {
-      "item": "modernfoundry:sky_slime_vine"
+      "ingredient": "modernfoundry:sky_slime_vine"
     },
     {
-      "item": "modernfoundry:silky_cloth"
+      "ingredient": "modernfoundry:silky_cloth"
     },
     {
-      "item": "modernfoundry:sky_slime_vine"
+      "ingredient": "modernfoundry:sky_slime_vine"
     },
     {
-      "item": "modernfoundry:sky_slime_vine"
+      "ingredient": "modernfoundry:sky_slime_vine"
     }
   ],
   "result": "modernfoundry:trick_quiver",
@@ -24,14 +24,10 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/ranged/bows"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable"
-      }
+      "#modernfoundry:modifiable/ranged/bows",
+      "#modernfoundry:modifiable/interactable"
     ]
   }
 }

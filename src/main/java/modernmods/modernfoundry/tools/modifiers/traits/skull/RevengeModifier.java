@@ -30,7 +30,7 @@ public class RevengeModifier extends NoLevelsModifier implements EquipmentChange
     Entity trueSource = source.getEntity();
     LivingEntity living = context.getEntity();
     if (trueSource != null && trueSource != living) { // no making yourself mad with slurping or self-destruct or alike
-      MobEffectInstance effect = new MobEffectInstance(MobEffects.DAMAGE_BOOST, 300);
+      MobEffectInstance effect = new MobEffectInstance(MobEffects.STRENGTH, 300);
       living.addEffect(effect);
     }
   }
@@ -40,7 +40,7 @@ public class RevengeModifier extends NoLevelsModifier implements EquipmentChange
     if (context.getChangedSlot() == EquipmentSlot.HEAD) {
       IToolStackView replacement = context.getReplacementTool();
       if (replacement == null || replacement.getModifierLevel(this) == 0) {
-        context.getEntity().removeEffect(MobEffects.DAMAGE_BOOST);
+        context.getEntity().removeEffect(MobEffects.STRENGTH);
       }
     }
   }

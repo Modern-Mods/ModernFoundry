@@ -2,8 +2,8 @@ package modernmods.modernfoundry.library.json;
 
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 
@@ -88,13 +88,13 @@ public record LevelingValue(float flat, float eachLevel) {
 
   /* Network */
 
-  /** @deprecated use {@link #LOADABLE} with {@link modernmods.hilt.data.loadable.Loadable#encode(FriendlyByteBuf, Object)} */
+  /** @deprecated use {@link #LOADABLE} with {@link modernmods.mantle.data.loadable.Loadable#encode(FriendlyByteBuf, Object)} */
   @Deprecated(forRemoval = true)
   public void toNetwork(FriendlyByteBuf buffer) {
     LOADABLE.encode(buffer, this);
   }
 
-  /** @deprecated use {@link #LOADABLE} with {@link modernmods.hilt.data.loadable.Loadable#decode(FriendlyByteBuf)} */
+  /** @deprecated use {@link #LOADABLE} with {@link modernmods.mantle.data.loadable.Loadable#decode(FriendlyByteBuf)} */
   @Deprecated(forRemoval = true)
   public static LevelingValue fromNetwork(FriendlyByteBuf buffer) {
     return LOADABLE.decode(buffer);

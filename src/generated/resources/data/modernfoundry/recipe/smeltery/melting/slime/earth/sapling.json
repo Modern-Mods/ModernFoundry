@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/earth/sapling",
-  "ingredient": {
-    "item": "modernfoundry:earth_slime_sapling"
-  },
+  "ingredient": "modernfoundry:earth_slime_sapling",
   "result": {
     "amount": 250,
     "tag": "c:slime"

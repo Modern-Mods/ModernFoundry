@@ -3,8 +3,8 @@ package modernmods.modernfoundry.library.recipe.partbuilder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.client.SafeClientAccess;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.client.SafeClientAccess;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
 import modernmods.modernfoundry.library.recipe.material.MaterialRecipeCache;
@@ -30,6 +30,9 @@ public interface IDisplayPartBuilderRecipe extends IPartBuilderRecipe {
     }
     return MaterialRecipeCache.getItems(material.getVariant());
   }
+
+  /** Gets the recipe result for display (26.1.2 removed vanilla Recipe#getResultItem, so declared here for JEI). */
+  ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider access);
 
   /** Gets a list of results. Should either be size 1, or size matching {@link #getMaterialItems()} */
   default List<ItemStack> getResultItems() {

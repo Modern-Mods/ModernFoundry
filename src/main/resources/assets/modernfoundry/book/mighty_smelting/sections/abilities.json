@@ -1,38 +1,38 @@
 [
   {
     "name": "group_general",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "abilities/general.json",
     "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/general", "path": "abilities/general", "prefix": "general" }}
   },
   {
     "name": "group_interact",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "abilities/interact.json",
     "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/interaction", "path": "abilities/interact", "prefix": "interact" }}
   },
   {
     "name": "group_melee",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "abilities/melee.json",
     "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/melee", "path": "abilities/melee", "prefix": "melee" }}
   },
   {
     "name": "group_harvest",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "abilities/harvest.json",
     "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/harvest", "path": "abilities/harvest", "prefix": "harvest" }}
   },
   {
     "name": "group_ranged",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "abilities/ranged.json",
     "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/ranged", "path": "abilities/ranged", "prefix": "ranged" }}
   },
 
   {
     "name": "group_armor",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "abilities/armor.json",
     "extraData": { "modernfoundry:load_modifiers": { "tag": "modernfoundry:abilities/armor/general", "path": "abilities/armor/general", "prefix": "armor" }}
   },

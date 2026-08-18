@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/slime/ichor/ball",
   "byproducts": [
     {
       "amount": 200,
       "fluid": "modernfoundry:ichor"
     }
   ],
-  "ingredient": {
-    "tag": "c:slimeball/ichor"
-  },
+  "id": "modernfoundry:smeltery/melting/slime/ichor/ball",
+  "ingredient": "#c:slimeball/ichor",
   "result": {
     "amount": 10,
     "fluid": "modernfoundry:blazing_blood"

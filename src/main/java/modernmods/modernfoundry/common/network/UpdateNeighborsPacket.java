@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.registries.GameData;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 
 /**
  * Packet to notify neighbors that a block changed, used when breaking blocks in weird contexts that vanilla suppresses updates in for some reason

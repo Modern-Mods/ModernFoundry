@@ -1,8 +1,8 @@
 {
-  "type": "hilt:add_entry",
+  "type": "mantle:add_entry",
   "conditions": [
     {
-      "condition": "hilt:block_tag",
+      "condition": "mantle:block_tag",
       "tag": "c:ores/iron"
     },
     {
@@ -11,7 +11,7 @@
     }
   ],
   "entry": {
-    "type": "hilt:tag_preference",
+    "type": "mantle:tag_preference",
     "tag": "c:nuggets/iron"
   },
   "functions": [
@@ -36,9 +36,9 @@
   ],
   "post_conditions": [
     {
-      "type": "hilt:inverted",
+      "type": "mantle:inverted",
       "condition": {
-        "type": "hilt:contains_item",
+        "type": "mantle:contains_item",
         "ingredient": {
           "tag": "c:ores/iron"
         }

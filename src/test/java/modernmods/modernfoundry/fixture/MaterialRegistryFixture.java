@@ -2,7 +2,7 @@ package modernmods.modernfoundry.fixture;
 
 import lombok.AllArgsConstructor;
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.Loadable;
 import modernmods.modernfoundry.library.materials.IMaterialRegistry;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;

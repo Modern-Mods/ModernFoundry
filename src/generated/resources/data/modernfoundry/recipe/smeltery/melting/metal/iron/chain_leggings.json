@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/chain_leggings",
   "byproducts": [
     {
       "amount": 210,
@@ -8,9 +7,8 @@
       "unit_size": 10
     }
   ],
-  "ingredient": {
-    "item": "minecraft:chainmail_leggings"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/iron/chain_leggings",
+  "ingredient": "minecraft:chainmail_leggings",
   "result": {
     "amount": 420,
     "tag": "c:molten_iron",

@@ -33,7 +33,10 @@ public class TinkerChestContainerMenu extends TabbedContainerMenu<AbstractChestB
   /** Resizable inventory */
   public static class DynamicChestInventory extends SideInventoryContainer<AbstractChestBlockEntity> {
     public DynamicChestInventory(MenuType<?> containerType, int windowId, Inventory inv, AbstractChestBlockEntity tile, int x, int y, int columns) {
-      super(containerType, windowId, inv, tile, x, y, columns);
+      // pass the chest's own item handler directly instead of resolving it through the Capabilities.Item.BLOCK lookup:
+      // the chest handler is a legacy IItemHandler that isn't (yet) exposed as a 26.1 ResourceHandler, so the cap lookup
+      // returns null and the menu built zero slots. The smeltery side-inventory uses this same direct-handler path.
+      super(containerType, windowId, inv, tile, tile == null ? null : tile.getItemHandler(), x, y, columns);
     }
   }
 }

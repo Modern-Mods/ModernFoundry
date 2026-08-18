@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -16,11 +16,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.Vec3;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
@@ -81,7 +81,7 @@ public record LightspeedAttributeModule(String unique, UUID uuid, Attribute attr
   }
 
   /** Gets the stable modifier ID used by 1.21 attributes. */
-  private ResourceLocation modifierId() {
+  private Identifier modifierId() {
     return TConstruct.getResource(unique.replace(':', '_').replace('/', '_'));
   }
 
@@ -89,11 +89,11 @@ public record LightspeedAttributeModule(String unique, UUID uuid, Attribute attr
   public void onWalk(IToolStackView tool, ModifierEntry modifier, LivingEntity living, BlockPos prevPos, BlockPos newPos) {
     // no point trying if not on the ground
     Level level = living.level();
-    if (tool.isBroken() || !living.onGround() || level.isClientSide) {
+    if (tool.isBroken() || !living.onGround() || level.isClientSide()) {
       return;
     }
     // must have speed
-    ResourceLocation modifierId = modifierId();
+    Identifier modifierId = modifierId();
     AttributeInstance attribute = living.getAttribute(attributeHolder());
     if (attribute == null) {
       return;
@@ -112,7 +112,7 @@ public record LightspeedAttributeModule(String unique, UUID uuid, Attribute attr
       attribute.addTransientModifier(new AttributeModifier(modifierId, scaledLight * amount * modifier.getEffectiveLevel(), operation));
 
       // damage boots
-      if (level.random.nextFloat() < (damageChance * scaledLight)) {
+      if (level.getRandom().nextFloat() < (damageChance * scaledLight)) {
         ToolDamageUtil.damageAnimated(tool, 1, living, EquipmentSlot.FEET, modifier.getId());
       }
     }
@@ -126,7 +126,7 @@ public record LightspeedAttributeModule(String unique, UUID uuid, Attribute attr
       IToolStackView newTool = context.getReplacementTool();
       // damaging the tool will trigger this hook, so ensure the new tool has the same level
       if (newTool == null || newTool.isBroken() || newTool.getModifier(modifier.getId()).getEffectiveLevel() != modifier.getEffectiveLevel()) {
-        ResourceLocation modifierId = modifierId();
+        Identifier modifierId = modifierId();
         AttributeInstance attribute = livingEntity.getAttribute(attributeHolder());
         if (attribute != null && attribute.getModifier(modifierId) != null) {
           attribute.removeModifier(modifierId);

@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wooden_button",
   "ingredients": [
-    {
-      "item": "modernfoundry:enderbark_planks"
-    }
+    "modernfoundry:enderbark_planks"
   ],
   "result": {
     "id": "modernfoundry:enderbark_button"

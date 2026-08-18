@@ -1,11 +1,7 @@
 {
   "type": "modernfoundry:overslime_modifier",
   "id": "modernfoundry:tools/modifiers/slotless/overslime/ender_ball",
-  "ingredient": {
-    "item": "modernfoundry:ender_slime_ball"
-  },
+  "ingredient": "modernfoundry:ender_slime_ball",
   "restore_amount": 80,
-  "tools": {
-    "tag": "modernfoundry:modifiable/durability"
-  }
+  "tools": "#modernfoundry:modifiable/durability"
 }

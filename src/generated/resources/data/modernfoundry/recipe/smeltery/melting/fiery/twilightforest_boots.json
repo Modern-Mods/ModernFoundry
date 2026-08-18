@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "value": "twilightforest:fiery_boots"
+    }
+  ],
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/fiery/twilightforest_boots",
   "byproducts": [
     {
       "amount": 360,
@@ -8,12 +13,7 @@
       "unit_size": 10
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:fiery_boots"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/fiery/twilightforest_boots",
   "ingredient": {
     "item": "twilightforest:fiery_boots"
   },

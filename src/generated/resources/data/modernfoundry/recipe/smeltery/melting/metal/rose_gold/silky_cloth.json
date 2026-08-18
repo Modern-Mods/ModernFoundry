@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/rose_gold/silky_cloth",
-  "ingredient": {
-    "item": "modernfoundry:silky_cloth"
-  },
+  "ingredient": "modernfoundry:silky_cloth",
   "result": {
     "amount": 90,
     "tag": "c:molten_rose_gold"

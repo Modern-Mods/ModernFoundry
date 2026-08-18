@@ -14,7 +14,7 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.block.entity.HiltBlockEntity;
+import modernmods.mantle.block.entity.MantleBlockEntity;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 import modernmods.modernfoundry.common.TinkerTags.EntityTypes;
 import modernmods.modernfoundry.fluids.TinkerFluids;
@@ -33,8 +33,8 @@ import java.util.function.Supplier;
  */
 @RequiredArgsConstructor
 public class EntityMeltingModule {
-  // TODO: migrate to whatever mojang is doing
-  private final HiltBlockEntity parent;
+  // Note: revisit alignment with vanilla damage handling
+  private final MantleBlockEntity parent;
   private final IFluidHandler tank;
   /** Supplier that returns true if the tank has space */
   private final BooleanSupplier canMeltEntities;
@@ -86,7 +86,7 @@ public class EntityMeltingModule {
       return lastRecipe;
     }
     // find a new recipe if the last recipe does not match
-    EntityMeltingRecipe recipe = EntityMeltingRecipeCache.findRecipe(getLevel().getRecipeManager(), type);
+    EntityMeltingRecipe recipe = EntityMeltingRecipeCache.findRecipe(getLevel().getServer().getRecipeManager(), type);
     if (recipe != null) {
       lastRecipe = recipe;
     }
@@ -98,7 +98,7 @@ public class EntityMeltingModule {
    * @return  Default fluid
    */
   public static FluidStack getDefaultFluid() {
-    // TODO: consider a way to put this in a recipe
+    // Note: could be made recipe-driven
     return new FluidStack(TinkerFluids.liquidSoul.get(), FluidValues.GLASS_PANE / 5);
   }
 
@@ -109,7 +109,7 @@ public class EntityMeltingModule {
    */
   private boolean canMeltEntity(LivingEntity entity) {
     // fire based mobs are absorbed instead of damaged
-    return !entity.isInvulnerableTo(entity.fireImmune() ? smelteryMagic() : smelteryHeat())
+    return !entity.isInvulnerableTo((net.minecraft.server.level.ServerLevel) entity.level(), entity.fireImmune() ? smelteryMagic() : smelteryHeat())
            // have to special case players because for some dumb reason creative players do not return true to invulnerable to
            && !(entity instanceof Player && ((Player)entity).getAbilities().invulnerable)
            // also have to special case fire resistance, so a blaze with fire resistance is immune to the smeltery
@@ -148,7 +148,7 @@ public class EntityMeltingModule {
       // only can melt living, ensure its not immune to our damage
       // if canMelt is already found as false, skip instance checks, we only care about items now
       // if the type is hidden, skip as well, I suppose thats your blacklist if you must have one
-      else if (canMelt != Boolean.FALSE && !type.is(EntityTypes.MELTING_HIDE) && entity instanceof LivingEntity && canMeltEntity((LivingEntity)entity)) {
+      else if (canMelt != Boolean.FALSE && !type.builtInRegistryHolder().is(EntityTypes.MELTING_HIDE) && entity instanceof LivingEntity && canMeltEntity((LivingEntity)entity)) {
         // only fetch boolean once, its not the fastest as it tries to consume fuel
         if (canMelt == null) canMelt = canMeltEntities.getAsBoolean();
 
@@ -167,7 +167,7 @@ public class EntityMeltingModule {
           }
 
           // if the entity is successfully damaged, fill the tank with fluid
-          if (entity.hurt(entity.fireImmune() ? smelteryMagic() : smelteryHeat(), damage)) {
+          if (entity.hurtOrSimulate(entity.fireImmune() ? smelteryMagic() : smelteryHeat(), damage)) {
             // its fine if we don't fill it all, leftover fluid is just lost
             tank.fill(fluid, FluidAction.EXECUTE);
             melted = true;

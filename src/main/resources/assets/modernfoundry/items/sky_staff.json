@@ -1,0 +1,25 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/sky_staff",
+    "large": true,
+    "modifier_maps": [
+      "modernfoundry:staff/sky",
+      "modernfoundry:staff"
+    ],
+    "first_modifiers": [
+      "modernfoundry:dyed",
+      "modernfoundry:embellishment"
+    ],
+    "small_modifier_roots": {
+      "small": [
+        "modernfoundry:item/tool/staff/modifiers/sky/",
+        "modernfoundry:item/tool/staff/modifiers/"
+      ],
+      "large": [
+        "modernfoundry:item/tool/staff/large_modifiers/sky/",
+        "modernfoundry:item/tool/staff/large_modifiers/"
+      ]
+    }
+  }
+}

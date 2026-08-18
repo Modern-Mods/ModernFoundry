@@ -1,6 +1,6 @@
 {
   "render_type": "minecraft:cutout",
-  "loader": "hilt:retextured",
+  "loader": "mantle:retextured",
   "parent": "block/block",
   "textures": {
     "particle": "#front"

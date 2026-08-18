@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:fancy_item_frame",
   "key": {
-    "M": {
-      "tag": "c:glass/colorless"
-    },
-    "e": {
-      "tag": "c:glass_panes/colorless"
-    }
+    "M": "#c:glass_blocks/colorless",
+    "e": "#c:glass_panes/colorless"
   },
   "pattern": [
     " e ",
@@ -17,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:clear_item_frame"
-  },
-  "show_notification": true
+  }
 }

@@ -1,24 +1,22 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/slimewood_enderbark",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/slimewood_enderbark",
   "inputs": [
     {
-      "item": "modernfoundry:enderbark_planks"
+      "ingredient": "modernfoundry:enderbark_planks"
     },
     {
-      "item": "modernfoundry:pattern"
+      "ingredient": "modernfoundry:pattern"
     },
     {
-      "item": "modernfoundry:enderbark_planks"
+      "ingredient": "modernfoundry:enderbark_planks"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:slimewood#enderbark"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/wood"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/wood",
   "variant_formatter": "modernfoundry:material"
 }

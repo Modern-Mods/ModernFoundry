@@ -2,15 +2,15 @@ package modernmods.modernfoundry.common.data.model;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import modernmods.hilt.registration.object.ItemObject;
+import modernmods.mantle.registration.object.ItemObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.registration.CastItemObject;
 import modernmods.modernfoundry.library.tools.part.MaterialItem;
@@ -59,9 +59,9 @@ public class TinkerItemModelProvider extends ItemModelProvider {
     // armor
     TinkerToolParts.plating.forEach((slot, item) -> {
       MaterialModelBuilder<ItemModelBuilder> b = this.part(item, "armor/plate/" + slot.getName() + "/plating");
-      if (slot == ArmorItem.Type.HELMET) {
+      if (slot == ArmorType.HELMET) {
         b.offset(0, 2);
-      } else if (slot == ArmorItem.Type.LEGGINGS) {
+      } else if (slot == ArmorType.LEGGINGS) {
         b.offset(0, 1);
       }
     });
@@ -132,19 +132,19 @@ public class TinkerItemModelProvider extends ItemModelProvider {
   }
 
   @SuppressWarnings("deprecation") // no its not
-  private ResourceLocation id(ItemLike item) {
+  private Identifier id(ItemLike item) {
     return BuiltInRegistries.ITEM.getKey(item.asItem());
   }
 
   /** Generated item with a texture */
-  private ItemModelBuilder generated(ResourceLocation item, ResourceLocation texture) {
+  private ItemModelBuilder generated(Identifier item, Identifier texture) {
     return getBuilder(item.toString()).parent(GENERATED).texture("layer0", texture);
   }
 
   /** Generated item with a texture */
   @SuppressWarnings("removal")
-  private ItemModelBuilder generated(ResourceLocation item, String texture) {
-    return generated(item, new ResourceLocation(item.getNamespace(), texture));
+  private ItemModelBuilder generated(Identifier item, String texture) {
+    return generated(item, Identifier.fromNamespaceAndPath(item.getNamespace(), texture));
   }
 
   /** Generated item with a texture */
@@ -153,7 +153,7 @@ public class TinkerItemModelProvider extends ItemModelProvider {
   }
 
   /** Generated item with a texture */
-  private ItemModelBuilder basicItem(ResourceLocation item, String texture) {
+  private ItemModelBuilder basicItem(Identifier item, String texture) {
     return generated(item, "item/" + texture);
   }
 
@@ -166,7 +166,7 @@ public class TinkerItemModelProvider extends ItemModelProvider {
   /* Parts */
 
   /** Creates a part model with the given texture */
-  private MaterialModelBuilder<ItemModelBuilder> part(ResourceLocation part, String texture) {
+  private MaterialModelBuilder<ItemModelBuilder> part(Identifier part, String texture) {
     return withExistingParent(part.getPath(), "neoforge:item/default")
       .texture("texture", getResource("item/tool/" + texture))
       .customLoader(MaterialModelBuilder::new);

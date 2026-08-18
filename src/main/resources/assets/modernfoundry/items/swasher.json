@@ -1,0 +1,29 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/swasher",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "blade",
+        "index": 0
+      },
+      {
+        "name": "barrel",
+        "index": 2
+      },
+      {
+        "name": "tank"
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:swasher"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/swasher/modifiers/"
+    ]
+  }
+}

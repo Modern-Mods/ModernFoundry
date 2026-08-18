@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:material_melting",
-  "id": "modernfoundry:tools/materials/melting/aluminum",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/aluminum"
     }
   ],
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/aluminum",
   "input": "modernfoundry:aluminum",
   "result": {
     "amount": 90,

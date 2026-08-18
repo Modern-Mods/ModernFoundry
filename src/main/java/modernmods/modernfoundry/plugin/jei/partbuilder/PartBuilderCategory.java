@@ -13,10 +13,10 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.GuiUtil;
@@ -31,7 +31,7 @@ import java.awt.Color;
 import java.util.List;
 
 public class PartBuilderCategory implements IRecipeCategory<IDisplayPartBuilderRecipe> {
-  private static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
+  private static final Identifier BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "part_builder.title");
   private static final String KEY_COST = TConstruct.makeTranslationKey("jei", "part_builder.cost");
 
@@ -55,14 +55,26 @@ public class PartBuilderCategory implements IRecipeCategory<IDisplayPartBuilderR
   }
 
   @Override
-  public void draw(IDisplayPartBuilderRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
+  public int getWidth() {
+    return 121;
+  }
+
+  @Override
+  public int getHeight() {
+    return 46;
+  }
+
+  @Override
+  public void draw(IDisplayPartBuilderRecipe recipe, IRecipeSlotsView slots, GuiGraphicsExtractor graphics, double mouseX, double mouseY) {
+    // getBackground() was removed in JEI 27.x; draw our background ourselves
+    background.draw(graphics, 0, 0);
     MaterialVariant variant = recipe.getMaterial();
     if (!variant.isEmpty()) {
       Font fontRenderer = Minecraft.getInstance().font;
       Component name = MaterialTooltipCache.getColoredDisplayName(variant.getVariant());
-      graphics.drawString(fontRenderer, name, 3, 2, -1, true);
+      graphics.text(fontRenderer, name, 3, 2, -1, true);
       String coolingString = I18n.get(KEY_COST, recipe.getCost());
-      graphics.drawString(fontRenderer, coolingString, 3, 35, Color.GRAY.getRGB(), false);
+      graphics.text(fontRenderer, coolingString, 3, 35, Color.GRAY.getRGB(), false);
     } else if (recipe.getMaterialItems().isEmpty()) {
       GuiUtil.renderPattern(graphics, Patterns.INGOT, 25, 16);
     }
@@ -89,7 +101,7 @@ public class PartBuilderCategory implements IRecipeCategory<IDisplayPartBuilderR
   }
 
   @Override
-  public ResourceLocation getRegistryName(IDisplayPartBuilderRecipe recipe) {
+  public Identifier getRegistryName(IDisplayPartBuilderRecipe recipe) {
     return recipe.getId();
   }
 }

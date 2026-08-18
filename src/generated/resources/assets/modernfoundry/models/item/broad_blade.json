@@ -1,10 +1,5 @@
 {
   "parent": "neoforge:item/default",
-  "loader": "modernfoundry:material",
-  "offset": [
-    -1,
-    1
-  ],
   "textures": {
     "texture": "modernfoundry:item/tool/cleaver/head"
   }

@@ -3,9 +3,9 @@ package modernmods.modernfoundry.library.client.armor.texture;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.conditions.ICondition;
-import modernmods.hilt.data.loadable.mapping.ConditionalLoadable.ConditionalObject;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.data.loadable.mapping.ConditionalLoadable.ConditionalObject;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
 import modernmods.modernfoundry.library.utils.Util;
 
 /**

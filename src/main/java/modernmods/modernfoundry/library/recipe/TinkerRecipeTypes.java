@@ -5,7 +5,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.registration.deferred.SynchronizedDeferredRegister;
+import modernmods.mantle.registration.deferred.SynchronizedDeferredRegister;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.recipe.alloying.AlloyRecipe;
 import modernmods.modernfoundry.library.recipe.casting.ICastingRecipe;
@@ -20,7 +20,7 @@ import modernmods.modernfoundry.library.recipe.tinkerstation.ITinkerStationRecip
 import modernmods.modernfoundry.library.recipe.worktable.IModifierWorktableRecipe;
 
 /**
- * Class containing all of Modern Foundry recipe types
+ * Class containing all of Tinkers Construct recipe types
  */
 public class TinkerRecipeTypes {
   /** Deferred instance */

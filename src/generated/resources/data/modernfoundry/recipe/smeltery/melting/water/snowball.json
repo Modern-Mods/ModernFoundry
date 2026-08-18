@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/water/snowball",
-  "ingredient": {
-    "item": "minecraft:snowball"
-  },
+  "ingredient": "minecraft:snowball",
   "result": {
     "amount": 125,
     "fluid": "minecraft:water"

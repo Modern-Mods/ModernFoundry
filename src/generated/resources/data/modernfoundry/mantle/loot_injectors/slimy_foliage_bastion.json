@@ -1,0 +1,20 @@
+{
+  "conditions": [
+    {
+      "type": "modernfoundry:config",
+      "prop": "slimy_loot_chests"
+    }
+  ],
+  "name": "minecraft:chests/bastion_bridge",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "modernfoundry:blood_slime_sapling"
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

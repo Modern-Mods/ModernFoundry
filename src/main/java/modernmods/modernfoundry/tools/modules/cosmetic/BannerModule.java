@@ -6,15 +6,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.block.entity.BannerPatterns;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -48,53 +48,53 @@ public enum BannerModule implements ModifierModule, DisplayNameModifierHook, Too
   /** Tooltip key saying hold shift for patterns */
   private static final Component HOLD_SHIFT = TConstruct.makeTranslation("modifier", "banner.hold_shift").withStyle(ChatFormatting.GRAY);
   /** Vanilla banner pattern IDs used for texture validation. */
-  public static final List<ResourceLocation> VANILLA_PATTERN_IDS = List.of(
-    BannerPatterns.BASE.location(),
-    BannerPatterns.SQUARE_BOTTOM_LEFT.location(),
-    BannerPatterns.SQUARE_BOTTOM_RIGHT.location(),
-    BannerPatterns.SQUARE_TOP_LEFT.location(),
-    BannerPatterns.SQUARE_TOP_RIGHT.location(),
-    BannerPatterns.STRIPE_BOTTOM.location(),
-    BannerPatterns.STRIPE_TOP.location(),
-    BannerPatterns.STRIPE_LEFT.location(),
-    BannerPatterns.STRIPE_RIGHT.location(),
-    BannerPatterns.STRIPE_CENTER.location(),
-    BannerPatterns.STRIPE_MIDDLE.location(),
-    BannerPatterns.STRIPE_DOWNRIGHT.location(),
-    BannerPatterns.STRIPE_DOWNLEFT.location(),
-    BannerPatterns.STRIPE_SMALL.location(),
-    BannerPatterns.CROSS.location(),
-    BannerPatterns.STRAIGHT_CROSS.location(),
-    BannerPatterns.TRIANGLE_BOTTOM.location(),
-    BannerPatterns.TRIANGLE_TOP.location(),
-    BannerPatterns.TRIANGLES_BOTTOM.location(),
-    BannerPatterns.TRIANGLES_TOP.location(),
-    BannerPatterns.DIAGONAL_LEFT.location(),
-    BannerPatterns.DIAGONAL_RIGHT.location(),
-    BannerPatterns.DIAGONAL_LEFT_MIRROR.location(),
-    BannerPatterns.DIAGONAL_RIGHT_MIRROR.location(),
-    BannerPatterns.CIRCLE_MIDDLE.location(),
-    BannerPatterns.RHOMBUS_MIDDLE.location(),
-    BannerPatterns.HALF_VERTICAL.location(),
-    BannerPatterns.HALF_HORIZONTAL.location(),
-    BannerPatterns.HALF_VERTICAL_MIRROR.location(),
-    BannerPatterns.HALF_HORIZONTAL_MIRROR.location(),
-    BannerPatterns.BORDER.location(),
-    BannerPatterns.CURLY_BORDER.location(),
-    BannerPatterns.GRADIENT.location(),
-    BannerPatterns.GRADIENT_UP.location(),
-    BannerPatterns.BRICKS.location(),
-    BannerPatterns.GLOBE.location(),
-    BannerPatterns.CREEPER.location(),
-    BannerPatterns.SKULL.location(),
-    BannerPatterns.FLOWER.location(),
-    BannerPatterns.MOJANG.location(),
-    BannerPatterns.PIGLIN.location(),
-    BannerPatterns.FLOW.location(),
-    BannerPatterns.GUSTER.location()
+  public static final List<Identifier> VANILLA_PATTERN_IDS = List.of(
+    BannerPatterns.BASE.identifier(),
+    BannerPatterns.SQUARE_BOTTOM_LEFT.identifier(),
+    BannerPatterns.SQUARE_BOTTOM_RIGHT.identifier(),
+    BannerPatterns.SQUARE_TOP_LEFT.identifier(),
+    BannerPatterns.SQUARE_TOP_RIGHT.identifier(),
+    BannerPatterns.STRIPE_BOTTOM.identifier(),
+    BannerPatterns.STRIPE_TOP.identifier(),
+    BannerPatterns.STRIPE_LEFT.identifier(),
+    BannerPatterns.STRIPE_RIGHT.identifier(),
+    BannerPatterns.STRIPE_CENTER.identifier(),
+    BannerPatterns.STRIPE_MIDDLE.identifier(),
+    BannerPatterns.STRIPE_DOWNRIGHT.identifier(),
+    BannerPatterns.STRIPE_DOWNLEFT.identifier(),
+    BannerPatterns.STRIPE_SMALL.identifier(),
+    BannerPatterns.CROSS.identifier(),
+    BannerPatterns.STRAIGHT_CROSS.identifier(),
+    BannerPatterns.TRIANGLE_BOTTOM.identifier(),
+    BannerPatterns.TRIANGLE_TOP.identifier(),
+    BannerPatterns.TRIANGLES_BOTTOM.identifier(),
+    BannerPatterns.TRIANGLES_TOP.identifier(),
+    BannerPatterns.DIAGONAL_LEFT.identifier(),
+    BannerPatterns.DIAGONAL_RIGHT.identifier(),
+    BannerPatterns.DIAGONAL_LEFT_MIRROR.identifier(),
+    BannerPatterns.DIAGONAL_RIGHT_MIRROR.identifier(),
+    BannerPatterns.CIRCLE_MIDDLE.identifier(),
+    BannerPatterns.RHOMBUS_MIDDLE.identifier(),
+    BannerPatterns.HALF_VERTICAL.identifier(),
+    BannerPatterns.HALF_HORIZONTAL.identifier(),
+    BannerPatterns.HALF_VERTICAL_MIRROR.identifier(),
+    BannerPatterns.HALF_HORIZONTAL_MIRROR.identifier(),
+    BannerPatterns.BORDER.identifier(),
+    BannerPatterns.CURLY_BORDER.identifier(),
+    BannerPatterns.GRADIENT.identifier(),
+    BannerPatterns.GRADIENT_UP.identifier(),
+    BannerPatterns.BRICKS.identifier(),
+    BannerPatterns.GLOBE.identifier(),
+    BannerPatterns.CREEPER.identifier(),
+    BannerPatterns.SKULL.identifier(),
+    BannerPatterns.FLOWER.identifier(),
+    BannerPatterns.MOJANG.identifier(),
+    BannerPatterns.PIGLIN.identifier(),
+    BannerPatterns.FLOW.identifier(),
+    BannerPatterns.GUSTER.identifier()
   );
   /** Mapping of legacy NBT banner hashes to modern pattern IDs. */
-  private static final Map<String,ResourceLocation> LEGACY_PATTERNS = Map.ofEntries(
+  private static final Map<String,Identifier> LEGACY_PATTERNS = Map.ofEntries(
     pattern("b", BannerPatterns.BASE),
     pattern("bl", BannerPatterns.SQUARE_BOTTOM_LEFT),
     pattern("br", BannerPatterns.SQUARE_BOTTOM_RIGHT),
@@ -155,7 +155,7 @@ public enum BannerModule implements ModifierModule, DisplayNameModifierHook, Too
     // color the tooltip the color of the first pattern
     ListTag patterns = tool.getPersistentData().getList(patternKey(entry.getId()), ListTag.TAG_COMPOUND);
     if (!patterns.isEmpty()) {
-      return name.copy().withStyle(name.getStyle().withColor(DyeColor.byId(patterns.getCompound(0).getInt(KEY_DYE)).getTextColor()));
+      return name.copy().withStyle(name.getStyle().withColor(DyeColor.byId(patterns.getCompoundOrEmpty(0).getIntOr(KEY_DYE, 0)).getTextColor()));
     }
     return name;
   }
@@ -167,9 +167,9 @@ public enum BannerModule implements ModifierModule, DisplayNameModifierHook, Too
       if (tooltipKey == TooltipKey.SHIFT) {
         ListTag patterns = tool.getPersistentData().getList(patternKey(modifier.getId()), ListTag.TAG_COMPOUND);
         for (int i = 0; i < patterns.size(); i++) {
-          CompoundTag tag = patterns.getCompound(i);
-          DyeColor dye = DyeColor.byId(tag.getInt(KEY_DYE));
-          ResourceLocation patternId = patternId(tag.getString(KEY_PATTERN));
+          CompoundTag tag = patterns.getCompoundOrEmpty(i);
+          DyeColor dye = DyeColor.byId(tag.getIntOr(KEY_DYE, 0));
+          Identifier patternId = patternId(tag.getStringOr(KEY_PATTERN, ""));
           tooltip.add(Component.translatable("block.minecraft.banner." + patternId.toShortLanguageKey() + '.' + dye.getName()).withStyle(ChatFormatting.GRAY));
         }
       } else {
@@ -179,30 +179,30 @@ public enum BannerModule implements ModifierModule, DisplayNameModifierHook, Too
   }
 
   /** Gets the key for the cache used in the model */
-  public static ResourceLocation cacheKey(ModifierId modifier) {
+  public static Identifier cacheKey(ModifierId modifier) {
     return modifier.withSuffix("_cache");
   }
 
   /** Gets the key for the pattern list in NBT */
-  public static ResourceLocation patternKey(ModifierId modifier) {
+  public static Identifier patternKey(ModifierId modifier) {
     return modifier.withSuffix("_patterns");
   }
 
   /** Converts a legacy short pattern hash or modern ID string to a modern pattern ID. */
-  public static ResourceLocation patternId(String pattern) {
-    ResourceLocation id = LEGACY_PATTERNS.get(pattern);
+  public static Identifier patternId(String pattern) {
+    Identifier id = LEGACY_PATTERNS.get(pattern);
     if (id != null) {
       return id;
     }
-    ResourceLocation parsed = ResourceLocation.tryParse(pattern);
+    Identifier parsed = Identifier.tryParse(pattern);
     if (parsed != null) {
       return parsed;
     }
-    return BannerPatterns.BASE.location();
+    return BannerPatterns.BASE.identifier();
   }
 
-  private static Map.Entry<String,ResourceLocation> pattern(String legacy, ResourceKey<BannerPattern> pattern) {
-    return Map.entry(legacy, pattern.location());
+  private static Map.Entry<String,Identifier> pattern(String legacy, ResourceKey<BannerPattern> pattern) {
+    return Map.entry(legacy, pattern.identifier());
   }
 
   /** Copies the given list of patterns from banner format to the tool's NBT */
@@ -212,7 +212,7 @@ public enum BannerModule implements ModifierModule, DisplayNameModifierHook, Too
 
     // add in the base pattern, it only exists on shields and we copy from banners
     CompoundTag basePattern = new CompoundTag();
-    basePattern.putString(KEY_PATTERN, BannerPatterns.BASE.location().toString());
+    basePattern.putString(KEY_PATTERN, BannerPatterns.BASE.identifier().toString());
     basePattern.putInt(KEY_DYE, dye.getId());
     basePattern.putInt(KEY_COLOR, baseColor);
     patterns.add(basePattern);
@@ -222,13 +222,13 @@ public enum BannerModule implements ModifierModule, DisplayNameModifierHook, Too
 
     // add in all other patterns
     for (int i = 0; i < banner.size(); i++) {
-      CompoundTag original = banner.getCompound(i);
+      CompoundTag original = banner.getCompoundOrEmpty(i);
       CompoundTag copy = new CompoundTag();
       // copy the pattern as is
-      String pattern = original.getString("Pattern");
+      String pattern = original.getStringOr("Pattern", "");
       copy.putString(KEY_PATTERN, pattern);
       // convert the color from a dye color to an integer
-      dye = DyeColor.byId(original.getInt("Color"));
+      dye = DyeColor.byId(original.getIntOr("Color", 0));
       int color = Util.getColor(dye);
       copy.putInt(KEY_DYE, dye.getId()); // dye for the tooltip
       copy.putInt(KEY_COLOR, color); // color for the model

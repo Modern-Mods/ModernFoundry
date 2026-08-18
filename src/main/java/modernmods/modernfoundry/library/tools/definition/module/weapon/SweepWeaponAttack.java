@@ -1,6 +1,7 @@
 package modernmods.modernfoundry.library.tools.definition.module.weapon;
+import modernmods.modernfoundry.library.tools.helper.ToolAttackUtil;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -9,7 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.module.HookProvider;
@@ -27,7 +28,7 @@ public record SweepWeaponAttack(LevelingValue range) implements MeleeHitToolHook
   public static final RecordLoadable<SweepWeaponAttack> LOADER = RecordLoadable.create(LevelingValue.ADD_TO_LEVEL.defaultField("range", LevelingValue.LEVEL, true, SweepWeaponAttack::range), SweepWeaponAttack::new);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<SweepWeaponAttack>defaultHooks(ToolHooks.MELEE_HIT);
   /** Volatile data float for the percentage of sweep damage to deal */
-  public static final ResourceLocation SWEEP_PERCENT = TConstruct.getResource("sweep_percent");
+  public static final Identifier SWEEP_PERCENT = TConstruct.getResource("sweep_percent");
 
   public SweepWeaponAttack(float range) {
     this(new LevelingValue(range, 1));
@@ -61,7 +62,9 @@ public record SweepWeaponAttack(LevelingValue range) implements MeleeHitToolHook
     // sweep code from Player#attack(Entity)
     // basically: no crit, no sprinting and has to stand on the ground for sweep. Also has to move regularly slowly
     LivingEntity attacker = context.getAttacker();
-    if (context.isFullyCharged() && !attacker.isSprinting() && !context.isCritical() && !context.isProjectile() && attacker.onGround() && (attacker.walkDist - attacker.walkDistO) < attacker.getSpeed()) {
+    // 26.1.2: vanilla sweep speed gate is now horizontal known-movement vs (speed * 2.5)^2 instead of walkDist deltas
+    double maxSweepSpeed = attacker.getSpeed() * 2.5;
+    if (context.isFullyCharged() && !attacker.isSprinting() && !context.isCritical() && !context.isProjectile() && attacker.onGround() && attacker.getKnownMovement().horizontalDistanceSqr() < maxSweepSpeed * maxSweepSpeed) {
       // loop through all nearby entities
       double range = this.range.compute(tool.getVolatileData().getInt(IModifiable.EXPANDED));
       double rangeSq = (2 + range); // TODO: why do we add 2 here? should that not be defined in the datagen?
@@ -82,7 +85,7 @@ public record SweepWeaponAttack(LevelingValue range) implements MeleeHitToolHook
 
       level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, attacker.getSoundSource(), 1.0F, 1.0F);
       if (attacker instanceof Player player) {
-        player.sweepAttack();
+        ToolAttackUtil.sweepAttack(player);
       }
     }
   }

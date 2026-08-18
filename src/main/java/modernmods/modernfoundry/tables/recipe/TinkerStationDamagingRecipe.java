@@ -3,15 +3,15 @@ package modernmods.modernfoundry.tables.recipe;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.recipe.RecipeResult;
@@ -34,7 +34,7 @@ public class TinkerStationDamagingRecipe implements ITinkerStationRecipe {
   private static final RecipeResult<LazyToolStack> BROKEN = RecipeResult.failure(TConstruct.makeTranslationKey("recipe", "damaging.broken"));
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   private final Ingredient ingredient;
   private final int damageAmount;
 
@@ -74,7 +74,7 @@ public class TinkerStationDamagingRecipe implements ITinkerStationRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends TinkerStationDamagingRecipe> getSerializer() {
     return TinkerTables.tinkerStationDamagingSerializer.get();
   }
 }

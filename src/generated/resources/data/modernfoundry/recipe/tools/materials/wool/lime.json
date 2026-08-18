@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wool/lime",
-  "ingredient": {
-    "item": "minecraft:lime_wool"
-  },
+  "ingredient": "minecraft:lime_wool",
   "material": "modernfoundry:wool#lime",
   "needed": 1,
   "value": 1

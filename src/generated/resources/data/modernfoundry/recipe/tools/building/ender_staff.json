@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "modernfoundry:ender_slime_crystal"
-    },
-    "I": {
-      "tag": "c:ingots/netherite"
-    },
-    "W": {
-      "tag": "modernfoundry:enderbark_logs"
-    }
+    "C": "modernfoundry:ender_slime_crystal",
+    "I": "#c:ingots/netherite",
+    "W": "#modernfoundry:enderbark_logs"
   },
   "pattern": [
     "CWC",
@@ -19,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:ender_staff"
-  },
-  "show_notification": true
+  }
 }

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/steel/cluster",
-  "ingredient": {
-    "item": "modernfoundry:steel_cluster"
-  },
+  "ingredient": "modernfoundry:steel_cluster",
   "result": {
     "amount": 40,
     "tag": "c:molten_steel"

@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/glass/sand_cast",
   "ingredient": [
-    {
-      "item": "modernfoundry:blank_sand_cast"
-    },
-    {
-      "item": "modernfoundry:blank_red_sand_cast"
-    }
+    "modernfoundry:blank_sand_cast",
+    "modernfoundry:blank_red_sand_cast"
   ],
   "result": {
     "amount": 250,

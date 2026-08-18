@@ -1,0 +1,22 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/slimy_chestplate",
+    "parts": [
+      {
+        "name": "slime",
+        "index": 1
+      },
+      {
+        "name": "ribcage",
+        "index": 0
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:slime/chestplate"
+    ],
+    "first_modifiers": [
+      "modernfoundry:trim"
+    ]
+  }
+}

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/quartz/geore/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:geore_blocks/quartz"
     }
   ],
-  "ingredient": {
-    "tag": "c:geore_blocks/quartz"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/quartz/geore/block",
+  "ingredient": "#c:geore_blocks/quartz",
   "result": {
     "amount": 400,
     "fluid": "modernfoundry:molten_quartz"

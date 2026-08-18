@@ -4,9 +4,7 @@
   },
   "input_slots": [
     {
-      "filter": {
-        "item": "modernfoundry:arrow_head"
-      },
+      "filter": "modernfoundry:arrow_head",
       "icon": "modernfoundry:arrow_head",
       "translation_key": "item.modernfoundry.arrow_head",
       "x": 33,
@@ -14,12 +12,8 @@
     },
     {
       "filter": [
-        {
-          "item": "modernfoundry:arrow_head"
-        },
-        {
-          "item": "modernfoundry:arrow_shaft"
-        }
+        "modernfoundry:arrow_head",
+        "modernfoundry:arrow_shaft"
       ],
       "icon": "modernfoundry:arrow_part",
       "translation_key": "pattern.modernfoundry.arrow_part",

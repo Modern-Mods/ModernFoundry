@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/speedy_from_dust",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "tag": "c:dusts/redstone"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/speedy_from_dust",
+  "input": "#c:dusts/redstone",
   "level": {
     "max": 3
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/leggings"
-  }
+  "tools": "#modernfoundry:modifiable/armor/leggings"
 }

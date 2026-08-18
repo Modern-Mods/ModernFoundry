@@ -9,7 +9,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.RelativeMovement;
+import net.minecraft.world.entity.Relative;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -20,7 +20,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public class TeleportHelper {
-  private static final Set<RelativeMovement> PACKET_FLAGS = EnumSet.of(RelativeMovement.X, RelativeMovement.Y, RelativeMovement.Z, RelativeMovement.X_ROT, RelativeMovement.Y_ROT);
+  private static final Set<Relative> PACKET_FLAGS = EnumSet.of(Relative.X, Relative.Y, Relative.Z, Relative.X_ROT, Relative.Y_ROT);
 
   /** Randomly teleports an entity, mostly copied from chorus fruit */
   @CanIgnoreReturnValue
@@ -32,7 +32,7 @@ public class TeleportHelper {
   @CanIgnoreReturnValue
   public static boolean randomNearbyTeleport(LivingEntity living, ITeleportEventFactory factory, int diameter, int chances) {
     Level level = living.level();
-    if (level.isClientSide) {
+    if (level.isClientSide()) {
       return true;
     }
     double posX = living.getX();
@@ -40,8 +40,8 @@ public class TeleportHelper {
     double posZ = living.getZ();
 
     RandomSource random = living.getRandom();
-    float minHeight = level.getMinBuildHeight();
-    float maxHeight = (level instanceof ServerLevel server ? (level.getMinBuildHeight() + server.getLogicalHeight()) : level.getMaxBuildHeight()) - 1;
+    float minHeight = level.getMinY();
+    float maxHeight = (level instanceof ServerLevel server ? (level.getMinY() + server.getLogicalHeight()) : level.getMaxY() + 1) - 1;
     for(int i = 0; i < chances; ++i) {
       double x = posX + (random.nextDouble() - 0.5D) * diameter;
       double y = Mth.clamp(posY + (double)(random.nextInt(diameter) - 8), minHeight, maxHeight);
@@ -70,7 +70,7 @@ public class TeleportHelper {
     Level level = entity.level();
     if (level instanceof ServerLevel serverWorld) {
       for (int i = 0; i < 32; ++i) {
-        serverWorld.sendParticles(ParticleTypes.PORTAL, entity.getX(), entity.getY() + level.random.nextDouble() * 2.0D, entity.getZ(), 1, level.random.nextGaussian(), 0.0D, level.random.nextGaussian(), 0);
+        serverWorld.sendParticles(ParticleTypes.PORTAL, entity.getX(), entity.getY() + level.getRandom().nextDouble() * 2.0D, entity.getZ(), 1, level.getRandom().nextGaussian(), 0.0D, level.getRandom().nextGaussian(), 0);
       }
     }
   }
@@ -85,7 +85,7 @@ public class TeleportHelper {
 
       // this logic only runs serverside, so need to use the server controller logic to move the player
       if (entity instanceof ServerPlayer playerMP) {
-        playerMP.connection.teleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), playerMP.getYRot(), playerMP.getXRot(), PACKET_FLAGS);
+        playerMP.connection.teleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), playerMP.getYRot(), playerMP.getXRot());
       } else {
         entity.setPos(event.getTargetX(), event.getTargetY(), event.getTargetZ());
       }

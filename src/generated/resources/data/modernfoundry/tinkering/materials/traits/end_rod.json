@@ -1,16 +1,8 @@
 {
-  "perStat": {
-    "modernfoundry:ammo": [
-      {
-        "level": 1,
-        "name": "modernfoundry:hover"
-      }
-    ],
-    "modernfoundry:ribcage": [
-      {
-        "level": 1,
-        "name": "modernfoundry:float"
-      }
-    ]
-  }
+  "default": [
+    {
+      "level": 1,
+      "name": "modernfoundry:hover"
+    }
+  ]
 }

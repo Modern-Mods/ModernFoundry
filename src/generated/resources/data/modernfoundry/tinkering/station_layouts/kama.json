@@ -1,31 +1,25 @@
 {
   "icon": {
     "item": "modernfoundry:kama",
-    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+    "nbt": "{tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
   },
   "input_slots": [
     {
-      "filter": {
-        "item": "modernfoundry:small_blade"
-      },
+      "filter": "modernfoundry:small_blade",
       "icon": "modernfoundry:small_blade",
       "translation_key": "item.modernfoundry.small_blade",
       "x": 31,
       "y": 22
     },
     {
-      "filter": {
-        "item": "modernfoundry:tool_handle"
-      },
+      "filter": "modernfoundry:tool_handle",
       "icon": "modernfoundry:tool_handle",
       "translation_key": "item.modernfoundry.tool_handle",
       "x": 22,
       "y": 53
     },
     {
-      "filter": {
-        "item": "modernfoundry:tool_binding"
-      },
+      "filter": "modernfoundry:tool_binding",
       "icon": "modernfoundry:tool_binding",
       "translation_key": "item.modernfoundry.tool_binding",
       "x": 51,

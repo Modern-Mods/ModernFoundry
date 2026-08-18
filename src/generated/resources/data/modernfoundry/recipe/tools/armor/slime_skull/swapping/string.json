@@ -3,12 +3,10 @@
   "id": "modernfoundry:tools/armor/slime_skull/swapping/string",
   "index": 0,
   "ingredient": {
-    "item": "modernfoundry:spider_head"
+    "ingredient": "modernfoundry:spider_head"
   },
   "material": "modernfoundry:string",
   "max_stack_size": 16,
   "repair_value": 6,
-  "tools": {
-    "tag": "modernfoundry:modifiable/skulls/swappable"
-  }
+  "tools": "#modernfoundry:modifiable/skulls/swappable"
 }

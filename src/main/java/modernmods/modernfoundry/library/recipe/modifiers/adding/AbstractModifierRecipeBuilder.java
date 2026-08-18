@@ -1,14 +1,15 @@
 package modernmods.modernfoundry.library.recipe.modifiers.adding;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.recipe.modifiers.ModifierSalvage;
@@ -28,7 +29,7 @@ import static modernmods.modernfoundry.library.modifiers.ModifierEntry.VALID_LEV
 public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRecipeBuilder<T>> extends AbstractRecipeBuilder<T> {
   // shared
   protected final ModifierId result;
-  protected Ingredient tools = Ingredient.of(TinkerTags.Items.MODIFIABLE);
+  protected Ingredient tools = modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(TinkerTags.Items.MODIFIABLE);
   protected int maxToolSize = ITinkerStationRecipe.DEFAULT_TOOL_STACK_SIZE;
   @Nullable
   protected SlotCount slots;
@@ -66,7 +67,7 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
    * @return  Builder instance
    */
   public T setTools(TagKey<Item> tag) {
-    return this.setTools(Ingredient.of(tag));
+    return this.setTools(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag));
   }
 
   /**
@@ -164,7 +165,7 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, result);
+    save(consumer, result.getIdentifier());
   }
 
   /**
@@ -172,20 +173,20 @@ public abstract class AbstractModifierRecipeBuilder<T extends AbstractModifierRe
    * @param consumer  Consumer instance
    * @param id        Recipe ID
    */
-  public T saveSalvage(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public T saveSalvage(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (maxLevel < minLevel) {
       throw new IllegalStateException("Max level must be greater than min level");
     }
     if (slots == null) {
       throw new IllegalStateException("Must set modifier slots to apply modifier salvage.");
     }
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "modifiers");
+    Identifier advancementId = buildOptionalAdvancement(id, "modifiers");
     consumer.accept(new LoadableFinishedRecipe<>(id, makeSalvage(id), ModifierSalvage.LOADER, advancementId));
     return (T) this;
   }
 
-  /** Makes the salvage recipe to save in {@link #saveSalvage(Consumer, ResourceLocation)} */
-  protected ModifierSalvage makeSalvage(ResourceLocation id) {
+  /** Makes the salvage recipe to save in {@link #saveSalvage(Consumer, Identifier)} */
+  protected ModifierSalvage makeSalvage(Identifier id) {
     return new ModifierSalvage(id, tools, maxToolSize, result, VALID_LEVEL.range(minLevel, useSalvageMax ? maxLevel : VALID_LEVEL.max()), Objects.requireNonNull(slots));
   }
 }

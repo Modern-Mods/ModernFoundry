@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:table_casting_material",
+  "cast": "#modernfoundry:casts/multi_use/repair_kit",
   "id": "modernfoundry:tools/parts/casting/repair_kit_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/repair_kit"
-  },
   "item_cost": 2,
   "result": "modernfoundry:repair_kit"
 }

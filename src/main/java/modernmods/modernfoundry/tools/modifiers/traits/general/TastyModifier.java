@@ -19,7 +19,7 @@ import modernmods.modernfoundry.shared.TinkerCommons;
 
 import java.util.List;
 
-/** @deprecated use {@link EdibleModule} and {@link modernmods.hilt.loot.AddEntryLootModifier} */
+/** @deprecated use {@link EdibleModule} and {@link modernmods.mantle.loot.AddEntryLootModifier} */
 @Deprecated(forRemoval = true)
 public class TastyModifier extends Modifier implements ProcessLootModifierHook {
   @Override
@@ -34,15 +34,15 @@ public class TastyModifier extends Modifier implements ProcessLootModifierHook {
   public void processLoot(IToolStackView tool, ModifierEntry modifier, List<ItemStack> generatedLoot, LootContext context) {
     // if no damage source, probably not a mob
     // otherwise blocks breaking (where THIS_ENTITY is the player) start dropping bacon
-    if (!context.hasParam(LootContextParams.DAMAGE_SOURCE)) {
+    if (!context.hasParameter(LootContextParams.DAMAGE_SOURCE)) {
       return;
     }
 
     // must have an entity
-    Entity entity = context.getParamOrNull(LootContextParams.THIS_ENTITY);
-    if (entity != null && entity.getType().is(TinkerTags.EntityTypes.BACON_PRODUCER)) {
+    Entity entity = context.getOptionalParameter(LootContextParams.THIS_ENTITY);
+    if (entity != null && entity.getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.BACON_PRODUCER)) {
       // at tasty 1, 2, 3, and 4 its a 2%, 4.15%, 6.25%, 8% per level
-      Integer lootingLevel = context.getParamOrNull(LootContextParams.ENCHANTMENT_LEVEL);
+      Integer lootingLevel = context.getOptionalParameter(LootContextParams.ENCHANTMENT_LEVEL);
       int looting = lootingLevel == null ? 0 : lootingLevel;
       if (RANDOM.nextInt(48 / modifier.intEffectiveLevel()) <= looting) {
         // bacon

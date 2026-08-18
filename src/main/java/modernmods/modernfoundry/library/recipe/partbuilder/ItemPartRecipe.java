@@ -2,16 +2,16 @@ package modernmods.modernfoundry.library.recipe.partbuilder;
 
 import lombok.Getter;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
@@ -42,7 +42,7 @@ public class ItemPartRecipe implements IDisplayPartBuilderRecipe {
     });
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   @Getter
   private final MaterialVariant material;
   @Getter
@@ -52,7 +52,7 @@ public class ItemPartRecipe implements IDisplayPartBuilderRecipe {
   private final int cost;
   private final ItemOutput result;
 
-  public ItemPartRecipe(ResourceLocation id, MaterialVariantId material, Pattern pattern, Ingredient patternItem, int cost, ItemOutput result) {
+  public ItemPartRecipe(Identifier id, MaterialVariantId material, Pattern pattern, Ingredient patternItem, int cost, ItemOutput result) {
     this.id = id;
     this.material = MaterialVariant.of(material);
     this.pattern = pattern;
@@ -104,12 +104,10 @@ public class ItemPartRecipe implements IDisplayPartBuilderRecipe {
     return IDisplayPartBuilderRecipe.super.getItemsUsed(inv);
   }
 
-  @Override
   public ItemStack getResultItem(HolderLookup.Provider access) {
     return result.get();
   }
 
-  @Override
   public ItemStack assemble(IPartBuilderContainer inv, HolderLookup.Provider access) {
     ItemStack result = getResultItem(access).copy();
     IMaterialValue materialRecipe = inv.getMaterial();
@@ -124,7 +122,7 @@ public class ItemPartRecipe implements IDisplayPartBuilderRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ItemPartRecipe> getSerializer() {
     return TinkerTables.itemPartBuilderSerializer.get();
   }
 
@@ -135,7 +133,7 @@ public class ItemPartRecipe implements IDisplayPartBuilderRecipe {
 
   @Override
   public List<ItemStack> getPatternItems() {
-    return Arrays.asList(patternItem.getItems());
+    return Arrays.asList(patternItem.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
   }
 
   @Override

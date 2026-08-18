@@ -1,13 +1,14 @@
 package modernmods.modernfoundry.library.recipe.modifiers.adding;
 
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.BuiltInRegistries;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.modifiers.util.LazyModifier;
@@ -17,7 +18,7 @@ import java.util.function.Consumer;
 /** Recipe that supports not just adding multiple of an item, but also adding a partial amount */
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class IncrementalModifierRecipeBuilder extends AbstractModifierRecipeBuilder<IncrementalModifierRecipeBuilder> {
-  private Ingredient input = Ingredient.EMPTY;
+  @javax.annotation.Nullable private Ingredient input = null;
   private int amountPerItem;
   private int neededPerLevel;
   private ItemOutput leftover = ItemOutput.EMPTY;
@@ -86,7 +87,7 @@ public class IncrementalModifierRecipeBuilder extends AbstractModifierRecipeBuil
    * @return  Builder instance
    */
   public IncrementalModifierRecipeBuilder setInput(TagKey<Item> tag, int amountPerItem, int neededPerLevel) {
-    return setInput(Ingredient.of(tag), amountPerItem, neededPerLevel);
+    return setInput(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag), amountPerItem, neededPerLevel);
   }
 
 
@@ -112,11 +113,11 @@ public class IncrementalModifierRecipeBuilder extends AbstractModifierRecipeBuil
   /* Building */
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-    if (input == Ingredient.EMPTY) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
+    if (input == null) {
       throw new IllegalStateException("Must set input");
     }
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "modifiers");
+    Identifier advancementId = buildOptionalAdvancement(id, "modifiers");
     consumer.accept(new LoadableFinishedRecipe<>(id, new IncrementalModifierRecipe(id, input, amountPerItem, neededPerLevel, tools, maxToolSize, result, ModifierEntry.VALID_LEVEL.range(minLevel, maxLevel), slots, leftover, allowCrystal, checkTraitLevel), IncrementalModifierRecipe.LOADER, advancementId));
   }
 }

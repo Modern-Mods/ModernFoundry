@@ -13,7 +13,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.Logger;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerModule;

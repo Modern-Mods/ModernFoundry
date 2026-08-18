@@ -3,19 +3,19 @@ package modernmods.modernfoundry.library.client.book.sectiontransformer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.PageData;
-import modernmods.hilt.client.book.data.SectionData;
-import modernmods.hilt.client.book.data.content.ContentPageIconList;
-import modernmods.hilt.client.book.data.content.ContentPageIconList.PageWithIcon;
-import modernmods.hilt.client.book.transformer.BookTransformer;
-import modernmods.hilt.client.screen.book.element.ItemElement;
-import modernmods.hilt.client.screen.book.element.SizedBookElement;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.PageData;
+import modernmods.mantle.client.book.data.SectionData;
+import modernmods.mantle.client.book.data.content.ContentPageIconList;
+import modernmods.mantle.client.book.data.content.ContentPageIconList.PageWithIcon;
+import modernmods.mantle.client.book.transformer.BookTransformer;
+import modernmods.mantle.client.screen.book.element.ItemElement;
+import modernmods.mantle.client.screen.book.element.SizedBookElement;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.book.content.FluidEffectContent;
 import modernmods.modernfoundry.library.client.book.elements.FluidItemElement;
@@ -31,7 +31,7 @@ import java.util.Map;
 /** Transformer adding fluid effect pages */
 public class FluidEffectInjectingTransformer extends BookTransformer {
   public static final FluidEffectInjectingTransformer INSTANCE = new FluidEffectInjectingTransformer();
-  private static final ResourceLocation KEY = TConstruct.getResource("fluid_effects");
+  private static final Identifier KEY = TConstruct.getResource("fluid_effects");
 
   private FluidEffectInjectingTransformer() {}
 
@@ -52,7 +52,7 @@ public class FluidEffectInjectingTransformer extends BookTransformer {
       }
 
       // sort the fluid effects
-      Map<ResourceLocation, PageWithIcon> newPages = new HashMap<>();
+      Map<Identifier, PageWithIcon> newPages = new HashMap<>();
       for (FluidEffects.Entry entry : effects) {
         FluidEffects effect = entry.effects();
         // skip hidden effects
@@ -66,7 +66,7 @@ public class FluidEffectInjectingTransformer extends BookTransformer {
         }
 
         // start building the page
-        ResourceLocation name = entry.name();
+        Identifier name = entry.name();
         PageData newPage = new PageData(true);
         newPage.parent = section;
         newPage.source = section.source;
@@ -105,10 +105,10 @@ public class FluidEffectInjectingTransformer extends BookTransformer {
       for (String name : presorted) {
         // since this feature is just for us, automatically prefix IDs
         // though for the sake of pack makers we allow other domains if they contain :
-        ResourceLocation id = null;
+        Identifier id = null;
         if (name.contains(":")) {
-          id = ResourceLocation.tryParse(name);
-        } else if (ResourceLocation.isValidPath(name)) {
+          id = Identifier.tryParse(name);
+        } else if (Identifier.isValidPath(name)) {
           id = TConstruct.getResource(name);
         }
         if (id == null) {

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/refined_glowstone/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/refined_glowstone"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/refined_glowstone"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/refined_glowstone/ingot",
+  "ingredient": "#c:ingots/refined_glowstone",
   "result": {
     "amount": 90,
     "tag": "c:molten_refined_glowstone"

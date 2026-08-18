@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.modifiers.modules.util;
 
 import net.minecraft.util.Mth;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 
 /** @deprecated use {@link LevelingIntModule} */

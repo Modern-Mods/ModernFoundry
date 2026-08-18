@@ -1,24 +1,22 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/blazewood",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/blazewood",
   "inputs": [
     {
-      "item": "modernfoundry:blazewood"
+      "ingredient": "modernfoundry:blazewood"
     },
     {
-      "item": "modernfoundry:pattern"
+      "ingredient": "modernfoundry:pattern"
     },
     {
-      "item": "modernfoundry:blazewood"
+      "ingredient": "modernfoundry:blazewood"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:blazewood"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/wood"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/wood",
   "variant_formatter": "modernfoundry:material"
 }

@@ -7,10 +7,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -33,10 +33,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -59,10 +59,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -85,10 +85,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -111,10 +111,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -137,10 +137,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -163,10 +163,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -189,10 +189,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -215,10 +215,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -241,10 +241,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -267,10 +267,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -293,10 +293,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -319,10 +319,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -345,10 +345,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -371,10 +371,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -397,10 +397,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -423,10 +423,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -449,10 +449,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:set",
+                  "type": "mantle:set",
                   "items": [
                     "modernfoundry:slime_helmet"
                   ]
@@ -478,7 +478,7 @@
     "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:slime_helmet",
+      "id": "modernfoundry:slime_helmet",
       "nbt": "{Damage:0,tic_broken:0b,tic_materials:[\"modernfoundry:glass\",\"modernfoundry:enderslime\"]}"
     },
     "show_toast": true,

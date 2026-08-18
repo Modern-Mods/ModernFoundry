@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/enderium/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/enderium"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/enderium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/enderium/nugget",
+  "ingredient": "#c:nuggets/enderium",
   "result": {
     "amount": 10,
     "tag": "c:molten_enderium"

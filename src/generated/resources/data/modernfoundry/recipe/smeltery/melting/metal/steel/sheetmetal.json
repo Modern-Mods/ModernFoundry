@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/steel/sheetmetal",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:sheetmetals/steel"
     }
   ],
-  "ingredient": {
-    "tag": "c:sheetmetals/steel"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/steel/sheetmetal",
+  "ingredient": "#c:sheetmetals/steel",
   "result": {
     "amount": 90,
     "tag": "c:molten_steel"

@@ -14,7 +14,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -24,8 +24,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 import net.neoforged.neoforge.common.crafting.IngredientType;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.shared.TinkerCommons;
 
@@ -43,7 +43,7 @@ public class BlockTagIngredient implements ICustomIngredient {
   @Nullable
   private Set<Item> matchingItems;
   @Nullable
-  private ItemStack[] items;
+  private java.util.List<net.minecraft.core.Holder<Item>> items;
 
   public static Ingredient of(TagKey<Block> tag) {
     return new BlockTagIngredient(tag).toVanilla();
@@ -71,16 +71,15 @@ public class BlockTagIngredient implements ICustomIngredient {
   }
 
   @Override
-  public Stream<ItemStack> getItems() {
+  public Stream<net.minecraft.core.Holder<Item>> items() {
     if (items == null) {
-      items = getMatchingItems().stream().map(ItemStack::new).toArray(ItemStack[]::new);
-      if (items.length == 0) {
-        ItemStack barrier = new ItemStack(Blocks.BARRIER);
-        barrier.set(DataComponents.CUSTOM_NAME, Component.literal("Empty Tag: " + tag.location()));
-        items = new ItemStack[] { barrier };
+      items = getMatchingItems().stream().map(Item::builtInRegistryHolder).collect(java.util.stream.Collectors.toList());
+      // 26.1.2 items() returns item holders; empty tags fall back to a plain barrier holder placeholder
+      if (items.isEmpty()) {
+        items = java.util.List.of(Items.BARRIER.builtInRegistryHolder());
       }
     }
-    return Stream.of(items);
+    return items.stream();
   }
 
   @Override
@@ -109,7 +108,7 @@ public class BlockTagIngredient implements ICustomIngredient {
   public enum Serializer {
     INSTANCE;
 
-    public static final ResourceLocation ID = TConstruct.getResource("block_tag");
+    public static final Identifier ID = TConstruct.getResource("block_tag");
 
     /** Parses the ingredient from the legacy JSON format */
     private static BlockTagIngredient parseJson(JsonObject json) {

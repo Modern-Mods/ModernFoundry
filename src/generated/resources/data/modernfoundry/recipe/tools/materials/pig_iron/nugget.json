@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/pig_iron/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/pig_iron"
-  },
+  "ingredient": "#c:nuggets/pig_iron",
   "material": "modernfoundry:pig_iron",
   "needed": 9,
   "value": 1

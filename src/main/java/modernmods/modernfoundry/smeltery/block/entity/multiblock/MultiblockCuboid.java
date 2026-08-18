@@ -440,13 +440,13 @@ public abstract class MultiblockCuboid<T extends MultiblockStructureData> {
    * @return  Set of positions
    */
   protected static Collection<BlockPos> readPosList(CompoundTag rootTag, String key, BlockPos offset) {
-    if (!rootTag.contains(key, Tag.TAG_LIST)) {
+    if (!rootTag.contains(key)) {
       return Collections.emptyList();
     }
-    ListTag list = rootTag.getList(key, Tag.TAG_COMPOUND);
+    ListTag list = rootTag.getListOrEmpty(key);
     List<BlockPos> collection = new ArrayList<>(list.size());
     for (int i = 0; i < list.size(); i++) {
-      NbtUtils.readBlockPos(list.getCompound(i), "pos").filter(pos -> !pos.equals(BlockPos.ZERO)).ifPresent(pos -> collection.add(pos.offset(offset)));
+      modernmods.modernfoundry.library.utils.TagUtil.readBlockPos(list.getCompoundOrEmpty(i), "pos").filter(pos -> !pos.equals(BlockPos.ZERO)).ifPresent(pos -> collection.add(pos.offset(offset)));
     }
     return collection;
   }

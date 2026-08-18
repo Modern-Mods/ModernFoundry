@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/netherite/coin",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/netherite"
     }
   ],
-  "ingredient": {
-    "tag": "c:coins/netherite"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/netherite/coin",
+  "ingredient": "#c:coins/netherite",
   "result": {
     "amount": 30,
     "tag": "c:molten_netherite"

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/bronze/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/bronze"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/bronze"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/bronze/plate",
+  "ingredient": "#c:plates/bronze",
   "result": {
     "amount": 90,
     "tag": "c:molten_bronze"

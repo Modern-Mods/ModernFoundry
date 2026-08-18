@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:entity_melting",
-  "id": "modernfoundry:smeltery/entity_melting/strength",
   "damage": 4,
   "entity": {
     "types": [
@@ -10,6 +9,7 @@
       "minecraft:zoglin"
     ]
   },
+  "id": "modernfoundry:smeltery/entity_melting/strength",
   "result": {
     "amount": 50,
     "nbt": {

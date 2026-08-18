@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/invar/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/invar"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/invar"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/invar/block",
+  "ingredient": "#c:storage_blocks/invar",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/invar"

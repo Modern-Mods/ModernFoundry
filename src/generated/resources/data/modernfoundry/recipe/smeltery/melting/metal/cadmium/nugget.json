@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/cadmium/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/cadmium"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/cadmium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/cadmium/nugget",
+  "ingredient": "#c:nuggets/cadmium",
   "result": {
     "amount": 10,
     "tag": "c:molten_cadmium"

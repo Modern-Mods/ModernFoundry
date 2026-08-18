@@ -4,10 +4,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -20,7 +22,7 @@ import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import modernmods.hilt.util.CombatHelper;
+import modernmods.mantle.util.CombatHelper;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 
 /** Block implementing knightmetal's spiky behavior. Based on <a href="https://github.com/TeamTwilight/twilightforest/blob/1.21.x/src/main/java/twilightforest/block/KnightmetalBlock.java">Twilight Forest</a> */
@@ -51,13 +53,12 @@ public class KnightMetalBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @SuppressWarnings("deprecation")
-  @Deprecated
   @Override
-  public BlockState updateShape(BlockState state, Direction pDirection, BlockState pNeighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+  protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction pDirection, BlockPos neighborPos, BlockState pNeighborState, RandomSource random) {
     if (state.getValue(WATERLOGGED)) {
-      level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+      tickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
     }
-    return super.updateShape(state, pDirection, pNeighborState, level, pos, neighborPos);
+    return super.updateShape(state, level, tickAccess, pos, pDirection, neighborPos, pNeighborState, random);
   }
 
   @Override
@@ -68,11 +69,11 @@ public class KnightMetalBlock extends Block implements SimpleWaterloggedBlock {
   @Nullable
   @Override
   public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
-    return PathType.DAMAGE_OTHER;
+    return PathType.DAMAGING;
   }
 
   @Override
-  public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-    entity.hurt(CombatHelper.damageSource(level, TinkerDamageTypes.KNIGHTMETAL), BLOCK_DAMAGE);
+  protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, net.minecraft.world.entity.InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+    entity.hurtOrSimulate(CombatHelper.damageSource(level, TinkerDamageTypes.KNIGHTMETAL), BLOCK_DAMAGE);
   }
 }

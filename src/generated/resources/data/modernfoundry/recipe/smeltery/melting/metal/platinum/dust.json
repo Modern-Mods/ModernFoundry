@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/platinum/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/platinum"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/platinum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/platinum/dust",
+  "ingredient": "#c:dusts/platinum",
   "result": {
     "amount": 90,
     "tag": "c:molten_platinum"

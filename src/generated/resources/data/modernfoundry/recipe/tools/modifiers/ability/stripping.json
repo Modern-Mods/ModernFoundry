@@ -1,19 +1,19 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/stripping",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/stripping",
   "inputs": [
     {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:small_axe_head"
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:small_axe_head"
     },
     {
-      "tag": "c:ingots/steel"
+      "ingredient": "#c:ingots/steel"
     },
     {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:tool_binding"
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:tool_binding"
     }
   ],
   "level": 1,
@@ -22,14 +22,10 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/durability"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable"
-      }
+      "#modernfoundry:modifiable/durability",
+      "#modernfoundry:modifiable/interactable"
     ]
   }
 }

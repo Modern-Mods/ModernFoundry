@@ -2,6 +2,6 @@
 @MethodsReturnNonnullByDefault
 package modernmods.modernfoundry.smeltery.block.entity.controller;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
+import modernmods.modernfoundry.compat.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

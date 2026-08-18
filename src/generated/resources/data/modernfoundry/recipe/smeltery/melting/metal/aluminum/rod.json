@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/aluminum/rod",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:rods/aluminum"
     }
   ],
-  "ingredient": {
-    "tag": "c:rods/aluminum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/aluminum/rod",
+  "ingredient": "#c:rods/aluminum",
   "result": {
     "amount": 45,
     "tag": "c:molten_aluminum"

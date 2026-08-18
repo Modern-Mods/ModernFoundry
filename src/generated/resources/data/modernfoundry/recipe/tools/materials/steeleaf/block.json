@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/steeleaf/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/steeleaf"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/steeleaf"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/steeleaf/block",
+  "ingredient": "#c:storage_blocks/steeleaf",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/steeleaf"

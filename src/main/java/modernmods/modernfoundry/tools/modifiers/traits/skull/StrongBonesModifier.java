@@ -46,7 +46,7 @@ public class StrongBonesModifier extends NoLevelsModifier {
     ItemStack helmet = living.getItemBySlot(EquipmentSlot.HEAD);
     boolean didSomething = false;
     if (ModifierUtil.getModifierLevel(helmet, TinkerModifiers.strongBones.getId()) > 0) {
-      MobEffectInstance effect = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, duration);
+      MobEffectInstance effect = new MobEffectInstance(MobEffects.RESISTANCE, duration);
       // on simulate, don't apply the effect, just ask if we can apply
       didSomething = action.execute() ? living.addEffect(effect) : living.canBeAffected(effect);
       // quick exit on simulate: no more information needed

@@ -19,15 +19,15 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.array.ArrayLoadable;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.array.ArrayLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.materials.RandomMaterial;
@@ -113,7 +113,7 @@ public record MobEquipment(EquipmentSlot slot, IJsonPredicate<Item> match, ItemO
           int amount = random.nextInt(capacity + 1);
           if (amount > 0) {
             // select fluid from tag
-            Fluid fluid = BuiltInRegistries.FLUID.getTag(this.fluid)
+            Fluid fluid = BuiltInRegistries.FLUID.get(this.fluid)
               .flatMap(tag -> tag.getRandomElement(random))
               .map(Holder::value)
               .orElse(Fluids.EMPTY);

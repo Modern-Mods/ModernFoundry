@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.json.variable.mining;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.BreakSpeed;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.math.ModifierFormula;
 import modernmods.modernfoundry.library.json.variable.VariableFormula;
 import modernmods.modernfoundry.library.json.variable.VariableFormulaLoadable;

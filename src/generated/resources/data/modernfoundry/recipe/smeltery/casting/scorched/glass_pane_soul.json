@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/scorched/glass_pane_soul",
-  "cast": {
-    "item": "modernfoundry:soul_glass_pane"
-  },
+  "cast": "modernfoundry:soul_glass_pane",
   "cast_consumed": true,
   "cooling_time": 83,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:scorched_stone"
   },
+  "id": "modernfoundry:smeltery/casting/scorched/glass_pane_soul",
   "result": "modernfoundry:scorched_soul_glass_pane"
 }

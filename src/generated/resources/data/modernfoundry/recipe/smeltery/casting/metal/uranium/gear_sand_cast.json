@@ -1,21 +1,19 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/uranium/gear_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/gear"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/uranium"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/single_use/gear",
+  "cast_consumed": true,
   "cooling_time": 122,
   "fluid": {
     "amount": 360,
     "tag": "c:molten_uranium"
   },
+  "id": "modernfoundry:smeltery/casting/metal/uranium/gear_sand_cast",
   "result": {
     "tag": "c:gears/uranium"
   }

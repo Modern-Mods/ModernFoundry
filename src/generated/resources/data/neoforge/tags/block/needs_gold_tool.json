@@ -47,6 +47,7 @@
     "modernfoundry:scorched_tinted_glass",
     "modernfoundry:scorched_glass_pane",
     "modernfoundry:scorched_soul_glass_pane",
+    "modernfoundry:seared_fuel_tank",
     "modernfoundry:seared_fuel_gauge",
     "modernfoundry:seared_ingot_tank",
     "modernfoundry:seared_ingot_gauge",
@@ -66,7 +67,7 @@
     "modernfoundry:scorched_basin",
     "modernfoundry:scorched_table",
     "modernfoundry:seared_heater",
+    "modernfoundry:seared_melter",
     "modernfoundry:scorched_alloyer"
   ]
 }
-

@@ -9,7 +9,7 @@ import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.tables.block.entity.chest.TinkersChestBlockEntity;
 
 import javax.annotation.Nullable;

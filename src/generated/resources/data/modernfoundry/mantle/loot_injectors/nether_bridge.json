@@ -1,0 +1,20 @@
+{
+  "name": "minecraft:chests/nether_bridge",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data"
+            }
+          ],
+          "name": "modernfoundry:flint_and_brick",
+          "weight": 5
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

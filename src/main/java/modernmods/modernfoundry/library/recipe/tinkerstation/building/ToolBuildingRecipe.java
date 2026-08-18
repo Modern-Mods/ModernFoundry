@@ -6,19 +6,19 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
-import modernmods.hilt.util.LogicHelper;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.util.LogicHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
@@ -65,7 +65,7 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
   protected static final RecipeResult<LazyToolStack> NO_COUNT = RecipeResult.failure(TConstruct.makeTranslationKey("recipe", "tool_build.no_count"));
   // loadable fields
   protected static final LoadableField<IModifiable,ToolBuildingRecipe> RESULT_FIELD = TinkerLoadables.MODIFIABLE_ITEM.requiredField("result", r -> r.output);
-  protected static final LoadableField<ResourceLocation,ToolBuildingRecipe> LAYOUT_FIELD = Loadables.RESOURCE_LOCATION.nullableField("slot_layout",  r -> r.layoutSlot);
+  protected static final LoadableField<Identifier,ToolBuildingRecipe> LAYOUT_FIELD = Loadables.RESOURCE_LOCATION.nullableField("slot_layout",  r -> r.layoutSlot);
   /** Loader instance */
   public static final RecordLoadable<ToolBuildingRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(), LoadableRecipeSerializer.RECIPE_GROUP, RESULT_FIELD,
@@ -77,7 +77,7 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
     ToolBuildingRecipe::new);
 
   @Getter
-  protected final ResourceLocation id;
+  protected final Identifier id;
   @Getter
   protected final String group;
   /** Tool result */
@@ -87,7 +87,7 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
   protected final int outputCount;
   /** Layout for slots in JEI */
   @Nullable
-  protected final ResourceLocation layoutSlot;
+  protected final Identifier layoutSlot;
   /** List of input ingredients required in addition to the parts */
   protected final List<Ingredient> ingredients;
   /** If nonnull, uses these parts to craft the tool. If null, parts are pulled from the tool definition */
@@ -101,12 +101,12 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
   protected List<ItemStack> displayOutput;
 
   @Deprecated(forRemoval = true)
-  public ToolBuildingRecipe(ResourceLocation id, String group, IModifiable output, int outputCount, @Nullable ResourceLocation layoutSlot, List<Ingredient> ingredients) {
+  public ToolBuildingRecipe(Identifier id, String group, IModifiable output, int outputCount, @Nullable Identifier layoutSlot, List<Ingredient> ingredients) {
     this(id, group, output, outputCount, layoutSlot, ingredients, null, List.of());
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ToolBuildingRecipe> getSerializer() {
     return TinkerTables.toolBuildingRecipeSerializer.get();
   }
 
@@ -163,8 +163,9 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
     }
     // remaining slots must match extra requirements
     for (; i < maxInputs; i++) {
-      Ingredient ingredient = LogicHelper.getOrDefault(ingredients, i - partSize, Ingredient.EMPTY);
-      if (!ingredient.test(inv.getInput(i))) {
+      Ingredient ingredient = LogicHelper.getOrDefault(ingredients, i - partSize, null);
+      // a null ingredient (beyond the required inputs) means the slot must be empty
+      if (ingredient == null ? !inv.getInput(i).isEmpty() : !ingredient.test(inv.getInput(i))) {
         return false;
       }
     }
@@ -228,7 +229,7 @@ public class ToolBuildingRecipe implements ITinkerStationRecipe {
    * Gets the ID of the station slot layout for displaying this recipe.
    * Typically matches the output definition ID, but some tool recipes share a single layout.
    */
-  public ResourceLocation getLayoutSlotId() {
+  public Identifier getLayoutSlotId() {
     return Objects.requireNonNullElse(layoutSlot, output.getToolDefinition().getId());
   }
 

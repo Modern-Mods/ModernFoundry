@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:table_casting_material",
+  "cast": "#modernfoundry:casts/multi_use/bow_grip",
   "id": "modernfoundry:tools/parts/casting/bow_grip_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/bow_grip"
-  },
   "item_cost": 2,
   "result": "modernfoundry:bow_grip"
 }

@@ -4,8 +4,8 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import modernmods.hilt.client.ResourceColorManager;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.client.ResourceColorManager;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.display.DisplayNameModifierHook;
@@ -31,7 +31,7 @@ public record ModifierVariantNameModule(VariantFormatter formatter) implements M
 
   @Override
   public Component getDisplayName(IToolStackView tool, ModifierEntry entry, Component name, @Nullable RegistryAccess access) {
-    String variant = tool.getPersistentData().getString(entry.getId());
+    String variant = tool.getPersistentData().getString(entry.getId().getIdentifier());
     if (!variant.isEmpty()) {
       // allow overriding the color of the result using the resource color manager
       TextColor color = ResourceColorManager.getOrNull(entry.getModifier().getTranslationKey() + '.' + variant);

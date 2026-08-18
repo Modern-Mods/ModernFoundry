@@ -1,16 +1,17 @@
 package modernmods.modernfoundry.library.recipe.worktable;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.library.json.predicate.modifier.ModifierPredicate;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 
@@ -20,7 +21,7 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ModifierSetWorktableRecipeBuilder extends AbstractSizedIngredientRecipeBuilder<ModifierSetWorktableRecipeBuilder> {
-  private final ResourceLocation dataKey;
+  private final Identifier dataKey;
   @Setter @Accessors(fluent = true)
   private IJsonPredicate<ModifierId> modifierPredicate = ModifierPredicate.ANY;
   private final boolean addToSet;
@@ -28,12 +29,12 @@ public class ModifierSetWorktableRecipeBuilder extends AbstractSizedIngredientRe
   private boolean allowTraits = false;
 
   /** Creates a new recipe for adding to a set */
-  public static ModifierSetWorktableRecipeBuilder setAdding(ResourceLocation dataKey) {
+  public static ModifierSetWorktableRecipeBuilder setAdding(Identifier dataKey) {
     return new ModifierSetWorktableRecipeBuilder(dataKey, true);
   }
 
   /** Creates a new recipe for removing from a set */
-  public static ModifierSetWorktableRecipeBuilder setRemoving(ResourceLocation dataKey) {
+  public static ModifierSetWorktableRecipeBuilder setRemoving(Identifier dataKey) {
     return new ModifierSetWorktableRecipeBuilder(dataKey, false);
   }
 
@@ -45,7 +46,7 @@ public class ModifierSetWorktableRecipeBuilder extends AbstractSizedIngredientRe
 
   /** Sets the tool requirement for this recipe */
   public ModifierSetWorktableRecipeBuilder setTools(TagKey<Item> tag) {
-    return this.setTools(Ingredient.of(tag));
+    return this.setTools(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag));
   }
 
   /** Sets the recipe to allow traits */
@@ -60,14 +61,13 @@ public class ModifierSetWorktableRecipeBuilder extends AbstractSizedIngredientRe
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (inputs.isEmpty()) {
       throw new IllegalStateException("Must have at least one ingredient");
     }
-    if (tools == Ingredient.EMPTY) {
-      throw new IllegalStateException("Tools cannot be empty");
-    }
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "modifiers");
+    // no tools.isEmpty() check: an Ingredient can never be empty in 26.1 (its constructor forbids it), and calling
+    // isEmpty() resolves a lazy tag ingredient's contents, throwing "Missing tag" at datagen time (tags not yet bound).
+    Identifier advancementId = buildOptionalAdvancement(id, "modifiers");
     consumer.accept(new LoadableFinishedRecipe<>(id, new ModifierSetWorktableRecipe(id, dataKey, inputs, tools, modifierPredicate, addToSet, allowTraits), ModifierSetWorktableRecipe.LOADER, advancementId));
   }
 }

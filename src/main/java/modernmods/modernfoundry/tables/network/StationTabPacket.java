@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import modernmods.modernfoundry.compat.neoforged.neoforge.network.NetworkHooks;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
 import modernmods.modernfoundry.tables.block.ITabbedBlock;
 
@@ -38,15 +38,15 @@ public class StationTabPacket implements IThreadsafePacket {
         sender.containerMenu.setCarried(ItemStack.EMPTY);
       }
 
-      Level world = sender.getCommandSenderWorld();
+      Level world = sender.level();
       if (!world.hasChunkAt(pos)) {
         return;
       }
       BlockState state = world.getBlockState(pos);
       if (state.getBlock() instanceof ITabbedBlock) {
-        ((ITabbedBlock) state.getBlock()).openGui(sender, sender.getCommandSenderWorld(), pos);
+        ((ITabbedBlock) state.getBlock()).openGui(sender, sender.level(), pos);
       } else {
-        MenuProvider provider = state.getMenuProvider(sender.getCommandSenderWorld(), pos);
+        MenuProvider provider = state.getMenuProvider(sender.level(), pos);
         if (provider != null) {
           NetworkHooks.openScreen(sender, provider, pos);
         }

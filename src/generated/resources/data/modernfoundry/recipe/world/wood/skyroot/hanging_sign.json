@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "hanging_sign",
   "key": {
-    "#": {
-      "item": "modernfoundry:stripped_skyroot_log"
-    },
-    "X": {
-      "item": "minecraft:chain"
-    }
+    "#": "modernfoundry:stripped_skyroot_log",
+    "X": "minecraft:iron_chain"
   },
   "pattern": [
     "X X",
@@ -18,6 +14,5 @@
   "result": {
     "count": 6,
     "id": "modernfoundry:skyroot_hanging_sign"
-  },
-  "show_notification": true
+  }
 }

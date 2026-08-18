@@ -6,11 +6,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/melee"
-    },
-    {
-      "tag": "modernfoundry:modifiable/armor/chestplate"
-    }
+    "#modernfoundry:modifiable/melee",
+    "#modernfoundry:modifiable/armor/chestplate"
   ]
 }

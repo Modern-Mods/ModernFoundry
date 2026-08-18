@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/constantan/chestplate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/chestplates/constantan"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/chestplates/constantan"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/chestplate",
+  "ingredient": "#c:armors/chestplates/constantan",
   "result": {
     "amount": 720,
     "tag": "c:molten_constantan",

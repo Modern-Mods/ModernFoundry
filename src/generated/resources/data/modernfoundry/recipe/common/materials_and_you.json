@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:book"
-    },
-    {
-      "item": "modernfoundry:pattern"
-    }
+    "minecraft:book",
+    "modernfoundry:pattern"
   ],
   "result": {
     "id": "modernfoundry:materials_and_you"

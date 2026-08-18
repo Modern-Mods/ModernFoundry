@@ -3,12 +3,14 @@ package modernmods.modernfoundry.fluids.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
-import modernmods.hilt.registration.deferred.FluidDeferredRegister;
+import modernmods.mantle.registration.deferred.FluidDeferredRegister;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -25,13 +27,15 @@ public class BurningLiquidBlock extends LiquidBlock {
     this.damage = damage;
   }
 
-  @SuppressWarnings("deprecation")  // useless annotation on block methods
   @Override
-  public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-    if (!entity.fireImmune() && entity.getFluidTypeHeight(fluid.getFluidType()) > 0) {
-      entity.igniteForSeconds(burnTime);
-      if (entity.hurt(entity.damageSources().lava(), damage)) {
-        entity.playSound(SoundEvents.GENERIC_BURN, 0.4F, 2.0F + level.random.nextFloat() * 0.4F);
+  protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+    if (!entity.fireImmune()) {
+      FluidState fluidState = level.getFluidState(pos);
+      if (!fluidState.isEmpty() && entity.getY() < pos.getY() + fluidState.getHeight(level, pos)) {
+        entity.igniteForSeconds(burnTime);
+        if (entity.hurtOrSimulate(entity.damageSources().lava(), damage)) {
+          entity.playSound(SoundEvents.GENERIC_BURN, 0.4F, 2.0F + level.getRandom().nextFloat() * 0.4F);
+        }
       }
     }
   }

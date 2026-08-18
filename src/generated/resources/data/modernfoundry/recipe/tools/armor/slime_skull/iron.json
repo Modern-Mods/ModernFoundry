@@ -1,13 +1,11 @@
 {
   "type": "modernfoundry:basin_tool_casting",
-  "id": "modernfoundry:tools/armor/slime_skull/iron",
-  "cast": {
-    "item": "modernfoundry:husk_head"
-  },
+  "cast": "modernfoundry:husk_head",
   "cast_purpose": "consumed_offset",
   "extra_materials": [
     "modernfoundry:iron"
   ],
+  "id": "modernfoundry:tools/armor/slime_skull/iron",
   "item_cost": 5,
   "result": "modernfoundry:slime_helmet"
 }

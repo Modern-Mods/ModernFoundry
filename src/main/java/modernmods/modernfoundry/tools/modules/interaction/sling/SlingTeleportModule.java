@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.tools.modules.interaction.sling;
 
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
@@ -8,8 +9,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.library.events.teleport.SlingModifierTeleportEvent;
 import modernmods.modernfoundry.library.json.LevelingValue;
@@ -39,7 +40,7 @@ public record SlingTeleportModule(LevelingValue forceMultiplier, float drawtimeM
   @Override
   public void sling(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int chargeTime, ModifierEntry activeModifier) {
     Level level = entity.level();
-    if (!level.isClientSide && entity instanceof ServerPlayer player) {
+    if (!level.isClientSide() && entity instanceof ServerPlayer player) {
       // must have enough charge and force must not be zeroed by a modifier
       // don't care about multiplier here as no knockback to change it
       float charge = GeneralInteractionModifierHook.getToolCharge(tool, chargeTime);
@@ -93,11 +94,11 @@ public record SlingTeleportModule(LevelingValue forceMultiplier, float drawtimeM
 
               // particle effect from EnderPearlEntity
               for (int i = 0; i < 32; ++i) {
-                level.addParticle(ParticleTypes.PORTAL, player.getX(), player.getY() + level.random.nextDouble() * 2.0D, player.getZ(), level.random.nextGaussian(), 0.0D, level.random.nextGaussian());
+                level.addParticle(ParticleTypes.PORTAL, player.getX(), player.getY() + level.getRandom().nextDouble() * 2.0D, player.getZ(), level.getRandom().nextGaussian(), 0.0D, level.getRandom().nextGaussian());
               }
               level.playSound(null, player.getX(), player.getY(), player.getZ(), Sounds.SLIME_SLING_TELEPORT.getSound(), player.getSoundSource(), 1f, 1f);
               player.causeFoodExhaustion(0.2F);
-              player.getCooldowns().addCooldown(tool.getItem(), 3);
+              player.getCooldowns().addCooldown(new ItemStack(tool.getItem()), 3);
               ToolDamageUtil.damageAnimated(tool, 1, entity, entity.getUsedItemHand(), modifier.getId());
               return;
             }

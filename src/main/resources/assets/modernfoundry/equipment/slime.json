@@ -1,0 +1,10 @@
+{
+  "layers": {
+    "humanoid": [
+      { "texture": "modernfoundry:slime/armor" }
+    ],
+    "humanoid_leggings": [
+      { "texture": "modernfoundry:slime/leggings" }
+    ]
+  }
+}

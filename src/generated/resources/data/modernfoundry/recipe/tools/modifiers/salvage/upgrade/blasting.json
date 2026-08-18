@@ -5,7 +5,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/harvest/stone"
-  }
+  "tools": "#modernfoundry:modifiable/harvest/stone"
 }

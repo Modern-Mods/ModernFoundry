@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:sheep_shearing",
-  "id": "modernfoundry:tools/severing/sheep_wool",
   "looting_bonus": 0.01,
   "per_level_chance": 0.05
 }

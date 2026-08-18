@@ -1,14 +1,15 @@
 package modernmods.modernfoundry.library.data.recipe;
 
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.recipe.helper.ItemOutput;
-import modernmods.hilt.registration.object.FluidObject;
-import modernmods.hilt.registration.object.MetalItemObject;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.recipe.helper.ItemOutput;
+import modernmods.mantle.registration.object.FluidObject;
+import modernmods.mantle.registration.object.MetalItemObject;
 import modernmods.modernfoundry.common.registration.CastItemObject;
 import modernmods.modernfoundry.library.recipe.FluidValues;
 import modernmods.modernfoundry.library.recipe.casting.ItemCastingRecipeBuilder;
@@ -19,7 +20,7 @@ import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
-import static modernmods.hilt.Hilt.COMMON;
+import static modernmods.mantle.Mantle.COMMON;
 import static modernmods.modernfoundry.library.recipe.melting.IMeltingRecipe.getTemperature;
 
 /**
@@ -53,7 +54,7 @@ public interface ISmelteryRecipeHelper extends ICastCreationHelper {
    */
   default void tagMelting(Consumer<FinishedRecipe> consumer, FluidOutput fluid, int temperature, String tagName, float factor, String recipePath, boolean isOptional) {
     Consumer<FinishedRecipe> wrapped = isOptional ? withCondition(consumer, tagCondition(tagName)) : consumer;
-    MeltingRecipeBuilder.melting(Ingredient.of(getItemTag(COMMON, tagName)), fluid, temperature, factor)
+    MeltingRecipeBuilder.melting(LazyTagIngredient.of(getItemTag(COMMON, tagName)), fluid, temperature, factor)
                         .save(wrapped, location(recipePath));
   }
 
@@ -104,7 +105,7 @@ public interface ISmelteryRecipeHelper extends ICastCreationHelper {
     metalMelting(builder, hasOre, hasDust);
   }
 
-  /** @deprecated use {@link SmelteryRecipeBuilder} via {@link SmelteryRecipeBuilder#fluid(Consumer, ResourceLocation, Fluid)} */
+  /** @deprecated use {@link SmelteryRecipeBuilder} via {@link SmelteryRecipeBuilder#fluid(Consumer, Identifier, Fluid)} */
   @Deprecated(forRemoval = true)
   default void metalMelting(Consumer<FinishedRecipe> consumer, Fluid fluid, String name, boolean hasOre, boolean hasDust, String folder, boolean isOptional, IByproduct... byproducts) {
     SmelteryRecipeBuilder builder = SmelteryRecipeBuilder.fluid(consumer, location(name), fluid).meltingFolder(folder).optional(isOptional);
@@ -137,7 +138,7 @@ public interface ISmelteryRecipeHelper extends ICastCreationHelper {
     gemMelting(builder, hasOre, blockSize);
   }
 
-  /** @deprecated use {@link SmelteryRecipeBuilder} via {@link SmelteryRecipeBuilder#fluid(Consumer, ResourceLocation, Fluid)} */
+  /** @deprecated use {@link SmelteryRecipeBuilder} via {@link SmelteryRecipeBuilder#fluid(Consumer, Identifier, Fluid)} */
   @Deprecated(forRemoval = true)
   default void gemMelting(Consumer<FinishedRecipe> consumer, Fluid fluid, String name, boolean hasOre, int blockSize, String folder, boolean isOptional, IByproduct... byproducts) {
     SmelteryRecipeBuilder builder = SmelteryRecipeBuilder.fluid(consumer, location(name), fluid).meltingFolder(folder).optional(isOptional);

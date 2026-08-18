@@ -3,11 +3,11 @@ package modernmods.modernfoundry.library.recipe.tinkerstation;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.recipe.ICommonRecipe;
+import modernmods.mantle.recipe.ICommonRecipe;
 import modernmods.modernfoundry.library.recipe.ITinkerableContainer;
 import modernmods.modernfoundry.library.recipe.RecipeResult;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
@@ -22,12 +22,12 @@ public interface ITinkerStationRecipe extends ICommonRecipe<ITinkerStationContai
   int DEFAULT_TOOL_STACK_SIZE = 16;
 
   /** Gets the recipe ID. */
-  ResourceLocation getId();
+  Identifier getId();
 
   /* Recipe data */
 
   @Override
-  default RecipeType<?> getType() {
+  default RecipeType<? extends ITinkerStationRecipe> getType() {
     return TinkerRecipeTypes.TINKER_STATION.get();
   }
 
@@ -69,21 +69,18 @@ public interface ITinkerStationRecipe extends ICommonRecipe<ITinkerStationContai
 
   /** @deprecated use {@link #getValidatedResult(ITinkerStationContainer, RegistryAccess)}*/
   @Deprecated
-  @Override
-  default ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
+    default ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
     return ItemStack.EMPTY;
   }
 
   /** @deprecated use {@link #getValidatedResult(ITinkerStationContainer, RegistryAccess)}*/
   @Deprecated
-  @Override
-  default ItemStack assemble(ITinkerStationContainer inv, HolderLookup.Provider access) {
+    default ItemStack assemble(ITinkerStationContainer inv, HolderLookup.Provider access) {
     return getResultItem(access).copy();
   }
 
   /** @deprecated use {@link #updateInputs(LazyToolStack, IMutableTinkerStationContainer, boolean)} */
-  @Override
-  @Deprecated
+    @Deprecated
   default NonNullList<ItemStack> getRemainingItems(ITinkerStationContainer inv) {
     return NonNullList.of(ItemStack.EMPTY);
   }

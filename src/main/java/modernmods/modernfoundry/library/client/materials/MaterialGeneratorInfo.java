@@ -4,12 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.gson.ResourceLocationSerializer;
-import modernmods.hilt.data.loadable.common.GsonLoadable;
-import modernmods.hilt.data.loadable.field.LegacyField;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.gson.ResourceLocationSerializer;
+import modernmods.mantle.data.loadable.common.GsonLoadable;
+import modernmods.mantle.data.loadable.field.LegacyField;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.data.spritetransformer.IColorMapping;
 import modernmods.modernfoundry.library.client.data.spritetransformer.ISpriteTransformer;
@@ -24,8 +24,12 @@ import java.util.Set;
 public class MaterialGeneratorInfo {
   /** GSON adapter for generator deserializing. TODO: migrate ISpriteTransformer to loadables? */
   private static final Gson GSON = (new GsonBuilder())
-    .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
-    .registerTypeAdapter(MaterialStatsId.class, new ResourceLocationSerializer<>(MaterialStatsId::new, TConstruct.MOD_ID))
+    .registerTypeAdapter(Identifier.class, ResourceLocationSerializer.resourceLocation(TConstruct.MOD_ID))
+    .registerTypeAdapter(MaterialStatsId.class, (com.google.gson.JsonDeserializer<MaterialStatsId>) (element, type, ctx) -> {
+      String loc = net.minecraft.util.GsonHelper.convertToString(element, "location");
+      if (!loc.contains(":")) { loc = TConstruct.MOD_ID + ":" + loc; }
+      return new MaterialStatsId(loc);
+    })
     .registerTypeHierarchyAdapter(ISpriteTransformer.class, ISpriteTransformer.SERIALIZER)
     .registerTypeHierarchyAdapter(IColorMapping.class, IColorMapping.SERIALIZER)
     .create();

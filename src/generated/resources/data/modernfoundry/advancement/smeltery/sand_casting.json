@@ -20,7 +20,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:tool_handle_sand_cast"
+      "id": "modernfoundry:tool_handle_sand_cast"
     },
     "show_toast": true,
     "title": {

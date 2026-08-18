@@ -3,12 +3,10 @@
   "id": "modernfoundry:tools/armor/slime_skull/swapping/blaze",
   "index": 0,
   "ingredient": {
-    "item": "modernfoundry:blaze_head"
+    "ingredient": "modernfoundry:blaze_head"
   },
   "material": "modernfoundry:blaze",
   "max_stack_size": 16,
   "repair_value": 6,
-  "tools": {
-    "tag": "modernfoundry:modifiable/skulls/swappable"
-  }
+  "tools": "#modernfoundry:modifiable/skulls/swappable"
 }

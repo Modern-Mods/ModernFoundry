@@ -2,18 +2,18 @@ package modernmods.modernfoundry.library.tools.capability;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.common.NeoForge;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.CapabilityManager;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.CapabilityToken;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ICapabilitySerializable;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.util.Lazy;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import modernmods.modernfoundry.compat.neoforged.neoforge.event.AttachCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.bus.api.EventPriority;
@@ -34,7 +34,7 @@ public class PersistentDataCapability {
   private PersistentDataCapability() {}
 
   /** Capability ID */
-  private static final ResourceLocation ID = TConstruct.getResource("persistent_data");
+  private static final Identifier ID = TConstruct.getResource("persistent_data");
   private static final String DATA_KEY = ID.toString();
   /** Capability type */
   public static final Capability<ModDataNBT> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
@@ -47,7 +47,7 @@ public class PersistentDataCapability {
   /** Gets the persistent data for an entity. */
   public static ModDataNBT getData(Entity entity) {
     CompoundTag persistentData = entity.getPersistentData();
-    CompoundTag data = persistentData.getCompound(DATA_KEY);
+    CompoundTag data = persistentData.getCompoundOrEmpty(DATA_KEY);
     persistentData.put(DATA_KEY, data);
     return ModDataNBT.readFromNBT(data);
   }

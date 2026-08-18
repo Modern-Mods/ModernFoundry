@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/composite/jeweled_hide_cleaning",
   "fluid": {
     "amount": 50,
     "tag": "modernfoundry:venom"
   },
+  "id": "modernfoundry:tools/materials/composite/jeweled_hide_cleaning",
   "input": "modernfoundry:jeweled_hide",
   "output": "modernfoundry:leather",
   "temperature": 10

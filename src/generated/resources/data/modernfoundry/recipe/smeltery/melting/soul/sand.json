@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/soul/sand",
   "ingredient": [
-    {
-      "item": "minecraft:soul_sand"
-    },
-    {
-      "item": "minecraft:soul_soil"
-    }
+    "minecraft:soul_sand",
+    "minecraft:soul_soil"
   ],
   "result": {
     "amount": 1000,

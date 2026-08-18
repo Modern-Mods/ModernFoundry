@@ -10,18 +10,19 @@ import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableAnimated.StartDirection;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotView;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.fluid.tooltip.FluidTooltipHandler;
+import modernmods.mantle.fluid.tooltip.FluidTooltipHandler;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.GuiUtil;
 import modernmods.modernfoundry.library.recipe.fuel.MeltingFuel;
@@ -35,7 +36,7 @@ import java.util.List;
 
 /** Shared logic between melting and foundry */
 public abstract class AbstractMeltingCategory implements IRecipeCategory<MeltingRecipe> {
-  protected static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/melting.png");
+  protected static final Identifier BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/melting.png");
   protected static final String KEY_COOLING_TIME = TConstruct.makeTranslationKey("jei", "melting.time");
   protected static final String KEY_TEMPERATURE = TConstruct.makeTranslationKey("jei", "temperature");
   protected static final String KEY_MULTIPLIER = TConstruct.makeTranslationKey("jei", "melting.multiplier");
@@ -69,7 +70,19 @@ public abstract class AbstractMeltingCategory implements IRecipeCategory<Melting
   }
 
   @Override
-  public void draw(MeltingRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
+  public int getWidth() {
+    return 132;
+  }
+
+  @Override
+  public int getHeight() {
+    return 40;
+  }
+
+  @Override
+  public void draw(MeltingRecipe recipe, IRecipeSlotsView slots, GuiGraphicsExtractor graphics, double mouseX, double mouseY) {
+    // getBackground() was removed in JEI 27.x; draw our background ourselves
+    background.draw(graphics, 0, 0);
     // draw the arrow
     cachedArrows.getUnchecked(recipe.getTime() * 5).draw(graphics, 56, 18);
     if (recipe.getOreType() != null) {
@@ -81,21 +94,20 @@ public abstract class AbstractMeltingCategory implements IRecipeCategory<Melting
     Font fontRenderer = Minecraft.getInstance().font;
     String tempString = I18n.get(KEY_TEMPERATURE, temperature);
     int x = 56 - fontRenderer.width(tempString) / 2;
-    graphics.drawString(fontRenderer, tempString, x, 3, Color.GRAY.getRGB(), false);
+    graphics.text(fontRenderer, tempString, x, 3, Color.GRAY.getRGB(), false);
   }
 
   @Override
-  public List<Component> getTooltipStrings(MeltingRecipe recipe, IRecipeSlotsView slots, double mouseXD, double mouseYD) {
+  public void getTooltip(ITooltipBuilder tooltip, MeltingRecipe recipe, IRecipeSlotsView slots, double mouseXD, double mouseYD) {
     int mouseX = (int)mouseXD;
     int mouseY = (int)mouseYD;
     if (recipe.getOreType() != null && GuiUtil.isHovered(mouseX, mouseY, 87, 31, 16, 16)) {
-      return Collections.singletonList(TOOLTIP_ORE);
+      tooltip.add(TOOLTIP_ORE);
     }
     // time tooltip
     if (GuiUtil.isHovered(mouseX, mouseY, 56, 18, 24, 17)) {
-      return Collections.singletonList(Component.translatable(KEY_COOLING_TIME, recipe.getTime() / 4));
+      tooltip.add(Component.translatable(KEY_COOLING_TIME, recipe.getTime() / 4));
     }
-    return Collections.emptyList();
   }
 
   /** Adds amounts to outputs and temperatures to fuels */
@@ -123,7 +135,7 @@ public abstract class AbstractMeltingCategory implements IRecipeCategory<Melting
   }
 
   @Override
-  public ResourceLocation getRegistryName(MeltingRecipe recipe) {
+  public Identifier getRegistryName(MeltingRecipe recipe) {
     return recipe.getId();
   }
 }

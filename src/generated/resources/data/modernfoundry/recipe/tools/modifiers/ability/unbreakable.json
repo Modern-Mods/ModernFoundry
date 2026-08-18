@@ -1,23 +1,23 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/unbreakable",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/unbreakable",
   "inputs": [
     {
-      "item": "minecraft:shulker_shell"
+      "ingredient": "minecraft:shulker_shell"
     },
     {
-      "item": "minecraft:dragon_breath"
+      "ingredient": "minecraft:dragon_breath"
     },
     {
-      "item": "minecraft:shulker_shell"
+      "ingredient": "minecraft:shulker_shell"
     },
     {
-      "tag": "c:ingots/netherite"
+      "ingredient": "#c:ingots/netherite"
     },
     {
-      "tag": "c:ingots/netherite"
+      "ingredient": "#c:ingots/netherite"
     }
   ],
   "level": 1,
@@ -25,7 +25,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/durability"
-  }
+  "tools": "#modernfoundry:modifiable/durability"
 }

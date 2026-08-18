@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/copper/geore/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:geore_blocks/copper"
     }
   ],
-  "ingredient": {
-    "tag": "c:geore_blocks/copper"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/copper/geore/block",
+  "ingredient": "#c:geore_blocks/copper",
   "result": {
     "amount": 360,
     "tag": "c:molten_copper"

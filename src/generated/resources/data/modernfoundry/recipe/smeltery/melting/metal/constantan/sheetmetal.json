@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/constantan/sheetmetal",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:sheetmetals/constantan"
     }
   ],
-  "ingredient": {
-    "tag": "c:sheetmetals/constantan"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/sheetmetal",
+  "ingredient": "#c:sheetmetals/constantan",
   "result": {
     "amount": 90,
     "tag": "c:molten_constantan"

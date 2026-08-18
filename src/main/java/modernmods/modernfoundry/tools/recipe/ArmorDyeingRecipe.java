@@ -5,14 +5,14 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.Tags.Items;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -38,9 +38,9 @@ import java.util.stream.Collectors;
 /** Recipe to dye travelers gear */
 public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDisplayModifierRecipe> {
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
 
-  public ArmorDyeingRecipe(ResourceLocation id) {
+  public ArmorDyeingRecipe(Identifier id) {
     this.id = id;
     ModifierRecipeLookup.addRecipeModifier(null, TinkerModifiers.dyed);
   }
@@ -70,13 +70,14 @@ public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDi
     ToolStack tool = inv.getTinkerable().copy();
 
     ModDataNBT persistentData = tool.getPersistentData();
-    ModifierId key = TinkerModifiers.dyed.getId();
+    ModifierId modifier = TinkerModifiers.dyed.getId();
+    Identifier key = modifier.getIdentifier();
     int nr = 0, nb = 0, ng = 0;
     int brightness = 0;
     int count = 0;
 
     // copy existing color
-    if (persistentData.contains(key, Tag.TAG_INT)) {
+    if (persistentData.contains(key)) {
       int color = persistentData.getInt(key);
       int r = color >> 16 & 255;
       int g = color >>  8 & 255;
@@ -125,14 +126,14 @@ public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDi
     persistentData.putInt(key, finalColor);
 
     // add the modifier if missing
-    if (tool.getModifierLevel(key) == 0) {
-      tool.addModifier(key, 1);
+    if (tool.getModifierLevel(modifier) == 0) {
+      tool.addModifier(modifier, 1);
     }
     return ITinkerStationRecipe.success(tool, inv);
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ArmorDyeingRecipe> getSerializer() {
     return TinkerModifiers.armorDyeingSerializer.get();
   }
 
@@ -154,7 +155,7 @@ public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDi
           return stack;
         }).toList();
       if (!toolInputs.isEmpty()) {
-        ResourceLocation id = getId();
+        Identifier id = getId();
         displayRecipes = Arrays.stream(DyeColor.values()).map(dye -> new DisplayRecipe(id, toolInputs, dye)).collect(Collectors.toList());
       } else {
         displayRecipes = List.of();
@@ -168,7 +169,7 @@ public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDi
     private final ModifierEntry RESULT = new ModifierEntry(TinkerModifiers.dyed, 1);
 
     @Getter
-    private final ResourceLocation recipeId;
+    private final Identifier recipeId;
     private final List<ItemStack> dyes;
     @Getter
     private final List<ItemStack> toolWithoutModifier;
@@ -176,13 +177,13 @@ public class ArmorDyeingRecipe implements ITinkerStationRecipe, IMultiRecipe<IDi
     private final List<ItemStack> toolWithModifier;
     @Getter
     private final Component variant;
-    public DisplayRecipe(ResourceLocation recipeId, List<ItemStack> tools, DyeColor color) {
+    public DisplayRecipe(Identifier recipeId, List<ItemStack> tools, DyeColor color) {
       this.recipeId = recipeId;
       this.toolWithoutModifier = tools;
       this.dyes = RegistryHelper.getTagValueStream(BuiltInRegistries.ITEM, color.getTag()).map(ItemStack::new).toList();
       this.variant = Component.translatable("color.minecraft." + color.getSerializedName());
 
-      ResourceLocation modID = RESULT.getId();
+      Identifier modID = RESULT.getId().getIdentifier();
       int tintColor = Util.getColor(color);
       List<ModifierEntry> results = List.of(RESULT);
       toolWithModifier = tools.stream().map(stack -> IDisplayModifierRecipe.withModifiers(stack, DEFAULT_TOOL_STACK_SIZE, results, data -> data.putInt(modID, tintColor))).toList();

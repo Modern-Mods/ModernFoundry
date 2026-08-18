@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/power",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "modernfoundry:ichor_slime_crystal"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/power",
+  "input": "modernfoundry:ichor_slime_crystal",
   "level": {
     "max": 5
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/ranged/power"
-  }
+  "tools": "#modernfoundry:modifiable/ranged/power"
 }

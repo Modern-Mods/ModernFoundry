@@ -4,20 +4,17 @@ import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.TooltipFlag;
-import modernmods.hilt.client.model.NBTKeyModel;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.tools.SlotType;
 import modernmods.modernfoundry.library.tools.SlotType.SlotCount;
-import modernmods.modernfoundry.tools.TinkerModifiers;
 
 import javax.annotation.Nullable;
 import java.awt.Color;
@@ -80,19 +77,24 @@ public enum SlotIngredientRenderer implements IIngredientRenderer<SlotCount> {
 
   /** Cache of sprite for each slot type */
   private static final Map<SlotType,TextureAtlasSprite> SLOT_SPRITES = new HashMap<>();
+  /**
+   * Slot-name -> texture, mirroring assets/modernfoundry/models/item/creative_slot.json. 26.1 removed the
+   * BakedModel/ItemOverrides system this used to read the per-slot texture from, so the map is resolved directly.
+   * The exact atlas the sprites live on is a runtime-visual detail.
+   */
+  private static final Map<String,Identifier> SLOT_TEXTURES = Map.of(
+    "slotless", TConstruct.getResource("item/slot/slotless"),
+    "upgrades", TConstruct.getResource("item/slot/upgrade"),
+    "abilities", TConstruct.getResource("item/slot/ability"),
+    "souls", TConstruct.getResource("item/materials/hollow_gem"),
+    "defense", TConstruct.getResource("item/slot/defense"));
   /** Lookup for sprite for a slot type */
   private static final Function<SlotType,TextureAtlasSprite> SLOT_LOOKUP = slotType -> {
-    Minecraft minecraft = Minecraft.getInstance();
-    ModelManager modelManager = minecraft.getModelManager();
-    // gets the model for the item, its a sepcial one that gives us texture info
-    BakedModel model = minecraft.getItemRenderer().getItemModelShaper().getItemModel(TinkerModifiers.creativeSlotItem.get());
-    if (model != null && model.getOverrides() instanceof NBTKeyModel.Overrides overrides) {
-      Material material = overrides.getTexture(slotType == null ? "slotless" : slotType.getName());
-      return modelManager.getAtlas(material.atlasLocation()).getSprite(material.texture());
-    } else {
-      // failed to use the model, use missing texture
-      return modelManager.getAtlas(InventoryMenu.BLOCK_ATLAS).getSprite(MissingTextureAtlasSprite.getLocation());
-    }
+    TextureAtlas atlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(TextureAtlas.LOCATION_BLOCKS);
+    String name = slotType == null ? "slotless" : slotType.getName();
+    Identifier texture = SLOT_TEXTURES.getOrDefault(name, TConstruct.getResource("item/slot/default"));
+    TextureAtlasSprite sprite = atlas.getSprite(texture);
+    return sprite != null ? sprite : atlas.getSprite(MissingTextureAtlasSprite.getLocation());
   };
 
   @Override
@@ -101,13 +103,13 @@ public enum SlotIngredientRenderer implements IIngredientRenderer<SlotCount> {
   }
 
   @Override
-  public void render(GuiGraphics graphics, @Nullable SlotCount slots) {
+  public void render(GuiGraphicsExtractor graphics, @Nullable SlotCount slots) {
     if (this != INGREDIENT && slots != null && slots.count() > 0) {
       String text = Integer.toString(slots.count());
       Font fontRenderer = Minecraft.getInstance().font;
-      graphics.drawString(fontRenderer, text, 9 - fontRenderer.width(text), 5, Color.GRAY.getRGB(), false);
+      graphics.text(fontRenderer, text, 9 - fontRenderer.width(text), 5, Color.GRAY.getRGB(), false);
     }
-    graphics.blit(this == INGREDIENT ? 0 : 8, 0, 0, 16, 16, SLOT_SPRITES.computeIfAbsent(SlotCount.type(slots), SLOT_LOOKUP));
+    graphics.blitSprite(RenderPipelines.GUI_TEXTURED, SLOT_SPRITES.computeIfAbsent(SlotCount.type(slots), SLOT_LOOKUP), this == INGREDIENT ? 0 : 8, 0, 16, 16);
   }
 
   /** Appends the ID in advanced tooltip */

@@ -2,11 +2,11 @@ package modernmods.modernfoundry.library.json.predicate.tool;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
-import modernmods.hilt.data.predicate.FallbackPredicateRegistry;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.predicate.FallbackPredicateRegistry;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
 import modernmods.modernfoundry.library.tools.nbt.IToolContext;
 
 import java.util.List;

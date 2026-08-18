@@ -1,6 +1,7 @@
 package modernmods.modernfoundry.tables.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
@@ -8,7 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.block.Block;
-import modernmods.hilt.util.RetexturedHelper;
+import modernmods.mantle.util.RetexturedHelper;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
@@ -52,13 +53,15 @@ public class AnvilBlockItem extends MaterialBlockItem {
   @Override
   public Component getName(ItemStack stack) {
     // don't put tool material in name
-    return Component.translatable(this.getDescriptionId(stack));
+    return Component.translatable(this.getDescriptionId());
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+  public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flag) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     // ditch the super call advanced tooltip material ID, we will handle it ourselves later
-    this.getBlock().appendHoverText(stack, context, tooltip, flag);
+    // 26.1.2 removed block-level appendHoverText; add the retextured tooltip directly (formerly via the block)
+    modernmods.mantle.util.RetexturedHelper.addTooltip(stack, tooltip, flag);
     MaterialVariantId material = getMaterial(stack);
     if (!IMaterial.UNKNOWN_ID.equals(material)) {
       // put tool material in tooltip. Its technically below texture but the two should never coexist.
@@ -68,6 +71,8 @@ public class AnvilBlockItem extends MaterialBlockItem {
         tooltip.add(Component.translatable(ToolPartItem.MATERIAL_KEY, material).withStyle(ChatFormatting.DARK_GRAY));
       }
     }
+  
+    tooltip.forEach(tooltipConsumer);
   }
 
   public String getCreatorModId(ItemStack stack) {

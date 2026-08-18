@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/silver/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/silver"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/silver"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/silver/plate",
+  "ingredient": "#c:plates/silver",
   "result": {
     "amount": 90,
     "tag": "c:molten_silver"

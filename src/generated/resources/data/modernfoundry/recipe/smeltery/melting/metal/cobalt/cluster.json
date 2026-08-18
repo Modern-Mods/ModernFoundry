@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/cobalt/cluster",
-  "ingredient": {
-    "item": "modernfoundry:cobalt_cluster"
-  },
+  "ingredient": "modernfoundry:cobalt_cluster",
   "result": {
     "amount": 40,
     "tag": "c:molten_cobalt"

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/amethyst_bronze/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/amethyst_bronze"
-  },
+  "ingredient": "#c:storage_blocks/amethyst_bronze",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/amethyst_bronze"

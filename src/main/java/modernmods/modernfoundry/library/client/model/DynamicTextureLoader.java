@@ -1,15 +1,15 @@
 package modernmods.modernfoundry.library.client.model;
 
+import modernmods.modernfoundry.TConstruct;
 import lombok.extern.log4j.Log4j2;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
-import modernmods.hilt.data.listener.ResourceValidator;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
+import modernmods.mantle.data.listener.ResourceValidator;
 import modernmods.modernfoundry.common.config.Config;
 
 import java.util.concurrent.CompletableFuture;
@@ -38,13 +38,14 @@ public class DynamicTextureLoader extends ResourceValidator {
   }
 
   @Override
-  public CompletableFuture<Void> reload(PreparationBarrier stage, ResourceManager resourceManager, ProfilerFiller preparationsProfiler, ProfilerFiller reloadProfiler, Executor backgroundExecutor, Executor gameExecutor) {
-    return super.reload(stage, resourceManager, preparationsProfiler, reloadProfiler, backgroundExecutor, gameExecutor).thenRunAsync(this::clear);
+  public CompletableFuture<Void> reload(SharedState sharedState, Executor backgroundExecutor, PreparationBarrier stage, Executor gameExecutor) {
+    // 26.1 changed the PreparableReloadListener#reload signature; clear the cache once the reload completes to save RAM
+    return super.reload(sharedState, backgroundExecutor, stage, gameExecutor).thenRunAsync(this::clear);
   }
 
   /** Registers this manager */
-  public static void init(RegisterClientReloadListenersEvent event) {
-    event.registerReloadListener(INSTANCE);
+  public static void init(AddClientReloadListenersEvent event) {
+    event.addListener(TConstruct.getResource("dynamic_texture_loader"), INSTANCE);
   }
 
   /**
@@ -60,12 +61,11 @@ public class DynamicTextureLoader extends ResourceValidator {
       return mat -> !MissingTextureAtlasSprite.getLocation().equals(spriteGetter.apply(mat).contents().name());
     } else {
       return mat -> {
-        // to suppress logging, need to load from our own list. We just load it for `textures/item` on the block atlas
-        if (InventoryMenu.BLOCK_ATLAS.equals(mat.atlasLocation())) {
-          ResourceLocation texture = mat.texture();
-          if (texture.getPath().startsWith("item/")) {
-            return INSTANCE.test(mat.texture());
-          }
+        // to suppress logging, load from our own list. In 26.1 sprite Material no longer carries an atlas location
+        // (it is just a sprite identifier), so we validate item textures directly against our scanned resource list.
+        Identifier texture = mat.sprite();
+        if (texture.getPath().startsWith("item/")) {
+          return INSTANCE.test(texture);
         }
         // failed preconditions? can't stop logging even if the boolean says to
         return !MissingTextureAtlasSprite.getLocation().equals(spriteGetter.apply(mat).contents().name());

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/gold/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/gold"
-  },
+  "ingredient": "#c:nuggets/gold",
   "material": "modernfoundry:gold",
   "needed": 9,
   "value": 1

@@ -4,8 +4,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import modernmods.hilt.client.render.FluidCuboid;
-import modernmods.hilt.data.datamap.BlockStateDataMapProvider;
+import modernmods.mantle.client.render.FluidCuboid;
+import modernmods.mantle.data.datamap.BlockStateDataMapProvider;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.FaucetBlock;
@@ -130,6 +130,6 @@ public class RenderFluidProvider extends BlockStateDataMapProvider<List<FluidCub
 
   @Override
   public String getName() {
-    return "Modern Foundry block render fluid provider";
+    return "Tinkers' Construct block render fluid provider";
   }
 }

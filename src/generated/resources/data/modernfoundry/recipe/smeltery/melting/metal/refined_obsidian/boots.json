@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/refined_obsidian/boots",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/boots/refined_obsidian"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/boots/refined_obsidian"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/refined_obsidian/boots",
+  "ingredient": "#c:armors/boots/refined_obsidian",
   "result": {
     "amount": 360,
     "tag": "c:molten_refined_obsidian",

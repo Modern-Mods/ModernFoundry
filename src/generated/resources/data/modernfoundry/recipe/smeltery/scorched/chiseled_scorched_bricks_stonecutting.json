@@ -1,14 +1,9 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
-    "type": "neoforge:difference",
-    "base": {
-      "tag": "modernfoundry:scorched_blocks"
-    },
-    "subtracted": {
-      "item": "modernfoundry:chiseled_scorched_bricks"
-    }
+    "neoforge:ingredient_type": "neoforge:difference",
+    "base": "#modernfoundry:scorched_blocks",
+    "subtracted": "modernfoundry:chiseled_scorched_bricks"
   },
   "result": {
     "id": "modernfoundry:chiseled_scorched_bricks"

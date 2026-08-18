@@ -5,7 +5,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.materials.RandomMaterial;
@@ -45,9 +45,9 @@ public abstract class TravelersPlateSlimeEntity extends ArmoredSlimeEntity {
       // start by randomly choosing plate or travelers. Starts at a 35% chance of plate but plate becomes more common with difficulty
       IModifiable helmetItem;
       if (this.random.nextFloat() < 0.35f * multiplier) {
-        helmetItem = TinkerTools.plateArmor.get(ArmorItem.Type.HELMET);
+        helmetItem = TinkerTools.plateArmor.get(ArmorType.HELMET);
       } else {
-        helmetItem = TinkerTools.travelersGear.get(ArmorItem.Type.HELMET);
+        helmetItem = TinkerTools.travelersGear.get(ArmorType.HELMET);
       }
       // next select materials; first is always fixed
       ToolDefinition definition = helmetItem.getToolDefinition();

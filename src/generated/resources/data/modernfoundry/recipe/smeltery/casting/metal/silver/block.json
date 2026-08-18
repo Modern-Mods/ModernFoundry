@@ -1,17 +1,17 @@
 {
-  "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/metal/silver/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/silver"
     }
   ],
+  "type": "modernfoundry:casting_basin",
   "cooling_time": 179,
   "fluid": {
     "amount": 810,
     "tag": "c:molten_silver"
   },
+  "id": "modernfoundry:smeltery/casting/metal/silver/block",
   "result": {
     "tag": "c:storage_blocks/silver"
   }

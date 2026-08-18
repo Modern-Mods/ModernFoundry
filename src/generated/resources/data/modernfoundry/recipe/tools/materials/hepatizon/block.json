@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/hepatizon/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/hepatizon"
-  },
+  "ingredient": "#c:storage_blocks/hepatizon",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/hepatizon"

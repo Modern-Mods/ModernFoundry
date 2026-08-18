@@ -2,9 +2,9 @@ package modernmods.modernfoundry.library.modifiers.modules.display;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import modernmods.hilt.client.ResourceColorManager;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.client.ResourceColorManager;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.display.DisplayNameModifierHook;
@@ -39,7 +39,7 @@ public enum ModifierVariantColorModule implements ModifierModule, DisplayNameMod
 
   @Override
   public Component getDisplayName(IToolStackView tool, ModifierEntry entry, Component name, @Nullable RegistryAccess access) {
-    String variant = tool.getPersistentData().getString(entry.getId());
+    String variant = tool.getPersistentData().getString(entry.getId().getIdentifier());
     if (!variant.isEmpty()) {
       String key = entry.getModifier().getTranslationKey();
       return name.copy().withStyle(style -> style.withColor(ResourceColorManager.getTextColor(key + "." + variant)));

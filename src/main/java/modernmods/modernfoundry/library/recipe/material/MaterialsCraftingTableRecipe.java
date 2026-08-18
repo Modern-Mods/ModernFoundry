@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.recipe.material;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
@@ -10,7 +10,7 @@ import java.util.List;
 /** Common methods between {@link ShapelessMaterialsRecipe} and {@link ShapedMaterialsRecipe} */
 public interface MaterialsCraftingTableRecipe {
   /** Gets the recipe ID. */
-  ResourceLocation getId();
+  Identifier getId();
 
   /** Gets the list of parts on this recipe. May be larger than {@link #getPartCount()}, in which case the extra should be ignored. */
   List<Ingredient> getParts();

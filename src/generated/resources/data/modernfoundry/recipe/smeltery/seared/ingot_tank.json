@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "modernfoundry:seared_brick"
-    },
-    "B": {
-      "tag": "c:glass"
-    }
+    "#": "modernfoundry:seared_brick",
+    "B": "#c:glass_blocks"
   },
   "pattern": [
     "#B#",
@@ -16,6 +12,5 @@
   ],
   "result": {
     "id": "modernfoundry:seared_ingot_tank"
-  },
-  "show_notification": true
+  }
 }

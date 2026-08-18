@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/rose_gold/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/rose_gold"
-  },
+  "ingredient": "#c:nuggets/rose_gold",
   "material": "modernfoundry:rose_gold",
   "needed": 9,
   "value": 1

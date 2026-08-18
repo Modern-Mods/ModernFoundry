@@ -1,5 +1,7 @@
 package modernmods.modernfoundry.smeltery.block.entity;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,14 +21,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.items.IItemHandler;
-import modernmods.hilt.fluid.FluidTransferHelper;
-import modernmods.hilt.inventory.SingleItemHandler;
+import modernmods.mantle.fluid.FluidTransferHelper;
+import modernmods.mantle.inventory.SingleItemHandler;
 import modernmods.modernfoundry.common.network.InventorySlotSyncPacket;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffectContext;
@@ -70,10 +72,19 @@ public class FluidCannonBlockEntity extends TankBlockEntity implements ITankInve
     this.block = block;
   }
 
+  @Override
+  public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+    super.preRemoveSideEffects(pos, state);
+    // 26.1.2 removed Block#onRemove; drop the held item when the cannon is removed (formerly in FluidCannonBlock#onRemove)
+    if (this.level != null) {
+      modernmods.mantle.block.InventoryBlock.dropInventoryItems(this.level, pos, itemHandler);
+    }
+  }
+
   /** Called when a player interacts with the fluid cannon */
   public void interact(Player player, InteractionHand hand, boolean clickedTank) {
     // skip client side, and skip if the recipe already started
-    if (level == null || level.isClientSide) {
+    if (level == null || level.isClientSide()) {
       return;
     }
     // transfer fluid if clicked tank
@@ -183,18 +194,16 @@ public class FluidCannonBlockEntity extends TankBlockEntity implements ITankInve
   }
 
   @Override
-  public void load(CompoundTag tag) {
-    super.load(tag);
-    tank.readFromNBT(TagUtil.BUILTIN_LOOKUP, tag.getCompound(NBTTags.TANK));
-    if (tag.contains(TAG_ITEM, Tag.TAG_COMPOUND)) {
-      itemHandler.readFromNBT(tag.getCompound(TAG_ITEM));
-    }
+  public void loadAdditional(ValueInput input) {
+    super.loadAdditional(input);
+    input.child(NBTTags.TANK).ifPresent(tank::deserialize);
+    input.read(TAG_ITEM, CompoundTag.CODEC).ifPresent(itemHandler::readFromNBT);
   }
 
   @Override
-  public void saveSynced(CompoundTag tag) {
-    super.saveSynced(tag);
-    tag.put(TAG_ITEM, itemHandler.writeToNBT());
+  public void saveSynced(ValueOutput output) {
+    super.saveSynced(output);
+    output.store(TAG_ITEM, CompoundTag.CODEC, itemHandler.writeToNBT());
   }
 
 
@@ -223,7 +232,7 @@ public class FluidCannonBlockEntity extends TankBlockEntity implements ITankInve
     @Override
     public void setStack(ItemStack newStack) {
       Level world = parent.getLevel();
-      boolean hasChange = world != null && !world.isClientSide && !ItemStack.matches(getStack(), newStack);
+      boolean hasChange = world != null && !world.isClientSide() && !ItemStack.matches(getStack(), newStack);
       super.setStack(newStack);
       if (hasChange) {
         BlockPos pos = parent.getBlockPos();

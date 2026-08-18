@@ -1,4 +1,5 @@
 package modernmods.modernfoundry.library.tools.helper;
+import modernmods.modernfoundry.tools.TinkerToolActions;
 
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
@@ -6,7 +7,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -20,8 +21,8 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.ItemAbilities;
-import modernmods.hilt.client.SafeClientAccess;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.SafeClientAccess;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.config.Config;
@@ -97,7 +98,7 @@ public class TooltipUtil {
    */
   public static boolean isDisplay(ItemStack stack) {
     CompoundTag nbt = TagUtil.getTag(stack);
-    return nbt != null && nbt.getBoolean(KEY_DISPLAY);
+    return nbt != null && nbt.getBooleanOr(KEY_DISPLAY, false);
   }
 
   /** Sets the tool name in a way that will not be italic */
@@ -115,7 +116,7 @@ public class TooltipUtil {
   public static String getDisplayName(ItemStack tool) {
     CompoundTag tag = TagUtil.getTag(tool);
     if (tag != null) {
-      return tag.getString(KEY_NAME);
+      return tag.getStringOr(KEY_NAME, "");
     }
     return "";
   }
@@ -168,7 +169,7 @@ public class TooltipUtil {
       tooltip.add(UNINITIALIZED);
       if (definition.hasMaterials()) {
         CompoundTag nbt = TagUtil.getTag(stack);
-        if (nbt == null || !nbt.contains(ToolStack.TAG_MATERIALS, Tag.TAG_LIST)) {
+        if (nbt == null || !nbt.contains(ToolStack.TAG_MATERIALS)) {
           tooltip.add(RANDOM_MATERIALS);
         }
       }
@@ -283,7 +284,7 @@ public class TooltipUtil {
       builder.addOptional(ToolStats.ARMOR_TOUGHNESS);
       builder.addOptional(ToolStats.KNOCKBACK_RESISTANCE, 10f);
     }
-    if (ModifierUtil.canPerformAction(tool, ItemAbilities.SHIELD_BLOCK)) {
+    if (ModifierUtil.canPerformAction(tool, TinkerToolActions.SHIELD_BLOCK)) {
       builder.add(ToolStats.BLOCK_AMOUNT);
       builder.add(ToolStats.BLOCK_ANGLE);
     }
@@ -382,7 +383,7 @@ public class TooltipUtil {
       if (i < partCount) {
         componentName = parts.get(i).withMaterial(material).getHoverName();
       } else {
-        componentName = Component.translatable(KEY_FORMAT, MaterialTooltipCache.getDisplayName(material), Component.translatable(Util.makeTranslationKey("stat", components.get(i))));
+        componentName = Component.translatable(KEY_FORMAT, MaterialTooltipCache.getDisplayName(material), Component.translatable(Util.makeTranslationKey("stat", components.get(i).getIdentifier())));
       }
       // underline it and color it with the material name
       tooltips.add(componentName.copy().withStyle(ChatFormatting.UNDERLINE).withStyle(style -> style.withColor(MaterialTooltipCache.getColor(material))));
@@ -440,7 +441,7 @@ public class TooltipUtil {
    * @param player     Player instance
    * @param tooltip    Tooltip list
    */
-  public static void addAttribute(Attribute attribute, Operation operation, double amount, @Nullable ResourceLocation id, @Nullable Player player, List<Component> tooltip) {
+  public static void addAttribute(Attribute attribute, Operation operation, double amount, @Nullable Identifier id, @Nullable Player player, List<Component> tooltip) {
     // find value
     boolean showEquals = false;
     if (player != null) {

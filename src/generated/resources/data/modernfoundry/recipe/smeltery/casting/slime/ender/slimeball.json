@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/slime/ender/slimeball",
   "cooling_time": 53,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:ender_slime"
   },
+  "id": "modernfoundry:smeltery/casting/slime/ender/slimeball",
   "result": "modernfoundry:ender_slime_ball"
 }

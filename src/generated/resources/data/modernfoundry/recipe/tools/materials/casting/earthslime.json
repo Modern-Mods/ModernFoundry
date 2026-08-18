@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/earthslime",
   "fluid": {
     "amount": 250,
     "tag": "c:slime"
   },
+  "id": "modernfoundry:tools/materials/casting/earthslime",
   "output": "modernfoundry:earthslime",
   "temperature": 50
 }

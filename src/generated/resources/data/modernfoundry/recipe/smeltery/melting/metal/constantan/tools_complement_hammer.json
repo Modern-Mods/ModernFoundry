@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/constantan/tools_complement_hammer",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "tools_complement:constantan_hammer"
+      "type": "neoforge:registered",
+      "value": "tools_complement:constantan_hammer"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/tools_complement_hammer",
   "ingredient": {
     "item": "tools_complement:constantan_hammer"
   },

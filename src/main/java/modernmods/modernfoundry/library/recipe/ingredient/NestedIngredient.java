@@ -2,6 +2,8 @@ package modernmods.modernfoundry.library.recipe.ingredient;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import net.minecraft.core.Holder;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.crafting.ICustomIngredient;
@@ -23,8 +25,8 @@ public abstract class NestedIngredient implements ICustomIngredient {
   }
 
   @Override
-  public Stream<ItemStack> getItems() {
-    return Stream.of(nested.getItems());
+  public Stream<Holder<Item>> items() {
+    return nested.items();
   }
 
   public boolean isEmpty() {

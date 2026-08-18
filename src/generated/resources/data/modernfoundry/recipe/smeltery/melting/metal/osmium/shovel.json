@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/osmium/shovel",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:tools/shovels/osmium"
     }
   ],
-  "ingredient": {
-    "tag": "c:tools/shovels/osmium"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/osmium/shovel",
+  "ingredient": "#c:tools/shovels/osmium",
   "result": {
     "amount": 90,
     "tag": "c:molten_osmium",

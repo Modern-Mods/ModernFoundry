@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/apple",
-  "ingredient": {
-    "item": "minecraft:golden_apple"
-  },
+  "ingredient": "minecraft:golden_apple",
   "result": {
     "amount": 720,
     "tag": "c:molten_gold"

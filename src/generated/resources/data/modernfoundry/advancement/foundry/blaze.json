@@ -114,7 +114,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:scorched_fuel_gauge",
+      "id": "modernfoundry:scorched_fuel_gauge",
       "nbt": "{tank:{Amount:4000,FluidName:\"modernfoundry:blazing_blood\"}}"
     },
     "show_toast": true,

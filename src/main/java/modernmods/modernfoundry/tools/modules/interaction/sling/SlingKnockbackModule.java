@@ -1,7 +1,8 @@
 package modernmods.modernfoundry.tools.modules.interaction.sling;
 
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -16,9 +17,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -65,7 +66,7 @@ public record SlingKnockbackModule(LevelingValue forceMultiplier, float drawtime
     TARGET_FIELD, ModifierCondition.TOOL_FIELD,
     SlingKnockbackModule::new);
   /** Temporary boolean in persistent data. Means bonking is in progress, suppresses knockback and boosts damage. */
-  public static final ResourceLocation IS_BONKING = TConstruct.getResource("is_bonking");
+  public static final Identifier IS_BONKING = TConstruct.getResource("is_bonking");
 
   @Override
   public RecordLoadable<SlingKnockbackModule> getLoader() {
@@ -113,7 +114,7 @@ public record SlingKnockbackModule(LevelingValue forceMultiplier, float drawtime
   @Override
   public void sling(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int chargeTime, ModifierEntry activeModifier) {
     Level level = entity.level();
-    if (!level.isClientSide && entity instanceof Player player) {
+    if (!level.isClientSide() && entity instanceof Player player) {
       float charge = GeneralInteractionModifierHook.getToolCharge(tool, chargeTime);
       if (charge > 0) {
         Vec3 start = player.getEyePosition(1F);
@@ -121,7 +122,7 @@ public record SlingKnockbackModule(LevelingValue forceMultiplier, float drawtime
         Vec3 direction = start.add(look.x * RANGE, look.y * RANGE, look.z * RANGE);
         AABB bb = player.getBoundingBox().expandTowards(look.x * RANGE, look.y * RANGE, look.z * RANGE).expandTowards(1, 1, 1);
 
-        EntityHitResult hit = ProjectileUtil.getEntityHitResult(level, player, start, direction, bb, e -> e instanceof LivingEntity);
+        EntityHitResult hit = ProjectileUtil.getEntityHitResult(level, player, start, direction, bb, e -> e instanceof LivingEntity, 0.0F);
         if (hit != null) {
           LivingEntity target = (LivingEntity)hit.getEntity();
           if (this.target.matches(target)) {
@@ -178,7 +179,7 @@ public record SlingKnockbackModule(LevelingValue forceMultiplier, float drawtime
                 // cooldowns and stuff
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), Sounds.BONK.getSound(), player.getSoundSource(), 1, 0.5f);
                 player.causeFoodExhaustion(0.2F);
-                player.getCooldowns().addCooldown(tool.getItem(), 3);
+                player.getCooldowns().addCooldown(new ItemStack(tool.getItem()), 3);
                 ToolDamageUtil.damageAnimated(tool, 1, entity, entity.getUsedItemHand(), modifier.getId());
                 return;
               }

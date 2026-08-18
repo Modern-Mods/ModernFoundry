@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.crafting.RecipeManager;
-import modernmods.hilt.recipe.helper.RecipeHelper;
+import modernmods.mantle.recipe.helper.RecipeHelper;
 import modernmods.modernfoundry.common.recipe.RecipeCacheInvalidator;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 

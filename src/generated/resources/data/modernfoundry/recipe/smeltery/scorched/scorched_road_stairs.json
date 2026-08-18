@@ -3,9 +3,7 @@
   "category": "building",
   "group": "modernfoundry:scorched_road_stairs",
   "key": {
-    "B": {
-      "item": "modernfoundry:scorched_road"
-    }
+    "B": "modernfoundry:scorched_road"
   },
   "pattern": [
     "B  ",
@@ -15,6 +13,5 @@
   "result": {
     "count": 4,
     "id": "modernfoundry:scorched_road_stairs"
-  },
-  "show_notification": true
+  }
 }

@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -27,11 +27,11 @@ import static java.util.Objects.requireNonNullElse;
  */
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class StationSlotLayout {
-  private static final ResourceLocation EMPTY_NAME = TConstruct.getResource("empty");
+  private static final Identifier EMPTY_NAME = TConstruct.getResource("empty");
   public static final StationSlotLayout EMPTY = new StationSlotLayout("", LayoutIcon.EMPTY, null, LayoutSlot.EMPTY, Collections.emptyList());
 
   @Getter @Setter(AccessLevel.PROTECTED)
-  private transient ResourceLocation name = EMPTY_NAME;
+  private transient Identifier name = EMPTY_NAME;
   private final String translation_key;
   private final LayoutIcon icon;
   @Nullable
@@ -93,7 +93,7 @@ public class StationSlotLayout {
 
   /** Reads a slot from the packet buffer */
   public static StationSlotLayout read(FriendlyByteBuf buffer) {
-    ResourceLocation name = buffer.readResourceLocation();
+    Identifier name = buffer.readIdentifier();
     String translationKey = buffer.readUtf(Short.MAX_VALUE);
     LayoutIcon icon = LayoutIcon.read(buffer);
     Integer sortIndex = null;
@@ -113,7 +113,7 @@ public class StationSlotLayout {
 
   /** Writes a slot to the packet buffer */
   public void write(FriendlyByteBuf buffer) {
-    buffer.writeResourceLocation(name);
+    buffer.writeIdentifier(name);
     buffer.writeUtf(getTranslationKey());
     icon.write(buffer);
     if (sortIndex != null) {
@@ -183,13 +183,19 @@ public class StationSlotLayout {
     /** Sets the given item as both the name and icon */
     public Builder item(ItemStack stack) {
       icon(stack);
-      translationKey = stack.getDescriptionId();
+      translationKey = stack.getItem().getDescriptionId();
       return this;
     }
 
     /** Sets the icon of this layout to a stack */
     public Builder icon(ItemStack stack) {
       icon = LayoutIcon.ofItem(stack);
+      return this;
+    }
+
+    /** Sets the icon of this layout to a prebuilt icon */
+    public Builder icon(LayoutIcon icon) {
+      this.icon = icon;
       return this;
     }
 

@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:compat/ceramics/clay/clay_boots",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "ceramics"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:compat/ceramics/clay/clay_boots",
   "ingredient": {
     "item": "ceramics:clay_boots"
   },

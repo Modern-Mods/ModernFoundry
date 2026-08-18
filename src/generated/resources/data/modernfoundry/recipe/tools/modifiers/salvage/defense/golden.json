@@ -5,7 +5,5 @@
   "slots": {
     "defense": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/worn"
-  }
+  "tools": "#modernfoundry:modifiable/armor/worn"
 }

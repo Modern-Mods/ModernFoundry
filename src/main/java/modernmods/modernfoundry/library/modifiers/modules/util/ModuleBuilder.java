@@ -2,8 +2,8 @@ package modernmods.modernfoundry.library.modifiers.modules.util;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.json.predicate.tool.ToolContextPredicate;
 import modernmods.modernfoundry.library.json.predicate.tool.ToolStackPredicate;

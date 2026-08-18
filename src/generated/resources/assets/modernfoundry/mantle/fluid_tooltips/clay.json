@@ -1,0 +1,13 @@
+{
+  "tag": "modernfoundry:tooltips/clay",
+  "units": [
+    {
+      "key": "gui.modernfoundry.fluid.block",
+      "needed": 1000
+    },
+    {
+      "key": "gui.modernfoundry.fluid.brick",
+      "needed": 250
+    }
+  ]
+}

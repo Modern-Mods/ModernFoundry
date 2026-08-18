@@ -1,7 +1,5 @@
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 package modernmods.modernfoundry.shared.command;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

@@ -1,0 +1,144 @@
+{
+  "parent": "modernfoundry:smeltery/tinkers_anvil",
+  "criteria": {
+    "broad_axe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:broad_axe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cleaver": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:cleaver"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "excavator": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:excavator"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "javelin": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:javelin"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "longbow": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:longbow"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "scythe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:scythe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "sledge_hammer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:sledge_hammer"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "vein_hammer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:vein_hammer"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.smeltery.tool_forge.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:vein_hammer",
+      "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.smeltery.tool_forge.title"
+    }
+  },
+  "requirements": [
+    [
+      "sledge_hammer"
+    ],
+    [
+      "vein_hammer"
+    ],
+    [
+      "excavator"
+    ],
+    [
+      "broad_axe"
+    ],
+    [
+      "scythe"
+    ],
+    [
+      "cleaver"
+    ],
+    [
+      "longbow"
+    ],
+    [
+      "javelin"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

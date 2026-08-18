@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.fluids.TinkerFluids;
 import modernmods.modernfoundry.library.tools.part.IMaterialItem;
@@ -55,8 +55,8 @@ public class PartBuilderToolRecycleBuilder extends AbstractRecipeBuilder<PartBui
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "parts");
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
+    Identifier advancementId = buildOptionalAdvancement(id, "parts");
     consumer.accept(new LoadableFinishedRecipe<>(id, new PartBuilderToolRecycle(id, tools, pattern, parts), PartBuilderToolRecycle.LOADER, advancementId));
   }
 }

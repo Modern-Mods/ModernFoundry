@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/silver/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/silver"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/silver"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/silver/nugget",
+  "ingredient": "#c:nuggets/silver",
   "result": {
     "amount": 10,
     "tag": "c:molten_silver"

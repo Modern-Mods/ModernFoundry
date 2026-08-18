@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.recipe.container.ISingleStackContainer;
+import modernmods.mantle.recipe.container.ISingleStackContainer;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 import modernmods.modernfoundry.library.recipe.material.MaterialRecipe;
 import modernmods.modernfoundry.library.recipe.tinkerstation.IMutableTinkerStationContainer;
@@ -62,10 +62,10 @@ public class TinkerStationContainerWrapper implements IMutableTinkerStationConta
     if (lastMaterialRecipe != null && lastMaterialRecipe.matches(inv, world)) {
       return lastMaterialRecipe;
     }
-    // try to find a new recipe
-    Optional<MaterialRecipe> newRecipe = world.getRecipeManager().getRecipeFor(TinkerRecipeTypes.MATERIAL.get(), inv, world).map(RecipeHolder::value);
-    if (newRecipe.isPresent()) {
-      lastMaterialRecipe = newRecipe.get();
+    // try to find a new recipe (side-aware: server RecipeManager, or the synced client recipe cache on the client)
+    MaterialRecipe newRecipe = MaterialRecipe.getRecipe(inv, world);
+    if (newRecipe != null) {
+      lastMaterialRecipe = newRecipe;
       return lastMaterialRecipe;
     }
     // if none found, return null

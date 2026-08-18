@@ -1,17 +1,17 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/scope",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/scope",
   "inputs": [
     {
-      "item": "minecraft:sugar"
+      "ingredient": "minecraft:sugar"
     },
     {
-      "item": "minecraft:spyglass"
+      "ingredient": "minecraft:spyglass"
     },
     {
-      "item": "minecraft:sugar"
+      "ingredient": "minecraft:sugar"
     }
   ],
   "level": 1,
@@ -19,7 +19,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/interactable/charge"
-  }
+  "tools": "#modernfoundry:modifiable/interactable/charge"
 }

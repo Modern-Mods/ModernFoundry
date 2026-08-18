@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.common.data.tags;
 
+import net.minecraft.tags.TagEntry;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;
@@ -7,10 +8,9 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import modernmods.hilt.datagen.HiltTags;
-import modernmods.hilt.registration.object.FlowingFluidObject;
-import modernmods.hilt.registration.object.FluidObject;
+import modernmods.mantle.datagen.MantleTags;
+import modernmods.mantle.registration.object.FlowingFluidObject;
+import modernmods.mantle.registration.object.FluidObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.fluids.TinkerFluids;
@@ -21,8 +21,8 @@ import java.util.concurrent.CompletableFuture;
 @SuppressWarnings("unchecked")
 public class FluidTagProvider extends FluidTagsProvider {
 
-  public FluidTagProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider, ExistingFileHelper helper) {
-    super(packOutput, lookupProvider, TConstruct.MOD_ID, helper);
+  public FluidTagProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider) {
+    super(packOutput, lookupProvider, TConstruct.MOD_ID);
   }
 
   @Override
@@ -226,7 +226,7 @@ public class FluidTagProvider extends FluidTagsProvider {
 
     this.tag(TinkerTags.Fluids.LARGE_GEM_TOOLTIPS).addTags(TinkerFluids.moltenEmerald.getTag(), TinkerFluids.moltenDiamond.getTag());
     this.tag(TinkerTags.Fluids.SMALL_GEM_TOOLTIPS).addTags(TinkerFluids.moltenQuartz.getTag(), TinkerFluids.moltenAmethyst.getTag());
-    this.tag(HiltTags.Fluids.SOUP).addTag(TinkerFluids.meatSoup.getTag()).addOptionalTag(TinkerTags.Fluids.SOUP_TOOLTIPS.location());
+    this.tag(MantleTags.Fluids.SOUP).addTag(TinkerFluids.meatSoup.getTag()).add(TagEntry.optionalTag(TinkerTags.Fluids.SOUP_TOOLTIPS.location()));
 
     // hide upcoming fluids
     tag(TinkerTags.Fluids.HIDDEN_IN_RECIPE_VIEWERS).add(TinkerFluids.moltenSoulsteel.get());
@@ -236,7 +236,7 @@ public class FluidTagProvider extends FluidTagsProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry Fluid Tags";
+    return "Tinkers Construct Fluid TinkerTags";
   }
 
   /** Adds tags for an unplacable fluid */

@@ -3,9 +3,9 @@ package modernmods.modernfoundry.plugin.jei.entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.neoforge.common.util.Lazy;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.recipe.ingredient.EntityIngredient;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.recipe.ingredient.EntityIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.recipe.entitymelting.EntityMeltingRecipe;
@@ -29,8 +29,8 @@ public class DefaultEntityMeltingRecipe extends EntityMeltingRecipe {
     typeLoop:
     for (EntityType<?> type : ForgeRegistries.ENTITY_TYPES) {
       // use tag overrides for default recipe
-      if (type.is(TinkerTags.EntityTypes.MELTING_HIDE)) continue;
-      if (type.getCategory() == MobCategory.MISC && !type.is(TinkerTags.EntityTypes.MELTING_SHOW)) continue;
+      if (type.builtInRegistryHolder().is(TinkerTags.EntityTypes.MELTING_HIDE)) continue;
+      if (type.getCategory() == MobCategory.MISC && !type.builtInRegistryHolder().is(TinkerTags.EntityTypes.MELTING_SHOW)) continue;
       for (EntityMeltingRecipe recipe : recipes) {
         if (recipe.matches(type)) {
           continue typeLoop;

@@ -1,16 +1,16 @@
 {
-  "type": "modernfoundry:alloy",
-  "id": "modernfoundry:smeltery/alloys/molten_refined_obsidian",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/refined_obsidian"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/osmium"
     }
   ],
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_refined_obsidian",
   "inputs": [
     {
       "amount": 250,

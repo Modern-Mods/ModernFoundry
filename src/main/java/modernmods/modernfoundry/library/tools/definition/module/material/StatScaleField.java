@@ -5,8 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
-import modernmods.hilt.data.loadable.field.RecordField;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.data.loadable.field.RecordField;
+import modernmods.mantle.util.typed.TypedMap;
 
 /** Specialized field used for parsing stat weights for {@link MaterialStatsModule} and {@link PartStatsModule} */
 record StatScaleField(String nestKey, String listKey) implements RecordField<float[],MaterialStatsModule> {

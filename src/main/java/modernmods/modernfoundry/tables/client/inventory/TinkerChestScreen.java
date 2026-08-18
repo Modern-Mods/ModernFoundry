@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.tables.client.inventory;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import modernmods.modernfoundry.tables.block.entity.chest.AbstractChestBlockEntity;
@@ -27,18 +27,19 @@ public class TinkerChestScreen extends BaseTabbedScreen<AbstractChestBlockEntity
   }
 
   @Override
-  protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+  public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
     this.drawBackground(graphics, BLANK_BACK_PLUS_1);
 
     if (this.scalingChestScreen != null) {
       this.scalingChestScreen.update(mouseX, mouseY);
     }
 
-    super.renderBg(graphics, partialTicks, mouseX, mouseY);
+    super.extractBackground(graphics, mouseX, mouseY, partialTicks);
   }
 
   @Override
-  public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent event, boolean doubleClick) {
+    double mouseX = event.x(); double mouseY = event.y(); int mouseButton = event.button();
     if (this.scalingChestScreen == null) {
       return false;
     }
@@ -47,11 +48,12 @@ public class TinkerChestScreen extends BaseTabbedScreen<AbstractChestBlockEntity
       return false;
     }
 
-    return super.mouseClicked(mouseX, mouseY, mouseButton);
+    return super.mouseClicked(event, doubleClick);
   }
 
   @Override
-  public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+  public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent event, double dragX, double dragY) {
+    double mouseX = event.x(); double mouseY = event.y(); int button = event.button();
     if (this.scalingChestScreen == null) {
       return false;
     }
@@ -60,10 +62,12 @@ public class TinkerChestScreen extends BaseTabbedScreen<AbstractChestBlockEntity
       return false;
     }
 
-    return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+    return super.mouseDragged(event, dragX, dragY);
   }
 
   @Override
+  // NOTE(26.1 port): this 3-arg mouseScrolled overrides Mantle's MultiModuleScreen helper, not vanilla's 4-arg entry point.
+  // Validate chest side-panel mouse-wheel scroll in-game (may need routing via the 4-arg mouseScrolled override).
   public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
     if (this.scalingChestScreen == null) {
       return false;
@@ -77,7 +81,8 @@ public class TinkerChestScreen extends BaseTabbedScreen<AbstractChestBlockEntity
   }
 
   @Override
-  public boolean mouseReleased(double mouseX, double mouseY, int state) {
+  public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent event) {
+    double mouseX = event.x(); double mouseY = event.y(); int state = event.button();
     if (this.scalingChestScreen == null) {
       return false;
     }
@@ -86,6 +91,6 @@ public class TinkerChestScreen extends BaseTabbedScreen<AbstractChestBlockEntity
       return false;
     }
 
-    return super.mouseReleased(mouseX, mouseY, state);
+    return super.mouseReleased(event);
   }
 }

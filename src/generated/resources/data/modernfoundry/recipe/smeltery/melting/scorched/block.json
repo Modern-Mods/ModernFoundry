@@ -2,21 +2,13 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/scorched/block",
   "ingredient": [
-    {
-      "tag": "modernfoundry:scorched_blocks"
-    },
-    {
-      "item": "modernfoundry:scorched_ladder"
-    },
-    {
-      "item": "modernfoundry:scorched_lamp"
-    },
-    {
-      "item": "modernfoundry:scorched_bricks_stairs"
-    },
-    {
-      "item": "modernfoundry:scorched_road_stairs"
-    }
+    "#modernfoundry:scorched_blocks",
+    [
+      "modernfoundry:scorched_ladder",
+      "modernfoundry:scorched_lamp",
+      "modernfoundry:scorched_bricks_stairs",
+      "modernfoundry:scorched_road_stairs"
+    ]
   ],
   "result": {
     "amount": 1000,

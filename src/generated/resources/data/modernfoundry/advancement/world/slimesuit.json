@@ -58,7 +58,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:slimy_chestplate",
+      "id": "modernfoundry:slimy_chestplate",
       "nbt": "{Damage:0,tic_broken:0b,tic_materials:[\"modernfoundry:bone\",\"modernfoundry:skyslime\"]}"
     },
     "show_toast": true,

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "modernfoundry:slime_crystal_block",
   "key": {
-    "#": {
-      "item": "modernfoundry:ichor_slime_crystal"
-    }
+    "#": "modernfoundry:ichor_slime_crystal"
   },
   "pattern": [
     "##",
@@ -13,6 +11,5 @@
   ],
   "result": {
     "id": "modernfoundry:ichor_slime_crystal_block"
-  },
-  "show_notification": true
+  }
 }

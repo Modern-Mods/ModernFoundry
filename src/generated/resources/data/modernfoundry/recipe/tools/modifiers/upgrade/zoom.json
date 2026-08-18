@@ -1,17 +1,17 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/zoom",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/zoom",
   "inputs": [
     {
-      "tag": "c:strings"
+      "ingredient": "#c:strings"
     },
     {
-      "item": "minecraft:spyglass"
+      "ingredient": "minecraft:spyglass"
     },
     {
-      "tag": "c:strings"
+      "ingredient": "#c:strings"
     }
   ],
   "level": 1,
@@ -20,11 +20,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/armor/helmets"
-    },
-    {
-      "tag": "modernfoundry:modifiable/interactable/charge"
-    }
+    "#modernfoundry:modifiable/armor/helmets",
+    "#modernfoundry:modifiable/interactable/charge"
   ]
 }

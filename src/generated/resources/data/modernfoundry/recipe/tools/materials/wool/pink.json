@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wool/pink",
-  "ingredient": {
-    "item": "minecraft:pink_wool"
-  },
+  "ingredient": "minecraft:pink_wool",
   "material": "modernfoundry:wool#pink",
   "needed": 1,
   "value": 1

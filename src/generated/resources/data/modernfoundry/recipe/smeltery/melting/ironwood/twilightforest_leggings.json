@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "value": "twilightforest:ironwood_leggings"
+    }
+  ],
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/ironwood/twilightforest_leggings",
   "byproducts": [
     {
       "amount": 70,
@@ -8,12 +13,7 @@
       "unit_size": 10
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:ironwood_leggings"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/ironwood/twilightforest_leggings",
   "ingredient": {
     "item": "twilightforest:ironwood_leggings"
   },

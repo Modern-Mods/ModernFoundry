@@ -8,14 +8,14 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.MultiPackResourceManager;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import modernmods.hilt.data.GenericDataProvider;
+import modernmods.mantle.data.GenericDataProvider;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.data.GenericNBTProvider;
 
@@ -59,7 +59,7 @@ public class StructureUpdater extends GenericNBTProvider {
 
   /** Updates the given structure */
   @Nullable
-  private CompletableFuture<?> process(ResourceLocation location, Resource resource, CachedOutput cache) {
+  private CompletableFuture<?> process(Identifier location, Resource resource, CachedOutput cache) {
     try {
       CompoundTag inputNBT = NbtIo.readCompressed(resource.open());
       CompoundTag converted = updateNBT(inputNBT);

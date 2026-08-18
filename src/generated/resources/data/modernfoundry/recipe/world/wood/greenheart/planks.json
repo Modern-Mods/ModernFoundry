@@ -3,9 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    {
-      "tag": "modernfoundry:greenheart_logs"
-    }
+    "#modernfoundry:greenheart_logs"
   ],
   "result": {
     "count": 4,

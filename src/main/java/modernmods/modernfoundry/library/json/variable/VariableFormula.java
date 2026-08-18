@@ -3,8 +3,8 @@ package modernmods.modernfoundry.library.json.variable;
 import com.google.gson.JsonPrimitive;
 import it.unimi.dsi.fastutil.floats.FloatStack;
 import net.minecraft.network.FriendlyByteBuf;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
-import modernmods.hilt.util.LogicHelper;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.util.LogicHelper;
 import modernmods.modernfoundry.library.json.math.ModifierFormula;
 import modernmods.modernfoundry.library.json.math.StackOperation;
 

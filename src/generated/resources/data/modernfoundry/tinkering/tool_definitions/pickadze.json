@@ -64,15 +64,8 @@
       ]
     },
     {
-      "type": "modernfoundry:tool_actions",
-      "tool_actions": [
-        "pickaxe_dig",
-        "shovel_dig"
-      ]
-    },
-    {
       "type": "modernfoundry:is_effective",
-      "predicate_type": "hilt:tag",
+      "predicate_type": "mantle:tag",
       "tag": "modernfoundry:mineable/pickadze"
     },
     {

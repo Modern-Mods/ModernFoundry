@@ -1,17 +1,17 @@
 {
-  "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/composite/treated_wood",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "registry": "minecraft:fluid",
       "tag": "c:creosote"
     }
   ],
+  "type": "modernfoundry:material_fluid",
   "fluid": {
     "amount": 125,
     "tag": "c:creosote"
   },
+  "id": "modernfoundry:tools/materials/composite/treated_wood",
   "input": "modernfoundry:wood",
   "output": "modernfoundry:treated_wood",
   "temperature": 600

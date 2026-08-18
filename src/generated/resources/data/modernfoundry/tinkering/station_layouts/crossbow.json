@@ -1,31 +1,25 @@
 {
   "icon": {
     "item": "modernfoundry:crossbow",
-    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+    "nbt": "{tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
   },
   "input_slots": [
     {
-      "filter": {
-        "item": "modernfoundry:bow_limb"
-      },
+      "filter": "modernfoundry:bow_limb",
       "icon": "modernfoundry:bow_limb",
       "translation_key": "item.modernfoundry.bow_limb",
       "x": 10,
       "y": 20
     },
     {
-      "filter": {
-        "item": "modernfoundry:bow_grip"
-      },
+      "filter": "modernfoundry:bow_grip",
       "icon": "modernfoundry:bow_grip",
       "translation_key": "item.modernfoundry.bow_grip",
       "x": 46,
       "y": 56
     },
     {
-      "filter": {
-        "item": "modernfoundry:bowstring"
-      },
+      "filter": "modernfoundry:bowstring",
       "icon": "modernfoundry:bowstring",
       "translation_key": "item.modernfoundry.bowstring",
       "x": 28,

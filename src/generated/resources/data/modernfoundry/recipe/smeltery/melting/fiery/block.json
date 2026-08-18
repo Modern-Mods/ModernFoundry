@@ -1,21 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:storage_blocks/fiery"
+    }
+  ],
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/fiery/block",
   "byproducts": [
     {
       "amount": 810,
       "tag": "c:molten_iron"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:storage_blocks/fiery"
-    }
-  ],
-  "ingredient": {
-    "tag": "c:storage_blocks/fiery"
-  },
+  "id": "modernfoundry:smeltery/melting/fiery/block",
+  "ingredient": "#c:storage_blocks/fiery",
   "result": {
     "amount": 2250,
     "fluid": "modernfoundry:fiery_liquid"

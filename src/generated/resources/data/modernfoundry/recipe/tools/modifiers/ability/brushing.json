@@ -1,14 +1,14 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/brushing",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/brushing",
   "inputs": [
     {
-      "tag": "c:feathers"
+      "ingredient": "#c:feathers"
     },
     {
-      "tag": "c:ingots/copper"
+      "ingredient": "#c:ingots/copper"
     }
   ],
   "level": 1,
@@ -17,14 +17,10 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/durability"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable/right"
-      }
+      "#modernfoundry:modifiable/durability",
+      "#modernfoundry:modifiable/interactable/right"
     ]
   }
 }

@@ -1,11 +1,9 @@
 {
   "type": "minecraft:smelting",
-  "category": "blocks",
+  "category": "misc",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "modernfoundry:scorched_stone"
-  },
+  "ingredient": "modernfoundry:scorched_stone",
   "result": {
     "id": "modernfoundry:scorched_road"
   }

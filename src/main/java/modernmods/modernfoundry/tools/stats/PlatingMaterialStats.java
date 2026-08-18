@@ -3,10 +3,10 @@ package modernmods.modernfoundry.tools.stats;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ArmorItem;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import net.minecraft.world.item.equipment.ArmorType;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.materials.stats.IRepairableMaterialStats;
 import modernmods.modernfoundry.library.materials.stats.MaterialStatType;
@@ -99,7 +99,7 @@ public record PlatingMaterialStats(MaterialStatType<?> getType, int durability, 
 
     /** Sets the durability for the piece based on the given factor */
     public Builder durabilityFactor(float maxDamageFactor) {
-      for (ArmorItem.Type slotType : ModifiableArmorMaterial.ARMOR_TYPES) {
+      for (ArmorType slotType : ModifiableArmorMaterial.ARMOR_TYPES) {
         int index = slotType.ordinal();
         durability[index] = (int)(ArmorModuleBuilder.MAX_DAMAGE_ARRAY[index] * maxDamageFactor);
       }
@@ -111,15 +111,15 @@ public record PlatingMaterialStats(MaterialStatType<?> getType, int durability, 
 
     /** Sets the armor value for each piece */
     public Builder armor(float boots, float leggings, float chestplate, float helmet) {
-      armor[ArmorItem.Type.BOOTS.ordinal()] = boots;
-      armor[ArmorItem.Type.LEGGINGS.ordinal()] = leggings;
-      armor[ArmorItem.Type.CHESTPLATE.ordinal()] = chestplate;
-      armor[ArmorItem.Type.HELMET.ordinal()] = helmet;
+      armor[ArmorType.BOOTS.ordinal()] = boots;
+      armor[ArmorType.LEGGINGS.ordinal()] = leggings;
+      armor[ArmorType.CHESTPLATE.ordinal()] = chestplate;
+      armor[ArmorType.HELMET.ordinal()] = helmet;
       return this;
     }
 
     @Override
-    public PlatingMaterialStats build(ArmorItem.Type slot) {
+    public PlatingMaterialStats build(ArmorType slot) {
       int index = slot.ordinal();
       return new PlatingMaterialStats(TYPES.get(index), durability[index], armor[index], toughness, knockbackResistance);
     }

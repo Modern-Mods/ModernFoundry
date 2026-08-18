@@ -3,20 +3,20 @@ package modernmods.modernfoundry.library.recipe.material;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import lombok.Getter;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.recipe.helper.LoggingRecipeSerializer;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.recipe.helper.LoggingRecipeSerializer;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.tables.TinkerTables;
 
@@ -28,32 +28,36 @@ import java.util.List;
  * {@link modernmods.modernfoundry.library.recipe.ingredient.MaterialValueIngredient} to set the materials of the result.
  */
 public class ShapelessMaterialsRecipe extends ShapelessRecipe implements MaterialsCraftingTableRecipe {
-  private final ResourceLocation id;
+  private final Identifier id;
   /** Number of parts to match */
   @Getter
   private final int partCount;
   /** List of additional materials to add beyond the parts */
   @Getter
   private final List<MaterialVariantId> extraMaterials;
+  /** Ingredients of this recipe, used as the parts list */
+  private final List<Ingredient> ingredients;
 
-  public ShapelessMaterialsRecipe(ResourceLocation id, String group, CraftingBookCategory category, ItemStack result, NonNullList<Ingredient> ingredients, int partCount, List<MaterialVariantId> extraMaterials) {
-    super(group, category, result, ingredients);
+  public ShapelessMaterialsRecipe(Identifier id, Recipe.CommonInfo commonInfo, CraftingRecipe.CraftingBookInfo bookInfo, ItemStackTemplate result, List<Ingredient> ingredients, int partCount, List<MaterialVariantId> extraMaterials) {
+    super(commonInfo, bookInfo, result, ingredients);
     this.id = id;
+    this.ingredients = ingredients;
     this.partCount = partCount;
     this.extraMaterials = extraMaterials;
   }
 
-  public ShapelessMaterialsRecipe(ShapelessRecipe recipe, int partCount, List<MaterialVariantId> extraMaterials) {
-    this(LoggingRecipeSerializer.UNKNOWN_ID, recipe.getGroup(), recipe.category(), recipe.getResultItem(null), recipe.getIngredients(), partCount, extraMaterials);
+  /** Wraps a vanilla shapeless recipe, adding the part count and extra material information */
+  public ShapelessMaterialsRecipe(Identifier id, ShapelessRecipe recipe, int partCount, List<MaterialVariantId> extraMaterials) {
+    this(id, new Recipe.CommonInfo(recipe.showNotification()), new CraftingRecipe.CraftingBookInfo(recipe.category(), recipe.group()), recipe.result(), recipe.ingredients, partCount, extraMaterials);
   }
 
-  public ResourceLocation getId() {
+  public Identifier getId() {
     return id;
   }
 
   @Override
   public List<Ingredient> getParts() {
-    return getIngredients();
+    return ingredients;
   }
 
   /** Sets the material for the given stack */
@@ -63,13 +67,14 @@ public class ShapelessMaterialsRecipe extends ShapelessRecipe implements Materia
   }
 
   @Override
-  public ItemStack assemble(CraftingInput inventory, HolderLookup.Provider registryAccess) {
-    return ShapedMaterialsRecipe.assemble(super.assemble(inventory, registryAccess), inventory, getIngredients(), partCount, false, extraMaterials);
+  public ItemStack assemble(CraftingInput inventory) {
+    return ShapedMaterialsRecipe.assemble(super.assemble(inventory), inventory, ingredients, partCount, false, extraMaterials);
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
-    return TinkerTables.shapelessMaterialsRecipeSerializer.get();
+  @SuppressWarnings("unchecked")
+  public RecipeSerializer<ShapelessRecipe> getSerializer() {
+    return (RecipeSerializer<ShapelessRecipe>)(RecipeSerializer<?>) TinkerTables.shapelessMaterialsRecipeSerializer.get();
   }
 
   public static class Serializer implements LoggingRecipeSerializer<ShapelessMaterialsRecipe> {
@@ -77,20 +82,20 @@ public class ShapelessMaterialsRecipe extends ShapelessRecipe implements Materia
     static final LoadableField<List<MaterialVariantId>,ShapelessMaterialsRecipe> MATERIAL_FIELD = EXTRA_MATERIALS.defaultField("extra_materials", List.of(), r -> r.extraMaterials);
 
     @Override
-    public ShapelessMaterialsRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+    public ShapelessMaterialsRecipe fromJson(Identifier recipeId, JsonObject json) {
       ShapelessRecipe vanilla = SHAPELESS_RECIPE.fromJson(recipeId, json);
       int parts = GsonHelper.getAsInt(json, "parts");
-      if (parts < 1 || parts > vanilla.getIngredients().size()) {
-        throw new JsonSyntaxException("Parts must be between 1 and the number of ingredients " + vanilla.getIngredients().size());
+      if (parts < 1 || parts > vanilla.ingredients.size()) {
+        throw new JsonSyntaxException("Parts must be between 1 and the number of ingredients " + vanilla.ingredients.size());
       }
-      return new ShapelessMaterialsRecipe(recipeId, vanilla.getGroup(), vanilla.category(), vanilla.getResultItem(null), vanilla.getIngredients(), parts, MATERIAL_FIELD.get(json));
+      return new ShapelessMaterialsRecipe(recipeId, vanilla, parts, MATERIAL_FIELD.get(json));
     }
 
     @Override
     @Nullable
-    public ShapelessMaterialsRecipe fromNetworkSafe(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public ShapelessMaterialsRecipe fromNetworkSafe(Identifier recipeId, FriendlyByteBuf buffer) {
       ShapelessRecipe recipe = SHAPELESS_RECIPE.fromNetwork(recipeId, buffer);
-      return recipe == null ? null : new ShapelessMaterialsRecipe(recipe, buffer.readByte(), MATERIAL_FIELD.decode(buffer));
+      return recipe == null ? null : new ShapelessMaterialsRecipe(recipeId, recipe, buffer.readByte(), MATERIAL_FIELD.decode(buffer));
     }
 
     @Override

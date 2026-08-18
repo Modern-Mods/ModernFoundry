@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "modernfoundry:scorched_brick"
-    },
-    "G": {
-      "item": "modernfoundry:gold_bars"
-    }
+    "#": "modernfoundry:scorched_brick",
+    "G": "modernfoundry:gold_bars"
   },
   "pattern": [
     "###",
@@ -16,6 +12,5 @@
   ],
   "result": {
     "id": "modernfoundry:scorched_table"
-  },
-  "show_notification": true
+  }
 }

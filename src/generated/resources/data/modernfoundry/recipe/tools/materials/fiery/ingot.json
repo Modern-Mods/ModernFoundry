@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/fiery/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/fiery"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/fiery"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/fiery/ingot",
+  "ingredient": "#c:ingots/fiery",
   "material": "modernfoundry:fiery",
   "needed": 1,
   "value": 1

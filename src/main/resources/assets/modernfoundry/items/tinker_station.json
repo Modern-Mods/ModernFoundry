@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "mantle:retextured",
+    "model": "modernfoundry:item/tinker_station",
+    "retextured": ["leg", "legBottom"]
+  }
+}

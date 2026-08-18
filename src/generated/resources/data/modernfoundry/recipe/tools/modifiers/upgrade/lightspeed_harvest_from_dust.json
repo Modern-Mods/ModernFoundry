@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/lightspeed_harvest_from_dust",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "tag": "c:dusts/glowstone"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/lightspeed_harvest_from_dust",
+  "input": "#c:dusts/glowstone",
   "level": {
     "max": 5
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/harvest"
-  }
+  "tools": "#modernfoundry:modifiable/harvest"
 }

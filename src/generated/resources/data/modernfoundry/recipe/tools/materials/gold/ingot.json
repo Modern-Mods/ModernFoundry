@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/gold/ingot",
-  "ingredient": {
-    "tag": "c:ingots/gold"
-  },
+  "ingredient": "#c:ingots/gold",
   "material": "modernfoundry:gold",
   "needed": 1,
   "value": 1

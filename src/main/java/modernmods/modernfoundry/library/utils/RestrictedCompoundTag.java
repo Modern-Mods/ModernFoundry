@@ -26,7 +26,7 @@ public class RestrictedCompoundTag {
    * @return  True if the tag is contained
    */
   public boolean contains(String name, int type) {
-    return !restrictedKeys.contains(name) && tag.contains(name, type);
+    return !restrictedKeys.contains(name) && tag.contains(name);
   }
 
 
@@ -64,7 +64,7 @@ public class RestrictedCompoundTag {
    * @return  Integer value
    */
   public int getInt(String name) {
-    return get(name, CompoundTag::getInt, 0);
+    return get(name, (t, n) -> t.getIntOr(n, 0), 0);
   }
 
   /**
@@ -73,7 +73,7 @@ public class RestrictedCompoundTag {
    * @return  Boolean value
    */
   public boolean getBoolean(String name) {
-    return get(name, CompoundTag::getBoolean, false);
+    return get(name, (t, n) -> t.getBooleanOr(n, false), false);
   }
 
   /**
@@ -82,7 +82,7 @@ public class RestrictedCompoundTag {
    * @return  Float value
    */
   public float getFloat(String name) {
-    return get(name, CompoundTag::getFloat, 0f);
+    return get(name, (t, n) -> t.getFloatOr(n, 0f), 0f);
   }
 
   /**
@@ -91,7 +91,7 @@ public class RestrictedCompoundTag {
    * @return  String value
    */
   public String getString(String name) {
-    return get(name, CompoundTag::getString, "");
+    return get(name, (t, n) -> t.getStringOr(n, ""), "");
   }
 
   /**
@@ -103,7 +103,7 @@ public class RestrictedCompoundTag {
     if (restrictedKeys.contains(name)) {
       return new CompoundTag();
     }
-    return tag.getCompound(name);
+    return tag.getCompoundOrEmpty(name);
   }
 
   /**
@@ -115,7 +115,7 @@ public class RestrictedCompoundTag {
     if (restrictedKeys.contains(name)) {
       return new ListTag();
     }
-    return tag.getList(name, type);
+    return tag.getListOrEmpty(name);
   }
 
 

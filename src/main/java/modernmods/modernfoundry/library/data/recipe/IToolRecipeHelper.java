@@ -1,11 +1,12 @@
 package modernmods.modernfoundry.library.data.recipe;
 
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.crafting.CompoundIngredient;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.registration.CastItemObject;
 import modernmods.modernfoundry.library.materials.stats.MaterialStatsId;
@@ -46,7 +47,7 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
    * @param folder     Folder for recipe
    * @param layoutSlot StationLayoutSlot id
    */
-  default void toolBuilding(Consumer<FinishedRecipe> consumer, IModifiable tool, String folder, ResourceLocation layoutSlot) {
+  default void toolBuilding(Consumer<FinishedRecipe> consumer, IModifiable tool, String folder, Identifier layoutSlot) {
     ToolBuildingRecipeBuilder.toolBuildingRecipe(tool)
       .layoutSlot(layoutSlot)
       .save(consumer, prefix(id(tool), folder));
@@ -110,10 +111,10 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
    * @param partFolder   Folder for recipes
    */
   default void uncastablePart(Consumer<FinishedRecipe> consumer, IMaterialItem part, int cost, @Nullable MaterialStatsId castingStatConflict, String partFolder) {
-    ResourceLocation id = id(part);
+    Identifier id = id(part);
     PartRecipeBuilder.partRecipe(part)
                      .setPattern(id)
-                     .setPatternItem(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS))
+                     .setPatternItem(LazyTagIngredient.of(TinkerTags.Items.DEFAULT_PATTERNS))
                      .setCost(cost)
                      .save(consumer, location(partFolder + "builder/" + id.getPath()));
     CompositeCastingRecipeBuilder.table(part, cost)
@@ -139,7 +140,7 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
     // dummy part builder recipe
     ItemPartRecipeBuilder.item(cast.getName(), ItemOutput.fromItem(dummyPart))
                          .material(MaterialIds.rock, cost)
-                         .setPatternItem(CompoundIngredient.of(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS), Ingredient.of(cast.get())))
+                         .setPatternItem(CompoundIngredient.of(LazyTagIngredient.of(TinkerTags.Items.DEFAULT_PATTERNS), Ingredient.of(cast.get())))
                          .save(consumer, location(partFolder + "builder/" + cast.getName().getPath()));
   }
 
@@ -152,11 +153,11 @@ public interface IToolRecipeHelper extends ICastCreationHelper {
    * @param partFolder   Folder for recipes
    */
   default void partRecipes(Consumer<FinishedRecipe> consumer, IMaterialItem part, CastItemObject cast, int cost, String partFolder, String castFolder) {
-    ResourceLocation id = id(part);
+    Identifier id = id(part);
     // Part Builder
     PartRecipeBuilder.partRecipe(part)
                      .setPattern(id)
-                     .setPatternItem(CompoundIngredient.of(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS), Ingredient.of(cast.get())))
+                     .setPatternItem(CompoundIngredient.of(LazyTagIngredient.of(TinkerTags.Items.DEFAULT_PATTERNS), Ingredient.of(cast.get())))
                      .setCost(cost)
                      .save(consumer, location(partFolder + "builder/" + id.getPath()));
     // casting

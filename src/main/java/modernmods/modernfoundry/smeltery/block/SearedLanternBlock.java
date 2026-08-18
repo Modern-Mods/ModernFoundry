@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.phys.HitResult;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.library.utils.NBTTags;
 import modernmods.modernfoundry.library.utils.TagUtil;
 import modernmods.modernfoundry.smeltery.block.component.SearedTankBlock;
@@ -64,7 +64,7 @@ public class SearedLanternBlock extends LanternBlock implements ITankBlock, Enti
   public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
     CompoundTag nbt = TagUtil.getTag(stack);
     if (nbt != null && world.getBlockEntity(pos) instanceof TankBlockEntity tank) {
-      tank.updateTank(nbt.getCompound(NBTTags.TANK));
+      tank.updateTank(nbt.getCompoundOrEmpty(NBTTags.TANK));
     }
   }
 
@@ -78,12 +78,12 @@ public class SearedLanternBlock extends LanternBlock implements ITankBlock, Enti
   @SuppressWarnings("deprecation")
   @Deprecated
   @Override
-  public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
+  public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos, net.minecraft.core.Direction direction) {
     return ITankBlockEntity.getComparatorInputOverride(worldIn, pos);
   }
 
   @Override
-  public ItemStack getCloneItemStack(BlockState state, HitResult target, net.minecraft.world.level.LevelReader world, BlockPos pos, Player player) {
+  public ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
     ItemStack stack = new ItemStack(this);
     BlockEntityHelper.get(TankBlockEntity.class, world, pos).ifPresent(te -> te.setTankTag(stack));
     return stack;

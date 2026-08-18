@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/earth/crystal",
-  "ingredient": {
-    "item": "modernfoundry:earth_slime_crystal"
-  },
+  "ingredient": "modernfoundry:earth_slime_crystal",
   "result": {
     "amount": 250,
     "tag": "c:slime"

@@ -11,7 +11,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-import modernmods.hilt.client.render.FluidRenderer;
+import modernmods.mantle.client.render.FluidRenderer;
 import modernmods.modernfoundry.library.client.TinkerRenderTypes;
 import modernmods.modernfoundry.smeltery.block.entity.tank.SmelteryTank;
 import modernmods.modernfoundry.smeltery.client.screen.module.GuiSmelteryTank;
@@ -61,6 +61,12 @@ public class SmelteryTankRenderer {
    */
   public static void renderFluids(PoseStack matrices, MultiBufferSource buffer, SmelteryTank<?> tank,
                                   BlockPos tankMinPos, BlockPos tankMaxPos, int brightness) {
+    renderFluids(matrices, buffer.getBuffer(TinkerRenderTypes.SMELTERY_FLUID), tank, tankMinPos, tankMaxPos, brightness);
+  }
+
+  /** Renders the smeltery's fluids to a single {@link VertexConsumer}, for the 26.1 BER submit path (SubmitNodeCollector). */
+  public static void renderFluids(PoseStack matrices, VertexConsumer builder, SmelteryTank<?> tank,
+                                  BlockPos tankMinPos, BlockPos tankMaxPos, int brightness) {
     List<FluidStack> fluids = tank.getFluids();
     // empty smeltery :(
     if(!fluids.isEmpty()) {
@@ -80,7 +86,6 @@ public class SmelteryTankRenderer {
       int[] heights = GuiSmelteryTank.calcLiquidHeights(fluids, tank.getCapacity(), yd * 1000 - HEIGHT_OFFSET, 100);
 
       // rendering time
-      VertexConsumer builder = buffer.getBuffer(TinkerRenderTypes.SMELTERY_FLUID);
       float curY = FLUID_OFFSET;
       for (int i = 0; i < fluids.size(); i++) {
         float h = (float) heights[i] / 1000f;
@@ -108,10 +113,10 @@ public class SmelteryTankRenderer {
     if(yMin >= yMax || fluid.isEmpty()) {
       return;
     }
-    // fluid attributes
-    IClientFluidTypeExtensions attributes = IClientFluidTypeExtensions.of(fluid.getFluid());
-    TextureAtlasSprite still = FluidRenderer.getBlockSprite(attributes.getStillTexture(fluid));
-    int color = attributes.getTintColor(fluid);
+    // fluid attributes (26.1.2 removed IClientFluidTypeExtensions#getStillTexture/getTintColor; use Mantle's FluidTextures)
+    FluidRenderer.FluidTextures textures = FluidRenderer.getFluidTextures(fluid);
+    TextureAtlasSprite still = textures.still();
+    int color = textures.color();
     FluidType fluidType = fluid.getFluid().getFluidType();
     brightness = FluidRenderer.withBlockLight(brightness, fluidType.getLightLevel(fluid));
     boolean upsideDown = fluidType.isLighterThanAir();

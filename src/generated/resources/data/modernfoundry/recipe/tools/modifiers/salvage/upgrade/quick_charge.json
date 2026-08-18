@@ -5,7 +5,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/ranged/quick_charge"
-  }
+  "tools": "#modernfoundry:modifiable/ranged/quick_charge"
 }

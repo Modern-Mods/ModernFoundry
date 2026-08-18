@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/constantan/helmet",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/helmets/constantan"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/helmets/constantan"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/helmet",
+  "ingredient": "#c:armors/helmets/constantan",
   "result": {
     "amount": 450,
     "tag": "c:molten_constantan",

@@ -1,4 +1,6 @@
 package modernmods.modernfoundry.smeltery.block.entity.component;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import modernmods.modernfoundry.smeltery.block.entity.ILegacyCapabilityBlockEntity;
 
 import lombok.Getter;
@@ -11,19 +13,19 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import net.neoforged.neoforge.model.data.ModelData;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import java.util.function.Consumer;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.EmptyFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
-import modernmods.hilt.block.entity.HiltBlockEntity;
-import modernmods.hilt.block.entity.IRetexturedBlockEntity;
-import modernmods.hilt.inventory.EmptyItemHandler;
-import modernmods.hilt.util.RetexturedHelper;
-import modernmods.hilt.util.WeakConsumerWrapper;
+import modernmods.mantle.block.entity.MantleBlockEntity;
+import modernmods.mantle.block.entity.IRetexturedBlockEntity;
+import modernmods.mantle.inventory.EmptyItemHandler;
+import modernmods.mantle.util.RetexturedHelper;
+import modernmods.mantle.util.WeakConsumerWrapper;
 import modernmods.modernfoundry.common.multiblock.IMasterLogic;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.entity.tank.ISmelteryTankHandler;
@@ -32,7 +34,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-import static modernmods.hilt.util.RetexturedHelper.TAG_TEXTURE;
+import static modernmods.mantle.util.RetexturedHelper.TAG_TEXTURE;
 
 /**
  * Shared logic between drains and ducts
@@ -89,7 +91,7 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
     super.setMaster(master, block);
     // notify neighbors of the change (state change skips the notify flag)
     if (masterChanged) {
-      level.blockUpdated(worldPosition, getBlockState().getBlock());
+      level.updateNeighborsAt(worldPosition, getBlockState().getBlock());
     }
   }
 
@@ -133,7 +135,7 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
     if (capability == this.capability) {
       return getCachedCapability().cast();
     }
-    return modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
+    return modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
   }
 
 
@@ -169,18 +171,19 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
   }
 
   @Override
-  protected void saveSynced(CompoundTag tags) {
-    super.saveSynced(tags);
+  protected void saveSynced(ValueOutput output) {
+    super.saveSynced(output);
     if (texture != Blocks.AIR) {
-      tags.putString(TAG_TEXTURE, getTextureName());
+      output.putString(TAG_TEXTURE, getTextureName());
     }
   }
 
   @Override
-  public void load(CompoundTag tags) {
-    super.load(tags);
-    if (tags.contains(TAG_TEXTURE, Tag.TAG_STRING)) {
-      texture = RetexturedHelper.getBlock(tags.getString(TAG_TEXTURE));
+  public void loadAdditional(ValueInput input) {
+    super.loadAdditional(input);
+    String tex = input.getStringOr(TAG_TEXTURE, "");
+    if (!tex.isEmpty()) {
+      texture = RetexturedHelper.getBlock(tex);
       RetexturedHelper.onTextureUpdated(this);
     }
   }

@@ -3,7 +3,7 @@ package modernmods.modernfoundry.tools.modifiers.traits.skull;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.predicate.damage.DamageSourcePredicate;
+import modernmods.mantle.data.predicate.damage.DamageSourcePredicate;
 import modernmods.modernfoundry.library.events.teleport.EnderdodgingTeleportEvent;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;

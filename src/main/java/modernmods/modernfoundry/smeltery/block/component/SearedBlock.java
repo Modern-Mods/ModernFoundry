@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.pathfinder.PathType;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.smeltery.block.entity.component.SmelteryComponentBlockEntity;
 
 import javax.annotation.Nullable;
@@ -44,22 +44,9 @@ public class SearedBlock extends Block implements EntityBlock {
     return null;
   }
 
-  @Override
-  @Deprecated
-  public void onRemove(BlockState oldState, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
-    if (requiredBlockEntity || oldState.getValue(IN_STRUCTURE)) {
-      // if the block is unchanged, remove the block entity if we no longer have one
-      if (newState.is(this)) {
-        if (!requiredBlockEntity && !newState.getValue(IN_STRUCTURE)) {
-          world.removeBlockEntity(pos);
-        }
-      } else {
-        // block changed, tell the master then ditch the block entity
-        BlockEntityHelper.get(SmelteryComponentBlockEntity.class, world, pos).ifPresent(te -> te.notifyMasterOfChange(pos, newState));
-        world.removeBlockEntity(pos);
-      }
-    }
-  }
+  // Formerly overrode Block#onRemove to notify the master and ditch the block entity on removal.
+  // In 26.1.2 that master-notification now lives in SmelteryComponentBlockEntity#preRemoveSideEffects,
+  // and vanilla manages block-entity lifecycle automatically, so no block-level override is needed.
 
   @Override
   public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
@@ -77,6 +64,6 @@ public class SearedBlock extends Block implements EntityBlock {
   @Nullable
   @Override
   public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
-    return state.getValue(IN_STRUCTURE) ? PathType.DAMAGE_FIRE : PathType.OPEN;
+    return state.getValue(IN_STRUCTURE) ? PathType.FIRE : PathType.OPEN;
   }
 }

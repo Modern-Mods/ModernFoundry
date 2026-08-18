@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/silver/coin",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/silver"
     }
   ],
-  "ingredient": {
-    "tag": "c:coins/silver"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/silver/coin",
+  "ingredient": "#c:coins/silver",
   "result": {
     "amount": 30,
     "tag": "c:molten_silver"

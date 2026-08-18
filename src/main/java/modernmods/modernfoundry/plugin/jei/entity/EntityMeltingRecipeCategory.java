@@ -16,14 +16,14 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.fluid.tooltip.FluidTooltipHandler;
-import modernmods.hilt.plugin.jei.HiltJEIConstants;
-import modernmods.hilt.plugin.jei.entity.EntityIngredientRenderer;
-import modernmods.hilt.recipe.ingredient.EntityIngredient;
+import modernmods.mantle.fluid.tooltip.FluidTooltipHandler;
+import modernmods.mantle.plugin.jei.MantleJEIConstants;
+import modernmods.mantle.plugin.jei.entity.EntityIngredientRenderer;
+import modernmods.mantle.recipe.ingredient.EntityIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.recipe.FluidValues;
 import modernmods.modernfoundry.library.recipe.entitymelting.EntityMeltingRecipe;
@@ -38,7 +38,7 @@ import java.util.List;
  * Entity melting display in JEI
  */
 public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltingRecipe> {
-  public static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/melting.png");
+  public static final Identifier BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/melting.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "entity_melting.title");
   private static final String KEY_PER_HEARTS = TConstruct.makeTranslationKey("jei", "entity_melting.per_hearts");
   private static final Component TOOLTIP_PER_HEART = Component.translatable(TConstruct.makeTranslationKey("jei", "entity_melting.per_heart")).withStyle(ChatFormatting.GRAY);
@@ -71,14 +71,26 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
   }
 
   @Override
-  public void draw(EntityMeltingRecipe recipe, IRecipeSlotsView slot, GuiGraphics graphics, double mouseX, double mouseY) {
+  public int getWidth() {
+    return 150;
+  }
+
+  @Override
+  public int getHeight() {
+    return 62;
+  }
+
+  @Override
+  public void draw(EntityMeltingRecipe recipe, IRecipeSlotsView slot, GuiGraphicsExtractor graphics, double mouseX, double mouseY) {
+    // getBackground() was removed in JEI 27.x; draw our background ourselves
+    background.draw(graphics, 0, 0);
     arrow.draw(graphics, 71, 21);
 
     // draw damage string next to the heart icon
     String damage = Float.toString(recipe.getDamage() / 2f);
     Font fontRenderer = Minecraft.getInstance().font;
     int x = 84 - fontRenderer.width(damage);
-    graphics.drawString(fontRenderer, damage, x, 8, Color.RED.getRGB(), false);
+    graphics.text(fontRenderer, damage, x, 8, Color.RED.getRGB(), false);
   }
 
   @Override
@@ -86,8 +98,8 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
     // inputs, filtered by spawn egg item
     EntityIngredient input = recipe.getIngredient();
     IIngredientAcceptor<?> entities = builder.addSlot(RecipeIngredientRole.INPUT, 19, 11)
-                                             .setCustomRenderer(HiltJEIConstants.ENTITY_TYPE, entityRenderer)
-                                             .addIngredients(HiltJEIConstants.ENTITY_TYPE, input.getDisplay());
+                                             .setCustomRenderer(MantleJEIConstants.ENTITY_TYPE, entityRenderer)
+                                             .addIngredients(MantleJEIConstants.ENTITY_TYPE, input.getDisplay());
     // add spawn eggs as hidden inputs
     IIngredientAcceptor<?> eggs = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStacks(input.getEggs());
     builder.createFocusLink(entities, eggs);
@@ -95,19 +107,19 @@ public class EntityMeltingRecipeCategory implements IRecipeCategory<EntityMeltin
     // output
     builder.addSlot(RecipeIngredientRole.OUTPUT, 115, 11)
            .setFluidRenderer(FluidValues.INGOT * 2, false, 16, 32)
-           .addTooltipCallback(new FluidTooltip(recipe.getDamage())) // object is cheap, no need to cache
+           .addRichTooltipCallback(new FluidTooltip(recipe.getDamage())) // object is cheap, no need to cache
            .addIngredient(NeoForgeTypes.FLUID_STACK, recipe.getOutput());
 
     // show fuels that are valid for this recipe
-    builder.addSlot(RecipeIngredientRole.CATALYST, 75, 43)
+    builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 75, 43)
            .setFluidRenderer(1, false, 16, 16)
            .setOverlay(tank, 0, 0)
-           .addTooltipCallback(FluidTooltipCallback.NO_AMOUNT)
+           .addRichTooltipCallback(FluidTooltipCallback.NO_AMOUNT)
            .addIngredients(NeoForgeTypes.FLUID_STACK, MeltingFuelHandler.getUsableFuels(1));
   }
 
   @Override
-  public ResourceLocation getRegistryName(EntityMeltingRecipe recipe) {
+  public Identifier getRegistryName(EntityMeltingRecipe recipe) {
     return recipe.getId();
   }
 

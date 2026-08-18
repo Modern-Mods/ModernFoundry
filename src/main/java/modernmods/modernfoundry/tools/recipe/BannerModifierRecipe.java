@@ -8,7 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.DyeColor;
@@ -16,8 +16,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -42,9 +42,9 @@ import java.util.stream.Stream;
 /** Recipe to add a banner to a shield */
 public class BannerModifierRecipe implements ITinkerStationRecipe, IMultiRecipe<IDisplayModifierRecipe> {
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
 
-  public BannerModifierRecipe(ResourceLocation id) {
+  public BannerModifierRecipe(Identifier id) {
     this.id = id;
     ModifierRecipeLookup.addRecipeModifier(null, TinkerModifiers.banner);
   }
@@ -101,11 +101,11 @@ public class BannerModifierRecipe implements ITinkerStationRecipe, IMultiRecipe<
     }
 
     // get the banner data
-    CustomData blockEntityData = banner.get(DataComponents.BLOCK_ENTITY_DATA);
-    CompoundTag bannerData = blockEntityData == null ? null : blockEntityData.copyTag();
+    var blockEntityData = banner.get(DataComponents.BLOCK_ENTITY_DATA);
+    CompoundTag bannerData = blockEntityData == null ? null : blockEntityData.copyTagWithoutId();
     ListTag patterns = new ListTag();
     if (bannerData != null) {
-      patterns = bannerData.getList("Patterns", Tag.TAG_COMPOUND);
+      patterns = bannerData.getListOrEmpty("Patterns");
     }
 
     // apply the pattern
@@ -119,7 +119,7 @@ public class BannerModifierRecipe implements ITinkerStationRecipe, IMultiRecipe<
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends BannerModifierRecipe> getSerializer() {
     return TinkerModifiers.bannerModifierSerializer.get();
   }
 
@@ -141,7 +141,7 @@ public class BannerModifierRecipe implements ITinkerStationRecipe, IMultiRecipe<
           return stack;
         }).toList();
       if (!toolInputs.isEmpty()) {
-        ResourceLocation id = getId();
+        Identifier id = getId();
         displayRecipes = RegistryHelper.getTagValueStream(BuiltInRegistries.ITEM, ItemTags.BANNERS)
           .flatMap(item -> {
             if (item instanceof BannerItem banner) {
@@ -162,7 +162,7 @@ public class BannerModifierRecipe implements ITinkerStationRecipe, IMultiRecipe<
     private final ModifierEntry RESULT = new ModifierEntry(TinkerModifiers.banner, 1);
 
     @Getter
-    private final ResourceLocation recipeId;
+    private final Identifier recipeId;
     private final List<ItemStack> banner;
     @Getter
     private final List<ItemStack> toolWithoutModifier;
@@ -170,7 +170,7 @@ public class BannerModifierRecipe implements ITinkerStationRecipe, IMultiRecipe<
     private final List<ItemStack> toolWithModifier;
     @Getter
     private final Component variant;
-    public DisplayRecipe(ResourceLocation recipeId, List<ItemStack> tools, BannerItem banner) {
+    public DisplayRecipe(Identifier recipeId, List<ItemStack> tools, BannerItem banner) {
       this.recipeId = recipeId;
       this.toolWithoutModifier = tools;
       this.banner = List.of(new ItemStack(banner));

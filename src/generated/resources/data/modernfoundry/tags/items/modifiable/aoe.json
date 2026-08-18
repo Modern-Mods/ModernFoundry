@@ -1,0 +1,28 @@
+{
+  "values": [
+    "modernfoundry:pickaxe",
+    "modernfoundry:sledge_hammer",
+    "modernfoundry:vein_hammer",
+    "modernfoundry:mattock",
+    "modernfoundry:pickadze",
+    "modernfoundry:excavator",
+    "modernfoundry:hand_axe",
+    "modernfoundry:broad_axe",
+    "modernfoundry:kama",
+    "modernfoundry:scythe",
+    "modernfoundry:sword",
+    "modernfoundry:cleaver",
+    "modernfoundry:flint_and_brick",
+    "modernfoundry:sky_staff",
+    "modernfoundry:earth_staff",
+    "modernfoundry:ichor_staff",
+    "modernfoundry:ender_staff",
+    "modernfoundry:melting_pan",
+    "modernfoundry:war_pick",
+    {
+      "id": "modernfoundry:minotaur_axe",
+      "required": false
+    },
+    "#modernfoundry:modifiable/armor/boots"
+  ]
+}

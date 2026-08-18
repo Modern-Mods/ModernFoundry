@@ -1,22 +1,22 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/reach",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/reach",
   "inputs": [
     {
-      "item": "minecraft:piston"
+      "ingredient": "minecraft:piston"
     },
     {
-      "tag": "c:ingots/queens_slime"
+      "ingredient": "#c:ingots/queens_slime"
     },
     {
-      "item": "minecraft:piston"
+      "ingredient": "minecraft:piston"
     },
     {
-      "tag": "c:slimeball/ender"
+      "ingredient": "#c:slimeball/ender"
     },
     {
-      "tag": "c:slimeball/ender"
+      "ingredient": "#c:slimeball/ender"
     }
   ],
   "level": {
@@ -26,7 +26,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/chestplate"
-  }
+  "tools": "#modernfoundry:modifiable/armor/chestplate"
 }

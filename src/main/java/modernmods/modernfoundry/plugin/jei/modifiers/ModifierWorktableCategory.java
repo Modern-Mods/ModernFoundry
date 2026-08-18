@@ -5,6 +5,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -12,9 +13,9 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -26,7 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ModifierWorktableCategory implements IRecipeCategory<IModifierWorktableRecipe> {
-  private static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
+  private static final Identifier BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "modifier_worktable.title");
 
   @Getter
@@ -56,7 +57,19 @@ public class ModifierWorktableCategory implements IRecipeCategory<IModifierWorkt
   }
 
   @Override
-  public void draw(IModifierWorktableRecipe recipe, IRecipeSlotsView slots, GuiGraphics graphics, double mouseX, double mouseY) {
+  public int getWidth() {
+    return 121;
+  }
+
+  @Override
+  public int getHeight() {
+    return 35;
+  }
+
+  @Override
+  public void draw(IModifierWorktableRecipe recipe, IRecipeSlotsView slots, GuiGraphicsExtractor graphics, double mouseX, double mouseY) {
+    // getBackground() was removed in JEI 27.x; draw our background ourselves
+    background.draw(graphics, 0, 0);
     if (recipe.getInputTools().isEmpty()) {
       toolIcon.draw(graphics, 23, 16);
     }
@@ -66,36 +79,35 @@ public class ModifierWorktableCategory implements IRecipeCategory<IModifierWorkt
         slotIcons[i].draw(graphics, 43 + i * 18, 16);
       }
     }
-    graphics.drawString(Minecraft.getInstance().font, recipe.getTitle(), 3, 2, 0x404040, false);
+    graphics.text(Minecraft.getInstance().font, recipe.getTitle(), 3, 2, 0x404040, false);
   }
 
   @Override
-  public List<Component> getTooltipStrings(IModifierWorktableRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+  public void getTooltip(ITooltipBuilder tooltip, IModifierWorktableRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
     if (mouseY >= 2 && mouseY <= 12) {
-      return List.of(recipe.getDescription(null));
+      tooltip.add(recipe.getDescription(null));
     }
-    return Collections.emptyList();
   }
 
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, IModifierWorktableRecipe recipe, IFocusGroup focuses) {
     // items
     List<ItemStack> tools = recipe.getInputTools();
-    IRecipeSlotBuilder toolSlot = builder.addSlot(recipe.isToolInput() ? RecipeIngredientRole.INPUT : RecipeIngredientRole.CATALYST, 23, 16).addItemStacks(tools);
+    IRecipeSlotBuilder toolSlot = builder.addSlot(recipe.isToolInput() ? RecipeIngredientRole.INPUT : RecipeIngredientRole.CRAFTING_STATION, 23, 16).addItemStacks(tools);
     int max = Math.min(2, recipe.getInputCount());
     for (int i = 0; i < max; i++) {
       builder.addSlot(RecipeIngredientRole.INPUT, 43 + i*18, 16).addItemStacks(recipe.getDisplayItems(i));
     }
     // modifier input
     List<ModifierEntry> modifiers = recipe.getModifierOptions(null);
-    IRecipeSlotBuilder modifierSlot = builder.addSlot(recipe.isModifierOutput() ? RecipeIngredientRole.OUTPUT : RecipeIngredientRole.CATALYST, 82, 16).addIngredients(TConstructJEIConstants.MODIFIER_TYPE, modifiers);
+    IRecipeSlotBuilder modifierSlot = builder.addSlot(recipe.isModifierOutput() ? RecipeIngredientRole.OUTPUT : RecipeIngredientRole.CRAFTING_STATION, 82, 16).addIngredients(TConstructJEIConstants.MODIFIER_TYPE, modifiers);
     if (recipe.linkToolsModifiers() && tools.size() == modifiers.size()) {
       builder.createFocusLink(toolSlot, modifierSlot);
     }
   }
 
   @Override
-  public ResourceLocation getRegistryName(IModifierWorktableRecipe recipe) {
+  public Identifier getRegistryName(IModifierWorktableRecipe recipe) {
     return recipe.getId();
   }
 }

@@ -71,19 +71,18 @@
     {
       "type": "modernfoundry:tool_actions",
       "tool_actions": [
-        "axe_dig",
         "shield_disable"
       ]
     },
     {
       "type": "modernfoundry:is_effective",
-      "predicate_type": "hilt:tag",
+      "predicate_type": "mantle:tag",
       "tag": "minecraft:mineable/axe"
     },
     {
       "type": "modernfoundry:conditional_aoe",
       "condition": {
-        "type": "hilt:tag",
+        "type": "mantle:tag",
         "tag": "modernfoundry:tree_log"
       },
       "if_false": {

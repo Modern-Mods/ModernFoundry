@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.RandomSource;
 
@@ -15,9 +15,9 @@ import java.util.stream.Stream;
 
 /** Shared count bonus formulas mirroring vanilla apply_bonus formulas. */
 public interface BonusFormula {
-  Map<ResourceLocation, Type> TYPES = Stream.of(BinomialWithBonusCount.TYPE, OreDrops.TYPE, UniformBonusCount.TYPE)
+  Map<Identifier, Type> TYPES = Stream.of(BinomialWithBonusCount.TYPE, OreDrops.TYPE, UniformBonusCount.TYPE)
     .collect(Collectors.toMap(Type::id, Function.identity()));
-  Codec<Type> TYPE_CODEC = ResourceLocation.CODEC.comapFlatMap(
+  Codec<Type> TYPE_CODEC = Identifier.CODEC.comapFlatMap(
     id -> {
       Type type = TYPES.get(id);
       return type != null ? DataResult.success(type) : DataResult.error(() -> "No formula type with id: '" + id + "'");
@@ -29,7 +29,7 @@ public interface BonusFormula {
 
   Type getType();
 
-  record Type(ResourceLocation id, Codec<? extends BonusFormula> codec) {}
+  record Type(Identifier id, Codec<? extends BonusFormula> codec) {}
 
   record BinomialWithBonusCount(int extraRounds, float probability) implements BonusFormula {
     public static final Codec<BinomialWithBonusCount> CODEC = RecordCodecBuilder.create(
@@ -38,7 +38,7 @@ public interface BonusFormula {
         Codec.FLOAT.fieldOf("probability").forGetter(BinomialWithBonusCount::probability)
       ).apply(instance, BinomialWithBonusCount::new)
     );
-    public static final Type TYPE = new Type(ResourceLocation.withDefaultNamespace("binomial_with_bonus_count"), CODEC);
+    public static final Type TYPE = new Type(Identifier.withDefaultNamespace("binomial_with_bonus_count"), CODEC);
 
     @Override
     public int calculateNewCount(RandomSource random, int originalCount, int level) {
@@ -57,8 +57,8 @@ public interface BonusFormula {
   }
 
   record OreDrops() implements BonusFormula {
-    public static final Codec<OreDrops> CODEC = Codec.unit(OreDrops::new);
-    public static final Type TYPE = new Type(ResourceLocation.withDefaultNamespace("ore_drops"), CODEC);
+    public static final Codec<OreDrops> CODEC = MapCodec.unitCodec(new OreDrops());
+    public static final Type TYPE = new Type(Identifier.withDefaultNamespace("ore_drops"), CODEC);
 
     @Override
     public int calculateNewCount(RandomSource random, int originalCount, int level) {
@@ -83,7 +83,7 @@ public interface BonusFormula {
       instance -> instance.group(Codec.INT.fieldOf("bonusMultiplier").forGetter(UniformBonusCount::bonusMultiplier))
                           .apply(instance, UniformBonusCount::new)
     );
-    public static final Type TYPE = new Type(ResourceLocation.withDefaultNamespace("uniform_bonus_count"), CODEC);
+    public static final Type TYPE = new Type(Identifier.withDefaultNamespace("uniform_bonus_count"), CODEC);
 
     @Override
     public int calculateNewCount(RandomSource random, int originalCount, int level) {

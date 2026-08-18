@@ -2,7 +2,7 @@ package modernmods.modernfoundry.tools.modules;
 
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -54,7 +54,7 @@ import static modernmods.modernfoundry.library.tools.capability.fluid.ToolTankHe
 public record MeltingModule(LevelingInt temperature, LevelingInt nuggetsPerMetal, LevelingInt shardsPerGem, ModifierCondition<IToolStackView> condition) implements ModifierModule, MeleeHitModifierHook, MonsterMeleeHitModifierHook.RedirectAfter, LauncherHitModifierHook, ProcessLootModifierHook, ConditionalModule<IToolStackView>, IMeltingContainer, IOreRate {
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MeltingModule>defaultHooks(ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.LAUNCHER_HIT, ModifierHooks.PROCESS_LOOT);
   /** Volatile data flag which makes a tool always melt regardless of tank space */
-  public static final ResourceLocation FORCE_MELTING = TConstruct.getResource("force_melting");
+  public static final Identifier FORCE_MELTING = TConstruct.getResource("force_melting");
 
   public static final RecordLoadable<MeltingModule> LOADER = RecordLoadable.create(
     LevelingInt.LOADABLE.requiredField("temperature", MeltingModule::temperature),
@@ -116,7 +116,7 @@ public record MeltingModule(LevelingInt temperature, LevelingInt nuggetsPerMetal
     // first, update inventory
     IMeltingRecipe recipe = lastRecipe;
     if (recipe == null || !recipe.matches(this, world)) {
-      recipe = world.getRecipeManager().getRecipeFor(TinkerRecipeTypes.MELTING.get(), this, world).map(holder -> holder.value()).orElse(null);
+      recipe = world.getServer().getRecipeManager().getRecipeFor(TinkerRecipeTypes.MELTING.get(), this, world).map(holder -> holder.value()).orElse(null);
       if (recipe == null) {
         MeltingModule.stack = ItemStack.EMPTY;
         return FluidStack.EMPTY;
@@ -147,8 +147,8 @@ public record MeltingModule(LevelingInt temperature, LevelingInt nuggetsPerMetal
     // allow tools to decide that we *must* melt the drops
     // for harvestable blocsk though, ignore that flag if the block was not effective (so we don't delete
     boolean forceMelt = tool.getVolatileData().getBoolean(FORCE_MELTING);
-    if (forceMelt && context.hasParam(LootContextParams.BLOCK_STATE)) {
-      BlockState state = context.getParam(LootContextParams.BLOCK_STATE);
+    if (forceMelt && context.hasParameter(LootContextParams.BLOCK_STATE)) {
+      BlockState state = context.getParameter(LootContextParams.BLOCK_STATE);
       forceMelt = tool.getHook(ToolHooks.IS_EFFECTIVE).isToolEffective(tool, state);
     }
 
@@ -160,7 +160,7 @@ public record MeltingModule(LevelingInt temperature, LevelingInt nuggetsPerMetal
       ItemStack stack = iterator.next();
       FluidStack output = meltItem(modifier, stack, world);
       // fluid must match tank fluid
-      if (!output.isEmpty() && (current.isEmpty() || current.isFluidEqual(output))) {
+      if (!output.isEmpty() && (current.isEmpty() || FluidStack.isSameFluidSameComponents(current, output))) {
         int amount;
 
         // if forced to melt, melt everything regardless, fluid handler will ensure we don't overflow
@@ -204,7 +204,7 @@ public record MeltingModule(LevelingInt temperature, LevelingInt nuggetsPerMetal
     if (damageDealt > 0 && condition.matches(tool, modifier)) {
       // first, find the proper recipe
       if (target != null) {
-        EntityMeltingRecipe recipe = EntityMeltingRecipeCache.findRecipe(target.level().getRecipeManager(), target.getType());
+        EntityMeltingRecipe recipe = EntityMeltingRecipeCache.findRecipe(target.level().getServer().getRecipeManager(), target.getType());
         FluidStack output;
         int damagePerOutput;
         if (recipe != null) {
@@ -215,7 +215,7 @@ public record MeltingModule(LevelingInt temperature, LevelingInt nuggetsPerMetal
           damagePerOutput = 2;
         }
         FluidStack fluid = TANK_HELPER.getFluid(tool);
-        if (fluid.isEmpty() || fluid.isFluidEqual(output)) {
+        if (fluid.isEmpty() || FluidStack.isSameFluidSameComponents(fluid, output)) {
           // recipe amount determines how much we get per hit, up to twice the recipe damage
           int fluidAmount;
           if (damageDealt < damagePerOutput * 2) {

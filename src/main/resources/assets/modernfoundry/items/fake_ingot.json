@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "modernfoundry:material",
+    "base_model": "modernfoundry:item/fake_ingot"
+  }
+}

@@ -5,13 +5,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.helper.ItemOutput;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.library.json.predicate.modifier.ModifierPredicate;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.recipe.worktable.AbstractSizedIngredientRecipeBuilder;
@@ -24,8 +25,8 @@ import java.util.function.Consumer;
 /** Builder for {@link ModifierRemovalRecipe} and {@link ExtractModifierRecipe} */
 @RequiredArgsConstructor(staticName = "removal")
 public class ModifierRemovalRecipeBuilder extends AbstractSizedIngredientRecipeBuilder<ModifierRemovalRecipeBuilder> {
-  private final Function6<ResourceLocation,String,SizedIngredient,List<SizedIngredient>,List<ItemStack>,IJsonPredicate<ModifierId>,ModifierRemovalRecipe> constructor;
-  private final List<ItemStack> leftovers = new ArrayList<>();
+  private final Function6<Identifier,String,SizedIngredient,List<SizedIngredient>,List<ItemOutput>,IJsonPredicate<ModifierId>,ModifierRemovalRecipe> constructor;
+  private final List<ItemOutput> leftovers = new ArrayList<>();
   @Accessors(chain = true)
   @Setter
   private String name = "modifiers";
@@ -66,7 +67,7 @@ public class ModifierRemovalRecipeBuilder extends AbstractSizedIngredientRecipeB
    * Adds a leftover stack to the recipe
    */
   public ModifierRemovalRecipeBuilder addLeftover(ItemStack stack) {
-    leftovers.add(stack);
+    leftovers.add(ItemOutput.fromStack(stack));
     return this;
   }
 
@@ -74,7 +75,9 @@ public class ModifierRemovalRecipeBuilder extends AbstractSizedIngredientRecipeB
    * Adds a leftover stack to the recipe
    */
   public ModifierRemovalRecipeBuilder addLeftover(ItemLike item) {
-    return addLeftover(new ItemStack(item));
+    // ItemOutput.fromItem defers stack construction: an ItemStack cannot be built until components are bound (not so at datagen)
+    leftovers.add(ItemOutput.fromItem(item));
+    return this;
   }
 
   @Override
@@ -83,11 +86,11 @@ public class ModifierRemovalRecipeBuilder extends AbstractSizedIngredientRecipeB
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (inputs.isEmpty()) {
       throw new IllegalStateException("Must have at least one input");
     }
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "modifiers");
+    Identifier advancementId = buildOptionalAdvancement(id, "modifiers");
     consumer.accept(new LoadableFinishedRecipe<>(id, constructor.apply(id, name, tools, inputs, leftovers, modifierPredicate), ModifierRemovalRecipe.LOADER, advancementId));
   }
 }

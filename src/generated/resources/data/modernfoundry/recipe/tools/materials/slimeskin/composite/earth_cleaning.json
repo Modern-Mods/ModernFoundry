@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/slimeskin/composite/earth_cleaning",
   "fluid": {
     "amount": 50,
     "tag": "modernfoundry:venom"
   },
+  "id": "modernfoundry:tools/materials/slimeskin/composite/earth_cleaning",
   "input": "modernfoundry:slimeskin",
   "output": "modernfoundry:leather",
   "temperature": 10

@@ -10,7 +10,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
-import modernmods.hilt.util.JsonHelper;
+import modernmods.mantle.util.JsonHelper;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 
 import java.util.List;

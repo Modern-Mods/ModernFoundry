@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:retextured_casting_basin",
-  "id": "modernfoundry:smeltery/casting/seared/smeltery_controller",
-  "cast": {
-    "tag": "modernfoundry:smeltery_bricks"
-  },
+  "cast": "#modernfoundry:smeltery_bricks",
   "cast_consumed": true,
   "cooling_time": 100,
   "fluid": {
     "amount": 360,
     "tag": "c:molten_copper"
   },
+  "id": "modernfoundry:smeltery/casting/seared/smeltery_controller",
   "result": "modernfoundry:smeltery_controller"
 }

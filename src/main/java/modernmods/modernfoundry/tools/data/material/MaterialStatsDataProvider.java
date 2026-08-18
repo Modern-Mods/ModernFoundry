@@ -13,12 +13,12 @@ import modernmods.modernfoundry.tools.stats.SkullStats;
 import modernmods.modernfoundry.tools.stats.SlimeStats;
 import modernmods.modernfoundry.tools.stats.StatlessMaterialStats;
 
-import static net.minecraft.world.item.Tiers.DIAMOND;
-import static net.minecraft.world.item.Tiers.GOLD;
-import static net.minecraft.world.item.Tiers.IRON;
-import static net.minecraft.world.item.Tiers.NETHERITE;
-import static net.minecraft.world.item.Tiers.STONE;
-import static net.minecraft.world.item.Tiers.WOOD;
+import static net.minecraft.world.item.ToolMaterial.DIAMOND;
+import static net.minecraft.world.item.ToolMaterial.GOLD;
+import static net.minecraft.world.item.ToolMaterial.IRON;
+import static net.minecraft.world.item.ToolMaterial.NETHERITE;
+import static net.minecraft.world.item.ToolMaterial.STONE;
+import static net.minecraft.world.item.ToolMaterial.WOOD;
 
 public class MaterialStatsDataProvider extends AbstractMaterialStatsDataProvider {
   public MaterialStatsDataProvider(PackOutput packOutput, AbstractMaterialDataProvider materials) {
@@ -27,7 +27,7 @@ public class MaterialStatsDataProvider extends AbstractMaterialStatsDataProvider
 
   @Override
   public String getName() {
-    return "Modern Foundry Material Stats";
+    return "Tinker's Construct Material Stats";
   }
 
   @Override
@@ -569,9 +569,6 @@ public class MaterialStatsDataProvider extends AbstractMaterialStatsDataProvider
     addMaterialStats(MaterialIds.necroticBone, RepairStats.ribcage(125));
     addMaterialStats(MaterialIds.necronium,    RepairStats.ribcage(357));
     addMaterialStats(MaterialIds.blaze,        RepairStats.ribcage(150));
-    addMaterialStats(MaterialIds.blazingBone,  RepairStats.ribcage(205));
-    addMaterialStats(MaterialIds.jadeite,      RepairStats.ribcage(616));
-    addMaterialStats(MaterialIds.endRod,       RepairStats.ribcage(250));
 
     // slimeshell
     addMaterialStats(MaterialIds.turtle, RepairStats.shell(150));

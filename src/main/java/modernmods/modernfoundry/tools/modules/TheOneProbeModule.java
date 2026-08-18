@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.tools.modules;
 
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;

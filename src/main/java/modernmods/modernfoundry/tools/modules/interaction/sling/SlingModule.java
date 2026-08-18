@@ -5,12 +5,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.UseAnim;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.field.RecordField;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
+import net.minecraft.world.item.ItemUseAnimation;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.field.RecordField;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -82,8 +82,8 @@ public interface SlingModule extends ModifierModule, GeneralInteractionModifierH
   }
 
   @Override
-  default UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-    return ModifierUtil.blockWhileCharging(tool, UseAnim.BOW);
+  default ItemUseAnimation getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    return ModifierUtil.blockWhileCharging(tool, ItemUseAnimation.BOW);
   }
 
   @Override

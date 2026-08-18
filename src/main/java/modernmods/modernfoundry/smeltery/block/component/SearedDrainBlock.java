@@ -3,13 +3,12 @@ package modernmods.modernfoundry.smeltery.block.component;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import modernmods.hilt.fluid.FluidTransferHelper;
+import modernmods.mantle.fluid.FluidTransferHelper;
 import modernmods.modernfoundry.smeltery.block.entity.component.DrainBlockEntity;
 
 /** Extenson to include interaction behavior */
@@ -21,10 +20,10 @@ public class SearedDrainBlock extends RetexturedOrientableSmelteryBlock {
   @SuppressWarnings("deprecation")
   @Deprecated
   @Override
-  protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+  protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
     if (FluidTransferHelper.interactWithTank(world, pos, player, hand, hit.getDirection(), state.getValue(FACING).getOpposite())) {
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
-    return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    return InteractionResult.PASS;
   }
 }

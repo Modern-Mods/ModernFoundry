@@ -9,7 +9,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -31,11 +31,11 @@ public class GlowballEntity extends ThrowableItemProjectile implements IEntityAd
   }
 
   public GlowballEntity(Level worldIn, LivingEntity throwerIn) {
-    super(TinkerGadgets.glowBallEntity.get(), throwerIn, worldIn);
+    super(TinkerGadgets.glowBallEntity.get(), throwerIn, worldIn, new ItemStack(TinkerGadgets.glowBall.get()));
   }
 
   public GlowballEntity(Level worldIn, double x, double y, double z) {
-    super(TinkerGadgets.glowBallEntity.get(), x, y, z, worldIn);
+    super(TinkerGadgets.glowBallEntity.get(), x, y, z, worldIn, new ItemStack(TinkerGadgets.glowBall.get()));
   }
 
   @Override
@@ -47,7 +47,7 @@ public class GlowballEntity extends ThrowableItemProjectile implements IEntityAd
   @Override
   protected void onHit(HitResult result) {
     Level level = level();
-    if (!level.isClientSide) {
+    if (!level.isClientSide()) {
       BlockPos position = null;
       Direction direction = Direction.DOWN;
 
@@ -66,7 +66,7 @@ public class GlowballEntity extends ThrowableItemProjectile implements IEntityAd
       }
     }
 
-    if (!level.isClientSide) {
+    if (!level.isClientSide()) {
       level.broadcastEntityEvent(this, (byte) 3);
       this.discard();
     }

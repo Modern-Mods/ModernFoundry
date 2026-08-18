@@ -1,26 +1,8 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/base/axe",
   "textures": {
-    "head":    "modernfoundry:item/tool/kama/head",
-    "handle":  "modernfoundry:item/tool/pickaxe/handle",
+    "head": "modernfoundry:item/tool/kama/head",
+    "handle": "modernfoundry:item/tool/pickaxe/handle",
     "binding": "modernfoundry:item/tool/kama/binding"
-  },
-  "modifier_maps": ["modernfoundry:kama"],
-  "modifier_roots": [ "modernfoundry:item/tool/kama/modifiers/" ],
-  "parts": [
-    { "name": "handle",  "index": 1 },
-    { "name": "head",    "index": 0 },
-    { "name": "binding", "index": 2 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/kama/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/kama/broken"
-    }
-  ]
+  }
 }

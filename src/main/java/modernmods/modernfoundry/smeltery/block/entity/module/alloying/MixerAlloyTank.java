@@ -8,20 +8,21 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
-import java.util.function.Consumer;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import net.neoforged.neoforge.fluids.capability.templates.EmptyFluidHandler;
-import modernmods.hilt.block.entity.HiltBlockEntity;
-import modernmods.hilt.util.WeakConsumerWrapper;
+import net.neoforged.neoforge.transfer.EmptyResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import modernmods.mantle.block.entity.MantleBlockEntity;
+import modernmods.mantle.fluid.FluidTransferHelper;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.recipe.alloying.IMutableAlloyTank;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +32,7 @@ import java.util.Map;
 public class MixerAlloyTank implements IMutableAlloyTank {
   // parameters
   /** Handler parent */
-  private final HiltBlockEntity parent;
+  private final MantleBlockEntity parent;
   /** Tank for outputs */
   private final IFluidHandler outputTank;
 
@@ -41,13 +42,11 @@ public class MixerAlloyTank implements IMutableAlloyTank {
   private int temperature = 0;
 
   // side tank cache
-  /** Cache of tanks for each of the sides */
-  private final Map<Direction,LazyOptional<IFluidHandler>> inputs = new EnumMap<>(Direction.class);
-  /** Map of invalidation listeners for each side */
-  private final Map<Direction,Consumer<LazyOptional<IFluidHandler>>> listeners = new EnumMap<>(Direction.class);
+  /** Cache of tanks for each of the sides; a null value means the side was checked but holds no tank */
+  private final Map<Direction,ResourceHandler<FluidResource>> inputs = new EnumMap<>(Direction.class);
   /** Map of tank index to tank on the side */
   @Nullable
-  private IFluidHandler[] indexedList = null;
+  private List<ResourceHandler<FluidResource>> indexedList = null;
 
   // state
   /** If true, tanks are marked for refresh later */
@@ -61,20 +60,16 @@ public class MixerAlloyTank implements IMutableAlloyTank {
     return currentTanks;
   }
 
-  /** Gets the map of index to direction */
-  private IFluidHandler[] indexTanks() {
+  /** Gets the indexed list of side tank handlers */
+  private List<ResourceHandler<FluidResource>> indexTanks() {
     // convert map into indexed list of fluid handlers, will be cleared next time a side updates
     if (indexedList == null) {
-      indexedList = new IFluidHandler[currentTanks];
-      if (currentTanks > 0) {
-        int nextTank = 0;
-        for (Direction direction : Direction.values()) {
-          if (direction != Direction.DOWN) {
-            LazyOptional<IFluidHandler> handler = inputs.getOrDefault(direction, LazyOptional.empty());
-            if (handler.isPresent()) {
-              indexedList[nextTank] = handler.orElse(EmptyFluidHandler.INSTANCE);
-              nextTank++;
-            }
+      indexedList = new ArrayList<>(currentTanks);
+      for (Direction direction : Direction.values()) {
+        if (direction != Direction.DOWN) {
+          ResourceHandler<FluidResource> handler = inputs.get(direction);
+          if (handler != null) {
+            indexedList.add(handler);
           }
         }
       }
@@ -83,13 +78,13 @@ public class MixerAlloyTank implements IMutableAlloyTank {
   }
 
   /** Gets the fluid handler for the given tank index */
-  public IFluidHandler getFluidHandler(int tank) {
+  public ResourceHandler<FluidResource> getFluidHandler(int tank) {
     checkTanks();
     // invalid index, nothing
     if (tank >= currentTanks || tank < 0) {
-      return EmptyFluidHandler.INSTANCE;
+      return EmptyResourceHandler.instance();
     }
-    return indexTanks()[tank];
+    return indexTanks().get(tank);
   }
 
   @Override
@@ -100,7 +95,12 @@ public class MixerAlloyTank implements IMutableAlloyTank {
       return FluidStack.EMPTY;
     }
     // get the first fluid from the proper tank, we do not support multiple fluids on a side
-    return indexTanks()[tank].getFluidInTank(0);
+    ResourceHandler<FluidResource> handler = indexTanks().get(tank);
+    if (handler.size() > 0) {
+      FluidResource resource = handler.getResource(0);
+      return resource.isEmpty() ? FluidStack.EMPTY : resource.toStack(handler.getAmountAsInt(0));
+    }
+    return FluidStack.EMPTY;
   }
 
   @Override
@@ -110,7 +110,7 @@ public class MixerAlloyTank implements IMutableAlloyTank {
     if (tank >= currentTanks || tank < 0) {
       return FluidStack.EMPTY;
     }
-    return indexTanks()[tank].drain(fluidStack, FluidAction.EXECUTE);
+    return FluidTransferHelper.drain(indexTanks().get(tank), fluidStack, true);
   }
 
   @Override
@@ -144,16 +144,15 @@ public class MixerAlloyTank implements IMutableAlloyTank {
             BlockEntity te = world.getBlockEntity(target);
             if (te != null) {
               // if we found a tank, increment the number of tanks
-              IFluidHandler capability = world.getCapability(Capabilities.FluidHandler.BLOCK, target, null, te, direction.getOpposite());
+              ResourceHandler<FluidResource> capability = world.getCapability(Capabilities.Fluid.BLOCK, target, null, te, direction.getOpposite());
               if (capability != null) {
-                // attach a listener so we know when the side invalidates
-                inputs.put(direction, LazyOptional.of(() -> capability));
+                inputs.put(direction, capability);
                 currentTanks++;
               } else {
-                inputs.put(direction, LazyOptional.empty());
+                inputs.put(direction, null);
               }
             } else {
-              inputs.put(direction, LazyOptional.empty());
+              inputs.put(direction, null);
             }
           }
         }
@@ -171,7 +170,7 @@ public class MixerAlloyTank implements IMutableAlloyTank {
     if (direction == Direction.DOWN) {
       return;
     }
-    if (!checkInput || (inputs.containsKey(direction) && inputs.get(direction).isPresent())) {
+    if (!checkInput || (inputs.containsKey(direction) && inputs.get(direction) != null)) {
       currentTanks--;
     }
     inputs.remove(direction);

@@ -1,13 +1,14 @@
 package modernmods.modernfoundry.tools.modules.combat;
+import modernmods.modernfoundry.tools.TinkerToolActions;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.ItemAbilities;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.behavior.ToolActionModifierHook;
@@ -45,7 +46,7 @@ public enum BlockingModule implements ModifierModule, GeneralInteractionModifier
 
   @Override
   public boolean canPerformAction(IToolStackView tool, ModifierEntry entry, ItemAbility toolAction) {
-    return toolAction == ItemAbilities.SHIELD_BLOCK;
+    return toolAction == TinkerToolActions.SHIELD_BLOCK;
   }
 
   @Override
@@ -63,7 +64,7 @@ public enum BlockingModule implements ModifierModule, GeneralInteractionModifier
   }
 
   @Override
-  public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-    return UseAnim.BLOCK;
+  public ItemUseAnimation getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    return ItemUseAnimation.BLOCK;
   }
 }

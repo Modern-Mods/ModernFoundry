@@ -5,7 +5,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/melee/weapon"
-  }
+  "tools": "#modernfoundry:modifiable/melee/weapon"
 }

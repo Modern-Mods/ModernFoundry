@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.library.modifiers.modules.build;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.build.VolatileDataModifierHook;
@@ -29,11 +29,11 @@ import java.util.List;
  * @see VolatileIntModule
  * @see VolatileFloatModule
  */
-public record VolatileFlagModule(ResourceLocation flag, ModifierCondition<IToolContext> condition) implements VolatileDataModifierHook, ProjectileLaunchModifierHook, ModifierModule, ConditionalModule<IToolContext> {
+public record VolatileFlagModule(Identifier flag, ModifierCondition<IToolContext> condition) implements VolatileDataModifierHook, ProjectileLaunchModifierHook, ModifierModule, ConditionalModule<IToolContext> {
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<VolatileFlagModule>defaultHooks(ModifierHooks.VOLATILE_DATA);
   public static final RecordLoadable<VolatileFlagModule> LOADER = RecordLoadable.create(Loadables.RESOURCE_LOCATION.requiredField("flag", VolatileFlagModule::flag), ModifierCondition.CONTEXT_FIELD, VolatileFlagModule::new);
 
-  public VolatileFlagModule(ResourceLocation flag) {
+  public VolatileFlagModule(Identifier flag) {
     this(flag, ModifierCondition.ANY_CONTEXT);
   }
 

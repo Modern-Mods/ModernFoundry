@@ -1,6 +1,3 @@
 {
-  "parent": "neoforge:item/bucket_drip",
-  "flip_gas": false,
-  "fluid": "modernfoundry:molten_cadmium",
-  "loader": "modernfoundry:fluid_container"
+  "parent": "neoforge:item/bucket_drip"
 }

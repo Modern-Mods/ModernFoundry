@@ -2,20 +2,20 @@ package modernmods.modernfoundry.library.recipe.entitymelting;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ICustomOutputRecipe;
-import modernmods.hilt.recipe.container.IEmptyContainer;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.recipe.ingredient.EntityIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ICustomOutputRecipe;
+import modernmods.mantle.recipe.container.IEmptyContainer;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.recipe.ingredient.EntityIngredient;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 
@@ -34,7 +34,7 @@ public class EntityMeltingRecipe implements ICustomOutputRecipe<IEmptyContainer>
     EntityMeltingRecipe::new);
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   @Getter
   private final EntityIngredient ingredient;
   private final FluidOutput output;
@@ -73,12 +73,12 @@ public class EntityMeltingRecipe implements ICustomOutputRecipe<IEmptyContainer>
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends EntityMeltingRecipe> getSerializer() {
     return TinkerSmeltery.entityMeltingSerializer.get();
   }
 
   @Override
-  public RecipeType<?> getType() {
+  public RecipeType<? extends EntityMeltingRecipe> getType() {
     return TinkerRecipeTypes.ENTITY_MELTING.get();
   }
 

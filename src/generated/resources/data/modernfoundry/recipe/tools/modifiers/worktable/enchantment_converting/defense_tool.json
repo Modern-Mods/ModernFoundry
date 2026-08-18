@@ -3,10 +3,10 @@
   "id": "modernfoundry:tools/modifiers/worktable/enchantment_converting/defense_tool",
   "inputs": [
     {
-      "item": "modernfoundry:earth_slime_crystal"
+      "ingredient": "modernfoundry:earth_slime_crystal"
     },
     {
-      "tag": "c:ingots/gold"
+      "ingredient": "#c:ingots/gold"
     }
   ],
   "match_book": false,

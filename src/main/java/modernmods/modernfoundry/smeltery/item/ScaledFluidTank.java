@@ -1,17 +1,15 @@
 package modernmods.modernfoundry.smeltery.item;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.core.HolderLookup;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import modernmods.modernfoundry.library.fluid.SimpleFluidResourceTank;
 
 import javax.annotation.Nonnull;
 
 /**
- * Fluid tank representing a stack of multiple fluid tanks. All operations must affect every tack in the stack at the same time, so must in increments of the scale.
+ * Fluid tank representing a stack of multiple fluid tanks. All operations must affect every tank in the stack at the same time, so must be in increments of the scale.
  * Internally works the same as a fluid tank with {@code capacity * scale}, except operations are truncated to the nearest scale (e.g. if scale is 4, we must fill in 4mb increments).
  */
-public class ScaledFluidTank extends FluidTank {
+public class ScaledFluidTank extends SimpleFluidResourceTank {
   private final int scale;
   private ScaledFluidTank(int capacity, int scale) {
     super(capacity * scale);
@@ -19,9 +17,9 @@ public class ScaledFluidTank extends FluidTank {
   }
 
   /** Creates a new instance */
-  public static FluidTank create(int capacity, int scale) {
+  public static SimpleFluidResourceTank create(int capacity, int scale) {
     if (scale == 1) {
-      return new FluidTank(capacity);
+      return new SimpleFluidResourceTank(capacity);
     }
     return new ScaledFluidTank(capacity, scale);
   }
@@ -55,8 +53,8 @@ public class ScaledFluidTank extends FluidTank {
   /* Fluid tank methods */
 
   @Override
-  public FluidTank setCapacity(int capacity) {
-    return super.setCapacity(enforceScale(capacity));
+  public void setCapacity(int capacity) {
+    super.setCapacity(enforceScale(capacity));
   }
 
   @Override
@@ -79,28 +77,5 @@ public class ScaledFluidTank extends FluidTank {
   @Override
   public FluidStack drain(FluidStack resource, FluidAction action) {
     return super.drain(enforceScale(resource, true), action);
-  }
-
-
-  /* NBT */
-
-  @Override
-  public FluidTank readFromNBT(HolderLookup.Provider registries, CompoundTag nbt) {
-    // scale the fluid on reading from NBT; as each instance should store the fluid relative to stack size 1
-    FluidStack fluid = FluidStack.parseOptional(registries, nbt);
-    fluid.setAmount(fluid.getAmount() * scale);
-    setFluid(fluid);
-    return this;
-  }
-
-  @Override
-  public CompoundTag writeToNBT(HolderLookup.Provider registries, CompoundTag nbt) {
-    // scale the fluid on reading from NBT; as each instance should store the fluid relative to stack size 1
-    FluidStack fluid = this.fluid.copy();
-    if (fluid.isEmpty()) {
-      return nbt;
-    }
-    fluid.setAmount(fluid.getAmount() / scale);
-    return (CompoundTag) fluid.save(registries, nbt);
   }
 }

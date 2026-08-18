@@ -1,13 +1,9 @@
 {
-  "type": "hilt:crafting_shaped_retextured",
+  "type": "mantle:crafting_shaped_retextured",
   "category": "misc",
   "key": {
-    "p": {
-      "item": "modernfoundry:pattern"
-    },
-    "w": {
-      "tag": "modernfoundry:planklike"
-    }
+    "p": "modernfoundry:pattern",
+    "w": "#modernfoundry:planklike"
   },
   "match_all": true,
   "pattern": [
@@ -17,6 +13,5 @@
   "result": {
     "id": "modernfoundry:part_builder"
   },
-  "show_notification": true,
   "texture": "w"
 }

@@ -2,15 +2,9 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/ingot_5",
   "ingredient": [
-    {
-      "item": "minecraft:blast_furnace"
-    },
-    {
-      "item": "minecraft:hopper"
-    },
-    {
-      "item": "minecraft:minecart"
-    }
+    "minecraft:blast_furnace",
+    "minecraft:hopper",
+    "minecraft:minecart"
   ],
   "result": {
     "amount": 450,

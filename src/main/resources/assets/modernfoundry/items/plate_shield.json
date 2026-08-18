@@ -1,0 +1,35 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/plate_shield",
+    "parts": [
+      {
+        "name": "core",
+        "index": 0
+      },
+      {
+        "name": "plating",
+        "index": 1
+      }
+    ],
+    "large": true,
+    "large_offset": [
+      -8,
+      0
+    ],
+    "modifier_maps": [
+      "modernfoundry:plate/shield"
+    ],
+    "first_modifiers": [
+      "modernfoundry:banner"
+    ],
+    "small_modifier_roots": {
+      "small": [
+        "modernfoundry:item/tool/armor/plate/shield/modifiers/"
+      ],
+      "large": [
+        "modernfoundry:item/tool/armor/plate/shield/large_modifiers/"
+      ]
+    }
+  }
+}

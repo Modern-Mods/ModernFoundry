@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wool/light_blue",
-  "ingredient": {
-    "item": "minecraft:light_blue_wool"
-  },
+  "ingredient": "minecraft:light_blue_wool",
   "material": "modernfoundry:wool#light_blue",
   "needed": 1,
   "value": 1

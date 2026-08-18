@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/molten_debris/ore",
   "byproducts": [
     {
       "amount": 30,
       "tag": "c:molten_netherite"
     }
   ],
-  "ingredient": {
-    "tag": "c:ores/netherite_scrap"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/molten_debris/ore",
+  "ingredient": "#c:ores/netherite_scrap",
   "rate": "metal",
   "result": {
     "amount": 90,

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:item_part_builder",
-  "id": "modernfoundry:smeltery/casts/sand/builder_cast/gears",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears"
     }
   ],
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/sand/builder_cast/gears",
   "pattern": "modernfoundry:gear",
-  "pattern_item": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "pattern_item": "#modernfoundry:casts/sand",
   "result": "modernfoundry:gear_sand_cast"
 }

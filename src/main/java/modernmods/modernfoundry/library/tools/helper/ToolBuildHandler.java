@@ -12,6 +12,7 @@ import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.materials.stats.MaterialStatsId;
+import net.minecraft.nbt.CompoundTag;
 import modernmods.modernfoundry.library.tools.definition.ToolDefinition;
 import modernmods.modernfoundry.library.tools.definition.module.material.ToolMaterialHook;
 import modernmods.modernfoundry.library.tools.item.IModifiable;
@@ -105,6 +106,23 @@ public final class ToolBuildHandler {
     tag.putBoolean(TooltipUtil.KEY_DISPLAY, true);
     TagUtil.setTag(stack, tag);
     return stack;
+  }
+
+  /**
+   * Builds just the display NBT (render materials + display flag) for a tool icon, without constructing an ItemStack.
+   * Mirrors {@link #buildToolForRendering(Item, ToolDefinition)}'s tag, but is safe to call during datagen where item
+   * DataComponents are not yet bound (so {@code new ItemStack(item)} would throw "Components not bound yet").
+   * @param definition  Tool definition
+   * @return  Custom-data tag matching a rendering tool stack
+   */
+  public static CompoundTag buildRenderToolNbt(ToolDefinition definition) {
+    CompoundTag tag = new CompoundTag();
+    // during datagen we have no idea if we will or won't have materials, so just add them regardless, won't hurt anything
+    if (!definition.isDataLoaded() || definition.hasMaterials()) {
+      new MaterialIdNBT(RENDER_MATERIALS).updateNBT(tag);
+    }
+    tag.putBoolean(TooltipUtil.KEY_DISPLAY, true);
+    return tag;
   }
 
 

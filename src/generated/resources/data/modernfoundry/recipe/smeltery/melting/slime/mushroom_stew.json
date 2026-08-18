@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/mushroom_stew",
-  "ingredient": {
-    "tag": "c:mushrooms"
-  },
+  "ingredient": "#c:mushrooms",
   "result": {
     "amount": 125,
     "tag": "c:mushroom_stew"

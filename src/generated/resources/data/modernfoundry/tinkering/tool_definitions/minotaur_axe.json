@@ -60,13 +60,12 @@
     {
       "type": "modernfoundry:tool_actions",
       "tool_actions": [
-        "axe_dig",
         "shield_disable"
       ]
     },
     {
       "type": "modernfoundry:is_effective",
-      "predicate_type": "hilt:tag",
+      "predicate_type": "mantle:tag",
       "tag": "modernfoundry:mineable/hand_axe"
     },
     {

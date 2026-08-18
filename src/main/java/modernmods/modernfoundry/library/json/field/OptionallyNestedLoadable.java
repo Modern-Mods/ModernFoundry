@@ -3,8 +3,8 @@ package modernmods.modernfoundry.library.json.field;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.util.typed.TypedMap;
 
 /** Wrapper around a loadable making it optionally load from an object key. If used with a record loadable, will condition on the object key being present */
 public record OptionallyNestedLoadable<T>(Loadable<T> loadable, String objectKey) implements Loadable<T> {

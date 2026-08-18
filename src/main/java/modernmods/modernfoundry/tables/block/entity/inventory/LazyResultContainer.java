@@ -113,10 +113,16 @@ public class LazyResultContainer implements Container {
 
   /* Required methods */
 
-  /** @deprecated Unsupported method */
-  @Deprecated
+  /**
+   * Accepts the server-synced result stack from the vanilla container slot sync. In 26.1 the client has no full
+   * RecipeManager, so it cannot recompute the result locally (calcResult returns empty client-side); without storing the
+   * synced stack here the result slot rendered empty even though taking it worked. Stored into the result cache so
+   * {@link #getItem}/{@link #getResult} return it on the client. Cleared/recomputed as normal on the server.
+   */
   @Override
-  public void setItem(int index, ItemStack stack) {}
+  public void setItem(int index, ItemStack stack) {
+    this.result = stack;
+  }
 
   /** @deprecated Unused method */
   @Deprecated

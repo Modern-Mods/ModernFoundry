@@ -12,7 +12,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
-import modernmods.hilt.loot.AbstractLootModifierBuilder.GenericLootModifierBuilder;
+import modernmods.mantle.loot.AbstractLootModifierBuilder.GenericLootModifierBuilder;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -31,26 +31,26 @@ import javax.annotation.Nonnull;
 public class ModifierLootModifier extends LootModifier {
   public static final MapCodec<ModifierLootModifier> CODEC = RecordCodecBuilder.mapCodec(inst -> codecStart(inst).apply(inst, ModifierLootModifier::new));
 
-  protected ModifierLootModifier(LootItemCondition[] conditionsIn) {
-    super(conditionsIn);
+  protected ModifierLootModifier(LootItemCondition[] conditionsIn, int priority) {
+    super(conditionsIn, priority);
   }
 
   /** Creates a builder for datagen */
   public static GenericLootModifierBuilder<ModifierLootModifier> builder() {
-    return new GenericLootModifierBuilder<>(ModifierLootModifier::new);
+    return new GenericLootModifierBuilder<>(conditions -> new ModifierLootModifier(conditions, 0));
   }
 
   @Nonnull
   @Override
   protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-    // tool is for harvest
-    ItemStack stack = context.getParamOrNull(LootContextParams.TOOL);
+    // tool is for harvest (TOOL is now a ContextKey<ItemInstance> in 26.1, cast back to the stack)
+    ItemStack stack = (ItemStack) context.getOptionalParameter(LootContextParams.TOOL);
 
     // if null, try killer entity
     if (stack == null) {
       // if this loot is due to a projectile fired by one of our tools, then use that projectile as the loot source
       // prevents weirdness when held tool switches after firing a projectile
-      if (context.getParamOrNull(LootContextParams.DIRECT_ATTACKING_ENTITY) instanceof Projectile projectile) {
+      if (context.getOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY) instanceof Projectile projectile) {
         ModifierNBT modifiers = EntityModifierCapability.getOrEmpty(projectile);
 
         // no need to build the dummy tool if we lack modifiers
@@ -66,7 +66,7 @@ public class ModifierLootModifier extends LootModifier {
       }
 
       // not a projectile causing it, fetch the killer entity directly from loot context
-      if (context.getParamOrNull(LootContextParams.ATTACKING_ENTITY) instanceof LivingEntity living) {
+      if (context.getOptionalParameter(LootContextParams.ATTACKING_ENTITY) instanceof LivingEntity living) {
         stack = living.getItemBySlot(ModifierLootingHandler.getLootingSlot(living));
       }
     }

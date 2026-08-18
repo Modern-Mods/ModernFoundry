@@ -6,19 +6,19 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import lombok.extern.log4j.Log4j2;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.GsonHelper;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.fml.ModLoader;
-import modernmods.hilt.data.datamap.RegistryDataMapLoader;
-import modernmods.hilt.data.listener.IEarlySafeManagerReloadListener;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.util.JsonHelper;
-import modernmods.hilt.util.typed.TypedMap;
-import modernmods.hilt.util.typed.TypedMapBuilder;
+import modernmods.mantle.data.datamap.RegistryDataMapLoader;
+import modernmods.mantle.data.listener.IEarlySafeManagerReloadListener;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.util.JsonHelper;
+import modernmods.mantle.util.typed.TypedMap;
+import modernmods.mantle.util.typed.TypedMapBuilder;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.utils.Util;
 
@@ -51,7 +51,8 @@ public class MaterialRenderInfoLoader implements IEarlySafeManagerReloadListener
     // bit of a hack: instead of registering our resource listener to the list as we should, we use the additional model registration event
     // we do this as we need to guarantee we run before models are baked, which happens in the first stage of listeners in the bakery constructor
     // the other option would be to wait until the atlas stitch event, though that would make it more difficult to know which sprites we need
-    modernmods.modernfoundry.TConstruct.getModBus().addListener(EventPriority.NORMAL, false, ModelEvent.RegisterAdditional.class, event -> {
+    // 26.1.2 renamed ModelEvent.RegisterAdditional to RegisterStandalone; we only use it as an early timing hook (before model bake), not its API
+    modernmods.modernfoundry.TConstruct.getModBus().addListener(EventPriority.NORMAL, false, ModelEvent.RegisterStandalone.class, event -> {
       if(!ModLoader.hasErrors()) {
         INSTANCE.onReloadSafe(Minecraft.getInstance().getResourceManager());
       }
@@ -89,7 +90,7 @@ public class MaterialRenderInfoLoader implements IEarlySafeManagerReloadListener
   }
 
   /** Gets the variant for the given render info path */
-  public static MaterialVariantId variant(ResourceLocation location) {
+  public static MaterialVariantId variant(Identifier location) {
     String path = location.getPath();
 
     // locate variant as a subfolder, and create final ID
@@ -110,15 +111,15 @@ public class MaterialRenderInfoLoader implements IEarlySafeManagerReloadListener
   @Override
   public void onReloadSafe(ResourceManager manager) {
     // first, we need to fetch all relevant JSON files
-    Map<ResourceLocation,JsonElement> jsons = new HashMap<>();
-    SimpleJsonResourceReloadListener.scanDirectory(manager, FOLDER, JsonHelper.DEFAULT_GSON, jsons);
+    Map<Identifier,JsonElement> jsons = new HashMap<>();
+    SimpleJsonResourceReloadListener.scanDirectory(manager, net.minecraft.resources.FileToIdConverter.json(FOLDER), com.mojang.serialization.JsonOps.INSTANCE, net.minecraft.util.ExtraCodecs.JSON, jsons);
     // final result map
     Map<MaterialVariantId,MaterialRenderInfo> map = new HashMap<>();
 
     // iterate the files, handling parenting thanks to the data map loader
-    for(Entry<ResourceLocation, JsonElement> entry : jsons.entrySet()) {
+    for(Entry<Identifier, JsonElement> entry : jsons.entrySet()) {
       // clean up ID by trimming off the extension and folder
-      ResourceLocation location = entry.getKey();
+      Identifier location = entry.getKey();
       MaterialVariantId id = variant(location);
 
       // read in the JSON data

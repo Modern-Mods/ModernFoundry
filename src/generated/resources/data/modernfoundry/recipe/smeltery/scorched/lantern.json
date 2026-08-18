@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "modernfoundry:scorched_brick"
-    },
-    "C": {
-      "tag": "c:ingots/iron"
-    },
-    "P": {
-      "item": "modernfoundry:scorched_glass_pane"
-    }
+    "B": "modernfoundry:scorched_brick",
+    "C": "#c:ingots/iron",
+    "P": "modernfoundry:scorched_glass_pane"
   },
   "pattern": [
     " C ",
@@ -20,6 +14,5 @@
   "result": {
     "count": 3,
     "id": "modernfoundry:scorched_lantern"
-  },
-  "show_notification": true
+  }
 }

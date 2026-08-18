@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/obsidian",
-  "ingredient": {
-    "item": "minecraft:obsidian"
-  },
+  "ingredient": "minecraft:obsidian",
   "material": "modernfoundry:obsidian",
   "needed": 1,
   "value": 4

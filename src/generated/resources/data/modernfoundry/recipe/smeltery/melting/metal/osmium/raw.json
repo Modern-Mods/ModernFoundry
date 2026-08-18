@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:raw_materials/osmium"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/osmium/raw",
   "byproducts": [
     {
       "amount": 90,
@@ -8,15 +13,8 @@
       "tag": "c:molten_iron"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:raw_materials/osmium"
-    }
-  ],
-  "ingredient": {
-    "tag": "c:raw_materials/osmium"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/osmium/raw",
+  "ingredient": "#c:raw_materials/osmium",
   "rate": "metal",
   "result": {
     "amount": 90,

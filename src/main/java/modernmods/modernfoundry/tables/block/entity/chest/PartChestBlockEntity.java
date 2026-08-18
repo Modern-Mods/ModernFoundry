@@ -10,7 +10,7 @@ import modernmods.modernfoundry.tables.TinkerTables;
 import modernmods.modernfoundry.tables.block.entity.inventory.ScalingChestItemHandler;
 
 /**
- * Chest that holds parts, up to 64 of a given material and type
+ * Chest that holds parts, up to 8 of a given material and type
  */
 public class PartChestBlockEntity extends AbstractChestBlockEntity {
   private static final Component NAME = TConstruct.makeTranslation("gui", "part_chest");
@@ -22,7 +22,7 @@ public class PartChestBlockEntity extends AbstractChestBlockEntity {
   public static class PartChestItemHandler extends ScalingChestItemHandler {
     @Override
     public int getSlotLimit(int slot) {
-      return 64;
+      return 8;
     }
 
     @Override

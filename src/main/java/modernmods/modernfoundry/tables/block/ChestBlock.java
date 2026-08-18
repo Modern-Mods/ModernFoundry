@@ -5,11 +5,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -21,7 +19,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import modernmods.modernfoundry.library.utils.TagUtil;
@@ -50,6 +47,11 @@ public class ChestBlock extends TabbedTableBlock {
     this.dropsItems = dropsItems;
   }
 
+  /** If true, the chest drops its contents as loose items when broken (as opposed to copying them into the dropped block item via loot) */
+  public boolean dropsItems() {
+    return dropsItems;
+  }
+
   @Nullable
   @Override
   public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
@@ -62,8 +64,8 @@ public class ChestBlock extends TabbedTableBlock {
     // check if we also have an inventory
 
     CompoundTag tag = TagUtil.getTag(stack);
-    if (tag != null && tag.contains("TinkerData", Tag.TAG_COMPOUND)) {
-      CompoundTag tinkerData = tag.getCompound("TinkerData");
+    if (tag != null && tag.contains("TinkerData")) {
+      CompoundTag tinkerData = tag.getCompoundOrEmpty("TinkerData");
       BlockEntity te = worldIn.getBlockEntity(pos);
       if (te instanceof AbstractChestBlockEntity chest) {
         chest.readInventory(tinkerData);
@@ -79,43 +81,20 @@ public class ChestBlock extends TabbedTableBlock {
   }
 
   @Override
-  protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+  protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
     BlockEntity te = worldIn.getBlockEntity(pos);
     Inventory playerInventory = player.getInventory();
-    ItemStack heldItem = playerInventory.getSelected();
+    ItemStack heldItem = playerInventory.getSelectedItem();
 
     if (!heldItem.isEmpty() && te instanceof AbstractChestBlockEntity chest && chest.canInsert(player, heldItem)) {
       IItemHandlerModifiable itemHandler = chest.getItemHandler();
       ItemStack rest = ItemHandlerHelper.insertItem(itemHandler, heldItem, false);
       if (rest.isEmpty() || rest.getCount() < heldItem.getCount()) {
-        playerInventory.items.set(playerInventory.selected, rest);
-        return ItemInteractionResult.SUCCESS;
+        playerInventory.setSelectedItem(rest);
+        return InteractionResult.SUCCESS;
       }
     }
 
-    return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-  }
-
-  @Override
-  public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-    if (state.getBlock() != newState.getBlock() && dropsItems) {
-      BlockEntity te = worldIn.getBlockEntity(pos);
-      if (te instanceof AbstractChestBlockEntity chest) {
-        dropInventoryItems(state, worldIn, pos, chest.getItemHandler());
-      }
-    }
-    super.onRemove(state, worldIn, pos, newState, isMoving);
-  }
-
-  @Override
-  protected void dropInventoryItems(BlockState state, Level worldIn, BlockPos pos, IItemHandler inventory) {
-    if (dropsItems) {
-      for (int slot = 0; slot < inventory.getSlots(); slot++) {
-        ItemStack stack = inventory.extractItem(slot, Integer.MAX_VALUE, false);
-        if (!stack.isEmpty()) {
-          Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
-        }
-      }
-    }
+    return InteractionResult.PASS;
   }
 }

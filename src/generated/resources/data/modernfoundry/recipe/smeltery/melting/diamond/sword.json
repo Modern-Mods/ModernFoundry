@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:damagable_melting",
   "id": "modernfoundry:smeltery/melting/diamond/sword",
-  "ingredient": {
-    "tag": "modernfoundry:melting/diamond/tools_costing_2"
-  },
+  "ingredient": "#modernfoundry:melting/diamond/tools_costing_2",
   "result": {
     "amount": 200,
     "fluid": "modernfoundry:molten_diamond",

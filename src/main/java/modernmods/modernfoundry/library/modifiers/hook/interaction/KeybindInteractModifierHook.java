@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.modifiers.hook.interaction;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 

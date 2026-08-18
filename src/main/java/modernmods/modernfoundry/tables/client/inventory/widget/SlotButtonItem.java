@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.tables.client.inventory.widget;
 
 import lombok.Getter;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
-import modernmods.hilt.client.screen.ElementScreen;
+import modernmods.mantle.client.screen.ElementScreen;
 import modernmods.modernfoundry.library.client.Icons;
 import modernmods.modernfoundry.library.tools.layout.StationSlotLayout;
 import modernmods.modernfoundry.tables.client.inventory.TinkerStationScreen;
@@ -40,7 +40,7 @@ public class SlotButtonItem extends Button {
   }
 
   @Override
-  public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+  protected void extractContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
       int x = getX();
       int y = getY();
       if (this.pressed) {

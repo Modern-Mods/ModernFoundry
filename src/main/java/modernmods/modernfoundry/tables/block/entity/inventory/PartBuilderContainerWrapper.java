@@ -67,7 +67,8 @@ public class PartBuilderContainerWrapper implements IPartBuilderContainer {
         }
       } else {
         Level world = getWorld();
-        this.material = world.getRecipeManager().getRecipeFor(TinkerRecipeTypes.MATERIAL.get(), this, world).map(holder -> holder.value()).orElse(null);
+        // side-aware lookup: server RecipeManager, or the synced client recipe cache on the client (26.1 has no client RecipeManager)
+        this.material = modernmods.modernfoundry.library.recipe.material.MaterialRecipe.getRecipe(this, world);
       }
     }
     return this.material;

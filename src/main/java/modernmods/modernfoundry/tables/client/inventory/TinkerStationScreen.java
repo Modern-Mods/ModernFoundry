@@ -1,25 +1,26 @@
 package modernmods.modernfoundry.tables.client.inventory;
 
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import org.joml.Matrix3x2fStack;
 import lombok.Getter;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.input.InputQuirks;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
-import modernmods.hilt.client.screen.ElementScreen;
-import modernmods.hilt.client.screen.ModuleScreen;
-import modernmods.hilt.client.screen.ScalableElementScreen;
+import modernmods.mantle.client.screen.ElementScreen;
+import modernmods.mantle.client.screen.ModuleScreen;
+import modernmods.mantle.client.screen.ScalableElementScreen;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
@@ -63,7 +64,7 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
   private static final int STILL_FILLED_SPACING = 18;
 
   // texture
-  private static final ResourceLocation TINKER_TEXTURE = TConstruct.getResource("textures/gui/tinker.png");
+  private static final Identifier TINKER_TEXTURE = TConstruct.getResource("textures/gui/tinker.png");
   // texture elements
   private static final ElementScreen ACTIVE_TEXT_FIELD = new ElementScreen(TINKER_TEXTURE, 0, 232, 90, 12, 256, 256);
   private static final ElementScreen ITEM_COVER = ACTIVE_TEXT_FIELD.move(176, 18, 70, 64);
@@ -313,11 +314,11 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
   }
 
   @Override
-  protected void drawContainerName(GuiGraphics graphics) {
-    graphics.drawString(this.font, this.getTitle(), 8, 8, 4210752, false);
+  protected void drawContainerName(GuiGraphicsExtractor graphics) {
+    graphics.text(this.font, this.getTitle(), 8, 8, 4210752, false);
   }
 
-  public static void renderIcon(GuiGraphics graphics, LayoutIcon icon, int x, int y) {
+  public static void renderIcon(GuiGraphicsExtractor graphics, LayoutIcon icon, int x, int y) {
     Pattern pattern = icon.getValue(Pattern.class);
     if (pattern != null) {
       // draw pattern sprite
@@ -327,12 +328,13 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
 
     ItemStack stack = icon.getValue(ItemStack.class);
     if (stack != null) {
-      graphics.renderItem(stack, x, y);
+      graphics.item(stack, x, y);
     }
   }
 
   @Override
-  protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+  public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
+    // 26.1: RenderSystem alpha/blend/depth calls removed (GPU rewrite); slot-background transparency is a runtime-visual detail
     this.drawBackground(graphics, TINKER_TEXTURE);
 
     int x = 0;
@@ -344,23 +346,19 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
     final float yOff = 22f;
 
     // render the background icon
-    PoseStack renderPose = graphics.pose();
-    renderPose.pushPose();
-    renderPose.translate(xOff, yOff, 0.0F);
-    renderPose.scale(scale, scale, 1.0f);
+    Matrix3x2fStack renderPose = graphics.pose();
+    renderPose.pushMatrix();
+    renderPose.translate(xOff, yOff);
+    renderPose.scale(scale, scale);
     renderIcon(graphics, currentLayout.getIcon(), (int) (this.cornerX / scale), (int) (this.cornerY / scale));
-    renderPose.popPose();
+    renderPose.popMatrix();
 
     // rebind gui texture since itemstack drawing sets it to something else
-    RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 0.82f);
-    RenderSystem.enableBlend();
     //RenderSystem.enableAlphaTest();
     //RenderHelper.turnOff();
-    RenderSystem.disableDepthTest();
     ITEM_COVER.draw(graphics, this.cornerX + 7, this.cornerY + 18);
 
     // slot backgrounds, are transparent
-    RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 0.28f);
     if (!this.currentLayout.getToolSlot().isHidden()) {
       Slot slot = this.getMenu().getSlot(TINKER_SLOT);
       SLOT_BACKGROUND.draw(graphics, x + this.cornerX + slot.x - 1, y + this.cornerY + slot.y - 1);
@@ -371,7 +369,6 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
     }
 
     // slot borders, are opaque
-    RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     for (int i = 0; i <= maxInputs; i++) {
       Slot slot = this.getMenu().getSlot(i);
       if ((slot instanceof TinkerStationSlot tinkerSlot && (!tinkerSlot.isDormant() || slot.hasItem()))) {
@@ -420,16 +417,15 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
       }
     }
 
-    RenderSystem.enableDepthTest();
 
-    super.renderBg(graphics, partialTicks, mouseX, mouseY);
+    super.extractBackground(graphics, mouseX, mouseY, partialTicks);
 
-    this.buttonsScreen.render(graphics, mouseX, mouseY, partialTicks);
+    this.buttonsScreen.extractRenderState(graphics, mouseX, mouseY, partialTicks);
 
     // text field
     if (textField != null && textField.visible) {
       TEXT_BOX.draw(graphics, this.cornerX + 79, this.cornerY + 5);
-      this.textField.render(graphics, mouseX, mouseY, partialTicks);
+      this.textField.extractRenderState(graphics, mouseX, mouseY, partialTicks);
     }
 
     renderArmorStand(graphics);
@@ -438,7 +434,8 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
 
 
   @Override
-  public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent event, boolean doubleClick) {
+    double mouseX = event.x(); double mouseY = event.y(); int mouseButton = event.button();
     if (this.tinkerInfo.handleMouseClicked(mouseX, mouseY, mouseButton)) {
       return false;
     }
@@ -451,11 +448,12 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
       return false;
     }
 
-    return super.mouseClicked(mouseX, mouseY, mouseButton);
+    return super.mouseClicked(event, doubleClick);
   }
 
   @Override
-  public boolean mouseDragged(double mouseX, double mouseY, int clickedMouseButton, double timeSinceLastClick, double unkowwn) {
+  public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent event, double timeSinceLastClick, double unkowwn) {
+    double mouseX = event.x(); double mouseY = event.y(); int clickedMouseButton = event.button();
     if (this.tinkerInfo.handleMouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick)) {
       return false;
     }
@@ -464,9 +462,11 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
       return false;
     }
 
-    return super.mouseDragged(mouseX, mouseY, clickedMouseButton, timeSinceLastClick, unkowwn);
+    return super.mouseDragged(event, timeSinceLastClick, unkowwn);
   }
 
+  // NOTE(26.1 port): this 3-arg mouseScrolled overrides Mantle's MultiModuleScreen helper, not vanilla's 4-arg entry point.
+  // Info-panel scroll flows through Mantle's 4-arg override; validate direct mouse-wheel scroll in-game.
   @Override
   public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
     if (this.tinkerInfo.handleMouseScrolled(mouseX, mouseY, delta)) {
@@ -481,7 +481,8 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
   }
 
   @Override
-  public boolean mouseReleased(double mouseX, double mouseY, int state) {
+  public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent event) {
+    double mouseX = event.x(); double mouseY = event.y(); int state = event.button();
     if (this.tinkerInfo.handleMouseReleased(mouseX, mouseY, state)) {
       return false;
     }
@@ -494,7 +495,7 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
       return false;
     }
 
-    return super.mouseReleased(mouseX, mouseY, state);
+    return super.mouseReleased(event);
   }
 
   /** Returns true if a key changed that requires a display update */
@@ -502,43 +503,43 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
     if (keyCode == GLFW.GLFW_KEY_LEFT_SHIFT || keyCode == GLFW.GLFW_KEY_RIGHT_SHIFT) {
       return true;
     }
-    if (Minecraft.ON_OSX) {
+    if (InputQuirks.ON_OSX) {
       return keyCode == GLFW.GLFW_KEY_LEFT_SUPER || keyCode == GLFW.GLFW_KEY_RIGHT_SUPER;
     }
     return keyCode == GLFW.GLFW_KEY_LEFT_CONTROL || keyCode == GLFW.GLFW_KEY_RIGHT_CONTROL;
   }
 
   @Override
-  public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-    if (keyCode == GLFW.GLFW_KEY_ESCAPE) {
+  public boolean keyPressed(KeyEvent event) {
+    if (event.key() == GLFW.GLFW_KEY_ESCAPE) {
       this.onClose();
       return true;
     }
-    if (needsDisplayUpdate(keyCode)) {
+    if (needsDisplayUpdate(event.key())) {
       updateDisplay();
     }
     if (textField.canConsumeInput()) {
-      textField.keyPressed(keyCode, scanCode, modifiers);
+      textField.keyPressed(event);
       return true;
     }
-    return super.keyPressed(keyCode, scanCode, modifiers);
+    return super.keyPressed(event);
   }
 
   @Override
-  public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
-    if (needsDisplayUpdate(keyCode)) {
+  public boolean keyReleased(KeyEvent event) {
+    if (needsDisplayUpdate(event.key())) {
       updateDisplay();
     }
-    return super.keyReleased(keyCode, scanCode, modifiers);
+    return super.keyReleased(event);
   }
 
   @Override
-  public void renderSlot(GuiGraphics graphics, Slot slotIn) {
+  public void extractSlot(GuiGraphicsExtractor graphics, Slot slotIn, int mouseX, int mouseY) {
     // don't draw dormant slots with no item
     if (slotIn instanceof TinkerStationSlot && ((TinkerStationSlot) slotIn).isDormant() && !slotIn.hasItem()) {
       return;
     }
-    super.renderSlot(graphics, slotIn);
+    super.extractSlot(graphics, slotIn, mouseX, mouseY);
   }
 
   @Override
@@ -615,8 +616,8 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
   }
 
   @Override
-  protected boolean hasClickedOutside(double mouseX, double mouseY, int guiLeft, int guiTop, int mouseButton) {
-    return super.hasClickedOutside(mouseX, mouseY, guiLeft, guiTop, mouseButton)
+  protected boolean hasClickedOutside(double mouseX, double mouseY, int guiLeft, int guiTop) {
+    return super.hasClickedOutside(mouseX, mouseY, guiLeft, guiTop)
       && !this.buttonsScreen.isMouseOver(mouseX, mouseY);
   }
 
@@ -636,9 +637,9 @@ public class TinkerStationScreen extends ToolTableScreen<TinkerStationBlockEntit
   }
 
   @Override
-  public void resize(Minecraft pMinecraft, int pWidth, int pHeight) {
+  public void resize(int pWidth, int pHeight) {
     String s = this.textField.getValue();
-    super.resize(pMinecraft, pWidth, pHeight);
+    super.resize(pWidth, pHeight);
     this.textField.setValue(s);
   }
 

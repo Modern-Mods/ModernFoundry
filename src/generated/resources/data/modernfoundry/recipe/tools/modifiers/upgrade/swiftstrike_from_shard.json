@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/swiftstrike_from_shard",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "minecraft:amethyst_shard"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/swiftstrike_from_shard",
+  "input": "minecraft:amethyst_shard",
   "level": {
     "max": 5
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/melee/weapon"
-  }
+  "tools": "#modernfoundry:modifiable/melee/weapon"
 }

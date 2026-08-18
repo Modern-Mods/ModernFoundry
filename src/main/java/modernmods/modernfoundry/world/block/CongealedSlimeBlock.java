@@ -3,6 +3,7 @@ package modernmods.modernfoundry.world.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -42,9 +43,9 @@ public class CongealedSlimeBlock extends Block {
   }
 
   @Override
-  public void updateEntityAfterFallOn(BlockGetter worldIn, Entity entity) {
+  public void updateEntityMovementAfterFallOn(BlockGetter worldIn, Entity entity) {
     if (entity.isSuppressingBounce() || !(entity instanceof LivingEntity) && !(entity instanceof ItemEntity)) {
-      super.updateEntityAfterFallOn(worldIn, entity);
+      super.updateEntityMovementAfterFallOn(worldIn, entity);
       // this is mostly needed to prevent XP orbs from bouncing. which completely breaks the game.
       return;
     }
@@ -59,18 +60,18 @@ public class CongealedSlimeBlock extends Block {
         entity.setOnGround(false);
       }
     } else {
-      super.updateEntityAfterFallOn(worldIn, entity);
+      super.updateEntityMovementAfterFallOn(worldIn, entity);
     }
   }
 
   @Override
-  public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
+  public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, double fallDistance) {
     // no fall damage on congealed slime
     entityIn.causeFallDamage(fallDistance, 0.0F, worldIn.damageSources().fall());
   }
 
   @Override
-  public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+  protected void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
     if (!worldIn.isClientSide() && !entityIn.isSuppressingBounce()) {
       Vec3 entityPosition = entityIn.position();
       Vec3 direction = entityPosition.subtract(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);

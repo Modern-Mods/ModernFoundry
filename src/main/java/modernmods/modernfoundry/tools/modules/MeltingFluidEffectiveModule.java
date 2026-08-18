@@ -3,11 +3,11 @@ package modernmods.modernfoundry.tools.modules;
 import net.minecraft.world.level.block.state.BlockState;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.TierSortingRegistry;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.block.BlockPredicate;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.block.BlockPredicate;
 import modernmods.modernfoundry.library.module.HookProvider;
 import modernmods.modernfoundry.library.module.ModuleHook;
 import modernmods.modernfoundry.library.recipe.melting.MeltingRecipeLookup;
@@ -56,7 +56,7 @@ public record MeltingFluidEffectiveModule(IJsonPredicate<BlockState> predicate, 
         if (capacity > currentFluid.getAmount()) {
           // new fluid must match current fluid
           FluidStack meltingResult = MeltingRecipeLookup.findResult(state.getBlock(), temperature);
-          return (!meltingResult.isEmpty() && (currentFluid.isEmpty() || currentFluid.isFluidEqual(meltingResult)))
+          return (!meltingResult.isEmpty() && (currentFluid.isEmpty() || FluidStack.isSameFluidSameComponents(currentFluid, meltingResult)))
                  // tier must also match
                  && (ignoreTier || TierSortingRegistry.isCorrectTierForDrops(MiningTierToolHook.getTier(tool), state));
         }

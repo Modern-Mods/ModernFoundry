@@ -1,0 +1,20 @@
+{
+  "pairs": {
+    "modernfoundry:trims/color_palettes/amethyst_bronze": "modernfoundry_amethyst_bronze",
+    "modernfoundry:trims/color_palettes/cinderslime": "modernfoundry_cinderslime",
+    "modernfoundry:trims/color_palettes/cobalt": "modernfoundry_cobalt",
+    "modernfoundry:trims/color_palettes/earthslime": "modernfoundry_earthslime",
+    "modernfoundry:trims/color_palettes/enderslime": "modernfoundry_enderslime",
+    "modernfoundry:trims/color_palettes/hepatizon": "modernfoundry_hepatizon",
+    "modernfoundry:trims/color_palettes/ichor": "modernfoundry_ichor",
+    "modernfoundry:trims/color_palettes/knightmetal": "modernfoundry_knightmetal",
+    "modernfoundry:trims/color_palettes/knightslime": "modernfoundry_knightslime",
+    "modernfoundry:trims/color_palettes/manyullyn": "modernfoundry_manyullyn",
+    "modernfoundry:trims/color_palettes/pig_iron": "modernfoundry_pig_iron",
+    "modernfoundry:trims/color_palettes/queens_slime": "modernfoundry_queens_slime",
+    "modernfoundry:trims/color_palettes/rose_gold": "modernfoundry_rose_gold",
+    "modernfoundry:trims/color_palettes/skyslime": "modernfoundry_skyslime",
+    "modernfoundry:trims/color_palettes/slimesteel": "modernfoundry_slimesteel",
+    "modernfoundry:trims/color_palettes/steel": "modernfoundry_steel"
+  }
+}

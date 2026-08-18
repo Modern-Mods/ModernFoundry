@@ -31,10 +31,10 @@
     "name": "melee_harvest_materials",
     "data": "no-load",
     "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:melee_harvest", "tier": 2, "predicate": {
-      "type": "hilt:or",
+      "type": "mantle:or",
       "predicates": [
-        { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" },
-        { "type": "hilt:load_condition", "conditions": [{ "type": "hilt:tag_filled", "tag": "modernfoundry:whitestone_ingots" }], "if_true": { "type": "modernfoundry:id", "id": "modernfoundry:whitestone" }}
+        { "type": "mantle:inverted", "inverted_type": "mantle:tag", "tag": "modernfoundry:book/distant" },
+        { "type": "mantle:load_condition", "conditions": [{ "type": "mantle:tag_filled", "tag": "modernfoundry:whitestone_ingots" }], "if_true": { "type": "modernfoundry:id", "id": "modernfoundry:whitestone" }}
       ]
     }}},
     "icon": {
@@ -48,7 +48,7 @@
   {
     "name": "ranged_materials",
     "data": "no-load",
-    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ranged", "tier": 2, "predicate": { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" }}},
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ranged", "tier": 2, "predicate": { "type": "mantle:inverted", "inverted_type": "mantle:tag", "tag": "modernfoundry:book/distant" }}},
     "icon": {
       "item": {
         "type": "forge:nbt",
@@ -60,7 +60,7 @@
   {
     "name": "armor_materials",
     "data": "no-load",
-    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:armor", "tier": { "min": 0, "max": 2 }, "predicate":  { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" } } },
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:armor", "tier": { "min": 0, "max": 2 }, "predicate":  { "type": "mantle:inverted", "inverted_type": "mantle:tag", "tag": "modernfoundry:book/distant" } } },
     "icon": {
       "item": {
         "type": "forge:nbt",

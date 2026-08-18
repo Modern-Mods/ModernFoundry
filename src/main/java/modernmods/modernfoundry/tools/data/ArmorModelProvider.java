@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.tools.data;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import modernmods.modernfoundry.library.client.armor.texture.ArmorTextureSupplier;
 import modernmods.modernfoundry.library.client.armor.texture.DyedArmorTextureSupplier;
 import modernmods.modernfoundry.library.client.armor.texture.FirstArmorTextureSupplier;
@@ -42,7 +42,7 @@ public class ArmorModelProvider extends AbstractArmorModelProvider {
       ),
       TrimArmorTextureSupplier.INSTANCE
     });
-    ResourceLocation slime = ArmorDefinitions.SLIMESUIT.getId();
+    Identifier slime = ArmorDefinitions.SLIMESUIT.getId();
     addModel(slime,
       new MaterialArmorTextureSupplier.Material(slime, "/", 1),
       TrimArmorTextureSupplier.INSTANCE
@@ -59,6 +59,6 @@ public class ArmorModelProvider extends AbstractArmorModelProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry Armor Models";
+    return "Tinkers' Construct Armor Models";
   }
 }

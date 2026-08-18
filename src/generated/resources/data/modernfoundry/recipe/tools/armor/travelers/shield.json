@@ -1,22 +1,19 @@
 {
   "type": "modernfoundry:crafting_shaped_materials",
-  "id": "modernfoundry:tools/armor/travelers/shield",
   "category": "equipment",
   "extra_materials": [
     "modernfoundry:leather"
   ],
   "key": {
     "c": {
-      "type": "modernfoundry:material_value",
+      "neoforge:ingredient_type": "modernfoundry:material_value",
       "material": {
         "type": "modernfoundry:stat_type",
         "stat_type": "modernfoundry:shield_core"
       },
       "value": 1
     },
-    "l": {
-      "tag": "c:leather"
-    }
+    "l": "#c:leathers"
   },
   "parts": "c",
   "pattern": [
@@ -24,7 +21,6 @@
     "lc"
   ],
   "result": {
-    "item": "modernfoundry:travelers_shield"
-  },
-  "show_notification": true
+    "id": "modernfoundry:travelers_shield"
+  }
 }

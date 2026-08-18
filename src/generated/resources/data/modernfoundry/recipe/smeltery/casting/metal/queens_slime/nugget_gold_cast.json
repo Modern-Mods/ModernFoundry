@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/queens_slime/nugget_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/nugget"
-  },
+  "cast": "#modernfoundry:casts/multi_use/nugget",
   "cooling_time": 24,
   "fluid": {
     "amount": 10,
     "tag": "modernfoundry:molten_queens_slime"
   },
+  "id": "modernfoundry:smeltery/casting/metal/queens_slime/nugget_gold_cast",
   "result": {
     "tag": "c:nuggets/queens_slime"
   }

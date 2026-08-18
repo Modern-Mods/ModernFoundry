@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "modernfoundry:scorched_alloyer"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "modernfoundry:blocks/scorched_alloyer"
+}

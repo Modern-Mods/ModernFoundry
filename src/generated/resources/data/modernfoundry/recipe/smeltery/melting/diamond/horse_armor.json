@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/diamond/horse_armor",
-  "ingredient": {
-    "item": "minecraft:diamond_horse_armor"
-  },
+  "ingredient": "minecraft:diamond_horse_armor",
   "result": {
     "amount": 700,
     "fluid": "modernfoundry:molten_diamond"

@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/zinc/allomancy_flakes",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "allomancy:zinc_flakes"
+      "type": "neoforge:registered",
+      "value": "allomancy:zinc_flakes"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/zinc/allomancy_flakes",
   "ingredient": {
     "item": "allomancy:zinc_flakes"
   },

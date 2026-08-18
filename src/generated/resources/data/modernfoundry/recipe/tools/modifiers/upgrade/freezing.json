@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/freezing",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/freezing",
   "inputs": [
     {
-      "item": "minecraft:powder_snow_bucket"
+      "ingredient": "minecraft:powder_snow_bucket"
     }
   ],
   "level": {
@@ -15,20 +15,10 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/melee"
-    },
-    {
-      "tag": "modernfoundry:modifiable/ranged/bows"
-    },
-    {
-      "tag": "modernfoundry:modifiable/fishing_rods"
-    },
-    {
-      "tag": "modernfoundry:modifiable/armor/worn"
-    },
-    {
-      "tag": "modernfoundry:modifiable/shields"
-    }
+    "#modernfoundry:modifiable/melee",
+    "#modernfoundry:modifiable/ranged/bows",
+    "#modernfoundry:modifiable/fishing_rods",
+    "#modernfoundry:modifiable/armor/worn",
+    "#modernfoundry:modifiable/shields"
   ]
 }

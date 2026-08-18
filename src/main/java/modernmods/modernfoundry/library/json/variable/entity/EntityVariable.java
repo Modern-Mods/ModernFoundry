@@ -2,14 +2,14 @@ package modernmods.modernfoundry.library.json.variable.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
-import modernmods.hilt.data.registry.GenericLoaderRegistry;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
+import modernmods.mantle.data.registry.GenericLoaderRegistry;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
 import modernmods.modernfoundry.library.json.variable.ToFloatFunction;
 import modernmods.modernfoundry.library.json.variable.VariableLoaderRegistry;
 
-import static modernmods.hilt.data.loadable.record.SingletonLoader.singleton;
+import static modernmods.mantle.data.loadable.record.SingletonLoader.singleton;
 
 /** Variable that fetches a property from an entity */
 public interface EntityVariable extends IHaveLoader {

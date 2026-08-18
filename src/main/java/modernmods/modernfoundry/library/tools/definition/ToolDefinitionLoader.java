@@ -1,19 +1,20 @@
 package modernmods.modernfoundry.library.tools.definition;
 
+import modernmods.modernfoundry.TConstruct;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import lombok.extern.log4j.Log4j2;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.conditions.ICondition.IContext;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.util.JsonHelper;
-import modernmods.hilt.util.typed.TypedMapBuilder;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.util.JsonHelper;
+import modernmods.mantle.util.typed.TypedMapBuilder;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
 
 import java.util.Collection;
@@ -24,21 +25,21 @@ import java.util.Map.Entry;
 
 /** JSON loader that loads tool definitions from JSON */
 @Log4j2
-public class ToolDefinitionLoader extends SimpleJsonResourceReloadListener {
+public class ToolDefinitionLoader extends SimpleJsonResourceReloadListener<com.google.gson.JsonElement> {
   public static final String FOLDER = "tinkering/tool_definitions";
   private static final ToolDefinitionLoader INSTANCE = new ToolDefinitionLoader();
 
   /** Map of loaded tool definition data */
-  private Map<ResourceLocation,ToolDefinitionData> dataMap = Collections.emptyMap();
+  private Map<Identifier,ToolDefinitionData> dataMap = Collections.emptyMap();
 
   /** Tool definitions registered to be loaded */
-  private final Map<ResourceLocation,ToolDefinition> definitions = new HashMap<>();
+  private final Map<Identifier,ToolDefinition> definitions = new HashMap<>();
 
   /** Condition context */
   private IContext conditionContext = IContext.EMPTY;
 
   private ToolDefinitionLoader() {
-    super(JsonHelper.DEFAULT_GSON, FOLDER);
+    super(net.minecraft.util.ExtraCodecs.JSON, net.minecraft.resources.FileToIdConverter.json(FOLDER));
   }
 
   /** Gets the instance of the definition loader */
@@ -56,9 +57,9 @@ public class ToolDefinitionLoader extends SimpleJsonResourceReloadListener {
    * Updates the tool data from the server.list. Should only be called client side
    * @param dataMap  Server data map
    */
-  protected void updateDataFromServer(Map<ResourceLocation,ToolDefinitionData> dataMap) {
+  protected void updateDataFromServer(Map<Identifier,ToolDefinitionData> dataMap) {
     this.dataMap = dataMap;
-    for (Entry<ResourceLocation,ToolDefinition> entry : definitions.entrySet()) {
+    for (Entry<Identifier,ToolDefinition> entry : definitions.entrySet()) {
       ToolDefinitionData data = dataMap.get(entry.getKey());
       ToolDefinition definition = entry.getValue();
       // errored serverside, so resolve without error here
@@ -71,16 +72,16 @@ public class ToolDefinitionLoader extends SimpleJsonResourceReloadListener {
   }
 
   /** Creates context for modifier parsing */
-  public static TypedMapBuilder contextBuilder(ResourceLocation key) {
+  public static TypedMapBuilder contextBuilder(Identifier key) {
     return TypedMapBuilder.builder().put(ContextKey.ID, key).put(ContextKey.DEBUG, "Tool Definition " + key);
   }
 
   @Override
-  protected void apply(Map<ResourceLocation,JsonElement> splashList, ResourceManager resourceManagerIn, ProfilerFiller profilerIn) {
+  protected void apply(Map<Identifier,JsonElement> splashList, ResourceManager resourceManagerIn, ProfilerFiller profilerIn) {
     long time = System.nanoTime();
-    ImmutableMap.Builder<ResourceLocation, ToolDefinitionData> builder = ImmutableMap.builder();
-    for (Entry<ResourceLocation,ToolDefinition> entry : definitions.entrySet()) {
-      ResourceLocation key = entry.getKey();
+    ImmutableMap.Builder<Identifier, ToolDefinitionData> builder = ImmutableMap.builder();
+    for (Entry<Identifier,ToolDefinition> entry : definitions.entrySet()) {
+      Identifier key = entry.getKey();
       ToolDefinition definition = entry.getValue();
       // first, need to have a json for the given name
       JsonElement element = splashList.get(key);
@@ -115,14 +116,14 @@ public class ToolDefinitionLoader extends SimpleJsonResourceReloadListener {
   }
 
   /** Adds the managers as datapack listeners */
-  private void addDataPackListeners(final AddReloadListenerEvent event) {
-    event.addListener(this);
+  private void addDataPackListeners(final AddServerReloadListenersEvent event) {
+    event.addListener(TConstruct.getResource("tool_definitions"), this);
     conditionContext = event.getConditionContext();
   }
 
   /** Registers a tool definition with the loader */
   public synchronized void registerToolDefinition(ToolDefinition definition) {
-    ResourceLocation name = definition.getId();
+    Identifier name = definition.getId();
     if (definitions.containsKey(name)) {
       throw new IllegalArgumentException("Duplicate tool definition " + name);
     }

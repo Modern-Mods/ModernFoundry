@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/lead/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/lead"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/lead"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/lead/dust",
+  "ingredient": "#c:dusts/lead",
   "result": {
     "amount": 90,
     "tag": "c:molten_lead"

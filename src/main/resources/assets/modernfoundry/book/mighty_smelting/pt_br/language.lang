@@ -8,7 +8,7 @@ armor_materials=Materiais de Armadura de Nível 3
 armor_materials.subtext=Esses materiais podem ser fundidos em armaduras e escudos.  
 
 tools=Ferramentas Grandes
-tools.subtext=Todas as ferramentas grandes requerem o uso da bigorna do Modern Foundry para serem fabricados.  
+tools.subtext=Todas as ferramentas grandes requerem o uso da bigorna do Tinker para serem fabricados.  
 
 armor=Armadura Poderosa
 armor.subtext=Ligas desbloqueiam uma gama maior de materiais para a criação de armaduras. Elas podem conceder habilidades adicionais além de conjuntos básicos como o equipamento do viajante.  

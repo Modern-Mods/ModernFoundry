@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wood/logs/spruce",
-  "ingredient": {
-    "tag": "minecraft:spruce_logs"
-  },
+  "ingredient": "#minecraft:spruce_logs",
   "leftover": "minecraft:spruce_planks",
   "material": "modernfoundry:wood",
   "needed": 1,

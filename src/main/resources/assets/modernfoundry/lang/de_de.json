@@ -1,5 +1,5 @@
 {
-"_comment": "Modern Foundry Common",
+"_comment": "Tinkers Common",
 
 "block.modernfoundry.sky_slime": "Skyslime-Block",
 "block.modernfoundry.sky_slime.tooltip": "Klebt sowohl an Schleim als auch an Honig",
@@ -120,9 +120,9 @@
 "item.modernfoundry.slimesteel_ingot": "Schleimstahlbarren",
 "item.modernfoundry.slimesteel_nugget": "Slimesteel-Nugget",
 
-"block.modernfoundry.tinkers_bronze_block": "Block aus Modern Foundry Bronze",
-"item.modernfoundry.tinkers_bronze_ingot": "Modern Foundry Bronzebarren",
-"item.modernfoundry.tinkers_bronze_nugget": "Modern Foundry Bronzenugget",
+"block.modernfoundry.tinkers_bronze_block": "Block aus Tinkers Bronze",
+"item.modernfoundry.tinkers_bronze_ingot": "Tinkers Bronzebarren",
+"item.modernfoundry.tinkers_bronze_nugget": "Tinkers Bronzenugget",
 
 "block.modernfoundry.rose_gold_block": "Block aus Roségold",
 "item.modernfoundry.rose_gold_ingot": "Roségoldbarren",
@@ -169,10 +169,10 @@
 
 "item.modernfoundry.materials_and_you": "Materialien und Sie",
 "item.modernfoundry.materials_and_you.tooltip": "Das Einführungsbuch in Werkzeuge und Materialien\nvon Selena",
-"item.modernfoundry.encyclopedia": "Enzyklopädie des Modern Foundry",
-"item.modernfoundry.encyclopedia.tooltip": "Das Nachschlagewerk, das jeder Modern Foundry braucht\nvon Selena",
+"item.modernfoundry.encyclopedia": "Enzyklopädie des Bastelns",
+"item.modernfoundry.encyclopedia.tooltip": "Das Nachschlagewerk, das jeder Tüftler braucht\nvon Selena",
 
-"item.modernfoundry.tinkers_gadgetry": "Modern Foundry",
+"item.modernfoundry.tinkers_gadgetry": "Bastelgeräte",
 "item.modernfoundry.tinkers_gadgetry.tooltip": "Buch der Verwendung von Schleim bei alltäglichen Aufgaben\nvon Melvin",
 
 "item.modernfoundry.puny_smelting": "Kleines Schmelzen",
@@ -262,7 +262,7 @@
 "item.modernfoundry.copper_can.contents": "Enthält: 1 Barren %s",
 
 
-"_comment": "Modern Foundry",
+"_comment": "Bastelmuster",
 
 "pattern.modernfoundry.repair_kit": "Reparaturset",
 
@@ -292,7 +292,7 @@
 "pattern.modernfoundry.tough_handle": "Harter Griff",
 
 
-"_comment": "Modern Foundry Goldgüsse",
+"_comment": "Tinkers Goldgüsse",
 
 "item.modernfoundry.blank_cast": "Rohling aus Goldguss",
 "item.modernfoundry.ingot_cast": "Goldguss von Barren",
@@ -333,7 +333,7 @@
 "item.modernfoundry.tough_handle_cast": "Robuster Griff aus Goldguss",
 
 
-"_comment": "Modern Foundry Sandgüsse",
+"_comment": "Tinkers Sandgüsse",
 
 "item.modernfoundry.blank_sand_cast": "Leerer Sandguss",
 "item.modernfoundry.ingot_sand_cast": "Barren-Sandguss",
@@ -374,7 +374,7 @@
 "item.modernfoundry.tough_handle_sand_cast": "Robuster Griff im Sandguss",
 
 
-"_comment": "Modern Foundry Red Sandguss",
+"_comment": "Tinkers Red Sandguss",
 
 "item.modernfoundry.blank_red_sand_cast": "Leerer roter Sandguss",
 "item.modernfoundry.ingot_red_sand_cast": "Roter Sandguss von Barren",
@@ -415,7 +415,7 @@
 "item.modernfoundry.tough_handle_red_sand_cast": "Robuster Griff aus rotem Sandguss",
 
 
-"_comment": "Modern Foundry",
+"_comment": "Bastelflüssigkeiten",
 
 "block.modernfoundry.blazing_blood_fluid": "Loderndes Blut",
 "fluid.modernfoundry.blazing_blood": "Loderndes Blut",
@@ -550,10 +550,10 @@
 "fluid.modernfoundry.flowing_molten_slimesteel": "Fließender geschmolzener Schleimstahl",
 "item.modernfoundry.molten_slimesteel_bucket": "Eimer aus geschmolzenem Schleimstahl",
 
-"block.modernfoundry.molten_tinkers_bronze_fluid": "Geschmolzene Modern Foundry",
-"fluid.modernfoundry.molten_tinkers_bronze": "Geschmolzene Modern Foundry",
-"fluid.modernfoundry.flowing_molten_tinkers_bronze": "Fließende geschmolzene Modern Foundry-Bronze",
-"item.modernfoundry.molten_tinkers_bronze_bucket": "Bronzeeimer des geschmolzenen Modern Foundry",
+"block.modernfoundry.molten_tinkers_bronze_fluid": "Geschmolzene Tüftlerbronze",
+"fluid.modernfoundry.molten_tinkers_bronze": "Geschmolzene Tüftlerbronze",
+"fluid.modernfoundry.flowing_molten_tinkers_bronze": "Fließende geschmolzene Tinker-Bronze",
+"item.modernfoundry.molten_tinkers_bronze_bucket": "Bronzeeimer des geschmolzenen Tinkers",
 
 "block.modernfoundry.molten_rose_gold_fluid": "Geschmolzenes Roségold",
 "fluid.modernfoundry.molten_rose_gold": "Geschmolzenes Roségold",
@@ -716,7 +716,7 @@
 "item.modernfoundry.molten_refined_obsidian_bucket": "Eimer aus geschmolzenem raffiniertem Obsidian",
 
 
-"_comment": "Modern Foundry-Gadgets",
+"_comment": "Tüftler-Gadgets",
 
 "block.modernfoundry.punji": "Punji-Sticks",
 "block.modernfoundry.punji.tooltip": "Spitz! Klebt auch an Wänden.",
@@ -770,20 +770,20 @@
 "block.modernfoundry.zombified_piglin_head": "Zombifizierter Piglin-Kopf",
 
 
-"_comment": "Modern Foundry",
+"_comment": "Basteltische",
 
 "block.modernfoundry.crafting_station": "Handwerksstation",
 
-"block.modernfoundry.tinker_station": "Modern Foundry",
-"block.modernfoundry.tinkers_anvil": "Modern Foundry Amboss",
-"block.modernfoundry.scorched_anvil": "Modern Foundry",
+"block.modernfoundry.tinker_station": "Bastelstation",
+"block.modernfoundry.tinkers_anvil": "Tinkers Amboss",
+"block.modernfoundry.scorched_anvil": "Bastelamboss",
 
 "block.modernfoundry.part_builder": "Teilebauer",
 
 "block.modernfoundry.part_chest": "Teiltruhe",
 "block.modernfoundry.part_chest.tooltip": "Hält bis zu 256 verschiedene Werkzeugteile",
 
-"block.modernfoundry.tinkers_chest": "Modern Foundry",
+"block.modernfoundry.tinkers_chest": "Bastelkiste",
 "block.modernfoundry.tinkers_chest.tooltip": "Hält bis zu 64 Stapel mit 16 Gegenständen",
 
 "block.modernfoundry.cast_chest": "Cast-Truhe",
@@ -791,7 +791,7 @@
 
 "item.modernfoundry.pattern": "Muster",
 
-"_comment": "Modern Foundry",
+"_comment": "Bastelwerkzeuge",
 
 "item.modernfoundry.pickaxe": "Spitzhacke",
 "item.modernfoundry.sledge_hammer": "Vorschlaghammer",
@@ -842,7 +842,7 @@
 "item.modernfoundry.slime_helmet.material.modernfoundry.pig_iron": "Zombifizierter Piglin Slimeskull",
 
 
-"_comment": "Modern Foundry-Werkzeugteile",
+"_comment": "Tinkers-Werkzeugteile",
 
 "item.modernfoundry.repair_kit": "Reparaturset",
 
@@ -934,7 +934,7 @@
 "multiblock.modernfoundry.tiny.no_fuel_tank": "Muss über einem Kraftstofftank oder einer Heizung platziert werden, um zu funktionieren",
 
 
-"_comment": "Modern Foundry-Schmelzerei",
+"_comment": "Tinkers-Schmelzerei",
 
 "block.modernfoundry.grout": "Mörtel",
 "block.modernfoundry.grout.tooltip": "Ich bin Grout!",
@@ -1021,7 +1021,7 @@
 "block.modernfoundry.seared_chute.tooltip": "Eingabe und Ausgabe von Schmelzerei-Gegenständen",
 
 
-"_comment": "Modern Foundry Foundry",
+"_comment": "Tinkers Foundry",
 
 "block.modernfoundry.nether_grout": "Nethermörtel",
 "block.modernfoundry.nether_grout.tooltip": "Wir sind Grout!",
@@ -1107,7 +1107,7 @@
 "gui.modernfoundry.fluid.hold_shift": "Halte §e§oShift§r§7 für Eimer",
 
 
-"_comment": "Modern Foundry World",
+"_comment": "Tinkers World",
 
 "entity.modernfoundry.earth_slime": "Schleim",
 "entity.modernfoundry.sky_slime": "Himmelsschleim",
@@ -1323,7 +1323,7 @@
 
 "material.modernfoundry.string": "Zeichenfolge",
 "material.modernfoundry.string.flavor": "Theoretisch das beste Material.",
-"material.modernfoundry.string.encyclopedia": "Ermöglicht die Reparatur des Werkzeugs mit Schnur in der Modern Foundry oder am Modern Foundry",
+"material.modernfoundry.string.encyclopedia": "Ermöglicht die Reparatur des Werkzeugs mit Schnur in der Bastelstation oder am Basteltisch",
 
 "material.modernfoundry.leather": "Leder",
 "material.modernfoundry.leather.flavor": "Eine Kuh getötet, ihre Haut gegerbt.",
@@ -1393,7 +1393,7 @@
 "material.modernfoundry.nahuatl.encyclopedia": "Hat eine Chance von 50 %, im Laufe der Zeit bis zu 5 Schaden zu verursachen, mehr Schaden auf höheren Stufen",
 
 "material.modernfoundry.bronze": "Bronze",
-"material.modernfoundry.bronze.silicon": "Modern Foundry's Bronze",
+"material.modernfoundry.bronze.silicon": "Tinker's Bronze",
 "material.modernfoundry.bronze.flavor": "Nicht zu verwechseln mit Bronze.",
 "material.modernfoundry.bronze.encyclopedia": "Gewährt +10 % bis +15 % Bergbaugeschwindigkeit pro Level bei voller Haltbarkeit, basierend auf anderen Modifikatoren",
 
@@ -1411,7 +1411,7 @@
 "material.modernfoundry.cobalt.encyclopedia": "Erhöht Bergbau- und Angriffsgeschwindigkeit um 7 % pro Stufe",
 
 "material.modernfoundry.manyullyn": "Manyullyn",
-"material.modernfoundry.manyullyn.flavor": "Das Metall, das die meisten Modern Foundry nie richtig aussprechen werden. Auch bekannt als Spitzenschneidmaterial.",
+"material.modernfoundry.manyullyn.flavor": "Das Metall, das die meisten Tüftler nie richtig aussprechen werden. Auch bekannt als Spitzenschneidmaterial.",
 "material.modernfoundry.manyullyn.encyclopedia": "Gewährt +2 Schaden pro Stufe nach 8 aufeinanderfolgenden Treffern",
 
 "material.modernfoundry.hepatizon": "Hepatizon",
@@ -1536,7 +1536,7 @@
 
 "_comment": "Modifikatoren",
 
-"key.categories.modernfoundry": "Modern Foundry-Konstrukt",
+"key.category.modernfoundry.modernfoundry": "Tüftler-Konstrukt",
 "key.modernfoundry.helmet_interact": "Helminteraktion",
 "key.modernfoundry.leggings_interact": "Leggings-Interaktion",
 
@@ -2303,29 +2303,29 @@
 
 "_comment": "GUIs",
 
-"itemGroup.modernfoundry.general": "Allgemeine Gegenstände der Modern Foundry",
-"itemGroup.modernfoundry.tools": "Modern Foundry",
-"itemGroup.modernfoundry.tool_parts": "Modern Foundry-Werkzeugteile",
-"itemGroup.modernfoundry.smeltery": "Modern Foundry Schmelzerei",
-"itemGroup.modernfoundry.world": "Modern Foundry",
-"itemGroup.modernfoundry.gadgets": "Modern Foundry-Gadgets",
+"itemGroup.modernfoundry.general": "Allgemeine Gegenstände der Tüftler",
+"itemGroup.modernfoundry.tools": "Tüftlerwerkzeuge",
+"itemGroup.modernfoundry.tool_parts": "Tüftler-Werkzeugteile",
+"itemGroup.modernfoundry.smeltery": "Foundry Schmelzerei",
+"itemGroup.modernfoundry.world": "Bastelwelt",
+"itemGroup.modernfoundry.gadgets": "Tüftler-Gadgets",
 
 "gui.modernfoundry.crafting_station": "Handwerksstation",
 "gui.modernfoundry.crafting_station.uncraftable": "Dieser Gegenstand kann derzeit nicht vom Spieler hergestellt werden",
 
 "gui.modernfoundry.part_builder": "Teilebauer",
-"gui.modernfoundry.part_builder.info": "Hier können Sie Werkzeugteile herstellen, um Ihre Modern Foundry zu erfüllen.\n\nUm ein Teil herzustellen, legen Sie einfach ein leeres Muster in den linken Schlitz und wählen Sie das gewünschte Teil aus. Der verbleibende Schlitz hält das Material, aus dem Sie Ihr Teil herstellen möchten.",
+"gui.modernfoundry.part_builder.info": "Hier können Sie Werkzeugteile herstellen, um Ihre Bastelfantasien zu erfüllen.\n\nUm ein Teil herzustellen, legen Sie einfach ein leeres Muster in den linken Schlitz und wählen Sie das gewünschte Teil aus. Der verbleibende Schlitz hält das Material, aus dem Sie Ihr Teil herstellen möchten.",
 "gui.modernfoundry.part_builder.material_value": "Materialwert: %s",
 "gui.modernfoundry.part_builder.cost": "Musterkosten: %s",
 "gui.modernfoundry.part_builder.trait": "Eigenschaft",
 "gui.modernfoundry.part_builder.uncraftable": "Formen nicht möglich",
 "gui.modernfoundry.part_builder.uncraftable.tooltip": "Material kann im Part Builder nicht geformt werden. Andere Methoden wie Gießen sind erforderlich.",
 
-"gui.modernfoundry.tinkers_chest": "Modern Foundry",
+"gui.modernfoundry.tinkers_chest": "Bastelkiste",
 "gui.modernfoundry.cast_chest": "Cast-Truhe",
 "gui.modernfoundry.part_chest": "Teiltruhe",
 
-"gui.modernfoundry.tinker_station": "Modern Foundry",
+"gui.modernfoundry.tinker_station": "Bastelstation",
 "gui.modernfoundry.tinker_station.repair_limited": "Reparieren & Modifizieren",
 "gui.modernfoundry.tinker_station.repair_limited.description": "Erlaubt das Erstellen aller grundlegenden Werkzeuge und das Anwenden der meisten Modifikatoren. Wählen Sie ein Layout aus den Schaltflächen auf der linken Seite aus, um zu beginnen.",
 "gui.modernfoundry.tinker_station.repair": "Reparieren & Modifizieren",
@@ -2496,20 +2496,20 @@
 
 
 "_comment": "Werkzeugverbesserungen",
-"advancements.modernfoundry.tools.materials_and_you.title": "Modern Foundry in Ausbildung",
+"advancements.modernfoundry.tools.materials_and_you.title": "In der Ausbildung basteln",
 "advancements.modernfoundry.tools.materials_and_you.description": "Craft Materials and You, das Einführungsbuch in Modern Foundry",
 "advancements.modernfoundry.tools.part_builder.title": "Teilebauer",
 "advancements.modernfoundry.tools.part_builder.description": "Erstellen Sie einen Part Builder, Ihr erster Schritt zur Herstellung von Werkzeugen",
 "advancements.modernfoundry.tools.make_part.title": "Werkzeugteile",
 "advancements.modernfoundry.tools.make_part.description": "Erstellen Sie Ihr erstes Werkzeugteil mit einem Muster und etwas Material im Part Builder",
-"advancements.modernfoundry.tools.tinker_station.title": "Modern Foundry",
-"advancements.modernfoundry.tools.tinker_station.description": "Erstelle eine Modern Foundry, um Teile zu Werkzeugen zu kombinieren",
-"advancements.modernfoundry.tools.tinker_tool.title": "Anfänger-Modern Foundry",
-"advancements.modernfoundry.tools.tinker_tool.description": "Erstellen Sie Ihr erstes Modern Foundry",
+"advancements.modernfoundry.tools.tinker_station.title": "Bastelstation",
+"advancements.modernfoundry.tools.tinker_station.description": "Erstelle eine Bastelstation, um Teile zu Werkzeugen zu kombinieren",
+"advancements.modernfoundry.tools.tinker_tool.title": "Anfänger-Tüftler",
+"advancements.modernfoundry.tools.tinker_tool.description": "Erstellen Sie Ihr erstes Bastelwerkzeug",
 "advancements.modernfoundry.tools.travelers_gear.title": "Reisender",
 "advancements.modernfoundry.tools.travelers_gear.description": "Stelle ein komplettes Set an Reiseausrüstung her",
 "advancements.modernfoundry.tools.modified.title": "Änderung",
-"advancements.modernfoundry.tools.modified.description": "Einen Modifikator auf ein Modern Foundry anwenden",
+"advancements.modernfoundry.tools.modified.description": "Einen Modifikator auf ein Bastelwerkzeug anwenden",
 "advancements.modernfoundry.tools.upgrade_slots.title": "Alle Upgrades",
 "advancements.modernfoundry.tools.upgrade_slots.description": "Geben Sie einem Werkzeug 6 weitere Upgrade-Slots mit beschreibbaren, rekapitulierten, harmonischen, wiederbelebten und vergoldeten",
 "advancements.modernfoundry.tools.glass_cannon.title": "Glaskanone",
@@ -2535,7 +2535,7 @@
 "advancements.modernfoundry.smeltery.structure.title": "Die mächtige Schmelze",
 "advancements.modernfoundry.smeltery.structure.description": "Stelle einen Schmelzerei-Controller her, indem du geschmolzenes Kupfer gießt, baue eine Schmelzerei und öffne die Schmelzerei-UI",
 "advancements.modernfoundry.smeltery.tinkers_anvil.title": "Fortgeschrittener Werkzeugbau",
-"advancements.modernfoundry.smeltery.tinkers_anvil.description": "Stelle einen Modern Foundry mit Legierungen aus der Schmelzerei her!",
+"advancements.modernfoundry.smeltery.tinkers_anvil.description": "Stelle einen Tüftleramboss mit Legierungen aus der Schmelzerei her!",
 "advancements.modernfoundry.smeltery.tool_forge.title": "Werkzeugschmiede",
 "advancements.modernfoundry.smeltery.tool_forge.description": "Schmiede eins von jedem breiten Werkzeug im Amboss",
 "advancements.modernfoundry.smeltery.abilities.title": "Fähigkeitsmeister",
@@ -2558,8 +2558,8 @@
 "advancements.modernfoundry.foundry.encyclopedia.description": "Erstellen Sie die Materialenzyklopädie mit Ihrem Wissen aus allen Büchern",
 
 "_comment": "Gadget-Fortschritte",
-"advancements.modernfoundry.world.tinkers_gadgetry.title": "Modern Foundry's Gadgetry",
-"advancements.modernfoundry.world.tinkers_gadgetry.description": "Stelle Modern Foundry's Gadgetry her, um mit der Erkundung der Welt zu beginnen",
+"advancements.modernfoundry.world.tinkers_gadgetry.title": "Tinker's Gadgetry",
+"advancements.modernfoundry.world.tinkers_gadgetry.description": "Stelle Tinker's Gadgetry her, um mit der Erkundung der Welt zu beginnen",
 "advancements.modernfoundry.world.earth_island.title": "Earthslime-Insel",
 "advancements.modernfoundry.world.earth_island.description": "Suche eine Erdschleiminsel im Ozean",
 "advancements.modernfoundry.world.sky_island.title": "Himmelsschleiminsel",

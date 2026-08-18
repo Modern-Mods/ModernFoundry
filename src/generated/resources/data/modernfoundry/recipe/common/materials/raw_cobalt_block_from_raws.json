@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:raw_cobalt_block",
   "key": {
-    "#": {
-      "tag": "c:raw_materials/cobalt"
-    },
-    "*": {
-      "item": "modernfoundry:raw_cobalt"
-    }
+    "#": "#c:raw_materials/cobalt",
+    "*": "modernfoundry:raw_cobalt"
   },
   "pattern": [
     "###",
@@ -17,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:raw_cobalt_block"
-  },
-  "show_notification": true
+  }
 }

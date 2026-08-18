@@ -63,7 +63,7 @@ public class Config {
       builder.comment("Everything to do with gameplay").push("gameplay");
 
       this.shouldSpawnWithTinkersBook = builder
-        .comment("Set this to false to disable new players spawning with the Modern Foundry Book.")
+        .comment("Set this to false to disable new players spawning with the Tinkers' Book.")
         .translation("modernfoundry.configgui.shouldSpawnWithTinkersBook")
         .worldRestart()
         .define("shouldSpawnWithTinkersBook", true);

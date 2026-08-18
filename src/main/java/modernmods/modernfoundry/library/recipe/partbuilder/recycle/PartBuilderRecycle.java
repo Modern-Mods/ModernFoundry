@@ -5,17 +5,17 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
@@ -53,13 +53,13 @@ public class PartBuilderRecycle implements IPartBuilderRecipe, IMultiRecipe<Disp
     PartBuilderRecycle::new);
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   private final Ingredient tool;
   private final Ingredient pattern;
   private final Map<Pattern,ItemOutput> results;
   private final int resultCount;
 
-  public PartBuilderRecycle(ResourceLocation id, Ingredient tool, Ingredient pattern, Map<Pattern,ItemOutput> results) {
+  public PartBuilderRecycle(Identifier id, Ingredient tool, Ingredient pattern, Map<Pattern,ItemOutput> results) {
     this.id = id;
     this.tool = tool;
     this.pattern = pattern;
@@ -133,7 +133,7 @@ public class PartBuilderRecycle implements IPartBuilderRecipe, IMultiRecipe<Disp
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends PartBuilderRecycle> getSerializer() {
     return TinkerTables.partBuilderDamageableRecycling.get();
   }
 
@@ -147,7 +147,6 @@ public class PartBuilderRecycle implements IPartBuilderRecipe, IMultiRecipe<Disp
 
   /** @deprecated use {@link #assemble(IPartBuilderContainer, HolderLookup.Provider, Pattern)} */
   @Deprecated
-  @Override
   public ItemStack getResultItem(HolderLookup.Provider access) {
     return ItemStack.EMPTY;
   }
@@ -184,8 +183,8 @@ public class PartBuilderRecycle implements IPartBuilderRecipe, IMultiRecipe<Disp
   @Override
   public List<DisplayPartRecipe> getRecipes(RegistryAccess access) {
     if (displayRecipes == null) {
-      List<ItemStack> patternItems = List.of(pattern.getItems());
-      List<ItemStack> toolItems = List.of(tool.getItems());
+      List<ItemStack> patternItems = List.of(pattern.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
+      List<ItemStack> toolItems = List.of(tool.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
       displayRecipes = results.entrySet().stream()
         .map(entry -> new DisplayPartRecipe(id, MaterialVariant.UNKNOWN, entry.getKey(), patternItems, 0, toolItems, List.of(entry.getValue().get()))).toList();
     }

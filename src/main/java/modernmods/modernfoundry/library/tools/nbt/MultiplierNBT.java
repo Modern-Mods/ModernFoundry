@@ -1,14 +1,12 @@
 package modernmods.modernfoundry.library.tools.nbt;
 
 import com.google.common.collect.ImmutableMap;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
 import modernmods.modernfoundry.library.tools.stat.INumericToolStat;
 import modernmods.modernfoundry.library.tools.stat.ToolStats;
 
@@ -21,7 +19,6 @@ import java.util.Set;
  * Generic container for tool stats, allows addons to select which stats they wish to use
  */
 @SuppressWarnings("ClassCanBeRecord")
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @EqualsAndHashCode
 @ToString
 public class MultiplierNBT {
@@ -32,6 +29,10 @@ public class MultiplierNBT {
 
   /** All currently contained multipliers */
   private final Map<INumericToolStat<?>, Float> stats;
+
+  MultiplierNBT(Map<INumericToolStat<?>, Float> stats) {
+    this.stats = stats;
+  }
 
   /** Creates a new builder */
   public static Builder builder() {
@@ -75,9 +76,9 @@ public class MultiplierNBT {
     // simply try each key as a tool stat
     Builder builder = builder();
     CompoundTag nbt = (CompoundTag)inbt;
-    for (String key : nbt.getAllKeys()) {
-      if (nbt.contains(key, Tag.TAG_ANY_NUMERIC) && StatsNBT.readStatIdFromNBT(key) instanceof INumericToolStat<?> stat) {
-        builder.set(stat, nbt.getFloat(key));
+    for (String key : nbt.keySet()) {
+      if (nbt.contains(key) && StatsNBT.readStatIdFromNBT(key) instanceof INumericToolStat<?> stat) {
+        builder.set(stat, nbt.getFloatOr(key, 0f));
       }
     }
     return builder.build();

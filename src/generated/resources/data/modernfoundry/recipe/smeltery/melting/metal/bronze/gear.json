@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/bronze/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/bronze"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/bronze"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/bronze/gear",
+  "ingredient": "#c:gears/bronze",
   "result": {
     "amount": 360,
     "tag": "c:molten_bronze"

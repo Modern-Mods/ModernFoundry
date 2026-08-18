@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/aluminum/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/aluminum"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/aluminum"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/aluminum/ingot",
+  "ingredient": "#c:ingots/aluminum",
   "material": "modernfoundry:aluminum",
   "needed": 1,
   "value": 1

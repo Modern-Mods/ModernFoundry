@@ -6,7 +6,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
 import net.minecraft.world.level.block.LiquidBlock;
-import modernmods.hilt.data.GenericDataProvider;
+import modernmods.mantle.data.GenericDataProvider;
 
 import java.util.concurrent.CompletableFuture;
 

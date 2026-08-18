@@ -19,8 +19,7 @@
       "modernfoundry:shield_core",
       "modernfoundry:maille",
       "modernfoundry:cuirass",
-      "modernfoundry:slime",
-      "modernfoundry:shell"
+      "modernfoundry:slime"
     ],
     "transformer": {
       "type": "modernfoundry:recolor_sprite",

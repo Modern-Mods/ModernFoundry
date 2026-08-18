@@ -1,0 +1,42 @@
+{
+  "parent": "modernfoundry:world/tinkers_gadgetry",
+  "criteria": {
+    "found_island": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structure": "modernfoundry:earth_slime_island"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.world.earth_island.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:earth_slime_sapling"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.world.earth_island.title"
+    }
+  },
+  "requirements": [
+    [
+      "found_island"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

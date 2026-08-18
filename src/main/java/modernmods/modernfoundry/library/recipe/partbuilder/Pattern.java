@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.recipe.partbuilder;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import modernmods.modernfoundry.library.utils.IdParser;
 import modernmods.modernfoundry.library.utils.ResourceId;
 import modernmods.modernfoundry.library.utils.Util;
@@ -22,7 +22,7 @@ public class Pattern extends ResourceId {
     super(namespaceIn, pathIn);
   }
 
-  public Pattern(ResourceLocation location) {
+  public Pattern(Identifier location) {
     super(location);
   }
 
@@ -31,7 +31,7 @@ public class Pattern extends ResourceId {
    * @return  Translation key
    */
   public String getTranslationKey() {
-    return Util.makeTranslationKey("pattern", this);
+    return Util.makeTranslationKey("pattern", getIdentifier());
   }
 
   /**
@@ -46,8 +46,8 @@ public class Pattern extends ResourceId {
    * Gets the texture for this pattern for rendering
    * @return  Pattern texture
    */
-  public ResourceLocation getTexture() {
-    return ResourceLocation.fromNamespaceAndPath(getNamespace(), "gui/tinker_pattern/" + getPath());
+  public Identifier getTexture() {
+    return Identifier.fromNamespaceAndPath(getNamespace(), "gui/tinker_pattern/" + getPath());
   }
 
 

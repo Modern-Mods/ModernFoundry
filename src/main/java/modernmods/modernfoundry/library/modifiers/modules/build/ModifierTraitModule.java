@@ -2,9 +2,9 @@ package modernmods.modernfoundry.library.modifiers.modules.build;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.library.json.predicate.tool.ToolContextPredicate;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;

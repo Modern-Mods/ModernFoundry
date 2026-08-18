@@ -1,65 +1,7 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/base/staff",
   "textures": {
-    "tool":       "modernfoundry:item/tool/staff/sky",
+    "tool": "modernfoundry:item/tool/staff/sky",
     "large_tool": "modernfoundry:item/tool/staff/sky_large"
-  },
-  "large": true,
-  "modifier_maps": ["modernfoundry:staff/sky", "modernfoundry:staff"],
-  "modifier_roots": {
-    "small": [ "modernfoundry:item/tool/staff/modifiers/sky/", "modernfoundry:item/tool/staff/modifiers/" ],
-    "large": [ "modernfoundry:item/tool/staff/large_modifiers/sky/", "modernfoundry:item/tool/staff/large_modifiers/" ]
-  },
-  "first_modifiers": [ "modernfoundry:dyed", "modernfoundry:embellishment" ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 1 },
-      "model": "modernfoundry:item/tool/staff/sky/charging_1"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.4 },
-      "model": "modernfoundry:item/tool/staff/sky/charging_2"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.7 },
-      "model": "modernfoundry:item/tool/staff/sky/charging_3"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.9 },
-      "model": "modernfoundry:item/tool/staff/sky/charging_4"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 1.0 },
-      "model": "modernfoundry:item/tool/staff/sky/charging_5"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/staff/sky/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.05 },
-      "model": "modernfoundry:item/tool/staff/sky/blocking_1"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.4 },
-      "model": "modernfoundry:item/tool/staff/sky/blocking_2"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.7 },
-      "model": "modernfoundry:item/tool/staff/sky/blocking_3"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.9 },
-      "model": "modernfoundry:item/tool/staff/sky/blocking_4"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 1.0 },
-      "model": "modernfoundry:item/tool/staff/sky/blocking_5"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/staff/sky/broken"
-    }
-  ]
+  }
 }

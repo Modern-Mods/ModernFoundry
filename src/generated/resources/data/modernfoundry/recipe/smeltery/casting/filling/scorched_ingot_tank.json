@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:basin_filling",
-  "id": "modernfoundry:smeltery/casting/filling/scorched_ingot_tank",
   "container": "modernfoundry:scorched_ingot_tank",
   "fluid_amount": 90
 }

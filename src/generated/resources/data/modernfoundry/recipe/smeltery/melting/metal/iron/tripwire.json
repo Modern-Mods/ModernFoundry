@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/tripwire",
-  "ingredient": {
-    "item": "minecraft:tripwire_hook"
-  },
+  "ingredient": "minecraft:tripwire_hook",
   "result": {
     "amount": 40,
     "tag": "c:molten_iron"

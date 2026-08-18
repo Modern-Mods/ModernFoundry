@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.tools.item.IModifiable;
@@ -30,7 +30,7 @@ public class ToolBuildingRecipeBuilder extends AbstractRecipeBuilder<ToolBuildin
   @Setter
   private int outputSize = 1;
   @Nullable @Setter
-  private ResourceLocation layoutSlot = null;
+  private Identifier layoutSlot = null;
   private final List<Ingredient> extraRequirements = new ArrayList<>();
   private List<IToolPart> partsOverride = null;
   private final List<MaterialVariantId> extraMaterials = new ArrayList<>();
@@ -77,8 +77,8 @@ public class ToolBuildingRecipeBuilder extends AbstractRecipeBuilder<ToolBuildin
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
-    ResourceLocation advancementId = this.buildOptionalAdvancement(id, "parts");
+  public void save(Consumer<FinishedRecipe> consumerIn, Identifier id) {
+    Identifier advancementId = this.buildOptionalAdvancement(id, "parts");
     if (tippedModifier != null) {
       if (extraMaterials.isEmpty()) {
         throw new IllegalArgumentException("Must have at least 1 material for modifier transform");

@@ -1,6 +1,12 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "ignore": "modernfoundry:non_singular_ore_rates",
+      "match": "c:ores/cobalt"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/cobalt/ore_singular",
   "byproducts": [
     {
       "amount": 50,
@@ -8,21 +14,11 @@
       "rate": "gem"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_combination_filled",
-      "ignore": "modernfoundry:non_singular_ore_rates",
-      "match": "c:ores/cobalt"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/metal/cobalt/ore_singular",
   "ingredient": {
-    "type": "neoforge:difference",
-    "base": {
-      "tag": "c:ores/cobalt"
-    },
-    "subtracted": {
-      "tag": "modernfoundry:non_singular_ore_rates"
-    }
+    "neoforge:ingredient_type": "neoforge:difference",
+    "base": "#c:ores/cobalt",
+    "subtracted": "#modernfoundry:non_singular_ore_rates"
   },
   "rate": "metal",
   "result": {

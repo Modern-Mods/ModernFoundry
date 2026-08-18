@@ -3,11 +3,11 @@ package modernmods.modernfoundry.library.modifiers.modules.behavior;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.util.typed.TypedMap;
 
 import java.util.function.Function;
 
@@ -22,7 +22,7 @@ public record AttributeUniqueField<P>(String key, Function<P,String> getter) imp
     if (json.has(key)) {
       return GsonHelper.getAsString(json, key);
     }
-    ResourceLocation id = context.get(ContextKey.ID);
+    Identifier id = context.get(ContextKey.ID);
     if (id == null) {
       throw new JsonParseException("Missing modifier ID in context, cannot default " + key);
     }

@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/slime/ichor/bottle",
-  "cast": {
-    "item": "minecraft:glass_bottle"
-  },
+  "cast": "minecraft:glass_bottle",
   "cast_consumed": true,
   "cooling_time": 1,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:ichor"
   },
+  "id": "modernfoundry:smeltery/casting/slime/ichor/bottle",
   "result": "modernfoundry:ichor_slime_bottle"
 }

@@ -52,7 +52,7 @@ public class FoundryCategory extends AbstractMeltingCategory {
 
     // fuel
     builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 4, 4)
-           .addTooltipCallback(FUEL_TOOLTIP)
+           .addRichTooltipCallback(FUEL_TOOLTIP)
            .setFluidRenderer(1, false, 12, 32)
            .addIngredients(NeoForgeTypes.FLUID_STACK, MeltingFuelHandler.getUsableFuels(recipe.getTemperature()));
   }

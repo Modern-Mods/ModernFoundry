@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/earth/congealed",
-  "ingredient": {
-    "item": "modernfoundry:earth_congealed_slime"
-  },
+  "ingredient": "modernfoundry:earth_congealed_slime",
   "result": {
     "amount": 1000,
     "tag": "c:slime"

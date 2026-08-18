@@ -1,5 +1,7 @@
 package modernmods.modernfoundry.smeltery.block.entity;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -10,11 +12,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.items.IItemHandler;
-import modernmods.hilt.block.entity.NameableBlockEntity;
+import modernmods.mantle.block.entity.NameableBlockEntity;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.entity.inventory.HeaterItemHandler;
@@ -53,7 +55,7 @@ public class HeaterBlockEntity extends NameableBlockEntity implements ILegacyCap
     if (capability == ForgeCapabilities.ITEM_HANDLER) {
       return itemCapability.cast();
     }
-    return modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
+    return modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
   }
 
   public void invalidateCaps() {
@@ -65,16 +67,14 @@ public class HeaterBlockEntity extends NameableBlockEntity implements ILegacyCap
   /* NBT */
 
   @Override
-  public void load(CompoundTag tags) {
-    super.load(tags);
-    if (tags.contains(TAG_ITEM, Tag.TAG_COMPOUND)) {
-      itemHandler.readFromNBT(tags.getCompound(TAG_ITEM));
-    }
+  public void loadAdditional(ValueInput input) {
+    super.loadAdditional(input);
+    input.read(TAG_ITEM, CompoundTag.CODEC).ifPresent(itemHandler::readFromNBT);
   }
 
   @Override
-  public void saveAdditional(CompoundTag tags) {
-    super.saveAdditional(tags);
-    tags.put(TAG_ITEM, itemHandler.writeToNBT());
+  public void saveAdditional(ValueOutput output) {
+    super.saveAdditional(output);
+    output.store(TAG_ITEM, CompoundTag.CODEC, itemHandler.writeToNBT());
   }
 }

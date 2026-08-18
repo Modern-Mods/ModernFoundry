@@ -1,13 +1,8 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/scorched/stone_from_magma",
   "cast": [
-    {
-      "item": "minecraft:basalt"
-    },
-    {
-      "item": "minecraft:gravel"
-    }
+    "minecraft:basalt",
+    "minecraft:gravel"
   ],
   "cast_consumed": true,
   "cooling_time": 99,
@@ -15,5 +10,6 @@
     "amount": 500,
     "tag": "c:magma"
   },
+  "id": "modernfoundry:smeltery/casting/scorched/stone_from_magma",
   "result": "modernfoundry:scorched_stone"
 }

@@ -1,5 +1,5 @@
 {
-  "type": "hilt:replace_item",
+  "type": "mantle:replace_item",
   "conditions": [
     {
       "condition": "neoforge:loot_table_id",

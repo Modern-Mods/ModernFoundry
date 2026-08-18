@@ -542,7 +542,7 @@
     "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:manyullyn_ingot"
+      "id": "modernfoundry:manyullyn_ingot"
     },
     "show_toast": true,
     "title": {

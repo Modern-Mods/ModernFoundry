@@ -1,10 +1,10 @@
 package modernmods.modernfoundry.library.json.predicate.modifier;
 
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.PredicateRegistry;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.PredicateRegistry;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 

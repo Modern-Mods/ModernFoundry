@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/pig_iron/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/pig_iron"
-  },
+  "ingredient": "#c:nuggets/pig_iron",
   "result": {
     "amount": 10,
     "fluid": "modernfoundry:molten_pig_iron"

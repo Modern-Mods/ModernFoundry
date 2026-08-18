@@ -1,13 +1,13 @@
 package modernmods.modernfoundry.tools.modules.ranged.common;
 
 import net.minecraft.core.Direction.Axis;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -45,7 +45,7 @@ public record ProjectileBounceModule(LevelingInt bounces) implements ModifierMod
 
   @Override
   public boolean onProjectileHitsBlock(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity owner) {
-    ResourceLocation key = modifier.getId();
+    Identifier key = modifier.getId().getIdentifier();
     int bounces = persistentData.getInt(key);
     if (bounces < this.bounces.compute(modifier.getEffectiveLevel())) {
       Vec3 motion = projectile.getDeltaMovement();
@@ -61,7 +61,7 @@ public record ProjectileBounceModule(LevelingInt bounces) implements ModifierMod
 
         // mark a bounce as happened, block future modifiers
         persistentData.putInt(key, bounces + 1);
-        if (!projectile.level().isClientSide) {
+        if (!projectile.level().isClientSide()) {
           projectile.playSound(Sounds.SLIMY_BOUNCE.getSound());
         }
         return true;

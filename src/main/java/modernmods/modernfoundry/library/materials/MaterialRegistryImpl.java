@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.materials;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.Loadable;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.materials.definition.MaterialManager;
@@ -82,7 +82,7 @@ public class MaterialRegistryImpl implements IMaterialRegistry {
   }
 
   @Override
-  public Collection<ResourceLocation> getAllStatTypeIds() {
+  public Collection<Identifier> getAllStatTypeIds() {
     return materialStatsManager.getAllStatTypeIds();
   }
 
@@ -117,7 +117,7 @@ public class MaterialRegistryImpl implements IMaterialRegistry {
   public void registerStatType(MaterialStatType<?> type, @Nullable MaterialStatsId fallback) {
     registerStatType(type);
     if (fallback != null) {
-      materialTraitsManager.registerStatTypeFallback(type.getId(), fallback);
+      materialTraitsManager.registerStatTypeFallback(type.getStatId(), fallback);
     }
   }
 

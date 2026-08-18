@@ -5,18 +5,18 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
@@ -60,7 +60,7 @@ public class ToolCastingRecipe extends PartSwapCastingRecipe implements IMultiRe
   /** List of materials to add after the cast and fluid */
   private final List<MaterialVariantId> extraMaterials;
 
-  protected ToolCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient cast, int itemCost, CastPurpose castPurpose, IModifiable result, IJsonPredicate<MaterialVariantId> allowedMaterials, List<MaterialVariantId> extraMaterials) {
+  protected ToolCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, Ingredient cast, int itemCost, CastPurpose castPurpose, IModifiable result, IJsonPredicate<MaterialVariantId> allowedMaterials, List<MaterialVariantId> extraMaterials) {
     super(serializer, id, group, cast, itemCost, castPurpose.swapIndex, allowedMaterials);
     this.result = result;
     this.extraMaterials = extraMaterials;
@@ -73,9 +73,9 @@ public class ToolCastingRecipe extends PartSwapCastingRecipe implements IMultiRe
     }
   }
 
-  /** @deprecated use {@link #ToolCastingRecipe(TypeAwareRecipeSerializer, ResourceLocation, String, Ingredient, int, CastPurpose, IModifiable, IJsonPredicate, List)} */
+  /** @deprecated use {@link #ToolCastingRecipe(TypeAwareRecipeSerializer, Identifier, String, Ingredient, int, CastPurpose, IModifiable, IJsonPredicate, List)} */
   @Deprecated(forRemoval = true)
-  public ToolCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient cast, int itemCost, IModifiable result) {
+  public ToolCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, Ingredient cast, int itemCost, IModifiable result) {
     this(serializer, id, group, cast, itemCost, CastPurpose.MAYBE_MATERIAL, result, MaterialPredicate.ANY, List.of());
   }
 
@@ -96,7 +96,7 @@ public class ToolCastingRecipe extends PartSwapCastingRecipe implements IMultiRe
       return canPartSwap(inv);
     }
     // no tool match? need to check cast and fluid
-    if (!this.getCast().test(cast)) {
+    if (!this.testCast(cast)) {
       return false;
     }
     // if we have a material item input, must have exactly 2 materials, else exactly 1
@@ -240,7 +240,7 @@ public class ToolCastingRecipe extends PartSwapCastingRecipe implements IMultiRe
         tag.putBoolean(TooltipUtil.KEY_DISPLAY, true);
         TagUtil.setTag(partSwapDisplay, tag);
 
-        List<ItemStack> casts = List.of(getCast().getItems());
+        List<ItemStack> casts = List.of(getCast().items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
         // if the cast is consumed, add the tool to the list of cast items to show that part swapping is an option
         boolean consumed = castPurpose != CastPurpose.CATALYST;
         List<ItemStack> castsWithTool = consumed ? Streams.concat(casts.stream(), Stream.of(partSwapDisplay)).toList() : casts;

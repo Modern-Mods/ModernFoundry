@@ -2,9 +2,9 @@ package modernmods.modernfoundry.shared.command.argument;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.command.argument.TagSource;
+import modernmods.mantle.command.argument.TagSource;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.materials.definition.MaterialManager;
@@ -53,12 +53,12 @@ public record MaterialTagSource(MaterialManager manager) implements TagSource<IM
 
   @Nullable
   @Override
-  public List<ResourceLocation> keysInTag(TagKey<IMaterial> tag) {
+  public List<Identifier> keysInTag(TagKey<IMaterial> tag) {
     List<IMaterial> entries = manager.getTagOrNull(tag);
     if (entries == null) {
       return null;
     }
-    return entries.stream().map(IMaterial::getIdentifier).collect(Collectors.toList());
+    return entries.stream().map(m -> m.getIdentifier().getIdentifier()).collect(Collectors.toList());
   }
 
 
@@ -66,7 +66,7 @@ public record MaterialTagSource(MaterialManager manager) implements TagSource<IM
 
   @Nullable
   @Override
-  public IMaterial getValue(ResourceLocation key) {
+  public IMaterial getValue(Identifier key) {
     return manager.getMaterial(new MaterialId(key)).orElse(null);
   }
 
@@ -76,7 +76,7 @@ public record MaterialTagSource(MaterialManager manager) implements TagSource<IM
   }
 
   @Override
-  public Stream<ResourceLocation> valueKeys() {
-    return manager.getAllMaterials().stream().map(IMaterial::getIdentifier);
+  public Stream<Identifier> valueKeys() {
+    return manager.getAllMaterials().stream().map(m -> m.getIdentifier().getIdentifier());
   }
 }

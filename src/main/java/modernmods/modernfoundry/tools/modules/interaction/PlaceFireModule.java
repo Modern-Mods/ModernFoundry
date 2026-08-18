@@ -24,8 +24,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.ItemAbility;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -80,12 +80,12 @@ public enum PlaceFireModule implements ModifierModule, EntityInteractionModifier
   public InteractionResult afterEntityUse(IToolStackView tool, ModifierEntry modifier, Player player, LivingEntity target, InteractionHand hand, InteractionSource source) {
     if (tool.getHook(ToolHooks.INTERACTION).canInteract(tool, modifier.getId(), source) && target instanceof Creeper creeper) {
       Level level = player.level();
-      level.playSound(player, creeper.getX(), creeper.getY(), creeper.getZ(), SoundEvents.FLINTANDSTEEL_USE, creeper.getSoundSource(), 1.0F, level.random.nextFloat() * 0.4F + 0.8F);
-      if (!level.isClientSide) {
+      level.playSound(player, creeper.getX(), creeper.getY(), creeper.getZ(), SoundEvents.FLINTANDSTEEL_USE, creeper.getSoundSource(), 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
+      if (!level.isClientSide()) {
         creeper.ignite();
         ToolDamageUtil.damageAnimated(tool, 1, player, source.getSlot(hand), modifier.getId());
       }
-      return InteractionResult.sidedSuccess(level.isClientSide);
+      return InteractionResult.SUCCESS;
     }
     return InteractionResult.PASS;
   }
@@ -94,7 +94,7 @@ public enum PlaceFireModule implements ModifierModule, EntityInteractionModifier
   private static boolean ignite(Level world, BlockPos pos, BlockState state, Direction sideHit, Direction horizontalFacing, @Nullable Player player) {
     // campfires first
     if (CampfireBlock.canLight(state) || CandleBlock.canLight(state) || CandleCakeBlock.canLight(state)) {
-      world.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, world.random.nextFloat() * 0.4F + 0.8F);
+      world.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
       world.setBlock(pos, state.setValue(BlockStateProperties.LIT, true), 11);
       world.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
       return true;
@@ -110,7 +110,7 @@ public enum PlaceFireModule implements ModifierModule, EntityInteractionModifier
     // fire starting
     BlockPos offset = pos.relative(sideHit);
     if (BaseFireBlock.canBePlacedAt(world, offset, horizontalFacing)) {
-      world.playSound(player, offset, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, world.random.nextFloat() * 0.4F + 0.8F);
+      world.playSound(player, offset, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
       world.setBlock(offset, BaseFireBlock.getState(world, offset), 11);
       return true;
     }
@@ -167,7 +167,7 @@ public enum PlaceFireModule implements ModifierModule, EntityInteractionModifier
         if (player != null) {
           player.onEquippedItemBroken(stack.getItem(), slotType);
         }
-        return InteractionResult.sidedSuccess(world.isClientSide);
+        return InteractionResult.SUCCESS;
       }
     }
     // ignite the edges, if any worked return success
@@ -183,7 +183,7 @@ public enum PlaceFireModule implements ModifierModule, EntityInteractionModifier
       }
     }
     // when targeting fire, return true so left click interact does not continue to run
-    return didIgnite || targetingFire ? InteractionResult.sidedSuccess(world.isClientSide) : InteractionResult.PASS;
+    return didIgnite || targetingFire ? InteractionResult.SUCCESS : InteractionResult.PASS;
   }
 
   @Nullable

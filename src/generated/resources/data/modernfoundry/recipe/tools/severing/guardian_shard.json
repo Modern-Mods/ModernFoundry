@@ -1,12 +1,12 @@
 {
   "type": "modernfoundry:severing",
-  "id": "modernfoundry:tools/severing/guardian_shard",
   "entity": {
     "types": [
       "minecraft:guardian",
       "minecraft:elder_guardian"
     ]
   },
+  "id": "modernfoundry:tools/severing/guardian_shard",
   "looting_bonus": 0.01,
   "per_level_chance": 0.05,
   "result": {

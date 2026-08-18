@@ -8,8 +8,8 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import modernmods.hilt.command.argument.TagSourceArgument;
-import modernmods.hilt.registration.deferred.ArgumentTypeDeferredRegister;
+import modernmods.mantle.command.argument.TagSourceArgument;
+import modernmods.mantle.registration.deferred.ArgumentTypeDeferredRegister;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.shared.command.argument.MaterialArgument;
@@ -55,14 +55,14 @@ public class TConstructCommand {
     NeoForge.EVENT_BUS.addListener(TConstructCommand::registerCommand);
   }
 
-  /** Registers a sub command for the root Hilt command */
+  /** Registers a sub command for the root Mantle command */
   private static void register(LiteralArgumentBuilder<CommandSourceStack> root, String name, Consumer<LiteralArgumentBuilder<CommandSourceStack>> consumer) {
     LiteralArgumentBuilder<CommandSourceStack> subCommand = Commands.literal(name);
     consumer.accept(subCommand);
     root.then(subCommand);
   }
 
-  /** Event listener to register the Hilt command */
+  /** Event listener to register the Mantle command */
   private static void registerCommand(RegisterCommandsEvent event) {
     LiteralArgumentBuilder<CommandSourceStack> builder = Commands.literal(TConstruct.MOD_ID);
     CommandBuildContext context = event.getBuildContext();

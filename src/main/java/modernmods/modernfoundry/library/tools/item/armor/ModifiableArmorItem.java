@@ -1,6 +1,7 @@
 package modernmods.modernfoundry.library.tools.item.armor;
 
 import com.google.common.collect.ImmutableMultimap;
+import net.minecraft.world.item.component.TooltipDisplay;
 import com.google.common.collect.Multimap;
 import lombok.Getter;
 import net.minecraft.core.Holder;
@@ -8,11 +9,10 @@ import net.minecraft.core.HolderLookup.RegistryLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -21,13 +21,15 @@ import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
@@ -37,8 +39,8 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.ItemAbility;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ICapabilityProvider;
-import modernmods.hilt.client.SafeClientAccess;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.SafeClientAccess;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -70,27 +72,51 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay {
+public class ModifiableArmorItem extends Item implements IModifiableDisplay {
   /** Volatile modifier tag to make piglins neutal when worn */
-  public static final ResourceLocation PIGLIN_NEUTRAL = TConstruct.getResource("piglin_neutral");
+  public static final Identifier PIGLIN_NEUTRAL = TConstruct.getResource("piglin_neutral");
   /** Volatile modifier tag to make this item an elytra */
-  public static final ResourceLocation ELYTRA = TConstruct.getResource("elyta");
+  public static final Identifier ELYTRA = TConstruct.getResource("elyta");
   /** Volatile flag for a boot item to walk on powdered snow. Cold immunity is handled through a tag */
-  public static final ResourceLocation SNOW_BOOTS = TConstruct.getResource("snow_boots");
+  public static final Identifier SNOW_BOOTS = TConstruct.getResource("snow_boots");
   /** Volatile flag for an item to act as an enderman mask, stopping them from getting angry. */
-  public static final ResourceLocation ENDERMASK = TConstruct.getResource("endermask");
+  public static final Identifier ENDERMASK = TConstruct.getResource("endermask");
 
   @Getter
   private final ToolDefinition toolDefinition;
+  /** Armor slot type this item occupies */
+  private final ArmorType armorType;
   /** Cache of the tool built for rendering */
   private ItemStack toolForRendering = null;
-  public ModifiableArmorItem(Holder<ArmorMaterial> materialIn, ArmorItem.Type type, Properties builderIn, ToolDefinition toolDefinition) {
-    super(materialIn, type, builderIn);
+  public ModifiableArmorItem(ArmorMaterial materialIn, ArmorType type, Properties builderIn, ToolDefinition toolDefinition) {
+    super(armorProperties(builderIn, materialIn, type));
+    this.armorType = type;
     this.toolDefinition = toolDefinition;
   }
 
-  public ModifiableArmorItem(ModifiableArmorMaterial material, ArmorItem.Type type, Properties properties) {
-    this(material.getMaterialHolder(), type, properties, Objects.requireNonNull(material.getArmorDefinition(type), "Missing tool definition for " + type.getName()));
+  /**
+   * Applies the humanoid armor properties. Mirrors {@link Properties#humanoidArmor(ArmorMaterial, ArmorType)} but skips
+   * the enchantable component when the material's enchantment value is zero: Tinkers armor is enchanted through its own
+   * modifier system, and 26.1's {@code Enchantable} rejects a non-positive value (which would crash registration).
+   */
+  private static Properties armorProperties(Properties props, ArmorMaterial material, ArmorType type) {
+    props.durability(type.getDurability(material.durability()))
+         .attributes(material.createAttributes(type))
+         .component(DataComponents.EQUIPPABLE, Equippable.builder(type.getSlot()).setEquipSound(material.equipSound()).setAsset(material.assetId()).build())
+         .repairable(material.repairIngredient());
+    if (material.enchantmentValue() > 0) {
+      props.enchantable(material.enchantmentValue());
+    }
+    return props;
+  }
+
+  public ModifiableArmorItem(ModifiableArmorMaterial material, ArmorType type, Properties properties) {
+    this(material.getArmorMaterial(), type, properties, Objects.requireNonNull(material.getArmorDefinition(type), "Missing tool definition for " + type.getName()));
+  }
+
+  /** Gets the equipment slot this armor occupies */
+  public EquipmentSlot getEquipmentSlot() {
+    return armorType.getSlot();
   }
 
   /* Basic properties */
@@ -107,17 +133,15 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
 
   @Override
   public boolean canWalkOnPowderedSnow(ItemStack stack, LivingEntity wearer) {
-    return type == Type.BOOTS && ModifierUtil.checkVolatileFlag(stack, SNOW_BOOTS);
+    return armorType == ArmorType.BOOTS && ModifierUtil.checkVolatileFlag(stack, SNOW_BOOTS);
   }
 
-  @Override
-  public boolean isEnderMask(ItemStack stack, Player player, EnderMan endermanEntity) {
-    return type == Type.HELMET && ModifierUtil.checkVolatileFlag(stack, ENDERMASK);
-  }
+  // Note: NeoForge's isEnderMask hook was removed in 26.1; endermen aggro suppression is now driven by the
+  // equippable data component (allowed_entities / camera_overlay). The ENDERMASK modifier flag applies that component.
 
   @Override
-  public boolean canPerformAction(ItemStack stack, ItemAbility toolAction) {
-    return ModifierUtil.canPerformAction(ToolStack.from(stack), toolAction);
+  public boolean canPerformAction(ItemInstance stack, ItemAbility toolAction) {
+    return stack instanceof ItemStack itemStack && ModifierUtil.canPerformAction(ToolStack.from(itemStack), toolAction);
   }
 
   @Override
@@ -129,23 +153,13 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
   /* Enchantments */
 
   @Override
-  public boolean isEnchantable(ItemStack stack) {
-    return false;
-  }
-
-  @Override
-  public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-    return false;
-  }
-
-  @Override
   public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
     return enchantment.is(EnchantmentTags.CURSE) && super.supportsEnchantment(stack, enchantment);
   }
 
   @Override
-  public int getEnchantmentLevel(ItemStack stack, Holder<Enchantment> enchantment) {
-    return EnchantmentModifierHook.getEnchantmentLevel(stack, enchantment);
+  public int getEnchantmentLevel(ItemInstance stack, Holder<Enchantment> enchantment) {
+    return stack instanceof ItemStack itemStack ? EnchantmentModifierHook.getEnchantmentLevel(itemStack, enchantment) : 0;
   }
 
   @Override
@@ -166,17 +180,17 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
   }
 
   @Override
-  public void onCraftedBy(ItemStack stack, Level levelIn, Player playerIn) {
+  public void onCraftedBy(ItemStack stack, Player playerIn) {
     ToolStack.ensureInitialized(stack, getToolDefinition());
   }
 
   @Override
-  public InteractionResultHolder<ItemStack> use(Level levelIn, Player playerIn, InteractionHand handIn) {
+  public InteractionResult use(Level levelIn, Player playerIn, InteractionHand handIn) {
     if (playerIn.isCrouching()) {
       ItemStack stack = playerIn.getItemInHand(handIn);
       InteractionResult result = ToolInventoryCapability.tryOpenContainer(stack, null, getToolDefinition(), playerIn, Util.getSlotType(handIn));
       if (result.consumesAction()) {
-        return new InteractionResultHolder<>(result, stack);
+        return result;
       }
     }
     return super.use(levelIn, playerIn, handIn);
@@ -214,8 +228,8 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
   /* Damage/Durability */
 
   @Override
-  public boolean isRepairable(ItemStack stack) {
-    // handle in the tinker station
+  public boolean isCombineRepairable(ItemStack stack) {
+    // handle in the tinker station, not the anvil or grindstone
     return false;
   }
 
@@ -281,12 +295,6 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
   /* Armor properties */
 
   @Override
-  public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
-    return false;
-  }
-
-
-  @Override
   public Multimap<Attribute,AttributeModifier> getAttributeModifiers(IToolStackView tool, EquipmentSlot slot) {
     if (slot != getEquipmentSlot()) {
       return ImmutableMultimap.of();
@@ -298,15 +306,15 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
       StatsNBT statsNBT = tool.getStats();
       float armor = statsNBT.get(ToolStats.ARMOR);
       if (armor > 0) {
-        builder.put(Attributes.ARMOR.value(), new AttributeModifier(TConstruct.getResource("armor/" + type.getName() + "/armor"), armor, AttributeModifier.Operation.ADD_VALUE));
+        builder.put(Attributes.ARMOR.value(), new AttributeModifier(TConstruct.getResource("armor/" + armorType.getName() + "/armor"), armor, AttributeModifier.Operation.ADD_VALUE));
       }
       float toughness = statsNBT.get(ToolStats.ARMOR_TOUGHNESS);
       if (toughness > 0) {
-        builder.put(Attributes.ARMOR_TOUGHNESS.value(), new AttributeModifier(TConstruct.getResource("armor/" + type.getName() + "/toughness"), toughness, AttributeModifier.Operation.ADD_VALUE));
+        builder.put(Attributes.ARMOR_TOUGHNESS.value(), new AttributeModifier(TConstruct.getResource("armor/" + armorType.getName() + "/toughness"), toughness, AttributeModifier.Operation.ADD_VALUE));
       }
       double knockbackResistance = statsNBT.get(ToolStats.KNOCKBACK_RESISTANCE);
       if (knockbackResistance > 0) {
-        builder.put(Attributes.KNOCKBACK_RESISTANCE.value(), new AttributeModifier(TConstruct.getResource("armor/" + type.getName() + "/knockback_resistance"), knockbackResistance, AttributeModifier.Operation.ADD_VALUE));
+        builder.put(Attributes.KNOCKBACK_RESISTANCE.value(), new AttributeModifier(TConstruct.getResource("armor/" + armorType.getName() + "/knockback_resistance"), knockbackResistance, AttributeModifier.Operation.ADD_VALUE));
       }
       // grab attributes from modifiers
       BiConsumer<Attribute,AttributeModifier> attributeConsumer = builder::put;
@@ -336,46 +344,27 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
 
   /* Elytra */
 
-  @Override
-  public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
-    return type == Type.CHESTPLATE && !ToolDamageUtil.isBroken(stack) && ModifierUtil.checkVolatileFlag(stack, ELYTRA);
-  }
-
-  @Override
-  public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
-    if (getEquipmentSlot() == EquipmentSlot.CHEST) {
-      ToolStack tool = ToolStack.from(stack);
-      if (!tool.isBroken()) {
-        // if any modifier says stop flying, stop flying
-        for (ModifierEntry entry : tool.getModifierList()) {
-          if (entry.getHook(ModifierHooks.ELYTRA_FLIGHT).elytraFlightTick(tool, entry, entity, flightTicks)) {
-            return false;
-          }
-        }
-        // damage the tool and keep flying
-        if (!entity.level().isClientSide && (flightTicks + 1) % 20 == 0) {
-          ToolDamageUtil.damageAnimated(tool, 1, entity, EquipmentSlot.CHEST);
-        }
-        return true;
-      }
-    }
-    return false;
-  }
+  // Note: NeoForge's canElytraFly / elytraFlightTick item hooks were removed in 26.1; gliding is now driven by the
+  // glider data component (DataComponents.GLIDER) applied by the ELYTRA modifier, with equipment asset controlling wings.
+  // The per-tick durability drain and ELYTRA_FLIGHT modifier hook handling needs reattaching to the glider tick pipeline;
+  // deferred to the armor/equipment component pass and flagged for in-game validation.
 
 
   /* Ticking */
 
   @Override
-  public void inventoryTick(ItemStack stack, Level levelIn, Entity entityIn, int itemSlot, boolean isSelected) {
+  public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel levelIn, Entity entityIn, @javax.annotation.Nullable EquipmentSlot equipmentSlot) {
     // don't care about non-living, they skip most tool context
     if (entityIn instanceof LivingEntity living) {
       ToolStack tool = ToolStack.from(stack);
-      if (!levelIn.isClientSide) {
-        tool.ensureHasData();
-      }
+      // 26.1 inventoryTick is server-only
+      tool.ensureHasData();
       List<ModifierEntry> modifiers = tool.getModifierList();
       if (!modifiers.isEmpty()) {
         boolean isCorrectSlot = living.getItemBySlot(getEquipmentSlot()) == stack;
+        // 26.1 gives an EquipmentSlot instead of index/selected; derive the legacy flags for the modifier hook
+        boolean isSelected = equipmentSlot == EquipmentSlot.MAINHAND;
+        int itemSlot = equipmentSlot != null ? equipmentSlot.getIndex() : 0;
         // we pass in the stack for most custom context, but for the sake of armor its easier to tell them that this is the correct slot for effects
         for (ModifierEntry entry : modifiers) {
           entry.getHook(ModifierHooks.INVENTORY_TICK).onInventoryTick(tool, entry, levelIn, living, itemSlot, isSelected, isCorrectSlot, stack);
@@ -403,9 +392,12 @@ public class ModifiableArmorItem extends ArmorItem implements IModifiableDisplay
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flag) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     Level level = context.registries() == null ? null : SafeClientAccess.getLevel();
     TooltipUtil.addInformation(this, stack, level, tooltip, SafeClientAccess.getTooltipKey(), flag);
+  
+    tooltip.forEach(tooltipConsumer);
   }
 
   @Override

@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/seared/stone/block_from_seared",
   "cooling_time": 178,
   "fluid": {
     "amount": 1000,
     "tag": "modernfoundry:seared_stone"
   },
+  "id": "modernfoundry:smeltery/casting/seared/stone/block_from_seared",
   "result": "modernfoundry:seared_stone"
 }

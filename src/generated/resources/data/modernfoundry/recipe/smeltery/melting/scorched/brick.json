@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/scorched/brick",
-  "ingredient": {
-    "item": "modernfoundry:scorched_brick"
-  },
+  "ingredient": "modernfoundry:scorched_brick",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:scorched_stone"

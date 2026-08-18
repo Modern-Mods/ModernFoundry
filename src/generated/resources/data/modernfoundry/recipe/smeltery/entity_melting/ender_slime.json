@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:entity_melting",
-  "id": "modernfoundry:smeltery/entity_melting/ender_slime",
   "damage": 2,
   "entity": {
     "type": "modernfoundry:ender_slime"
   },
+  "id": "modernfoundry:smeltery/entity_melting/ender_slime",
   "result": {
     "amount": 25,
     "fluid": "modernfoundry:ender_slime"

@@ -1,0 +1,23 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/travelers_boots",
+    "parts": [
+      {
+        "name": "metal",
+        "index": 0
+      },
+      {
+        "name": "cuirass",
+        "index": 1
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:travelers/boots"
+    ],
+    "first_modifiers": [
+      "modernfoundry:dyed",
+      "modernfoundry:trim"
+    ]
+  }
+}

@@ -3,7 +3,5 @@
   "id": "modernfoundry:tools/armor/plate/chestplate_swapping",
   "index": 0,
   "item_cost": 6,
-  "tools": {
-    "item": "modernfoundry:plate_chestplate"
-  }
+  "tools": "modernfoundry:plate_chestplate"
 }

@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.modifiers.modules.display;
 
-import modernmods.hilt.data.loadable.common.ColorLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.common.ColorLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.display.DurabilityDisplayModifierHook;

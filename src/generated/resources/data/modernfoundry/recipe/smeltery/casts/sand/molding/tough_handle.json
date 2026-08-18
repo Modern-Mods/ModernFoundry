@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/sand/molding/tough_handle",
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "material": "#modernfoundry:casts/sand",
   "pattern": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:tough_handle"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:tough_handle"
   },
   "result": "modernfoundry:tough_handle_sand_cast"
 }

@@ -12,19 +12,17 @@ import com.mojang.blaze3d.platform.NativeImage;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.FastColor;
-import net.minecraft.util.FastColor.ABGR32;
+import net.minecraft.util.ARGB;
+import modernmods.modernfoundry.library.utils.ABGR;
 import net.minecraft.util.GsonHelper;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import modernmods.hilt.data.loadable.common.ColorLoadable;
-import modernmods.hilt.util.JsonHelper;
+import modernmods.mantle.data.loadable.common.ColorLoadable;
+import modernmods.mantle.util.JsonHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.data.material.MaterialPartTextureGenerator;
 import modernmods.modernfoundry.library.client.data.spritetransformer.GreyToColorMapping.Interpolate;
 import modernmods.modernfoundry.library.client.data.util.AbstractSpriteReader;
-import modernmods.modernfoundry.library.client.data.util.DataGenSpriteReader;
 import modernmods.modernfoundry.library.client.data.util.ResourceManagerSpriteReader;
 import modernmods.modernfoundry.library.utils.Util;
 
@@ -42,7 +40,7 @@ import java.util.function.ToIntFunction;
  */
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class GreyToSpriteTransformer implements IRecolorSpriteTransformer {
-  public static final ResourceLocation NAME = TConstruct.getResource("grey_to_sprite");
+  public static final Identifier NAME = TConstruct.getResource("grey_to_sprite");
   public static final Deserializer<GreyToSpriteTransformer> DESERIALIZER = new Deserializer<>((builder, json) -> builder.build());
 
   /** Base folder for texture backgrounds */
@@ -76,7 +74,7 @@ public class GreyToSpriteTransformer implements IRecolorSpriteTransformer {
   public int getNewColor(int color, int x, int y, int f) {
     // if fully transparent, just return fully transparent
     // we do not do 0 alpha RGB values to save effort
-    if (FastColor.ABGR32.alpha(color) == 0) {
+    if (ABGR.alpha(color) == 0) {
       return 0x00000000;
     }
     int grey = GreyToColorMapping.getGrey(color);
@@ -182,14 +180,14 @@ public class GreyToSpriteTransformer implements IRecolorSpriteTransformer {
     }
 
     /** Adds a texture to the palette */
-    public Builder addTexture(int grey, ResourceLocation texture, int tint) {
+    public Builder addTexture(int grey, Identifier texture, int tint) {
       checkGrey(grey);
       builder.add(new SpriteMapping(grey, Util.translateColorBGR(tint), texture));
       return this;
     }
 
     /** Adds a texture to the palette */
-    public Builder addTexture(int grey, ResourceLocation texture) {
+    public Builder addTexture(int grey, Identifier texture) {
       return addTexture(grey, texture, -1);
     }
 
@@ -203,7 +201,7 @@ public class GreyToSpriteTransformer implements IRecolorSpriteTransformer {
     }
 
     /** Builds an animated transformer */
-    public AnimatedGreyToSpriteTransformer animated(ResourceLocation metaPath, int frames) {
+    public AnimatedGreyToSpriteTransformer animated(Identifier metaPath, int frames) {
       List<SpriteMapping> list = builder.build();
       if (list.size() < 2) {
         throw new IllegalStateException("Too few colors in palette, must have at least 2");
@@ -223,7 +221,7 @@ public class GreyToSpriteTransformer implements IRecolorSpriteTransformer {
     private final int color;
     /** Path of the sprite relative to the textures folder */
     @Nullable
-    private final ResourceLocation path;
+    private final Identifier path;
 
     /** Loaded image */
     private transient NativeImage image = null;
@@ -253,13 +251,13 @@ public class GreyToSpriteTransformer implements IRecolorSpriteTransformer {
           int spriteColor;
           // -1 means we are not doing frames, treat the whole image as one thing. This notably does not require it to be square
           if (frame == -1) {
-            spriteColor = image.getPixelRGBA(x % image.getWidth(), y % image.getHeight());
+            spriteColor = image.getPixel(x % image.getWidth(), y % image.getHeight());
           } else {
             // assume the frames of this are square, otherwise we have to store the ratio somewhere
             int width = image.getWidth();
             // ensure the x and y coordinates are within the individual frame by wrapping, needed notably for large tool sprites
             // then offset the y value, and ensure the offset is within the final height
-            spriteColor = image.getPixelRGBA(x % width, (y % width + frame * width) % image.getHeight());
+            spriteColor = image.getPixel(x % width, (y % width + frame * width) % image.getHeight());
           }
           // if we have a color set, treat it as a tint
           if (color != -1) {
@@ -282,15 +280,15 @@ public class GreyToSpriteTransformer implements IRecolorSpriteTransformer {
           int alpha = 0;
           for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
-              int color = image.getPixelRGBA(x, y);
-              red   += ABGR32.red(color);
-              green += ABGR32.green(color);
-              blue  += ABGR32.blue(color);
-              alpha += ABGR32.alpha(color);
+              int color = image.getPixel(x, y);
+              red   += ABGR.red(color);
+              green += ABGR.green(color);
+              blue  += ABGR.blue(color);
+              alpha += ABGR.alpha(color);
             }
           }
           int pixels = image.getWidth() * image.getHeight();
-          int spriteColor = ABGR32.color(alpha / pixels, blue / pixels, green / pixels, red / pixels);
+          int spriteColor = ABGR.color(alpha / pixels, blue / pixels, green / pixels, red / pixels);
           // if we have a color set, treat it as a tint
           if (color != -1) {
             spriteColor = GreyToColorMapping.scaleColor(spriteColor, color, 255);
@@ -367,16 +365,15 @@ public class GreyToSpriteTransformer implements IRecolorSpriteTransformer {
   }
 
   /** Called before generating to set up the reader */
-  private static void textureCallback(@Nullable ExistingFileHelper existingFileHelper, @Nullable ResourceManager manager) {
+  private static void textureCallback(@Nullable ResourceManager manager) {
     if (READER != null) {
       MAPPINGS_TO_CLEAR.forEach(mapping -> mapping.image = null);
       MAPPINGS_TO_CLEAR.clear();
       READER.closeAll();
       READER = null;
     }
-    if (existingFileHelper != null) {
-      READER = new DataGenSpriteReader(existingFileHelper, TEXTURE_FOLDER);
-    } else if (manager != null) {
+    // the removed ExistingFileHelper datagen reader path was dropped in the 26.1 port; runtime uses the ResourceManager
+    if (manager != null) {
       READER = new ResourceManagerSpriteReader(manager, TEXTURE_FOLDER);
     }
   }

@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/scorched/brick_composite",
-  "cast": {
-    "item": "minecraft:flint"
-  },
+  "cast": "minecraft:flint",
   "cast_consumed": true,
   "cooling_time": 50,
   "fluid": {
     "amount": 125,
     "tag": "c:magma"
   },
+  "id": "modernfoundry:smeltery/casting/scorched/brick_composite",
   "result": "modernfoundry:scorched_brick"
 }

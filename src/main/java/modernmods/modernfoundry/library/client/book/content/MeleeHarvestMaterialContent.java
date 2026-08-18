@@ -1,10 +1,10 @@
 package modernmods.modernfoundry.library.client.book.content;
 
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.screen.book.element.ItemElement;
-import modernmods.hilt.util.html.HtmlElement;
-import modernmods.hilt.util.html.HtmlSerializable;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.screen.book.element.ItemElement;
+import modernmods.mantle.util.html.HtmlElement;
+import modernmods.mantle.util.html.HtmlSerializable;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
@@ -25,14 +25,14 @@ import static modernmods.modernfoundry.TConstruct.getResource;
  */
 public class MeleeHarvestMaterialContent extends AbstractMaterialContent {
   /** Page ID for using this index directly */
-  public static final ResourceLocation ID = getResource("melee_harvest_material");
+  public static final Identifier ID = getResource("melee_harvest_material");
 
   public MeleeHarvestMaterialContent(MaterialVariantId materialVariant, boolean detailed) {
     super(materialVariant, detailed);
   }
 
   @Override
-  public ResourceLocation getId() {
+  public Identifier getId() {
     return ID;
   }
 

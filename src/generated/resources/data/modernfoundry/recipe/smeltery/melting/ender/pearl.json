@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/ender/pearl",
   "ingredient": [
-    {
-      "tag": "c:ender_pearls"
-    },
-    {
-      "item": "minecraft:ender_eye"
-    }
+    "#c:ender_pearls",
+    "minecraft:ender_eye"
   ],
   "result": {
     "amount": 250,

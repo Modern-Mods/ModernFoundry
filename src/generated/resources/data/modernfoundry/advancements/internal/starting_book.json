@@ -1,0 +1,25 @@
+{
+  "criteria": {
+    "tick": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "modernfoundry:gameplay/starting_book"
+    ]
+  },
+  "sends_telemetry_event": true,
+  "neoforge:conditions": [
+    {
+      "type": "modernfoundry:config",
+      "prop": "spawn_with_book"
+    }
+  ]
+}

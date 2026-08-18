@@ -8,27 +8,28 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.ForgeI18n;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.client.book.HTMLUtils;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.content.PageContent;
-import modernmods.hilt.client.book.data.element.TextComponentData;
-import modernmods.hilt.client.book.data.element.TextData;
-import modernmods.hilt.client.screen.book.BookScreen;
-import modernmods.hilt.client.screen.book.element.BookElement;
-import modernmods.hilt.client.screen.book.element.ItemElement;
-import modernmods.hilt.client.screen.book.element.TextComponentElement;
-import modernmods.hilt.client.screen.book.element.TextElement;
-import modernmods.hilt.recipe.helper.RecipeHelper;
-import modernmods.hilt.util.RegistryHelper;
-import modernmods.hilt.util.html.HtmlElement;
-import modernmods.hilt.util.html.HtmlGroup;
-import modernmods.hilt.util.html.HtmlSerializable;
+import modernmods.mantle.client.book.HTMLUtils;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.content.PageContent;
+import modernmods.mantle.client.book.data.element.TextComponentData;
+import modernmods.mantle.client.book.data.element.TextData;
+import modernmods.mantle.client.screen.book.BookScreen;
+import modernmods.mantle.client.screen.book.element.BookElement;
+import modernmods.mantle.client.screen.book.element.ItemElement;
+import modernmods.mantle.client.screen.book.element.TextComponentElement;
+import modernmods.mantle.client.screen.book.element.TextElement;
+import modernmods.mantle.recipe.helper.RecipeHelper;
+import modernmods.mantle.recipe.sync.ClientRecipeCache;
+import modernmods.mantle.util.RegistryHelper;
+import modernmods.mantle.util.html.HtmlElement;
+import modernmods.mantle.util.html.HtmlGroup;
+import modernmods.mantle.util.html.HtmlSerializable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.client.book.elements.TinkerItemElement;
@@ -106,7 +107,7 @@ public abstract class AbstractMaterialContent extends PageContent {
   }
 
   /** Gets the page type ID */
-  public abstract ResourceLocation getId();
+  public abstract Identifier getId();
 
   /** Given an index 0-3, return the stat type to show at that index */
   @Nullable
@@ -148,11 +149,11 @@ public abstract class AbstractMaterialContent extends PageContent {
       }
       // simply combine all items from all recipes
       MaterialVariantId material = getMaterialVariant();
-      repairStacks = RecipeHelper.getUIRecipes(world.getRecipeManager(), TinkerRecipeTypes.MATERIAL.get(), MaterialRecipe.class, recipe -> material.matchesVariant(recipe.getMaterial()))
+      repairStacks = RecipeHelper.getUIRecipes(ClientRecipeCache.getRecipeMap(), TinkerRecipeTypes.MATERIAL.get(), MaterialRecipe.class, recipe -> material.matchesVariant(recipe.getMaterial()))
         .stream()
         // prefer 1 value 1 needed (ingots), then 1 value with higher needed (nuggets), then higher value (blocks)
         .sorted(Comparator.comparing(MaterialRecipe::getValue).thenComparing(MaterialRecipe::getNeeded))
-        .flatMap(recipe -> Arrays.stream(recipe.getIngredient().getItems()))
+        .flatMap(recipe -> recipe.getIngredient().items().map(ItemStack::new))
         .collect(Collectors.toList());
       // no repair items? use the fallbacks
       if (repairStacks.isEmpty()) {
@@ -295,7 +296,7 @@ public abstract class AbstractMaterialContent extends PageContent {
 
 
   /** Gets the tooltip for a material category */
-  protected static TinkerItemElement makeCategoryIcon(ItemStack item, ResourceLocation name) {
+  protected static TinkerItemElement makeCategoryIcon(ItemStack item, Identifier name) {
     TinkerItemElement element = new TinkerItemElement(item);
     name = name.withPrefix("material.category.");
     element.tooltip = List.of(
@@ -329,7 +330,7 @@ public abstract class AbstractMaterialContent extends PageContent {
                                     .findFirst().orElse(FluidStack.EMPTY);
       elementItem.tooltip = List.of(
         CASTABLE,
-        Component.translatable(CAST_FROM, firstFluid.getDisplayName()).withStyle(ChatFormatting.GRAY)
+        Component.translatable(CAST_FROM, firstFluid.getHoverName()).withStyle(ChatFormatting.GRAY)
       );
       displayTools.add(elementItem);
     }
@@ -351,7 +352,7 @@ public abstract class AbstractMaterialContent extends PageContent {
           FluidStack firstFluid = composite.getFluids().stream().findFirst().orElse(FluidStack.EMPTY);
           elementItem.tooltip = List.of(
             COMPOSITE,
-            Component.translatable(COMPOSITE_FROM, firstFluid.getDisplayName(), MaterialTooltipCache.getDisplayName(inputId)).withStyle(ChatFormatting.GRAY)
+            Component.translatable(COMPOSITE_FROM, firstFluid.getHoverName(), MaterialTooltipCache.getDisplayName(inputId)).withStyle(ChatFormatting.GRAY)
           );
           displayTools.add(elementItem);
         }

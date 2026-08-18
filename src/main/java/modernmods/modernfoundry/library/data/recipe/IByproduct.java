@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.data.recipe;
 
-import modernmods.hilt.recipe.helper.FluidOutput;
+import modernmods.mantle.recipe.helper.FluidOutput;
 import modernmods.modernfoundry.library.recipe.melting.IMeltingContainer.OreRateType;
 
 /** Interface for a byproduct for datagen, not required but makes parameters easier */

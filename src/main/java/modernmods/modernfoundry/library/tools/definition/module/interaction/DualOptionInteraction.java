@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.tools.definition.module.interaction;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.modifiers.hook.interaction.InteractionSource;
@@ -25,7 +25,7 @@ public enum DualOptionInteraction implements InteractionToolModule, ToolModule {
   public static final SingletonLoader<DualOptionInteraction> LOADER = new SingletonLoader<>(INSTANCE);
   /** @deprecated use {@link InteractionSource#getKey()} */
   @Deprecated(forRemoval = true)
-  public static final ResourceLocation KEY = InteractionSource.LEFT_CLICK.getKey();
+  public static final Identifier KEY = InteractionSource.LEFT_CLICK.getKey();
 
   @Override
   public List<ModuleHook<?>> getDefaultHooks() {

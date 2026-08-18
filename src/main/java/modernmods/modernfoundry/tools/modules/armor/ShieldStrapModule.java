@@ -8,8 +8,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -47,7 +47,7 @@ public record ShieldStrapModule(Set<TooltipKey> keys) implements ModifierModule,
   public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot equipmentSlot, TooltipKey keyModifier) {
     if (keys.contains(keyModifier)) {
       Level level = player.level();
-      if (level.isClientSide) {
+      if (level.isClientSide()) {
         return true;
       }
       // offhand must be able to go in the pants

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/copper/ingot",
-  "ingredient": {
-    "tag": "c:ingots/copper"
-  },
+  "ingredient": "#c:ingots/copper",
   "result": {
     "amount": 90,
     "tag": "c:molten_copper"

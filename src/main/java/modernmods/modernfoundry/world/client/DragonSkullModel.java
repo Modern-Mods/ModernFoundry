@@ -1,35 +1,26 @@
 package modernmods.modernfoundry.world.client;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.object.skull.SkullModelBase;
 
 /** Recreation of {@link net.minecraft.client.model.dragon.DragonHeadModel} but adjusted for slimeskulls. */
 public class DragonSkullModel extends SkullModelBase {
-  private final ModelPart root;
   private final ModelPart head;
   private final ModelPart jaw;
 
   public DragonSkullModel(ModelPart root) {
-    this.root = root;
+    super(root);
     this.head = root.getChild("head");
     this.jaw = this.head.getChild("jaw");
   }
 
+  // 26.1.2: client render overhaul — SkullModelBase is now Model<State> with a submit-based pipeline;
+  // setupAnim now takes the packed State and renderToBuffer is final. Animation ported to the new State,
+  // but the custom translate/scale that lived in the old renderToBuffer override needs the new submit pass.
   @Override
-  public void setupAnim(float pMouthAnimation, float yRot, float xRot) {
-    this.jaw.xRot = (float)(Math.sin(pMouthAnimation * Math.PI * 0.2f) + 1) * 0.2f;
-    this.head.yRot = yRot * ((float)Math.PI / 180);
-    this.head.xRot = xRot * ((float)Math.PI / 180);
-  }
-
-  @Override
-  public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int light, int overlay, int color) {
-    poseStack.pushPose();
-    poseStack.translate(0, -0.25f, 0.075f);
-    poseStack.scale(0.5f, 0.5f, 0.49f);
-    this.root.render(poseStack, buffer, light, overlay, color);
-    poseStack.popPose();
+  public void setupAnim(State state) {
+    this.jaw.xRot = (float)(Math.sin(state.animationPos * Math.PI * 0.2f) + 1) * 0.2f;
+    this.head.yRot = state.yRot * ((float)Math.PI / 180);
+    this.head.xRot = state.xRot * ((float)Math.PI / 180);
   }
 }

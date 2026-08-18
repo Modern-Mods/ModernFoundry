@@ -3,13 +3,13 @@ package modernmods.modernfoundry.library.recipe.modifiers.adding;
 import com.google.common.collect.Streams;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.recipe.RecipeResult;
@@ -33,7 +33,7 @@ public class MultilevelIncrementalModifierRecipe extends IncrementalModifierReci
     MultilevelIncrementalModifierRecipe::new);
 
   private final List<LevelEntry> levels;
-  protected MultilevelIncrementalModifierRecipe(ResourceLocation id, Ingredient input, int amountPerInput, int neededPerLevel, Ingredient toolRequirement, int maxToolSize, ModifierId result, ItemOutput leftover, boolean allowCrystal, List<LevelEntry> levels, boolean checkTraitLevel) {
+  protected MultilevelIncrementalModifierRecipe(Identifier id, Ingredient input, int amountPerInput, int neededPerLevel, Ingredient toolRequirement, int maxToolSize, ModifierId result, ItemOutput leftover, boolean allowCrystal, List<LevelEntry> levels, boolean checkTraitLevel) {
     super(id, input, amountPerInput, neededPerLevel, toolRequirement, maxToolSize, result, levels.get(0).level(), levels.get(0).slots(), leftover, allowCrystal, checkTraitLevel);
     this.levels = levels;
   }
@@ -94,7 +94,7 @@ public class MultilevelIncrementalModifierRecipe extends IncrementalModifierReci
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends MultilevelIncrementalModifierRecipe> getSerializer() {
     return TinkerModifiers.multilevelIncrementalModifierSerializer.get();
   }
 

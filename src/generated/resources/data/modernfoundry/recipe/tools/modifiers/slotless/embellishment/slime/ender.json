@@ -1,24 +1,22 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/ender",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/ender",
   "inputs": [
     {
-      "item": "modernfoundry:ender_congealed_slime"
+      "ingredient": "modernfoundry:ender_congealed_slime"
     },
     {
-      "item": "modernfoundry:ender_slime_ball"
+      "ingredient": "modernfoundry:ender_slime_ball"
     },
     {
-      "item": "modernfoundry:ender_congealed_slime"
+      "ingredient": "modernfoundry:ender_congealed_slime"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:enderslime"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/slime"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/slime",
   "variant_formatter": "modernfoundry:material"
 }

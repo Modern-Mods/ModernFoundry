@@ -1,6 +1,8 @@
 package modernmods.modernfoundry.tools.item;
 
 import net.minecraft.ChatFormatting;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
@@ -8,7 +10,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
-import modernmods.hilt.util.TranslationHelper;
+import modernmods.mantle.util.TranslationHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -50,11 +52,11 @@ public class RepairKitItem extends MaterialItem implements IRepairKitItem {
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-    super.appendHoverText(stack, context, tooltip, flag);
+  public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flag) {
+    super.appendHoverText(stack, context, tooltipDisplay, tooltipConsumer, flag);
     // tooltip is about inventory repair
     if (canRepairInCraftingTable()) {
-      tooltip.add(Component.translatable(TOOLTIP_KEY, TranslationHelper.COMMA_FORMAT.format(getRepairAmount())).withStyle(ChatFormatting.GRAY));
+      tooltipConsumer.accept(Component.translatable(TOOLTIP_KEY, TranslationHelper.COMMA_FORMAT.format(getRepairAmount())).withStyle(ChatFormatting.GRAY));
     }
   }
 
@@ -92,7 +94,7 @@ public class RepairKitItem extends MaterialItem implements IRepairKitItem {
             ToolDamageUtil.repair(tool, (int)amount);
             tool.updateStack(toolItem);
             stack.shrink(1);
-            player.playSound(Sounds.SAW.getSound(), 1, 0.8f + 0.4f * player.level().random.nextFloat());
+            player.playSound(Sounds.SAW.getSound(), 1, 0.8f + 0.4f * player.level().getRandom().nextFloat());
           }
         }
         return true;

@@ -3,7 +3,7 @@ package modernmods.modernfoundry.shared.inventory;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import modernmods.hilt.inventory.MultiModuleContainerMenu;
+import modernmods.mantle.inventory.MultiModuleContainerMenu;
 import modernmods.modernfoundry.shared.TinkerCommons;
 
 import javax.annotation.Nullable;

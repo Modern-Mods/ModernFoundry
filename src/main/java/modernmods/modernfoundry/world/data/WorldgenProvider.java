@@ -14,7 +14,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.random.WeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -69,7 +69,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers.AddFeaturesBiomeModifier;
 import net.neoforged.neoforge.common.world.BiomeModifiers.AddSpawnsBiomeModifier;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
 import net.neoforged.neoforge.registries.holdersets.AndHolderSet;
 import net.neoforged.neoforge.registries.holdersets.NotHolderSet;
 import net.neoforged.neoforge.registries.holdersets.OrHolderSet;
@@ -451,6 +451,6 @@ public class WorldgenProvider {
 
   /** Creates a spawn override for a single mob */
   private static Map<MobCategory,StructureSpawnOverride> monsterOverride(EntityType<?> entity, int min, int max) {
-    return Map.of(MobCategory.MONSTER, new StructureSpawnOverride(BoundingBoxType.STRUCTURE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(entity, 1, min, max))));
+    return Map.of(MobCategory.MONSTER, new StructureSpawnOverride(BoundingBoxType.STRUCTURE, WeightedList.of(new MobSpawnSettings.SpawnerData(entity, 1, min, max))));
   }
 }

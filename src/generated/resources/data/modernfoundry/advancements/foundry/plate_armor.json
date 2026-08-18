@@ -1,0 +1,84 @@
+{
+  "parent": "modernfoundry:foundry/blaze",
+  "criteria": {
+    "crafted_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:plate_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "crafted_chestplate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:plate_chestplate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "crafted_helmet": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:plate_helmet"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "crafted_leggings": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:plate_leggings"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.foundry.plate_armor.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:plate_chestplate",
+      "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.foundry.plate_armor.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted_helmet"
+    ],
+    [
+      "crafted_chestplate"
+    ],
+    [
+      "crafted_leggings"
+    ],
+    [
+      "crafted_boots"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,11 +1,11 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/wings",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/wings",
   "inputs": [
     {
-      "item": "minecraft:elytra"
+      "ingredient": "minecraft:elytra"
     }
   ],
   "level": 1,
@@ -13,7 +13,5 @@
   "slots": {
     "abilities": 2
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/chestplate"
-  }
+  "tools": "#modernfoundry:modifiable/armor/chestplate"
 }

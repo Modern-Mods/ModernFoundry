@@ -6,15 +6,15 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.predicate.modifier.ModifierPredicate;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -44,7 +44,7 @@ public class ModifierSetWorktableRecipe extends AbstractWorktableRecipe {
   /** Message to display if there are no matching modifiers on the tool */
   public static final Component NO_MATCHES = TConstruct.makeTranslation("recipe", "modifier_set_worktable.empty");
   /** Logic to fetch a list of strings from the persistent data */
-  public static final BiFunction<CompoundTag, String, ListTag> LIST_GETTER = (tag, name) -> tag.getList(name, Tag.TAG_STRING);
+  public static final BiFunction<CompoundTag, String, ListTag> LIST_GETTER = (tag, name) -> tag.getListOrEmpty(name);
   /** Loader instance */
   public static final RecordLoadable<ModifierSetWorktableRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
@@ -63,7 +63,7 @@ public class ModifierSetWorktableRecipe extends AbstractWorktableRecipe {
   /** Description to display when valid */
   private final Component description;
   /** Key of the set to fill with modifier names */
-  private final ResourceLocation dataKey;
+  private final Identifier dataKey;
   /** Predicate of modifiers to support in this recipe */
   private final IJsonPredicate<ModifierId> modifierPredicate;
   /** Filter of modifiers to display */
@@ -75,7 +75,7 @@ public class ModifierSetWorktableRecipe extends AbstractWorktableRecipe {
   /** Cached list of modifiers shown in JEI */
   private List<ModifierEntry> filteredModifiers = null;
 
-  public ModifierSetWorktableRecipe(ResourceLocation id, ResourceLocation dataKey, List<SizedIngredient> inputs, Ingredient toolRequirement, IJsonPredicate<ModifierId> modifierPredicate, boolean addToSet, boolean allowTraits) {
+  public ModifierSetWorktableRecipe(Identifier id, Identifier dataKey, List<SizedIngredient> inputs, Ingredient toolRequirement, IJsonPredicate<ModifierId> modifierPredicate, boolean addToSet, boolean allowTraits) {
     super(id, toolRequirement, inputs);
     this.dataKey = dataKey;
     this.addToSet = addToSet;
@@ -140,18 +140,18 @@ public class ModifierSetWorktableRecipe extends AbstractWorktableRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ModifierSetWorktableRecipe> getSerializer() {
     return TinkerModifiers.modifierSetWorktableSerializer.get();
   }
 
   /** Gets the set of modifiers in persistent data at the given key */
-  public static Set<ModifierId> getModifierSet(IModDataView modData, ResourceLocation key) {
-    return modData.get(key, LIST_GETTER).stream().map(tag -> ModifierId.tryParse(tag.getAsString())).filter(Objects::nonNull).collect(Collectors.toSet());
+  public static Set<ModifierId> getModifierSet(IModDataView modData, Identifier key) {
+    return modData.get(key, LIST_GETTER).stream().map(tag -> ModifierId.tryParse(tag.asString().orElse(""))).filter(Objects::nonNull).collect(Collectors.toSet());
   }
 
-  /** Checks if the given modifier is in the set. Faster to use {@link #getModifierSet(IModDataView, ResourceLocation)} for multiple consecutive queries */
-  public static boolean isInSet(IModDataView modData, ResourceLocation key, ModifierId modifier) {
-    if (!modData.contains(key, Tag.TAG_LIST)) {
+  /** Checks if the given modifier is in the set. Faster to use {@link #getModifierSet(IModDataView, Identifier)} for multiple consecutive queries */
+  public static boolean isInSet(IModDataView modData, Identifier key, ModifierId modifier) {
+    if (!modData.contains(key)) {
       return false;
     }
     return isInSet(modData.get(key, LIST_GETTER), modifier, false);
@@ -162,7 +162,7 @@ public class ModifierSetWorktableRecipe extends AbstractWorktableRecipe {
     String modifierStr = modifier.toString();
     Iterator<Tag> iterator = list.iterator();
     while (iterator.hasNext()) {
-      if (modifierStr.equals(iterator.next().getAsString())) {
+      if (modifierStr.equals(iterator.next().asString().orElse(""))) {
         if (remove) {
           iterator.remove();
         }

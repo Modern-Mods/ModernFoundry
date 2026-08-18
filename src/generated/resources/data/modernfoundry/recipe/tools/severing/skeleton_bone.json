@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:severing",
-  "id": "modernfoundry:tools/severing/skeleton_bone",
   "entity": {
     "types": [
       "minecraft:skeleton",
@@ -8,6 +7,7 @@
       "minecraft:stray"
     ]
   },
+  "id": "modernfoundry:tools/severing/skeleton_bone",
   "looting_bonus": 0.01,
   "per_level_chance": 0.05,
   "result": {

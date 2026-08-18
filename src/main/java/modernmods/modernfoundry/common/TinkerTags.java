@@ -4,7 +4,7 @@ import lombok.Getter;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageType;
@@ -27,7 +27,7 @@ import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierManager;
 import modernmods.modernfoundry.library.tools.stat.ToolStats;
 
-import static modernmods.hilt.Hilt.commonResource;
+import static modernmods.mantle.Mantle.commonResource;
 import static modernmods.modernfoundry.TConstruct.getResource;
 
 public class TinkerTags {
@@ -54,7 +54,7 @@ public class TinkerTags {
 
   /** Resource location of the hidden from recipe tags used in JEI. */
   @SuppressWarnings("removal")
-  public static final ResourceLocation HIDDEN_FROM_RECIPE_VIEWERS = ResourceLocation.fromNamespaceAndPath("c", "hidden_from_recipe_viewers");
+  public static final Identifier HIDDEN_FROM_RECIPE_VIEWERS = Identifier.fromNamespaceAndPath("c", "hidden_from_recipe_viewers");
 
   /** Creates a tag that hides things from JEI */
   @SuppressWarnings("SameParameterValue") // there really is no benefit to migrating to new constructors early; just lose Neo compat
@@ -209,7 +209,7 @@ public class TinkerTags {
     public static final TagKey<Block> BUDDING = common("budding");
     // ceramics compat
     @SuppressWarnings("removal")
-    public static final TagKey<Block> CISTERN_CONNECTIONS = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("ceramics", "cistern_connections"));
+    public static final TagKey<Block> CISTERN_CONNECTIONS = TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("ceramics", "cistern_connections"));
 
     /** Makes a tag in the tinkers domain */
     private static TagKey<Block> local(String name) {
@@ -586,7 +586,7 @@ public class TinkerTags {
     public static final TagKey<Fluid> SMALL_GEM_TOOLTIPS = local("tooltips/gem_small");
     /** Causes the fluid to be formatted like glass in tooltips */
     public static final TagKey<Fluid> GLASS_TOOLTIPS = local("tooltips/glass");
-    /** @deprecated use {@link modernmods.hilt.datagen.HiltTags.Fluids#SOUP} */
+    /** @deprecated use {@link modernmods.mantle.datagen.MantleTags.Fluids#SOUP} */
     @Deprecated(forRemoval = true)
     public static final TagKey<Fluid> SOUP_TOOLTIPS = local("tooltips/soup");
 
@@ -669,7 +669,7 @@ public class TinkerTags {
     public static final TagKey<EntityType<?>> KILLAGERS = local("killagers");
     /** Entities in this tag drop bacon from the tasty modifier */
     public static final TagKey<EntityType<?>> BACON_PRODUCER = local("bacon_producer");
-    /** {@link net.minecraft.world.entity.projectile.AbstractArrow} with this tag will not run the enderference override. Ensures we run the proper damaging logic for weird arrows like tridents. */
+    /** {@link net.minecraft.world.entity.projectile.arrow.AbstractArrow} with this tag will not run the enderference override. Ensures we run the proper damaging logic for weird arrows like tridents. */
     public static final TagKey<EntityType<?>> ENDERFERENCE_ARROW_BLACKLIST = local("enderference_arrow_blacklist");
     /** Entities that will not heal you using necrotic */
     public static final TagKey<EntityType<?>> NECROTIC_BLACKLIST = local("necrotic_blacklist");

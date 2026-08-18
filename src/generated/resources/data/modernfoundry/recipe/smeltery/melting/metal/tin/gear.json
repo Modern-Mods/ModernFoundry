@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/tin/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/tin"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/tin"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/tin/gear",
+  "ingredient": "#c:gears/tin",
   "result": {
     "amount": 360,
     "tag": "c:molten_tin"

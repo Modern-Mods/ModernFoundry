@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/electrum/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/electrum"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/electrum"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/electrum/block",
+  "ingredient": "#c:storage_blocks/electrum",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/electrum"

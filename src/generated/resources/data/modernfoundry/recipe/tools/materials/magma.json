@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/magma",
-  "ingredient": {
-    "item": "minecraft:magma_cream"
-  },
+  "ingredient": "minecraft:magma_cream",
   "material": "modernfoundry:magma",
   "needed": 1,
   "value": 1

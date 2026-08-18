@@ -1,27 +1,27 @@
 {
   "type": "modernfoundry:multilevel_modifier",
-  "id": "modernfoundry:tools/modifiers/ability/reflecting",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/reflecting",
   "inputs": [
     {
       "amount_needed": 4,
-      "item": "modernfoundry:sky_congealed_slime"
+      "ingredient": "modernfoundry:sky_congealed_slime"
     },
     {
       "amount_needed": 4,
-      "item": "modernfoundry:ichor_congealed_slime"
+      "ingredient": "modernfoundry:ichor_congealed_slime"
     },
     {
       "amount_needed": 4,
-      "item": "modernfoundry:sky_congealed_slime"
+      "ingredient": "modernfoundry:sky_congealed_slime"
     },
     {
       "amount_needed": 4,
-      "item": "modernfoundry:earth_congealed_slime"
+      "ingredient": "modernfoundry:earth_congealed_slime"
     },
     {
       "amount_needed": 4,
-      "item": "modernfoundry:earth_congealed_slime"
+      "ingredient": "modernfoundry:earth_congealed_slime"
     }
   ],
   "levels": [
@@ -42,7 +42,5 @@
     }
   ],
   "result": "modernfoundry:reflecting",
-  "tools": {
-    "tag": "modernfoundry:modifiable/shields"
-  }
+  "tools": "#modernfoundry:modifiable/shields"
 }

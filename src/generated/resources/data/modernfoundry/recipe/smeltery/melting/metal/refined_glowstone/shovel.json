@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/refined_glowstone/shovel",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:tools/shovels/refined_glowstone"
     }
   ],
-  "ingredient": {
-    "tag": "c:tools/shovels/refined_glowstone"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/refined_glowstone/shovel",
+  "ingredient": "#c:tools/shovels/refined_glowstone",
   "result": {
     "amount": 90,
     "tag": "c:molten_refined_glowstone",

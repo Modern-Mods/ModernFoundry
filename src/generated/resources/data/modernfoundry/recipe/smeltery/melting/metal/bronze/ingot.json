@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/bronze/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/bronze"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/bronze"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/bronze/ingot",
+  "ingredient": "#c:ingots/bronze",
   "result": {
     "amount": 90,
     "tag": "c:molten_bronze"

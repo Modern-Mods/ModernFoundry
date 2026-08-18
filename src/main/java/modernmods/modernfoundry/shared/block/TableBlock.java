@@ -8,7 +8,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.core.Direction;
@@ -19,7 +19,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.level.BlockGetter;
-import modernmods.hilt.block.InventoryBlock;
+import modernmods.mantle.block.InventoryBlock;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
@@ -28,7 +28,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
  */
 public abstract class TableBlock extends InventoryBlock implements SimpleWaterloggedBlock {
 
-  protected static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+  protected static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
   private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
   private static final VoxelShape TABLE_SHAPE = Shapes.or(

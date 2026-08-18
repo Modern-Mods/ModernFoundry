@@ -2,7 +2,7 @@ package modernmods.modernfoundry.shared;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
@@ -17,11 +17,11 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.registration.deferred.PotionDeferredRegister;
-import modernmods.hilt.registration.deferred.PotionDeferredRegister.PotionType;
-import modernmods.hilt.registration.object.EnumObject;
+import modernmods.mantle.registration.deferred.PotionDeferredRegister;
+import modernmods.mantle.registration.deferred.PotionDeferredRegister.PotionType;
+import modernmods.mantle.registration.object.EnumObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerEffect;
 import modernmods.modernfoundry.common.TinkerModule;
@@ -45,7 +45,7 @@ public class TinkerEffects extends TinkerModule {
   public static final DeferredHolder<MobEffect, TinkerEffect> ricochet = MOB_EFFECTS.register("ricochet", () -> new TinkerEffect(MobEffectCategory.NEUTRAL, 0x01cbcd, true).addAttributeModifier(TinkerAttributes.KNOCKBACK_MULTIPLIER, "58a4bc13-366f-4f76-82f5-705451498c24", 0.5f, Operation.ADD_MULTIPLIED_BASE));
   public static final DeferredHolder<MobEffect, TinkerEffect> enderference = MOB_EFFECTS.register("enderference", () -> new TinkerEffect(MobEffectCategory.HARMFUL, 0xD37CFF, true));
   /** Projectile persistent data key to allow ranged modifiers to hit endermen. */
-  public static final ResourceLocation ENDERFERENCE_KEY = enderference.getId();
+  public static final Identifier ENDERFERENCE_KEY = enderference.getId();
 
   // slimy cakes
   public static final DeferredHolder<MobEffect, TinkerEffect> bouncy = MOB_EFFECTS.register("bouncy", () -> new TinkerEffect(MobEffectCategory.BENEFICIAL, 0x71AC63, true).addAttributeModifier(TinkerAttributes.BOUNCY, "5de036ed-bc47-4965-9348-64c3ab5c8ae8", 1, Operation.ADD_VALUE));
@@ -85,7 +85,7 @@ public class TinkerEffects extends TinkerModule {
   /** Registers recipes for brewing, longer and stronger potions for the given object */
   private static void brewing(RegisterBrewingRecipesEvent event, EnumObject<PotionType,Potion> potion, Holder<Potion> base, Ingredient ingredient) {
     Potion normal = potion.get(PotionType.NORMAL);
-    event.getBuilder().addMix(base, ingredient.getItems()[0].getItem(), holder(normal));
+    event.getBuilder().addMix(base, ingredient.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)[0].getItem(), holder(normal));
     Potion longer = potion.getOrNull(PotionType.LONG);
     if (longer != null) {
       event.getBuilder().addMix(holder(normal), Items.REDSTONE, holder(longer));

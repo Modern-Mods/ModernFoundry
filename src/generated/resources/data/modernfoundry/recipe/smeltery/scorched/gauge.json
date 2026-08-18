@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "C": {
-      "item": "modernfoundry:obsidian_pane"
-    },
-    "G": {
-      "tag": "c:glass_panes/colorless"
-    }
+    "C": "modernfoundry:obsidian_pane",
+    "G": "#c:glass_panes/colorless"
   },
   "pattern": [
     " C ",
@@ -17,6 +13,5 @@
   "result": {
     "count": 4,
     "id": "modernfoundry:obsidian_gauge"
-  },
-  "show_notification": true
+  }
 }

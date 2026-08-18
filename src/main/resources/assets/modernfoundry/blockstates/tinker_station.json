@@ -1,18 +1,26 @@
 {
     "variants": {
         "facing=north": {
-            "model": "modernfoundry:block/table/tinker_station"
+            "type": "mantle:retextured",
+            "model": "modernfoundry:block/table/tinker_station",
+            "retextured": ["leg", "legBottom"]
         },
         "facing=south": {
+            "type": "mantle:retextured",
             "model": "modernfoundry:block/table/tinker_station",
+            "retextured": ["leg", "legBottom"],
             "y": 180
         },
         "facing=west": {
+            "type": "mantle:retextured",
             "model": "modernfoundry:block/table/tinker_station",
+            "retextured": ["leg", "legBottom"],
             "y": 270
         },
         "facing=east": {
+            "type": "mantle:retextured",
             "model": "modernfoundry:block/table/tinker_station",
+            "retextured": ["leg", "legBottom"],
             "y": 90
         }
     }

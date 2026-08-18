@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/geore/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:geore_blocks/iron"
     }
   ],
-  "ingredient": {
-    "tag": "c:geore_blocks/iron"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/iron/geore/block",
+  "ingredient": "#c:geore_blocks/iron",
   "result": {
     "amount": 360,
     "tag": "c:molten_iron"

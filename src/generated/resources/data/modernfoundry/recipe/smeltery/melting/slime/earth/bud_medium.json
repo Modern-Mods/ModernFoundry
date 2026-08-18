@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:ore_melting",
   "id": "modernfoundry:smeltery/melting/slime/earth/bud_medium",
-  "ingredient": {
-    "item": "modernfoundry:medium_earth_slime_crystal_bud"
-  },
+  "ingredient": "modernfoundry:medium_earth_slime_crystal_bud",
   "rate": "gem",
   "result": {
     "amount": 500,

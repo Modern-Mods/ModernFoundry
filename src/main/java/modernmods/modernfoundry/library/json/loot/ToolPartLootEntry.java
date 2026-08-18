@@ -9,16 +9,15 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import modernmods.hilt.data.loadable.LoadableCodec;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.data.loadable.LoadableCodec;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.library.materials.RandomMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.tools.part.IToolPart;
-import modernmods.modernfoundry.tools.TinkerToolParts;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -42,8 +41,8 @@ public class ToolPartLootEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public LootPoolEntryType getType() {
-    return TinkerToolParts.toolPartLootEntry.get();
+  public MapCodec<? extends LootPoolSingletonContainer> codec() {
+    return CODEC;
   }
 
   @Override

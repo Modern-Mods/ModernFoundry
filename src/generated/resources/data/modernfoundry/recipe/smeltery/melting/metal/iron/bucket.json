@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/bucket",
-  "ingredient": {
-    "item": "minecraft:bucket"
-  },
+  "ingredient": "minecraft:bucket",
   "result": {
     "amount": 270,
     "tag": "c:molten_iron"

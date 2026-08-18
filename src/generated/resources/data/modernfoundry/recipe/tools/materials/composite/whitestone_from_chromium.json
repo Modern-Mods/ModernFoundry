@@ -1,16 +1,16 @@
 {
-  "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/composite/whitestone_from_chromium",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/chromium"
     }
   ],
+  "type": "modernfoundry:material_fluid",
   "fluid": {
     "amount": 90,
     "tag": "c:molten_chromium"
   },
+  "id": "modernfoundry:tools/materials/composite/whitestone_from_chromium",
   "input": "modernfoundry:rock",
   "output": "modernfoundry:whitestone#composite",
   "temperature": 900

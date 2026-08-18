@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.smeltery.client.screen;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
-import modernmods.hilt.client.screen.ElementScreen;
+import modernmods.mantle.client.screen.ElementScreen;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.GuiUtil;
 import modernmods.modernfoundry.smeltery.block.entity.controller.AlloyerBlockEntity;
@@ -17,7 +17,7 @@ import modernmods.modernfoundry.smeltery.menu.AlloyerContainerMenu;
 
 public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu> implements IScreenWithFluidTank {
   private static final int[] INPUT_TANK_START_X = {54, 22, 38, 70, 6};
-  private static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/alloyer.png");
+  private static final Identifier BACKGROUND = TConstruct.getResource("textures/gui/alloyer.png");
   private static final ElementScreen SCALA = new ElementScreen(BACKGROUND, 176, 0, 34, 52, 256, 256);
   private static final ElementScreen FUEL_SLOT = new ElementScreen(BACKGROUND, 176, 52, 18, 36, 256, 256);
   private static final ElementScreen FUEL_TANK = new ElementScreen(BACKGROUND, 194, 52, 14, 38, 256, 256);
@@ -49,7 +49,7 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
       GuiTankModule[] tanks = new GuiTankModule[numTanks];
       int max = Math.min(numTanks, 5); // only support 5 tanks, any more is impossible
       for (int i = 0; i < max; i++) {
-        tanks[i] = new GuiTankModule(this, alloyTank.getFluidHandler(i), INPUT_TANK_START_X[i], 16, 14, 52, AlloyerContainerMenu.TOOLTIP_FORMAT);
+        tanks[i] = new GuiTankModule(this, net.neoforged.neoforge.fluids.capability.IFluidHandler.of(alloyTank.getFluidHandler(i)), INPUT_TANK_START_X[i], 16, 14, 52, AlloyerContainerMenu.TOOLTIP_FORMAT);
       }
       this.inputTanks = tanks;
     }
@@ -65,15 +65,9 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
     }
   }
 
+  // 26.1 GUI lifecycle: render/renderBg removed; draw container texture + modules in extractRenderState before super
   @Override
-  public void render(GuiGraphics graphics, int x, int y, float partialTicks) {
-    this.renderBackground(graphics, x, y, partialTicks);
-    super.render(graphics, x, y, partialTicks);
-    this.renderTooltip(graphics, x, y);
-  }
-
-  @Override
-  protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+  public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
     GuiUtil.drawBackground(graphics, this, BACKGROUND);
 
     // fluids
@@ -99,11 +93,13 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
     for (GuiTankModule tankModule : inputTanks) {
       tankModule.draw(graphics);
     }
+
+    super.extractRenderState(graphics, mouseX, mouseY, partialTicks);
   }
 
   @Override
-  protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
-    super.renderLabels(graphics, mouseX, mouseY);
+  protected void extractLabels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+    super.extractLabels(graphics, mouseX, mouseY);
     int checkX = mouseX - this.leftPos;
     int checkY = mouseY - this.topPos;
 
@@ -121,8 +117,8 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
   }
 
   @Override
-  protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
-    super.renderTooltip(graphics, mouseX, mouseY);
+  protected void extractTooltip(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+    super.extractTooltip(graphics, mouseX, mouseY);
 
     // tank tooltip
     if (outputTank != null) outputTank.renderTooltip(graphics, mouseX, mouseY);
@@ -136,7 +132,8 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
   }
 
   @Override
-  public boolean mouseClicked(double mouseX, double mouseY, int button) {
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent event, boolean doubleClick) {
+    double mouseX = event.x(); double mouseY = event.y(); int button = event.button();
     assert minecraft != null && minecraft.player != null && minecraft.gameMode != null;
     if (!minecraft.player.isSpectator() && (button == 0 || button == 1) && !menu.getCarried().isEmpty()) {
       int checkX = (int)mouseX - leftPos;
@@ -157,7 +154,7 @@ public class AlloyerScreen extends AbstractContainerScreen<AlloyerContainerMenu>
         }
       }
     }
-    return super.mouseClicked(mouseX, mouseY, button);
+    return super.mouseClicked(event, doubleClick);
   }
 
   @Override

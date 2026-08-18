@@ -3,7 +3,7 @@ package modernmods.modernfoundry.plugin.jei.partbuilder;
 import lombok.NoArgsConstructor;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.TooltipFlag;
 import modernmods.modernfoundry.library.client.GuiUtil;
@@ -19,7 +19,7 @@ public class PatternIngredientRenderer implements IIngredientRenderer<Pattern> {
   public static final PatternIngredientRenderer INSTANCE = new PatternIngredientRenderer();
 
   @Override
-  public void render(GuiGraphics graphics, @Nullable Pattern pattern) {
+  public void render(GuiGraphicsExtractor graphics, @Nullable Pattern pattern) {
     if (pattern != null) {
       GuiUtil.renderPattern(graphics, pattern, 0, 0);
     }

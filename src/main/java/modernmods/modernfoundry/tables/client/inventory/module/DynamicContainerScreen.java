@@ -1,15 +1,15 @@
 package modernmods.modernfoundry.tables.client.inventory.module;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
-import modernmods.hilt.client.screen.ElementScreen;
-import modernmods.hilt.client.screen.ModuleScreen;
-import modernmods.hilt.client.screen.MultiModuleScreen;
-import modernmods.hilt.client.screen.ScalableElementScreen;
-import modernmods.hilt.client.screen.SliderWidget;
+import modernmods.mantle.client.screen.ElementScreen;
+import modernmods.mantle.client.screen.ModuleScreen;
+import modernmods.mantle.client.screen.MultiModuleScreen;
+import modernmods.mantle.client.screen.ScalableElementScreen;
+import modernmods.mantle.client.screen.SliderWidget;
 import modernmods.modernfoundry.tables.client.inventory.SlotPositionHelper;
 
 public class DynamicContainerScreen<P extends MultiModuleScreen<?>, C extends AbstractContainerMenu> extends ModuleScreen<P,C> {
@@ -173,7 +173,7 @@ public class DynamicContainerScreen<P extends MultiModuleScreen<?>, C extends Ab
   }
 
   @Override
-  protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+  public void handleDrawGuiContainerBackgroundLayer(GuiGraphicsExtractor graphics, float partialTicks, int mouseX, int mouseY) {
     if (!this.slider.isHidden()) {
       this.slider.draw(graphics);
 

@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/gold/allomancy_flakes",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "allomancy:gold_flakes"
+      "type": "neoforge:registered",
+      "value": "allomancy:gold_flakes"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/gold/allomancy_flakes",
   "ingredient": {
     "item": "allomancy:gold_flakes"
   },

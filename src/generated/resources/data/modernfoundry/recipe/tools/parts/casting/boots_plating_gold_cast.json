@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:table_casting_material",
+  "cast": "#modernfoundry:casts/multi_use/boots_plating",
   "id": "modernfoundry:tools/parts/casting/boots_plating_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/boots_plating"
-  },
   "item_cost": 2,
   "result": "modernfoundry:boots_plating"
 }

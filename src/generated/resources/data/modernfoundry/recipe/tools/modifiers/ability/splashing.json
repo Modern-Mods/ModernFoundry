@@ -1,23 +1,23 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/splashing",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/splashing",
   "inputs": [
     {
-      "tag": "c:bottles/splash"
+      "ingredient": "#c:bottles/splash"
     },
     {
-      "type": "modernfoundry:no_container",
-      "tag": "modernfoundry:tanks"
+      "neoforge:ingredient_type": "modernfoundry:no_container",
+      "match": "#modernfoundry:tanks"
     },
     {
-      "tag": "c:bottles/splash"
+      "ingredient": "#c:bottles/splash"
     },
     {
-      "tag": "c:ingots/copper"
+      "ingredient": "#c:ingots/copper"
     },
     {
-      "tag": "c:ingots/copper"
+      "ingredient": "#c:ingots/copper"
     }
   ],
   "result": "modernfoundry:splashing",
@@ -25,14 +25,10 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/durability"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable"
-      }
+      "#modernfoundry:modifiable/durability",
+      "#modernfoundry:modifiable/interactable"
     ]
   }
 }

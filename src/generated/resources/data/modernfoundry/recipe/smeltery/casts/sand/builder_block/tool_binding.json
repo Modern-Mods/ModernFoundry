@@ -2,9 +2,7 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/sand/builder_block/tool_binding",
   "pattern": "modernfoundry:tool_binding",
-  "pattern_item": {
-    "tag": "c:sand/colorless"
-  },
+  "pattern_item": "#c:sands/colorless",
   "result": {
     "count": 4,
     "item": "modernfoundry:tool_binding_sand_cast"

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/rock/calcite",
-  "ingredient": {
-    "item": "minecraft:calcite"
-  },
+  "ingredient": "minecraft:calcite",
   "material": "modernfoundry:rock#calcite",
   "needed": 1,
   "value": 1

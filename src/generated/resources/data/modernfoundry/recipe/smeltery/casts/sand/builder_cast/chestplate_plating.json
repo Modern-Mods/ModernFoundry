@@ -2,8 +2,6 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/sand/builder_cast/chestplate_plating",
   "pattern": "modernfoundry:chestplate_plating",
-  "pattern_item": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "pattern_item": "#modernfoundry:casts/sand",
   "result": "modernfoundry:chestplate_plating_sand_cast"
 }

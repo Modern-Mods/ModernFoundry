@@ -80,12 +80,29 @@ public final class TagUtil {
 
   /** Reads an item stack using the built-in registry lookup. */
   public static ItemStack readItem(CompoundTag tag) {
-    return ItemStack.parseOptional(BUILTIN_LOOKUP, tag);
+    return ItemStack.CODEC.parse(BUILTIN_LOOKUP.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), tag).result().orElse(ItemStack.EMPTY);
   }
 
-  /** Saves an item stack using the built-in registry lookup. */
+  /** Reads a fluid stack using the built-in registry lookup (26.1.2 replacement for FluidStack.parseOptional). */
+  public static net.neoforged.neoforge.fluids.FluidStack readFluid(net.minecraft.nbt.Tag tag) {
+    return net.neoforged.neoforge.fluids.FluidStack.CODEC.parse(BUILTIN_LOOKUP.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), tag).result().orElse(net.neoforged.neoforge.fluids.FluidStack.EMPTY);
+  }
+
+  /** Saves a fluid stack using the built-in registry lookup (26.1.2 replacement for FluidStack.saveOptional). */
+  public static net.minecraft.nbt.Tag writeFluid(net.neoforged.neoforge.fluids.FluidStack fluid) {
+    return net.neoforged.neoforge.fluids.FluidStack.CODEC.encodeStart(BUILTIN_LOOKUP.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), fluid).getOrThrow();
+  }
+
+  /** Saves an item stack using the built-in registry lookup. Merges the encoded stack into the passed tag. */
   public static CompoundTag saveItem(ItemStack stack, CompoundTag tag) {
-    return (CompoundTag)stack.save(BUILTIN_LOOKUP, tag);
+    if (stack.isEmpty()) {
+      return tag;
+    }
+    net.minecraft.nbt.Tag encoded = ItemStack.CODEC.encodeStart(BUILTIN_LOOKUP.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), stack).getOrThrow();
+    if (encoded instanceof CompoundTag compound) {
+      tag.merge(compound);
+    }
+    return tag;
   }
 
   /** Creates a fluid stack and applies the custom data tag if present. */
@@ -104,7 +121,18 @@ public final class TagUtil {
    */
   @Nullable
   public static BlockPos readOptionalPos(CompoundTag parent, String key, BlockPos offset) {
-    return NbtUtils.readBlockPos(parent, key).map(pos -> pos.offset(offset)).orElse(null);
+    return readBlockPos(parent, key).map(pos -> pos.offset(offset)).orElse(null);
+  }
+
+  /** Writes a block position as a tag, replacing the removed {@code NbtUtils.writeBlockPos} */
+  public static net.minecraft.nbt.Tag writeBlockPos(BlockPos pos) {
+    return BlockPos.CODEC.encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, pos).getOrThrow();
+  }
+
+  /** Reads a block position from the given key, replacing the removed {@code NbtUtils.readBlockPos} */
+  public static java.util.Optional<BlockPos> readBlockPos(CompoundTag parent, String key) {
+    net.minecraft.nbt.Tag posTag = parent.get(key);
+    return posTag == null ? java.util.Optional.empty() : BlockPos.CODEC.parse(net.minecraft.nbt.NbtOps.INSTANCE, posTag).result();
   }
 
   /**

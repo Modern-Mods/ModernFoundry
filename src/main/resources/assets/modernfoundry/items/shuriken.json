@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/shuriken",
+    "parts": [
+      {
+        "name": "bottom",
+        "index": 1
+      },
+      {
+        "name": "top",
+        "index": 0
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:shuriken"
+    ]
+  }
+}

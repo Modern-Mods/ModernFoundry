@@ -5,9 +5,9 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.common.util.TablePrinter;
-import modernmods.hilt.command.HiltCommand;
+import modernmods.mantle.command.MantleCommand;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierManager;
@@ -28,7 +28,7 @@ public class ModifierPriorityCommand {
    * @param subCommand  Command builder
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
-    subCommand.requires(sender -> sender.hasPermission(HiltCommand.PERMISSION_EDIT_SPAWN))
+    subCommand.requires(sender -> MantleCommand.hasPermission(sender, MantleCommand.PERMISSION_EDIT_SPAWN))
               // no argument: list all priorities
               .executes(context -> run(context, false))
               // argument: list only priorities of modifiers using that hook
@@ -58,7 +58,7 @@ public class ModifierPriorityCommand {
       builder.append(" for ").append(filter.getId());
     } else {
       // if not filtered, include a row listing all used hooks
-      table.header("Hooks", m -> m.getHooks().getAllModules().keySet().stream().map(ModuleHook::getId).sorted().map(ResourceLocation::toString).collect(Collectors.joining(", ")));
+      table.header("Hooks", m -> m.getHooks().getAllModules().keySet().stream().map(ModuleHook::getId).sorted().map(Identifier::toString).collect(Collectors.joining(", ")));
     }
     builder.append(":").append(System.lineSeparator());
     List<Modifier> list = modifiers.sorted(Comparator.comparingInt(Modifier::getPriority).reversed().thenComparing(Modifier::getId)).toList();

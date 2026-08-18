@@ -3,12 +3,12 @@ package modernmods.modernfoundry.library.recipe.casting.container;
 import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 
 import javax.annotation.Nullable;
@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 @AllArgsConstructor(staticName = "castingRecipe")
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class ContainerFillingRecipeBuilder extends AbstractRecipeBuilder<ContainerFillingRecipeBuilder> {
-  private final ResourceLocation result;
+  private final Identifier result;
   private final int fluidAmount;
   private final TypeAwareRecipeSerializer<? extends ContainerFillingRecipe> recipeSerializer;
 
@@ -41,8 +41,8 @@ public class ContainerFillingRecipeBuilder extends AbstractRecipeBuilder<Contain
    * @param fluidAmount       Container size
    * @return  Builder instance
    */
-  public static ContainerFillingRecipeBuilder basinRecipe(ResourceLocation result, int fluidAmount) {
-    return castingRecipe(result, fluidAmount, TinkerSmeltery.basinFillingRecipeSerializer.get());
+  public static ContainerFillingRecipeBuilder basinRecipe(Identifier result, int fluidAmount) {
+    return castingRecipe(result, fluidAmount, TinkerSmeltery.basinFillingRecipeSerializer);
   }
 
   /**
@@ -52,7 +52,7 @@ public class ContainerFillingRecipeBuilder extends AbstractRecipeBuilder<Contain
    * @return  Builder instance
    */
   public static ContainerFillingRecipeBuilder basinRecipe(ItemLike result, int fluidAmount) {
-    return castingRecipe(result, fluidAmount, TinkerSmeltery.basinFillingRecipeSerializer.get());
+    return castingRecipe(result, fluidAmount, TinkerSmeltery.basinFillingRecipeSerializer);
   }
 
   /**
@@ -61,8 +61,8 @@ public class ContainerFillingRecipeBuilder extends AbstractRecipeBuilder<Contain
    * @param fluidAmount       Container size
    * @return  Builder instance
    */
-  public static ContainerFillingRecipeBuilder tableRecipe(ResourceLocation result, int fluidAmount) {
-    return castingRecipe(result, fluidAmount, TinkerSmeltery.tableFillingRecipeSerializer.get());
+  public static ContainerFillingRecipeBuilder tableRecipe(Identifier result, int fluidAmount) {
+    return castingRecipe(result, fluidAmount, TinkerSmeltery.tableFillingRecipeSerializer);
   }
 
   /**
@@ -72,7 +72,7 @@ public class ContainerFillingRecipeBuilder extends AbstractRecipeBuilder<Contain
    * @return  Builder instance
    */
   public static ContainerFillingRecipeBuilder tableRecipe(ItemLike result, int fluidAmount) {
-    return castingRecipe(result, fluidAmount, TinkerSmeltery.tableFillingRecipeSerializer.get());
+    return castingRecipe(result, fluidAmount, TinkerSmeltery.tableFillingRecipeSerializer);
   }
 
   @Override
@@ -81,19 +81,19 @@ public class ContainerFillingRecipeBuilder extends AbstractRecipeBuilder<Contain
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
-    ResourceLocation advancementId = this.buildOptionalAdvancement(id, "casting");
+  public void save(Consumer<FinishedRecipe> consumerIn, Identifier id) {
+    Identifier advancementId = this.buildOptionalAdvancement(id, "casting");
     consumerIn.accept(new ContainerFillingRecipeBuilder.Result(id, advancementId));
   }
 
   private class Result extends AbstractFinishedRecipe {
-    public Result(ResourceLocation ID, @Nullable ResourceLocation advancementID) {
+    public Result(Identifier ID, @Nullable Identifier advancementID) {
       super(ID, advancementID);
     }
 
     @Override
     public RecipeSerializer<?> getType() {
-      return recipeSerializer;
+      return recipeSerializer.serializer();
     }
 
     @Override

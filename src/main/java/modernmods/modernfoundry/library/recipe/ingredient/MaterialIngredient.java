@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.library.recipe.ingredient;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.DataResult;
@@ -10,15 +11,15 @@ import com.mojang.serialization.MapLike;
 import com.mojang.serialization.RecordBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.crafting.IngredientType;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
@@ -131,7 +132,7 @@ public class MaterialIngredient extends NestedIngredient {
    * @return  Material with tag
    */
   public static Ingredient of(TagKey<Item> tag, MaterialVariantId material) {
-    return of(Ingredient.of(tag), material);
+    return of(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag), material);
   }
 
   /**
@@ -140,7 +141,7 @@ public class MaterialIngredient extends NestedIngredient {
    * @return  Material with tag
    */
   public static Ingredient of(TagKey<Item> tag) {
-    return of(Ingredient.of(tag));
+    return of(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag));
   }
 
   @Override
@@ -157,25 +158,27 @@ public class MaterialIngredient extends NestedIngredient {
   }
 
   @Override
-  public Stream<ItemStack> getItems() {
-    if (materialStacks == null) {
-      if (!MaterialRegistry.isFullyLoaded()) {
-        return Arrays.stream(nested.getItems());
-      }
-      // no material? apply all materials for variants
-      Stream<ItemStack> items = Arrays.stream(nested.getItems());
-      // find all materials matching the filter; note this only shows craftable material variants
-      items = items.flatMap(stack -> MaterialRecipeCache.getAllVariants().stream()
-        .filter(material::matches)
-        .map(mat -> IMaterialItem.withMaterial(stack, mat))
-        .filter(TagUtil::hasTag));
-      materialStacks = items.distinct().toArray(ItemStack[]::new);
+  public Stream<net.minecraft.core.Holder<net.minecraft.world.item.Item>> items() {
+    // 26.1.2 ICustomIngredient#items() returns item holders (no NBT/components), so material-variant expansion
+    // can no longer live here; JEI's material crafting extensions build the per-material display separately.
+    return nested.items();
+  }
+
+  /**
+   * Registry-aware JSON ops, built lazily. Serializing a tag {@link Ingredient} needs a {@link net.minecraft.resources.RegistryOps}
+   * so {@code HolderSetCodec} writes the tag by name; plain {@link JsonOps} instead iterates the holder set contents,
+   * which throws "Missing tag" at datagen time (tags are not bound then).
+   */
+  private static com.mojang.serialization.DynamicOps<JsonElement> jsonOps;
+  private static com.mojang.serialization.DynamicOps<JsonElement> jsonOps() {
+    if (jsonOps == null) {
+      jsonOps = net.minecraft.resources.RegistryOps.create(JsonOps.INSTANCE, net.minecraft.core.RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY));
     }
-    return Arrays.stream(materialStacks);
+    return jsonOps;
   }
 
   public JsonElement toJson() {
-    JsonElement parent = Ingredient.CODEC_NONEMPTY.encodeStart(JsonOps.INSTANCE, nested).getOrThrow(IllegalArgumentException::new);
+    JsonElement parent = Ingredient.CODEC.encodeStart(jsonOps(), nested).getOrThrow(IllegalArgumentException::new);
     JsonObject result;
     if (!nested.isCustom() && parent.isJsonObject()) {
       result = parent.getAsJsonObject();
@@ -211,19 +214,21 @@ public class MaterialIngredient extends NestedIngredient {
   /** Serializer instance */
   public enum Serializer {
     INSTANCE;
-    public static final ResourceLocation ID = TConstruct.getResource("material");
+    public static final Identifier ID = TConstruct.getResource("material");
     private static final LoadableField<IJsonPredicate<MaterialVariantId>,MaterialIngredient> MATERIAL_FIELD = new MaterialPredicateField<>("material", i -> i.material);
 
     /** Parses the ingredient from the legacy JSON format (supports both the inline vanilla form and the "match" wrapper) */
     private static MaterialIngredient parseJson(JsonObject json) {
       // if we have match, parse as a nested object. Without match, just parse the object as vanilla
+      // route through IngredientLoadable.convert, which accepts a bare item/tag string, the legacy {"item"}/{"tag"}
+      // object forms, arrays, and custom ingredients -- the raw Ingredient.CODEC (HolderSet-based) rejects a bare item id
       Ingredient ingredient;
       if (json.has("match")) {
-        ingredient = Ingredient.CODEC_NONEMPTY.parse(JsonOps.INSTANCE, json.get("match")).getOrThrow(IllegalArgumentException::new);
+        ingredient = modernmods.mantle.data.loadable.common.IngredientLoadable.DISALLOW_EMPTY.convert(json.get("match"), "match", modernmods.mantle.util.typed.TypedMap.empty());
       } else {
         JsonObject copy = json.deepCopy();
         copy.remove("type");
-        ingredient = Ingredient.CODEC_NONEMPTY.parse(JsonOps.INSTANCE, copy).getOrThrow(IllegalArgumentException::new);
+        ingredient = modernmods.mantle.data.loadable.common.IngredientLoadable.DISALLOW_EMPTY.convert(copy, "match", modernmods.mantle.util.typed.TypedMap.empty());
       }
       IJsonPredicate<MaterialVariantId> material = MATERIAL_FIELD.get(json);
       // deprecated tag field

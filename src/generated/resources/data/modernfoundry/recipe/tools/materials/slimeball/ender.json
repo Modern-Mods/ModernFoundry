@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/slimeball/ender",
-  "ingredient": {
-    "tag": "c:slimeball/ender"
-  },
+  "ingredient": "#c:slimeball/ender",
   "material": "modernfoundry:slimeball#ender",
   "needed": 1,
   "value": 1

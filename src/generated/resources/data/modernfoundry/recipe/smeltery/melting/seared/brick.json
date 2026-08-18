@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/seared/brick",
-  "ingredient": {
-    "item": "modernfoundry:seared_brick"
-  },
+  "ingredient": "modernfoundry:seared_brick",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:seared_stone"

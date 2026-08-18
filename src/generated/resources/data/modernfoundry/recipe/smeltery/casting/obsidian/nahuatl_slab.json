@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/obsidian/nahuatl_slab",
-  "cast": {
-    "tag": "minecraft:wooden_slabs"
-  },
+  "cast": "#minecraft:wooden_slabs",
   "cast_consumed": true,
   "cooling_time": 78,
   "fluid": {
     "amount": 125,
     "tag": "modernfoundry:molten_obsidian"
   },
+  "id": "modernfoundry:smeltery/casting/obsidian/nahuatl_slab",
   "result": "modernfoundry:nahuatl_slab"
 }

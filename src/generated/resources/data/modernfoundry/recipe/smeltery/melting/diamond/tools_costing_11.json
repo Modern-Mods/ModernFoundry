@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/diamond/tools_costing_11",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/diamond/tools_costing_11"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/diamond/tools_costing_11"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/diamond/tools_costing_11",
+  "ingredient": "#modernfoundry:melting/diamond/tools_costing_11",
   "result": {
     "amount": 1100,
     "fluid": "modernfoundry:molten_diamond",

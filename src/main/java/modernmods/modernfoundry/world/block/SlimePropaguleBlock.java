@@ -7,8 +7,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.grower.TreeGrower;
@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -37,6 +36,8 @@ public class SlimePropaguleBlock extends SlimeSaplingBlock {
     Block.box(7.0, 3.0, 7.0, 9.0, 16.0, 9.0),
     Block.box(7.0, 0.0, 7.0, 9.0, 16.0, 9.0)
   };
+  /** Non-hanging sapling shape, matching {@link net.minecraft.world.level.block.SaplingBlock} whose shape is now private */
+  private static final VoxelShape SAPLING_SHAPE = Block.column(12.0, 0.0, 12.0);
 
   public SlimePropaguleBlock(TreeGrower treeIn, FoliageType foliageType, Properties properties) {
     super(treeIn, foliageType, properties);
@@ -61,15 +62,14 @@ public class SlimePropaguleBlock extends SlimeSaplingBlock {
 
   @Override
   public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-    Vec3 vec3 = pState.getOffset(pLevel, pPos);
     VoxelShape voxelshape;
     if (pState.getValue(HANGING)) {
       voxelshape = SHAPE_PER_AGE[pState.getValue(AGE)];
     } else {
-      voxelshape = SHAPE;
+      voxelshape = SAPLING_SHAPE;
     }
 
-    return voxelshape.move(vec3.x, vec3.y, vec3.z);
+    return voxelshape.move(pState.getOffset(pPos));
   }
 
   @Override
@@ -80,11 +80,11 @@ public class SlimePropaguleBlock extends SlimeSaplingBlock {
   }
 
   @Override
-  public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+  protected BlockState updateShape(BlockState pState, LevelReader pLevel, ScheduledTickAccess pTicks, BlockPos pCurrentPos, Direction pDirectionToNeighbour, BlockPos pNeighbourPos, BlockState pNeighbourState, RandomSource pRandom) {
     if (pState.getValue(WATERLOGGED)) {
-      pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+      pTicks.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
     }
-    return pFacing == Direction.UP && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+    return pDirectionToNeighbour == Direction.UP && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pLevel, pTicks, pCurrentPos, pDirectionToNeighbour, pNeighbourPos, pNeighbourState, pRandom);
   }
 
   @SuppressWarnings("deprecation")

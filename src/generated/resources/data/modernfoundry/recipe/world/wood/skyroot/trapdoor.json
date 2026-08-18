@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wooden_trapdoor",
   "key": {
-    "#": {
-      "item": "modernfoundry:skyroot_planks"
-    }
+    "#": "modernfoundry:skyroot_planks"
   },
   "pattern": [
     "###",
@@ -14,6 +12,5 @@
   "result": {
     "count": 2,
     "id": "modernfoundry:skyroot_trapdoor"
-  },
-  "show_notification": true
+  }
 }

@@ -3,7 +3,5 @@
   "id": "modernfoundry:tools/armor/plate/boots_swapping",
   "index": 0,
   "item_cost": 2,
-  "tools": {
-    "item": "modernfoundry:plate_boots"
-  }
+  "tools": "modernfoundry:plate_boots"
 }

@@ -2,17 +2,17 @@ package modernmods.modernfoundry.library.recipe.casting.material;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
@@ -40,14 +40,14 @@ public class CompositeCastingRecipe extends MaterialCastingRecipe {
   @Nullable
   private final MaterialStatsId castingStatConflict;
 
-  public CompositeCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, int itemCost, IMaterialItem result, IJsonPredicate<MaterialVariantId> materials, @Nullable MaterialStatsId castingStatConflict) {
+  public CompositeCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, int itemCost, IMaterialItem result, IJsonPredicate<MaterialVariantId> materials, @Nullable MaterialStatsId castingStatConflict) {
     super(serializer, id, group, Ingredient.of(result), itemCost, result, materials, true, false);
     this.castingStatConflict = castingStatConflict;
   }
 
-  /** @deprecated use {@link #CompositeCastingRecipe(TypeAwareRecipeSerializer, ResourceLocation, String, int, IMaterialItem, IJsonPredicate, MaterialStatsId)} */
+  /** @deprecated use {@link #CompositeCastingRecipe(TypeAwareRecipeSerializer, Identifier, String, int, IMaterialItem, IJsonPredicate, MaterialStatsId)} */
   @Deprecated(forRemoval = true)
-  public CompositeCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, IMaterialItem result, int itemCost, @Nullable MaterialStatsId castingStatConflict) {
+  public CompositeCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, IMaterialItem result, int itemCost, @Nullable MaterialStatsId castingStatConflict) {
     this(serializer, id, group, itemCost, result, MaterialPredicate.ANY, castingStatConflict);
   }
 

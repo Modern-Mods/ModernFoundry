@@ -3,8 +3,8 @@ package modernmods.modernfoundry.tools.modules;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.armor.EquipmentChangeModifierHook;
@@ -39,7 +39,7 @@ public record ClearEffectOnUnequipModule(MobEffect effect, ModifierCondition<ITo
   @Override
   public void onUnequip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
     LivingEntity entity = context.getEntity();
-    if (!entity.level().isClientSide && condition.matches(tool, modifier) && EquipmentChangeModifierHook.didUnequip(tool, context)) {
+    if (!entity.level().isClientSide() && condition.matches(tool, modifier) && EquipmentChangeModifierHook.didUnequip(tool, context)) {
       entity.removeEffect(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(effect));
     }
   }

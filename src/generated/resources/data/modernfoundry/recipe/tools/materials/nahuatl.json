@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/nahuatl",
-  "ingredient": {
-    "item": "modernfoundry:nahuatl"
-  },
+  "ingredient": "modernfoundry:nahuatl",
   "material": "modernfoundry:nahuatl",
   "needed": 1,
   "value": 1

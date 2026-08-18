@@ -9,7 +9,7 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import modernmods.hilt.util.JsonHelper;
+import modernmods.mantle.util.JsonHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.fixture.MaterialItemFixture;
 import modernmods.modernfoundry.fixture.RegistrationFixture;

@@ -101,6 +101,6 @@ public class EnchantmentToModifierProvider extends AbstractEnchantmentToModifier
 
   @Override
   public String getName() {
-    return "Modern Foundry Enchantment to Modifier Mapping";
+    return "Tinkers' Construct Enchantment to Modifier Mapping";
   }
 }

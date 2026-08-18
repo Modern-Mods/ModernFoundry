@@ -3,9 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    {
-      "tag": "modernfoundry:skyroot_logs"
-    }
+    "#modernfoundry:skyroot_logs"
   ],
   "result": {
     "count": 4,

@@ -8,7 +8,7 @@ armor_materials=Tier3 防具用素材
 armor_materials.subtext=これらの素材を鋳造して防具や盾の部品を作れます。
 
 tools=大型道具
-tools.subtext=大型道具を作成するためにはModern Foundry金床が必要です
+tools.subtext=大型道具を作成するためにはティンカー金床が必要です
 
 armor=強力な防具
 armor.subtext=合金化により、防具の作成に使用できる多くの素材が開放されます。これらの素材は、旅行者の防具などの基本的なものにその防御性能を超える追加の能力を付与できる場合があります。

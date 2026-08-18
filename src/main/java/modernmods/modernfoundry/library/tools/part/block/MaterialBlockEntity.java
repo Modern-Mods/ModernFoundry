@@ -7,9 +7,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import modernmods.hilt.block.entity.HiltBlockEntity;
-import modernmods.hilt.util.RetexturedHelper;
+import net.neoforged.neoforge.model.data.ModelData;
+import modernmods.mantle.block.entity.MantleBlockEntity;
+import modernmods.mantle.util.RetexturedHelper;
 import modernmods.modernfoundry.library.client.model.ModelProperties;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
@@ -21,7 +21,7 @@ import java.util.Objects;
 import static modernmods.modernfoundry.library.tools.part.IMaterialItem.MATERIAL_TAG;
 
 /** Block entity logic for {@link MaterialBlock} */
-public class MaterialBlockEntity extends HiltBlockEntity {
+public class MaterialBlockEntity extends MantleBlockEntity {
   @Nonnull
   @Getter
   private MaterialVariantId material = IMaterial.UNKNOWN_ID;
@@ -58,18 +58,19 @@ public class MaterialBlockEntity extends HiltBlockEntity {
   }
 
   @Override
-  protected void saveSynced(CompoundTag tags, HolderLookup.Provider registries) {
-    super.saveSynced(tags, registries);
+  protected void saveSynced(net.minecraft.world.level.storage.ValueOutput output) {
+    super.saveSynced(output);
     if (material != IMaterial.UNKNOWN_ID) {
-      tags.putString(MATERIAL_TAG, material.toString());
+      output.putString(MATERIAL_TAG, material.toString());
     }
   }
 
   @Override
-  protected void loadAdditional(CompoundTag tags, HolderLookup.Provider registries) {
-    super.loadAdditional(tags, registries);
-    if (tags.contains(MATERIAL_TAG, Tag.TAG_STRING)) {
-      material = Objects.requireNonNullElse(MaterialVariantId.tryParse(tags.getString(MATERIAL_TAG)), IMaterial.UNKNOWN_ID);
+  protected void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
+    super.loadAdditional(input);
+    String materialStr = input.getStringOr(MATERIAL_TAG, "");
+    if (!materialStr.isEmpty()) {
+      material = Objects.requireNonNullElse(MaterialVariantId.tryParse(materialStr), IMaterial.UNKNOWN_ID);
       RetexturedHelper.onTextureUpdated(this);
     }
   }

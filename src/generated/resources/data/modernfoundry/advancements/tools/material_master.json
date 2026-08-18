@@ -1,0 +1,669 @@
+{
+  "parent": "modernfoundry:tools/netherite_tier",
+  "criteria": {
+    "amethyst_bronze": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:amethyst_bronze"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "bamboo": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:bamboo"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "blazewood": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:blazewood"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "blazing_bone": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:blazing_bone"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "bone": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:bone"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "chorus": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:chorus"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cinderslime": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:cinderslime"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "cobalt": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:cobalt"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "copper": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:copper"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "darkthread": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:darkthread"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "enderslime_vine": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:enderslime_vine"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "flint": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:flint"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "hepatizon": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:hepatizon"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "ichorskin": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:ichorskin"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "iron": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:iron"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "jeweled_hide": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:jeweled_hide"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "knightmetal": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:knightmetal"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "knightslime": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:knightslime"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leather": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:leather"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "manyullyn": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:manyullyn"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "nahuatl": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:nahuatl"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "necrotic_bone": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:necrotic_bone"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pig_iron": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:pig_iron"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "queens_slime": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:queens_slime"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "rock": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:rock"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "rose_gold": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:rose_gold"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "scorched_stone": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:scorched_stone"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "seared_stone": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:seared_stone"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "skyslime_vine": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:skyslime_vine"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "slimeskin": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:slimeskin"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "slimesteel": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:slimesteel"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "slimewood": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:slimewood"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "string": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:string"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "twisting_vine": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:twisting_vine"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "vine": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:vine"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "weeping_vine": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:weeping_vine"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "whitestone": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:whitestone"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "wood": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "modernfoundry:has_material",
+              "material": "modernfoundry:wood"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.tools.material_master.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:manyullyn_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.tools.material_master.title"
+    }
+  },
+  "requirements": [
+    [
+      "wood"
+    ],
+    [
+      "flint"
+    ],
+    [
+      "rock"
+    ],
+    [
+      "bone"
+    ],
+    [
+      "necrotic_bone"
+    ],
+    [
+      "leather"
+    ],
+    [
+      "string"
+    ],
+    [
+      "vine"
+    ],
+    [
+      "bamboo"
+    ],
+    [
+      "chorus"
+    ],
+    [
+      "iron"
+    ],
+    [
+      "seared_stone"
+    ],
+    [
+      "scorched_stone"
+    ],
+    [
+      "copper"
+    ],
+    [
+      "slimewood"
+    ],
+    [
+      "slimeskin"
+    ],
+    [
+      "skyslime_vine"
+    ],
+    [
+      "weeping_vine"
+    ],
+    [
+      "twisting_vine"
+    ],
+    [
+      "whitestone"
+    ],
+    [
+      "rose_gold"
+    ],
+    [
+      "slimesteel"
+    ],
+    [
+      "nahuatl"
+    ],
+    [
+      "amethyst_bronze"
+    ],
+    [
+      "pig_iron"
+    ],
+    [
+      "cobalt"
+    ],
+    [
+      "darkthread"
+    ],
+    [
+      "ichorskin"
+    ],
+    [
+      "manyullyn"
+    ],
+    [
+      "hepatizon"
+    ],
+    [
+      "cinderslime"
+    ],
+    [
+      "queens_slime"
+    ],
+    [
+      "blazing_bone"
+    ],
+    [
+      "blazewood"
+    ],
+    [
+      "jeweled_hide"
+    ],
+    [
+      "knightmetal"
+    ],
+    [
+      "knightslime"
+    ],
+    [
+      "enderslime_vine"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

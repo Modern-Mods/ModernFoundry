@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/hepatizon/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/hepatizon"
-  },
+  "ingredient": "#c:storage_blocks/hepatizon",
   "result": {
     "amount": 810,
     "tag": "c:molten_hepatizon"

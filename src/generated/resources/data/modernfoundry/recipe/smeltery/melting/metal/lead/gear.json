@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/lead/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/lead"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/lead"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/lead/gear",
+  "ingredient": "#c:gears/lead",
   "result": {
     "amount": 360,
     "tag": "c:molten_lead"

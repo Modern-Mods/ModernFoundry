@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "modernfoundry:item/modifier_crystal",
+    "tints": [
+      {
+        "type": "modernfoundry:modifier_crystal"
+      }
+    ]
+  }
+}

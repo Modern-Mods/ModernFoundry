@@ -4,9 +4,7 @@
   "cookingtime": 400,
   "experience": 0.2,
   "group": "modernfoundry:slime_dirt",
-  "ingredient": {
-    "item": "modernfoundry:sky_slime_dirt"
-  },
+  "ingredient": "modernfoundry:sky_slime_dirt",
   "result": {
     "id": "modernfoundry:sky_slime_crystal"
   }

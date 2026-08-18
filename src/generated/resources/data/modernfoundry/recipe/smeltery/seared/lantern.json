@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "modernfoundry:seared_brick"
-    },
-    "C": {
-      "tag": "c:ingots/iron"
-    },
-    "P": {
-      "item": "modernfoundry:seared_glass_pane"
-    }
+    "B": "modernfoundry:seared_brick",
+    "C": "#c:ingots/iron",
+    "P": "modernfoundry:seared_glass_pane"
   },
   "pattern": [
     " C ",
@@ -20,6 +14,5 @@
   "result": {
     "count": 3,
     "id": "modernfoundry:seared_lantern"
-  },
-  "show_notification": true
+  }
 }

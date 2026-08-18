@@ -22,7 +22,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:fantastic_foundry"
+      "id": "modernfoundry:fantastic_foundry"
     },
     "show_toast": true,
     "title": {

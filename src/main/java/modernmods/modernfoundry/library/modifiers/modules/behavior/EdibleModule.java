@@ -12,13 +12,13 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import modernmods.hilt.data.loadable.common.ItemStackLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
+import modernmods.mantle.data.loadable.common.ItemStackLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.LevelingInt;
@@ -86,8 +86,8 @@ public record EdibleModule(ItemStack representativeItem, LevelingInt duration, L
   }
 
   @Override
-  public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-    return UseAnim.EAT;
+  public ItemUseAnimation getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    return ItemUseAnimation.EAT;
   }
 
   @Override
@@ -104,13 +104,13 @@ public record EdibleModule(ItemStack representativeItem, LevelingInt duration, L
       float saturation = stats.get(SATURATION);
       player.getFoodData().eat(hunger, saturation);
       ModifierUtil.foodConsumer.onConsume(player, representativeItem, hunger, saturation);
-      world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.GENERIC_EAT, SoundSource.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
-      world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.NEUTRAL, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
+      world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.GENERIC_EAT, SoundSource.NEUTRAL, 1.0F, 1.0F + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.4F);
+      world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_BURP, SoundSource.NEUTRAL, 0.5F, world.getRandom().nextFloat() * 0.1F + 0.9F);
 
       // 15 damage for a bite per level, does not process reinforced/overslime, your teeth are tough
       int damage = this.durabilityUsage.compute(modifier.getEffectiveLevel());
       if (damage > 0 && ToolDamageUtil.directDamage(tool, damage, player, player.getUseItem())) {
-        player.onEquippedItemBroken(player.getUseItem().getItem(), LivingEntity.getSlotForHand(player.getUsedItemHand()));
+        player.onEquippedItemBroken(player.getUseItem().getItem(), player.getUsedItemHand().asEquipmentSlot());
       }
     }
   }
@@ -132,9 +132,9 @@ public record EdibleModule(ItemStack representativeItem, LevelingInt duration, L
       position = position.xRot(-entity.getXRot() * ((float)Math.PI / 180.0f));
       position = position.yRot(-entity.getYRot() * ((float)Math.PI / 180.0f));
       position = position.add(entity.getX(), entity.getEyeY(), entity.getZ());
-      entity.level().addParticle(new ItemParticleOption(ParticleTypes.ITEM, representativeItem), position.x, position.y, position.z, speed.x, speed.y + 0.05, speed.z);
+      entity.level().addParticle(new ItemParticleOption(ParticleTypes.ITEM, representativeItem.getItem()), position.x, position.y, position.z, speed.x, speed.y + 0.05, speed.z);
     }
-    entity.playSound(SoundEvents.GENERIC_EAT, 0.5f + 0.5f * random.nextInt(2), (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
+    entity.playSound(SoundEvents.GENERIC_EAT.value(), 0.5f + 0.5f * random.nextInt(2), (random.nextFloat() - random.nextFloat()) * 0.2f + 1.0f);
   }
 
   @Override
@@ -148,7 +148,7 @@ public record EdibleModule(ItemStack representativeItem, LevelingInt duration, L
         if (entity instanceof Player player && player.canEat(false)) {
           ItemStack representativeItem = getRepresentativeItem(entity);
           eatEffects(entity, representativeItem, 16);
-          if (!entity.level().isClientSide) {
+          if (!entity.level().isClientSide()) {
             eat(tool, modifier, player, representativeItem);
           }
         }
@@ -167,7 +167,7 @@ public record EdibleModule(ItemStack representativeItem, LevelingInt duration, L
       if (modifier != activeModifier) {
         eatEffects(entity, representativeItem, 5);
       }
-      if (!entity.level().isClientSide) {
+      if (!entity.level().isClientSide()) {
         eat(tool, modifier, player, representativeItem);
       }
     }
@@ -178,7 +178,7 @@ public record EdibleModule(ItemStack representativeItem, LevelingInt duration, L
     if (!tool.isBroken() && tool.hasTag(TinkerTags.Items.ARMOR) && condition.matches(tool, modifier) && tool.getStats().getInt(HUNGER) > 0) {
       LivingEntity entity = context.getEntity();
       float level = CounterModule.getLevel(tool, modifier, slotType, entity);
-      if (context.getLevel().random.nextFloat() < chance.compute(level) && entity instanceof Player player && player.canEat(false)) {
+      if (context.getLevel().getRandom().nextFloat() < chance.compute(level) && entity instanceof Player player && player.canEat(false)) {
         eat(tool, modifier, player, !representativeItem.isEmpty() ? representativeItem : entity.getItemBySlot(slotType));
       }
     }

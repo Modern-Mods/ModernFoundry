@@ -1,22 +1,22 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/pockets",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/pockets",
   "inputs": [
     {
-      "item": "minecraft:shulker_shell"
+      "ingredient": "minecraft:shulker_shell"
     },
     {
-      "tag": "c:ingots/iron"
+      "ingredient": "#c:ingots/iron"
     },
     {
-      "item": "minecraft:shulker_shell"
+      "ingredient": "minecraft:shulker_shell"
     },
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     },
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     }
   ],
   "level": {
@@ -26,7 +26,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/leggings"
-  }
+  "tools": "#modernfoundry:modifiable/armor/leggings"
 }

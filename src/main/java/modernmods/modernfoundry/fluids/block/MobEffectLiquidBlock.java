@@ -3,13 +3,15 @@ package modernmods.modernfoundry.fluids.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
-import modernmods.hilt.registration.deferred.FluidDeferredRegister;
+import modernmods.mantle.registration.deferred.FluidDeferredRegister;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -23,11 +25,12 @@ public class MobEffectLiquidBlock extends LiquidBlock {
   }
 
   @Override
-  public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-    if (entity.getFluidTypeHeight(fluid.getFluidType()) > 0 && entity instanceof LivingEntity living) {
-      MobEffectInstance effect = this.effect.get();
-      effect.getCures().clear();
-      living.addEffect(effect);
+  protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+    if (entity instanceof LivingEntity living) {
+      FluidState fluidState = level.getFluidState(pos);
+      if (!fluidState.isEmpty() && entity.getY() < pos.getY() + fluidState.getHeight(level, pos)) {
+        living.addEffect(this.effect.get());
+      }
     }
   }
 

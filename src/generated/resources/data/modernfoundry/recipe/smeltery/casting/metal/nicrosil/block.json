@@ -1,17 +1,17 @@
 {
-  "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/metal/nicrosil/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/nicrosil"
     }
   ],
+  "type": "modernfoundry:casting_basin",
   "cooling_time": 208,
   "fluid": {
     "amount": 810,
     "tag": "c:molten_nicrosil"
   },
+  "id": "modernfoundry:smeltery/casting/metal/nicrosil/block",
   "result": {
     "tag": "c:storage_blocks/nicrosil"
   }

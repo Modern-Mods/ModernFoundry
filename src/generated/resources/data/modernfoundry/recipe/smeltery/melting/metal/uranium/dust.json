@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/uranium/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/uranium"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/uranium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/uranium/dust",
+  "ingredient": "#c:dusts/uranium",
   "result": {
     "amount": 90,
     "tag": "c:molten_uranium"

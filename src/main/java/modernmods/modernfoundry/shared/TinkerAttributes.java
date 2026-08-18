@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.registration.deferred.AttributeDeferredRegister;
+import modernmods.mantle.registration.deferred.AttributeDeferredRegister;
 import modernmods.modernfoundry.TConstruct;
 
 public class TinkerAttributes {

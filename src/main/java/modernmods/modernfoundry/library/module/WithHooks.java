@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.library.module;
 
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.registry.GenericLoaderRegistry;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.registry.GenericLoaderRegistry;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
 
 import java.util.List;
 

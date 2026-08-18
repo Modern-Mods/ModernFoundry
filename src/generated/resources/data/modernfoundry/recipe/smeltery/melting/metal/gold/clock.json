@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/clock",
-  "ingredient": {
-    "item": "minecraft:clock"
-  },
+  "ingredient": "minecraft:clock",
   "result": {
     "amount": 360,
     "tag": "c:molten_gold"

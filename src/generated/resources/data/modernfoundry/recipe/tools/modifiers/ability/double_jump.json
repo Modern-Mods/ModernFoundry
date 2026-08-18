@@ -1,22 +1,22 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/double_jump",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/double_jump",
   "inputs": [
     {
-      "item": "minecraft:piston"
+      "ingredient": "minecraft:piston"
     },
     {
-      "item": "modernfoundry:sky_slime"
+      "ingredient": "modernfoundry:sky_slime"
     },
     {
-      "item": "minecraft:piston"
+      "ingredient": "minecraft:piston"
     },
     {
-      "item": "minecraft:phantom_membrane"
+      "ingredient": "minecraft:phantom_membrane"
     },
     {
-      "item": "minecraft:phantom_membrane"
+      "ingredient": "minecraft:phantom_membrane"
     }
   ],
   "level": {
@@ -26,7 +26,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/boots"
-  }
+  "tools": "#modernfoundry:modifiable/armor/boots"
 }

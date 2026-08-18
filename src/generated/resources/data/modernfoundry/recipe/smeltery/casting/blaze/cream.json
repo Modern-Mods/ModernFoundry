@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/blaze/cream",
-  "cast": {
-    "tag": "c:slimeball/earth"
-  },
+  "cast": "#c:slimeball/earth",
   "cast_consumed": true,
   "cooling_time": 60,
   "fluid": {
     "amount": 50,
     "tag": "modernfoundry:blazing_blood"
   },
+  "id": "modernfoundry:smeltery/casting/blaze/cream",
   "result": "minecraft:magma_cream"
 }

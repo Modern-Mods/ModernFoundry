@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/slimewood/enderbark_planks",
-  "ingredient": {
-    "item": "modernfoundry:enderbark_planks"
-  },
+  "ingredient": "modernfoundry:enderbark_planks",
   "material": "modernfoundry:slimewood#enderbark",
   "needed": 1,
   "value": 1

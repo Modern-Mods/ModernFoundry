@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.library.recipe.ingredient;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.DataResult;
@@ -10,7 +11,7 @@ import com.mojang.serialization.MapLike;
 import com.mojang.serialization.RecordBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,7 +29,7 @@ import java.util.stream.Stream;
 
 /** Ingredient matching an item with no container item, used to ensure NBT fluid items are empty */
 public class NoContainerIngredient extends NestedIngredient {
-  public static final ResourceLocation ID = TConstruct.getResource("no_container");
+  public static final Identifier ID = TConstruct.getResource("no_container");
 
   protected NoContainerIngredient(Ingredient nested) {
     super(nested);
@@ -36,7 +37,7 @@ public class NoContainerIngredient extends NestedIngredient {
 
   @Override
   public boolean test(@Nullable ItemStack stack) {
-    return stack != null && super.test(stack) && !stack.hasCraftingRemainingItem();
+    return stack != null && super.test(stack) && stack.getItem().getCraftingRemainder(stack) == null;
   }
 
   @Override
@@ -44,8 +45,21 @@ public class NoContainerIngredient extends NestedIngredient {
     return false;
   }
 
+  /**
+   * Registry-aware JSON ops, built lazily. Serializing a tag {@link Ingredient} needs a {@link net.minecraft.resources.RegistryOps}
+   * so {@code HolderSetCodec} writes the tag by name (via {@code unwrapKey}); plain {@link JsonOps} instead iterates the holder
+   * set contents ({@code encodeWithoutRegistry}), which throws "Missing tag" at datagen time (tags are not bound then).
+   */
+  private static DynamicOps<JsonElement> jsonOps;
+  private static DynamicOps<JsonElement> jsonOps() {
+    if (jsonOps == null) {
+      jsonOps = net.minecraft.resources.RegistryOps.create(JsonOps.INSTANCE, net.minecraft.core.RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY));
+    }
+    return jsonOps;
+  }
+
   public JsonElement toJson() {
-    JsonElement nestedElement = Ingredient.CODEC_NONEMPTY.encodeStart(JsonOps.INSTANCE, nested).getOrThrow(IllegalArgumentException::new);
+    JsonElement nestedElement = Ingredient.CODEC.encodeStart(jsonOps(), nested).getOrThrow(IllegalArgumentException::new);
     // if we are a vanilla ingredient, and not an array ingredient, serialize into the ingredient directly
     if (!nested.isCustom() && nestedElement.isJsonObject()) {
       JsonObject nestedObject = nestedElement.getAsJsonObject();
@@ -79,13 +93,15 @@ public class NoContainerIngredient extends NestedIngredient {
     /** Parses the ingredient from the legacy JSON format (supports both the inline vanilla form and the "match" wrapper) */
     private static NoContainerIngredient parseJson(JsonObject json) {
       // if we have match, parse as a nested object. Without match, just parse the object as vanilla
+      // route through IngredientLoadable.convert, which accepts a bare item/tag string, the legacy {"item"}/{"tag"}
+      // object forms, arrays, and custom ingredients -- the raw Ingredient.CODEC (HolderSet-based) rejects a bare item id
       Ingredient ingredient;
       if (json.has("match")) {
-        ingredient = Ingredient.CODEC_NONEMPTY.parse(JsonOps.INSTANCE, json.get("match")).getOrThrow(IllegalArgumentException::new);
+        ingredient = modernmods.mantle.data.loadable.common.IngredientLoadable.DISALLOW_EMPTY.convert(json.get("match"), "match", modernmods.mantle.util.typed.TypedMap.empty());
       } else {
         JsonObject copy = json.deepCopy();
         copy.remove("type");
-        ingredient = Ingredient.CODEC_NONEMPTY.parse(JsonOps.INSTANCE, copy).getOrThrow(IllegalArgumentException::new);
+        ingredient = modernmods.mantle.data.loadable.common.IngredientLoadable.DISALLOW_EMPTY.convert(copy, "match", modernmods.mantle.util.typed.TypedMap.empty());
       }
       return new NoContainerIngredient(ingredient);
     }
@@ -148,11 +164,12 @@ public class NoContainerIngredient extends NestedIngredient {
 
   /** Creates an instance from the given stacks */
   public static Ingredient of(ItemStack... stacks) {
-    return of(Ingredient.of(stacks));
+    // 26.1.2 Ingredient.of no longer accepts ItemStacks (ingredients are item-based); use the stacks' items
+    return of(Ingredient.of(java.util.Arrays.stream(stacks).map(ItemStack::getItem).toArray(Item[]::new)));
   }
 
   /** Creates an instance from the given tag */
   public static Ingredient of(TagKey<Item> tag) {
-    return of(Ingredient.of(tag));
+    return of(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag));
   }
 }

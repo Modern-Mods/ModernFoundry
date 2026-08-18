@@ -1,16 +1,16 @@
 package modernmods.modernfoundry.smeltery.block.entity.module;
 
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import modernmods.hilt.block.entity.HiltBlockEntity;
+import modernmods.mantle.block.entity.MantleBlockEntity;
 import modernmods.modernfoundry.library.recipe.melting.IMeltingContainer.IOreRate;
 import modernmods.modernfoundry.library.recipe.melting.IMeltingRecipe;
 
 public class ByproductMeltingModuleInventory extends MeltingModuleInventory {
-  public ByproductMeltingModuleInventory(HiltBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate, int size) {
+  public ByproductMeltingModuleInventory(MantleBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate, int size) {
     super(parent, fluidHandler, oreRate, size);
   }
 
-  public ByproductMeltingModuleInventory(HiltBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate) {
+  public ByproductMeltingModuleInventory(MantleBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate) {
     super(parent, fluidHandler, oreRate);
   }
 

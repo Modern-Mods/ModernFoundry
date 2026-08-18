@@ -7,7 +7,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.common.TinkerEffect;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;

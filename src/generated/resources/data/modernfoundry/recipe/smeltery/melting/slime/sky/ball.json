@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/sky/ball",
-  "ingredient": {
-    "tag": "c:slimeball/sky"
-  },
+  "ingredient": "#c:slimeball/sky",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:sky_slime"

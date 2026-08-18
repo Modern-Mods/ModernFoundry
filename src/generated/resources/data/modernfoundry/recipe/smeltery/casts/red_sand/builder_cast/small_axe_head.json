@@ -2,8 +2,6 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/red_sand/builder_cast/small_axe_head",
   "pattern": "modernfoundry:small_axe_head",
-  "pattern_item": {
-    "tag": "modernfoundry:casts/red_sand"
-  },
+  "pattern_item": "#modernfoundry:casts/red_sand",
   "result": "modernfoundry:small_axe_head_red_sand_cast"
 }

@@ -1,0 +1,546 @@
+{
+  "parent": "modernfoundry:world/slimesuit",
+  "criteria": {
+    "blaze": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:blaze"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "blazing_bone": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:blazing_bone"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "bone": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:bone"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "copper": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:copper"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "darkthread": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:darkthread"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "dragon_scale": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:dragon_scale"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "ender_pearl": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:ender_pearl"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "glass": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:glass"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "gold": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:gold"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "ice": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:ice"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "iron": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:iron"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "knightmetal": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:knightmetal"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "leather": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:leather"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "necrotic_bone": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:necrotic_bone"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pig_iron": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:pig_iron"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "rose_gold": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:rose_gold"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "string": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:string"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "venombone": {
+      "conditions": {
+        "items": [
+          {
+            "type": "modernfoundry:tool_stack",
+            "predicate": {
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "modernfoundry:slime_helmet"
+                  ]
+                },
+                {
+                  "type": "modernfoundry:has_material",
+                  "index": 0,
+                  "material": "modernfoundry:venombone"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.world.slimeskull.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:slime_helmet",
+      "nbt": "{Damage:0,tic_broken:0b,tic_materials:[\"modernfoundry:glass\",\"modernfoundry:enderslime\"]}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.world.slimeskull.title"
+    }
+  },
+  "requirements": [
+    [
+      "glass"
+    ],
+    [
+      "blaze"
+    ],
+    [
+      "leather"
+    ],
+    [
+      "iron"
+    ],
+    [
+      "copper"
+    ],
+    [
+      "string"
+    ],
+    [
+      "darkthread"
+    ],
+    [
+      "bone"
+    ],
+    [
+      "ice"
+    ],
+    [
+      "necrotic_bone"
+    ],
+    [
+      "gold"
+    ],
+    [
+      "rose_gold"
+    ],
+    [
+      "pig_iron"
+    ],
+    [
+      "ender_pearl"
+    ],
+    [
+      "dragon_scale"
+    ],
+    [
+      "venombone"
+    ],
+    [
+      "blazing_bone"
+    ],
+    [
+      "knightmetal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

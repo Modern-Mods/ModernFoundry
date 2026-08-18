@@ -1,0 +1,23 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/travelers_leggings",
+    "parts": [
+      {
+        "name": "metal",
+        "index": 0
+      },
+      {
+        "name": "cuirass",
+        "index": 1
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:travelers/pants"
+    ],
+    "first_modifiers": [
+      "modernfoundry:dyed",
+      "modernfoundry:trim"
+    ]
+  }
+}

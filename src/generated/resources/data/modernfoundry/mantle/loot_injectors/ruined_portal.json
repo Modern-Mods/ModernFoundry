@@ -1,0 +1,20 @@
+{
+  "name": "minecraft:chests/ruined_portal",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data"
+            }
+          ],
+          "name": "modernfoundry:flint_and_brick",
+          "weight": 30
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

@@ -1,4 +1,6 @@
 package modernmods.modernfoundry.smeltery.block.entity.controller;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import modernmods.modernfoundry.smeltery.block.entity.ILegacyCapabilityBlockEntity;
 
 import lombok.Getter;
@@ -15,14 +17,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import net.neoforged.neoforge.model.data.ModelData;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
-import modernmods.hilt.block.entity.NameableBlockEntity;
+import modernmods.mantle.block.entity.NameableBlockEntity;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.config.Config;
@@ -36,6 +38,7 @@ import modernmods.modernfoundry.smeltery.block.controller.ControllerBlock;
 import modernmods.modernfoundry.smeltery.block.controller.MelterBlock;
 import modernmods.modernfoundry.smeltery.block.entity.ITankBlockEntity.ITankInventoryBlockEntity;
 import modernmods.modernfoundry.smeltery.block.entity.module.MeltingModuleInventory;
+import modernmods.modernfoundry.smeltery.block.entity.module.FuelModule;
 import modernmods.modernfoundry.smeltery.block.entity.module.SolidFuelModule;
 import modernmods.modernfoundry.smeltery.menu.MelterContainerMenu;
 
@@ -118,7 +121,7 @@ public class MelterBlockEntity extends NameableBlockEntity implements ITankInven
     if (capability == ForgeCapabilities.ITEM_HANDLER) {
       return inventoryHolder.cast();
     }
-    return modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
+    return modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
   }
 
   public void invalidateCaps() {
@@ -193,25 +196,23 @@ public class MelterBlockEntity extends NameableBlockEntity implements ITankInven
   }
 
   @Override
-  public void load(CompoundTag tag) {
-    super.load(tag);
-    tank.readFromNBT(TagUtil.BUILTIN_LOOKUP, tag.getCompound(NBTTags.TANK));
-    fuelModule.readFromTag(tag);
-    if (tag.contains(TAG_INVENTORY, Tag.TAG_COMPOUND)) {
-      meltingInventory.readFromTag(tag.getCompound(TAG_INVENTORY));
-    }
+  public void loadAdditional(ValueInput input) {
+    super.loadAdditional(input);
+    input.child(NBTTags.TANK).ifPresent(tank::deserialize);
+    input.read(FuelModule.NBT_KEY, CompoundTag.CODEC).ifPresent(fuelModule::readFromTag);
+    input.read(TAG_INVENTORY, CompoundTag.CODEC).ifPresent(meltingInventory::readFromTag);
   }
 
   @Override
-  public void saveSynced(CompoundTag tag) {
-    super.saveSynced(tag);
-    tag.put(NBTTags.TANK, tank.writeToNBT(TagUtil.BUILTIN_LOOKUP, new CompoundTag()));
-    tag.put(TAG_INVENTORY, meltingInventory.writeToTag());
+  public void saveSynced(ValueOutput output) {
+    super.saveSynced(output);
+    tank.serialize(output.child(NBTTags.TANK));
+    output.store(TAG_INVENTORY, CompoundTag.CODEC, meltingInventory.writeToTag());
   }
 
   @Override
-  public void saveAdditional(CompoundTag tag) {
-    super.saveAdditional(tag);
-    fuelModule.writeToTag(tag);
+  public void saveAdditional(ValueOutput output) {
+    super.saveAdditional(output);
+    output.store(FuelModule.NBT_KEY, CompoundTag.CODEC, fuelModule.writeToTag(new CompoundTag()));
   }
 }

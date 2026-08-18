@@ -2,6 +2,6 @@
 @MethodsReturnNonnullByDefault
 package modernmods.modernfoundry.library.client.book;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
+import modernmods.modernfoundry.compat.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

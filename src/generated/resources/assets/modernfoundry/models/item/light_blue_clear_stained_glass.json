@@ -1,3 +1,7 @@
 {
-  "parent": "modernfoundry:block/clear_glass/light_blue/block"
+  "parent": "modernfoundry:block/util/tinted_cube_all",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "all": "modernfoundry:block/clear_stained_glass"
+  }
 }

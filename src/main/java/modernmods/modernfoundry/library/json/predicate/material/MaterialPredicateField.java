@@ -3,9 +3,9 @@ package modernmods.modernfoundry.library.json.predicate.material;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.util.typed.TypedMap;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 
 import java.util.function.Function;

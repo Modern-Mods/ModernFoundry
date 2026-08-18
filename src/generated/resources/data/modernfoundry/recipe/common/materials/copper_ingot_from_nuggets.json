@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:copper_ingot",
   "key": {
-    "#": {
-      "tag": "c:nuggets/copper"
-    },
-    "*": {
-      "item": "modernfoundry:copper_nugget"
-    }
+    "#": "#c:nuggets/copper",
+    "*": "modernfoundry:copper_nugget"
   },
   "pattern": [
     "###",
@@ -17,6 +13,5 @@
   ],
   "result": {
     "id": "minecraft:copper_ingot"
-  },
-  "show_notification": true
+  }
 }

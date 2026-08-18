@@ -13,7 +13,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickE
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
@@ -26,7 +25,7 @@ import modernmods.modernfoundry.tools.network.InteractWithAirPacket;
 /**
  * Client side interaction hooks
  */
-@EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.GAME, value = Dist.CLIENT)
+@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT)
 public class ClientInteractionHandler {
   /** If true, next offhand interaction should be canceled, used since we cannot tell Forge to break the hand loop from the main hand */
   private static boolean cancelNextOffhand = false;
@@ -43,7 +42,7 @@ public class ClientInteractionHandler {
       TinkerNetwork.getInstance().sendToServer(InteractWithAirPacket.fromChestplate(hand));
       InteractionResult result = InteractionHandler.onChestplateUse(player, chestplate, hand);
       if (result.consumesAction()) {
-        if (result.shouldSwing()) {
+        if (result instanceof InteractionResult.Success success && success.swingSource() == InteractionResult.SwingSource.CLIENT) {
           player.swing(hand);
         }
         Minecraft.getInstance().gameRenderer.itemInHandRenderer.itemUsed(hand);
@@ -78,7 +77,7 @@ public class ClientInteractionHandler {
       TinkerNetwork.getInstance().sendToServer(InteractWithAirPacket.LEFT_CLICK);
       InteractionResult result = InteractionHandler.onLeftClickInteraction(player, tool, hand);
       if (result.consumesAction()) {
-        if (result.shouldSwing()) {
+        if (result instanceof InteractionResult.Success success && success.swingSource() == InteractionResult.SwingSource.CLIENT) {
           player.swing(hand);
         }
         Minecraft.getInstance().gameRenderer.itemInHandRenderer.itemUsed(hand);

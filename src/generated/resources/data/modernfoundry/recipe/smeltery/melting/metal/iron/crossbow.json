@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:damagable_melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/crossbow",
-  "ingredient": {
-    "item": "minecraft:crossbow"
-  },
+  "ingredient": "minecraft:crossbow",
   "result": {
     "amount": 130,
     "tag": "c:molten_iron",

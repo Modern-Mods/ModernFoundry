@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.smeltery.client.screen;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
-import modernmods.hilt.client.screen.ElementScreen;
+import modernmods.mantle.client.screen.ElementScreen;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.GuiUtil;
 import modernmods.modernfoundry.smeltery.block.entity.controller.MelterBlockEntity;
@@ -16,7 +16,7 @@ import modernmods.modernfoundry.smeltery.client.screen.module.GuiTankModule;
 import modernmods.modernfoundry.smeltery.menu.MelterContainerMenu;
 
 public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> implements IScreenWithFluidTank {
-  private static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/melter.png");
+  private static final Identifier BACKGROUND = TConstruct.getResource("textures/gui/melter.png");
   private static final ElementScreen SCALA = new ElementScreen(BACKGROUND, 176, 0, 52, 52, 256, 256);
   private static final ElementScreen FUEL_SLOT = new ElementScreen(BACKGROUND, 176, 52, 18, 36, 256, 256);
   private static final ElementScreen FUEL_TANK = new ElementScreen(BACKGROUND, 194, 52, 14, 38, 256, 256);
@@ -39,15 +39,11 @@ public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> i
     }
   }
 
+  // 26.1 GUI lifecycle: render/renderBg removed; the engine calls extractBackground then
+  // extractRenderState. The container texture + display modules (was renderBg) are drawn at the
+  // start of extractRenderState, before super draws widgets/labels/slots.
   @Override
-  public void render(GuiGraphics graphics, int x, int y, float partialTicks) {
-    this.renderBackground(graphics, x, y, partialTicks);
-    super.render(graphics, x, y, partialTicks);
-    this.renderTooltip(graphics, x, y);
-  }
-
-  @Override
-  protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+  public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
     GuiUtil.drawBackground(graphics, this, BACKGROUND);
 
     // fuel
@@ -63,11 +59,13 @@ public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> i
 
     // fluids
     if (tank != null) tank.draw(graphics);
+
+    super.extractRenderState(graphics, mouseX, mouseY, partialTicks);
   }
 
   @Override
-  protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
-    super.renderLabels(graphics, mouseX, mouseY);
+  protected void extractLabels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+    super.extractLabels(graphics, mouseX, mouseY);
     int checkX = mouseX - this.leftPos;
     int checkY = mouseY - this.topPos;
 
@@ -86,8 +84,8 @@ public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> i
   }
 
   @Override
-  protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
-    super.renderTooltip(graphics, mouseX, mouseY);
+  protected void extractTooltip(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+    super.extractTooltip(graphics, mouseX, mouseY);
 
     // tank tooltip
     if (tank != null) tank.renderTooltip(graphics, mouseX, mouseY);
@@ -100,7 +98,8 @@ public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> i
   }
 
   @Override
-  public boolean mouseClicked(double mouseX, double mouseY, int button) {
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent event, boolean doubleClick) {
+    double mouseX = event.x(); double mouseY = event.y(); int button = event.button();
     assert minecraft != null && minecraft.player != null && minecraft.gameMode != null;
     if (!minecraft.player.isSpectator() && (button == 0 || button == 1) && !menu.getCarried().isEmpty()) {
       int checkX = (int)mouseX - leftPos;
@@ -117,7 +116,7 @@ public class MelterScreen extends AbstractContainerScreen<MelterContainerMenu> i
         return true;
       }
     }
-    return super.mouseClicked(mouseX, mouseY, button);
+    return super.mouseClicked(event, doubleClick);
   }
 
   @Override

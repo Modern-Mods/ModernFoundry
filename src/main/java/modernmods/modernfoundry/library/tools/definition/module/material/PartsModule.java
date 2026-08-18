@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.tools.definition.module.material;
 
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.module.HookProvider;
 import modernmods.modernfoundry.library.module.ModuleHook;

@@ -2,7 +2,5 @@
   "type": "modernfoundry:tinker_station_part_swapping",
   "id": "modernfoundry:tables/throwing_axe_part_swapping",
   "max_stack_size": 2,
-  "tools": {
-    "item": "modernfoundry:throwing_axe"
-  }
+  "tools": "modernfoundry:throwing_axe"
 }

@@ -1,13 +1,13 @@
 package modernmods.modernfoundry.world.data;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
-import modernmods.hilt.recipe.data.ItemNameOutput;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
+import modernmods.mantle.recipe.data.ItemNameOutput;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.data.FakeRegistryEntry;
@@ -60,7 +60,7 @@ public class MobEquipmentProvider extends AbstractMobEquipmentProvider {
       .material(random, random, random);
     // twilight forest compat
     String tf = "twilightforest";
-    equip(FakeRegistryEntry.entity(ResourceLocation.fromNamespaceAndPath(tf, "minotaur")), new ModLoadedCondition(tf))
+    equip(FakeRegistryEntry.entity(Identifier.fromNamespaceAndPath(tf, "minotaur")), new ModLoadedCondition(tf))
       .slot(EquipmentSlot.MAINHAND)
       .tool(ItemNameOutput.fromName(TinkerTools.minotaurAxe.getId()))
       .material(random, random, random);
@@ -68,6 +68,6 @@ public class MobEquipmentProvider extends AbstractMobEquipmentProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry mob equipment";
+    return "Tinkers' Construct mob equipment";
   }
 }

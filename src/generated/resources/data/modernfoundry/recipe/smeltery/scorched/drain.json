@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "modernfoundry:scorched_brick"
-    },
-    "C": {
-      "item": "modernfoundry:obsidian_pane"
-    }
+    "#": "modernfoundry:scorched_brick",
+    "C": "modernfoundry:obsidian_pane"
   },
   "pattern": [
     "# #",
@@ -16,6 +12,5 @@
   ],
   "result": {
     "id": "modernfoundry:scorched_drain"
-  },
-  "show_notification": true
+  }
 }

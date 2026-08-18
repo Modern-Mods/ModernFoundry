@@ -1,21 +1,17 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/seared/gauge",
   "byproducts": [
     {
       "amount": 5000,
       "fluid": "modernfoundry:molten_glass"
     }
   ],
+  "id": "modernfoundry:smeltery/melting/seared/gauge",
   "ingredient": {
-    "type": "modernfoundry:no_container",
+    "neoforge:ingredient_type": "modernfoundry:no_container",
     "match": [
-      {
-        "item": "modernfoundry:seared_fuel_gauge"
-      },
-      {
-        "item": "modernfoundry:seared_ingot_gauge"
-      }
+      "modernfoundry:seared_fuel_gauge",
+      "modernfoundry:seared_ingot_gauge"
     ]
   },
   "result": {

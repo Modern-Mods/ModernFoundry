@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "modernfoundry:seared_brick"
-    }
+    "#": "modernfoundry:seared_brick"
   },
   "pattern": [
     "###",
@@ -13,6 +11,5 @@
   ],
   "result": {
     "id": "modernfoundry:seared_table"
-  },
-  "show_notification": true
+  }
 }

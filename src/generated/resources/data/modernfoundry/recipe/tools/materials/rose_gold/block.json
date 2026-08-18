@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/rose_gold/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/rose_gold"
-  },
+  "ingredient": "#c:storage_blocks/rose_gold",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/rose_gold"

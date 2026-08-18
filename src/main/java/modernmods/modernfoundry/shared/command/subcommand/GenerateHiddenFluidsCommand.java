@@ -7,16 +7,16 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagFile;
-import modernmods.hilt.Hilt;
-import modernmods.hilt.command.GeneratePackHelper;
-import modernmods.hilt.command.HiltCommand;
-import modernmods.hilt.registration.object.FlowingFluidObject;
-import modernmods.hilt.registration.object.FluidObject;
-import modernmods.hilt.util.JsonHelper;
+import modernmods.mantle.Mantle;
+import modernmods.mantle.command.GeneratePackHelper;
+import modernmods.mantle.command.MantleCommand;
+import modernmods.mantle.registration.object.FlowingFluidObject;
+import modernmods.mantle.registration.object.FluidObject;
+import modernmods.mantle.util.JsonHelper;
 import modernmods.modernfoundry.common.TinkerTags.Fluids;
 import modernmods.modernfoundry.smeltery.data.SmelteryCompat;
 
@@ -29,14 +29,14 @@ import java.util.List;
 
 /** Command generating the relevant tag to hide fluids related to unused materials. */
 public class GenerateHiddenFluidsCommand {
-  private static final DynamicCommandExceptionType ERROR_WRITING_TAG = new DynamicCommandExceptionType(tag -> Component.translatable("command.hilt.modify_tag.write_error", "fluid", tag));
+  private static final DynamicCommandExceptionType ERROR_WRITING_TAG = new DynamicCommandExceptionType(tag -> Component.translatable("command.mantle.modify_tag.write_error", "fluid", tag));
 
   /**
    * Registers this sub command with the root command
    * @param subCommand Command builder
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
-    subCommand.requires(sender -> sender.hasPermission(HiltCommand.PERMISSION_GAME_COMMANDS)).executes(GenerateHiddenFluidsCommand::run);
+    subCommand.requires(sender -> MantleCommand.hasPermission(sender, MantleCommand.PERMISSION_GAME_COMMANDS)).executes(GenerateHiddenFluidsCommand::run);
   }
 
   /** Runs the command */
@@ -47,8 +47,8 @@ public class GenerateHiddenFluidsCommand {
     GeneratePackHelper.saveMcmeta(pack);
 
     // fetch existing tag, if it exists
-    ResourceLocation tag = Fluids.HIDDEN_IN_RECIPE_VIEWERS.location();
-    Path tagPath = pack.resolve(PackType.SERVER_DATA.getDirectory() + '/' + tag.getNamespace() + "/tags/" + Registries.FLUID.location().getPath() + '/' + tag.getPath() + ".json");
+    Identifier tag = Fluids.HIDDEN_IN_RECIPE_VIEWERS.location();
+    Path tagPath = pack.resolve(PackType.SERVER_DATA.getDirectory() + '/' + tag.getNamespace() + "/tags/" + Registries.FLUID.identifier().getPath() + '/' + tag.getPath() + ".json");
 
     // load in existing tag from the path, not using resource managers as we are just modifying locally
     List<TagEntry> add = new ArrayList<>();
@@ -75,14 +75,14 @@ public class GenerateHiddenFluidsCommand {
   }
 
   /** Saves the passed tag */
-  private static void saveTag(Path path, ResourceLocation tag, TagFile contents) throws CommandSyntaxException {
+  private static void saveTag(Path path, Identifier tag, TagFile contents) throws CommandSyntaxException {
     try {
       Files.createDirectories(path.getParent());
       try (BufferedWriter writer = Files.newBufferedWriter(path)) {
         writer.write(JsonHelper.DEFAULT_GSON.toJson(JsonHelper.serialize(TagFile.CODEC, contents)));
       }
     } catch (IOException ex) {
-      Hilt.logger.error("Couldn't save fluid tag {} to {}", tag, path, ex);
+      Mantle.logger.error("Couldn't save fluid tag {} to {}", tag, path, ex);
       throw ERROR_WRITING_TAG.create(tag);
     }
   }

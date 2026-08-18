@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/slimewood/greenheart_planks",
-  "ingredient": {
-    "item": "modernfoundry:greenheart_planks"
-  },
+  "ingredient": "modernfoundry:greenheart_planks",
   "material": "modernfoundry:slimewood#greenheart",
   "needed": 1,
   "value": 1

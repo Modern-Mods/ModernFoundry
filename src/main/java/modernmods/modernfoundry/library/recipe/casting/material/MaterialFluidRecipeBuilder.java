@@ -3,13 +3,13 @@ package modernmods.modernfoundry.library.recipe.casting.material;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 
 import javax.annotation.Nullable;
@@ -60,18 +60,18 @@ public class MaterialFluidRecipeBuilder extends AbstractRecipeBuilder<MaterialFl
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, outputId.getId());
+    save(consumer, outputId.getId().getIdentifier());
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (this.fluid == FluidIngredient.EMPTY) {
       throw new IllegalStateException("Material fluid recipes require a fluid input");
     }
     if (this.temperature < 0) {
       throw new IllegalStateException("Temperature is too low, must be at least 0");
     }
-    ResourceLocation advancementId = this.buildOptionalAdvancement(id, "materials");
+    Identifier advancementId = this.buildOptionalAdvancement(id, "materials");
     consumer.accept(new LoadableFinishedRecipe<>(id, new MaterialFluidRecipe(id, fluid, temperature, inputId, outputId), MaterialFluidRecipe.LOADER, advancementId));
   }
 }

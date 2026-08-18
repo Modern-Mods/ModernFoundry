@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/cobalt/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/cobalt"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/cobalt"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/cobalt/dust",
+  "ingredient": "#c:dusts/cobalt",
   "result": {
     "amount": 90,
     "tag": "c:molten_cobalt"

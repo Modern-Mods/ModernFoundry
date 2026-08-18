@@ -7,7 +7,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,11 +22,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import modernmods.hilt.block.InventoryBlock;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.block.InventoryBlock;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.library.utils.NBTTags;
 import modernmods.modernfoundry.library.utils.TagUtil;
 import modernmods.modernfoundry.smeltery.block.component.SearedTankBlock;
@@ -40,7 +39,7 @@ import javax.annotation.Nullable;
 import static modernmods.modernfoundry.smeltery.block.component.SearedTankBlock.LIGHT;
 
 public class CastingTankBlock extends InventoryBlock implements ITankBlock, EntityBlock {
-  public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+  public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
   public CastingTankBlock(Properties properties) {
     super(properties);
@@ -88,12 +87,12 @@ public class CastingTankBlock extends InventoryBlock implements ITankBlock, Enti
 
   @Deprecated
   @Override
-  protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+  protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
     if (world.getBlockEntity(pos) instanceof CastingTankBlockEntity tank) {
       tank.interact(player, hand, hit.getLocation().y - pos.getY() < 0.6875);
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
-    return ItemInteractionResult.FAIL;
+    return InteractionResult.FAIL;
   }
 
   @Override
@@ -109,7 +108,7 @@ public class CastingTankBlock extends InventoryBlock implements ITankBlock, Enti
   public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
     CompoundTag nbt = TagUtil.getTag(stack);
     if (nbt != null && worldIn.getBlockEntity(pos) instanceof CastingTankBlockEntity tank) {
-      tank.updateTank(nbt.getCompound(NBTTags.TANK));
+      tank.updateTank(nbt.getCompoundOrEmpty(NBTTags.TANK));
     }
 
     super.setPlacedBy(worldIn, pos, state, placer, stack);
@@ -120,7 +119,7 @@ public class CastingTankBlock extends InventoryBlock implements ITankBlock, Enti
   @SuppressWarnings("deprecation")
   @Deprecated
   @Override
-  public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+  public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, @org.jetbrains.annotations.Nullable net.minecraft.world.level.redstone.Orientation orientation, boolean isMoving) {
     if (!worldIn.isClientSide() && worldIn.getBlockEntity(pos) instanceof CastingTankBlockEntity tank) {
       tank.handleRedstone(worldIn.hasNeighborSignal(pos));
     }
@@ -146,14 +145,14 @@ public class CastingTankBlock extends InventoryBlock implements ITankBlock, Enti
 
   @Deprecated
   @Override
-  public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
+  public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos, Direction direction) {
     return ITankBlockEntity.getComparatorInputOverride(worldIn, pos);
   }
 
 
 
   @Override
-  public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+  public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
     ItemStack stack = new ItemStack(this);
     BlockEntityHelper.get(CastingTankBlockEntity.class, world, pos).ifPresent(te -> te.setTankTag(stack));
     return stack;

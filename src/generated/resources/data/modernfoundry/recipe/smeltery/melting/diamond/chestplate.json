@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:damagable_melting",
   "id": "modernfoundry:smeltery/melting/diamond/chestplate",
-  "ingredient": {
-    "item": "minecraft:diamond_chestplate"
-  },
+  "ingredient": "minecraft:diamond_chestplate",
   "result": {
     "amount": 800,
     "fluid": "modernfoundry:molten_diamond",

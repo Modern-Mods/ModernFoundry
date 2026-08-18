@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/aluminum/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/aluminum"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/aluminum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/aluminum/block",
+  "ingredient": "#c:storage_blocks/aluminum",
   "result": {
     "amount": 810,
     "tag": "c:molten_aluminum"

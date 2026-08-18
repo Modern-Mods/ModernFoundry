@@ -1,20 +1,18 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/constantan/plate_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/plate"
-  },
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/constantan"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/multi_use/plate",
   "cooling_time": 64,
   "fluid": {
     "amount": 90,
     "tag": "c:molten_constantan"
   },
+  "id": "modernfoundry:smeltery/casting/metal/constantan/plate_gold_cast",
   "result": {
     "tag": "c:plates/constantan"
   }

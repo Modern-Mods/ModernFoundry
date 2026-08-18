@@ -5,23 +5,25 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionContents;
 import modernmods.modernfoundry.compat.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.phys.EntityHitResult;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -66,9 +68,9 @@ public enum TippedModule implements ModifierModule, ProjectileLaunchModifierHook
 
   @Override
   public void onProjectileShoot(IToolStackView tool, ModifierEntry modifier, @Nullable LivingEntity shooter, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
-    ResourceLocation key = modifier.getId();
+    Identifier key = modifier.getId().getIdentifier();
     IModDataView toolData = tool.getPersistentData();
-    if (toolData.contains(key, Tag.TAG_STRING)) {
+    if (toolData.contains(key)) {
       persistentData.putString(key, toolData.getString(key));
     }
   }
@@ -76,7 +78,7 @@ public enum TippedModule implements ModifierModule, ProjectileLaunchModifierHook
   @Nullable
   @Override
   public Component onRemoved(IToolStackView tool, Modifier modifier) {
-    tool.getPersistentData().remove(modifier.getId());
+    tool.getPersistentData().remove(modifier.getId().getIdentifier());
     return null;
   }
 
@@ -90,19 +92,19 @@ public enum TippedModule implements ModifierModule, ProjectileLaunchModifierHook
 
   @Override
   public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
-    ResourceLocation key = modifier.getId();
-    if (target != null && persistentData.contains(key, Tag.TAG_STRING)) {
-      ResourceLocation id = ResourceLocation.tryParse(persistentData.getString(key));
+    Identifier key = modifier.getId().getIdentifier();
+    if (target != null && persistentData.contains(key)) {
+      Identifier id = Identifier.tryParse(persistentData.getString(key));
       if (id != null) {
         Entity source = projectile.getEffectSource();
         int divisor = getDivisor(modifier);
         int oldHurtTime = target.invulnerableTime;
         target.invulnerableTime = 0;
         // not a problem if the ID is invalid, will just do nothing
-        for (MobEffectInstance instance : BuiltInRegistries.POTION.getHolder(id).<Holder<Potion>>map(holder -> holder).orElse(Potions.WATER).value().getEffects()) {
+        for (MobEffectInstance instance : BuiltInRegistries.POTION.get(id).<Holder<Potion>>map(holder -> holder).orElse(Potions.WATER).value().getEffects()) {
           MobEffect effect = instance.getEffect().value();
           if (effect.isInstantenous()) {
-            effect.applyInstantenousEffect(projectile, projectile.getOwner(), target, instance.getAmplifier(), 1f / (divisor * 0.75f));
+            effect.applyInstantenousEffect((ServerLevel) projectile.level(), projectile, projectile.getOwner(), target, instance.getAmplifier(), 1f / (divisor * 0.75f));
           } else {
             target.addEffect(new MobEffectInstance(instance.getEffect(), Math.max(instance.mapDuration(i -> i / divisor), 1), instance.getAmplifier(), instance.isAmbient(), instance.isVisible()), source);
           }
@@ -118,12 +120,12 @@ public enum TippedModule implements ModifierModule, ProjectileLaunchModifierHook
 
   @Override
   public void addTooltip(IToolStackView tool, ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
-    ResourceLocation key = modifier.getId();
+    Identifier key = modifier.getId().getIdentifier();
     IModDataView toolData = tool.getPersistentData();
-    if (toolData.contains(key, Tag.TAG_STRING)) {
-      ResourceLocation id = ResourceLocation.tryParse(toolData.getString(key));
+    if (toolData.contains(key)) {
+      Identifier id = Identifier.tryParse(toolData.getString(key));
       if (id != null) {
-        Holder<Potion> potion = BuiltInRegistries.POTION.getHolder(id).<Holder<Potion>>map(holder -> holder).orElse(Potions.WATER);
+        Holder<Potion> potion = BuiltInRegistries.POTION.get(id).<Holder<Potion>>map(holder -> holder).orElse(Potions.WATER);
         if (potion != Potions.WATER) {
           PotionUtils.getColor(potion);
           PotionUtils.addPotionTooltip(potion.value().getEffects(), tooltip, 1f / getDivisor(modifier));
@@ -134,17 +136,17 @@ public enum TippedModule implements ModifierModule, ProjectileLaunchModifierHook
 
   @Override
   public Component getDisplayName(IToolStackView tool, ModifierEntry entry, Component name, @Nullable RegistryAccess access) {
-    ResourceLocation key = entry.getId();
+    Identifier key = entry.getId().getIdentifier();
     IModDataView toolData = tool.getPersistentData();
-    if (toolData.contains(key, Tag.TAG_STRING)) {
-      ResourceLocation id = ResourceLocation.tryParse(toolData.getString(key));
+    if (toolData.contains(key)) {
+      Identifier id = Identifier.tryParse(toolData.getString(key));
       if (id != null) {
-        Holder<Potion> potion = BuiltInRegistries.POTION.getHolder(id).<Holder<Potion>>map(holder -> holder).orElse(Potions.WATER);
+        Holder<Potion> potion = BuiltInRegistries.POTION.get(id).<Holder<Potion>>map(holder -> holder).orElse(Potions.WATER);
         if (potion != Potions.WATER) {
           // formats as Tipped <level> (<potion>)
           return Component.translatable(FORMAT,
             RomanNumeralHelper.getNumeral(entry.getLevel()),
-            Component.translatable(Potion.getName(java.util.Optional.of(potion), "item.minecraft.potion.effect."))
+            new PotionContents(potion).getName("item.minecraft.potion.effect.")
           ).withStyle(style -> style.withColor(PotionUtils.getColor(potion)));
         }
       }

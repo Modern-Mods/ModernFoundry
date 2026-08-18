@@ -2,8 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/copper/can",
   "ingredient": {
-    "type": "modernfoundry:no_container",
-    "item": "modernfoundry:copper_can"
+    "neoforge:ingredient_type": "modernfoundry:no_container",
+    "match": "modernfoundry:copper_can"
   },
   "result": {
     "amount": 90,

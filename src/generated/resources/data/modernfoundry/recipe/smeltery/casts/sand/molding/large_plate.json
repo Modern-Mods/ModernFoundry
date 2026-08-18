@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/sand/molding/large_plate",
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "material": "#modernfoundry:casts/sand",
   "pattern": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:large_plate"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:large_plate"
   },
   "result": "modernfoundry:large_plate_sand_cast"
 }

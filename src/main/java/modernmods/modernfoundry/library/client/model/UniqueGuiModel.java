@@ -2,74 +2,29 @@ package modernmods.modernfoundry.library.client.model;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import com.mojang.blaze3d.vertex.PoseStack;
-import lombok.RequiredArgsConstructor;
-import net.minecraft.client.renderer.block.model.ItemOverrides;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.ModelBaker;
-import net.minecraft.client.resources.model.ModelState;
-import net.minecraft.client.resources.model.UnbakedModel;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.neoforged.neoforge.client.model.BakedModelWrapper;
-import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
-import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
-import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
-import modernmods.hilt.client.model.util.SimpleBlockModel;
+import net.neoforged.neoforge.client.model.UnbakedModelLoader;
+import modernmods.mantle.client.model.util.SimpleBlockModel;
 
-import java.util.function.Function;
-
-/** Model providing a variant for the GUI */
-@RequiredArgsConstructor
-public class UniqueGuiModel implements IUnbakedGeometry<UniqueGuiModel> {
+/**
+ * Model providing a variant for the GUI.
+ * <p>
+ * 26.1 removed the per-display-context baked-model swap (the old {@code BakedModelWrapper#applyTransform} that returned
+ * a different baked model for {@link net.minecraft.world.item.ItemDisplayContext#GUI}). Display transforms are now
+ * data-driven through the model's {@code display} block, so this is a static shell that bakes the main model geometry.
+ * The separate {@code "gui"} sub-model is ignored; a distinct GUI appearance should be expressed via GUI display
+ * transforms (or a dedicated item model) in JSON.
+ */
+public class UniqueGuiModel extends SimpleBlockModel {
   /** Shared loader instance */
-  public static final IGeometryLoader<UniqueGuiModel> LOADER = UniqueGuiModel::deserialize;
+  public static final UnbakedModelLoader<UniqueGuiModel> LOADER = UniqueGuiModel::deserialize;
 
-  protected final SimpleBlockModel model;
-  protected final SimpleBlockModel gui;
-
-  @Override
-  public void resolveParents(Function<ResourceLocation,UnbakedModel> modelGetter, IGeometryBakingContext context) {
-    model.resolveParents(modelGetter, context);
-    gui.resolveParents(modelGetter, context);
-  }
-
-  @Override
-  public BakedModel bake(IGeometryBakingContext owner, ModelBaker baker, Function<Material,TextureAtlasSprite> spriteGetter, ModelState transform, ItemOverrides overrides) {
-    return new Baked(
-      model.bake(owner, baker, spriteGetter, transform, overrides),
-      gui.bake(owner, baker, spriteGetter, transform, overrides)
-    );
-  }
-
-  /**
-   * Wrapper that swaps the model for the GUI
-   */
-  public static class Baked extends BakedModelWrapper<BakedModel> {
-    private final BakedModel gui;
-
-    public Baked(BakedModel base, BakedModel gui) {
-      super(base);
-      this.gui = gui;
-    }
-
-    @Override
-    public BakedModel applyTransform(ItemDisplayContext itemDisplay, PoseStack mat, boolean applyLeftHandTransform) {
-      if (itemDisplay == ItemDisplayContext.GUI) {
-        return gui.applyTransform(itemDisplay, mat, applyLeftHandTransform);
-      }
-      return originalModel.applyTransform(itemDisplay, mat, applyLeftHandTransform);
-    }
+  private UniqueGuiModel(SimpleBlockModel model) {
+    super(model);
   }
 
   /** Loader for this model */
   public static UniqueGuiModel deserialize(JsonObject json, JsonDeserializationContext context) {
-    return new UniqueGuiModel(
-      SimpleBlockModel.deserialize(json, context),
-      SimpleBlockModel.deserialize(GsonHelper.getAsJsonObject(json, "gui"), context)
-    );
+    // static shell: bake the main model; the "gui" variant swap is gone in 26.1 (display transforms are data-driven)
+    return new UniqueGuiModel(SimpleBlockModel.deserialize(json, context));
   }
 }

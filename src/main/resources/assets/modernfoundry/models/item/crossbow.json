@@ -1,66 +1,8 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/base/crossbow",
   "textures": {
-    "limb":      "modernfoundry:item/tool/crossbow/limb",
-    "body":      "modernfoundry:item/tool/crossbow/body",
+    "limb": "modernfoundry:item/tool/crossbow/limb",
+    "body": "modernfoundry:item/tool/crossbow/body",
     "bowstring": "modernfoundry:item/tool/crossbow/bowstring"
-  },
-  "modifier_maps": ["modernfoundry:crossbow"],
-  "modifier_roots": [ "modernfoundry:item/tool/crossbow/modifiers/" ],
-  "parts": [
-    { "name": "limb",      "index": 0 },
-    { "name": "body",      "index": 1 },
-    { "name": "bowstring", "index": 2 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.05 },
-      "model": "modernfoundry:item/tool/crossbow/pulling_1"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.58 },
-      "model": "modernfoundry:item/tool/crossbow/pulling_2"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 1.0 },
-      "model": "modernfoundry:item/tool/crossbow/pulling_3"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/crossbow/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.05 },
-      "model": "modernfoundry:item/tool/crossbow/blocking_1"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.58 },
-      "model": "modernfoundry:item/tool/crossbow/blocking_2"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 1.0 },
-      "model": "modernfoundry:item/tool/crossbow/blocking_3"
-    },
-    {
-      "predicate": { "modernfoundry:ammo": 1 },
-      "model": "modernfoundry:item/tool/crossbow/pulling_3"
-    },
-    {
-      "predicate": { "modernfoundry:ammo": 1, "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/crossbow/blocking_3"
-    },
-    {
-      "predicate": { "modernfoundry:ammo": 2 },
-      "model": "modernfoundry:item/tool/crossbow/firework"
-    },
-    {
-      "predicate": { "modernfoundry:ammo": 2, "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/crossbow/firework_blocking"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/crossbow/broken"
-    }
-  ]
+  }
 }

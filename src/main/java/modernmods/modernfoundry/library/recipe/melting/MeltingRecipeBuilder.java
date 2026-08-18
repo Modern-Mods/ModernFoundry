@@ -3,14 +3,14 @@ package modernmods.modernfoundry.library.recipe.melting;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.registration.object.FluidObject;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.registration.object.FluidObject;
 import modernmods.modernfoundry.library.recipe.melting.IMeltingContainer.OreRateType;
 
 import javax.annotation.Nullable;
@@ -108,7 +108,10 @@ public class MeltingRecipeBuilder extends AbstractRecipeBuilder<MeltingRecipeBui
    * @return  Builder instance
    */
   public static MeltingRecipeBuilder melting(Ingredient input, Fluid fluid, int amount, float timeFactor) {
-    return melting(input, new FluidStack(fluid, amount), timeFactor);
+    // build a FluidOutput directly rather than a FluidStack: as of 26.1 a FluidStack cannot be constructed until fluid
+    // data components are bound, which is not the case at datagen time. FluidOutput.fromFluid defers construction.
+    int temperature = getTemperature(fluid);
+    return melting(input, FluidOutput.fromFluid(fluid, amount), temperature, timeFactor);
   }
 
   /**
@@ -170,6 +173,11 @@ public class MeltingRecipeBuilder extends AbstractRecipeBuilder<MeltingRecipeBui
    * @param fluid  Byproduct to add
    * @return  Builder instance
    */
+  /** Adds a byproduct from a raw fluid and amount, deferring FluidStack construction (components not bound at datagen) */
+  public MeltingRecipeBuilder addByproduct(Fluid fluid, int amount) {
+    return addByproduct(FluidOutput.fromFluid(fluid, amount));
+  }
+
   public MeltingRecipeBuilder addByproduct(FluidStack fluid) {
     return addByproduct(FluidOutput.fromStack(fluid));
   }
@@ -181,12 +189,12 @@ public class MeltingRecipeBuilder extends AbstractRecipeBuilder<MeltingRecipeBui
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (oreRate != null && unitSizes != null) {
       throw new IllegalStateException("Builder cannot be both ore and damagable");
     }
     // only build JSON if needed
-    ResourceLocation advancementId = this.buildOptionalAdvancement(id, "melting");
+    Identifier advancementId = this.buildOptionalAdvancement(id, "melting");
     // based on properties, choose which recipe to build
     if (oreRate != null) {
       consumer.accept(new LoadableFinishedRecipe<>(id,

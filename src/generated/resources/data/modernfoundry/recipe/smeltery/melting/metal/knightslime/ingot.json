@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/knightslime/ingot",
-  "ingredient": {
-    "tag": "c:ingots/knightslime"
-  },
+  "ingredient": "#c:ingots/knightslime",
   "result": {
     "amount": 90,
     "fluid": "modernfoundry:molten_knightslime"

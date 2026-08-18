@@ -1,0 +1,14 @@
+{
+  "values": [
+    "modernfoundry:piercing",
+    "modernfoundry:self_destruct",
+    "modernfoundry:bleeding",
+    "modernfoundry:entangled",
+    "modernfoundry:spiny",
+    "modernfoundry:update_health",
+    "modernfoundry:water_melee",
+    "modernfoundry:water_ranged",
+    "modernfoundry:fluid_spike_melee",
+    "modernfoundry:fluid_spike_ranged"
+  ]
+}

@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/blockade",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "modernfoundry:obsidian_pane"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/blockade",
+  "input": "modernfoundry:obsidian_pane",
   "level": {
     "max": 3
   },
@@ -15,14 +13,10 @@
     "upgrades": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/interactable/charge"
-      },
-      {
-        "tag": "modernfoundry:modifiable/durability"
-      }
+      "#modernfoundry:modifiable/interactable/charge",
+      "#modernfoundry:modifiable/durability"
     ]
   }
 }

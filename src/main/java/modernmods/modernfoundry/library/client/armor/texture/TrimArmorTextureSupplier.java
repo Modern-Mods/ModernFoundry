@@ -13,15 +13,15 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.util.FastColor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.armortrim.TrimMaterial;
-import net.minecraft.world.item.armortrim.TrimPattern;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
+import net.minecraft.world.item.equipment.trim.TrimPattern;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.common.ColorLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.common.ColorLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /** Handles fetching textures for armor trims */
-public record TrimArmorTextureSupplier(ModifierId modifier, ResourceLocation patternKey, ResourceLocation materialKey) implements ArmorTextureSupplier {
+public record TrimArmorTextureSupplier(ModifierId modifier, Identifier patternKey, Identifier materialKey) implements ArmorTextureSupplier {
   /** Default instant using the tinkers modifier */
   public static TrimArmorTextureSupplier INSTANCE = new TrimArmorTextureSupplier(TinkerModifiers.trim.getId());
   public static final RecordLoadable<TrimArmorTextureSupplier> LOADER = RecordLoadable.create(ModifierId.PARSER.defaultField("modifier", TinkerModifiers.trim.getId(), TrimArmorTextureSupplier::modifier), TrimArmorTextureSupplier::new);
@@ -44,7 +44,6 @@ public record TrimArmorTextureSupplier(ModifierId modifier, ResourceLocation pat
   public static final ResourceManagerReloadListener CACHE_INVALIDATOR = manager -> {
     ARMOR_CACHE.clear();
     LEGGING_CACHE.clear();
-    TrimArmorTexture.armorTrimAtlas = null;
   };
 
   /** @apiNote use {@link #TrimArmorTextureSupplier(ModifierId)} */
@@ -67,11 +66,11 @@ public record TrimArmorTextureSupplier(ModifierId modifier, ResourceLocation pat
         if (texture != null) {
           return texture;
         }
-        TrimPattern pattern = access.registryOrThrow(Registries.TRIM_PATTERN).get(ResourceLocation.tryParse(patternId));
-        TrimMaterial material = access.registryOrThrow(Registries.TRIM_MATERIAL).get(ResourceLocation.tryParse(materialId));
+        TrimPattern pattern = access.lookupOrThrow(Registries.TRIM_PATTERN).getOptional(Identifier.tryParse(patternId)).orElse(null);
+        TrimMaterial material = access.lookupOrThrow(Registries.TRIM_MATERIAL).getOptional(Identifier.tryParse(materialId)).orElse(null);
         texture = ArmorTexture.EMPTY;
         if (pattern != null && material != null) {
-          ResourceLocation patternAsset = pattern.assetId();
+          Identifier patternAsset = pattern.assetId();
           texture = TrimArmorTexture.create(patternAsset.withPath("trims/models/armor/" + patternAsset.getPath() + (textureType == TextureType.LEGGINGS ? "_leggings" : "")), material);
         }
         cache.put(key, texture);
@@ -89,32 +88,22 @@ public record TrimArmorTextureSupplier(ModifierId modifier, ResourceLocation pat
   /** Implementation of an armor texture for armor trims */
   @RequiredArgsConstructor
   public static class TrimArmorTexture implements ArmorTexture {
-    private static TextureAtlas armorTrimAtlas = null;
     private final TextureAtlasSprite trimSprite;
 
-    /** Gets the texture atlas for trim */
-    private static TextureAtlas getTrimAtlas() {
-      if (armorTrimAtlas == null) {
-        armorTrimAtlas = Minecraft.getInstance().getModelManager().getAtlas(Sheets.ARMOR_TRIMS_SHEET);
-      }
-      return armorTrimAtlas;
-    }
-
-    /** Creates the trim texture for the given root texture and material */
-    private static ArmorTexture create(ResourceLocation root, TrimMaterial material) {
-      // start by trying and finding the material specific sprite
-      ResourceLocation withMaterial = root.withSuffix('_' + material.assetName());
-      TextureAtlasSprite sprite = getTrimAtlas().getSprite(withMaterial);
-      if (!MissingTextureAtlasSprite.getLocation().equals(sprite.contents().name())) {
-        return new TrimArmorTexture(sprite);
-      }
-      // failed to find the unique sprite, go for tinting the base
+    /**
+     * Creates the trim texture; the material-specific atlas sprite lookup is deferred.
+     * <p>
+     * DEFERRED RENDER: pre-26.1 resolved a per-material sprite via {@code ModelManager#getAtlas} + {@code TrimMaterial#assetName()},
+     * both removed in 26.1 (the trim atlas is now owned by {@code EquipmentLayerRenderer} and the suffix lives in
+     * {@code MaterialAssetGroup}). Until that renderer is driven we always tint the base texture; per-material trim sprites
+     * validated in-game once re-hooked.
+     */
+    private static ArmorTexture create(Identifier root, TrimMaterial material) {
       int color = -1;
       TextColor textColor = material.description().getStyle().getColor();
       if (textColor != null) {
         color = textColor.getValue() | 0xFF000000;
       }
-      TConstruct.LOG.error("Missing material specific texture {}, defaulting to tinting base texture #{}", withMaterial, ColorLoadable.NO_ALPHA.getString(color));
       return new TintedArmorTexture(root.withPath("textures/" + root.getPath() + ".png"), color);
     }
 
@@ -122,7 +111,7 @@ public record TrimArmorTextureSupplier(ModifierId modifier, ResourceLocation pat
     public void renderTexture(Model model, PoseStack matrices, MultiBufferSource bufferSource, int packedLight, int packedOverlay, float red, float green, float blue, float alpha, boolean hasGlint) {
       // ignoring glint as odds are very low trim texture is the first one
       VertexConsumer buffer = trimSprite.wrap(bufferSource.getBuffer(Sheets.armorTrimsSheet(false)));
-      model.renderToBuffer(matrices, buffer, packedLight, packedOverlay, FastColor.ARGB32.color((int)(alpha * 255.0f), (int)(red * 255.0f), (int)(green * 255.0f), (int)(blue * 255.0f)));
+      model.renderToBuffer(matrices, buffer, packedLight, packedOverlay, ARGB.color((int)(alpha * 255.0f), (int)(red * 255.0f), (int)(green * 255.0f), (int)(blue * 255.0f)));
     }
   }
 }

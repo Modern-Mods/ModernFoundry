@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/zinc/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/zinc"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/zinc"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/zinc/nugget",
+  "ingredient": "#c:nuggets/zinc",
   "result": {
     "amount": 10,
     "tag": "c:molten_zinc"

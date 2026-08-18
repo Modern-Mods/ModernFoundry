@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.library.client.model;
 
-import net.neoforged.neoforge.client.model.data.ModelProperty;
+import net.neoforged.neoforge.model.data.ModelProperty;
 import net.neoforged.neoforge.fluids.FluidStack;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.tools.nbt.MaterialIdNBT;
 
-/** Model data properties used in Modern Foundry */
+/** Model data properties used in Tinker's Construct */
 public class ModelProperties {
   /** Property for fluid stack in a fluid model */
   public static final ModelProperty<FluidStack> FLUID_STACK = new ModelProperty<>();

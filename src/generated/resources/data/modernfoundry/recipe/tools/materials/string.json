@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/string",
-  "ingredient": {
-    "tag": "c:strings"
-  },
+  "ingredient": "#c:strings",
   "material": "modernfoundry:string",
   "needed": 4,
   "value": 1

@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.modifiers;
 
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.loadable.field.ContextKey;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.loadable.field.ContextKey;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.utils.IdParser;
 import modernmods.modernfoundry.library.utils.ResourceId;
@@ -9,7 +9,7 @@ import modernmods.modernfoundry.library.utils.ResourceId;
 import javax.annotation.Nullable;
 
 /**
- * This is just a copy of ResourceLocation for type safety in modifier JSON.
+ * This is just a copy of Identifier for type safety in modifier JSON.
  */
 public class ModifierId extends ResourceId {
   public static final IdParser<ModifierId> PARSER = new IdParser<>(ModifierId::new, "Modifier");
@@ -29,7 +29,7 @@ public class ModifierId extends ResourceId {
     super(namespaceIn, pathIn);
   }
 
-  public ModifierId(ResourceLocation location) {
+  public ModifierId(Identifier location) {
     super(location);
   }
 

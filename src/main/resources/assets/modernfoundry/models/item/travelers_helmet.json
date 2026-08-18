@@ -1,22 +1,8 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "neoforge:item/default",
   "textures": {
-    "base":    "modernfoundry:item/tool/armor/travelers/goggles/base",
+    "base": "modernfoundry:item/tool/armor/travelers/goggles/base",
     "cuirass": "modernfoundry:item/tool/armor/travelers/goggles/cuirass",
-    "metal":   "modernfoundry:item/tool/armor/travelers/goggles/metal"
-  },
-  "modifier_maps": ["modernfoundry:travelers/goggles"],
-  "first_modifiers": [ "modernfoundry:dyed" ],
-  "parts": [
-    { "name": "base" },
-    { "name": "cuirass", "index": 1 },
-    { "name": "metal", "index": 0 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/armor/travelers/helmet_broken"
-    }
-  ]
+    "metal": "modernfoundry:item/tool/armor/travelers/goggles/metal"
+  }
 }

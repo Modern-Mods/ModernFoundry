@@ -10,7 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -18,12 +18,12 @@ import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.player.Player;
 import org.apache.commons.lang3.mutable.MutableInt;
-import modernmods.hilt.command.GeneratePackHelper;
-import modernmods.hilt.data.datamap.RegistryDataMapLoader;
-import modernmods.hilt.data.loadable.ErrorFactory;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.JsonHelper;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.command.GeneratePackHelper;
+import modernmods.mantle.data.datamap.RegistryDataMapLoader;
+import modernmods.mantle.data.loadable.ErrorFactory;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.JsonHelper;
+import modernmods.mantle.util.typed.TypedMap;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.data.material.AbstractMaterialSpriteProvider.MaterialSpriteInfo;
 import modernmods.modernfoundry.library.client.data.material.AbstractPartSpriteProvider.PartSpriteInfo;
@@ -64,7 +64,7 @@ public class ClientGeneratePartTexturesCommand {
   private static final Component NO_PARTS = TConstruct.makeTranslation("command", "generate_part_textures.no_parts");
   private static final Component NO_MATERIALS = TConstruct.makeTranslation("command", "generate_part_textures.no_materials");
   /** Path to add the data */
-  private static final String PACK_NAME = "ModernFoundryGeneratedPartTextures";
+  private static final String PACK_NAME = "TinkersConstructGeneratedPartTextures";
   /** Part file to load, pulls from all namespaces, but no merging */
   private static final String GENERATOR_PART_TEXTURES = "tinkering/generator_part_textures.json";
 
@@ -80,7 +80,7 @@ public class ClientGeneratePartTexturesCommand {
     try {
       ResourceManager manager = Minecraft.getInstance().getResourceManager();
       // the forge mod bus is annoying, but stuck using it due to the normal bus not existing at datagen time
-      MaterialPartTextureGenerator.runCallbacks(null, manager);
+      MaterialPartTextureGenerator.runCallbacks(manager);
 
       Player player = Minecraft.getInstance().player;
 
@@ -88,7 +88,7 @@ public class ClientGeneratePartTexturesCommand {
       GeneratorConfiguration generatorConfig = loadGeneratorConfig(manager);
       if (generatorConfig.sprites.isEmpty()) {
         if (player != null) {
-          player.displayClientMessage(NO_PARTS, false);
+          player.sendSystemMessage(NO_PARTS);
         }
         return;
       }
@@ -101,23 +101,23 @@ public class ClientGeneratePartTexturesCommand {
       List<MaterialSpriteInfo> materialSprites = loadMaterialRenderInfoGenerators(manager, validMaterialId);
       if (materialSprites.isEmpty()) {
         if (player != null) {
-          player.displayClientMessage(NO_MATERIALS, false);
+          player.sendSystemMessage(NO_MATERIALS);
         }
         return;
       }
 
       // prepare the output directory
       Path path = Minecraft.getInstance().getResourcePackDirectory().resolve(PACK_NAME);
-      BiConsumer<ResourceLocation, NativeImage> saver = (outputPath, image) -> saveImage(path, outputPath, image);
-      BiConsumer<ResourceLocation, JsonObject> metaSaver = (outputPath, image) -> saveMetadata(path, outputPath, image);
+      BiConsumer<Identifier, NativeImage> saver = (outputPath, image) -> saveImage(path, outputPath, image);
+      BiConsumer<Identifier, JsonObject> metaSaver = (outputPath, image) -> saveMetadata(path, outputPath, image);
 
       // create a pack.mcmeta so its a valid resource pack
-      GeneratePackHelper.saveMcmeta(path, PackType.CLIENT_RESOURCES, "Generated Resources from the Modern Foundry Part Texture Generator");
+      GeneratePackHelper.saveMcmeta(path, PackType.CLIENT_RESOURCES, "Generated Resources from the Tinkers' Construct Part Texture Generator");
 
       // predicate for whether we should generate the texture
       AbstractSpriteReader spriteReader = new ResourceManagerSpriteReader(manager, MaterialPartTextureGenerator.FOLDER);
       MutableInt generated = new MutableInt(0); // keep track of how many generated
-      Predicate<ResourceLocation> shouldGenerate;
+      Predicate<Identifier> shouldGenerate;
       if (operation == Operation.ALL) {
         shouldGenerate = exists -> {
           generated.add(1);
@@ -140,7 +140,7 @@ public class ClientGeneratePartTexturesCommand {
           if (!material.isVariant() || !part.isSkipVariants()) {
             for (MaterialStatsId statType : part.getStatTypes()) {
               if (material.supportStatType(statType) || generatorConfig.statOverrides.hasOverride(statType, material.getTexture())) {
-                ResourceLocation spritePath = MaterialPartTextureGenerator.outputPath(part, material);
+                Identifier spritePath = MaterialPartTextureGenerator.outputPath(part, material);
                 if (shouldGenerate.test(spritePath)) {
                   MaterialPartTextureGenerator.generateSprite(spriteReader, material, part, spritePath, saver, metaSaver);
                 }
@@ -155,22 +155,22 @@ public class ClientGeneratePartTexturesCommand {
       // success message
       long deltaTime = System.nanoTime() - time;
       int count = generated.getValue();
-      MaterialPartTextureGenerator.runCallbacks(null, null);
+      MaterialPartTextureGenerator.runCallbacks(null);
       log.info("Finished generating {} textures in {} ms", count, deltaTime / 1000000f);
       if (Minecraft.getInstance().player != null) {
-        Minecraft.getInstance().player.displayClientMessage(Component.translatable(SUCCESS_KEY, count, (deltaTime / 1000000) / 1000f, GeneratePackHelper.getOutputComponent(path.toFile())), false);
+        Minecraft.getInstance().player.sendSystemMessage(Component.translatable(SUCCESS_KEY, count, (deltaTime / 1000000) / 1000f, GeneratePackHelper.getOutputComponent(path.toFile())));
       }
     } catch (Exception e) {
       long deltaTime = System.nanoTime() - time;
       log.error("Failed to generate part textures after {} ms", deltaTime / 1000000f, e);
       if (Minecraft.getInstance().player != null) {
-        Minecraft.getInstance().player.displayClientMessage(Component.translatable(FAILURE_KEY, (deltaTime / 1000000) / 1000f, e.getMessage()).withStyle(ChatFormatting.RED), false);
+        Minecraft.getInstance().player.sendSystemMessage(Component.translatable(FAILURE_KEY, (deltaTime / 1000000) / 1000f, e.getMessage()).withStyle(ChatFormatting.RED));
       }
     }
   }
 
   /** Saves an image to the output folder */
-  private static void saveImage(Path folder, ResourceLocation location, NativeImage image) {
+  private static void saveImage(Path folder, Identifier location, NativeImage image) {
     Path path = folder.resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(),
                 location.getNamespace(), MaterialPartTextureGenerator.FOLDER, location.getPath() + ".png"));
     try {
@@ -182,7 +182,7 @@ public class ClientGeneratePartTexturesCommand {
   }
 
   /** Saves metadata to the output folder */
-  private static void saveMetadata(Path folder, ResourceLocation location, JsonObject meta) {
+  private static void saveMetadata(Path folder, Identifier location, JsonObject meta) {
     Path path = folder.resolve(Paths.get(PackType.CLIENT_RESOURCES.getDirectory(),
                                          location.getNamespace(), MaterialPartTextureGenerator.FOLDER, location.getPath() + ".png.mcmeta"));
     try {
@@ -202,12 +202,12 @@ public class ClientGeneratePartTexturesCommand {
   /** Loads all part sprites file */
   @SuppressWarnings("removal")
   private static GeneratorConfiguration loadGeneratorConfig(ResourceManager manager) {
-    Map<ResourceLocation,PartSpriteInfo> builder = new HashMap<>();
+    Map<Identifier,PartSpriteInfo> builder = new HashMap<>();
     StatOverride.Builder stats = new StatOverride.Builder();
 
     // each namespace loads separately
     for (String namespace : manager.getNamespaces()) {
-      ResourceLocation location = ResourceLocation.fromNamespaceAndPath(namespace, GENERATOR_PART_TEXTURES);
+      Identifier location = Identifier.fromNamespaceAndPath(namespace, GENERATOR_PART_TEXTURES);
       List<Resource> resources = manager.getResourceStack(location);
       if (!resources.isEmpty()) {
         // if the namespace has the file, we will start building
@@ -271,7 +271,7 @@ public class ClientGeneratePartTexturesCommand {
     MaterialGeneratorInfo.LOADABLE.requiredField("generator", Function.identity()),
     ErrorFactory.FIELD,
     (render, generator, error) -> {
-      ResourceLocation texture = render.texture();
+      Identifier texture = render.texture();
       if (texture == null) {
         throw error.create("Unable to create generator for material " + render.id() + " as it has no texture despite having a generator");
       }
@@ -286,14 +286,14 @@ public class ClientGeneratePartTexturesCommand {
    */
   private static List<MaterialSpriteInfo> loadMaterialRenderInfoGenerators(ResourceManager manager, Predicate<MaterialVariantId> validMaterialId) {
     // first, we need to fetch all relevant JSON files
-    Map<ResourceLocation,JsonElement> jsons = new HashMap<>();
-    SimpleJsonResourceReloadListener.scanDirectory(manager, MaterialRenderInfoLoader.FOLDER, JsonHelper.DEFAULT_GSON, jsons);
+    Map<Identifier,JsonElement> jsons = new HashMap<>();
+    SimpleJsonResourceReloadListener.scanDirectory(manager, net.minecraft.resources.FileToIdConverter.json(MaterialRenderInfoLoader.FOLDER), com.mojang.serialization.JsonOps.INSTANCE, net.minecraft.util.ExtraCodecs.JSON, jsons);
     // final results map from texture name to sprite info
-    Map<ResourceLocation,MaterialSpriteInfo> builder = new HashMap<>();
+    Map<Identifier,MaterialSpriteInfo> builder = new HashMap<>();
 
-    for(Entry<ResourceLocation, JsonElement> entry : jsons.entrySet()) {
+    for(Entry<Identifier, JsonElement> entry : jsons.entrySet()) {
       // clean up ID by trimming off the extension
-      ResourceLocation location = entry.getKey();
+      Identifier location = entry.getKey();
       MaterialVariantId id = MaterialRenderInfoLoader.variant(location);
 
       // ensure its a material we care about

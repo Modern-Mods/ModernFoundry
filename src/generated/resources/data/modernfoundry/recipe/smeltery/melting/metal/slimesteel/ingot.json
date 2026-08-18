@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/slimesteel/ingot",
-  "ingredient": {
-    "tag": "c:ingots/slimesteel"
-  },
+  "ingredient": "#c:ingots/slimesteel",
   "result": {
     "amount": 90,
     "fluid": "modernfoundry:molten_slimesteel"

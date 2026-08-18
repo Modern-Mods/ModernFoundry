@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "mantle:retextured",
+    "model": "modernfoundry:item/scorched_anvil",
+    "retextured": ["particle", "top"]
+  }
+}

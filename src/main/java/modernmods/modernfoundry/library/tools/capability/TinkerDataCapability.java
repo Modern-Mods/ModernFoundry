@@ -3,19 +3,19 @@ package modernmods.modernfoundry.library.tools.capability;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.common.NeoForge;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.CapabilityManager;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.CapabilityToken;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import modernmods.modernfoundry.compat.neoforged.neoforge.event.AttachCapabilitiesEvent;
 import net.neoforged.bus.api.EventPriority;
-import modernmods.hilt.registration.object.IdAwareObject;
+import modernmods.mantle.registration.object.IdAwareObject;
 import modernmods.modernfoundry.TConstruct;
 
 import javax.annotation.Nonnull;
@@ -34,7 +34,7 @@ public class TinkerDataCapability {
   private TinkerDataCapability() {}
 
   /** Capability ID */
-  private static final ResourceLocation ID = TConstruct.getResource("modifier_data");
+  private static final Identifier ID = TConstruct.getResource("modifier_data");
   /** Capability type */
   public static final Capability<Holder> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
   /** 1.21 replacement for the old transient entity capability. */
@@ -111,7 +111,7 @@ public class TinkerDataCapability {
   public static class TinkerDataKey<T> implements IdAwareObject {
     /** Name for debug */
     @Getter
-    private final ResourceLocation id;
+    private final Identifier id;
 
     @Override
     public String toString() {
@@ -122,13 +122,13 @@ public class TinkerDataCapability {
   /** Extension key that can automatically create an instance if missing */
   public static class ComputableDataKey<T> extends TinkerDataKey<T> implements Function<TinkerDataKey<?>, T> {
     private final Supplier<T> constructor;
-    private ComputableDataKey(ResourceLocation name, Supplier<T> constructor) {
+    private ComputableDataKey(Identifier name, Supplier<T> constructor) {
       super(name);
       this.constructor = constructor;
     }
 
     /** Creates a new instance */
-    public static <T> ComputableDataKey<T> of(ResourceLocation name, Supplier<T> constructor) {
+    public static <T> ComputableDataKey<T> of(Identifier name, Supplier<T> constructor) {
       return new ComputableDataKey<>(name, constructor);
     }
 

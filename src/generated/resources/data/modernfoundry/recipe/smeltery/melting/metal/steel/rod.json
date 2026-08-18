@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/steel/rod",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:rods/steel"
     }
   ],
-  "ingredient": {
-    "tag": "c:rods/steel"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/steel/rod",
+  "ingredient": "#c:rods/steel",
   "result": {
     "amount": 45,
     "tag": "c:molten_steel"

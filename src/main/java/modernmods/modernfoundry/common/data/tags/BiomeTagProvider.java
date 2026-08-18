@@ -4,7 +4,6 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.world.level.biome.Biomes;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 
@@ -27,8 +26,8 @@ import static net.minecraft.world.level.biome.Biomes.SMALL_END_ISLANDS;
 
 @SuppressWarnings("unchecked")
 public class BiomeTagProvider extends BiomeTagsProvider {
-  public BiomeTagProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-    super(packOutput, lookupProvider, TConstruct.MOD_ID, existingFileHelper);
+  public BiomeTagProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider) {
+    super(packOutput, lookupProvider, TConstruct.MOD_ID);
   }
 
   @Override
@@ -45,6 +44,6 @@ public class BiomeTagProvider extends BiomeTagsProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry Biome Tags";
+    return "Tinkers' Construct Biome Tags";
   }
 }

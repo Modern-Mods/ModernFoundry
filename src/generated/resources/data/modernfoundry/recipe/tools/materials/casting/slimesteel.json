@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/slimesteel",
   "fluid": {
     "amount": 90,
     "tag": "modernfoundry:molten_slimesteel"
   },
+  "id": "modernfoundry:tools/materials/casting/slimesteel",
   "output": "modernfoundry:slimesteel",
   "temperature": 900
 }

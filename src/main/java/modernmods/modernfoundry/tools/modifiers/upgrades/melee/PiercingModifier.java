@@ -4,7 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;

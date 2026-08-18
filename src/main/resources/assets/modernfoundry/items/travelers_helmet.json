@@ -1,0 +1,25 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/travelers_helmet",
+    "parts": [
+      {
+        "name": "metal",
+        "index": 0
+      },
+      {
+        "name": "cuirass",
+        "index": 1
+      },
+      {
+        "name": "base"
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:travelers/goggles"
+    ],
+    "first_modifiers": [
+      "modernfoundry:dyed"
+    ]
+  }
+}

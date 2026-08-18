@@ -1,5 +1,7 @@
 package modernmods.modernfoundry.tools.entity;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.core.BlockPos;
@@ -20,7 +22,7 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -31,7 +33,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.ItemAbilities;
-import modernmods.hilt.util.CombatHelper;
+import modernmods.mantle.util.CombatHelper;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
@@ -84,7 +86,7 @@ public class CombatFishingHook extends FishingHook implements ProjectileWithKnoc
     float dz = Mth.cos(yAngle);
     float dx = Mth.sin(yAngle);
     // position
-    this.moveTo(
+    this.snapTo(
       player.getX() - dx * 0.3,
       player.getEyeY(),
       player.getZ() - dz * 0.3,
@@ -174,7 +176,7 @@ public class CombatFishingHook extends FishingHook implements ProjectileWithKnoc
   /** Damages the rod if locatable */
   private void damageRod() {
     // we damage on both cast and release to prevent some cheese with some modifiers and swapping items post cast
-    if (!level().isClientSide && getOwner() instanceof LivingEntity living) {
+    if (!level().isClientSide() && getOwner() instanceof LivingEntity living) {
       ItemStack stack = living.getMainHandItem();
       InteractionHand hand = InteractionHand.MAIN_HAND;
       // must be able to cast
@@ -202,7 +204,7 @@ public class CombatFishingHook extends FishingHook implements ProjectileWithKnoc
 
   @Override
   protected boolean canHitEntity(Entity target) {
-    return super.canHitEntity(target) || (target.isAlive() && isCollecting() && (target.getType().is(TinkerTags.EntityTypes.COLLECTABLES) || target instanceof AbstractArrow));
+    return super.canHitEntity(target) || (target.isAlive() && isCollecting() && (target.getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.COLLECTABLES) || target instanceof AbstractArrow));
   }
 
   @Override
@@ -211,7 +213,7 @@ public class CombatFishingHook extends FishingHook implements ProjectileWithKnoc
     if (owner != null) {
       // if requested, collect the targeted item
       // include arrows directly for modded arrow compat
-      boolean collectable = target.getType().is(TinkerTags.EntityTypes.COLLECTABLES) || target instanceof ItemEntity || target instanceof AbstractArrow;
+      boolean collectable = target.getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.COLLECTABLES) || target instanceof ItemEntity || target instanceof AbstractArrow;
       if (collectable && isCollecting()) {
         if (owner instanceof Player player) {
           target.playerTouch(player);
@@ -219,7 +221,7 @@ public class CombatFishingHook extends FishingHook implements ProjectileWithKnoc
           if (target.isRemoved()) {
             return;
             // if not removed but it's on the list to discard on failed pickup, discard and als be done
-          } else if (target.getType().is(TinkerTags.EntityTypes.DISCARDABLE_COLLECTABLES)) {
+          } else if (target.getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.DISCARDABLE_COLLECTABLES)) {
             target.discard();
             return;
           }
@@ -239,7 +241,7 @@ public class CombatFishingHook extends FishingHook implements ProjectileWithKnoc
         AttributeInstance knockback = ToolAttackUtil.disableKnockback(targetLiving);
         // actually hurt the entity
         float oldHealth = targetLiving != null ? targetLiving.getHealth() : 0;
-        if (target.hurt(source, damage)) {
+        if (target.hurtOrSimulate(source, damage)) {
           if (this.level() instanceof ServerLevel serverLevel && owner instanceof LivingEntity ownerLiving) {
             if (targetLiving != null) {
               EnchantmentHelper.doPostAttackEffects(serverLevel, targetLiving, source);
@@ -378,7 +380,7 @@ public class CombatFishingHook extends FishingHook implements ProjectileWithKnoc
   public void tick() {
     // if in the wall, continue ticking life
     super.tick();
-    if (this.wallState != null && !level().isClientSide) {
+    if (this.wallState != null && !level().isClientSide()) {
       this.wallLife++;
       if (this.wallLife >= 1200) {
         this.discard();
@@ -394,16 +396,17 @@ public class CombatFishingHook extends FishingHook implements ProjectileWithKnoc
   private static final String TAG_MATERIAL = "material";
 
   @Override
-  public void addAdditionalSaveData(CompoundTag tag) {
-    super.addAdditionalSaveData(tag);
-    tag.putString(TAG_MATERIAL, getMaterial().toString());
+  public void addAdditionalSaveData(ValueOutput output) {
+    super.addAdditionalSaveData(output);
+    output.putString(TAG_MATERIAL, getMaterial().toString());
   }
 
   @Override
-  public void readAdditionalSaveData(CompoundTag tag) {
-    super.readAdditionalSaveData(tag);
-    if (tag.contains(TAG_MATERIAL)) {
-      setMaterial(Objects.requireNonNullElse(MaterialVariantId.tryParse(tag.getString(TAG_MATERIAL)), IMaterial.UNKNOWN_ID));
+  public void readAdditionalSaveData(ValueInput input) {
+    super.readAdditionalSaveData(input);
+    String material = input.getStringOr(TAG_MATERIAL, "");
+    if (!material.isEmpty()) {
+      setMaterial(Objects.requireNonNullElse(MaterialVariantId.tryParse(material), IMaterial.UNKNOWN_ID));
     }
   }
 }

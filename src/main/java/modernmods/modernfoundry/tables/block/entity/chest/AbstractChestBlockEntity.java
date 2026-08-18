@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.tables.block.entity.chest;
 
+import net.minecraft.world.level.storage.ValueOutput;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,16 +9,22 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.Containers;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import net.minecraft.world.level.storage.TagValueInput;
+import net.minecraft.world.level.storage.TagValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.items.IItemHandler;
-import modernmods.hilt.block.entity.NameableBlockEntity;
+import modernmods.mantle.block.entity.NameableBlockEntity;
 import modernmods.modernfoundry.library.utils.TagUtil;
+import modernmods.modernfoundry.tables.block.ChestBlock;
 import modernmods.modernfoundry.tables.block.entity.inventory.IChestItemHandler;
 import modernmods.modernfoundry.tables.menu.TinkerChestContainerMenu;
 
@@ -43,7 +50,7 @@ public abstract class AbstractChestBlockEntity extends NameableBlockEntity {
     if (cap == ForgeCapabilities.ITEM_HANDLER) {
       return capability.cast();
     }
-    return modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
+    return modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
   }
 
   public void invalidateCaps() {
@@ -68,25 +75,37 @@ public abstract class AbstractChestBlockEntity extends NameableBlockEntity {
   }
 
   @Override
-  public void saveAdditional(CompoundTag tags) {
-    super.saveAdditional(tags);
-    // move the items from the serialized result
-    // we don't care about the size and need it here for compat with old worlds
-    CompoundTag handlerNBT = itemHandler.serializeNBT(TagUtil.BUILTIN_LOOKUP);
-    tags.put(KEY_ITEMS, handlerNBT.getList(KEY_ITEMS, Tag.TAG_COMPOUND));
+  public void saveAdditional(ValueOutput output) {
+    super.saveAdditional(output);
+    itemHandler.serialize(output);
   }
 
   /** Reads the inventory from NBT */
   public void readInventory(CompoundTag tags) {
     // copy in just the items key for deserializing, don't want to change the size
     CompoundTag handlerNBT = new CompoundTag();
-    handlerNBT.put(KEY_ITEMS, tags.getList(KEY_ITEMS, Tag.TAG_COMPOUND));
-    itemHandler.deserializeNBT(TagUtil.BUILTIN_LOOKUP, handlerNBT);
+    handlerNBT.put(KEY_ITEMS, tags.getListOrEmpty(KEY_ITEMS));
+    ValueInput input = TagValueInput.create(ProblemReporter.DISCARDING, TagUtil.BUILTIN_LOOKUP, handlerNBT);
+    itemHandler.deserialize(input);
   }
 
   @Override
-  public void load(CompoundTag tags) {
-    super.load(tags);
-    readInventory(tags);
+  public void loadAdditional(ValueInput input) {
+    super.loadAdditional(input);
+    itemHandler.deserialize(input);
+  }
+
+  @Override
+  public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+    super.preRemoveSideEffects(pos, state);
+    // chests flagged to drop items scatter their contents when broken; the rest preserve them in the dropped block item via loot
+    if (level != null && state.getBlock() instanceof ChestBlock chest && chest.dropsItems()) {
+      for (int i = 0; i < itemHandler.getSlots(); i++) {
+        ItemStack stack = itemHandler.getStackInSlot(i);
+        if (!stack.isEmpty()) {
+          Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
+        }
+      }
+    }
   }
 }

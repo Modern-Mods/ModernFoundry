@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/tin/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/tin"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/tin"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/tin/dust",
+  "ingredient": "#c:dusts/tin",
   "result": {
     "amount": 90,
     "tag": "c:molten_tin"

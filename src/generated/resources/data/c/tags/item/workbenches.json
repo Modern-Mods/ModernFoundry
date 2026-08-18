@@ -3,9 +3,8 @@
     "minecraft:crafting_table",
     "modernfoundry:crafting_station",
     {
-      "id": "#c:workbench",
+      "id": "#forge:workbench",
       "required": false
-    },
-    "#c:workbench"
+    }
   ]
 }

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/refined_obsidian/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/refined_obsidian"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/refined_obsidian"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/refined_obsidian/nugget",
+  "ingredient": "#c:nuggets/refined_obsidian",
   "result": {
     "amount": 10,
     "tag": "c:molten_refined_obsidian"

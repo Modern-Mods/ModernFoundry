@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "modernfoundry:seared_brick"
-    }
+    "B": "modernfoundry:seared_brick"
   },
   "pattern": [
     "BBB",
@@ -13,6 +11,5 @@
   ],
   "result": {
     "id": "modernfoundry:seared_heater"
-  },
-  "show_notification": true
+  }
 }

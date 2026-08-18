@@ -1,31 +1,89 @@
 package modernmods.modernfoundry.smeltery.block.entity.tank;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.transaction.SnapshotJournal;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
+import net.neoforged.neoforge.transfer.transaction.TransactionContext;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
 import modernmods.modernfoundry.library.utils.TagUtil;
 import modernmods.modernfoundry.smeltery.block.entity.CastingBlockEntity;
 import modernmods.modernfoundry.smeltery.item.TankItem;
 
 import javax.annotation.Nonnull;
 
-@RequiredArgsConstructor
-public class CastingFluidHandler implements IFluidHandler {
+/**
+ * Fluid handler for a casting table/basin. Backed by the 26.1 {@link ResourceHandler} transfer API (so it registers as a
+ * {@code ResourceHandler<FluidResource>} capability) while keeping the legacy {@link IFluidHandler} for internal callers.
+ *
+ * <p>The casting recipe capacity is determined dynamically the first time fluid is inserted; {@link CastingBlockEntity#initNewCasting}
+ * has a side-effect-free SIMULATE mode used to size the tank inside a transaction, while the actual recipe lock in
+ * (and the tile change/reset notifications) are non-transactional and are only applied once the transaction is committed.
+ */
+public class CastingFluidHandler implements ResourceHandler<FluidResource>, IFluidHandler {
   private final CastingBlockEntity tile;
-  @Getter @Setter
   private FluidStack fluid = FluidStack.EMPTY;
-  @Setter
   private int capacity = 0;
   private Fluid filter = Fluids.EMPTY;
+
+  /** Snapshot of the handler state, for transactional rollback */
+  private record Snapshot(FluidStack fluid, int capacity, Fluid filter) {}
+
+  /** Journal tracking transactional changes to the tank; defers the non-transactional tile side effects to commit */
+  private final SnapshotJournal<Snapshot> journal = new SnapshotJournal<>() {
+    @Override
+    protected Snapshot createSnapshot() {
+      return new Snapshot(fluid.copy(), capacity, filter);
+    }
+
+    @Override
+    protected void revertToSnapshot(Snapshot snapshot) {
+      fluid = snapshot.fluid();
+      capacity = snapshot.capacity();
+      filter = snapshot.filter();
+    }
+
+    @Override
+    protected void onRootCommit(Snapshot original) {
+      if (fluid.isEmpty() && !original.fluid().isEmpty()) {
+        // drained to empty: reset the casting recipe (also clears this tank via tile.reset -> tank.reset)
+        tile.reset();
+      } else {
+        // if the casting recipe was initialized during this transaction, lock it in now (real execution path)
+        if (original.filter() == Fluids.EMPTY && filter != Fluids.EMPTY) {
+          tile.initNewCasting(fluid, FluidAction.EXECUTE);
+        }
+        tile.onContentsChanged();
+      }
+    }
+  };
+
+  public CastingFluidHandler(CastingBlockEntity tile) {
+    this.tile = tile;
+  }
+
+  /** Gets the fluid in the tank */
+  public FluidStack getFluid() {
+    return fluid;
+  }
+
+  /** Sets the fluid in the tank directly, used by the tile when pouring */
+  public void setFluid(FluidStack fluid) {
+    this.fluid = fluid;
+  }
+
+  /** Sets the tank capacity directly */
+  public void setCapacity(int capacity) {
+    this.capacity = capacity;
+  }
 
   /** Checks if the given fluid is valid */
   public boolean isFluidValid(FluidStack stack) {
@@ -52,68 +110,116 @@ public class CastingFluidHandler implements IFluidHandler {
     filter = Fluids.EMPTY;
   }
 
+
+  /* ResourceHandler */
+
   @Override
-  public int fill(FluidStack resource, FluidAction action) {
-    if (resource.isEmpty() || !isFluidValid(resource)) {
+  public int size() {
+    return 1;
+  }
+
+  @Override
+  public FluidResource getResource(int index) {
+    return FluidResource.of(fluid);
+  }
+
+  @Override
+  public long getAmountAsLong(int index) {
+    return fluid.getAmount();
+  }
+
+  @Override
+  public long getCapacityAsLong(int index, FluidResource resource) {
+    return getCapacity();
+  }
+
+  @Override
+  public boolean isValid(int index, FluidResource resource) {
+    return index == 0 && isFluidValid(resource.toStack(1));
+  }
+
+  @Override
+  public int insert(int index, FluidResource resource, int amount, TransactionContext transaction) {
+    if (index != 0 || resource.isEmpty() || amount <= 0) {
       return 0;
     }
-
-    // update filter and capacity
-    int capacity = this.capacity;
-    if (filter == null || this.capacity == 0) {
-      Fluid fluid = resource.getFluid();
-      capacity = tile.initNewCasting(resource, action);
-      if (capacity <= 0) {
+    FluidStack resourceStack = resource.toStack(amount);
+    if (!isFluidValid(resourceStack)) {
+      return 0;
+    }
+    // determine the recipe capacity, initializing the casting if not yet done (SIMULATE has no side effects)
+    int cap = this.capacity;
+    boolean initializing = filter == Fluids.EMPTY || this.capacity == 0;
+    if (initializing) {
+      cap = tile.initNewCasting(resourceStack, FluidAction.SIMULATE);
+      if (cap <= 0) {
         return 0;
       }
-      if (action.execute()) {
-        this.capacity = capacity;
-        this.filter = fluid;
-      }
     }
-
-    // if no fluid yet, copy it in
+    // compute how much actually fits
+    int filled;
     if (fluid.isEmpty()) {
-      int amount = Math.min(capacity, resource.getAmount());
-      if (action.execute()) {
-        fluid = resource.copyWithAmount(amount);
-        tile.onContentsChanged();
-      }
-      return amount;
-    }
-
-    // safety: should never be false, but good to check
-    if (!resource.isFluidEqual(fluid)) {
+      filled = Math.min(cap, amount);
+    } else if (!FluidStack.isSameFluidSameComponents(fluid, resourceStack)) {
       return 0;
-    }
-
-    // if full, nothing to do
-    int space = capacity - fluid.getAmount();
-    if (space <= 0) {
-      return 0;
-    }
-    // if it fits, it grows
-    int amount = resource.getAmount();
-    if (amount < space) {
-      if (action.execute()) {
-        fluid.grow(amount);
-        tile.onContentsChanged();
-      }
-      return amount;
     } else {
-      // too much? set to max
+      filled = Math.min(cap - fluid.getAmount(), amount);
+    }
+    if (filled <= 0) {
+      return 0;
+    }
+    // apply the change, snapshotting so it can be rolled back
+    journal.updateSnapshots(transaction);
+    if (initializing) {
+      this.capacity = cap;
+      this.filter = resourceStack.getFluid();
+    }
+    if (fluid.isEmpty()) {
+      this.fluid = resourceStack.copyWithAmount(filled);
+    } else {
+      this.fluid = fluid.copyWithAmount(fluid.getAmount() + filled);
+    }
+    return filled;
+  }
+
+  @Override
+  public int extract(int index, FluidResource resource, int amount, TransactionContext transaction) {
+    if (index != 0 || resource.isEmpty() || amount <= 0) {
+      return 0;
+    }
+    if (fluid.isEmpty() || !FluidStack.isSameFluidSameComponents(fluid, resource.toStack(1))) {
+      return 0;
+    }
+    int drained = Math.min(fluid.getAmount(), amount);
+    if (drained <= 0) {
+      return 0;
+    }
+    journal.updateSnapshots(transaction);
+    this.fluid = fluid.copyWithAmount(fluid.getAmount() - drained);
+    return drained;
+  }
+
+
+  /* Legacy IFluidHandler */
+
+  @Override
+  public int fill(FluidStack resource, FluidAction action) {
+    if (resource.isEmpty()) {
+      return 0;
+    }
+    try (Transaction tx = Transaction.openRoot()) {
+      int filled = insert(0, FluidResource.of(resource), resource.getAmount(), tx);
       if (action.execute()) {
-        fluid.setAmount(capacity);
-        tile.onContentsChanged();
+        tx.commit();
       }
-      return space;
+      return filled;
     }
   }
 
   @Nonnull
   @Override
   public FluidStack drain(FluidStack resource, FluidAction action) {
-    if (resource.isEmpty() || !resource.isFluidEqual(fluid)) {
+    if (resource.isEmpty() || !FluidStack.isSameFluidSameComponents(fluid, resource)) {
       return FluidStack.EMPTY;
     }
     return this.drain(resource.getAmount(), action);
@@ -122,27 +228,18 @@ public class CastingFluidHandler implements IFluidHandler {
   @Nonnull
   @Override
   public FluidStack drain(int maxDrain, FluidAction action) {
-    int drained = Math.min(fluid.getAmount(), maxDrain);
-    if (drained <= 0) {
+    if (fluid.isEmpty() || maxDrain <= 0) {
       return FluidStack.EMPTY;
     }
-
-    FluidStack stack = fluid.copyWithAmount(drained);
-    if (action.execute()) {
-      fluid.shrink(drained);
-      if (fluid.isEmpty()) {
-        // since empty, assume the current recipe is invalid now
-        // fixes some odd behavior with capacity and recipes going out of sync
-        tile.reset();
-      } else {
-        // called in reset
-        tile.onContentsChanged();
+    FluidStack current = fluid;
+    try (Transaction tx = Transaction.openRoot()) {
+      int drained = extract(0, FluidResource.of(current), maxDrain, tx);
+      if (action.execute()) {
+        tx.commit();
       }
+      return drained > 0 ? current.copyWithAmount(drained) : FluidStack.EMPTY;
     }
-    return stack;
   }
-
-  /* Required */
 
   @Nonnull
   @Override
@@ -175,13 +272,13 @@ public class CastingFluidHandler implements IFluidHandler {
 
   /** Reads the tank from Tag */
   public void readFromTag(CompoundTag nbt) {
-    capacity = nbt.getInt(TAG_CAPACITY);
-    if (nbt.contains(TAG_FLUID, Tag.TAG_COMPOUND)) {
-      CompoundTag fluidTag = nbt.getCompound(TAG_FLUID);
-      setFluid(fluidTag.contains("FluidName", Tag.TAG_STRING) ? TankItem.readFluid(fluidTag) : FluidStack.parseOptional(TagUtil.BUILTIN_LOOKUP, fluidTag));
+    capacity = nbt.getIntOr(TAG_CAPACITY, 0);
+    if (nbt.contains(TAG_FLUID)) {
+      CompoundTag fluidTag = nbt.getCompoundOrEmpty(TAG_FLUID);
+      setFluid(fluidTag.contains("FluidName") ? TankItem.readFluid(fluidTag) : TagUtil.readFluid(fluidTag));
     }
-    if (nbt.contains(TAG_FILTER, Tag.TAG_STRING)) {
-      ResourceLocation id = ResourceLocation.tryParse(nbt.getString(TAG_FILTER));
+    if (nbt.contains(TAG_FILTER)) {
+      Identifier id = Identifier.tryParse(nbt.getStringOr(TAG_FILTER, ""));
       Fluid fluid = id == null ? null : ForgeRegistries.FLUIDS.getValue(id);
       if (fluid != null) {
         filter = fluid;
@@ -194,7 +291,7 @@ public class CastingFluidHandler implements IFluidHandler {
   public CompoundTag writeToTag(CompoundTag nbt) {
     nbt.putInt(TAG_CAPACITY, capacity);
     if (!fluid.isEmpty()) {
-      nbt.put(TAG_FLUID, fluid.save(TagUtil.BUILTIN_LOOKUP));
+      nbt.put(TAG_FLUID, TagUtil.writeFluid(fluid));
     }
     if (filter != Fluids.EMPTY) {
       nbt.putString(TAG_FILTER, BuiltInRegistries.FLUID.getKey(filter).toString());

@@ -4,7 +4,7 @@ import lombok.Getter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,17 +14,17 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
 import modernmods.modernfoundry.library.utils.TagUtil;
 
 import java.util.List;
@@ -43,10 +43,10 @@ public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<Display
     COOLING_TIME_FIELD,
     PotionCastingRecipe::new);
 
-  @Getter
+  @Getter(lombok.AccessLevel.NONE)
   protected final TypeAwareRecipeSerializer<?> serializer;
   @Getter
-  protected final ResourceLocation id;
+  protected final Identifier id;
   @Getter
   protected final String group;
   /** Input on the casting table, always consumed */
@@ -58,7 +58,7 @@ public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<Display
   /** Cooling time for this recipe, used for tipped arrows */
   protected final int coolingTime;
 
-  public PotionCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient bottle, FluidIngredient fluid, Item result, int coolingTime) {
+  public PotionCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, Ingredient bottle, FluidIngredient fluid, Item result, int coolingTime) {
     this.serializer = serializer;
     this.id = id;
     this.group = group;
@@ -70,8 +70,15 @@ public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<Display
   }
 
   @Override
-  public RecipeType<?> getType() {
-    return serializer.getType();
+  @SuppressWarnings("unchecked")
+  public RecipeType<? extends PotionCastingRecipe> getType() {
+    return (RecipeType<? extends PotionCastingRecipe>) serializer.getType();
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public net.minecraft.world.item.crafting.RecipeSerializer<? extends PotionCastingRecipe> getSerializer() {
+    return (net.minecraft.world.item.crafting.RecipeSerializer<? extends PotionCastingRecipe>) serializer.serializer();
   }
 
   @Override
@@ -99,7 +106,6 @@ public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<Display
     return coolingTime;
   }
 
-  @Override
   public ItemStack assemble(ICastingContainer inv, HolderLookup.Provider access) {
     ItemStack result = new ItemStack(this.result);
     PotionUtils.setPotion(result, PotionUtils.getPotion(inv.getFluidTag()));
@@ -114,7 +120,7 @@ public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<Display
   public List<DisplayCastingRecipe> getRecipes(RegistryAccess access) {
     if (displayRecipes == null) {
       // create a subrecipe for every potion variant
-      List<ItemStack> bottles = List.of(bottle.getItems());
+      List<ItemStack> bottles = List.of(bottle.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
       displayRecipes = ForgeRegistries.POTIONS.getValues().stream()
         .filter(potion -> potion != Potions.WATER.value())
         .map(potion -> {
@@ -131,14 +137,14 @@ public class PotionCastingRecipe implements ICastingRecipe, IMultiRecipe<Display
 
   /* Recipe interface methods */
 
-  @Override
   public NonNullList<Ingredient> getIngredients() {
-    return NonNullList.of(Ingredient.EMPTY, bottle);
+    NonNullList<Ingredient> list = NonNullList.create();
+    list.add(bottle);
+    return list;
   }
 
   /** @deprecated use {@link #assemble(Container, HolderLookup.Provider)} */
   @Deprecated
-  @Override
   public ItemStack getResultItem(HolderLookup.Provider access) {
     return new ItemStack(this.result);
   }

@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/diamond/tools_complement_hammer",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "tools_complement:diamond_hammer"
+      "type": "neoforge:registered",
+      "value": "tools_complement:diamond_hammer"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/diamond/tools_complement_hammer",
   "ingredient": {
     "item": "tools_complement:diamond_hammer"
   },

@@ -4,7 +4,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -22,17 +21,20 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
- * Listing for wandering traders to randomly sell an ancient tool
+ * Builds a randomized ancient tool merchant offer for wandering traders.
+ * The removed 26.1 VillagerTrades.ItemListing interface (and WandererTradesEvent) previously wired this into the
+ * wandering trader pool. Wandering trades are now data-driven via TradeSets/VillagerTrade with static ItemStackTemplates,
+ * which cannot express a random-material tool with a tier-based cost, so this dynamic builder is retained for a future
+ * data-driven trade-set integration (custom loot function + trade set JSON).
  */
-public enum AncientToolItemListing implements ItemListing {
+public enum AncientToolItemListing {
   INSTANCE;
 
   @SuppressWarnings("deprecation")
   @Nullable
-  @Override
   public MerchantOffer getOffer(Entity trader, RandomSource random) {
     // step 1: select ancient tool
-    Optional<Holder<Item>> selected = BuiltInRegistries.ITEM.getTag(TinkerTags.Items.TRADER_TOOLS).flatMap(t -> t.getRandomElement(random));
+    Optional<Holder<Item>> selected = BuiltInRegistries.ITEM.get(TinkerTags.Items.TRADER_TOOLS).flatMap(t -> t.getRandomElement(random));
     if (selected.isPresent() && selected.get().value() instanceof IModifiable toolItem) {
       // step 2: select materials
       ToolStack tool = ToolBuildHandler.buildToolRandomMaterials(toolItem, RandomMaterial.ancient(), random);

@@ -3,7 +3,5 @@
   "id": "modernfoundry:tools/armor/travelers/boots_leather",
   "index": 1,
   "item_cost": 2,
-  "tools": {
-    "item": "modernfoundry:travelers_boots"
-  }
+  "tools": "modernfoundry:travelers_boots"
 }

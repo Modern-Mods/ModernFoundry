@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/obsidian/pane",
-  "ingredient": {
-    "item": "modernfoundry:obsidian_pane"
-  },
+  "ingredient": "modernfoundry:obsidian_pane",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:molten_obsidian"

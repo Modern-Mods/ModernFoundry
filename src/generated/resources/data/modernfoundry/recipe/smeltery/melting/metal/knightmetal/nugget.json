@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/knightmetal/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/knightmetal"
-  },
+  "ingredient": "#c:nuggets/knightmetal",
   "result": {
     "amount": 10,
     "fluid": "modernfoundry:molten_knightmetal"

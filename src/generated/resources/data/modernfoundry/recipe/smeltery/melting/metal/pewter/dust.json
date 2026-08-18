@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/pewter/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/pewter"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/pewter"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/pewter/dust",
+  "ingredient": "#c:dusts/pewter",
   "result": {
     "amount": 90,
     "tag": "c:molten_pewter"

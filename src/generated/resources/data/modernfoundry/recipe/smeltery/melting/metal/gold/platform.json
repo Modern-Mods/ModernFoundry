@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/platform",
-  "ingredient": {
-    "item": "modernfoundry:gold_platform"
-  },
+  "ingredient": "modernfoundry:gold_platform",
   "result": {
     "amount": 100,
     "tag": "c:molten_gold"

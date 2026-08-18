@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/entity_melting/heads/blaze",
-  "ingredient": {
-    "item": "modernfoundry:blaze_head"
-  },
+  "ingredient": "modernfoundry:blaze_head",
   "result": {
     "amount": 100,
     "fluid": "modernfoundry:blazing_blood"

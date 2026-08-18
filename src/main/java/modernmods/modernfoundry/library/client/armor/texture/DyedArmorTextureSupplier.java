@@ -1,13 +1,13 @@
 package modernmods.modernfoundry.library.client.armor.texture;
 
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.common.ColorLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.common.ColorLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
 import modernmods.modernfoundry.tools.TinkerModifiers;
@@ -29,7 +29,7 @@ public class DyedArmorTextureSupplier implements ArmorTextureSupplier {
     IntLoadable.range(0, 15).defaultField("luminosity", 0, false, s -> s.luminosity),
     DyedArmorTextureSupplier::new);
 
-  private final ResourceLocation prefix;
+  private final Identifier prefix;
   private final String suffix;
   private final ModifierId modifier;
   private final boolean alwaysRender;
@@ -37,7 +37,7 @@ public class DyedArmorTextureSupplier implements ArmorTextureSupplier {
   private final int luminosity;
   private final TintedArmorTexture[] textures;
 
-  public DyedArmorTextureSupplier(ResourceLocation prefix, String suffix, ModifierId modifier, @Nullable Integer defaultColor, int luminosity) {
+  public DyedArmorTextureSupplier(Identifier prefix, String suffix, ModifierId modifier, @Nullable Integer defaultColor, int luminosity) {
     this.prefix = prefix;
     this.suffix = suffix;
     this.modifier = modifier;
@@ -52,15 +52,15 @@ public class DyedArmorTextureSupplier implements ArmorTextureSupplier {
   }
 
   // TODO 1.21: cleanup constructor variants
-  public DyedArmorTextureSupplier(ResourceLocation prefix, ModifierId modifier, @Nullable Integer defaultColor, int luminosity) {
+  public DyedArmorTextureSupplier(Identifier prefix, ModifierId modifier, @Nullable Integer defaultColor, int luminosity) {
     this(prefix, "", modifier, defaultColor, luminosity);
   }
 
-  public DyedArmorTextureSupplier(ResourceLocation prefix, ModifierId modifier, @Nullable Integer defaultColor) {
+  public DyedArmorTextureSupplier(Identifier prefix, ModifierId modifier, @Nullable Integer defaultColor) {
     this(prefix, modifier, defaultColor, 0);
   }
 
-  public DyedArmorTextureSupplier(ResourceLocation base, String variant, ModifierId modifier, @Nullable Integer defaultColor) {
+  public DyedArmorTextureSupplier(Identifier base, String variant, ModifierId modifier, @Nullable Integer defaultColor) {
     this(base.withSuffix(variant), modifier, defaultColor);
   }
 
@@ -68,7 +68,7 @@ public class DyedArmorTextureSupplier implements ArmorTextureSupplier {
   public ArmorTexture getArmorTexture(ItemStack stack, TextureType textureType, RegistryAccess access) {
     TintedArmorTexture texture = textures[textureType.ordinal()];
     if (texture != null && (alwaysRender || ModifierUtil.getModifierLevel(stack, modifier) > 0)) {
-      int color = ModifierUtil.getPersistentInt(stack, modifier, defaultColor);
+      int color = ModifierUtil.getPersistentInt(stack, modifier.getIdentifier(), defaultColor);
       return texture.color(0xFF000000 | color);
     }
     return ArmorTexture.EMPTY;

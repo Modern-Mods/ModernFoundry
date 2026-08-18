@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/amethyst/bud_medium",
   "byproducts": [
     {
       "amount": 200,
       "fluid": "modernfoundry:molten_quartz"
     }
   ],
-  "ingredient": {
-    "item": "minecraft:medium_amethyst_bud"
-  },
+  "id": "modernfoundry:smeltery/melting/amethyst/bud_medium",
+  "ingredient": "minecraft:medium_amethyst_bud",
   "rate": "gem",
   "result": {
     "amount": 200,

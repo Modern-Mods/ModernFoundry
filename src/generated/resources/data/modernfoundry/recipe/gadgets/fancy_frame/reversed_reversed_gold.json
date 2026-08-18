@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:reverse_fancy_item_frame",
   "ingredients": [
-    {
-      "item": "modernfoundry:reversed_gold_item_frame"
-    },
-    {
-      "item": "minecraft:redstone_torch"
-    }
+    "modernfoundry:reversed_gold_item_frame",
+    "minecraft:redstone_torch"
   ],
   "result": {
     "id": "modernfoundry:gold_item_frame"

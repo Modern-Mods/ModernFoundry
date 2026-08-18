@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "mantle:retextured",
+    "model": "modernfoundry:item/part_builder",
+    "retextured": ["leg", "legBottom"]
+  }
+}

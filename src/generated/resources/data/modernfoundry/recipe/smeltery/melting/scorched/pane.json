@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/scorched/pane",
   "byproducts": [
     {
       "amount": 25,
       "fluid": "modernfoundry:molten_quartz"
     }
   ],
-  "ingredient": {
-    "item": "modernfoundry:scorched_glass_pane"
-  },
+  "id": "modernfoundry:smeltery/melting/scorched/pane",
+  "ingredient": "modernfoundry:scorched_glass_pane",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:scorched_stone"

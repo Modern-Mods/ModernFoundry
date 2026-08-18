@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/cobalt/raw_block",
   "byproducts": [
     {
       "amount": 225,
@@ -8,9 +7,8 @@
       "rate": "gem"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/raw_cobalt"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/cobalt/raw_block",
+  "ingredient": "#c:storage_blocks/raw_cobalt",
   "rate": "metal",
   "result": {
     "amount": 810,

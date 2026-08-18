@@ -6,14 +6,8 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/melee/weapon"
-    },
-    {
-      "tag": "modernfoundry:modifiable/harvest"
-    },
-    {
-      "tag": "modernfoundry:modifiable/armor/worn"
-    }
+    "#modernfoundry:modifiable/melee/weapon",
+    "#modernfoundry:modifiable/harvest",
+    "#modernfoundry:modifiable/armor/worn"
   ]
 }

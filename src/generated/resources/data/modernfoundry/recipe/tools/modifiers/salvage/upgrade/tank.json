@@ -6,11 +6,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/held"
-    },
-    {
-      "tag": "modernfoundry:modifiable/armor"
-    }
+    "#modernfoundry:modifiable/held",
+    "#modernfoundry:modifiable/armor"
   ]
 }

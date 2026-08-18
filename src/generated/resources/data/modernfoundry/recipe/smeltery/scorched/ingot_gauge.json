@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "modernfoundry:scorched_brick"
-    },
-    "B": {
-      "tag": "c:gems/quartz"
-    }
+    "#": "modernfoundry:scorched_brick",
+    "B": "#c:gems/quartz"
   },
   "pattern": [
     "B#B",
@@ -16,6 +12,5 @@
   ],
   "result": {
     "id": "modernfoundry:scorched_ingot_gauge"
-  },
-  "show_notification": true
+  }
 }

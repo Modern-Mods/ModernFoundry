@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/cobalt/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/cobalt"
-  },
+  "ingredient": "#c:storage_blocks/cobalt",
   "result": {
     "amount": 810,
     "tag": "c:molten_cobalt"

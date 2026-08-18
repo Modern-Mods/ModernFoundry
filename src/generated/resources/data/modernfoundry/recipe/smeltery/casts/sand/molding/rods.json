@@ -1,11 +1,7 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/sand/molding/rods",
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
-  "pattern": {
-    "tag": "c:rods"
-  },
+  "material": "#modernfoundry:casts/sand",
+  "pattern": "#c:rods",
   "result": "modernfoundry:rod_sand_cast"
 }

@@ -4,7 +4,7 @@ import com.google.common.collect.Streams;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import modernmods.modernfoundry.library.json.IntRange;
@@ -33,7 +33,7 @@ import java.util.stream.Stream;
 public interface IDisplayModifierRecipe extends IModifierRecipe {
   /** Gets the ID of this recipe. If this is a generated display recipe, uses the parent recipe ID */
   @Nullable
-  default ResourceLocation getRecipeId() {
+  default Identifier getRecipeId() {
     return null;
   }
 

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/sky/crystal",
-  "ingredient": {
-    "item": "modernfoundry:sky_slime_crystal"
-  },
+  "ingredient": "modernfoundry:sky_slime_crystal",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:sky_slime"

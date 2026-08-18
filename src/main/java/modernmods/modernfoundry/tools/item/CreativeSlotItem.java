@@ -1,6 +1,7 @@
 package modernmods.modernfoundry.tools.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -12,8 +13,8 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import modernmods.hilt.command.HiltCommand;
-import modernmods.hilt.fluid.FluidTransferHelper;
+import modernmods.mantle.command.MantleCommand;
+import modernmods.mantle.fluid.FluidTransferHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.config.Config;
@@ -45,8 +46,8 @@ public class CreativeSlotItem extends Item {
   @Nullable
   public static SlotType getSlot(ItemStack stack) {
     CompoundTag nbt = TagUtil.getTag(stack);
-    if (nbt != null && nbt.contains(NBT_KEY, Tag.TAG_STRING)) {
-      return SlotType.getIfPresent(nbt.getString(NBT_KEY));
+    if (nbt != null && nbt.contains(NBT_KEY)) {
+      return SlotType.getIfPresent(nbt.getStringOr(NBT_KEY, ""));
     }
     return null;
   }
@@ -60,26 +61,30 @@ public class CreativeSlotItem extends Item {
   }
 
   @Override
-  public String getDescriptionId(ItemStack stack) {
+  public Component getName(ItemStack stack) {
+    // 26.1.2 removed Item#getDescriptionId(ItemStack); override getName to provide the slot-specific name
     SlotType slot = getSlot(stack);
     String originalKey = getDescriptionId();
     if (slot != null) {
       String betterKey = originalKey + "." + slot.getName();
       if (Util.canTranslate(betterKey)) {
-        return betterKey;
+        return Component.translatable(betterKey);
       }
     }
-    return originalKey;
+    return Component.translatable(originalKey);
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flag) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     SlotType slot = getSlot(stack);
     if (slot != null) {
       tooltip.add(Component.translatable(TOOLTIP, slot.getDisplayName()).withStyle(ChatFormatting.GRAY));
     } else {
       tooltip.add(TOOLTIP_MISSING);
     }
+  
+    tooltip.forEach(tooltipConsumer);
   }
 
   /** Adds all variants of this slot item to the creative tab */
@@ -96,14 +101,14 @@ public class CreativeSlotItem extends Item {
 
   /** Checks if the given player may apply this item */
   public static boolean canApply(Player player) {
-    return player.isCreative() || (Config.COMMON.quickApplyToolModifiersSurvival.get() && player.hasPermissions(HiltCommand.PERMISSION_GAME_COMMANDS));
+    return player.isCreative() || (Config.COMMON.quickApplyToolModifiersSurvival.get() && MantleCommand.PERMISSION_GAME_COMMANDS.check(player.permissions()));
   }
 
   /** Common logic between two stack methods */
   private static boolean handleStackOn(ItemStack stack, ItemStack toolItem, Player player, int amount) {
     SlotType slotType = getSlot(stack);
     if (slotType != null && !toolItem.isEmpty() && toolItem.is(TinkerTags.Items.MODIFIABLE)) {
-      if (!player.level().isClientSide || (player.isCreative() && player.containerMenu.getType() == null)) {
+      if (!player.level().isClientSide() || (player.isCreative() && player.containerMenu.getType() == null)) {
         if (canApply(player)) {
           ToolStack tool = ToolStack.from(toolItem);
           // do nothing if the tool already has 0 slots and we are removing
@@ -114,7 +119,7 @@ public class CreativeSlotItem extends Item {
           // find the tool data
           ModDataNBT persistentData = tool.getPersistentData();
           CompoundTag slots;
-          if (persistentData.contains(CreativeSlotModifier.KEY_SLOTS, Tag.TAG_COMPOUND)) {
+          if (persistentData.contains(CreativeSlotModifier.KEY_SLOTS)) {
             slots = persistentData.getCompound(CreativeSlotModifier.KEY_SLOTS);
           } else {
             slots = new CompoundTag();
@@ -123,7 +128,7 @@ public class CreativeSlotItem extends Item {
 
           // add the slot
           String name = slotType.getName();
-          int updated = slots.getInt(name) + amount;
+          int updated = slots.getIntOr(name, 0) + amount;
           if (updated == 0) {
             slots.remove(name);
           } else {
@@ -150,7 +155,7 @@ public class CreativeSlotItem extends Item {
             FluidTransferHelper.playUISound(player, SoundEvents.GRINDSTONE_USE);
           }
         } else if (!player.isCreative()) {
-          player.displayClientMessage(CREATIVE_ONLY, false);
+          player.sendSystemMessage(CREATIVE_ONLY);
         }
       }
       return true;

@@ -1,17 +1,13 @@
 {
-  "type": "modernfoundry:molding_table",
-  "id": "modernfoundry:smeltery/casts/sand/molding/wires",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:wires"
     }
   ],
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
-  "pattern": {
-    "tag": "c:wires"
-  },
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/sand/molding/wires",
+  "material": "#modernfoundry:casts/sand",
+  "pattern": "#c:wires",
   "result": "modernfoundry:wire_sand_cast"
 }

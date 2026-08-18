@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steel/raw_block",
   "byproducts": [
     {
       "amount": 810,
@@ -8,9 +7,8 @@
       "tag": "c:molten_iron"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/raw_steel"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/steel/raw_block",
+  "ingredient": "#c:storage_blocks/raw_steel",
   "rate": "metal",
   "result": {
     "amount": 810,

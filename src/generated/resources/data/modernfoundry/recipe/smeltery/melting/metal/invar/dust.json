@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/invar/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/invar"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/invar"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/dust",
+  "ingredient": "#c:dusts/invar",
   "result": {
     "amount": 90,
     "tag": "c:molten_invar"

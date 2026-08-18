@@ -6,8 +6,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
-import modernmods.hilt.util.LogicHelper;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.util.LogicHelper;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.tools.capability.TinkerDataCapability;
 import modernmods.modernfoundry.library.tools.context.EquipmentIterator.EquipmentEntry;
@@ -40,7 +40,7 @@ public class EquipmentContext {
   /** Creates a context with an existing tool instance */
   public static EquipmentContext withTool(LivingEntity living, IToolStackView tool, EquipmentSlot slot) {
     EquipmentContext context = new EquipmentContext(living);
-    int index = slot.getFilterFlag();
+    int index = slot.getId();
     context.toolsInSlots[index] = tool;
     context.fetchedTool[index] = true;
     return context;
@@ -67,7 +67,7 @@ public class EquipmentContext {
    */
   @Nullable
   public IToolStackView getToolInSlot(EquipmentSlot slotType) {
-    int index = slotType.getFilterFlag();
+    int index = slotType.getId();
     if (!fetchedTool[index]) {
       toolsInSlots[index] = getToolStackIfModifiable(entity.getItemBySlot(slotType));
       fetchedTool[index] = true;

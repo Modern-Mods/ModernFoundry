@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/hepatizon",
   "fluid": {
     "amount": 90,
     "tag": "c:molten_hepatizon"
   },
+  "id": "modernfoundry:tools/materials/casting/hepatizon",
   "output": "modernfoundry:hepatizon",
   "temperature": 1400
 }

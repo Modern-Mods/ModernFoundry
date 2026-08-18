@@ -1,19 +1,19 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/tilling",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/tilling",
   "inputs": [
     {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:small_blade"
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:small_blade"
     },
     {
-      "tag": "c:ingots/steel"
+      "ingredient": "#c:ingots/steel"
     },
     {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:tool_binding"
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:tool_binding"
     }
   ],
   "level": 1,
@@ -22,19 +22,16 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
+      "#modernfoundry:modifiable/durability",
       {
-        "tag": "modernfoundry:modifiable/durability"
-      },
-      [
-        {
-          "tag": "modernfoundry:modifiable/interactable"
-        },
-        {
-          "tag": "modernfoundry:modifiable/armor/boots"
-        }
-      ]
+        "neoforge:ingredient_type": "neoforge:compound",
+        "children": [
+          "#modernfoundry:modifiable/interactable",
+          "#modernfoundry:modifiable/armor/boots"
+        ]
+      }
     ]
   }
 }

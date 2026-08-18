@@ -1,7 +1,7 @@
 [
   {
     "name": "group_general",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "no-load",
     "extraData": {
       "modernfoundry:load_tools": { "tag": "modernfoundry:modifiable/small", "path": "tools" }
@@ -9,7 +9,7 @@
   },
   {
     "name": "group_ranged",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "no-load",
     "extraData": { "modernfoundry:load_tools": [
       { "tag": "modernfoundry:modifiable/ranged/small", "path": "tools" },
@@ -18,27 +18,27 @@
   },
   {
     "name": "group_info",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "no-load"
   },
   {
     "name": "repairing",
-    "type": "hilt:crafting",
+    "type": "mantle:crafting",
     "data": "tools/repairing.json"
   },
   {
     "name": "part_swapping",
-    "type": "hilt:image_text",
+    "type": "mantle:image_text",
     "data": "tools/part_swapping.json"
   },
   {
     "name": "material_swapping",
-    "type": "hilt:image_text",
+    "type": "mantle:image_text",
     "data": "tools/material_swapping.json"
   },
   {
     "name": "recycling",
-    "type": "hilt:image_text",
+    "type": "mantle:image_text",
     "data": "tools/recycling.json"
   }
 ]

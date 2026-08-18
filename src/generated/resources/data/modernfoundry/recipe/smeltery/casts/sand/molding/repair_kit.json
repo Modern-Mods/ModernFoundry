@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/sand/molding/repair_kit",
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "material": "#modernfoundry:casts/sand",
   "pattern": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:repair_kit"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:repair_kit"
   },
   "result": "modernfoundry:repair_kit_sand_cast"
 }

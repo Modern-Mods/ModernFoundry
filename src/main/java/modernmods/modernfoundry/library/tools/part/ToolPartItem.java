@@ -1,12 +1,14 @@
 package modernmods.modernfoundry.library.tools.part;
 
 import net.minecraft.ChatFormatting;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import modernmods.hilt.client.SafeClientAccess;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.SafeClientAccess;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.config.Config;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
@@ -105,8 +107,11 @@ public class ToolPartItem extends MaterialItem implements IToolPart {
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flag) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     appendHoverText(this, stack, tooltip, flag);
+  
+    tooltip.forEach(tooltipConsumer);
   }
 
   /**

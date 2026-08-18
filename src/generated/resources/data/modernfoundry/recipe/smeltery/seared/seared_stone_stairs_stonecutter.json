@@ -1,9 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "modernfoundry:seared_stone"
-  },
+  "ingredient": "modernfoundry:seared_stone",
   "result": {
     "id": "modernfoundry:seared_stone_stairs"
   }

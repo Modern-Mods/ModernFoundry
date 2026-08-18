@@ -3,8 +3,8 @@ package modernmods.modernfoundry.library.client.data.spritetransformer;
 import com.google.gson.JsonObject;
 import com.mojang.blaze3d.platform.NativeImage;
 import org.jetbrains.annotations.ApiStatus.NonExtendable;
-import modernmods.hilt.data.gson.GenericRegisteredSerializer;
-import modernmods.hilt.data.gson.GenericRegisteredSerializer.IJsonSerializable;
+import modernmods.mantle.data.gson.GenericRegisteredSerializer;
+import modernmods.mantle.data.gson.GenericRegisteredSerializer.IJsonSerializable;
 
 import javax.annotation.Nullable;
 

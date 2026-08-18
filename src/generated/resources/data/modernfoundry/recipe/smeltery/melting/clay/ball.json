@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/clay/ball",
-  "ingredient": {
-    "item": "minecraft:clay_ball"
-  },
+  "ingredient": "minecraft:clay_ball",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:molten_clay"

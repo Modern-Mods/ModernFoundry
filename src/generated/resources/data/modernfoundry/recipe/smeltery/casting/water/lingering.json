@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/water/lingering",
-  "cast": {
-    "tag": "c:bottles/lingering"
-  },
+  "cast": "#c:bottles/lingering",
   "cast_consumed": true,
   "cooling_time": 1,
   "fluid": {
     "amount": 500,
-    "tag": "hilt:water"
+    "tag": "mantle:water"
   },
+  "id": "modernfoundry:smeltery/casting/water/lingering",
   "result": {
     "item": "minecraft:lingering_potion",
     "nbt": {

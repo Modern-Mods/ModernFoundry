@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "value": "twilightforest:ironwood_chestplate"
+    }
+  ],
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/ironwood/twilightforest_chestplate",
   "byproducts": [
     {
       "amount": 80,
@@ -8,12 +13,7 @@
       "unit_size": 10
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:ironwood_chestplate"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/ironwood/twilightforest_chestplate",
   "ingredient": {
     "item": "twilightforest:ironwood_chestplate"
   },

@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.modifiers.modules.util;
 
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
 
 /** Predicate matching a boolean parameter on a modifier module */
 public enum BooleanPredicate implements it.unimi.dsi.fastutil.booleans.BooleanPredicate {

@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/water/pink_concrete",
-  "cast": {
-    "item": "minecraft:pink_concrete_powder"
-  },
+  "cast": "minecraft:pink_concrete_powder",
   "cast_consumed": true,
   "cooling_time": 30,
   "fluid": {
     "amount": 100,
     "fluid": "minecraft:water"
   },
+  "id": "modernfoundry:smeltery/casting/water/pink_concrete",
   "result": "minecraft:pink_concrete"
 }

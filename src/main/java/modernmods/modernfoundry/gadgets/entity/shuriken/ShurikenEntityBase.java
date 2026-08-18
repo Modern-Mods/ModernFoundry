@@ -5,10 +5,11 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerEntity;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -31,11 +32,13 @@ public abstract class ShurikenEntityBase extends ThrowableItemProjectile impleme
   }
 
   public ShurikenEntityBase(EntityType<? extends ShurikenEntityBase> type, double x, double y, double z, Level worldIn) {
-    super(type, x, y, z, worldIn);
+    super(type, x, y, z, worldIn, ItemStack.EMPTY);
+    setItem(new ItemStack(getDefaultItem()));
   }
 
   public ShurikenEntityBase(EntityType<? extends ShurikenEntityBase> type, LivingEntity livingEntityIn, Level worldIn) {
-    super(type, livingEntityIn, worldIn);
+    super(type, livingEntityIn, worldIn, ItemStack.EMPTY);
+    setItem(new ItemStack(getDefaultItem()));
   }
 
     /**
@@ -58,8 +61,8 @@ public abstract class ShurikenEntityBase extends ThrowableItemProjectile impleme
     super.onHit(result);
 
     Level level = level();
-    if (!level.isClientSide) {
-      level.broadcastEntityEvent(this, (byte) 3); // TODO: find the proper constant for this event ID
+    if (!level.isClientSide()) {
+      level.broadcastEntityEvent(this, (byte) 3);
       this.discard();
     }
   }
@@ -68,13 +71,17 @@ public abstract class ShurikenEntityBase extends ThrowableItemProjectile impleme
   protected void onHitBlock(BlockHitResult result) {
     super.onHitBlock(result);
 
-    this.spawnAtLocation(getDefaultItem());
+    if (level() instanceof ServerLevel server) {
+      this.spawnAtLocation(server, getDefaultItem());
+    }
   }
 
   @Override
   protected void onHitEntity(EntityHitResult result) {
     Entity entity = result.getEntity();
-    entity.hurt(damageSources().thrown(this, this.getOwner()), this.getDamage());
+    if (level() instanceof ServerLevel server) {
+      entity.hurtServer(server, damageSources().thrown(this, this.getOwner()), this.getDamage());
+    }
 
     if (!level().isClientSide() && entity instanceof LivingEntity) {
       Vec3 motion = this.getDeltaMovement().normalize();

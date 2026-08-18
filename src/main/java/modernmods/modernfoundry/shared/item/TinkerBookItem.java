@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.shared.item;
 
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.client.book.BookScreenOpener;
-import modernmods.hilt.item.AbstractBookItem;
+import modernmods.mantle.client.book.BookScreenOpener;
+import modernmods.mantle.item.AbstractBookItem;
 import modernmods.modernfoundry.library.client.book.TinkerBook;
 
 public class TinkerBookItem extends AbstractBookItem {

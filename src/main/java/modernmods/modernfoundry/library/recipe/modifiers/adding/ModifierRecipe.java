@@ -2,15 +2,15 @@ package modernmods.modernfoundry.library.recipe.modifiers.adding;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
@@ -43,7 +43,7 @@ public class ModifierRecipe extends AbstractModifierRecipe {
    */
   protected final List<SizedIngredient> inputs;
 
-  public ModifierRecipe(ResourceLocation id, List<SizedIngredient> inputs, Ingredient toolRequirement, int maxToolSize, ModifierId result, IntRange level, @Nullable SlotCount slots, boolean allowCrystal, boolean checkTraitLevel) {
+  public ModifierRecipe(Identifier id, List<SizedIngredient> inputs, Ingredient toolRequirement, int maxToolSize, ModifierId result, IntRange level, @Nullable SlotCount slots, boolean allowCrystal, boolean checkTraitLevel) {
     super(id, toolRequirement, maxToolSize, result, level, slots, allowCrystal, checkTraitLevel);
     this.inputs = inputs;
   }
@@ -198,7 +198,7 @@ public class ModifierRecipe extends AbstractModifierRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ModifierRecipe> getSerializer() {
     return TinkerModifiers.modifierSerializer.get();
   }
 

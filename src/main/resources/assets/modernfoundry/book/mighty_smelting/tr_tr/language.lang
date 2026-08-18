@@ -6,7 +6,7 @@ ranged_materials=3. Düzey Uzun Menzilli Malzemeleri
 ranged_materials.subtext=Bu malzemeler alaşımlamayla oluşturulup sonra yay gibi uzun menzilli silahların araç parçalarına dökümlenebilir.
 
 tools=Koca Araçlar
-tools.subtext=Koca araçların hepsinin üretimi için Modern Foundry örsünün kullanılmasına gerek duyuyor
+tools.subtext=Koca araçların hepsinin üretimi için onarıcının örsünün kullanılmasına gerek duyuyor
 
 armor=Yavuz Zırh
 armor.subtext=Alaşımlar zırh üretimi için daha geniş aralıktaki malzemelerin kapısını aralar. Bu gezginin donanımı gibi yalın takımları aşan ek olarak yetenekler sağlar.

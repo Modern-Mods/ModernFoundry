@@ -1,14 +1,14 @@
 package modernmods.modernfoundry.tools.modules.ranged;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -37,7 +37,7 @@ public enum TrickQuiverModule implements ModifierModule, BowAmmoModifierHook, Ge
   public static final SingletonLoader<TrickQuiverModule> LOADER = new SingletonLoader<>(INSTANCE);
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<TrickQuiverModule>defaultHooks(ModifierHooks.BOW_AMMO, ModifierHooks.GENERAL_INTERACT, ModifierHooks.REMOVE);
   /** Key for the currently selected arrow */
-  private static final ResourceLocation SELECTED_SLOT = TConstruct.getResource("trick_quiver_selected");
+  private static final Identifier SELECTED_SLOT = TConstruct.getResource("trick_quiver_selected");
   /** Message when disabling the trick quiver */
   private static final String DISABLED = TConstruct.makeTranslationKey("modifier", "trick_quiver.disabled");
   /** Message to display selected slot */
@@ -68,12 +68,12 @@ public enum TrickQuiverModule implements ModifierModule, BowAmmoModifierHook, Ge
 
   @Override
   public void onDisableSelection(IToolStackView tool, ModifierEntry modifier, Player player) {
-    player.displayClientMessage(Component.translatable(DISABLED, modifier.getModifier().getDisplayName()), true);
+    player.sendOverlayMessage(Component.translatable(DISABLED, modifier.getModifier().getDisplayName()));
   }
 
   @Override
   public void onInventorySelect(IToolStackView tool, ModifierEntry modifier, Player player, int newIndex, ItemStack stack) {
-    player.displayClientMessage(Component.translatable(SELECTED, modifier.getModifier().getDisplayName(), stack.getHoverName(), newIndex + 1), true);
+    player.sendOverlayMessage(Component.translatable(SELECTED, modifier.getModifier().getDisplayName(), stack.getHoverName(), newIndex + 1));
   }
 
   @Override

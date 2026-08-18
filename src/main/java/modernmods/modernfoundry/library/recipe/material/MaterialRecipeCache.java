@@ -97,7 +97,7 @@ public class MaterialRecipeCache {
   /** Cache lookup function for items by materials */
   private static final Function<MaterialVariantId,List<ItemStack>> GET_ITEMS_BY_MATERIAL = variant ->
     getRecipes(variant).stream().flatMap(r -> {
-      Stream<ItemStack> stacks = Arrays.stream(r.getIngredient().getItems());
+      Stream<ItemStack> stacks = Arrays.stream(r.getIngredient().items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
       // if we need multiple, increase the stack size of the display stacks
       if (r.needed > r.value) {
         int size = (r.needed + r.value - 1) / r.value;

@@ -1,6 +1,6 @@
 {
   "render_type": "minecraft:translucent",
-  "loader": "hilt:connected",
+  "loader": "mantle:connected",
   "parent": "block/cube_all",
   "textures": {
     "all": "modernfoundry:block/foundry/tinted_glass"

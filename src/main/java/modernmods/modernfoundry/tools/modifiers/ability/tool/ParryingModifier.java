@@ -1,11 +1,13 @@
 package modernmods.modernfoundry.tools.modifiers.ability.tool;
+import modernmods.modernfoundry.tools.TinkerToolActions;
 
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.ItemAbilities;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -57,13 +59,13 @@ public class ParryingModifier extends OffhandAttackModifier implements ToolActio
   @Override
   public void onFinishUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity) {
     if (entity instanceof Player player) {
-      player.getCooldowns().addCooldown(tool.getItem(), (int)(20 / tool.getStats().get(ToolStats.ATTACK_SPEED)));
+      player.getCooldowns().addCooldown(new ItemStack(tool.getItem()), (int)(20 / tool.getStats().get(ToolStats.ATTACK_SPEED)));
     }
   }
 
   @Override
-  public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-    return UseAnim.BLOCK;
+  public ItemUseAnimation getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    return ItemUseAnimation.BLOCK;
   }
 
   @Override
@@ -73,6 +75,6 @@ public class ParryingModifier extends OffhandAttackModifier implements ToolActio
 
   @Override
   public boolean canPerformAction(IToolStackView tool, ModifierEntry modifier, ItemAbility toolAction) {
-    return toolAction == ItemAbilities.SHIELD_BLOCK;
+    return toolAction == TinkerToolActions.SHIELD_BLOCK;
   }
 }

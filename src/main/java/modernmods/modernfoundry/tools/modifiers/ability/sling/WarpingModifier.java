@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.tools.modifiers.ability.sling;
 
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.modules.util.ModifierCondition;

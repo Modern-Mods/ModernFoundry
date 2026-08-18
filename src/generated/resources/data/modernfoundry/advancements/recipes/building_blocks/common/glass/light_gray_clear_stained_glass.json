@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_clear_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:clear_glass"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "modernfoundry:common/glass/light_gray_clear_stained_glass"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_clear_glass",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "modernfoundry:common/glass/light_gray_clear_stained_glass"
+    ]
+  },
+  "sends_telemetry_event": false
+}

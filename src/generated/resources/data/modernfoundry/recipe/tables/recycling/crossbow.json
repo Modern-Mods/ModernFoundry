@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:part_builder_recycling",
   "id": "modernfoundry:tables/recycling/crossbow",
-  "pattern": {
-    "item": "modernfoundry:venom_bottle"
-  },
+  "pattern": "modernfoundry:venom_bottle",
   "results": {
     "modernfoundry:bowstring": {
       "count": 2,
@@ -18,7 +16,5 @@
       "item": "minecraft:stick"
     }
   },
-  "tool": {
-    "item": "minecraft:crossbow"
-  }
+  "tool": "minecraft:crossbow"
 }

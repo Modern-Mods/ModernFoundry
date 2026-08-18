@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/tin/chestplate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/chestplates/tin"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/chestplates/tin"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/tin/chestplate",
+  "ingredient": "#c:armors/chestplates/tin",
   "result": {
     "amount": 720,
     "tag": "c:molten_tin",

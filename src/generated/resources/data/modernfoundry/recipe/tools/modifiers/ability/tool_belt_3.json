@@ -1,21 +1,19 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/tool_belt_3",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/ability/tool_belt_3",
   "inputs": [
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     },
     {
-      "tag": "c:ingots/rose_gold"
+      "ingredient": "#c:ingots/rose_gold"
     },
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     }
   ],
   "level": 3,
   "result": "modernfoundry:tool_belt",
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/leggings"
-  }
+  "tools": "#modernfoundry:modifiable/armor/leggings"
 }

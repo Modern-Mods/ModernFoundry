@@ -10,7 +10,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
-import modernmods.hilt.block.entity.HiltBlockEntity;
+import modernmods.mantle.block.entity.MantleBlockEntity;
 import modernmods.modernfoundry.library.recipe.melting.IMeltingContainer.IOreRate;
 import modernmods.modernfoundry.library.recipe.melting.IMeltingRecipe;
 
@@ -34,7 +34,7 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
   private static final String TAG_SIZE = "size";
 
   /** Parent tile entity */
-  private final HiltBlockEntity parent;
+  private final MantleBlockEntity parent;
   /** Fluid handler for outputs */
   protected final IFluidHandler fluidHandler;
   /** Array of modules containing each slot */
@@ -51,7 +51,7 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
    * @param oreRate        Ore rate
    * @param size           Size
    */
-  public MeltingModuleInventory(HiltBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate, int size) {
+  public MeltingModuleInventory(MantleBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate, int size) {
     this.parent = parent;
     this.fluidHandler = fluidHandler;
     this.modules = new MeltingModule[size];
@@ -65,7 +65,7 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
    * @param fluidHandler   Tank for output
    * @param oreRate        Ore rate
    */
-  public MeltingModuleInventory(HiltBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate) {
+  public MeltingModuleInventory(MantleBlockEntity parent, IFluidHandler fluidHandler, IOreRate oreRate) {
     this(parent, fluidHandler, oreRate, 0);
   }
 
@@ -334,7 +334,7 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
    */
   public void readFromTag(CompoundTag nbt) {
     if (!strictSize) {
-      int newSize = nbt.getByte(TAG_SIZE) & 255;
+      int newSize = nbt.getByteOr(TAG_SIZE, (byte)0) & 255;
       if (newSize != modules.length) {
         modules = Arrays.copyOf(modules, newSize);
       }
@@ -346,11 +346,11 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
       }
     }
 
-    ListTag list = nbt.getList(TAG_ITEMS, Tag.TAG_COMPOUND);
+    ListTag list = nbt.getListOrEmpty(TAG_ITEMS);
     for (int i = 0; i < list.size(); i++) {
-      CompoundTag item = list.getCompound(i);
-      if (item.contains(TAG_SLOT, Tag.TAG_BYTE)) {
-        int slot = item.getByte(TAG_SLOT) & 255;
+      CompoundTag item = list.getCompoundOrEmpty(i);
+      if (item.contains(TAG_SLOT)) {
+        int slot = item.getByteOr(TAG_SLOT, (byte)0) & 255;
         if (validSlot(slot)) {
           getModule(slot).readFromTag(item);
         }

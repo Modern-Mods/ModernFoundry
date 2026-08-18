@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "mantle:retextured",
+    "model": "modernfoundry:item/crafting_station",
+    "retextured": ["leg", "legBottom"]
+  }
+}

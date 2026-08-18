@@ -1,16 +1,19 @@
 package modernmods.modernfoundry.fluids.item;
 
 import net.minecraft.network.chat.Component;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.util.StringUtil;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
@@ -25,19 +28,22 @@ public class MagmaBottleItem extends Item {
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
-    super.appendHoverText(stack, context, tooltip, flagIn);
+  public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flagIn) {
+    List<Component> tooltip = new java.util.ArrayList<>();
+    super.appendHoverText(stack, context, tooltipDisplay, tooltip::add, flagIn);
     tooltip.add(Component.translatable(
       "potion.withDuration",
       Blocks.FIRE.getName(),
       StringUtil.formatTickDuration(fireTime * 20, 20.0f)
     ).withStyle(MobEffectCategory.HARMFUL.getTooltipFormatting()));
+  
+    tooltip.forEach(tooltipConsumer);
   }
 
   @Override
-  public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+  public InteractionResult use(Level level, Player player, InteractionHand hand) {
     player.startUsingItem(hand);
-    return InteractionResultHolder.consume(player.getItemInHand(hand));
+    return InteractionResult.CONSUME;
   }
 
   @Override
@@ -46,14 +52,15 @@ public class MagmaBottleItem extends Item {
   }
 
   @Override
-  public UseAnim getUseAnimation(ItemStack pStack) {
-    return UseAnim.DRINK;
+  public ItemUseAnimation getUseAnimation(ItemStack pStack) {
+    return ItemUseAnimation.DRINK;
   }
 
   @Override
   public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity living) {
     living.igniteForSeconds(fireTime);
-    ItemStack container = stack.getCraftingRemainingItem();
+    ItemStackTemplate remainderTemplate = stack.getItem().getCraftingRemainder(stack);
+    ItemStack container = remainderTemplate != null ? remainderTemplate.create() : ItemStack.EMPTY;
     Player player = living instanceof Player p ? p : null;
     if (player == null || !player.getAbilities().instabuild) {
       stack.shrink(1);

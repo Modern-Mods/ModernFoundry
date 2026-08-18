@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/knightslime",
   "fluid": {
     "amount": 90,
     "tag": "modernfoundry:molten_knightslime"
   },
+  "id": "modernfoundry:tools/materials/casting/knightslime",
   "output": "modernfoundry:knightslime",
   "temperature": 1125
 }

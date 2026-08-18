@@ -1,15 +1,11 @@
 {
   "type": "modernfoundry:part_builder",
-  "id": "modernfoundry:tools/parts/builder/maille",
   "cost": 2,
+  "id": "modernfoundry:tools/parts/builder/maille",
   "pattern": "modernfoundry:maille",
   "pattern_item": [
-    {
-      "tag": "modernfoundry:patterns/default"
-    },
-    {
-      "item": "modernfoundry:maille_cast"
-    }
+    "#modernfoundry:patterns/default",
+    "modernfoundry:maille_cast"
   ],
   "result": {
     "item": "modernfoundry:maille"

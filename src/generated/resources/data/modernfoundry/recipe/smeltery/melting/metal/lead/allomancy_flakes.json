@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/lead/allomancy_flakes",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "allomancy:lead_flakes"
+      "type": "neoforge:registered",
+      "value": "allomancy:lead_flakes"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/lead/allomancy_flakes",
   "ingredient": {
     "item": "allomancy:lead_flakes"
   },

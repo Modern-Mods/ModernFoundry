@@ -10,7 +10,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class GoldGuardModifier extends NoLevelsModifier implements EquipmentChangeModifierHook, TooltipModifierHook {
-  private static final net.minecraft.resources.ResourceLocation GOLD_GUARD_ID = TConstruct.getResource("gold_guard");
+  private static final net.minecraft.resources.Identifier GOLD_GUARD_ID = TConstruct.getResource("gold_guard");
   private static final ComputableDataKey<GoldGuardGold> TOTAL_GOLD = TConstruct.createKey("gold_guard", GoldGuardGold::new);
 
   @Override

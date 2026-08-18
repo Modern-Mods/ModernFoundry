@@ -1,18 +1,18 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:ingots/fiery"
+    }
+  ],
   "type": "modernfoundry:material_melting",
-  "id": "modernfoundry:tools/materials/melting/fiery",
   "byproducts": [
     {
       "amount": 90,
       "tag": "c:molten_iron"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:ingots/fiery"
-    }
-  ],
+  "id": "modernfoundry:tools/materials/melting/fiery",
   "input": "modernfoundry:fiery",
   "result": {
     "amount": 250,

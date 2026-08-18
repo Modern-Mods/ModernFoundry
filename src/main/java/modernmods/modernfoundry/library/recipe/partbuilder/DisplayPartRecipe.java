@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.recipe.partbuilder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 public class DisplayPartRecipe implements IDisplayPartBuilderRecipe {
   /** ID of recipe; should generally match a real recipe JSON */
-  private final ResourceLocation id;
+  private final Identifier id;
   /** Material variant for name display */
   private final MaterialVariant material;
   /** Pattern button input */
@@ -47,13 +47,12 @@ public class DisplayPartRecipe implements IDisplayPartBuilderRecipe {
     throw new UnsupportedOperationException();
   }
 
-  @Override
-  public ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends DisplayPartRecipe> getSerializer() {
     throw new UnsupportedOperationException();
   }
 }

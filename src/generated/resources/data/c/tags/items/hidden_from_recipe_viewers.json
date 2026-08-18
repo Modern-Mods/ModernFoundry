@@ -1,0 +1,20 @@
+{
+  "values": [
+    "modernfoundry:crystalshot",
+    "modernfoundry:molten_soulsteel_bucket",
+    "modernfoundry:molten_knightslime_bucket",
+    "modernfoundry:soulsteel_block",
+    "modernfoundry:soulsteel_ingot",
+    "modernfoundry:soulsteel_nugget",
+    "modernfoundry:ichor_slime_leaves",
+    "modernfoundry:ichor_slime_tall_grass",
+    "modernfoundry:ichor_slime_fern",
+    "modernfoundry:ichor_slime_sapling",
+    "modernfoundry:ichor_slime_grass_seeds",
+    "modernfoundry:ichor_earth_slime_grass",
+    "modernfoundry:ichor_sky_slime_grass",
+    "modernfoundry:ichor_ichor_slime_grass",
+    "modernfoundry:ichor_ender_slime_grass",
+    "modernfoundry:ichor_vanilla_slime_grass"
+  ]
+}

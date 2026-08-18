@@ -1,10 +1,5 @@
 {
   "parent": "neoforge:item/default",
-  "loader": "modernfoundry:material",
-  "offset": [
-    0,
-    1
-  ],
   "textures": {
     "texture": "modernfoundry:item/tool/armor/slime/boots/laces"
   }

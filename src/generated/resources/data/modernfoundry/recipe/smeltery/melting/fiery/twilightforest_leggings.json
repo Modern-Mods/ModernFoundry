@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "value": "twilightforest:fiery_leggings"
+    }
+  ],
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/fiery/twilightforest_leggings",
   "byproducts": [
     {
       "amount": 630,
@@ -8,12 +13,7 @@
       "unit_size": 10
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:fiery_leggings"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/fiery/twilightforest_leggings",
   "ingredient": {
     "item": "twilightforest:fiery_leggings"
   },

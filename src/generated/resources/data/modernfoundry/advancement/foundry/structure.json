@@ -16,7 +16,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:foundry_controller"
+      "id": "modernfoundry:foundry_controller"
     },
     "show_toast": true,
     "title": {

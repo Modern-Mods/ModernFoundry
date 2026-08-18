@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/lead/tools_complement_excavator",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "tools_complement:lead_excavator"
+      "type": "neoforge:registered",
+      "value": "tools_complement:lead_excavator"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/lead/tools_complement_excavator",
   "ingredient": {
     "item": "tools_complement:lead_excavator"
   },

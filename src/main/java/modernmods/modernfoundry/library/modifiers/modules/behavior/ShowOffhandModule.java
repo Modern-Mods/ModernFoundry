@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.modifiers.modules.behavior;
 
 import net.minecraft.world.entity.EquipmentSlot;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.armor.EquipmentChangeModifierHook;

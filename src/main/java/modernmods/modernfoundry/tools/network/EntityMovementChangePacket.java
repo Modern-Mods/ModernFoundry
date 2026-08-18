@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 
 public class EntityMovementChangePacket implements IThreadsafePacket {
   private final int entityID;

@@ -3,7 +3,5 @@
   "id": "modernfoundry:tools/armor/plate/leggings_swapping",
   "index": 0,
   "item_cost": 5,
-  "tools": {
-    "item": "modernfoundry:plate_leggings"
-  }
+  "tools": "modernfoundry:plate_leggings"
 }

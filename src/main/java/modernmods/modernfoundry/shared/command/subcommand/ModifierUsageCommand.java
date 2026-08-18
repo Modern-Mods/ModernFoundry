@@ -8,8 +8,8 @@ import net.minecraft.commands.Commands;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.common.util.TablePrinter;
-import modernmods.hilt.command.HiltCommand;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.command.MantleCommand;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.materials.IMaterialRegistry;
@@ -45,7 +45,7 @@ public class ModifierUsageCommand {
    * @param subCommand  Command builder
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
-    subCommand.requires(sender -> sender.hasPermission(HiltCommand.PERMISSION_EDIT_SPAWN))
+    subCommand.requires(sender -> MantleCommand.hasPermission(sender, MantleCommand.PERMISSION_EDIT_SPAWN))
               .executes(context -> runForType(context, ModifierUsages.ALL, null))
               // modifier_usage all
               .then(Commands.literal("all").executes(context -> runForType(context, ModifierUsages.ALL, null)))

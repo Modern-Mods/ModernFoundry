@@ -1,0 +1,40 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/longbow",
+    "parts": [
+      {
+        "name": "limb_bottom",
+        "index": 0
+      },
+      {
+        "name": "limb_top",
+        "index": 1
+      },
+      {
+        "name": "bowstring",
+        "index": 3
+      },
+      {
+        "name": "grip",
+        "index": 2
+      }
+    ],
+    "large": true,
+    "large_offset": [
+      -7,
+      9
+    ],
+    "modifier_maps": [
+      "modernfoundry:longbow"
+    ],
+    "small_modifier_roots": {
+      "small": [
+        "modernfoundry:item/tool/longbow/modifiers/"
+      ],
+      "large": [
+        "modernfoundry:item/tool/longbow/large/modifiers/"
+      ]
+    }
+  }
+}

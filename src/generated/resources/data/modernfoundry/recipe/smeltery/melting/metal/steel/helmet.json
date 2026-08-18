@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steel/helmet",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/steel/tools_costing_5"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/steel/tools_costing_5"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steel/helmet",
+  "ingredient": "#modernfoundry:melting/steel/tools_costing_5",
   "result": {
     "amount": 450,
     "tag": "c:molten_steel",

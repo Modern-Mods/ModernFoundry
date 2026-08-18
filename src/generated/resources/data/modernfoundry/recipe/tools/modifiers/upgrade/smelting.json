@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/smelting",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/smelting",
   "inputs": [
     {
-      "item": "minecraft:campfire"
+      "ingredient": "minecraft:campfire"
     }
   ],
   "level": {
@@ -15,11 +15,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/interactable"
-    },
-    {
-      "tag": "modernfoundry:modifiable/armor/worn"
-    }
+    "#modernfoundry:modifiable/interactable",
+    "#modernfoundry:modifiable/armor/worn"
   ]
 }

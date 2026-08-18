@@ -1,16 +1,12 @@
 {
   "type": "modernfoundry:item_part_builder",
-  "id": "modernfoundry:tools/parts/builder/helmet_plating",
   "cost": 3,
+  "id": "modernfoundry:tools/parts/builder/helmet_plating",
   "material": "modernfoundry:rock",
   "pattern": "modernfoundry:helmet_plating",
   "pattern_item": [
-    {
-      "tag": "modernfoundry:patterns/default"
-    },
-    {
-      "item": "modernfoundry:helmet_plating_cast"
-    }
+    "#modernfoundry:patterns/default",
+    "modernfoundry:helmet_plating_cast"
   ],
   "result": "modernfoundry:helmet_plating_dummy"
 }

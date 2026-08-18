@@ -1,12 +1,12 @@
 package modernmods.modernfoundry.library.recipe.modifiers.adding;
 
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 
 import java.util.ArrayList;
@@ -93,14 +93,14 @@ public class MultilevelModifierRecipeBuilder extends AbstractMultilevelModifierR
   /* Saving */
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (inputs.isEmpty() && !allowCrystal) {
       throw new IllegalStateException("Must either have at least 1 input or allow crystal");
     }
     if (levels.isEmpty()) {
       throw new IllegalStateException("Must have at least 1 level");
     }
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "modifiers");
+    Identifier advancementId = buildOptionalAdvancement(id, "modifiers");
     consumer.accept(new LoadableFinishedRecipe<>(id, new MultilevelModifierRecipe(id, inputs, tools, maxToolSize, result, allowCrystal, levels, checkTraitLevel), MultilevelModifierRecipe.LOADER, advancementId));
   }
 }

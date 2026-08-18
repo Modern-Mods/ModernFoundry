@@ -3,12 +3,8 @@
   "category": "building",
   "group": "modernfoundry:stained_clear_glass",
   "key": {
-    "#": {
-      "item": "modernfoundry:clear_glass"
-    },
-    "X": {
-      "tag": "c:dyes/gray"
-    }
+    "#": "modernfoundry:clear_glass",
+    "X": "#c:dyes/gray"
   },
   "pattern": [
     "###",
@@ -18,6 +14,5 @@
   "result": {
     "count": 8,
     "id": "modernfoundry:gray_clear_stained_glass"
-  },
-  "show_notification": true
+  }
 }

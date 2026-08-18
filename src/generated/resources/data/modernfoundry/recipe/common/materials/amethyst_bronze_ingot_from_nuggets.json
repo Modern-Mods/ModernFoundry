@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:amethyst_bronze_ingot",
   "key": {
-    "#": {
-      "tag": "c:nuggets/amethyst_bronze"
-    },
-    "*": {
-      "item": "modernfoundry:amethyst_bronze_nugget"
-    }
+    "#": "#c:nuggets/amethyst_bronze",
+    "*": "modernfoundry:amethyst_bronze_nugget"
   },
   "pattern": [
     "###",
@@ -17,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:amethyst_bronze_ingot"
-  },
-  "show_notification": true
+  }
 }

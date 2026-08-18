@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "W": {
-      "item": "modernfoundry:nahuatl"
-    }
+    "W": "modernfoundry:nahuatl"
   },
   "pattern": [
     "WWW",
@@ -13,6 +11,5 @@
   "result": {
     "count": 6,
     "id": "modernfoundry:nahuatl_fence"
-  },
-  "show_notification": true
+  }
 }

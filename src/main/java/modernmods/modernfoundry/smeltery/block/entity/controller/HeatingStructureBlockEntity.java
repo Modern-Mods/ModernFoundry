@@ -24,18 +24,18 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import net.neoforged.neoforge.model.data.ModelData;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
-import modernmods.hilt.block.entity.IRetexturedBlockEntity;
-import modernmods.hilt.block.entity.NameableBlockEntity;
-import modernmods.hilt.util.BlockEntityHelper;
-import modernmods.hilt.util.RetexturedHelper;
+import modernmods.mantle.block.entity.IRetexturedBlockEntity;
+import modernmods.mantle.block.entity.NameableBlockEntity;
+import modernmods.mantle.util.BlockEntityHelper;
+import modernmods.mantle.util.RetexturedHelper;
 import modernmods.modernfoundry.common.multiblock.IMasterLogic;
 import modernmods.modernfoundry.common.multiblock.IServantLogic;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
@@ -65,13 +65,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import static modernmods.hilt.util.RetexturedHelper.TAG_TEXTURE;
+import static modernmods.mantle.util.RetexturedHelper.TAG_TEXTURE;
 
 public abstract class HeatingStructureBlockEntity extends NameableBlockEntity implements IMasterLogic, ISmelteryTankHandler, IRetexturedBlockEntity, ILegacyCapabilityBlockEntity {
   private static final String TAG_STRUCTURE = "multiblock";
   private static final String TAG_TANK = "tank";
   private static final String TAG_INVENTORY = "inventory";
   private static final String TAG_ERROR_POS = "lastError";
+  /** Wrapper keys nesting the legacy CompoundTag blobs under the ValueIO output */
+  private static final String TAG_SYNCED_DATA = "synced_data";
+  private static final String TAG_ADDITIONAL_DATA = "additional_data";
+  private static final String TAG_UPDATE_DATA = "update_data";
 
   /** Ticker instance for the serverside */
   public static final BlockEntityTicker<HeatingStructureBlockEntity> SERVER_TICKER = (level, pos, state, self) -> self.serverTick(level, pos, state);
@@ -230,7 +234,7 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
 
   /** Handles the server tick */
   protected void serverTick(Level level, BlockPos pos, BlockState state) {
-    if (level.isClientSide) {
+    if (level.isClientSide()) {
       if (errorVisibleFor > 0) {
         errorVisibleFor--;
       }
@@ -294,10 +298,10 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
    */
   protected void dropItem(ItemStack stack) {
     assert level != null;
-    if (!level.isClientSide && !stack.isEmpty()) {
-      double x = (double)(level.random.nextFloat() * 0.5F) + 0.25D;
-      double y = (double)(level.random.nextFloat() * 0.5F) + 0.25D;
-      double z = (double)(level.random.nextFloat() * 0.5F) + 0.25D;
+    if (!level.isClientSide() && !stack.isEmpty()) {
+      double x = (double)(level.getRandom().nextFloat() * 0.5F) + 0.25D;
+      double y = (double)(level.getRandom().nextFloat() * 0.5F) + 0.25D;
+      double z = (double)(level.getRandom().nextFloat() * 0.5F) + 0.25D;
       BlockPos pos = this.worldPosition.relative(getBlockState().getValue(ControllerBlock.FACING));
       ItemEntity itementity = new ItemEntity(level, (double)pos.getX() + x, (double)pos.getY() + y, (double)pos.getZ() + z, stack);
       itementity.setDefaultPickUpDelay();
@@ -312,7 +316,7 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   public void onLoad() {
     super.onLoad();
     // just to clear out invalid references to the old master/no master, nothing should actually change behavior
-    if (level != null && !level.isClientSide && structure != null) {
+    if (level != null && !level.isClientSide() && structure != null) {
       structure.forEachContained(pos -> {
         if (level.getBlockEntity(pos) instanceof IServantLogic servant) {
           servant.onMasterLoad(this);
@@ -347,7 +351,7 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
     if (capability == ForgeCapabilities.ITEM_HANDLER) {
       return itemCapability.cast();
     }
-    return modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
+    return modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
   }
 
 
@@ -373,7 +377,7 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
    * Attempts to locate a valid smeltery structure
    */
   protected void checkStructure() {
-    if (level == null || level.isClientSide) {
+    if (level == null || level.isClientSide()) {
       return;
     }
     boolean wasFormed = getBlockState().getValue(ControllerBlock.IN_STRUCTURE);
@@ -438,6 +442,14 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   }
 
   @Override
+  public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+    super.preRemoveSideEffects(pos, state);
+    // the controller block is being removed; tear down the multiblock structure. Runs server-side before the block entity is removed
+    // (formerly handled in Block#onRemove, which no longer exists in this form). May need in-game validation for client structure visuals.
+    invalidateStructure();
+  }
+
+  @Override
   public void notifyChange(BlockPos pos, BlockState state) {
     // structure invalid? can ignore this, will automatically check later
     if (structure == null) {
@@ -486,7 +498,7 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
    * @param fluid  Fluid
    */
   private void updateDisplayFluid(FluidStack fluid) {
-    if (level != null && level.isClientSide) {
+    if (level != null && level.isClientSide()) {
       // update ourself
       this.displayFluid = fluid.copy();
       this.requestModelDataUpdate();
@@ -608,58 +620,61 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   /* Tag */
 
   private void loadFromTag(CompoundTag nbt) {
-    if (nbt.contains(TAG_TANK, Tag.TAG_COMPOUND)) {
-      tank.read(nbt.getCompound(TAG_TANK));
+    if (nbt.contains(TAG_TANK)) {
+      tank.read(nbt.getCompoundOrEmpty(TAG_TANK));
       FluidStack first = tank.getFluidInTank(0);
       if (!first.isEmpty()) {
         updateDisplayFluid(first);
       }
     }
-    if (nbt.contains(TAG_INVENTORY, Tag.TAG_COMPOUND)) {
-      meltingInventory.readFromTag(nbt.getCompound(TAG_INVENTORY));
+    if (nbt.contains(TAG_INVENTORY)) {
+      meltingInventory.readFromTag(nbt.getCompoundOrEmpty(TAG_INVENTORY));
     }
-    if (nbt.contains(TAG_STRUCTURE, Tag.TAG_COMPOUND)) {
-      setStructure(multiblock.readFromTag(nbt.getCompound(TAG_STRUCTURE), this.worldPosition));
+    if (nbt.contains(TAG_STRUCTURE)) {
+      setStructure(multiblock.readFromTag(nbt.getCompoundOrEmpty(TAG_STRUCTURE), this.worldPosition));
       if (structure != null) {
         fluidCapability = LazyOptional.of(() -> tank);
       }
     }
     // only exists to be sent server to client in update packets
-    if (nbt.contains(TAG_ERROR_POS, Tag.TAG_COMPOUND)) {
-      this.errorPos = NbtUtils.readBlockPos(nbt.getCompound(TAG_ERROR_POS), "pos").map(pos -> pos.offset(this.worldPosition)).orElse(null);
+    if (nbt.contains(TAG_ERROR_POS)) {
+      this.errorPos = modernmods.modernfoundry.library.utils.TagUtil.readBlockPos(nbt.getCompoundOrEmpty(TAG_ERROR_POS), "pos").map(pos -> pos.offset(this.worldPosition)).orElse(null);
     }
     fuelModule.readFromTag(nbt);
-    if (nbt.contains(TAG_TEXTURE, Tag.TAG_STRING)) {
-      texture = RetexturedHelper.getBlock(nbt.getString(TAG_TEXTURE));
+    if (nbt.contains(TAG_TEXTURE)) {
+      texture = RetexturedHelper.getBlock(nbt.getStringOr(TAG_TEXTURE, ""));
       RetexturedHelper.onTextureUpdated(this);
     }
   }
 
-  private void saveAdditionalData(CompoundTag compound) {
+  private CompoundTag saveAdditionalData(CompoundTag compound) {
     if (structure != null) {
       compound.put(TAG_STRUCTURE, structure.writeToTag(this.worldPosition));
     }
     fuelModule.writeToTag(compound);
+    return compound;
   }
 
-  private void saveSyncedData(CompoundTag compound) {
+  private CompoundTag saveSyncedData(CompoundTag compound) {
     compound.put(TAG_TANK, tank.write(new CompoundTag()));
     compound.put(TAG_INVENTORY, meltingInventory.writeToTag());
     if (texture != Blocks.AIR) {
       compound.putString(TAG_TEXTURE, getTextureName());
     }
+    return compound;
   }
 
-  private void saveUpdateData(CompoundTag nbt) {
+  private CompoundTag saveUpdateData(CompoundTag nbt) {
     if (structure != null) {
       nbt.put(TAG_STRUCTURE, structure.writeClientTag(this.worldPosition));
     }
     // sync error position, not actually saved in Tag
     if (errorPos != null) {
       CompoundTag posTag = new CompoundTag();
-      posTag.put("pos", NbtUtils.writeBlockPos(errorPos.subtract(this.worldPosition)));
+      posTag.put("pos", modernmods.modernfoundry.library.utils.TagUtil.writeBlockPos(errorPos.subtract(this.worldPosition)));
       nbt.put(TAG_ERROR_POS, posTag);
     }
+    return nbt;
   }
 
   @Override
@@ -668,57 +683,38 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   }
 
   @Override
-  public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registries) {
-    super.loadAdditional(nbt, registries);
-    loadFromTag(nbt);
+  public void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
+    super.loadAdditional(input);
+    // merge the disk (synced + additional) and client (update) blobs, then read all in one pass
+    CompoundTag merged = new CompoundTag();
+    input.read(TAG_SYNCED_DATA, CompoundTag.CODEC).ifPresent(merged::merge);
+    input.read(TAG_ADDITIONAL_DATA, CompoundTag.CODEC).ifPresent(merged::merge);
+    input.read(TAG_UPDATE_DATA, CompoundTag.CODEC).ifPresent(merged::merge);
+    loadFromTag(merged);
   }
 
   @Override
-  public void load(CompoundTag nbt) {
-    super.loadAdditional(nbt, BUILTIN_LOOKUP);
-    loadFromTag(nbt);
+  public void saveAdditional(net.minecraft.world.level.storage.ValueOutput output) {
+    // writes to disk; super calls saveSynced which stores TAG_SYNCED_DATA
+    super.saveAdditional(output);
+    output.store(TAG_ADDITIONAL_DATA, CompoundTag.CODEC, saveAdditionalData(new CompoundTag()));
   }
 
   @Override
-  public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-    super.saveAdditional(compound, registries);
-    saveAdditionalData(compound);
-  }
-
-  @Override
-  public void saveAdditional(CompoundTag compound) {
-    // Tag that just writes to disk
-    super.saveAdditional(compound, BUILTIN_LOOKUP);
-    saveAdditionalData(compound);
-  }
-
-  @Override
-  public void saveSynced(CompoundTag compound, HolderLookup.Provider registries) {
-    // Tag that writes to disk and syncs to client
-    super.saveSynced(compound, registries);
-    saveSyncedData(compound);
-  }
-
-  @Override
-  public void saveSynced(CompoundTag compound) {
-    // Tag that writes to disk and syncs to client
-    super.saveSynced(compound, BUILTIN_LOOKUP);
-    saveSyncedData(compound);
+  public void saveSynced(net.minecraft.world.level.storage.ValueOutput output) {
+    // writes to disk and syncs to client
+    super.saveSynced(output);
+    output.store(TAG_SYNCED_DATA, CompoundTag.CODEC, saveSyncedData(new CompoundTag()));
   }
 
   @Override
   public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-    // Tag that just syncs to client
+    // Tag that syncs to client; super provides the synced data (TAG_SYNCED_DATA)
     CompoundTag nbt = super.getUpdateTag(registries);
-    saveUpdateData(nbt);
-    return nbt;
-  }
-
-  @Override
-  public CompoundTag getUpdateTag() {
-    // Tag that just syncs to client
-    CompoundTag nbt = super.getUpdateTag(BUILTIN_LOOKUP);
-    saveUpdateData(nbt);
+    CompoundTag updateData = saveUpdateData(new CompoundTag());
+    if (!updateData.isEmpty()) {
+      nbt.put(TAG_UPDATE_DATA, updateData);
+    }
     return nbt;
   }
 
@@ -729,6 +725,6 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   /** Handles the unchecked cast for a block entity ticker */
   @Nullable
   public static <HAVE extends HeatingStructureBlockEntity, RET extends BlockEntity> BlockEntityTicker<RET> getTicker(Level level, BlockEntityType<RET> expected, BlockEntityType<HAVE> have) {
-    return BlockEntityHelper.castTicker(expected, have, level.isClientSide ? CLIENT_TICKER : SERVER_TICKER);
+    return BlockEntityHelper.castTicker(expected, have, level.isClientSide() ? CLIENT_TICKER : SERVER_TICKER);
   }
 }

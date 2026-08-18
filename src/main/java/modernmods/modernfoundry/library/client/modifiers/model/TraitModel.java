@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.library.client.modifiers.model;
 
 import com.mojang.math.Transformation;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.ItemLayerPixels;
+import net.minecraft.client.resources.model.sprite.Material;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.ItemLayerPixels;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;

@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/harmonious",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/slotless/harmonious",
   "inputs": [
     {
-      "tag": "c:music_discs"
+      "ingredient": "#c:music_discs"
     }
   ],
   "level": 1,
   "result": "modernfoundry:harmonious",
-  "tools": {
-    "tag": "modernfoundry:modifiable/bonus_slots"
-  }
+  "tools": "#modernfoundry:modifiable/bonus_slots"
 }

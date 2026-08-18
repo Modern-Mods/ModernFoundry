@@ -1,11 +1,9 @@
 {
   "type": "minecraft:smelting",
-  "category": "blocks",
+  "category": "misc",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "modernfoundry:seared_cobble"
-  },
+  "ingredient": "modernfoundry:seared_cobble",
   "result": {
     "id": "modernfoundry:seared_stone"
   }

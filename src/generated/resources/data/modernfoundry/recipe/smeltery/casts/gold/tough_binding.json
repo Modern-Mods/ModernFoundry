@@ -1,9 +1,8 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casts/gold/tough_binding",
   "cast": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:tough_binding"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:tough_binding"
   },
   "cast_consumed": true,
   "cooling_time": 57,
@@ -11,6 +10,7 @@
     "amount": 90,
     "tag": "c:molten_gold"
   },
+  "id": "modernfoundry:smeltery/casts/gold/tough_binding",
   "result": "modernfoundry:tough_binding_cast",
   "switch_slots": true
 }

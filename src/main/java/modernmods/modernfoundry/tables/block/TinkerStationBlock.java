@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
-import modernmods.hilt.util.RetexturedHelper;
+import modernmods.mantle.util.RetexturedHelper;
 import modernmods.modernfoundry.library.utils.TagUtil;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
@@ -59,7 +59,7 @@ public class TinkerStationBlock extends RetexturedTableBlock {
   }
 
   @Override
-  public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+  public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
     ItemStack stack = new ItemStack(state.getBlock());
     if (level.getBlockEntity(pos) instanceof TinkerStationBlockEntity be) {
       Block block = be.getTexture();

@@ -1,9 +1,9 @@
 {
   "type": "modernfoundry:severing",
-  "id": "modernfoundry:tools/severing/piglin_brute_head",
   "entity": {
     "type": "minecraft:piglin_brute"
   },
+  "id": "modernfoundry:tools/severing/piglin_brute_head",
   "looting_bonus": 0.01,
   "per_level_chance": 0.05,
   "result": "modernfoundry:piglin_brute_head"

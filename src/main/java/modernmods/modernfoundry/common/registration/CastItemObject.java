@@ -3,24 +3,24 @@ package modernmods.modernfoundry.common.registration;
 import lombok.Getter;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import modernmods.hilt.registration.object.ItemObject;
+import modernmods.mantle.registration.object.ItemObject;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import static modernmods.hilt.util.RegistryHelper.getHolder;
+import static modernmods.mantle.util.RegistryHelper.getHolder;
 
 /**
  * Deferred wrapper holding gold, sand, and red sand casts
  */
 public class CastItemObject extends ItemObject<Item> {
   @Getter
-  private final ResourceLocation name;
+  private final Identifier name;
   private final Supplier<? extends Item> sand;
   private final Supplier<? extends Item> redSand;
   @Getter
@@ -29,7 +29,7 @@ public class CastItemObject extends ItemObject<Item> {
   private final TagKey<Item> multiUseTag;
 
   @SuppressWarnings("deprecation")  // you know, pointless deprecations is really going to make people start ignoring deprecations
-  public CastItemObject(ResourceLocation name, Item gold, Item sand, Item redSand) {
+  public CastItemObject(Identifier name, Item gold, Item sand, Item redSand) {
     super(BuiltInRegistries.ITEM, gold);
     this.name = name;
     this.sand = getHolder(BuiltInRegistries.ITEM, sand);
@@ -38,7 +38,7 @@ public class CastItemObject extends ItemObject<Item> {
     this.multiUseTag = makeTag("multi_use");
   }
 
-  public CastItemObject(ResourceLocation name, ItemObject<? extends Item> gold, Supplier<? extends Item> sand, Supplier<? extends Item> redSand) {
+  public CastItemObject(Identifier name, ItemObject<? extends Item> gold, Supplier<? extends Item> sand, Supplier<? extends Item> redSand) {
     super(gold);
     this.name = name;
     this.sand = sand;
@@ -52,7 +52,7 @@ public class CastItemObject extends ItemObject<Item> {
    * @return  Single use tag
    */
   protected TagKey<Item> makeTag(String type) {
-    return TagKey.create(Registries.ITEM, new ResourceLocation(name.getNamespace(), "casts/" + type + "/" + name.getPath()));
+    return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(name.getNamespace(), "casts/" + type + "/" + name.getPath()));
   }
 
   /**

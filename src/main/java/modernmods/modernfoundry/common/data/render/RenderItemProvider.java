@@ -3,8 +3,8 @@ package modernmods.modernfoundry.common.data.render;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
-import modernmods.hilt.client.render.RenderItem;
-import modernmods.hilt.data.datamap.BlockStateDataMapProvider;
+import modernmods.mantle.client.render.RenderItem;
+import modernmods.mantle.data.datamap.BlockStateDataMapProvider;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.TinkerItemDisplays;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
@@ -123,6 +123,6 @@ public class RenderItemProvider extends BlockStateDataMapProvider<List<RenderIte
 
   @Override
   public String getName() {
-    return "Modern Foundry block render item provider";
+    return "Tinkers' Construct block render item provider";
   }
 }

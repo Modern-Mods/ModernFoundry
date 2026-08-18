@@ -1,21 +1,21 @@
 {
-  "type": "modernfoundry:material_melting",
-  "id": "modernfoundry:tools/materials/melting/bronze",
   "neoforge:conditions": [
     {
       "type": "neoforge:or",
       "values": [
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/bronze"
         },
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/tin"
         }
       ]
     }
   ],
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/bronze",
   "input": "modernfoundry:bronze",
   "result": {
     "amount": 90,

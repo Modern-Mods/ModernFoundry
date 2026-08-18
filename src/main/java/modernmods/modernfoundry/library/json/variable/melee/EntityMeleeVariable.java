@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.library.json.variable.melee;
 
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.variable.entity.EntityVariable;
 import modernmods.modernfoundry.library.tools.context.ToolAttackContext;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;

@@ -4,8 +4,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 
 /** Gets the level of the mob effect on an entity */
 public record EntityEffectLevelVariable(MobEffect effect) implements EntityVariable {

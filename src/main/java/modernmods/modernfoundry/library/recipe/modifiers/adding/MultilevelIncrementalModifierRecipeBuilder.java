@@ -1,20 +1,21 @@
 package modernmods.modernfoundry.library.recipe.modifiers.adding;
 
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.BuiltInRegistries;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 
 import java.util.function.Consumer;
 
 /** Builder for {@link MultilevelIncrementalModifierRecipe} */
 public class MultilevelIncrementalModifierRecipeBuilder extends AbstractMultilevelModifierRecipeBuilder<MultilevelIncrementalModifierRecipeBuilder> {
-  private Ingredient input = Ingredient.EMPTY;
+  @javax.annotation.Nullable private Ingredient input = null;
   private int amountPerItem;
   private int neededPerLevel;
   private ItemOutput leftover = ItemOutput.EMPTY;
@@ -70,7 +71,7 @@ public class MultilevelIncrementalModifierRecipeBuilder extends AbstractMultilev
    * @return  Builder instance
    */
   public MultilevelIncrementalModifierRecipeBuilder setInput(TagKey<Item> tag, int amountPerItem, int neededPerLevel) {
-    return setInput(Ingredient.of(tag), amountPerItem, neededPerLevel);
+    return setInput(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag), amountPerItem, neededPerLevel);
   }
 
 
@@ -96,14 +97,14 @@ public class MultilevelIncrementalModifierRecipeBuilder extends AbstractMultilev
   /* Saving */
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-    if (input == Ingredient.EMPTY) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
+    if (input == null) {
       throw new IllegalStateException("Must set input");
     }
     if (levels.isEmpty()) {
       throw new IllegalStateException("Must have at least 1 level");
     }
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "modifiers");
+    Identifier advancementId = buildOptionalAdvancement(id, "modifiers");
     consumer.accept(new LoadableFinishedRecipe<>(id, new MultilevelIncrementalModifierRecipe(id, input, amountPerItem, neededPerLevel, tools, maxToolSize, result, leftover, allowCrystal, levels, checkTraitLevel), MultilevelIncrementalModifierRecipe.LOADER, advancementId));
   }
 }

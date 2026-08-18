@@ -6,22 +6,17 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
+      "#modernfoundry:modifiable/durability",
+      "#modernfoundry:modifiable/interactable/charge",
       {
-        "tag": "modernfoundry:modifiable/durability"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable/charge"
-      },
-      [
-        {
-          "tag": "modernfoundry:modifiable/melee/weapon"
-        },
-        {
-          "tag": "modernfoundry:modifiable/harvest"
-        }
-      ]
+        "neoforge:ingredient_type": "neoforge:compound",
+        "children": [
+          "#modernfoundry:modifiable/melee/weapon",
+          "#modernfoundry:modifiable/harvest"
+        ]
+      }
     ]
   }
 }

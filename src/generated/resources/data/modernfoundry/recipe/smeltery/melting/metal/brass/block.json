@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/brass/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/brass"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/brass"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/brass/block",
+  "ingredient": "#c:storage_blocks/brass",
   "result": {
     "amount": 810,
     "tag": "c:molten_brass"

@@ -1,29 +1,27 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/rebalanced_abilities",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/rebalanced_abilities",
   "inputs": [
     {
-      "tag": "c:nuggets/queens_slime"
+      "ingredient": "#c:nuggets/queens_slime"
     },
     {
-      "item": "minecraft:end_crystal"
+      "ingredient": "minecraft:end_crystal"
     },
     {
-      "tag": "c:nuggets/queens_slime"
+      "ingredient": "#c:nuggets/queens_slime"
     },
     {
-      "item": "modernfoundry:ichor_slime_crystal_block"
+      "ingredient": "modernfoundry:ichor_slime_crystal_block"
     },
     {
-      "item": "modernfoundry:ichor_slime_crystal_block"
+      "ingredient": "modernfoundry:ichor_slime_crystal_block"
     }
   ],
   "result": {
     "name": "modernfoundry:rebalanced",
     "value": "abilities"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/bonus_slots"
-  }
+  "tools": "#modernfoundry:modifiable/bonus_slots"
 }

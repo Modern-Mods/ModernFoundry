@@ -1,10 +1,11 @@
 package modernmods.modernfoundry.tables.client.inventory;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -32,7 +33,7 @@ public class ModifierWorktableScreen extends ToolTableScreen<ModifierWorktableBl
   protected static final Component TITLE = TConstruct.makeTranslation("gui", "modifier_worktable.title");
   protected static final Component TABLE_INFO = TConstruct.makeTranslation("gui", "modifier_worktable.info");
   private static final Component MODIFIERS = TConstruct.makeTranslation("gui", "tinker_station.modifiers");
-  private static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/worktable.png");
+  private static final Identifier BACKGROUND = TConstruct.getResource("textures/gui/worktable.png");
   private static final Pattern[] INPUT_PATTERNS = {
     new Pattern(TConstruct.MOD_ID, "pickaxe"),
     new Pattern(TConstruct.MOD_ID, "ingot"),
@@ -112,23 +113,22 @@ public class ModifierWorktableScreen extends ToolTableScreen<ModifierWorktableBl
   }
 
   @Override
-  protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+  public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
     this.drawBackground(graphics, BACKGROUND);
 
     // draw scrollbar
-    graphics.blit(BACKGROUND, this.cornerX + SLIDER_LEFT, this.cornerY + SLIDER_TOP + (int) (SROLLABLE_AREA * this.sliderProgress), canScroll() ? HANDLE_U : HANDLE_U_DISABLE, 0, SLIDER_WIDTH, HANDLE_HEIGHT);
+    graphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, this.cornerX + SLIDER_LEFT, this.cornerY + SLIDER_TOP + (int) (SROLLABLE_AREA * this.sliderProgress), (float)(canScroll() ? HANDLE_U : HANDLE_U_DISABLE), 0f, SLIDER_WIDTH, HANDLE_HEIGHT, 256, 256);
     this.drawModifierBackgrounds(graphics, mouseX, mouseY, this.cornerX + MODIFIER_LEFT, this.cornerY + MODIFIER_TOP);
 
     // draw slot icons
     List<Slot> slots = this.getMenu().getInputSlots();
     int max = Math.min(slots.size(), INPUT_PATTERNS.length);
-    RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
     for (int i = 0; i < max; i++) {
       this.drawIconEmpty(graphics, slots.get(i), INPUT_PATTERNS[i]);
     }
     this.drawModifierIcons(graphics, this.cornerX + MODIFIER_LEFT, this.cornerY + MODIFIER_TOP);
 
-    super.renderBg(graphics, partialTicks, mouseX, mouseY);
+    super.extractBackground(graphics, mouseX, mouseY, partialTicks);
 
     renderArmorStand(graphics);
   }
@@ -160,8 +160,8 @@ public class ModifierWorktableScreen extends ToolTableScreen<ModifierWorktableBl
   }
 
   @Override
-  protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
-    super.renderTooltip(graphics, mouseX, mouseY);
+  protected void extractTooltip(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+    super.extractTooltip(graphics, mouseX, mouseY);
 
     // determime which button we are hovering
     if (tile != null) {
@@ -169,14 +169,14 @@ public class ModifierWorktableScreen extends ToolTableScreen<ModifierWorktableBl
       if (!buttons.isEmpty()) {
         int index = getButtonAt(mouseX, mouseY);
         if (index >= 0) {
-          graphics.renderTooltip(this.font, buttons.get(index).getDisplayName(), mouseX, mouseY);
+          graphics.setTooltipForNextFrame(this.font, buttons.get(index).getDisplayName(), mouseX, mouseY);
         }
       }
     }
   }
 
   /** Draw backgrounds for all modifiers */
-  private void drawModifierBackgrounds(GuiGraphics graphics, int mouseX, int mouseY, int left, int top) {
+  private void drawModifierBackgrounds(GuiGraphicsExtractor graphics, int mouseX, int mouseY, int left, int top) {
     if (tile != null) {
       int selectedIndex = this.tile.getSelectedIndex();
       int max = Math.min(this.modifierIndexOffset + MAX_MODIFIER, this.getModifierCount());
@@ -190,18 +190,17 @@ public class ModifierWorktableScreen extends ToolTableScreen<ModifierWorktableBl
         } else if (mouseX >= x && mouseY >= y && mouseX < x + MODIFIER_SIZE && mouseY < y + MODIFIER_SIZE) {
           v += 2 * MODIFIER_SIZE;
         }
-        graphics.blit(BACKGROUND, x, y, MODIFIER_U, v, MODIFIER_SIZE, MODIFIER_SIZE);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, x, y, (float)MODIFIER_U, (float)v, MODIFIER_SIZE, MODIFIER_SIZE, 256, 256);
       }
     }
   }
 
   /** Draw slot icons for all patterns */
-  private void drawModifierIcons(GuiGraphics graphics, int left, int top) {
+  private void drawModifierIcons(GuiGraphicsExtractor graphics, int left, int top) {
     // use block texture list
     if (tile != null) {
       assert this.minecraft != null;
-      RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
-      // iterate all recipes
+        // iterate all recipes
       List<ModifierEntry> list = this.tile.getCurrentButtons();
       int max = Math.min(this.modifierIndexOffset + MAX_MODIFIER, this.getModifierCount());
       for (int i = this.modifierIndexOffset; i < max; ++i) {
@@ -271,7 +270,8 @@ public class ModifierWorktableScreen extends ToolTableScreen<ModifierWorktableBl
   /* Scrollbar logic */
 
   @Override
-  public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent event, boolean doubleClick) {
+    double mouseX = event.x(); double mouseY = event.y(); int mouseButton = event.button();
     this.clickedOnScrollBar = false;
 
     if (this.tinkerInfo.handleMouseClicked(mouseX, mouseY, mouseButton)
@@ -298,11 +298,12 @@ public class ModifierWorktableScreen extends ToolTableScreen<ModifierWorktableBl
       }
     }
 
-    return super.mouseClicked(mouseX, mouseY, mouseButton);
+    return super.mouseClicked(event, doubleClick);
   }
 
   @Override
-  public boolean mouseDragged(double mouseX, double mouseY, int clickedMouseButton, double timeSinceLastClick, double unknown) {
+  public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent event, double timeSinceLastClick, double unknown) {
+    double mouseX = event.x(); double mouseY = event.y(); int clickedMouseButton = event.button();
     if (this.tinkerInfo.handleMouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick)
         || this.modifierInfo.handleMouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick)) {
       return false;
@@ -317,10 +318,12 @@ public class ModifierWorktableScreen extends ToolTableScreen<ModifierWorktableBl
       return true;
     }
 
-    return super.mouseDragged(mouseX, mouseY, clickedMouseButton, timeSinceLastClick, unknown);
+    return super.mouseDragged(event, timeSinceLastClick, unknown);
   }
 
   @Override
+  // NOTE(26.1 port): this 3-arg mouseScrolled overrides Mantle's MultiModuleScreen helper, not vanilla's 4-arg entry point.
+  // Validate the recipe scrollbar mouse-wheel scroll in-game (may need routing via the 4-arg mouseScrolled override).
   public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
     if (this.tinkerInfo.handleMouseScrolled(mouseX, mouseY, delta)
         || this.modifierInfo.handleMouseScrolled(mouseX, mouseY, delta)) {
@@ -340,12 +343,13 @@ public class ModifierWorktableScreen extends ToolTableScreen<ModifierWorktableBl
   }
 
   @Override
-  public boolean mouseReleased(double mouseX, double mouseY, int state) {
+  public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent event) {
+    double mouseX = event.x(); double mouseY = event.y(); int state = event.button();
     if (this.tinkerInfo.handleMouseReleased(mouseX, mouseY, state)
         || this.modifierInfo.handleMouseReleased(mouseX, mouseY, state)) {
       return false;
     }
-    return super.mouseReleased(mouseX, mouseY, state);
+    return super.mouseReleased(event);
   }
 
 
@@ -386,19 +390,19 @@ public class ModifierWorktableScreen extends ToolTableScreen<ModifierWorktableBl
   }
 
   @Override
-  public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-    if (TinkerStationScreen.needsDisplayUpdate(keyCode)) {
+  public boolean keyPressed(KeyEvent event) {
+    if (TinkerStationScreen.needsDisplayUpdate(event.key())) {
       updateDisplay();
     }
-    return super.keyPressed(keyCode, scanCode, modifiers);
+    return super.keyPressed(event);
   }
 
   @Override
-  public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
-    if (TinkerStationScreen.needsDisplayUpdate(keyCode)) {
+  public boolean keyReleased(KeyEvent event) {
+    if (TinkerStationScreen.needsDisplayUpdate(event.key())) {
       updateDisplay();
     }
-    return super.keyReleased(keyCode, scanCode, modifiers);
+    return super.keyReleased(event);
   }
 
 

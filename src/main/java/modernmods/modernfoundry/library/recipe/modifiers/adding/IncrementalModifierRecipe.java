@@ -4,18 +4,18 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.math.IntMath;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.Lazy;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
@@ -56,7 +56,7 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
   /** Item stack to use when a partial amount is leftover */
   private final ItemOutput leftover;
 
-  public IncrementalModifierRecipe(ResourceLocation id, Ingredient input, int amountPerInput, int neededPerLevel, Ingredient toolRequirement, int maxToolSize, ModifierId result, IntRange level, @Nullable SlotCount slots, ItemOutput leftover, boolean allowCrystal, boolean checkTraitLevel) {
+  public IncrementalModifierRecipe(Identifier id, Ingredient input, int amountPerInput, int neededPerLevel, Ingredient toolRequirement, int maxToolSize, ModifierId result, IntRange level, @Nullable SlotCount slots, ItemOutput leftover, boolean allowCrystal, boolean checkTraitLevel) {
     super(id, toolRequirement, maxToolSize, result, level, slots, allowCrystal, checkTraitLevel);
     this.input = input;
     this.amountPerInput = amountPerInput;
@@ -151,7 +151,7 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends IncrementalModifierRecipe> getSerializer() {
     return TinkerModifiers.incrementalModifierSerializer.get();
   }
 
@@ -172,7 +172,7 @@ public class IncrementalModifierRecipe extends AbstractModifierRecipe {
       ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
 
       // fill extra item slots
-      List<ItemStack> items = Arrays.asList(input.getItems());
+      List<ItemStack> items = Arrays.asList(input.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
       int maxStackSize = items.stream().mapToInt(ItemStack::getMaxStackSize).min().orElse(64);
 
       // split the stacks out if we need more than 1

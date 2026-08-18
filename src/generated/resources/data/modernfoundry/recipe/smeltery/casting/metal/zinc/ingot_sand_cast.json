@@ -1,21 +1,19 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/zinc/ingot_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/ingot"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/zinc"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/single_use/ingot",
+  "cast_consumed": true,
   "cooling_time": 47,
   "fluid": {
     "amount": 90,
     "tag": "c:molten_zinc"
   },
+  "id": "modernfoundry:smeltery/casting/metal/zinc/ingot_sand_cast",
   "result": {
     "tag": "c:ingots/zinc"
   }

@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.tools.definition.module;
 
 import net.neoforged.neoforge.common.conditions.ICondition;
-import modernmods.hilt.data.loadable.mapping.ConditionalLoadable.ConditionalObject;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.mapping.ConditionalLoadable.ConditionalObject;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.modules.ModifierModule;
 import modernmods.modernfoundry.library.module.ModuleHook;
 

@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.library.data.material;
 
+import net.neoforged.neoforge.common.conditions.NeoForgeConditions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
@@ -7,9 +8,9 @@ import net.minecraft.data.PackOutput.Target;
 import net.neoforged.neoforge.common.conditions.AndCondition;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.OrCondition;
-import modernmods.hilt.Hilt;
-import modernmods.hilt.data.GenericDataProvider;
-import modernmods.hilt.recipe.condition.TagFilledCondition;
+import modernmods.mantle.Mantle;
+import modernmods.mantle.data.GenericDataProvider;
+import modernmods.mantle.recipe.condition.TagFilledCondition;
 import modernmods.modernfoundry.common.json.ConfigEnabledCondition;
 import modernmods.modernfoundry.library.json.JsonRedirect;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
@@ -81,7 +82,7 @@ public abstract class AbstractMaterialDataProvider extends GenericDataProvider {
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
     ensureAddMaterialsRun();
-    return allOf(allMaterials.entrySet().stream().map(entry -> saveJson(cache, entry.getKey(), convert(entry.getValue()))));
+    return allOf(allMaterials.entrySet().stream().map(entry -> saveJson(cache, entry.getKey().getIdentifier(), convert(entry.getValue()))));
   }
 
   /**
@@ -123,12 +124,12 @@ public abstract class AbstractMaterialDataProvider extends GenericDataProvider {
 
   /** Conditions on a forge tag existing */
   protected static ICondition tagExistsCondition(String name) {
-    return new TagFilledCondition<>(Registries.ITEM, Hilt.commonResource(name));
+    return new TagFilledCondition<>(Registries.ITEM, Mantle.commonResource(name));
   }
 
   /** Creates a normal material with a condition and a redirect */
   protected void addMaterial(MaterialId location, int tier, int order, boolean craftable, boolean hidden, @Nullable ICondition condition, JsonRedirect... redirect) {
-    addMaterial(new Material(location, tier, order, craftable, hidden), condition, redirect);
+    addMaterial(new Material(location.getIdentifier(), tier, order, craftable, hidden), condition, redirect);
   }
 
   /** Creates a normal material */
@@ -138,7 +139,7 @@ public abstract class AbstractMaterialDataProvider extends GenericDataProvider {
 
   /** Creates a new compat material */
   protected void addCompatMaterial(MaterialId location, int tier, int order, boolean craftable, String... tagNames) {
-    ICondition condition = new OrCondition(Stream.concat(
+    ICondition condition = NeoForgeConditions.or(Stream.concat(
       Stream.of(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS),
       Arrays.stream(tagNames).map(AbstractMaterialDataProvider::tagExistsCondition)
     ).toArray(ICondition[]::new));
@@ -158,13 +159,13 @@ public abstract class AbstractMaterialDataProvider extends GenericDataProvider {
 
   /** Creates a new compat alloy, enabled if its components are present */
   protected void addCompatAlloy(MaterialId location, int tier, int order, ICondition... alloyConditions) {
-    ICondition condition = new OrCondition(
+    ICondition condition = NeoForgeConditions.or(
       // if forced
       ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS,
       // or we have the matching alloy ingot
       tagExistsCondition("ingots/" + location.getPath()),
       // or we allow ingotless alloys and have all alloy components
-      new AndCondition(Util.prepend(alloyConditions, ConfigEnabledCondition.ALLOW_INGOTLESS_ALLOYS))
+      NeoForgeConditions.and(Util.prepend(alloyConditions, ConfigEnabledCondition.ALLOW_INGOTLESS_ALLOYS))
     );
     addMaterial(location, tier, order, false, false, condition);
   }
@@ -179,7 +180,7 @@ public abstract class AbstractMaterialDataProvider extends GenericDataProvider {
 
   /** Makes a conditional redirect to the given ID */
   protected JsonRedirect conditionalRedirect(MaterialId id, @Nullable ICondition condition) {
-    return new JsonRedirect(id, condition);
+    return new JsonRedirect(id.getIdentifier(), condition);
   }
 
   /** Makes an unconditional redirect to the given ID */

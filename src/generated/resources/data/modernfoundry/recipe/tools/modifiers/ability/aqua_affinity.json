@@ -1,23 +1,23 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/aqua_affinity",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/aqua_affinity",
   "inputs": [
     {
-      "item": "minecraft:prismarine_bricks"
+      "ingredient": "minecraft:prismarine_bricks"
     },
     {
-      "item": "minecraft:heart_of_the_sea"
+      "ingredient": "minecraft:heart_of_the_sea"
     },
     {
-      "item": "minecraft:prismarine_bricks"
+      "ingredient": "minecraft:prismarine_bricks"
     },
     {
-      "item": "minecraft:dark_prismarine"
+      "ingredient": "minecraft:dark_prismarine"
     },
     {
-      "item": "minecraft:dark_prismarine"
+      "ingredient": "minecraft:dark_prismarine"
     }
   ],
   "level": 1,
@@ -25,7 +25,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/helmets"
-  }
+  "tools": "#modernfoundry:modifiable/armor/helmets"
 }

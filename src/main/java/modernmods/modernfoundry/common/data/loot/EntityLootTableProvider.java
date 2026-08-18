@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.common.data.loot;
 
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.advancements.critereon.NbtPredicate;
-import net.minecraft.advancements.critereon.SlimePredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.advancements.criterion.NbtPredicate;
+import net.minecraft.advancements.criterion.SlimePredicate;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
@@ -23,7 +23,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.shared.TinkerCommons;
 import modernmods.modernfoundry.shared.block.SlimeType;
@@ -36,8 +36,8 @@ import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 public class EntityLootTableProvider extends EntityLootSubProvider {
-  protected EntityLootTableProvider() {
-    super(FeatureFlags.REGISTRY.allFlags());
+  protected EntityLootTableProvider(net.minecraft.core.HolderLookup.Provider registries) {
+    super(FeatureFlags.REGISTRY.allFlags(), registries);
   }
 
   @Override

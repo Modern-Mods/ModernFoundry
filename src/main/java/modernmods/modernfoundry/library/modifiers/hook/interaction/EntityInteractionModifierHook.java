@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.modifiers.hook.interaction;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -24,7 +24,7 @@ import java.util.List;
  */
 public interface EntityInteractionModifierHook {
   /** Modifier volatile data key to disable melee attacks against monsters */
-  ResourceLocation NO_MELEE = TConstruct.getResource("no_melee");
+  Identifier NO_MELEE = TConstruct.getResource("no_melee");
 
   /**
 	 * Called when interacting with an entity before standard entity interaction.
@@ -103,7 +103,7 @@ public interface EntityInteractionModifierHook {
     ToolStack tool = ToolStack.from(stack);
     boolean noMelee = meleeDisabled(tool);
     if (stack.is(TinkerTags.Items.INTERACTABLE_LEFT)) {
-      if (!player.getCooldowns().isOnCooldown(stack.getItem())) {
+      if (!player.getCooldowns().isOnCooldown(stack)) {
         List<ModifierEntry> modifiers = tool.getModifierList();
         // TODO: should this be in the event?
         for (ModifierEntry entry : modifiers) {

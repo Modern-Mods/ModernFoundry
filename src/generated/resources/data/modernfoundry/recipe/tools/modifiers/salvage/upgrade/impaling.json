@@ -5,7 +5,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/ranged/bows"
-  }
+  "tools": "#modernfoundry:modifiable/ranged/bows"
 }

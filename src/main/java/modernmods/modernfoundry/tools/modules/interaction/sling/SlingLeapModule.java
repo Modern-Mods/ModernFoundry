@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.tools.modules.interaction.sling;
 
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -7,10 +8,10 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.LevelingValue;
@@ -89,15 +90,15 @@ public record SlingLeapModule(LevelingValue forceMultiplier, boolean leaveGround
         SlimeBounceHandler.addBounceHandler(entity);
         SlingLaunchModifierHook.afterSlingLaunch(tool, entity, entity, modifier, force, multiplier, angle);
 
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
           level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), Sounds.SLIME_SLING.getSound(), entity.getSoundSource(), 1, 1);
           ToolDamageUtil.damageAnimated(tool, 1, entity, entity.getUsedItemHand(), modifier.getId());
         }
         // only need player for exhaustion, cooldowns, and drill attack
         if (entity instanceof Player player) {
-          if (!level.isClientSide) {
+          if (!level.isClientSide()) {
             player.causeFoodExhaustion(0.2F);
-            player.getCooldowns().addCooldown(tool.getItem(), 3);
+            player.getCooldowns().addCooldown(new ItemStack(tool.getItem()), 3);
           }
           // if supported, perform drill attack if the modifier is available
           if (ModifierManager.isInTag(modifier.getId(), TinkerTags.Modifiers.DRILL_ATTACKS) && ModifierUtil.canPerformAction(tool, TinkerToolActions.DRILL_ATTACK)) {
@@ -108,7 +109,7 @@ public record SlingLeapModule(LevelingValue forceMultiplier, boolean leaveGround
       }
     }
     // play failure sound
-    if (!level.isClientSide && ModifierUtil.isActiveModifier(tool, modifier, activeModifier)) {
+    if (!level.isClientSide() && ModifierUtil.isActiveModifier(tool, modifier, activeModifier)) {
       level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), Sounds.SLIME_SLING.getSound(), entity.getSoundSource(), 1, 0.5f);
     }
   }

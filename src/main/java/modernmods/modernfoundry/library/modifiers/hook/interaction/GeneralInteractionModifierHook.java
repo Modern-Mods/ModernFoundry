@@ -1,12 +1,13 @@
 package modernmods.modernfoundry.library.modifiers.hook.interaction;
 
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -89,17 +90,17 @@ public interface GeneralInteractionModifierHook {
    * @param modifier   Modifier instance
    * @return  Use action to be performed
    */
-  default UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-    return UseAnim.NONE;
+  default ItemUseAnimation getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    return ItemUseAnimation.NONE;
   }
 
 
   /* Helpers */
 
   /** Persistent key storing the actively running modifier for use in several hooks */
-  ResourceLocation KEY_ACTIVE_MODIFIER = TConstruct.getResource("active_modifier");
+  Identifier KEY_ACTIVE_MODIFIER = TConstruct.getResource("active_modifier");
   /** Persistent data key storing the drawtime needed for using the tool. Generally is set when tool usage starts */
-  ResourceLocation KEY_DRAWTIME = TConstruct.getResource("drawtime");
+  Identifier KEY_DRAWTIME = TConstruct.getResource("drawtime");
 
   /**
    * Use in {@link #onToolUse(IToolStackView, ModifierEntry, Player, InteractionHand, InteractionSource)} to start using an item, ensuring later hooks are properly called.
@@ -120,7 +121,7 @@ public interface GeneralInteractionModifierHook {
 
   /** Causes cooldown on the given tool based on its draw speed stat. */
   static void addCooldown(IToolStackView tool, Player player, float speedFactor) {
-    player.getCooldowns().addCooldown(tool.getItem(), getDrawtime(tool, player, speedFactor));
+    player.getCooldowns().addCooldown(new ItemStack(tool.getItem()), getDrawtime(tool, player, speedFactor));
   }
 
   /**
@@ -174,7 +175,7 @@ public interface GeneralInteractionModifierHook {
   /** Gets the currently active modifier, or {@link ModifierEntry#EMPTY} if none is active. Generally does not need to be called in modifiers as we call it in internal logic. */
   static ModifierEntry getActiveModifier(IToolStackView tool) {
     IModDataView persistentData = tool.getPersistentData();
-    if (persistentData.contains(KEY_ACTIVE_MODIFIER, Tag.TAG_STRING)) {
+    if (persistentData.contains(KEY_ACTIVE_MODIFIER)) {
       ModifierId modifier = ModifierId.tryParse(persistentData.getString(KEY_ACTIVE_MODIFIER));
       if (modifier != null) {
         return tool.getModifiers().getEntry(modifier);
@@ -238,14 +239,14 @@ public interface GeneralInteractionModifierHook {
     }
 
     @Override
-    public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    public ItemUseAnimation getUseAction(IToolStackView tool, ModifierEntry modifier) {
       for (GeneralInteractionModifierHook module : modules) {
-        UseAnim anim = module.getUseAction(tool, modifier);
-        if (anim != UseAnim.NONE) {
+        ItemUseAnimation anim = module.getUseAction(tool, modifier);
+        if (anim != ItemUseAnimation.NONE) {
           return anim;
         }
       }
-      return UseAnim.NONE;
+      return ItemUseAnimation.NONE;
     }
   }
 }

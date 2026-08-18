@@ -1,10 +1,11 @@
 package modernmods.modernfoundry.library.utils;
 
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import modernmods.modernfoundry.TConstruct;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.ForgeI18n;
 import net.neoforged.fml.ModList;
 import org.apache.commons.lang3.text.WordUtils;
-import modernmods.hilt.data.listener.ISafeManagerReloadListener;
+import modernmods.mantle.data.listener.ISafeManagerReloadListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class DomainDisplayName {
   }
 
   /** Registers the reload listener with the resource manager */
-  public static void addResourceListener(RegisterClientReloadListenersEvent manager) {
-    manager.registerReloadListener(RELOAD_LISTENER);
+  public static void addResourceListener(AddClientReloadListenersEvent manager) {
+    manager.addListener(TConstruct.getResource("domain_display_name"), RELOAD_LISTENER);
   }
 }

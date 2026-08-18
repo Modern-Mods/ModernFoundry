@@ -2,7 +2,7 @@ package modernmods.modernfoundry.tools.modifiers.traits.ranged;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
@@ -10,13 +10,13 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import modernmods.hilt.recipe.helper.TagPreference;
+import modernmods.mantle.recipe.helper.TagPreference;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -31,11 +31,11 @@ import modernmods.modernfoundry.shared.TinkerMaterials;
 
 import javax.annotation.Nullable;
 
-import static modernmods.hilt.Hilt.commonResource;
+import static modernmods.mantle.Mantle.commonResource;
 
 @Deprecated
 public class OlympicModifier extends Modifier implements ProjectileLaunchModifierHook, ProjectileHitModifierHook {
-  private static final ResourceLocation OLYMPIC_START = TConstruct.getResource("olympic_start");
+  private static final Identifier OLYMPIC_START = TConstruct.getResource("olympic_start");
   private static final TagKey<Item> PLATINUM_NUGGET = ItemTags.create(commonResource("nuggets/platinum"));
 
   /** Gets the nugget for the given distance */
@@ -79,14 +79,14 @@ public class OlympicModifier extends Modifier implements ProjectileLaunchModifie
     // 10% chance per level
     Entity targetEntity = hit.getEntity();
     Level level = projectile.level();
-    if (notBlocked && !level.isClientSide && targetEntity.getType().getCategory() == MobCategory.MONSTER && RANDOM.nextInt(20) < modifier.getLevel()) {
+    if (notBlocked && !level.isClientSide() && targetEntity.getType().getCategory() == MobCategory.MONSTER && RANDOM.nextInt(20) < modifier.getLevel()) {
       CompoundTag startCompound = persistentData.getCompound(OLYMPIC_START);
-      if (!startCompound.isEmpty() && startCompound.contains("X", Tag.TAG_ANY_NUMERIC) && startCompound.contains("Y", Tag.TAG_ANY_NUMERIC) && startCompound.contains("Z", Tag.TAG_ANY_NUMERIC)) {
+      if (!startCompound.isEmpty() && startCompound.contains("X") && startCompound.contains("Y") && startCompound.contains("Z")) {
         // nugget type based on distance
-        Item nugget = getNugget(targetEntity.distanceToSqr(startCompound.getDouble("X"), startCompound.getDouble("Y"), startCompound.getDouble("Z")));
+        Item nugget = getNugget(targetEntity.distanceToSqr(startCompound.getDoubleOr("X", 0.0), startCompound.getDoubleOr("Y", 0.0), startCompound.getDoubleOr("Z", 0.0)));
         if (nugget != Items.AIR) {
           // spawn and play sound
-          targetEntity.spawnAtLocation(nugget);
+          targetEntity.spawnAtLocation((net.minecraft.server.level.ServerLevel) level, nugget);
           if (attacker != null) {
             level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0f, 1.0f);
           }

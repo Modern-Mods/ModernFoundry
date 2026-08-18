@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/quartz/gem",
-  "ingredient": {
-    "tag": "c:gems/quartz"
-  },
+  "ingredient": "#c:gems/quartz",
   "result": {
     "amount": 100,
     "fluid": "modernfoundry:molten_quartz"

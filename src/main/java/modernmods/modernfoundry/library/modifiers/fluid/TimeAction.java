@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.modifiers.fluid;
 
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
 
 /** Helper for effects with time that wish to either add or set */
 public enum TimeAction {

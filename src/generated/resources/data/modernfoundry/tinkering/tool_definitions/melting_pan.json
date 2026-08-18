@@ -49,8 +49,8 @@
     {
       "type": "modernfoundry:melting_fluid_effective",
       "ignore_tier": false,
-      "inverted_type": "hilt:tag",
-      "predicate_type": "hilt:inverted",
+      "inverted_type": "mantle:tag",
+      "predicate_type": "mantle:inverted",
       "tag": "modernfoundry:mineable/melting_blacklist",
       "temperature": 1500
     },

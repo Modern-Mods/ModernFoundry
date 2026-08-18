@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:entity_melting",
-  "id": "modernfoundry:smeltery/entity_melting/phantom",
   "damage": 4,
   "entity": {
     "type": "minecraft:phantom"
   },
+  "id": "modernfoundry:smeltery/entity_melting/phantom",
   "result": {
     "amount": 50,
     "nbt": {

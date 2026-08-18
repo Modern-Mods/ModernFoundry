@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.modifiers.impl;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import modernmods.modernfoundry.library.modifiers.IncrementalModifierEntry;
 import modernmods.modernfoundry.library.modifiers.Modifier;
@@ -57,8 +57,8 @@ public abstract class DurabilityShieldModifier extends Modifier implements Capac
   /* Helpers */
 
   /** Gets the key to use for teh shield */
-  protected ResourceLocation getShieldKey() {
-    return getId();
+  protected Identifier getShieldKey() {
+    return getId().getIdentifier();
   }
 
   /** @deprecated use {@link #getAmount(IToolStackView)} */

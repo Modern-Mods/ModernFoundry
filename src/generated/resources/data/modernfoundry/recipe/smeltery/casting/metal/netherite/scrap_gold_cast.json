@@ -1,13 +1,11 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/netherite/scrap_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/ingot"
-  },
+  "cast": "#modernfoundry:casts/multi_use/ingot",
   "cooling_time": 71,
   "fluid": {
     "amount": 90,
     "tag": "modernfoundry:molten_debris"
   },
+  "id": "modernfoundry:smeltery/casting/metal/netherite/scrap_gold_cast",
   "result": "minecraft:netherite_scrap"
 }

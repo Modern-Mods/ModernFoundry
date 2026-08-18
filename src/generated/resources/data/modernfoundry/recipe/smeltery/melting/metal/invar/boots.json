@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/invar/boots",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/boots/invar"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/boots/invar"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/boots",
+  "ingredient": "#c:armors/boots/invar",
   "result": {
     "amount": 360,
     "tag": "c:molten_invar",

@@ -93,7 +93,7 @@ public interface IToolStat<T> {
 
   /** Gets the prefix translation key for displaying stats */
   default String getTranslationKey() {
-    return Util.makeTranslationKey("tool_stat", getName());
+    return Util.makeTranslationKey("tool_stat", getName().getIdentifier());
   }
 
   /** Gets the prefix for this tool stat */

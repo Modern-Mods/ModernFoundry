@@ -1,13 +1,9 @@
 {
-  "type": "hilt:crafting_shaped_retextured",
+  "type": "mantle:crafting_shaped_retextured",
   "category": "redstone",
   "key": {
-    "#": {
-      "tag": "modernfoundry:foundry_bricks"
-    },
-    "C": {
-      "tag": "c:ingots/gold"
-    }
+    "#": "#modernfoundry:foundry_bricks",
+    "C": "#c:ingots/gold"
   },
   "match_all": false,
   "pattern": [
@@ -16,6 +12,5 @@
   "result": {
     "id": "modernfoundry:scorched_duct"
   },
-  "show_notification": true,
   "texture": "#"
 }

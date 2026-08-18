@@ -1,13 +1,11 @@
 {
   "type": "modernfoundry:basin_tool_casting",
-  "id": "modernfoundry:tools/armor/slime_skull/string",
-  "cast": {
-    "item": "modernfoundry:spider_head"
-  },
+  "cast": "modernfoundry:spider_head",
   "cast_purpose": "consumed_offset",
   "extra_materials": [
     "modernfoundry:string"
   ],
+  "id": "modernfoundry:tools/armor/slime_skull/string",
   "item_cost": 5,
   "result": "modernfoundry:slime_helmet"
 }

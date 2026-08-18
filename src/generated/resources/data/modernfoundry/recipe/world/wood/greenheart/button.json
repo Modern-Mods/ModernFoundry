@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wooden_button",
   "ingredients": [
-    {
-      "item": "modernfoundry:greenheart_planks"
-    }
+    "modernfoundry:greenheart_planks"
   ],
   "result": {
     "id": "modernfoundry:greenheart_button"

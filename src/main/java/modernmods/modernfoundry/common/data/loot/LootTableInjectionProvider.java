@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.common.data.loot;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
@@ -14,10 +14,10 @@ import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.loot.AbstractLootTableInjectionProvider;
-import modernmods.hilt.loot.LootTableInjection;
-import modernmods.hilt.loot.function.SetFluidLootFunction;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.loot.AbstractLootTableInjectionProvider;
+import modernmods.mantle.loot.LootTableInjection;
+import modernmods.mantle.loot.function.SetFluidLootFunction;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.data.FakeRegistryEntry;
@@ -156,7 +156,7 @@ public class LootTableInjectionProvider extends AbstractLootTableInjectionProvid
                                  .build());
     // diamond armor shows in bastions, add in some plate with similar weight to enchanted version
     RandomMaterial randomHighTier = RandomMaterial.random().allowHidden().tier(3, 4).material(includeInLoot).build();
-    for (ArmorItem.Type slot : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
+    for (ArmorType slot : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
       bastion.addToPool("main", LootItem.lootTableItem(TinkerTools.plateArmor.get(slot))
                                         .setWeight(6)
                                         .apply(AddToolDataFunction.builder()
@@ -179,7 +179,7 @@ public class LootTableInjectionProvider extends AbstractLootTableInjectionProvid
                                   .apply(ancientToolData3)
                                  .apply(setFluid)
                                   .build());
-    inject("fishing_treasure", ResourceLocation.parse("gameplay/fishing/treasure"))
+    inject("fishing_treasure", Identifier.parse("gameplay/fishing/treasure"))
       .addToPool("main", LootItem.lootTableItem(TinkerTools.swasher.get())
                                  .setWeight(1) // all treasure from fishing is the same weight
                                  .apply(ancientToolData3)
@@ -200,14 +200,14 @@ public class LootTableInjectionProvider extends AbstractLootTableInjectionProvid
       .setWeight(1) // TF tends to use 1 for its weight
       .apply(ancientToolData3)
       .build();
-    inject("labyrinth_room", ResourceLocation.fromNamespaceAndPath(tf, "chests/labyrinth_room"), tfLoaded)
+    inject("labyrinth_room", Identifier.fromNamespaceAndPath(tf, "chests/labyrinth_room"), tfLoaded)
       .addToPool("pool1", minotaurAxe)
       .addToPool("pool2", minotaurAxe);
   }
 
   @Override
   public String getName() {
-    return "Modern Foundry Loot Table Injections";
+    return "Tinkers' Construct Loot Table Injections";
   }
 
   /** Makes a seed injection loot entry */

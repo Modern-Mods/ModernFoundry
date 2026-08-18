@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.common.data;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
@@ -9,9 +9,9 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistry;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.IForgeRegistry;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistry;
+import modernmods.mantle.compat.neoforged.neoforge.registries.IForgeRegistry;
 import modernmods.modernfoundry.common.TinkerEffect;
 
 import java.util.Objects;
@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 public class FakeRegistryEntry {
   /** Creates a dummy registry entry */
   @SuppressWarnings("UnstableApiUsage")
-  private static <T> T getOrCreate(IForgeRegistry<T> registry, ResourceLocation id, Supplier<T> constructor) {
+  private static <T> T getOrCreate(IForgeRegistry<T> registry, Identifier id, Supplier<T> constructor) {
     if (!registry.containsKey(id)) {
       ((ForgeRegistry<T>)registry).unfreeze();
       T value = constructor.get();
@@ -32,25 +32,25 @@ public class FakeRegistryEntry {
   }
 
   /** Gets or creates a fake block with the given ID */
-  public static Block block(ResourceLocation id) {
+  public static Block block(Identifier id) {
     return getOrCreate(ForgeRegistries.BLOCKS, id, () -> new Block(BlockBehaviour.Properties.of()));
   }
 
   /** Gets or creates a fake item with the given ID */
-  public static Item item(ResourceLocation id) {
+  public static Item item(Identifier id) {
     return getOrCreate(ForgeRegistries.ITEMS, id, () -> new Item(new Item.Properties()));
   }
 
   /** Gets or creates a fake mob effect with the given ID */
-  public static MobEffect effect(ResourceLocation id) {
+  public static MobEffect effect(Identifier id) {
     return getOrCreate(ForgeRegistries.MOB_EFFECTS, id, () -> new TinkerEffect(MobEffectCategory.NEUTRAL, false));
   }
 
   /** Gets or creates a fake entity with the given ID */
-  public static <T extends Entity> EntityType<?> entity(ResourceLocation id) {
+  public static <T extends Entity> EntityType<?> entity(Identifier id) {
     return getOrCreate(ForgeRegistries.ENTITY_TYPES, id, () ->
       EntityType.Builder.of((type, level) -> {
         throw new UnsupportedOperationException("Cannot create instance of fake entity");
-      }, MobCategory.MISC).build(id.toString()));
+      }, MobCategory.MISC).build(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE, id)));
   }
 }

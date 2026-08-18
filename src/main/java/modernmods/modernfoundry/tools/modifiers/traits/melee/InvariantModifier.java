@@ -7,8 +7,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.predicate.damage.DamageSourcePredicate;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.predicate.damage.DamageSourcePredicate;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -41,7 +41,8 @@ public class InvariantModifier extends Modifier implements ConditionalStatModifi
   private static float getBonus(LivingEntity living) {
     // temperature ranges from 0 to 1.25. multiplication makes it go from 0 to 2.5
     BlockPos pos = living.blockPosition();
-    return (MAX_TEMPERATURE - Math.abs(BASELINE_TEMPERATURE - living.level().getBiome(pos).value().getTemperature(pos)));
+    // 26.1.2 removed Biome#getTemperature(BlockPos); getBaseTemperature() omits the altitude cooling adjustment
+    return (MAX_TEMPERATURE - Math.abs(BASELINE_TEMPERATURE - living.level().getBiome(pos).value().getBaseTemperature()));
   }
 
   @Override

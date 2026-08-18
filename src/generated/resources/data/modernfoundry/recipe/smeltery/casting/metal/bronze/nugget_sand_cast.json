@@ -1,21 +1,19 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/bronze/nugget_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/nugget"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/bronze"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/single_use/nugget",
+  "cast_consumed": true,
   "cooling_time": 19,
   "fluid": {
     "amount": 10,
     "tag": "c:molten_bronze"
   },
+  "id": "modernfoundry:smeltery/casting/metal/bronze/nugget_sand_cast",
   "result": {
     "tag": "c:nuggets/bronze"
   }

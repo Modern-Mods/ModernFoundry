@@ -8,7 +8,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
@@ -17,17 +17,17 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.common.crafting.CraftingHelper;
+import com.mojang.serialization.JsonOps;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.conditions.OrCondition;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.GenericDataProvider;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
-import modernmods.hilt.recipe.condition.TagFilledCondition;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
-import modernmods.hilt.registration.object.FluidObject;
+import modernmods.mantle.data.GenericDataProvider;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
+import modernmods.mantle.recipe.condition.TagFilledCondition;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.registration.object.FluidObject;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 import modernmods.modernfoundry.common.json.ConfigEnabledCondition;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffect;
@@ -51,13 +51,13 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
-import static modernmods.hilt.Hilt.commonResource;
+import static modernmods.mantle.Mantle.commonResource;
 
 /** Data provider for spilling fluids */
 @SuppressWarnings("deprecation")  // fluid registry is ours to use, not yours forge
 public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
   private final String modId;
-  private final Map<ResourceLocation,Builder> entries = new HashMap<>();
+  private final Map<Identifier,Builder> entries = new HashMap<>();
 
   public AbstractFluidEffectProvider(PackOutput packOutput, String modId) {
     super(packOutput, Target.DATA_PACK, FluidEffectManager.FOLDER);
@@ -76,7 +76,7 @@ public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
   /* Helpers */
 
   /** Creates a new fluid builder for the given location */
-  protected Builder addFluid(ResourceLocation id, FluidIngredient fluid) {
+  protected Builder addFluid(Identifier id, FluidIngredient fluid) {
     Builder newBuilder = new Builder(fluid);
     Builder original = entries.put(id, newBuilder);
     if (original != null) {
@@ -88,7 +88,7 @@ public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
   /** Creates a new fluid builder for the given mod ID */
   @SuppressWarnings("removal")
   protected Builder addFluid(String name, FluidIngredient fluid) {
-    return addFluid(ResourceLocation.fromNamespaceAndPath(modId, name), fluid);
+    return addFluid(Identifier.fromNamespaceAndPath(modId, name), fluid);
   }
 
   /** Creates a builder for a fluid stack */
@@ -333,10 +333,10 @@ public abstract class AbstractFluidEffectProvider extends GenericDataProvider {
 
     /** Builds the instance */
     @CheckReturnValue
-    private JsonObject build(ResourceLocation id) {
+    private JsonObject build(Identifier id) {
       JsonObject json = new JsonObject();
       if (!conditions.isEmpty()) {
-        json.add("conditions", CraftingHelper.serialize(conditions.toArray(new ICondition[0])));
+        json.add("conditions", ICondition.LIST_CODEC.encodeStart(JsonOps.INSTANCE, conditions).getOrThrow());
       }
       if (blockEffects.isEmpty() && entityEffects.isEmpty()) {
         throw new IllegalStateException("Must have at least 1 effect");

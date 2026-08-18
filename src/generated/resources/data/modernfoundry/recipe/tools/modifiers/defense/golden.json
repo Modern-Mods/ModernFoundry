@@ -1,23 +1,23 @@
 {
-  "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/defense/golden",
-  "allow_crystal": true,
-  "check_trait_level": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:modifiable/armor/golden"
     }
   ],
+  "type": "modernfoundry:modifier",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/defense/golden",
   "inputs": [
     {
-      "tag": "c:ingots/gold"
+      "ingredient": "#c:ingots/gold"
     },
     {
-      "tag": "c:ingots/gold"
+      "ingredient": "#c:ingots/gold"
     },
     {
-      "tag": "c:ingots/gold"
+      "ingredient": "#c:ingots/gold"
     }
   ],
   "level": 1,
@@ -25,7 +25,5 @@
   "slots": {
     "defense": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/golden"
-  }
+  "tools": "#modernfoundry:modifiable/armor/golden"
 }

@@ -1,14 +1,14 @@
 package modernmods.modernfoundry.tools.data.material;
 
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.armortrim.TrimMaterial;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.registration.object.MetalItemObject;
+import modernmods.mantle.registration.object.MetalItemObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.shared.TinkerMaterials;
@@ -56,9 +56,9 @@ public class TrimMaterialProvider {
   /** Registers a trim materials with the context */
   private static void material(BootstrapContext<TrimMaterial> context, MaterialId material, ItemLike ingredient, int color, float modelIndex) {
     context.register(
-      ResourceKey.create(Registries.TRIM_MATERIAL, material),
+      ResourceKey.create(Registries.TRIM_MATERIAL, material.getIdentifier()),
       TrimMaterial.create(material.getSuffix(), ingredient.asItem(), modelIndex,
-        Component.translatable(TRIM_FORMAT, Component.translatable(Util.makeDescriptionId("material", material))).withStyle(style -> style.withColor(color)),
+        Component.translatable(TRIM_FORMAT, Component.translatable(Util.makeDescriptionId("material", material.getIdentifier()))).withStyle(style -> style.withColor(color)),
         Map.of())
     );
   }

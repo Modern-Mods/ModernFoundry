@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.tools.modifiers.traits.melee;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.LevelingValue;

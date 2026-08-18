@@ -6,11 +6,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/melee"
-    },
-    {
-      "tag": "modernfoundry:modifiable/ranged/launcher"
-    }
+    "#modernfoundry:modifiable/melee",
+    "#modernfoundry:modifiable/ranged/launcher"
   ]
 }

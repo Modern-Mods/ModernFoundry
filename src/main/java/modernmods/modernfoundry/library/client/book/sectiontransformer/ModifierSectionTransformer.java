@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.client.book.sectiontransformer;
 
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.PageData;
-import modernmods.hilt.client.book.transformer.ContentGroupingSectionTransformer;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.PageData;
+import modernmods.mantle.client.book.transformer.ContentGroupingSectionTransformer;
 import modernmods.modernfoundry.library.client.book.content.ContentModifier;
 import modernmods.modernfoundry.library.modifiers.ModifierManager;
 

@@ -3,12 +3,12 @@ package modernmods.modernfoundry.library.json.variable;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.registry.GenericLoaderRegistry;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.registry.GenericLoaderRegistry;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.util.typed.TypedMap;
 
 import java.util.function.Function;
 

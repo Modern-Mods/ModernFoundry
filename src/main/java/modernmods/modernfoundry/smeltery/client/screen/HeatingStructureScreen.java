@@ -1,15 +1,15 @@
 package modernmods.modernfoundry.smeltery.client.screen;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
-import modernmods.hilt.client.screen.ElementScreen;
-import modernmods.hilt.client.screen.MultiModuleScreen;
+import modernmods.mantle.client.screen.ElementScreen;
+import modernmods.mantle.client.screen.MultiModuleScreen;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.GuiUtil;
 import modernmods.modernfoundry.smeltery.block.controller.ControllerBlock;
@@ -27,7 +27,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureContainerMenu> implements IScreenWithFluidTank {
-  public static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/heating_structure.png");
+  public static final Identifier BACKGROUND = TConstruct.getResource("textures/gui/heating_structure.png");
   private static final ElementScreen SCALA = new ElementScreen(BACKGROUND, 176, 0, 80, 106, 256, 256);
   // slot modes
   private static final ElementScreen MODE_AUTO = SCALA.move(176, 186, 16, 16);
@@ -79,6 +79,9 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
     }
   }
 
+  /** This opaque panel must not be darkened by the in-world screen overlay. */
+  @Override
+  public void extractTransparentBackground(GuiGraphicsExtractor graphics) {}
 
   @Override
   protected void containerTick() {
@@ -89,8 +92,9 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
       this.onClose();
     }
   }
+  // 26.1: container background moved to extractBackground (matches Mantle MultiModuleScreen)
   @Override
-  protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+  public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
     // draw stuff with background
     GuiUtil.drawBackground(graphics, this, BACKGROUND);
     // fuel
@@ -102,7 +106,7 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
     if (tank != null) tank.renderFluids(graphics);
 
     // draw other components
-    super.renderBg(graphics, partialTicks, mouseX, mouseY);
+    super.extractBackground(graphics, mouseX, mouseY, a);
   }
 
   /** Checks if the bucket button is hovered */
@@ -111,8 +115,8 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
   }
 
   @Override
-  protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
-    super.renderLabels(graphics, mouseX, mouseY);
+  protected void extractLabels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+    super.extractLabels(graphics, mouseX, mouseY);
 
     SCALA.draw(graphics, 8, 16, 110);
 
@@ -143,16 +147,16 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
   }
 
   @Override
-  protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
-    super.renderTooltip(graphics, mouseX, mouseY);
+  protected void extractTooltip(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+    super.extractTooltip(graphics, mouseX, mouseY);
 
     // add the hover text giving info on the button
     if (bucketButtonHovered(mouseX - leftPos, mouseY - topPos)) {
-      graphics.renderTooltip(font, switch (menu.getTransferDirection()) {
+      graphics.setComponentTooltipForNextFrame(font, switch (menu.getTransferDirection()) {
         default -> TOOLTIP_AUTO;
         case EMPTY_ITEM -> TOOLTIP_EMPTY;
         case FILL_ITEM -> TOOLTIP_FILL;
-      }, Optional.empty(), mouseX, mouseY);
+      }, mouseX, mouseY);
     }
 
     // fluid tooltips
@@ -167,7 +171,8 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
   }
 
   @Override
-  public boolean mouseClicked(double mouseX, double mouseY, int button) {
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent event, boolean doubleClick) {
+    double mouseX = event.x(); double mouseY = event.y(); int button = event.button();
     assert minecraft != null && minecraft.player != null && minecraft.gameMode != null;
     if (!minecraft.player.isSpectator()) {
       int checkX = (int)mouseX - cornerX;
@@ -203,7 +208,7 @@ public class HeatingStructureScreen extends MultiModuleScreen<HeatingStructureCo
         }
       }
     }
-    return super.mouseClicked(mouseX, mouseY, button);
+    return super.mouseClicked(event, doubleClick);
   }
 
   @Nullable

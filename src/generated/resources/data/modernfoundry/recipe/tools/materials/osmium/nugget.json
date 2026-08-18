@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/osmium/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/osmium"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/osmium"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/osmium/nugget",
+  "ingredient": "#c:nuggets/osmium",
   "material": "modernfoundry:osmium",
   "needed": 9,
   "value": 1

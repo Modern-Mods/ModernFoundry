@@ -1,14 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/diamond/smithing_template",
-  "ingredient": [
-    {
-      "item": "minecraft:netherite_upgrade_smithing_template"
-    },
-    {
-      "tag": "minecraft:trim_templates"
-    }
-  ],
+  "ingredient": "minecraft:netherite_upgrade_smithing_template",
   "result": {
     "amount": 500,
     "fluid": "modernfoundry:molten_diamond"

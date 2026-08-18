@@ -1,17 +1,17 @@
 package modernmods.modernfoundry.library.client.modifiers.model;
 
 import com.mojang.math.Transformation;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.client.model.util.HiltItemLayerModel;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.ItemLayerPixels;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.client.model.util.MantleItemLayerModel;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.ItemLayerPixels;
 import modernmods.modernfoundry.common.config.Config;
 import modernmods.modernfoundry.library.client.materials.MaterialRenderInfo;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -27,7 +27,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /** Modifier model that renders all banner patterns on a tool */
-public record BannerModifierModel(@Nullable ResourceLocation smallPrefix, @Nullable ResourceLocation largePrefix) implements ModifierModel {
+public record BannerModifierModel(@Nullable Identifier smallPrefix, @Nullable Identifier largePrefix) implements ModifierModel {
   public static final RecordLoadable<BannerModifierModel> LOADER = RecordLoadable.create(
     Loadables.RESOURCE_LOCATION.nullableField("prefix", BannerModifierModel::smallPrefix),
     Loadables.RESOURCE_LOCATION.nullableField("prefix_large", BannerModifierModel::largePrefix),
@@ -42,7 +42,7 @@ public record BannerModifierModel(@Nullable ResourceLocation smallPrefix, @Nulla
   public void validate(Function<Material, TextureAtlasSprite> spriteGetter) {
     // since these are dynamically loaded, condition based on the config option
     if (Config.CLIENT.logMissingModifierTextures.get()) {
-      for (ResourceLocation id : BannerModule.VANILLA_PATTERN_IDS) {
+      for (Identifier id : BannerModule.VANILLA_PATTERN_IDS) {
         String suffix = MaterialRenderInfo.getSuffix(id);
         if (smallPrefix != null) {
           spriteGetter.apply(ModifierModel.blockAtlas(smallPrefix.withSuffix(suffix)));
@@ -61,25 +61,25 @@ public record BannerModifierModel(@Nullable ResourceLocation smallPrefix, @Nulla
 
   @Override
   public void addQuads(IToolStackView tool, ModifierEntry modifier, Function<Material, TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
-    ResourceLocation prefix = isLarge ? largePrefix : smallPrefix;
+    Identifier prefix = isLarge ? largePrefix : smallPrefix;
     if (prefix != null) {
       IModDataView modData = tool.getPersistentData();
-      ResourceLocation key = BannerModule.patternKey(modifier.getId());
-      if (modData.contains(key, CompoundTag.TAG_LIST)) {
-        ListTag list = modData.getList(key, ListTag.TAG_COMPOUND);
+      Identifier key = BannerModule.patternKey(modifier.getId());
+      if (modData.contains(key)) {
+        ListTag list = modData.getList(key, net.minecraft.nbt.Tag.TAG_COMPOUND);
         List<BakedQuad> quads = new ArrayList<>(list.size());
         // iterate all patterns
         for (int i = 0; i < list.size(); i++) {
           // patterns are stored as short strings for some reason, for consistency we also store as hashes
           // map that back to the pattern
-          CompoundTag tag = list.getCompound(i);
-          ResourceLocation pattern = BannerModule.patternId(tag.getString(BannerModule.KEY_PATTERN));
-          int color = tag.getInt(BannerModule.KEY_COLOR);
+          CompoundTag tag = list.getCompoundOrEmpty(i);
+          Identifier pattern = BannerModule.patternId(tag.getStringOr(BannerModule.KEY_PATTERN, ""));
+          int color = tag.getIntOr(BannerModule.KEY_COLOR, 0);
           if (pattern != null) {
             TextureAtlasSprite sprite = spriteGetter.apply(ModifierModel.blockAtlas(prefix.withSuffix(MaterialRenderInfo.getSuffix(pattern))));
             // skip if sprite is missing - deals with modded patterns that we haven't made textures for
             if (!MissingTextureAtlasSprite.getLocation().equals(sprite.contents().name())) {
-              quads.add(HiltItemLayerModel.getQuadForGui(color, -1, sprite, transforms, 0));
+              quads.add(MantleItemLayerModel.getQuadForGui(color, -1, new Material.Baked(sprite, false), transforms, 0));
             }
           }
         }

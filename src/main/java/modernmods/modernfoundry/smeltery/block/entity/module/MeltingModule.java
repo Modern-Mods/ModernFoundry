@@ -7,7 +7,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.block.entity.HiltBlockEntity;
+import modernmods.mantle.block.entity.MantleBlockEntity;
 import modernmods.modernfoundry.common.network.InventorySlotSyncPacket;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
@@ -34,7 +34,7 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
   private static final int REQUIRED_TEMP = 2;
 
   /** Tile entity containing this melting module */
-  private final HiltBlockEntity parent;
+  private final MantleBlockEntity parent;
   /** Function that accepts fluid output from this module */
   private final Predicate<IMeltingRecipe> outputFunction;
   /** Function that boosts the ores based on the rate type */
@@ -80,7 +80,7 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
   public void setStack(ItemStack newStack) {
     // send a slot update to the client when items change, so we can update the TESR
     Level world = parent.getLevel();
-    if (slotIndex != -1 && world != null && !world.isClientSide && !ItemStack.matches(stack, newStack)) {
+    if (slotIndex != -1 && world != null && !world.isClientSide() && !ItemStack.matches(stack, newStack)) {
       TinkerNetwork.getInstance().sendToClientsAround(new InventorySlotSyncPacket(newStack, slotIndex, parent.getBlockPos()), world, parent.getBlockPos());
     }
 
@@ -95,7 +95,10 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
     this.stack = newStack;
     int newTime = 0;
     int newTemp = 0;
-    if(!stack.isEmpty()) {
+    // only look up the recipe server-side: 26.1 removed Level#getRecipeManager, so findRecipe goes through
+    // world.getServer().getRecipeManager(), which is null on the client (getServer() == null) and would NPE on every
+    // slot interaction. The client receives requiredTime/requiredTemp via the menu's synced ContainerData instead.
+    if (!stack.isEmpty() && world != null && !world.isClientSide()) {
       IMeltingRecipe recipe = findRecipe();
       if (recipe != null) {
         newTime = recipe.getTime(this) * 10;
@@ -177,7 +180,7 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
       return last;
     }
     // if that fails, try to find a new recipe
-    Optional<RecipeHolder<IMeltingRecipe>> newRecipe = world.getRecipeManager().getRecipeFor(TinkerRecipeTypes.MELTING.get(), this, world);
+    Optional<RecipeHolder<IMeltingRecipe>> newRecipe = world.getServer().getRecipeManager().getRecipeFor(TinkerRecipeTypes.MELTING.get(), this, world);
     if (newRecipe.isPresent()) {
       lastRecipe = newRecipe.get().value();
       return lastRecipe;
@@ -212,7 +215,7 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
   public CompoundTag writeToTag() {
     CompoundTag nbt = new CompoundTag();
     if (!stack.isEmpty()) {
-      nbt = (CompoundTag) stack.save(TagUtil.BUILTIN_LOOKUP, nbt);
+      nbt = TagUtil.saveItem(stack, nbt);
       nbt.putInt(TAG_CURRENT_TIME, currentTime);
       nbt.putInt(TAG_REQUIRED_TIME, requiredTime);
       nbt.putInt(TAG_REQUIRED_TEMP, requiredTemp);
@@ -225,11 +228,11 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
    * @param nbt  NBT
    */
   public void readFromTag(CompoundTag nbt) {
-    stack = ItemStack.parseOptional(TagUtil.BUILTIN_LOOKUP, nbt);
+    stack = TagUtil.readItem(nbt);
     if (!stack.isEmpty()) {
-      currentTime = nbt.getInt(TAG_CURRENT_TIME);
-      requiredTime = nbt.getInt(TAG_REQUIRED_TIME);
-      requiredTemp = nbt.getInt(TAG_REQUIRED_TEMP);
+      currentTime = nbt.getIntOr(TAG_CURRENT_TIME, 0);
+      requiredTime = nbt.getIntOr(TAG_REQUIRED_TIME, 0);
+      requiredTemp = nbt.getIntOr(TAG_REQUIRED_TEMP, 0);
     }
   }
 

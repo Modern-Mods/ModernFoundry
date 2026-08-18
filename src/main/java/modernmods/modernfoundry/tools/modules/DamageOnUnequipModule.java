@@ -3,9 +3,9 @@ package modernmods.modernfoundry.tools.modules;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -47,7 +47,7 @@ public record DamageOnUnequipModule(float damage, ResourceKey<DamageType> damage
   public void onUnequip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
     if (condition.matches(tool, modifier)) {
       Level level = context.getLevel();
-      if (!level.isClientSide && EquipmentChangeModifierHook.didUnequip(tool, context)) {
+      if (!level.isClientSide() && EquipmentChangeModifierHook.didUnequip(tool, context)) {
         context.getEntity().hurt(TinkerDamageTypes.source(level.registryAccess(), damageType), damage * modifier.getEffectiveLevel());
       }
     }

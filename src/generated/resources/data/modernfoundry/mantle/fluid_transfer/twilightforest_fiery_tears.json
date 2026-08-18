@@ -1,0 +1,17 @@
+{
+  "type": "mantle:empty_item",
+  "conditions": [
+    {
+      "type": "neoforge:registered",
+      "registry": "minecraft:item",
+      "value": "twilightforest:fiery_tears"
+    }
+  ],
+  "fluid": {
+    "amount": 250,
+    "fluid": "modernfoundry:fiery_liquid"
+  },
+  "input": {
+    "item": "twilightforest:fiery_tears"
+  }
+}

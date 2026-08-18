@@ -1,13 +1,14 @@
 package modernmods.modernfoundry.tools.recipe;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
@@ -30,7 +31,7 @@ public class ExtractModifierRecipe extends ModifierRemovalRecipe {
   /** Recipe loadable */
   public static final RecordLoadable<ExtractModifierRecipe> LOADER = RecordLoadable.create(ContextKey.ID.requiredField(), NAME_FIELD, TOOLS_FIELD, INPUTS_FIELD, LEFTOVERS_FIELD, MODIFIER_PREDICATE_FIELD, ExtractModifierRecipe::new);
 
-  public ExtractModifierRecipe(ResourceLocation id, String name, SizedIngredient toolRequirements, List<SizedIngredient> inputs, List<ItemStack> leftovers, IJsonPredicate<ModifierId> modifierPredicate) {
+  public ExtractModifierRecipe(Identifier id, String name, SizedIngredient toolRequirements, List<SizedIngredient> inputs, List<ItemOutput> leftovers, IJsonPredicate<ModifierId> modifierPredicate) {
     super(id, name, toolRequirements, inputs, leftovers, modifierPredicate);
   }
 
@@ -75,7 +76,7 @@ public class ExtractModifierRecipe extends ModifierRemovalRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ExtractModifierRecipe> getSerializer() {
     return TinkerModifiers.extractModifierSerializer.get();
   }
 }

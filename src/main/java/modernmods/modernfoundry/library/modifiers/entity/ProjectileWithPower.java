@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.modifiers.entity;
 
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 
 /** Interface for a projectile with a power getter and setter, used by {@link modernmods.modernfoundry.library.modifiers.modules.combat.ConditionalPowerModule} */
@@ -28,7 +28,7 @@ public interface ProjectileWithPower {
       return withPower.getDamage();
     }
     if (projectile instanceof AbstractArrow arrow) {
-      return velocityScale(projectile, arrow.getBaseDamage());
+      return velocityScale(projectile, arrow.baseDamage);
     }
     return 0;
   }

@@ -1,38 +1,13 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/base/tall",
   "textures": {
-    "head":   "modernfoundry:item/tool/sledge_hammer/head",
+    "head": "modernfoundry:item/tool/sledge_hammer/head",
     "handle": "modernfoundry:item/tool/sledge_hammer/handle",
-    "back":   "modernfoundry:item/tool/sledge_hammer/back",
-    "front":  "modernfoundry:item/tool/sledge_hammer/front",
-
-    "large_head":   "modernfoundry:item/tool/sledge_hammer/large/head",
+    "back": "modernfoundry:item/tool/sledge_hammer/back",
+    "front": "modernfoundry:item/tool/sledge_hammer/front",
+    "large_head": "modernfoundry:item/tool/sledge_hammer/large/head",
     "large_handle": "modernfoundry:item/tool/sledge_hammer/large/handle",
-    "large_back":   "modernfoundry:item/tool/sledge_hammer/large/back",
-    "large_front":  "modernfoundry:item/tool/sledge_hammer/large/front"
-  },
-  "modifier_maps": ["modernfoundry:sledge_hammer"],
-  "modifier_roots": {
-    "small": [ "modernfoundry:item/tool/sledge_hammer/modifiers/" ],
-    "large": [ "modernfoundry:item/tool/sledge_hammer/large/modifiers/" ]
-  },
-  "large": true,
-  "large_offset": [-2, 2],
-  "parts": [
-    { "name": "handle", "index": 1 },
-    { "name": "head",   "index": 0 },
-    { "name": "back",   "index": 2 },
-    { "name": "front",  "index": 3 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/sledge_hammer/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/sledge_hammer/broken"
-    }
-  ]
+    "large_back": "modernfoundry:item/tool/sledge_hammer/large/back",
+    "large_front": "modernfoundry:item/tool/sledge_hammer/large/front"
+  }
 }

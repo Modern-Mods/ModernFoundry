@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/iron"
-  },
+  "ingredient": "#c:nuggets/iron",
   "result": {
     "amount": 10,
     "tag": "c:molten_iron"

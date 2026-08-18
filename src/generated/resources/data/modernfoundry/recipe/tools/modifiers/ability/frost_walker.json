@@ -1,22 +1,22 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/frost_walker",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/frost_walker",
   "inputs": [
     {
-      "item": "minecraft:blue_ice"
+      "ingredient": "minecraft:blue_ice"
     },
     {
-      "item": "modernfoundry:stray_head"
+      "ingredient": "modernfoundry:stray_head"
     },
     {
-      "item": "minecraft:blue_ice"
+      "ingredient": "minecraft:blue_ice"
     },
     {
-      "item": "minecraft:blue_ice"
+      "ingredient": "minecraft:blue_ice"
     },
     {
-      "item": "minecraft:blue_ice"
+      "ingredient": "minecraft:blue_ice"
     }
   ],
   "level": 1,
@@ -24,7 +24,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/boots"
-  }
+  "tools": "#modernfoundry:modifiable/armor/boots"
 }

@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/sand/molding/tool_binding",
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "material": "#modernfoundry:casts/sand",
   "pattern": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:tool_binding"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:tool_binding"
   },
   "result": "modernfoundry:tool_binding_sand_cast"
 }

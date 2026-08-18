@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.materials.stats;
 
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;
-import modernmods.hilt.data.listener.MergingJsonFileLoader;
+import modernmods.mantle.data.listener.MergingJsonFileLoader;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.test.BaseMcTest;

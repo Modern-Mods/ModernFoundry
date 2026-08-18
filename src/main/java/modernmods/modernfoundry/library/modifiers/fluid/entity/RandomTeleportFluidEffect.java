@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.modifiers.fluid.entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.events.teleport.FluidEffectTeleportEvent;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.modifiers.fluid.EffectLevel;

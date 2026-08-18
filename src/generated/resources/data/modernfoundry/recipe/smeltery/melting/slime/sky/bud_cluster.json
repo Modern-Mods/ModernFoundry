@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:ore_melting",
   "id": "modernfoundry:smeltery/melting/slime/sky/bud_cluster",
-  "ingredient": {
-    "item": "modernfoundry:sky_slime_crystal_cluster"
-  },
+  "ingredient": "modernfoundry:sky_slime_crystal_cluster",
   "rate": "gem",
   "result": {
     "amount": 1000,

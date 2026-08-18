@@ -1,9 +1,8 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casts/gold/hammer_head",
   "cast": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:hammer_head"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:hammer_head"
   },
   "cast_consumed": true,
   "cooling_time": 57,
@@ -11,6 +10,7 @@
     "amount": 90,
     "tag": "c:molten_gold"
   },
+  "id": "modernfoundry:smeltery/casts/gold/hammer_head",
   "result": "modernfoundry:hammer_head_cast",
   "switch_slots": true
 }

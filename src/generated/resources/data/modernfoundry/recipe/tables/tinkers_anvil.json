@@ -1,13 +1,9 @@
 {
-  "type": "hilt:crafting_shaped_retextured",
+  "type": "mantle:crafting_shaped_retextured",
   "category": "misc",
   "key": {
-    "m": {
-      "tag": "modernfoundry:anvil_metal"
-    },
-    "s": {
-      "tag": "modernfoundry:seared_blocks"
-    }
+    "m": "#modernfoundry:anvil_metal",
+    "s": "#modernfoundry:seared_blocks"
   },
   "match_all": true,
   "pattern": [
@@ -18,6 +14,5 @@
   "result": {
     "id": "modernfoundry:tinkers_anvil"
   },
-  "show_notification": true,
   "texture": "m"
 }

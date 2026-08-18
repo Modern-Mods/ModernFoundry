@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/reinforcement",
-  "ingredient": {
-    "item": "modernfoundry:gold_reinforcement"
-  },
+  "ingredient": "modernfoundry:gold_reinforcement",
   "result": {
     "amount": 90,
     "tag": "c:molten_gold"

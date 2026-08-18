@@ -3,6 +3,7 @@ package modernmods.modernfoundry.fluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.core.cauldron.CauldronInteractions;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -40,13 +41,13 @@ import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.fluid.InvertedFluid;
-import modernmods.hilt.fluid.UnplaceableFluid;
-import modernmods.hilt.registration.RegistrationHelper;
-import modernmods.hilt.registration.object.EnumObject;
-import modernmods.hilt.registration.object.FlowingFluidObject;
-import modernmods.hilt.registration.object.FluidObject;
-import modernmods.hilt.registration.object.ItemObject;
+import modernmods.mantle.fluid.InvertedFluid;
+import modernmods.mantle.fluid.UnplaceableFluid;
+import modernmods.mantle.registration.RegistrationHelper;
+import modernmods.mantle.registration.object.EnumObject;
+import modernmods.mantle.registration.object.FlowingFluidObject;
+import modernmods.mantle.registration.object.FluidObject;
+import modernmods.mantle.registration.object.ItemObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerModule;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -73,7 +74,7 @@ import modernmods.modernfoundry.tools.data.material.MaterialIds;
 import modernmods.modernfoundry.tools.network.FluidDataSerializer;
 import modernmods.modernfoundry.world.TinkerWorld;
 
-import static modernmods.hilt.Hilt.commonResource;
+import static modernmods.mantle.Mantle.commonResource;
 import static modernmods.modernfoundry.fluids.block.BurningLiquidBlock.createBurning;
 import static modernmods.modernfoundry.fluids.block.MobEffectLiquidBlock.createEffect;
 
@@ -99,7 +100,7 @@ public final class TinkerFluids extends TinkerModule {
 
   // basic
   public static final FlowingFluidObject<BaseFlowingFluid> venom = FLUIDS.register("venom").type(slime("venom").temperature(310)).bucket().block(createEffect(MapColor.QUARTZ, 0, () -> new MobEffectInstance(MobEffects.POISON, 5*20))).flowing();
-  public static final ItemObject<Item> venomBottle = ITEMS.register("venom_bottle", () -> new FluidContainerFoodItem(new Item.Properties().food(TinkerFood.VENOM_BOTTLE).stacksTo(16).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(venom.get(), FluidValues.BOTTLE)));
+  public static final ItemObject<Item> venomBottle = ITEMS.register("venom_bottle", () -> new FluidContainerFoodItem(new Item.Properties().food(TinkerFood.VENOM_BOTTLE, TinkerFood.VENOM_BOTTLE_CONSUMABLE).stacksTo(16).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(venom.get(), FluidValues.BOTTLE)));
   public static final FluidObject<UnplaceableFluid> powderedSnow = FLUIDS.register("powdered_snow").bucket(() -> Items.POWDER_SNOW_BUCKET).type(powder("powdered_snow").temperature(270)).commonTag().unplacable();
 
   // slime -  note second name parameter is forge tag name
@@ -111,11 +112,11 @@ public final class TinkerFluids extends TinkerModule {
   public static final EnumObject<SlimeType, Fluid> slime = new EnumObject.Builder<SlimeType, Fluid>(SlimeType.class).put(SlimeType.EARTH, earthSlime).put(SlimeType.SKY, skySlime).put(SlimeType.ENDER, enderSlime).put(SlimeType.ICHOR, ichor).build();
   // bottles of slime
   public static final EnumObject<SlimeType, Item> slimeBottle = ITEMS.registerEnum(SlimeType.values(), "slime_bottle", type -> new FluidContainerFoodItem(
-      new Item.Properties().food(TinkerFood.getBottle(type)).stacksTo(16).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(slime.get(type), FluidValues.BOTTLE)));
+      new Item.Properties().food(TinkerFood.getBottle(type), TinkerFood.getBottleConsumable(type)).stacksTo(16).craftRemainder(Items.GLASS_BOTTLE), () -> new FluidStack(slime.get(type), FluidValues.BOTTLE)));
   public static final ItemObject<Item> magmaBottle = ITEMS.register("magma_bottle", () -> new MagmaBottleItem(new Item.Properties().stacksTo(16).craftRemainder(Items.GLASS_BOTTLE), 15));
 
   // foods
-  public static FlowingFluidObject<BaseFlowingFluid> honey        = FLUIDS.registerSlime("honey").type(slime("honey").temperature(301)).bucket().block(createEffect(MapColor.COLOR_ORANGE, 0, () -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5*20))).commonTag().flowing();
+  public static FlowingFluidObject<BaseFlowingFluid> honey        = FLUIDS.registerSlime("honey").type(slime("honey").temperature(301)).bucket().block(createEffect(MapColor.COLOR_ORANGE, 0, () -> new MobEffectInstance(MobEffects.SLOWNESS, 5*20))).commonTag().flowing();
   public static FlowingFluidObject<BaseFlowingFluid> beetrootSoup = FLUIDS.register("beetroot_soup").type(cool("beetroot_soup").temperature(400)).bucket().block(MapColor.COLOR_RED, 0).commonTag().flowing();
   public static FlowingFluidObject<BaseFlowingFluid> mushroomStew = FLUIDS.register("mushroom_stew").type(cool("mushroom_stew").temperature(400)).bucket().block(MapColor.DIRT, 0).commonTag().flowing();
   public static FlowingFluidObject<BaseFlowingFluid> rabbitStew   = FLUIDS.register("rabbit_stew").type(cool("rabbit_stew").temperature(400)).bucket().block(MapColor.PODZOL, 0).commonTag().flowing();
@@ -254,12 +255,15 @@ public final class TinkerFluids extends TinkerModule {
   @SubscribeEvent
   void commonSetup(final FMLCommonSetupEvent event) {
     event.enqueueWork(() -> {
-      CauldronInteraction.WATER.map().put(splashBottle.get(), new FillBottle(Items.SPLASH_POTION));
-      CauldronInteraction.WATER.map().put(lingeringBottle.get(), new FillBottle(Items.LINGERING_POTION));
-      CauldronInteraction.WATER.map().put(Items.SPLASH_POTION,    new EmptyBottleIntoWater(splashBottle,    CauldronInteraction.WATER.map().get(Items.SPLASH_POTION)));
-      CauldronInteraction.WATER.map().put(Items.LINGERING_POTION, new EmptyBottleIntoWater(lingeringBottle, CauldronInteraction.WATER.map().get(Items.LINGERING_POTION)));
-      CauldronInteraction.EMPTY.map().put(Items.SPLASH_POTION,    new EmptyBottleIntoEmpty(splashBottle,    CauldronInteraction.EMPTY.map().get(Items.SPLASH_POTION)));
-      CauldronInteraction.EMPTY.map().put(Items.LINGERING_POTION, new EmptyBottleIntoEmpty(lingeringBottle, CauldronInteraction.EMPTY.map().get(Items.LINGERING_POTION)));
+      CauldronInteractions.WATER.put(splashBottle.get(), new FillBottle(Items.SPLASH_POTION));
+      CauldronInteractions.WATER.put(lingeringBottle.get(), new FillBottle(Items.LINGERING_POTION));
+      // Vanilla registers no cauldron interaction for splash/lingering potions, so the existing fallback is
+      // CauldronInteraction.DEFAULT. Reference it directly rather than resolving via new ItemStack(...), which
+      // cannot be constructed during setup in 26.1 (item data components are not bound until after common setup).
+      CauldronInteractions.WATER.put(Items.SPLASH_POTION,    new EmptyBottleIntoWater(splashBottle,    CauldronInteraction.DEFAULT));
+      CauldronInteractions.WATER.put(Items.LINGERING_POTION, new EmptyBottleIntoWater(lingeringBottle, CauldronInteraction.DEFAULT));
+      CauldronInteractions.EMPTY.put(Items.SPLASH_POTION,    new EmptyBottleIntoEmpty(splashBottle,    CauldronInteraction.DEFAULT));
+      CauldronInteractions.EMPTY.put(Items.LINGERING_POTION, new EmptyBottleIntoEmpty(lingeringBottle, CauldronInteraction.DEFAULT));
     });
 
     // dispense buckets
@@ -362,7 +366,7 @@ public final class TinkerFluids extends TinkerModule {
   /** Registers custom brewing recipes. */
   void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
     event.getBuilder().addRecipe(new BottleBrewingRecipe(Ingredient.of(Items.GLASS_BOTTLE), Items.POTION, Items.SPLASH_POTION, new ItemStack(splashBottle)));
-    event.getBuilder().addRecipe(new BottleBrewingRecipe(Ingredient.of(TinkerTags.Items.SPLASH_BOTTLE), Items.SPLASH_POTION, Items.LINGERING_POTION, new ItemStack(lingeringBottle)));
+    event.getBuilder().addRecipe(new BottleBrewingRecipe(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(TinkerTags.Items.SPLASH_BOTTLE), Items.SPLASH_POTION, Items.LINGERING_POTION, new ItemStack(lingeringBottle)));
     for (SlimeType slime : SlimeType.values()) {
       event.getBuilder().addRecipe(new BrewingRecipe(Ingredient.of(Items.GLASS_BOTTLE), Ingredient.of(TinkerWorld.congealedSlime.get(slime)), new ItemStack(TinkerFluids.slimeBottle.get(slime))));
     }
@@ -465,7 +469,7 @@ public final class TinkerFluids extends TinkerModule {
     acceptMolten(output, moltenBendalloy);
     acceptCompat(output, moltenSteeleaf, MaterialIds.steeleaf);
     acceptCompat(output, fieryLiquid, "fiery", MaterialIds.fiery);
-    BuiltInRegistries.POTION.holders().filter(holder -> !holder.is(Potions.WATER)).forEachOrdered(holder ->
+    BuiltInRegistries.POTION.listElements().filter(holder -> !holder.is(Potions.WATER)).forEachOrdered(holder ->
       output.accept(PotionFluidType.potionBucket(holder.key())));
 
     // add copper cans, tanks, and lanterns for all the fluids

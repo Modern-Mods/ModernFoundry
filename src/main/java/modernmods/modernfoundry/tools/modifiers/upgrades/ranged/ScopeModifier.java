@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.tools.modifiers.upgrades.ranged;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -16,7 +16,7 @@ import modernmods.modernfoundry.tools.modules.ZoomModule;
 @Deprecated(forRemoval = true)
 public class ScopeModifier extends Modifier {
   @Deprecated(forRemoval = true)
-  public static final ResourceLocation SCOPE = ModifierIds.scope;
+  public static final Identifier SCOPE = ModifierIds.scope.getIdentifier();
 
   @Override
   protected void registerHooks(Builder hookBuilder) {
@@ -35,7 +35,7 @@ public class ScopeModifier extends Modifier {
    */
   @Deprecated(forRemoval = true)
   public static void stopScoping(LivingEntity entity) {
-    if (entity.level().isClientSide) {
+    if (entity.level().isClientSide()) {
       TinkerDataCapability.getCapability(entity).ifPresent(data -> data.computeIfAbsent(TinkerDataKeys.FOV_MODIFIER).remove(SCOPE));
     }
   }

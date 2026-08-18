@@ -1,100 +1,66 @@
 package modernmods.modernfoundry.fluids.util;
 
-import lombok.Getter;
-import net.minecraft.core.Direction;
-import net.minecraft.world.item.ItemStack;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ICapabilityProvider;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
+import net.neoforged.neoforge.transfer.ItemAccessResourceHandler;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+/**
+ * Fluid {@link net.neoforged.neoforge.transfer.ResourceHandler} for a container holding a constant fluid.
+ * Draining swaps the container for its empty variant; it cannot be filled.
+ */
+public class ConstantFluidContainerWrapper extends ItemAccessResourceHandler<FluidResource> {
+  /** Contained fluid resource */
+  private final FluidResource fluid;
+  /** Amount of the contained fluid */
+  private final int amount;
+  /** Resource representing the empty version of the container */
+  private final ItemResource emptyResource;
+  /** Item this handler was created for; if the item changes the handler reports empty */
+  private final Item validItem;
 
-/** Represents a capability handler for a container with a constant fluid */
-public class ConstantFluidContainerWrapper implements IFluidHandlerItem, ICapabilityProvider {
-  private final LazyOptional<IFluidHandlerItem> holder = LazyOptional.of(() -> this);
-
-  /** Contained fluid */
-  private final FluidStack fluid;
-  /** If true, the container is now empty */
-  private boolean empty = false;
-  /** Item stack representing the current state */
-  @Getter
-  @Nonnull
-  protected ItemStack container;
-  /** Empty version of the container */
-  private final ItemStack emptyStack;
-
-  public ConstantFluidContainerWrapper(FluidStack fluid, ItemStack container, ItemStack emptyStack) {
-    this.fluid = fluid;
-    this.container = container;
-    this.emptyStack = emptyStack;
-  }
-
-  public ConstantFluidContainerWrapper(FluidStack fluid, ItemStack container) {
-    this(fluid, container, container.getCraftingRemainingItem());
+  public ConstantFluidContainerWrapper(ItemAccess itemAccess, FluidStack fluid, ItemResource emptyResource) {
+    super(itemAccess, 1);
+    this.fluid = FluidResource.of(fluid);
+    this.amount = fluid.getAmount();
+    this.emptyResource = emptyResource;
+    this.validItem = itemAccess.getResource().getItem();
   }
 
   @Override
-  public int getTanks() {
-    return 1;
+  protected FluidResource getResourceFrom(ItemResource accessResource, int index) {
+    return accessResource.is(validItem) ? fluid : FluidResource.EMPTY;
   }
 
   @Override
-  public int getTankCapacity(int tank) {
-    return fluid.getAmount();
+  protected int getAmountFrom(ItemResource accessResource, int index) {
+    return accessResource.is(validItem) ? amount : 0;
   }
 
   @Override
-  public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
-    return stack.isEmpty() || stack.getFluid() == fluid.getFluid();
-  }
-
-  @Nonnull
-  @Override
-  public FluidStack getFluidInTank(int tank) {
-    return empty ? FluidStack.EMPTY : fluid;
+  protected int getCapacity(int index, FluidResource resource) {
+    return amount;
   }
 
   @Override
-  public int fill(FluidStack resource, FluidAction action) {
-    return 0;
+  public boolean isValid(int index, FluidResource resource) {
+    // only the constant fluid, and only while the backing item has not changed
+    return itemAccess.getResource().is(validItem) && fluid.equals(resource);
   }
 
-  @Nonnull
   @Override
-  public FluidStack drain(FluidStack resource, FluidAction action) {
-    // cannot drain if: already drained, requested the wrong type, or requested too little
-    if (empty || resource.getFluid() != fluid.getFluid() || resource.getAmount() < fluid.getAmount()) {
-      return FluidStack.EMPTY;
+  protected ItemResource update(ItemResource accessResource, int index, FluidResource newResource, int newAmount) {
+    // fully drained: swap to the empty container
+    if (newAmount == 0) {
+      return emptyResource;
     }
-    if (action == FluidAction.EXECUTE) {
-      container = emptyStack;
-      empty = true;
+    // still full and unchanged: keep the current container
+    if (newAmount == amount && fluid.equals(newResource)) {
+      return accessResource;
     }
-    return fluid.copy();
-  }
-
-  @Nonnull
-  @Override
-  public FluidStack drain(int maxDrain, FluidAction action) {
-    // cannot drain if: already drained, requested the wrong type, or requested too little
-    if (empty || maxDrain < fluid.getAmount()) {
-      return FluidStack.EMPTY;
-    }
-    if (action == FluidAction.EXECUTE) {
-      container = emptyStack;
-      empty = true;
-    }
-    return fluid.copy();
-  }
-
-  @Nonnull
-  @Override
-  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction side) {
-    return ForgeCapabilities.FLUID_HANDLER_ITEM.orEmpty(capability, holder);
+    // any partial state is not a valid container (all-or-nothing)
+    return ItemResource.EMPTY;
   }
 }

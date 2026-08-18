@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.library.utils.Util;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.entity.controller.AlloyerBlockEntity;
@@ -32,14 +32,17 @@ public class AlloyerBlock extends TinyMultiblockControllerBlock {
   @Nullable
   @Override
   public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> wanted) {
-    return pLevel.isClientSide ? null : BlockEntityHelper.castTicker(wanted, TinkerSmeltery.alloyer.get(), AlloyerBlockEntity.SERVER_TICKER);
+    return pLevel.isClientSide() ? null : BlockEntityHelper.castTicker(wanted, TinkerSmeltery.alloyer.get(), AlloyerBlockEntity.SERVER_TICKER);
   }
 
   @Override
-  public void neighborChanged(BlockState state, Level world, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-    Direction direction = Util.directionFromOffset(pos, fromPos);
-    if (direction != Direction.DOWN) {
-      BlockEntityHelper.get(AlloyerBlockEntity.class, world, pos).ifPresent(te -> te.neighborChanged(direction));
+  public void neighborChanged(BlockState state, Level world, BlockPos pos, Block blockIn, @org.jetbrains.annotations.Nullable net.minecraft.world.level.redstone.Orientation orientation, boolean isMoving) {
+    // 26.1.2 replaced fromPos with an Orientation; getFront() is the direction the update came from
+    if (orientation != null) {
+      Direction direction = orientation.getFront();
+      if (direction != Direction.DOWN) {
+        BlockEntityHelper.get(AlloyerBlockEntity.class, world, pos).ifPresent(te -> te.neighborChanged(direction));
+      }
     }
   }
 
@@ -54,7 +57,7 @@ public class AlloyerBlock extends TinyMultiblockControllerBlock {
   }
 
   @Override
-  public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+  protected boolean propagatesSkylightDown(BlockState state) {
     return true;
   }
 

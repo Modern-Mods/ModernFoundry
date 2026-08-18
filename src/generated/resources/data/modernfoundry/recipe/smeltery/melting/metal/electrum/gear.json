@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/electrum/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/electrum"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/electrum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/gear",
+  "ingredient": "#c:gears/electrum",
   "result": {
     "amount": 360,
     "tag": "c:molten_electrum"

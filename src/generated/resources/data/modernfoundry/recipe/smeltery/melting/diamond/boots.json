@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:damagable_melting",
   "id": "modernfoundry:smeltery/melting/diamond/boots",
-  "ingredient": {
-    "tag": "modernfoundry:melting/diamond/tools_costing_4"
-  },
+  "ingredient": "#modernfoundry:melting/diamond/tools_costing_4",
   "result": {
     "amount": 400,
     "fluid": "modernfoundry:molten_diamond",

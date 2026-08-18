@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/scorched/glass_soul",
   "byproducts": [
     {
       "amount": 1000,
       "fluid": "modernfoundry:liquid_soul"
     }
   ],
-  "ingredient": {
-    "item": "modernfoundry:scorched_soul_glass"
-  },
+  "id": "modernfoundry:smeltery/melting/scorched/glass_soul",
+  "ingredient": "modernfoundry:scorched_soul_glass",
   "result": {
     "amount": 1000,
     "fluid": "modernfoundry:scorched_stone"

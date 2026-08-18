@@ -5,13 +5,15 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.crafting.CraftingHelper;
+import com.mojang.serialization.JsonOps;
 import net.neoforged.neoforge.common.conditions.ICondition;
-import modernmods.hilt.data.GenericDataProvider;
+import modernmods.mantle.data.GenericDataProvider;
 import modernmods.modernfoundry.library.recipe.partbuilder.Pattern;
+import modernmods.modernfoundry.library.tools.helper.ToolBuildHandler;
 import modernmods.modernfoundry.library.tools.item.IModifiableDisplay;
+import modernmods.modernfoundry.library.tools.layout.LayoutIcon;
 import modernmods.modernfoundry.library.tools.layout.StationSlotLayout;
 import modernmods.modernfoundry.library.tools.layout.StationSlotLayoutLoader;
 
@@ -41,7 +43,7 @@ public abstract class AbstractStationSlotLayoutProvider extends GenericDataProvi
   /** Index for armor */
   protected static final int SORT_ARMOR = 15;
 
-  private final Map<ResourceLocation,SerializeLayout> allLayouts = new HashMap<>();
+  private final Map<Identifier,SerializeLayout> allLayouts = new HashMap<>();
 
   public AbstractStationSlotLayoutProvider(PackOutput packOutput) {
     super(packOutput, Target.DATA_PACK, StationSlotLayoutLoader.FOLDER, StationSlotLayoutLoader.GSON);
@@ -53,12 +55,12 @@ public abstract class AbstractStationSlotLayoutProvider extends GenericDataProvi
   protected abstract void addLayouts();
 
   /** Defines the given ID as a general layout */
-  protected StationSlotLayout.Builder define(ResourceLocation id) {
+  protected StationSlotLayout.Builder define(Identifier id) {
     return allLayouts.computeIfAbsent(id, i -> new SerializeLayout()).builder;
   }
 
   /** Defines the given ID as a general layout with conditions. */
-  protected StationSlotLayout.Builder define(ResourceLocation id, ICondition... conditions) {
+  protected StationSlotLayout.Builder define(Identifier id, ICondition... conditions) {
     SerializeLayout layout = allLayouts.computeIfAbsent(id, i -> new SerializeLayout());
     Collections.addAll(layout.conditions, conditions);
     return layout.builder;
@@ -71,14 +73,16 @@ public abstract class AbstractStationSlotLayoutProvider extends GenericDataProvi
 
   /** Defines the given ID as a general layout */
   protected StationSlotLayout.Builder definePattern(Pattern id) {
-    return define(id).icon(id);
+    return define(id.getIdentifier()).icon(id);
   }
 
   /** Defines the given ID as a tool layout, sets icon and name */
   protected StationSlotLayout.Builder defineModifiable(IModifiableDisplay item) {
+    // build the render-tool icon directly from raw data: item.getRenderTool() constructs an ItemStack, which reads item
+    // DataComponents that are not yet bound during datagen ("Components not bound yet"). The JSON is identical.
     return define(BuiltInRegistries.ITEM.getKey(item.asItem()))
       .translationKey(item.asItem().getDescriptionId())
-      .icon(item.getRenderTool());
+      .icon(LayoutIcon.ofRawItem(item.asItem(), ToolBuildHandler.buildRenderToolNbt(item.getToolDefinition())));
   }
 
   /** Defines the given ID as a tool layout, sets icon and name */
@@ -102,7 +106,7 @@ public abstract class AbstractStationSlotLayoutProvider extends GenericDataProvi
     public JsonObject serialize() {
       JsonObject json = StationSlotLayoutLoader.GSON.toJsonTree(builder.build()).getAsJsonObject();
       if (!conditions.isEmpty()) {
-        json.add("conditions", CraftingHelper.serialize(conditions.toArray(ICondition[]::new)));
+        json.add("conditions", ICondition.LIST_CODEC.encodeStart(JsonOps.INSTANCE, conditions).getOrThrow());
       }
       return json;
     }

@@ -1,7 +1,9 @@
 package modernmods.modernfoundry.common.data.loot;
 
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.criterion.EnchantmentPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.tags.ItemTags;
@@ -14,6 +16,8 @@ import net.minecraft.world.level.block.MangrovePropaguleBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer.Builder;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyCustomDataFunction;
 import net.minecraft.world.level.storage.loot.functions.CopyNameFunction;
@@ -27,12 +31,12 @@ import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.loot.CanItemPerformAbility;
-import modernmods.hilt.loot.function.RetexturedLootFunction;
-import modernmods.hilt.registration.object.BuildingBlockObject;
-import modernmods.hilt.registration.object.FenceBuildingBlockObject;
-import modernmods.hilt.registration.object.WallBuildingBlockObject;
-import modernmods.hilt.registration.object.WoodBlockObject;
+import modernmods.modernfoundry.compat.neoforged.neoforge.common.loot.CanToolPerformAction;
+import modernmods.mantle.loot.function.RetexturedLootFunction;
+import modernmods.mantle.registration.object.BuildingBlockObject;
+import modernmods.mantle.registration.object.FenceBuildingBlockObject;
+import modernmods.mantle.registration.object.WallBuildingBlockObject;
+import modernmods.mantle.registration.object.WoodBlockObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.registration.GeodeItemObject;
 import modernmods.modernfoundry.common.registration.GeodeItemObject.BudSize;
@@ -56,8 +60,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class BlockLootTableProvider extends BlockLootSubProvider {
-  protected BlockLootTableProvider() {
-    super(Set.of(), FeatureFlags.REGISTRY.allFlags());
+  protected BlockLootTableProvider(net.minecraft.core.HolderLookup.Provider registries) {
+    super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
   }
 
   @SuppressWarnings("deprecation")  // the vanilla registry is perfectly fine for our uses, will make migration away from forge registries easier
@@ -189,18 +193,15 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
       this.add(TinkerWorld.slimeFern.get(type), BlockLootTableProvider::onlyShears);
     }
     for (FoliageType type : FoliageType.NETHER) {
-      // nether leaves, like overworld leaves, drop their matching sapling
-      this.add(TinkerWorld.slimeLeaves.get(type), block -> randomDropSlimeBallOrSapling(type, block, TinkerWorld.slimeSapling.get(type), NORMAL_LEAVES_SAPLING_CHANCES));
+      // nether slime leaves have a sapling too, so drop it like the overworld leaves (was dropSelf, which meant they only
+      // ever dropped the leaf block, never a sapling); the nether fern (roots/fungus) has no sapling so it still drops self
+      this.add(TinkerWorld.slimeLeaves.get(type), block -> dropSapling(block, TinkerWorld.slimeSapling.get(type), NORMAL_LEAVES_SAPLING_CHANCES));
       this.dropSelf(TinkerWorld.slimeFern.get(type));
     }
-    // Ender leaves also return their matching propagule instead of the leaf block
-    this.add(TinkerWorld.slimeLeaves.get(FoliageType.ENDER), leaves -> dropSapling(
-      leaves, TinkerWorld.slimeSapling.get(FoliageType.ENDER), NORMAL_LEAVES_SAPLING_CHANCES).withPool(
-        LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-          .when(HAS_NO_SHEARS_OR_SILK_TOUCH)
-          .add(applyExplosionCondition(leaves, LootItem.lootTableItem(TinkerCommons.slimeball.get(SlimeType.ENDER))
-            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
-            .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_STICK_CHANCES)))));
+    // mangrove leaves do not drop saplings, they just drop sticks. We do slimeballs instead
+    this.add(TinkerWorld.slimeLeaves.get(FoliageType.ENDER), leaves -> droppingSilkOrShears(leaves,
+      applyExplosionDecay(leaves, LootItem.lootTableItem(TinkerCommons.slimeball.get(SlimeType.ENDER)).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+        .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_STICK_CHANCES))));
     this.add(TinkerWorld.slimeFern.get(FoliageType.ENDER), BlockLootTableProvider::onlyShears);
 
 
@@ -326,17 +327,23 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
    * Utils
    */
 
-  private static final LootItemCondition.Builder SHEARS = CanItemPerformAbility.canItemPerformAbility(ItemAbilities.SHEARS_DIG);
+  private static final LootItemCondition.Builder SILK_TOUCH = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))));
+  private static final LootItemCondition.Builder SHEARS = CanToolPerformAction.canToolPerformAction(ItemAbilities.SHEARS_DIG);
+  private static final LootItemCondition.Builder SILK_TOUCH_OR_SHEARS = SHEARS.or(SILK_TOUCH);
 
   protected static LootTable.Builder onlyShears(ItemLike item) {
     return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(SHEARS).add(LootItem.lootTableItem(item)));
   }
 
-  /** Reuses vanilla leaves behavior while keeping the matching sapling as the normal drop. */
+  /** Recreation of {@link #createShearsDispatchTable(Block, Builder)} using the tool action instead of the shears item */
+  private static LootTable.Builder droppingSilkOrShears(Block block, LootPoolEntryContainer.Builder<?> alternativeLootEntry) {
+    return createSelfDropDispatchTable(block, SILK_TOUCH_OR_SHEARS, alternativeLootEntry);
+  }
+
+  /** Reimplementation of {@link #createLeavesDrops(Block, Block, float...)} dropping the sticks from the loot table */
   private LootTable.Builder dropSapling(Block leaves, Block sapling, float... fortune) {
-    return createSilkTouchOrShearsDispatchTable(leaves, applyExplosionCondition(leaves,
-      LootItem.lootTableItem(sapling)
-        .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fortune))));
+    return droppingSilkOrShears(leaves, applyExplosionCondition(leaves, LootItem.lootTableItem(sapling))
+      .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, fortune)));
   }
 
   private LootTable.Builder randomDropSlimeBallOrSapling(FoliageType foliageType, Block leaves, Block sapling, float... fortune) {

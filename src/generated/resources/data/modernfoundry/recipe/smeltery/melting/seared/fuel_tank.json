@@ -1,15 +1,15 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/seared/fuel_tank",
   "byproducts": [
     {
       "amount": 1000,
       "fluid": "modernfoundry:molten_glass"
     }
   ],
+  "id": "modernfoundry:smeltery/melting/seared/fuel_tank",
   "ingredient": {
-    "type": "modernfoundry:no_container",
-    "item": "modernfoundry:seared_fuel_tank"
+    "neoforge:ingredient_type": "modernfoundry:no_container",
+    "match": "modernfoundry:seared_fuel_tank"
   },
   "result": {
     "amount": 2000,

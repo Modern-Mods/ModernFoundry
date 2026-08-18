@@ -1,14 +1,14 @@
 package modernmods.modernfoundry.tables.recipe;
 
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.recipe.RecipeResult;
@@ -33,13 +33,13 @@ import java.util.stream.IntStream;
 public class TinkerStationPartSwapping extends MaterialSwappingRecipe {
   public static final RecordLoadable<TinkerStationPartSwapping> LOADER = RecordLoadable.create(ContextKey.ID.requiredField(), TOOLS_FIELD, STACK_SIZE_FIELD, EXTRA_REQUIREMENTS_FIELD, TinkerStationPartSwapping::new);
 
-  protected TinkerStationPartSwapping(ResourceLocation id, Ingredient tools, int maxStackSize, List<SizedIngredient> extraRequirements) {
+  protected TinkerStationPartSwapping(Identifier id, Ingredient tools, int maxStackSize, List<SizedIngredient> extraRequirements) {
     super(id, tools, maxStackSize, extraRequirements);
   }
 
-  /** @deprecated use {@link #TinkerStationPartSwapping(ResourceLocation, Ingredient, int, List)} */
+  /** @deprecated use {@link #TinkerStationPartSwapping(Identifier, Ingredient, int, List)} */
   @Deprecated(forRemoval = true)
-  public TinkerStationPartSwapping(ResourceLocation id, Ingredient tools, int maxStackSize) {
+  public TinkerStationPartSwapping(Identifier id, Ingredient tools, int maxStackSize) {
     this(id, tools, maxStackSize, List.of());
   }
 
@@ -123,7 +123,7 @@ public class TinkerStationPartSwapping extends MaterialSwappingRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends TinkerStationPartSwapping> getSerializer() {
     return TinkerTables.tinkerStationPartSwappingSerializer.get();
   }
 }

@@ -1,12 +1,11 @@
 package modernmods.modernfoundry.tools.network;
 
-import lombok.RequiredArgsConstructor;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.shared.TinkerEffects;
 import modernmods.modernfoundry.tools.logic.DoubleJumpHandler;
 import modernmods.modernfoundry.tools.logic.InteractionHandler;
@@ -14,7 +13,6 @@ import modernmods.modernfoundry.tools.logic.InteractionHandler;
 /**
  * Generic packet for various controls the client may send to the server
  */
-@RequiredArgsConstructor
 public enum TinkerControlPacket implements IThreadsafePacket {
   DOUBLE_JUMP,
   ANTIGRAVITY_JUMP,
@@ -35,6 +33,10 @@ public enum TinkerControlPacket implements IThreadsafePacket {
 
   TinkerControlPacket() {
     this(TooltipKey.UNKNOWN);
+  }
+
+  TinkerControlPacket(TooltipKey modifier) {
+    this.modifier = modifier;
   }
 
   /** Gets the packet for helmet interaction */

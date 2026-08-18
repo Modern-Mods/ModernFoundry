@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/knightmetal/leggings",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/knightmetal/tools_costing_7"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/knightmetal/tools_costing_7"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/knightmetal/leggings",
+  "ingredient": "#modernfoundry:melting/knightmetal/tools_costing_7",
   "result": {
     "amount": 630,
     "fluid": "modernfoundry:molten_knightmetal",

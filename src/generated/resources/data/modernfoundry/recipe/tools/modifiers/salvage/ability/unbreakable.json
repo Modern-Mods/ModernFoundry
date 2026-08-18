@@ -5,7 +5,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/durability"
-  }
+  "tools": "#modernfoundry:modifiable/durability"
 }

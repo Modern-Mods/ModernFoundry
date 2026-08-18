@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:entity_melting",
-  "id": "modernfoundry:smeltery/entity_melting/zombie",
   "damage": 4,
   "entity": {
     "types": [
@@ -9,6 +8,7 @@
       "minecraft:zombie_horse"
     ]
   },
+  "id": "modernfoundry:smeltery/entity_melting/zombie",
   "result": {
     "amount": 10,
     "tag": "c:molten_iron"

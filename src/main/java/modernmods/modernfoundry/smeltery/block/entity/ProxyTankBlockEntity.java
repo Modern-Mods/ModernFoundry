@@ -1,5 +1,7 @@
 package modernmods.modernfoundry.smeltery.block.entity;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -10,12 +12,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import org.jetbrains.annotations.Nullable;
-import modernmods.hilt.block.entity.HiltBlockEntity;
-import modernmods.hilt.fluid.FluidTransferHelper;
+import modernmods.mantle.block.InventoryBlock;
+import modernmods.mantle.block.entity.MantleBlockEntity;
+import modernmods.mantle.fluid.FluidTransferHelper;
 import modernmods.modernfoundry.library.fluid.IFluidTankUpdater;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.entity.tank.ProxyItemTank;
@@ -23,14 +26,25 @@ import modernmods.modernfoundry.smeltery.block.entity.tank.ProxyItemTank;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 /** Block entity with a tank that proxies to the nested item handler */
-public class ProxyTankBlockEntity extends HiltBlockEntity implements IFluidTankUpdater, ILegacyCapabilityBlockEntity {
+public class ProxyTankBlockEntity extends MantleBlockEntity implements IFluidTankUpdater, ILegacyCapabilityBlockEntity {
   /** Direct access to the fluid handler and item handler */
   @Getter
   private final ProxyItemTank<ProxyTankBlockEntity> itemTank = new ProxyItemTank<>(this);
-  /** Capability instance for both items and fluids */
-  private final LazyOptional<ProxyItemTank<?>> capability = LazyOptional.of(() -> itemTank);
+  /** Capability instance for the item handler */
+  private final LazyOptional<ProxyItemTank<?>> itemCapability = LazyOptional.of(() -> itemTank);
+  /** Capability instance for the fluid handler */
+  private final LazyOptional<net.neoforged.neoforge.transfer.ResourceHandler<net.neoforged.neoforge.transfer.fluid.FluidResource>> fluidCapability = LazyOptional.of(itemTank::getFluidHandler);
   /** Last comparator strength to reduce block updates */
   private int lastStrength = -1;
+  @Override
+  public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+    super.preRemoveSideEffects(pos, state);
+    // drop the stored container item when the block is removed (formerly Block#onRemove). Runs server-side before the block entity is removed
+    if (this.level != null) {
+      InventoryBlock.dropInventoryItems(this.level, pos, itemTank);
+    }
+  }
+
   protected ProxyTankBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
     super(type, pos, state);
   }
@@ -43,15 +57,18 @@ public class ProxyTankBlockEntity extends HiltBlockEntity implements IFluidTankU
   /* Capability */
 
   public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-    if (cap == ForgeCapabilities.ITEM_HANDLER || cap == ForgeCapabilities.FLUID_HANDLER) {
-      return capability.cast();
+    if (cap == ForgeCapabilities.ITEM_HANDLER) {
+      return itemCapability.cast();
     }
-    return modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
+    if (cap == ForgeCapabilities.FLUID_HANDLER) {
+      return fluidCapability.cast();
+    }
+    return modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional.empty();
   }
 
   public void invalidateCaps() {
-    // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent (was super.invalidateCaps();)
-    capability.invalidate();
+    itemCapability.invalidate();
+    fluidCapability.invalidate();
   }
 
 
@@ -62,11 +79,15 @@ public class ProxyTankBlockEntity extends HiltBlockEntity implements IFluidTankU
    * @return  Tank comparator strength
    */
   private int calculateComparatorStrength() {
-    int capacity = itemTank.getTankCapacity(0);
+    net.neoforged.neoforge.transfer.ResourceHandler<net.neoforged.neoforge.transfer.fluid.FluidResource> handler = itemTank.getFluidHandler();
+    if (handler.size() == 0) {
+      return 0;
+    }
+    int capacity = handler.getCapacityAsInt(0, handler.getResource(0));
     if (capacity == 0) {
       return 0;
     }
-    return 1 + 14 * itemTank.getFluidInTank(0).getAmount() / capacity;
+    return 1 + 14 * handler.getAmountAsInt(0) / capacity;
   }
 
   /** Gets the current comparator strength */
@@ -79,7 +100,7 @@ public class ProxyTankBlockEntity extends HiltBlockEntity implements IFluidTankU
 
   @Override
   public void onTankContentsChanged() {
-    if (level != null && !level.isClientSide) {
+    if (level != null && !level.isClientSide()) {
       setChangedFast();
       int newStrength = calculateComparatorStrength();
       if (newStrength != lastStrength) {
@@ -94,7 +115,7 @@ public class ProxyTankBlockEntity extends HiltBlockEntity implements IFluidTankU
   /** Called when a player interacts with the fluid cannon */
   public void interact(Player player, InteractionHand hand, boolean clickedTank) {
     // skip client side
-    if (level == null || level.isClientSide) {
+    if (level == null || level.isClientSide()) {
       return;
     }
 
@@ -104,8 +125,8 @@ public class ProxyTankBlockEntity extends HiltBlockEntity implements IFluidTankU
     // if we have an active tank, try interacting
     if (!inventory.isEmpty()) {
       // must have a held item to interact
-      if (!held.isEmpty() && FluidTransferHelper.interactWithContainer(level, worldPosition, itemTank, player, hand).didTransfer()
-        || FluidTransferHelper.interactWithFilledBucket(level, worldPosition, itemTank, player, hand, getBlockState().getValue(HORIZONTAL_FACING)).didTransfer()) {
+      if (!held.isEmpty() && FluidTransferHelper.interactWithContainer(level, worldPosition, itemTank.getFluidHandler(), player, hand).didTransfer()
+        || FluidTransferHelper.interactWithFilledBucket(level, worldPosition, itemTank.getFluidHandler(), player, hand, getBlockState().getValue(HORIZONTAL_FACING)).didTransfer()) {
         return;
       }
       // if we clicked the tank, don't try and swap items unless we have no tank
@@ -144,16 +165,14 @@ public class ProxyTankBlockEntity extends HiltBlockEntity implements IFluidTankU
   }
 
   @Override
-  public void load(CompoundTag tag) {
-    super.load(tag);
-    if (tag.contains(TAG_ITEM, Tag.TAG_COMPOUND)) {
-      itemTank.readFromNBT(tag.getCompound(TAG_ITEM));
-    }
+  public void loadAdditional(ValueInput input) {
+    super.loadAdditional(input);
+    input.read(TAG_ITEM, CompoundTag.CODEC).ifPresent(itemTank::readFromNBT);
   }
 
   @Override
-  protected void saveSynced(CompoundTag tag) {
-    super.saveSynced(tag);
-    tag.put(TAG_ITEM, itemTank.writeToNBT());
+  protected void saveSynced(ValueOutput output) {
+    super.saveSynced(output);
+    output.store(TAG_ITEM, CompoundTag.CODEC, itemTank.writeToNBT());
   }
 }

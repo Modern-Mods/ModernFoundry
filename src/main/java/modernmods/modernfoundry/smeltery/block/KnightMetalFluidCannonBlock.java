@@ -10,7 +10,7 @@ import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import modernmods.hilt.util.CombatHelper;
+import modernmods.mantle.util.CombatHelper;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 import modernmods.modernfoundry.shared.block.KnightMetalBlock;
 
@@ -28,11 +28,11 @@ public class KnightMetalFluidCannonBlock extends FluidCannonBlock {
   @Nullable
   @Override
   public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
-    return PathType.DAMAGE_OTHER;
+    return PathType.DAMAGING;
   }
 
   @Override
-  public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-    entity.hurt(CombatHelper.damageSource(level, TinkerDamageTypes.KNIGHTMETAL), KnightMetalBlock.BLOCK_DAMAGE);
+  protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, net.minecraft.world.entity.InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+    entity.hurtOrSimulate(CombatHelper.damageSource(level, TinkerDamageTypes.KNIGHTMETAL), KnightMetalBlock.BLOCK_DAMAGE);
   }
 }

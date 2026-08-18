@@ -298,7 +298,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:hammer_head_cast"
+      "id": "modernfoundry:hammer_head_cast"
     },
     "show_toast": true,
     "title": {

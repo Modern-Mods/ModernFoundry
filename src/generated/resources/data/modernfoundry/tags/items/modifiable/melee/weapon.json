@@ -1,0 +1,18 @@
+{
+  "values": [
+    "modernfoundry:pickaxe",
+    "modernfoundry:vein_hammer",
+    "modernfoundry:mattock",
+    "modernfoundry:pickadze",
+    "modernfoundry:excavator",
+    "modernfoundry:kama",
+    "modernfoundry:crossbow",
+    "modernfoundry:longbow",
+    "modernfoundry:fishing_rod",
+    "modernfoundry:flint_and_brick",
+    "modernfoundry:war_pick",
+    "#modernfoundry:modifiable/melee/primary",
+    "#modernfoundry:modifiable/melee/sword",
+    "#modernfoundry:modifiable/melee/parry"
+  ]
+}

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "modernfoundry:scorched_brick"
-    },
-    "C": {
-      "tag": "c:ingots/gold"
-    }
+    "#": "modernfoundry:scorched_brick",
+    "C": "#c:ingots/gold"
   },
   "pattern": [
     "# #",
@@ -16,6 +12,5 @@
   ],
   "result": {
     "id": "modernfoundry:scorched_duct"
-  },
-  "show_notification": true
+  }
 }

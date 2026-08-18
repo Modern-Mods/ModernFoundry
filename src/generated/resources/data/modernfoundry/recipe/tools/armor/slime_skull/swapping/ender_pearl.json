@@ -3,12 +3,10 @@
   "id": "modernfoundry:tools/armor/slime_skull/swapping/ender_pearl",
   "index": 0,
   "ingredient": {
-    "item": "modernfoundry:enderman_head"
+    "ingredient": "modernfoundry:enderman_head"
   },
   "material": "modernfoundry:ender_pearl",
   "max_stack_size": 16,
   "repair_value": 6,
-  "tools": {
-    "tag": "modernfoundry:modifiable/skulls/swappable"
-  }
+  "tools": "#modernfoundry:modifiable/skulls/swappable"
 }

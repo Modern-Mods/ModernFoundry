@@ -2,13 +2,13 @@ package modernmods.modernfoundry.library.client.materials;
 
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.InventoryMenu;
-import modernmods.hilt.data.loadable.common.ColorLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.common.ColorLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 
 import javax.annotation.Nullable;
@@ -18,7 +18,7 @@ import java.util.function.Function;
  * Determines the type of texture used for rendering a specific material.
  * TODO: rename luminosity to emissivity, need a fallback field type
  */
-public record MaterialRenderInfo(MaterialVariantId id, @Nullable ResourceLocation texture, String[] fallbacks, int vertexColor, int luminosity) {
+public record MaterialRenderInfo(MaterialVariantId id, @Nullable Identifier texture, String[] fallbacks, int vertexColor, int luminosity) {
   public static final RecordLoadable<MaterialRenderInfo> LOADABLE = RecordLoadable.create(
     MaterialVariantId.CONTEXT_KEY.requiredField(),
     MaterialTextureField.INSTANCE,
@@ -36,7 +36,7 @@ public record MaterialRenderInfo(MaterialVariantId id, @Nullable ResourceLocatio
    */
   @Nullable
   private TextureAtlasSprite trySprite(Material base, String suffix, Function<Material,TextureAtlasSprite> spriteGetter) {
-    Material materialTexture = getMaterial(base.texture(), suffix);
+    Material materialTexture = getMaterial(base.sprite(), suffix);
     TextureAtlasSprite sprite = spriteGetter.apply(materialTexture);
     if (!MissingTextureAtlasSprite.getLocation().equals(sprite.contents().name())) {
       return sprite;
@@ -72,7 +72,7 @@ public record MaterialRenderInfo(MaterialVariantId id, @Nullable ResourceLocatio
    * @param material  Material ID
    * @return  Sprite name
    */
-  public static String getSuffix(ResourceLocation material) {
+  public static String getSuffix(Identifier material) {
     // namespace will only be minecraft for a texture override, so this lets you select to always use an untinted base texture as the materials texture
     String namespace = material.getNamespace();
     if ("minecraft".equals(namespace)) {
@@ -87,8 +87,8 @@ public record MaterialRenderInfo(MaterialVariantId id, @Nullable ResourceLocatio
    * @param suffix    Material or fallback suffix name
    * @return  Material instance
    */
-  private static Material getMaterial(ResourceLocation texture, String suffix) {
-    return new Material(InventoryMenu.BLOCK_ATLAS, new ResourceLocation(texture.getNamespace(), texture.getPath() + "_" + suffix));
+  private static Material getMaterial(Identifier texture, String suffix) {
+    return new Material(Identifier.fromNamespaceAndPath(texture.getNamespace(), texture.getPath() + "_" + suffix));
   }
 
   /**

@@ -98,7 +98,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:scorched_alloyer"
+      "id": "modernfoundry:scorched_alloyer"
     },
     "show_toast": true,
     "title": {

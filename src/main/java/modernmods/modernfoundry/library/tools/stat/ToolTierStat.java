@@ -11,12 +11,12 @@ import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.ToolMaterial;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.TierSortingRegistry;
-import modernmods.hilt.util.JsonHelper;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.util.JsonHelper;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.utils.HarvestTiers;
 import modernmods.modernfoundry.library.utils.Util;
@@ -27,7 +27,7 @@ import java.util.Objects;
 /** Tool stat for comparing tool tiers */
 @SuppressWarnings("ClassCanBeRecord")
 @Getter @RequiredArgsConstructor
-public class ToolTierStat implements IToolStat<Tier> {
+public class ToolTierStat implements IToolStat<ToolMaterial> {
   /** Name of this tool stat */
   private final ToolStatId name;
 
@@ -37,7 +37,7 @@ public class ToolTierStat implements IToolStat<Tier> {
   }
 
   @Override
-  public Tier getDefaultValue() {
+  public ToolMaterial getDefaultValue() {
     return HarvestTiers.minTier();
   }
 
@@ -47,7 +47,7 @@ public class ToolTierStat implements IToolStat<Tier> {
   }
 
   @Override
-  public Tier build(ModifierStatsBuilder parent, Object builder) {
+  public ToolMaterial build(ModifierStatsBuilder parent, Object builder) {
     return ((TierBuilder) builder).value;
   }
 
@@ -57,15 +57,15 @@ public class ToolTierStat implements IToolStat<Tier> {
    * @param value    Amount to add
    */
   @Override
-  public void update(ModifierStatsBuilder builder, Tier value) {
+  public void update(ModifierStatsBuilder builder, ToolMaterial value) {
     builder.<TierBuilder>updateStat(this, b -> b.value = HarvestTiers.max(b.value, value));
   }
 
   @Nullable
   @Override
-  public Tier read(Tag tag) {
+  public ToolMaterial read(Tag tag) {
     if (tag.getId() == Tag.TAG_STRING) {
-      ResourceLocation tierId = ResourceLocation.tryParse(tag.getAsString());
+      Identifier tierId = Identifier.tryParse(tag.asString().orElse(""));
       if (tierId != null) {
         return TierSortingRegistry.byName(tierId);
       }
@@ -74,8 +74,8 @@ public class ToolTierStat implements IToolStat<Tier> {
   }
 
   @Override
-  public Tag write(Tier value) {
-    ResourceLocation id = TierSortingRegistry.getName(value);
+  public Tag write(ToolMaterial value) {
+    Identifier id = TierSortingRegistry.getName(value);
     if (id != null) {
       return StringTag.valueOf(id.toString());
     }
@@ -83,9 +83,9 @@ public class ToolTierStat implements IToolStat<Tier> {
   }
 
   @Override
-  public Tier deserialize(JsonElement json) {
-    ResourceLocation id = JsonHelper.convertToResourceLocation(json, getName().toString());
-    Tier tier = TierSortingRegistry.byName(id);
+  public ToolMaterial deserialize(JsonElement json) {
+    Identifier id = JsonHelper.convertToResourceLocation(json, getName().toString());
+    ToolMaterial tier = TierSortingRegistry.byName(id);
     if (tier != null) {
       return tier;
     }
@@ -93,14 +93,14 @@ public class ToolTierStat implements IToolStat<Tier> {
   }
 
   @Override
-  public JsonElement serialize(Tier value) {
+  public JsonElement serialize(ToolMaterial value) {
     return new JsonPrimitive(Objects.requireNonNull(TierSortingRegistry.getName(value)).toString());
   }
 
   @Override
-  public Tier fromNetwork(FriendlyByteBuf buffer) {
-    ResourceLocation id = buffer.readResourceLocation();
-    Tier tier = TierSortingRegistry.byName(id);
+  public ToolMaterial fromNetwork(FriendlyByteBuf buffer) {
+    Identifier id = buffer.readIdentifier();
+    ToolMaterial tier = TierSortingRegistry.byName(id);
     if (tier != null) {
       return tier;
     }
@@ -108,13 +108,13 @@ public class ToolTierStat implements IToolStat<Tier> {
   }
 
   @Override
-  public void toNetwork(FriendlyByteBuf buffer, Tier value) {
-    buffer.writeResourceLocation(Objects.requireNonNull(TierSortingRegistry.getName(value)));
+  public void toNetwork(FriendlyByteBuf buffer, ToolMaterial value) {
+    buffer.writeIdentifier(Objects.requireNonNull(TierSortingRegistry.getName(value)));
   }
 
   @Override
-  public Component formatValue(Tier value) {
-    return Component.translatable(Util.makeTranslationKey("tool_stat", getName())).append(HarvestTiers.getName(value));
+  public Component formatValue(ToolMaterial value) {
+    return Component.translatable(Util.makeTranslationKey("tool_stat", getName().getIdentifier())).append(HarvestTiers.getName(value));
   }
 
   @Override
@@ -125,6 +125,6 @@ public class ToolTierStat implements IToolStat<Tier> {
   /** Builder for a tier object */
   @AllArgsConstructor
   private static class TierBuilder {
-    private Tier value;
+    private ToolMaterial value;
   }
 }

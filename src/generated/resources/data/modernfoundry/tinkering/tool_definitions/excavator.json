@@ -73,14 +73,8 @@
       ]
     },
     {
-      "type": "modernfoundry:tool_actions",
-      "tool_actions": [
-        "shovel_dig"
-      ]
-    },
-    {
       "type": "modernfoundry:is_effective",
-      "predicate_type": "hilt:tag",
+      "predicate_type": "mantle:tag",
       "tag": "minecraft:mineable/shovel"
     },
     {

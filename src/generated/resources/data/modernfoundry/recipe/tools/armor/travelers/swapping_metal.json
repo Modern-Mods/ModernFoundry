@@ -4,17 +4,9 @@
   "index": 0,
   "item_cost": 2,
   "tools": [
-    {
-      "item": "modernfoundry:travelers_helmet"
-    },
-    {
-      "item": "modernfoundry:travelers_chestplate"
-    },
-    {
-      "item": "modernfoundry:travelers_leggings"
-    },
-    {
-      "item": "modernfoundry:travelers_boots"
-    }
+    "modernfoundry:travelers_helmet",
+    "modernfoundry:travelers_chestplate",
+    "modernfoundry:travelers_leggings",
+    "modernfoundry:travelers_boots"
   ]
 }

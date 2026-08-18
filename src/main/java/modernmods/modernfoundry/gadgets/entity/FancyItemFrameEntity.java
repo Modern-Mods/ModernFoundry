@@ -1,5 +1,7 @@
 package modernmods.modernfoundry.gadgets.entity;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -11,7 +13,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerEntity;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.Explosion;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import modernmods.modernfoundry.compat.neoforged.neoforge.entity.IEntityAdditionalSpawnData;
 import modernmods.modernfoundry.compat.neoforged.neoforge.network.NetworkHooks;
 import modernmods.modernfoundry.common.Sounds;
@@ -60,16 +62,17 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
   }
 
   @Override
-  public InteractionResult interact(Player player, InteractionHand hand) {
+  public InteractionResult interact(Player player, InteractionHand hand, Vec3 location) {
     if (!player.isShiftKeyDown() && getFrameId() == FrameType.CLEAR.getId() && !getItem().isEmpty()) {
+      Direction direction = getDirection();
       BlockPos behind = blockPosition().relative(direction.getOpposite());
       Level level = level();
       BlockState state = level.getBlockState(behind);
       if (!state.isAir()) {
         var hit = Util.createTraceResult(behind, direction, false);
-        ItemInteractionResult itemResult = state.useItemOn(player.getItemInHand(hand), level, player, hand, hit);
+        InteractionResult itemResult = state.useItemOn(player.getItemInHand(hand), level, player, hand, hit);
         if (itemResult.consumesAction()) {
-          return itemResult.result();
+          return itemResult;
         }
         InteractionResult result = state.useWithoutItem(level, player, hit);
         if (result.consumesAction()) {
@@ -77,7 +80,7 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
         }
       }
     }
-    return super.interact(player, hand);
+    return super.interact(player, hand, location);
   }
 
   @Override
@@ -91,7 +94,7 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
       // diamond winds down every 30 seconds, but does not go past 0, makes a full timer 3:30
       if (rotationTimer >= 300) {
         rotationTimer = 0;
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
           int curRotation = getRotation();
           if (curRotation > 0) {
             this.setRotation(curRotation - 1);
@@ -101,7 +104,7 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
       return;
     }
     // for gold and reversed gold, only increment timer serverside
-    if (!level.isClientSide) {
+    if (!level.isClientSide()) {
       if (doesRotate(frameId)) {
         rotationTimer++;
         if (rotationTimer >= 20) {
@@ -126,7 +129,7 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
   public void setItem(ItemStack stack, boolean updateComparator) {
     super.setItem(stack, updateComparator);
     // spinning frames reset to 0 on changing item
-    if (updateComparator && !level().isClientSide && doesRotate(getFrameId())) {
+    if (updateComparator && !level().isClientSide() && doesRotate(getFrameId())) {
       setRotation(0, false);
     }
   }
@@ -156,7 +159,7 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
     if (FrameType.hasMoreRotations(id)) {
       // diamond caps at 16, while the others circle around
       if (id == FrameType.DIAMOND.getId()) {
-        if (!level().isClientSide && updateComparator) {
+        if (!level().isClientSide() && updateComparator) {
           // play a sound as diamond is special
           this.playSound(Sounds.ITEM_FRAME_CLICK.getSound(), 1.0f, 1.0f);
         }
@@ -234,22 +237,22 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
 
 
   @Override
-  public void addAdditionalSaveData(CompoundTag compound) {
-    super.addAdditionalSaveData(compound);
+  public void addAdditionalSaveData(ValueOutput output) {
+    super.addAdditionalSaveData(output);
     int frameId = this.getFrameId();
-    compound.putInt(TAG_VARIANT, frameId);
+    output.putInt(TAG_VARIANT, frameId);
     if (doesRotate(frameId)) {
-      compound.putInt(TAG_ROTATION_TIMER, rotationTimer);
+      output.putInt(TAG_ROTATION_TIMER, rotationTimer);
     }
   }
 
   @Override
-  public void readAdditionalSaveData(CompoundTag compound) {
-    super.readAdditionalSaveData(compound);
-    int frameId = compound.getInt(TAG_VARIANT);
+  public void readAdditionalSaveData(ValueInput input) {
+    super.readAdditionalSaveData(input);
+    int frameId = input.getIntOr(TAG_VARIANT, 0);
     this.entityData.set(VARIANT, frameId);
     if (doesRotate(frameId)) {
-      rotationTimer = compound.getInt(TAG_ROTATION_TIMER);
+      rotationTimer = input.getIntOr(TAG_ROTATION_TIMER, 0);
     }
   }
 
@@ -262,7 +265,7 @@ public class FancyItemFrameEntity extends ItemFrame implements IEntityAdditional
   public void writeSpawnData(FriendlyByteBuf buffer) {
     buffer.writeVarInt(this.getFrameId());
     buffer.writeBlockPos(this.pos);
-    buffer.writeVarInt(this.direction.get3DDataValue());
+    buffer.writeVarInt(this.getDirection().get3DDataValue());
   }
 
   @Override

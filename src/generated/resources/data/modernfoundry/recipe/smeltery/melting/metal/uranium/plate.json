@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/uranium/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/uranium"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/uranium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/uranium/plate",
+  "ingredient": "#c:plates/uranium",
   "result": {
     "amount": 90,
     "tag": "c:molten_uranium"

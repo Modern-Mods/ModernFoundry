@@ -1,6 +1,7 @@
 package modernmods.modernfoundry.tools.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -11,8 +12,8 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import modernmods.hilt.command.HiltCommand;
-import modernmods.hilt.fluid.FluidTransferHelper;
+import modernmods.mantle.command.MantleCommand;
+import modernmods.mantle.fluid.FluidTransferHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.TinkerTags.Modifiers;
@@ -50,13 +51,14 @@ public class ModifierCrystalItem extends Item {
   public Component getName(ItemStack stack) {
     ModifierId modifier = getModifier(stack);
     if (modifier != null) {
-      return Component.translatable(getDescriptionId(stack) + ".format", Component.translatable(Util.makeTranslationKey("modifier", modifier)));
+      return Component.translatable(getDescriptionId() + ".format", Component.translatable(Util.makeTranslationKey("modifier", modifier.getIdentifier())));
     }
     return super.getName(stack);
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag advanced) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag advanced) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     ModifierId id = getModifier(stack);
     if (id != null) {
       if (ModifierManager.INSTANCE.contains(id)) {
@@ -69,11 +71,13 @@ public class ModifierCrystalItem extends Item {
     } else {
       tooltip.add(TOOLTIP_MISSING);
     }
+  
+    tooltip.forEach(tooltipConsumer);
   }
 
   @Nullable
   @Override
-  public String getCreatorModId(ItemStack stack) {
+  public String getCreatorModId(net.minecraft.core.HolderLookup.Provider registries, ItemStack stack) {
     ModifierId modifier = getModifier(stack);
     if (modifier != null) {
       return modifier.getNamespace();
@@ -93,7 +97,7 @@ public class ModifierCrystalItem extends Item {
       ItemStack toolItem = slot.getItem();
       // slot must have a tool, NBT must be valid
       if (modifier != null && !toolItem.isEmpty() && toolItem.is(TinkerTags.Items.MODIFIABLE)) {
-        if (!player.level().isClientSide || (player.isCreative() && player.containerMenu.getType() == null)) {
+        if (!player.level().isClientSide() || (player.isCreative() && player.containerMenu.getType() == null)) {
           ToolStack tool = ToolStack.copyFrom(toolItem);
 
           // add modifier
@@ -102,7 +106,7 @@ public class ModifierCrystalItem extends Item {
           // ensure no modifier problems after adding
           Component toolValidation = tool.tryValidate();
           if (toolValidation != null) {
-            player.displayClientMessage(toolValidation, false);
+            player.sendSystemMessage(toolValidation);
           } else {
             tool.updateStack(toolItem);
             FluidTransferHelper.playUISound(player, SoundEvents.ENCHANTMENT_TABLE_USE);
@@ -122,11 +126,11 @@ public class ModifierCrystalItem extends Item {
     // see also - modifier removal command
 
     // must be op or in creative, right-clicking onto a modifiable slot with a tool
-    if (action == ClickAction.SECONDARY && slot.allowModification(player) && !toolItem.isEmpty() && toolItem.is(TinkerTags.Items.MODIFIABLE) && (player.isCreative() || player.hasPermissions(HiltCommand.PERMISSION_GAME_COMMANDS))) {
+    if (action == ClickAction.SECONDARY && slot.allowModification(player) && !toolItem.isEmpty() && toolItem.is(TinkerTags.Items.MODIFIABLE) && (player.isCreative() || MantleCommand.PERMISSION_GAME_COMMANDS.check(player.permissions()))) {
       // NBT must be valid
       ModifierId modifier = getModifier(stack);
       if (modifier != null) {
-        if (!player.level().isClientSide || (player.isCreative() && player.containerMenu.getType() == null)) {
+        if (!player.level().isClientSide() || (player.isCreative() && player.containerMenu.getType() == null)) {
           ToolStack original = ToolStack.from(toolItem);
           ToolStack tool = original.copy();
 
@@ -145,14 +149,14 @@ public class ModifierCrystalItem extends Item {
           // ensure no modifier problems after adding
           Component toolValidation = tool.tryValidate();
           if (toolValidation != null) {
-            player.displayClientMessage(toolValidation, false);
+            player.sendSystemMessage(toolValidation);
             return true;
           }
 
           // ask modifiers if it's okay to remove them
           toolValidation = ModifierRemovalHook.onRemoved(original, tool);
           if (toolValidation != null) {
-            player.displayClientMessage(toolValidation, false);
+            player.sendSystemMessage(toolValidation);
             return true;
           }
 
@@ -189,7 +193,7 @@ public class ModifierCrystalItem extends Item {
   public static ModifierId getModifier(ItemStack stack) {
     CompoundTag tag = TagUtil.getTag(stack);
     if (tag != null) {
-      return ModifierId.tryParse(tag.getString(TAG_MODIFIER));
+      return ModifierId.tryParse(tag.getStringOr(TAG_MODIFIER, ""));
     }
     return null;
   }

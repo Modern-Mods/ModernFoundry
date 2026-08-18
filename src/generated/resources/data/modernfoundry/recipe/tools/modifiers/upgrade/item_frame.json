@@ -1,25 +1,15 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/item_frame",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/item_frame",
   "inputs": [
     {
       "ingredient": [
-        {
-          "item": "modernfoundry:reversed_gold_item_frame"
-        },
-        {
-          "item": "modernfoundry:diamond_item_frame"
-        },
-        {
-          "item": "modernfoundry:manyullyn_item_frame"
-        },
-        {
-          "item": "modernfoundry:gold_item_frame"
-        },
-        {
-          "item": "modernfoundry:netherite_item_frame"
-        }
+        "modernfoundry:reversed_gold_item_frame",
+        "modernfoundry:diamond_item_frame",
+        "modernfoundry:manyullyn_item_frame",
+        "modernfoundry:gold_item_frame",
+        "modernfoundry:netherite_item_frame"
       ]
     }
   ],
@@ -27,7 +17,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/helmets"
-  }
+  "tools": "#modernfoundry:modifiable/armor/helmets"
 }

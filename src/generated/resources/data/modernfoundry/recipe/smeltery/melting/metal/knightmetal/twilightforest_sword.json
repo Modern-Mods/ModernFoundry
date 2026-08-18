@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/knightmetal/twilightforest_sword",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:knightmetal_sword"
+      "type": "neoforge:registered",
+      "value": "twilightforest:knightmetal_sword"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/knightmetal/twilightforest_sword",
   "ingredient": {
     "item": "twilightforest:knightmetal_sword"
   },

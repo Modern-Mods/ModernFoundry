@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/nicrosil/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/nicrosil"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/nicrosil"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/nicrosil/nugget",
+  "ingredient": "#c:nuggets/nicrosil",
   "result": {
     "amount": 10,
     "tag": "c:molten_nicrosil"

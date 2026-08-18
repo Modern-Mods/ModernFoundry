@@ -6,7 +6,7 @@ ranged_materials=三級遠程材料
 ranged_materials.subtext=這些材料需要通過合金來獲得，然後鑄造成像弓那樣的遠程武器的工具部件。
 
 tools=寬型工具
-tools.subtext=寬型工具需要Modern Foundry砧才能製作。
+tools.subtext=寬型工具需要工匠砧才能製作。
 
 armor=大師盔甲
 armor.subtext=合金拓寬了盔甲製造中材料的使用範圍。這些材料或許能向旅行者套裝這樣的基礎盔甲上增加額外的能力。

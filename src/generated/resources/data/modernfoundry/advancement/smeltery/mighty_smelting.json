@@ -22,7 +22,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:mighty_smelting"
+      "id": "modernfoundry:mighty_smelting"
     },
     "show_toast": true,
     "title": {

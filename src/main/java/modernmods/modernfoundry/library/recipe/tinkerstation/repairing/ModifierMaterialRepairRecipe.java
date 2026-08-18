@@ -1,12 +1,12 @@
 package modernmods.modernfoundry.library.recipe.tinkerstation.repairing;
 
 import lombok.Getter;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.materials.definition.LazyMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
@@ -32,7 +32,7 @@ public class ModifierMaterialRepairRecipe extends TinkerStationRepairRecipe impl
   /** Stat type used for repairing, null means it will be fetched as the first available stat type */
   @Getter
   private final MaterialStatsId statType;
-  public ModifierMaterialRepairRecipe(ResourceLocation id, ModifierId modifier, MaterialId repairMaterialID, MaterialStatsId statType) {
+  public ModifierMaterialRepairRecipe(Identifier id, ModifierId modifier, MaterialId repairMaterialID, MaterialStatsId statType) {
     super(id);
     this.modifier = modifier;
     this.repairMaterial = LazyMaterial.of(repairMaterialID);
@@ -64,7 +64,7 @@ public class ModifierMaterialRepairRecipe extends TinkerStationRepairRecipe impl
 
   @SuppressWarnings("removal")
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ModifierMaterialRepairRecipe> getSerializer() {
     return TinkerModifiers.modifierMaterialRepair.get();
   }
 

@@ -1,0 +1,20 @@
+{
+  "values": [
+    "modernfoundry:pickaxe",
+    "modernfoundry:sledge_hammer",
+    "modernfoundry:vein_hammer",
+    "modernfoundry:mattock",
+    "modernfoundry:pickadze",
+    "modernfoundry:excavator",
+    "modernfoundry:hand_axe",
+    "modernfoundry:broad_axe",
+    "modernfoundry:kama",
+    "modernfoundry:scythe",
+    "modernfoundry:melting_pan",
+    "modernfoundry:war_pick",
+    {
+      "id": "modernfoundry:minotaur_axe",
+      "required": false
+    }
+  ]
+}

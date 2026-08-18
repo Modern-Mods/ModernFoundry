@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/slimesteel/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/slimesteel"
-  },
+  "ingredient": "#c:storage_blocks/slimesteel",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/slimesteel"

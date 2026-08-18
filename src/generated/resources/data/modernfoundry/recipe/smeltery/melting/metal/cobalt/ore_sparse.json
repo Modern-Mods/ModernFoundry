@@ -1,6 +1,14 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "c:ores/cobalt",
+        "c:ore_rates/sparse"
+      ]
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/cobalt/ore_sparse",
   "byproducts": [
     {
       "amount": 25,
@@ -8,24 +16,12 @@
       "rate": "gem"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_combination_filled",
-      "match": [
-        "c:ores/cobalt",
-        "c:ore_rates/sparse"
-      ]
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/metal/cobalt/ore_sparse",
   "ingredient": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "c:ores/cobalt"
-      },
-      {
-        "tag": "c:ore_rates/sparse"
-      }
+      "#c:ores/cobalt",
+      "#c:ore_rates/sparse"
     ]
   },
   "rate": "metal",

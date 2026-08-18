@@ -1,38 +1,13 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/base/tall_axe",
   "textures": {
-    "head":    "modernfoundry:item/tool/broad_axe/blade",
-    "handle":  "modernfoundry:item/tool/broad_axe/handle",
-    "back":    "modernfoundry:item/tool/broad_axe/back",
+    "head": "modernfoundry:item/tool/broad_axe/blade",
+    "handle": "modernfoundry:item/tool/broad_axe/handle",
+    "back": "modernfoundry:item/tool/broad_axe/back",
     "binding": "modernfoundry:item/tool/broad_axe/binding",
-    
-    "large_head":    "modernfoundry:item/tool/broad_axe/large/blade",
-    "large_handle":  "modernfoundry:item/tool/broad_axe/large/handle",
-    "large_back":    "modernfoundry:item/tool/broad_axe/large/back",
+    "large_head": "modernfoundry:item/tool/broad_axe/large/blade",
+    "large_handle": "modernfoundry:item/tool/broad_axe/large/handle",
+    "large_back": "modernfoundry:item/tool/broad_axe/large/back",
     "large_binding": "modernfoundry:item/tool/broad_axe/large/binding"
-  },
-  "modifier_maps": ["modernfoundry:broad_axe"],
-  "modifier_roots": {
-    "small": [ "modernfoundry:item/tool/broad_axe/modifiers/" ],
-    "large": [ "modernfoundry:item/tool/broad_axe/large/modifiers/" ]
-  },
-  "large": true,
-  "large_offset": [-2, 2],
-  "parts": [
-    { "name": "handle",  "index": 1 },
-    { "name": "head",    "index": 0 },
-    { "name": "back",    "index": 2 },
-    { "name": "binding", "index": 3 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/broad_axe/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/broad_axe/broken"
-    }
-  ]
+  }
 }

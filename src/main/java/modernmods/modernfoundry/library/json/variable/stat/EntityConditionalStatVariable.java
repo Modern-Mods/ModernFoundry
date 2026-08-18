@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.json.variable.stat;
 
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.variable.entity.EntityVariable;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 

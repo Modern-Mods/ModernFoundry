@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steeleaf/twilightforest_leggings",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:steeleaf_leggings"
+      "type": "neoforge:registered",
+      "value": "twilightforest:steeleaf_leggings"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steeleaf/twilightforest_leggings",
   "ingredient": {
     "item": "twilightforest:steeleaf_leggings"
   },

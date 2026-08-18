@@ -10,20 +10,21 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
+import modernmods.mantle.recipe.data.FinishedRecipe;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
+import modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
@@ -70,7 +71,7 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe, IMultiRecipe<
   /** Error for trying to recycle a tool that cannot be */
   public static final List<Component> NO_MODIFIERS = Collections.singletonList(TConstruct.makeTranslation("recipe", "tool_recycling.no_modifiers").withStyle(ChatFormatting.RED));
   /** Default tool field */
-  public static final SizedIngredient DEFAULT_TOOLS = SizedIngredient.fromTag(TinkerTags.Items.MULTIPART_TOOL);
+  public static final SizedIngredient DEFAULT_TOOLS = SizedIngredient.of(LazyTagIngredient.of(TinkerTags.Items.MULTIPART_TOOL), 1);
 
   /** Loader instance */
   public static final RecordLoadable<PartBuilderToolRecycle> LOADER = RecordLoadable.create(
@@ -81,14 +82,14 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe, IMultiRecipe<
     PartBuilderToolRecycle::new);
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   private final SizedIngredient toolRequirement;
   private final Ingredient pattern;
   private final List<IMaterialItem> parts;
 
   /** @deprecated use {@link FinishedRecipe} */
   @Deprecated(forRemoval = true)
-  public PartBuilderToolRecycle(ResourceLocation id, SizedIngredient toolRequirement, Ingredient pattern) {
+  public PartBuilderToolRecycle(Identifier id, SizedIngredient toolRequirement, Ingredient pattern) {
     this(id, toolRequirement, pattern, List.of());
   }
 
@@ -207,13 +208,12 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe, IMultiRecipe<
 
   /** @deprecated use {@link IPartBuilderRecipe#assemble(IPartBuilderContainer, HolderLookup.Provider, Pattern)} */
   @Deprecated
-  @Override
   public ItemStack getResultItem(HolderLookup.Provider access) {
     return ItemStack.EMPTY;
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends PartBuilderToolRecycle> getSerializer() {
     return TinkerTables.partBuilderToolRecycling.get();
   }
 
@@ -249,7 +249,7 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe, IMultiRecipe<
   @Override
   public List<DisplayPartRecipe> getRecipes(RegistryAccess access) {
     if (displayRecipes == null) {
-      List<ItemStack> patternItems = List.of(this.pattern.getItems());
+      List<ItemStack> patternItems = List.of(this.pattern.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
       // if we have parts, will be using the same list for all tools, so make just 1 recipe per part
       if (!parts.isEmpty()) {
         List<ItemStack> tools = toolRequirement.getMatchingStacks().stream().map(IModifiableDisplay::getDisplayStack).toList();
@@ -269,11 +269,11 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe, IMultiRecipe<
 
   /** @deprecated use {@link modernmods.modernfoundry.library.recipe.partbuilder.recycle.PartBuilderToolRecycleBuilder} */
   @Deprecated(forRemoval = true)
-  public record Finished(ResourceLocation getId, SizedIngredient tools, Ingredient pattern) implements FinishedRecipe {
+  public record Finished(Identifier getId, SizedIngredient tools, Ingredient pattern) implements FinishedRecipe {
     @Override
     public void serializeRecipeData(JsonObject json) {
       json.add("tools", SizedIngredient.LOADABLE.serialize(tools));
-      json.add("pattern", Ingredient.CODEC_NONEMPTY.encodeStart(JsonOps.INSTANCE, pattern).getOrThrow(IllegalArgumentException::new));
+      json.add("pattern", Ingredient.CODEC.encodeStart(JsonOps.INSTANCE, pattern).getOrThrow(IllegalArgumentException::new));
     }
 
     @Override
@@ -289,7 +289,7 @@ public class PartBuilderToolRecycle implements IPartBuilderRecipe, IMultiRecipe<
 
     @Nullable
     @Override
-    public ResourceLocation getAdvancementId() {
+    public Identifier getAdvancementId() {
       return null;
     }
   }

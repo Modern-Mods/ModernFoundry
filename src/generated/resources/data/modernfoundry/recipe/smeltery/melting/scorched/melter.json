@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/scorched/melter",
   "byproducts": [
     {
       "amount": 500,
       "fluid": "modernfoundry:molten_quartz"
     }
   ],
-  "ingredient": {
-    "item": "modernfoundry:scorched_alloyer"
-  },
+  "id": "modernfoundry:smeltery/melting/scorched/melter",
+  "ingredient": "modernfoundry:scorched_alloyer",
   "result": {
     "amount": 2250,
     "fluid": "modernfoundry:scorched_stone"

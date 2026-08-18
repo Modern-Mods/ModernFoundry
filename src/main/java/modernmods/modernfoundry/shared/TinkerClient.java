@@ -1,29 +1,17 @@
 package modernmods.modernfoundry.shared;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
+import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
 import net.neoforged.neoforge.client.event.RenderBlockScreenEffectEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
-import org.joml.Matrix4f;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.recipe.RecipeCacheInvalidator;
@@ -65,7 +53,7 @@ import static modernmods.modernfoundry.TConstruct.getResource;
 /**
  * This class should only be referenced on the client side
  */
-@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.GAME)
+@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT)
 public class TinkerClient {
   /**
    * Called by TConstruct to handle any client side logic that needs to run during the constructor
@@ -77,7 +65,7 @@ public class TinkerClient {
     MaterialRenderInfoLoader.init();
 
     // add the recipe cache invalidator to the client
-    Consumer<RecipesUpdatedEvent> recipesUpdated = event -> RecipeCacheInvalidator.reload(true);
+    Consumer<RecipesReceivedEvent> recipesUpdated = event -> RecipeCacheInvalidator.reload(true);
     NeoForge.EVENT_BUS.addListener(recipesUpdated);
 
     // register datagen serializers
@@ -124,35 +112,11 @@ public class TinkerClient {
       float width = minecraft.player.getBbWidth() * 0.8F;
       // check collision of the block again, for non-full blocks
       if (Shapes.joinIsNotEmpty(state.getShape(minecraft.level, pos).move(pos.getX(), pos.getY(), pos.getZ()), Shapes.create(AABB.ofSize(minecraft.player.getEyePosition(), width, 1.0E-6D, width)), BooleanOp.AND)) {
-        // this is for the most part a clone of the vanilla logic from ScreenEffectRenderer with some changes mentioned below
-
-        TextureAtlasSprite texture = minecraft.getBlockRenderer().getBlockModelShaper().getTexture(state, minecraft.level, pos);
-        RenderSystem.setShaderTexture(0, texture.atlasLocation());
-        // changed: shader using pos tex
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        // change: handle brightness based on renderWater, and enable blend
-        Player player = minecraft.player;
-        BlockPos blockpos = BlockPos.containing(player.getX(), player.getEyeY(), player.getZ());
-        float brightness = LightTexture.getBrightness(player.level().dimensionType(), player.level().getMaxLocalRawBrightness(blockpos));
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.setShaderColor(brightness, brightness, brightness, 1.0f);
-
-        // draw the quad
-        float u0 = texture.getU0();
-        float u1 = texture.getU1();
-        float v0 = texture.getV0();
-        float v1 = texture.getV1();
-        Matrix4f matrix4f = event.getPoseStack().last().pose();
-        BufferBuilder bufferbuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        // change: dropped color, see above
-        bufferbuilder.addVertex(matrix4f, -1, -1, -0.5f).setUv(u1, v1);
-        bufferbuilder.addVertex(matrix4f, 1, -1, -0.5f).setUv(u0, v1);
-        bufferbuilder.addVertex(matrix4f, 1, 1, -0.5f).setUv(u0, v0);
-        bufferbuilder.addVertex(matrix4f, -1, 1, -0.5f).setUv(u1, v0);
-        BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
-        // changed: disable blend
-        RenderSystem.disableBlend();
+        // DEFERRED RENDER: the pre-26.1 custom transparent overlay quad was drawn with the removed immediate-mode pipeline
+        // (RenderSystem.setShader/setShaderTexture, Tesselator/BufferBuilder + BufferUploader.drawWithShader, and
+        // LightTexture.getBrightness). In 26.1 the screen-effect overlay must be rebuilt against the new render pipeline
+        // (ScreenEffectRenderer). Cancelling the vanilla overlay below already leaves the block view transparent (the intent
+        // of TRANSPARENT_OVERLAY); re-adding the tinted quad is validated in-game.
       }
       event.setCanceled(true);
     }

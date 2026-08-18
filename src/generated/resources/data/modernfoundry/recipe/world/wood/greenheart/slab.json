@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_slab",
   "key": {
-    "#": {
-      "item": "modernfoundry:greenheart_planks"
-    }
+    "#": "modernfoundry:greenheart_planks"
   },
   "pattern": [
     "###"
@@ -13,6 +11,5 @@
   "result": {
     "count": 6,
     "id": "modernfoundry:greenheart_planks_slab"
-  },
-  "show_notification": true
+  }
 }

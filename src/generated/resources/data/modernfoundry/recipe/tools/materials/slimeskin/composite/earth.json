@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/slimeskin/composite/earth",
   "fluid": {
     "amount": 250,
     "tag": "c:slime"
   },
+  "id": "modernfoundry:tools/materials/slimeskin/composite/earth",
   "input": "modernfoundry:leather",
   "output": "modernfoundry:slimeskin",
   "temperature": 50

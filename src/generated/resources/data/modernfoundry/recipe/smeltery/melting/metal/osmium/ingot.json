@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/osmium/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/osmium"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/osmium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/osmium/ingot",
+  "ingredient": "#c:ingots/osmium",
   "result": {
     "amount": 90,
     "tag": "c:molten_osmium"

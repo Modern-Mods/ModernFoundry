@@ -1,0 +1,11 @@
+{
+  "type": "mantle:fill_item",
+  "fluid": {
+    "amount": 250,
+    "tag": "modernfoundry:meat_soup"
+  },
+  "input": {
+    "item": "minecraft:bowl"
+  },
+  "result": "modernfoundry:meat_soup"
+}

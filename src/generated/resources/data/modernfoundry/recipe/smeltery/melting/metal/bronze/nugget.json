@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/bronze/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/bronze"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/bronze"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/bronze/nugget",
+  "ingredient": "#c:nuggets/bronze",
   "result": {
     "amount": 10,
     "tag": "c:molten_bronze"

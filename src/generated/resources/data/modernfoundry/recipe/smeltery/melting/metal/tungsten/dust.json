@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/tungsten/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/tungsten"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/tungsten"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/tungsten/dust",
+  "ingredient": "#c:dusts/tungsten",
   "result": {
     "amount": 90,
     "tag": "c:molten_tungsten"

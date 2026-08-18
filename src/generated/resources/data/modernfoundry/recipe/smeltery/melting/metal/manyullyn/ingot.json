@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/manyullyn/ingot",
-  "ingredient": {
-    "tag": "c:ingots/manyullyn"
-  },
+  "ingredient": "#c:ingots/manyullyn",
   "result": {
     "amount": 90,
     "tag": "c:molten_manyullyn"

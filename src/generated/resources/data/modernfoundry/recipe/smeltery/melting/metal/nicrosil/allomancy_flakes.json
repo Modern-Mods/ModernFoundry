@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/nicrosil/allomancy_flakes",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "allomancy:nicrosil_flakes"
+      "type": "neoforge:registered",
+      "value": "allomancy:nicrosil_flakes"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/nicrosil/allomancy_flakes",
   "ingredient": {
     "item": "allomancy:nicrosil_flakes"
   },

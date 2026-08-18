@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "p": {
-      "tag": "minecraft:planks"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
-    }
+    "p": "#minecraft:planks",
+    "s": "#c:rods/wooden"
   },
   "pattern": [
     "ps",
@@ -16,6 +12,5 @@
   "result": {
     "count": 6,
     "id": "modernfoundry:pattern"
-  },
-  "show_notification": true
+  }
 }

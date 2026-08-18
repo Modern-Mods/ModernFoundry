@@ -4,14 +4,14 @@ import com.mojang.math.Transformation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.client.model.util.HiltItemLayerModel;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.ItemLayerPixels;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.client.model.util.MantleItemLayerModel;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.ItemLayerPixels;
 import modernmods.modernfoundry.library.client.modifiers.model.SimpleModifierModel;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
@@ -60,8 +60,8 @@ public class DyedModifierModel implements SimpleModifierModel {
     ModifierId modifier = entry.getId();
     IModDataView data = tool.getPersistentData();
     int color = -1;
-    if (data.contains(modifier, Tag.TAG_INT)) {
-      color = data.getInt(modifier);
+    if (data.contains(modifier.getIdentifier())) {
+      color = data.getInt(modifier.getIdentifier());
     }
     return new CacheKey(modifier, color);
   }
@@ -71,9 +71,9 @@ public class DyedModifierModel implements SimpleModifierModel {
     Material texture = isLarge ? large : small;
     if (texture != null) {
       IModDataView data = tool.getPersistentData();
-      ResourceLocation key = modifier.getId();
-      if (data.contains(key, Tag.TAG_INT)) {
-        quadConsumer.accept(HiltItemLayerModel.getQuadsForSprite(0xFF000000 | data.getInt(key), -1, spriteGetter.apply(texture), transforms, 0, pixels));
+      Identifier key = modifier.getId().getIdentifier();
+      if (data.contains(key)) {
+        quadConsumer.accept(MantleItemLayerModel.getQuadsForSprite(0xFF000000 | data.getInt(key), -1, new Material.Baked(spriteGetter.apply(texture), false), transforms, 0, pixels));
       }
     }
   }

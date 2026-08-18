@@ -1,17 +1,17 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/crafting_table",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/crafting_table",
   "inputs": [
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     },
     {
-      "item": "modernfoundry:crafting_station"
+      "ingredient": "modernfoundry:crafting_station"
     },
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     }
   ],
   "level": 1,
@@ -19,7 +19,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/leggings"
-  }
+  "tools": "#modernfoundry:modifiable/armor/leggings"
 }

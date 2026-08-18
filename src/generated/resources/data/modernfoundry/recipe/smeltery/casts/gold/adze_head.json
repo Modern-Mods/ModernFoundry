@@ -1,9 +1,8 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casts/gold/adze_head",
   "cast": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:adze_head"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:adze_head"
   },
   "cast_consumed": true,
   "cooling_time": 57,
@@ -11,6 +10,7 @@
     "amount": 90,
     "tag": "c:molten_gold"
   },
+  "id": "modernfoundry:smeltery/casts/gold/adze_head",
   "result": "modernfoundry:adze_head_cast",
   "switch_slots": true
 }

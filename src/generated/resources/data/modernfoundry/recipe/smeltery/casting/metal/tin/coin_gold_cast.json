@@ -1,20 +1,18 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/tin/coin_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/coin"
-  },
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/tin"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/multi_use/coin",
   "cooling_time": 23,
   "fluid": {
     "amount": 30,
     "tag": "c:molten_tin"
   },
+  "id": "modernfoundry:smeltery/casting/metal/tin/coin_gold_cast",
   "result": {
     "tag": "c:coins/tin"
   }

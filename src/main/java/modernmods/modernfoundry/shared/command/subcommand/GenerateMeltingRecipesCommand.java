@@ -14,9 +14,9 @@ import net.minecraft.commands.arguments.ResourceArgument;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
+import modernmods.mantle.recipe.data.FinishedRecipe;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.Resource;
@@ -28,27 +28,32 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplayContext;
+import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import modernmods.modernfoundry.library.fluid.SimpleFluidResourceTank;
 import org.apache.commons.lang3.mutable.MutableInt;
-import modernmods.hilt.command.GeneratePackHelper;
-import modernmods.hilt.command.HiltCommand;
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
-import modernmods.hilt.fluid.transfer.FluidContainerTransferManager;
-import modernmods.hilt.fluid.transfer.IFluidContainerTransfer;
-import modernmods.hilt.fluid.transfer.IFluidContainerTransfer.TransferDirection;
-import modernmods.hilt.fluid.transfer.IFluidContainerTransfer.TransferResult;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.util.JsonHelper;
-import modernmods.hilt.util.LogicHelper;
+import modernmods.mantle.command.GeneratePackHelper;
+import modernmods.mantle.command.MantleCommand;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
+import modernmods.mantle.fluid.transfer.FluidContainerTransferManager;
+import modernmods.mantle.fluid.transfer.IFluidContainerTransfer;
+import modernmods.mantle.fluid.transfer.IFluidContainerTransfer.TransferDirection;
+import modernmods.mantle.fluid.transfer.IFluidContainerTransfer.TransferResult;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.util.JsonHelper;
+import modernmods.mantle.util.LogicHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.recipe.melting.MeltingRecipeBuilder;
 import modernmods.modernfoundry.library.recipe.melting.MeltingRecipeLookup;
@@ -73,13 +78,13 @@ import java.util.function.Function;
 /** Generates melting recipes based on crafting recipes */
 public class GenerateMeltingRecipesCommand {
   /** Location of the config JSON file */
-  public static final ResourceLocation MELTING_CONFIGURATION = TConstruct.getResource("command/generate_melting_recipes.json");
+  public static final Identifier MELTING_CONFIGURATION = TConstruct.getResource("command/generate_melting_recipes.json");
   /** KEY for successfully running command */
   private static final String KEY_SUCCESS = TConstruct.makeTranslationKey("command", "generate.melting_recipes");
   /** Error on invalid config JSON */
   private static final SimpleCommandExceptionType CONFIG_INVALID = new SimpleCommandExceptionType(TConstruct.makeTranslation("command", "generate.melting_recipes.invalid_config"));
   /** Recipes to skip when considering melting */
-  private static final Loadable<List<ResourceLocation>> SKIP_RECIPES = Loadables.RESOURCE_LOCATION.list(0);
+  private static final Loadable<List<Identifier>> SKIP_RECIPES = Loadables.RESOURCE_LOCATION.list(0);
 
   /**
    * Registers this sub command with the root command
@@ -88,7 +93,7 @@ public class GenerateMeltingRecipesCommand {
    * @param context    Context to fetch the recipe type argument
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand, CommandBuildContext context) {
-    subCommand.requires(sender -> sender.hasPermission(HiltCommand.PERMISSION_GAME_COMMANDS))
+    subCommand.requires(sender -> MantleCommand.hasPermission(sender, MantleCommand.PERMISSION_GAME_COMMANDS))
       .then(Commands.argument("recipe_type", ResourceArgument.resource(context, Registries.RECIPE_TYPE))
         .executes(GenerateMeltingRecipesCommand::run));
   }
@@ -109,7 +114,7 @@ public class GenerateMeltingRecipesCommand {
     IJsonPredicate<Item> melt;
     IJsonPredicate<Item> inputs;
     IJsonPredicate<Item> ignore;
-    List<ResourceLocation> skipRecipes;
+    List<Identifier> skipRecipes;
     Optional<Resource> resource = level.getServer().getResourceManager().getResource(MELTING_CONFIGURATION);
     config: {
       if (resource.isPresent()) {
@@ -131,11 +136,11 @@ public class GenerateMeltingRecipesCommand {
 
     // iterate all recipes for the type storing recipes that craft the tag
     RegistryAccess access = level.registryAccess();
-    Comparator<MeltingResult> nameComparator = Comparator.<MeltingResult,ResourceLocation>comparing(r -> Loadables.FLUID.getKey(r.fluid.getFluid())).reversed();
+    Comparator<MeltingResult> nameComparator = Comparator.<MeltingResult,Identifier>comparing(r -> Loadables.FLUID.getKey(r.fluid.getFluid())).reversed();
     MutableInt successes = new MutableInt(0);
     Path data = pack.resolve(PackType.SERVER_DATA.getDirectory());
     Consumer<FinishedRecipe> consumer = recipe -> {
-      ResourceLocation id = recipe.getId();
+      Identifier id = recipe.getId();
       Path path = data.resolve(id.getNamespace() + "/recipes/" + id.getPath() + ".json");
       if (GeneratePackHelper.saveJson(recipe.serializeRecipe(), path)) {
         successes.increment();
@@ -148,14 +153,20 @@ public class GenerateMeltingRecipesCommand {
 
     // iterate all recipes and try adding a melting recipe
     MeltingCache cache = new MeltingCache();
-    List<RecipeHolder<?>> recipes = (List)level.getRecipeManager().getAllRecipesFor((RecipeType)recipeType.value());
+    ContextMap slotContext = SlotDisplayContext.fromLevel(level);
+    List<RecipeHolder<?>> recipes = (List)level.getServer().getRecipeManager().recipeMap().byType((RecipeType)recipeType.value());
     for (RecipeHolder<?> recipeHolder : recipes) {
       Recipe<?> recipe = recipeHolder.value();
       // skip any recipes that are specifically blacklisted
-      if (skipRecipes.contains(recipeHolder.id())) {
+      if (skipRecipes.contains(recipeHolder.id().identifier())) {
         continue;
       }
-      ItemStack resultStack = recipe.getResultItem(access);
+      // resolve the recipe's display result to a representative output stack
+      List<RecipeDisplay> displays = recipe.display();
+      if (displays.isEmpty()) {
+        continue;
+      }
+      ItemStack resultStack = displays.getFirst().result().resolveForFirstStack(slotContext);
       // don't bother with results that have NBT unless its a damagable item, in which case we ignore NBT and hope for the best
       // also skip anything already meltable
       Item result = resultStack.getItem();
@@ -166,7 +177,7 @@ public class GenerateMeltingRecipesCommand {
 
       // in order to melt the result, we need to find what it's made of. Iterate all ingredients and turn them into a single result object
       ingredientSearch: {
-        for (Ingredient ingredient : recipe.getIngredients()) {
+        for (Ingredient ingredient : recipe.placementInfo().ingredients()) {
           // skip empty ingredients, just saves some steps really
           if (ingredient.isEmpty()) {
             continue;
@@ -174,7 +185,7 @@ public class GenerateMeltingRecipesCommand {
           // for each ingredient, convert it into the smallest fluid. If we have multiple or anything invalid, give up
           MeltingResult ingredientFluid = null;
           boolean didIgnore = false; // if true, we skipped something and are ineligible for a fluid next
-          for (ItemStack stack : ingredient.getItems()) {
+          for (ItemStack stack : ingredient.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)) {
             // if the ingredient has NBT, nothing we can do here
             // also skip if the item is disallowed as an input
             if (stack.isEmpty() || TagUtil.hasTag(stack) || !inputs.matches(stack.getItem())) {
@@ -273,8 +284,8 @@ public class GenerateMeltingRecipesCommand {
           // we don't know the proper unit size, but 10mb is pretty likely
           builder.setDamagable(10);
         }
-        ResourceLocation id = Loadables.ITEM.getKey(result);
-        builder.save(consumer, new ResourceLocation("tinkers_generated", "melting/" + id.getNamespace() + '/' + id.getPath()));
+        Identifier id = Loadables.ITEM.getKey(result);
+        builder.save(consumer, Identifier.fromNamespaceAndPath("tinkers_generated", "melting/" + id.getNamespace() + '/' + id.getPath()));
       }
     }
 
@@ -342,7 +353,7 @@ public class GenerateMeltingRecipesCommand {
         return first.tag.equals(second.tag);
       }
       // if either lack a tag, do exact fluid
-      return first.fluid.isFluidEqual(second.fluid);
+      return FluidStack.isSameFluidSameComponents(first.fluid, second.fluid);
     }
 
     /** Combines two results into a larger result. Precondition is {@link #matches(MeltingResult, MeltingResult)} is true. */
@@ -425,7 +436,7 @@ public class GenerateMeltingRecipesCommand {
       ItemStack stack = new ItemStack(item);
       IFluidContainerTransfer transfer = FluidContainerTransferManager.INSTANCE.getTransfer(stack, FluidStack.EMPTY);
       if (transfer != null) {
-        FluidTank tank = new FluidTank(10000);
+        SimpleFluidResourceTank tank = new SimpleFluidResourceTank(10000);
         TransferResult transferResult = transfer.transfer(stack, FluidStack.EMPTY, tank, TransferDirection.EMPTY_ITEM);
         if (transferResult != null) {
           return MeltingResult.from(transferResult.fluid());
@@ -440,9 +451,9 @@ public class GenerateMeltingRecipesCommand {
       }
       // fluid capability check
       try {
-        IFluidHandlerItem capability = stack.getCapability(Capabilities.FluidHandler.ITEM);
-        if (capability != null) {
-          FluidStack contained = capability.getFluidInTank(0);
+        ResourceHandler<FluidResource> capability = ItemAccess.forStack(stack.copyWithCount(1)).getCapability(Capabilities.Fluid.ITEM);
+        if (capability != null && capability.size() > 0) {
+          FluidStack contained = capability.getResource(0).toStack(capability.getAmountAsInt(0));
           if (!contained.isEmpty()) {
             return MeltingResult.from(contained);
           }

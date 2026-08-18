@@ -1,23 +1,23 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/flinging",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/flinging",
   "inputs": [
     {
-      "item": "minecraft:vine"
+      "ingredient": "minecraft:vine"
     },
     {
-      "item": "modernfoundry:earth_slime_crystal"
+      "ingredient": "modernfoundry:earth_slime_crystal"
     },
     {
-      "item": "minecraft:vine"
+      "ingredient": "minecraft:vine"
     },
     {
-      "item": "modernfoundry:earth_congealed_slime"
+      "ingredient": "modernfoundry:earth_congealed_slime"
     },
     {
-      "item": "modernfoundry:earth_congealed_slime"
+      "ingredient": "modernfoundry:earth_congealed_slime"
     }
   ],
   "level": 1,
@@ -26,14 +26,10 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/durability"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable/charge"
-      }
+      "#modernfoundry:modifiable/durability",
+      "#modernfoundry:modifiable/interactable/charge"
     ]
   }
 }

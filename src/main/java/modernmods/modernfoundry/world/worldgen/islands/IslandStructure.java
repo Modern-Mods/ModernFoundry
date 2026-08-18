@@ -1,19 +1,14 @@
 package modernmods.modernfoundry.world.worldgen.islands;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.Accessors;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
@@ -35,27 +30,35 @@ public class IslandStructure extends Structure {
   public static final MapCodec<IslandStructure> CODEC = RecordCodecBuilder.mapCodec(inst ->
     inst.group(settingsCodec(inst)).and(inst.group(
           IslandPlacement.CODEC.fieldOf("placement").forGetter(s -> s.placement),
-          SimpleWeightedRandomList.wrappedCodec(ResourceLocation.CODEC).fieldOf("templates").forGetter(s -> s.templates),
-          SimpleWeightedRandomList.wrappedCodec(ConfiguredFeature.CODEC).fieldOf("trees").forGetter(s -> s.trees),
+          WeightedList.codec(Identifier.CODEC).fieldOf("templates").forGetter(s -> s.templates),
+          WeightedList.codec(ConfiguredFeature.CODEC).fieldOf("trees").forGetter(s -> s.trees),
           BuiltInRegistries.BLOCK.byNameCodec().optionalFieldOf("vines").forGetter(s -> s.vines),
-          SimpleWeightedRandomList.wrappedCodec(BuiltInRegistries.BLOCK.byNameCodec()).fieldOf("grasses").forGetter(s -> s.grasses)))
+          WeightedList.codec(BuiltInRegistries.BLOCK.byNameCodec()).fieldOf("grasses").forGetter(s -> s.grasses)))
         .apply(inst, IslandStructure::new));
 
-  @Getter
   private final IslandPlacement placement;
-  private final SimpleWeightedRandomList<ResourceLocation> templates;
-  private final SimpleWeightedRandomList<Holder<ConfiguredFeature<?,?>>> trees;
+  private final WeightedList<Identifier> templates;
+  private final WeightedList<Holder<ConfiguredFeature<?,?>>> trees;
   private final Optional<Block> vines;
-  @Getter
-  private final SimpleWeightedRandomList<Block> grasses;
+  private final WeightedList<Block> grasses;
 
-  public IslandStructure(StructureSettings settings, IslandPlacement placement, SimpleWeightedRandomList<ResourceLocation> templates, SimpleWeightedRandomList<Holder<ConfiguredFeature<?,?>>> trees, Optional<Block> vines, SimpleWeightedRandomList<Block> grasses) {
+  public IslandStructure(StructureSettings settings, IslandPlacement placement, WeightedList<Identifier> templates, WeightedList<Holder<ConfiguredFeature<?,?>>> trees, Optional<Block> vines, WeightedList<Block> grasses) {
     super(settings);
     this.placement = placement;
     this.templates = templates;
     this.trees = trees;
     this.vines = vines;
     this.grasses = grasses;
+  }
+
+  /** Gets the placement type for this island */
+  public IslandPlacement getPlacement() {
+    return placement;
+  }
+
+  /** Gets the weighted grasses for this island */
+  public WeightedList<Block> getGrasses() {
+    return grasses;
   }
 
   @Override
@@ -84,13 +87,13 @@ public class IslandStructure extends Structure {
 
   private void generatePieces(StructurePiecesBuilder builder, Structure.GenerationContext context) {
     RandomSource random = context.random();
-    Optional<ResourceLocation> template = templates.getRandomValue(random);
+    Optional<Identifier> template = templates.getRandom(random);
     if (template.isPresent()) {
       Rotation rotation = Rotation.getRandom(random);
       int height = placement.getHeight(context.chunkPos(), context.chunkGenerator(), context.heightAccessor(), rotation, random, context.randomState());
       BlockPos targetPos = context.chunkPos().getMiddleBlockPosition(height);
       Mirror mirror = Util.getRandom(Mirror.values(), random);
-      builder.addPiece(new IslandPiece(context.structureTemplateManager(), this, template.get(), targetPos, trees.getRandomValue(random).map(Holder::value).orElse(null), rotation, mirror));
+      builder.addPiece(new IslandPiece(context.structureTemplateManager(), this, template.get(), targetPos, trees.getRandom(random).map(Holder::value).orElse(null), rotation, mirror));
     }
   }
 
@@ -108,26 +111,28 @@ public class IslandStructure extends Structure {
   }
 
   @SuppressWarnings("UnusedReturnValue")  // its a builder my dude
-  @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class Builder {
     private static final String[] SIZES = new String[] { "0x1x0", "2x2x4", "4x1x6", "8x1x11", "11x1x11" };
 
     private final IslandPlacement placement;
-    private final SimpleWeightedRandomList.Builder<ResourceLocation> templates = SimpleWeightedRandomList.builder();
-    private final SimpleWeightedRandomList.Builder<Holder<ConfiguredFeature<?,?>>> trees = SimpleWeightedRandomList.builder();
-    private final SimpleWeightedRandomList.Builder<Block> grasses = SimpleWeightedRandomList.builder();
+    private final WeightedList.Builder<Identifier> templates = WeightedList.builder();
+    private final WeightedList.Builder<Holder<ConfiguredFeature<?,?>>> trees = WeightedList.builder();
+    private final WeightedList.Builder<Block> grasses = WeightedList.builder();
     @Nullable
-    @Accessors(fluent = true)
     private Block vines;
 
+    private Builder(IslandPlacement placement) {
+      this.placement = placement;
+    }
+
     /** Adds the given template to the builder */
-    public Builder addTemplate(ResourceLocation template, int weight) {
+    public Builder addTemplate(Identifier template, int weight) {
       this.templates.add(template, weight);
       return this;
     }
 
     /** Adds the default 5 templates around the given prefix to the builder */
-    public Builder addDefaultTemplates(ResourceLocation prefix) {
+    public Builder addDefaultTemplates(Identifier prefix) {
       for (String size : SIZES) {
         addTemplate(prefix.withSuffix(size), 1);
       }

@@ -1,9 +1,9 @@
 {
   "type": "modernfoundry:severing",
-  "id": "modernfoundry:tools/severing/wither_salvage",
   "entity": {
     "type": "minecraft:wither"
   },
+  "id": "modernfoundry:tools/severing/wither_salvage",
   "looting_bonus": 0.02,
   "per_level_chance": 0.1,
   "result": "minecraft:wither_skeleton_skull"

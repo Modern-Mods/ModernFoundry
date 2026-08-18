@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/steel/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/steel"
-  },
+  "ingredient": "#c:storage_blocks/steel",
   "result": {
     "amount": 810,
     "tag": "c:molten_steel"

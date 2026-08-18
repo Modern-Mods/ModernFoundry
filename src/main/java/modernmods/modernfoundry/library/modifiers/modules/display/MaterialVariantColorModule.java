@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.modifiers.modules.display;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.client.materials.MaterialTooltipCache;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;

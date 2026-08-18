@@ -9,8 +9,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.BreakSpeed;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.predicate.damage.DamageSourcePredicate;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.predicate.damage.DamageSourcePredicate;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -69,7 +69,8 @@ public class TemperateModifier extends Modifier implements ConditionalStatModifi
   private static float getBonus(LivingEntity living, BlockPos pos) {
     // temperature ranges from -1.25 to 1.25, so make it go -1 to 1
     // negative is cold, positive is hot
-    return (living.level().getBiome(pos).value().getTemperature(pos) - BASELINE_TEMPERATURE);
+    // 26.1.2 removed Biome#getTemperature(BlockPos); getBaseTemperature() omits the altitude cooling adjustment
+    return (living.level().getBiome(pos).value().getBaseTemperature() - BASELINE_TEMPERATURE);
   }
 
   @Override

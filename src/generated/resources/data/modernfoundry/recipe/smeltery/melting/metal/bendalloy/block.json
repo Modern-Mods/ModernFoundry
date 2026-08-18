@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/bendalloy/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/bendalloy"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/bendalloy"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/bendalloy/block",
+  "ingredient": "#c:storage_blocks/bendalloy",
   "result": {
     "amount": 810,
     "tag": "c:molten_bendalloy"

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/cadmium/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/cadmium"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/cadmium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/cadmium/ingot",
+  "ingredient": "#c:ingots/cadmium",
   "result": {
     "amount": 90,
     "tag": "c:molten_cadmium"

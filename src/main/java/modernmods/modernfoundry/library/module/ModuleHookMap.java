@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.module;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.LinkedHashMultimap;
 import lombok.RequiredArgsConstructor;
-import modernmods.hilt.data.loadable.ErrorFactory;
+import modernmods.mantle.data.loadable.ErrorFactory;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.impl.BasicModifier;
 

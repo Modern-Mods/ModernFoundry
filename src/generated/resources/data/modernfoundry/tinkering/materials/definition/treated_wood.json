@@ -7,11 +7,11 @@
         "prop": "force_integration_materials"
       },
       {
-        "type": "hilt:tag_filled",
+        "type": "mantle:tag_filled",
         "tag": "c:treated_wood"
       },
       {
-        "type": "hilt:tag_filled",
+        "type": "mantle:tag_filled",
         "registry": "minecraft:fluid",
         "tag": "c:creosote"
       }

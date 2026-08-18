@@ -4,9 +4,9 @@ package modernmods.modernfoundry.tables.client.inventory.widget;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.client.gui.components.Button;
-import modernmods.hilt.client.screen.MultiModuleScreen;
+import modernmods.mantle.client.screen.MultiModuleScreen;
 import lombok.Getter;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 /**
  * A side buttons widget with pagination
@@ -89,11 +89,11 @@ public class SideButtonsWidgetPaged<T extends Button> extends SideButtonsWidget<
         if (mouseButton == 0) {
             int button_num = this.buttons.size();
             if (button_num > columns * MAX_ROWS) { // Page button shows
-                if (this.previousPageButton.mouseClicked(mouseX, mouseY, mouseButton)) {
+                if (this.previousPageButton.mouseClicked(new net.minecraft.client.input.MouseButtonEvent(mouseX, mouseY, new net.minecraft.client.input.MouseButtonInfo(mouseButton, 0)), false)) {
                     this.clickedButtonIndex = 1;
                     return true;
                 }
-                if (this.nextPageButton.mouseClicked(mouseX, mouseY, mouseButton)) {
+                if (this.nextPageButton.mouseClicked(new net.minecraft.client.input.MouseButtonEvent(mouseX, mouseY, new net.minecraft.client.input.MouseButtonInfo(mouseButton, 0)), false)) {
                     this.clickedButtonIndex = 2;
                     return true;
                 }
@@ -105,12 +105,12 @@ public class SideButtonsWidgetPaged<T extends Button> extends SideButtonsWidget<
     @Override
     public boolean handleMouseReleased(double mouseX, double mouseY, int state) {
         if (this.clickedButtonIndex == 1) {
-            this.previousPageButton.mouseReleased(mouseX, mouseY, state);
+            this.previousPageButton.mouseReleased(new net.minecraft.client.input.MouseButtonEvent(mouseX, mouseY, new net.minecraft.client.input.MouseButtonInfo(state, 0)));
             this.clickedButtonIndex = 0;
             return true;
         }
         if (this.clickedButtonIndex == 2) {
-            this.nextPageButton.mouseReleased(mouseX, mouseY, state);
+            this.nextPageButton.mouseReleased(new net.minecraft.client.input.MouseButtonEvent(mouseX, mouseY, new net.minecraft.client.input.MouseButtonInfo(state, 0)));
             this.clickedButtonIndex = 0;
             return true;
         }
@@ -155,17 +155,17 @@ public class SideButtonsWidgetPaged<T extends Button> extends SideButtonsWidget<
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
         int button_num = this.buttons.size();
         if (button_num > columns * MAX_ROWS) {
-            this.previousPageButton.render(graphics, mouseX, mouseY, partialTicks);
-            this.nextPageButton.render(graphics, mouseX, mouseY, partialTicks);
+            this.previousPageButton.extractRenderState(graphics, mouseX, mouseY, partialTicks);
+            this.nextPageButton.extractRenderState(graphics, mouseX, mouseY, partialTicks);
         }
         int startIndex = page * columns * MAX_ROWS;
         int endIndex = Math.min(startIndex + columns * MAX_ROWS, button_num);
         for (int i = startIndex; i < endIndex; i++) { //only render buttons in the current page
             T button = this.buttons.get(i);
-            button.render(graphics, mouseX, mouseY, partialTicks);
+            button.extractRenderState(graphics, mouseX, mouseY, partialTicks);
         }
     }
 }

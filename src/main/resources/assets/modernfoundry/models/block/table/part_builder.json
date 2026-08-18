@@ -1,5 +1,5 @@
 {
-  "loader": "hilt:retextured",
+  "loader": "mantle:retextured",
   "parent": "modernfoundry:block/table/table",
   "textures": {
     "particle": "modernfoundry:block/table/part_builder_top",

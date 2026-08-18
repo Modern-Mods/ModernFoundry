@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:table_casting_material",
+  "cast": "#modernfoundry:casts/multi_use/helmet_plating",
   "id": "modernfoundry:tools/parts/casting/helmet_plating_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/helmet_plating"
-  },
   "item_cost": 3,
   "result": "modernfoundry:helmet_plating"
 }

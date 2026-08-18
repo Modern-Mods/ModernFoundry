@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/hepatizon/nugget_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/nugget"
-  },
+  "cast": "#modernfoundry:casts/multi_use/nugget",
   "cooling_time": 26,
   "fluid": {
     "amount": 10,
     "tag": "c:molten_hepatizon"
   },
+  "id": "modernfoundry:smeltery/casting/metal/hepatizon/nugget_gold_cast",
   "result": {
     "tag": "c:nuggets/hepatizon"
   }

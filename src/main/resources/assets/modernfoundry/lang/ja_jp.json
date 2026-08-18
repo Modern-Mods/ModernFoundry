@@ -1,5 +1,5 @@
 {
-  "_comment": "Modern Foundry Common",
+  "_comment": "Tinkers Common",
 
   "block.modernfoundry.sky_slime": "スカイスライムブロック",
   "block.modernfoundry.sky_slime.tooltip": "スライムブロック、ハチミツブロックにくっつく",
@@ -171,10 +171,10 @@
   "item.modernfoundry.book.click_to_open": "右クリックで開く",
   "item.modernfoundry.materials_and_you": "素材とあなた",
   "item.modernfoundry.materials_and_you.tooltip": "道具と材料についての入門書\nby Selena",
-  "item.modernfoundry.encyclopedia": "Modern Foundry大辞典",
-  "item.modernfoundry.encyclopedia.tooltip": "すべてのModern Foundryのための参考書\nby Selena",
+  "item.modernfoundry.encyclopedia": "ティンカー大辞典",
+  "item.modernfoundry.encyclopedia.tooltip": "すべてのティンカーのための参考書\nby Selena",
 
-  "item.modernfoundry.tinkers_gadgetry": "Modern Foundryのガジェット類",
+  "item.modernfoundry.tinkers_gadgetry": "ティンカーのガジェット類",
   "item.modernfoundry.tinkers_gadgetry.tooltip": "日々の作業の助けとなるスライムの利用法を記した書\nby Melvin",
 
   "item.modernfoundry.puny_smelting": "初等精錬",
@@ -272,7 +272,7 @@
   "item.modernfoundry.copper_can.tooltip": "1インゴット分の液体を保持するスタック可能な液体コンテナ",
   "item.modernfoundry.copper_can.contents": "中身: 1インゴット分の%s",
 
-  "_comment": "Modern Foundry Patterns",
+  "_comment": "Tinkers Patterns",
 
   "pattern.modernfoundry.ingot": "インゴット",
   "pattern.modernfoundry.nugget": "塊",
@@ -320,7 +320,7 @@
   "pattern.modernfoundry.tough_handle": "強化持ち手",
   "pattern.modernfoundry.bow_grip": "弓柄",
 
-  "_comment": "Modern Foundry Gold Casts",
+  "_comment": "Tinkers Gold Casts",
 
   "item.modernfoundry.cast.cost": "必要素材: %d",
 
@@ -370,7 +370,7 @@
   "item.modernfoundry.boots_plating_cast": "ブーツ用プレートの金型",
   "item.modernfoundry.maille_cast": "鎖環の金型",
 
-  "_comment": "Modern Foundry Sand Casts",
+  "_comment": "Tinkers Sand Casts",
 
   "item.modernfoundry.blank_sand_cast": "空の砂型",
   "item.modernfoundry.ingot_sand_cast": "インゴットの砂型",
@@ -419,7 +419,7 @@
   "item.modernfoundry.boots_plating_sand_cast": "ブーツ用プレートの砂型",
   "item.modernfoundry.maille_sand_cast": "鎖環の砂型",
 
-  "_comment": "Modern Foundry Red Sand Casts",
+  "_comment": "Tinkers Red Sand Casts",
 
   "item.modernfoundry.blank_red_sand_cast": "空の赤い砂型",
   "item.modernfoundry.ingot_red_sand_cast": "インゴットの赤い砂型",
@@ -468,7 +468,7 @@
   "item.modernfoundry.boots_plating_red_sand_cast": "ブーツ用プレートの赤い砂型",
   "item.modernfoundry.maille_red_sand_cast": "鎖環の赤い砂型",
 
-  "_comment": "Modern Foundry Fluids",
+  "_comment": "Tinkers Fluids",
 
   "block.modernfoundry.blazing_blood_fluid": "燃え盛る血液",
   "fluid.modernfoundry.blazing_blood": "燃え盛る血液",
@@ -928,7 +928,7 @@
   "fluid_effect.modernfoundry.drop_item": "%sを落とす",
   "fluid_effect.modernfoundry.explosion": "爆発 (強度%s)",
 
-  "_comment": "Modern Foundry Gadgets",
+  "_comment": "Tinkers Gadgets",
 
   "block.modernfoundry.punji": "竹槍トラップ",
   "block.modernfoundry.punji.tooltip": "鋭い！壁に設置することもできる。",
@@ -972,13 +972,13 @@
   "block.modernfoundry.piglin_brute_head": "ピグリンブルートの頭",
   "block.modernfoundry.zombified_piglin_head": "ゾンビピグリンの頭",
 
-  "_comment": "Modern Foundry Tables",
+  "_comment": "Tinkers Tables",
 
   "block.modernfoundry.crafting_station": "改良作業台",
 
-  "block.modernfoundry.tinker_station": "Modern Foundry台",
-  "block.modernfoundry.tinkers_anvil": "Modern Foundry金床",
-  "block.modernfoundry.scorched_anvil": "Modern Foundry金床",
+  "block.modernfoundry.tinker_station": "ティンカー台",
+  "block.modernfoundry.tinkers_anvil": "ティンカー金床",
+  "block.modernfoundry.scorched_anvil": "ティンカー金床",
 
   "block.modernfoundry.part_builder": "部品作成台",
   "block.modernfoundry.modifier_worktable": "改造調整台",
@@ -986,7 +986,7 @@
   "block.modernfoundry.part_chest": "部品チェスト",
   "block.modernfoundry.part_chest.tooltip": "最大で256個の部品を収納可能",
 
-  "block.modernfoundry.tinkers_chest": "Modern Foundryチェスト",
+  "block.modernfoundry.tinkers_chest": "ティンカーチェスト",
   "block.modernfoundry.tinkers_chest.tooltip": "最大で16種類のアイテムを64スタック収納可能",
 
   "block.modernfoundry.cast_chest": "金型チェスト",
@@ -994,7 +994,7 @@
 
   "item.modernfoundry.pattern": "パターン",
 
-  "_comment": "Modern Foundry Tools",
+  "_comment": "Tinkers Tools",
 
   "_comment_on_format_": "These format allows you to have more control over separators in material names. By default we separate with space. You can use %1$s and %2$s if you wish to change the order.",
   "item.modernfoundry.tool.format": "%sの%s",
@@ -1067,7 +1067,7 @@
   "item.modernfoundry.crystalshot": "クリスタルショット",
   "entity.modernfoundry.crystalshot": "クリスタルショット",
 
-  "_comment": "Modern Foundry Tool Parts",
+  "_comment": "Tinkers Tool Parts",
 
   "item.modernfoundry.dummy_tool_part.tooltip": "鋳型の作成に使用し、道具の作成には使用できない",
 
@@ -1199,7 +1199,7 @@
 
   "multiblock.modernfoundry.tiny.no_fuel_tank": "動作させるには、燃料タンクまたは発熱器の上に配置する必要があります",
 
-  "_comment": "Modern Foundry Smeltery",
+  "_comment": "Tinkers Smeltery",
 
   "block.modernfoundry.grout": "グラウト",
   "block.modernfoundry.grout.tooltip": "私はグラウト！",
@@ -1300,7 +1300,7 @@
   "block.modernfoundry.seared_casting_tank": "鋳造タンク",
   "block.modernfoundry.seared_casting_tank.tooltip": "挿入したアイテムを自動的に空にしたり、充填したりする。\n壊れても液体を保持する。",
 
-  "_comment": "Modern Foundry Foundry",
+  "_comment": "Tinkers Foundry",
 
   "block.modernfoundry.nether_grout": "ネザーグラウト",
   "block.modernfoundry.nether_grout.tooltip": "私たちはグラウト！",
@@ -1356,7 +1356,7 @@
   "block.modernfoundry.scorched_basin.tooltip": "鋳造炉から溶けた金属を流し込んでアイテム化させる。",
   "block.modernfoundry.scorched_table": "焦熱石の鋳造台",
   "block.modernfoundry.scorched_table.tooltip": "鋳造炉から溶けた金属を流し込んでアイテム化させる。",
-  "block.modernfoundry.scorched_proxy_tank": "焦熱石のModern Foundryタンク",
+  "block.modernfoundry.scorched_proxy_tank": "焦熱石のティンカータンク",
   "block.modernfoundry.scorched_proxy_tank.tooltip": "内部のタンクの代わりに充填や排出が可能なタンク。",
 
   "block.modernfoundry.scorched_channel": "焦熱石のチャネル",
@@ -1396,7 +1396,7 @@
 
   "gui.modernfoundry.fluid.hold_shift": "§e§oShift§r§7を押すとバケツ単位に切り替わります",
 
-  "_comment": "Modern Foundry World",
+  "_comment": "Tinkers World",
 
   "entity.modernfoundry.earth_slime": "アーススライム",
   "item.modernfoundry.earth_slime_spawn_egg": "アーススライムのスポーンエッグ",
@@ -1638,7 +1638,7 @@
 
   "material.modernfoundry.flint": "火打石",
   "material.modernfoundry.flint.basalt": "玄武岩",
-  "material.modernfoundry.flint.flavor": "Modern Foundryの心が燃え上がる！",
+  "material.modernfoundry.flint.flavor": "ティンカーの心が燃え上がる！",
   "material.modernfoundry.flint.encyclopedia": "減少した耐久度の平方根の更に4分の1の値に、この特性のレベルを掛けた分、攻撃力が増加する",
 
   "material.modernfoundry.bone": "骨",
@@ -1663,7 +1663,7 @@
 
   "material.modernfoundry.string": "糸",
   "material.modernfoundry.string.flavor": "理論上、最高の素材。",
-  "material.modernfoundry.string.encyclopedia": "Modern Foundry台または作業台で、道具を糸で修理できるようになる",
+  "material.modernfoundry.string.encyclopedia": "ティンカー台または作業台で、道具を糸で修理できるようになる",
   "material.modernfoundry.string.skull_flavor": "クモはポーションの達人であり、その秘密を知ればポーションの効果を高めることができるかもしれない…",
   "material.modernfoundry.string.skull_encyclopedia": "正のポーション効果の持続時間が25%伸びる",
 
@@ -1772,7 +1772,7 @@
   "material.modernfoundry.cobalt.armor": "レベルごとに近接攻撃によるダメージを10%軽減し、アイテム使用時の移動速度を5%増加する。最もレベルの高いアーマーのものが適用される",
 
   "material.modernfoundry.manyullyn": "マンユリン",
-  "material.modernfoundry.manyullyn.flavor": "ほとんどのModern Foundryが正しく発音していない金属。星切の素材としても知られている。",
+  "material.modernfoundry.manyullyn.flavor": "ほとんどのティンカーが正しく発音していない金属。星切の素材としても知られている。",
   "material.modernfoundry.manyullyn.encyclopedia": "攻撃を8回連続でヒットさせた後、以降のダメージがレベルごとに+2される",
   "material.modernfoundry.manyullyn.ranged": "攻撃を8回連続でヒットさせた後、以降の矢のダメージがレベルごとに+1(速度によるダメージ補正をする前の値)される",
   "material.modernfoundry.manyullyn.armor": "ダメージを受けるたび、一時的に近接攻撃ダメージが+1される。全アーマーの合計レベルが最大値",
@@ -1947,7 +1947,7 @@
 
   "_comment": "Modifiers",
 
-  "key.categories.modernfoundry": "Modern Foundry",
+  "key.category.modernfoundry.modernfoundry": "Modern Foundry",
   "key.modernfoundry.helmet_interact": "ヘルメットのアクション",
   "key.modernfoundry.leggings_interact": "レギンスのアクション",
 
@@ -3024,30 +3024,30 @@
 
   "_comment": "GUIs",
 
-  "itemGroup.modernfoundry.general": "Modern Foundry 一般アイテム",
-  "itemGroup.modernfoundry.tables": "Modern Foundry 作業台",
-  "itemGroup.modernfoundry.tools": "Modern Foundry 道具",
-  "itemGroup.modernfoundry.tool_parts": "Modern Foundry 道具の部品",
-  "itemGroup.modernfoundry.smeltery": "Modern Foundry 精錬炉関連",
-  "itemGroup.modernfoundry.fluids": "Modern Foundry 液体",
-  "itemGroup.modernfoundry.world": "Modern Foundry 自然生成物",
+  "itemGroup.modernfoundry.general": "Foundry 一般アイテム",
+  "itemGroup.modernfoundry.tables": "Foundry 作業台",
+  "itemGroup.modernfoundry.tools": "Foundry 道具",
+  "itemGroup.modernfoundry.tool_parts": "Foundry 道具の部品",
+  "itemGroup.modernfoundry.smeltery": "Foundry 精錬炉関連",
+  "itemGroup.modernfoundry.fluids": "Foundry 液体",
+  "itemGroup.modernfoundry.world": "Foundry 自然生成物",
 
   "gui.modernfoundry.crafting_station": "改良作業台",
   "gui.modernfoundry.crafting_station.uncraftable": "このアイテムは現在プレイヤーがクラフトできません",
 
   "gui.modernfoundry.part_builder": "部品作成台",
-  "gui.modernfoundry.part_builder.info": "あなたのModern Foundryとしての夢を叶える道具の部品を作れます。\n\n部品を作るには、左のスロットに空のパターンを入れて作成したい部品を選択します。残りのスロットには部品を作るための素材を置きます。",
+  "gui.modernfoundry.part_builder.info": "あなたのティンカーとしての夢を叶える道具の部品を作れます。\n\n部品を作るには、左のスロットに空のパターンを入れて作成したい部品を選択します。残りのスロットには部品を作るための素材を置きます。",
   "gui.modernfoundry.part_builder.material_value": "素材値: %s",
   "gui.modernfoundry.part_builder.cost": "パターンコスト: %s",
   "gui.modernfoundry.part_builder.trait": "能力",
   "gui.modernfoundry.part_builder.uncraftable": "成形できません",
   "gui.modernfoundry.part_builder.uncraftable.tooltip": "この素材は部品作成台で成形することはできません。鋳造などの他の方法が必要です。",
 
-  "gui.modernfoundry.tinkers_chest": "Modern Foundryチェスト",
+  "gui.modernfoundry.tinkers_chest": "ティンカーチェスト",
   "gui.modernfoundry.cast_chest": "金型チェスト",
   "gui.modernfoundry.part_chest": "部品チェスト",
 
-  "gui.modernfoundry.tinker_station": "Modern Foundry台",
+  "gui.modernfoundry.tinker_station": "ティンカー台",
   "gui.modernfoundry.tinker_station.repair_limited": "修理と変更",
   "gui.modernfoundry.tinker_station.repair_limited.description": "全ての基本道具の作成とほとんどの改造の適用ができます。左側の一覧から選んで始めましょう。",
   "gui.modernfoundry.tinker_station.repair": "修理と変更",
@@ -3104,7 +3104,7 @@
   "recipe.modernfoundry.enchantment_converting.no_enchantments": "このアイテムには抽出できるエンチャントがありません",
   "recipe.modernfoundry.enchantment_converting.too_few": "高レベルのエンチャントを抽出するには、より多くの入力アイテムが必要です",
 
-  "recipe.modernfoundry.part_swapping.too_many_parts": "Modern Foundry台はこの道具の部品を入れ替えるには狭すぎます",
+  "recipe.modernfoundry.part_swapping.too_many_parts": "ティンカー台はこの道具の部品を入れ替えるには狭すぎます",
 
   "recipe.modernfoundry.modifier.not_enough_slot": " この改造を適用するには少なくとも1以上の%sスロットが必要です",
   "recipe.modernfoundry.modifier.not_enough_slots": "この改造を適用するには少なくとも%s以上の%sスロットが必要です",
@@ -3282,7 +3282,7 @@
   "jei.modernfoundry.severing.title": "切断",
 
   "jei.modernfoundry.tinkering.tool_building": "部品作成",
-  "jei.modernfoundry.tinkering.tool_building.anvil": "更に幅広い道具を作るなら、Modern Foundry金床を使うか部品を交換する必要がある",
+  "jei.modernfoundry.tinkering.tool_building.anvil": "更に幅広い道具を作るなら、ティンカー金床を使うか部品を交換する必要がある",
 
   "jei.modernfoundry.part_builder.title": "部品作成台",
   "jei.modernfoundry.part_builder.cost": "コスト: %s",
@@ -3290,20 +3290,20 @@
   "jei.modernfoundry.modifier_worktable.title": "改造調整台",
 
   "_comment": "Tool Advancements",
-  "advancements.modernfoundry.tools.materials_and_you.title": "Modern Foundry入門",
+  "advancements.modernfoundry.tools.materials_and_you.title": "ティンカー入門",
   "advancements.modernfoundry.tools.materials_and_you.description": "Modern Foundryの入門書である「素材とあなた」をクラフトする",
   "advancements.modernfoundry.tools.part_builder.title": "部品作成台",
   "advancements.modernfoundry.tools.part_builder.description": "部品作成台を作る、道具を作るための最初のステップ",
   "advancements.modernfoundry.tools.make_part.title": "道具の部品",
   "advancements.modernfoundry.tools.make_part.description": "部品作成台で、パターンといくつかの素材を使って最初の道具の部品を作る",
-  "advancements.modernfoundry.tools.tinker_station.title": "Modern Foundry台",
-  "advancements.modernfoundry.tools.tinker_station.description": "Modern Foundry台を作る、これで部品を組み合わせて道具を作る",
-  "advancements.modernfoundry.tools.tinker_tool.title": "Modern Foundry初心者",
-  "advancements.modernfoundry.tools.tinker_tool.description": "Modern Foundryの最初の道具を作る",
+  "advancements.modernfoundry.tools.tinker_station.title": "ティンカー台",
+  "advancements.modernfoundry.tools.tinker_station.description": "ティンカー台を作る、これで部品を組み合わせて道具を作る",
+  "advancements.modernfoundry.tools.tinker_tool.title": "ティンカー初心者",
+  "advancements.modernfoundry.tools.tinker_tool.description": "ティンカーの最初の道具を作る",
   "advancements.modernfoundry.tools.travelers_gear.title": "旅行者",
   "advancements.modernfoundry.tools.travelers_gear.description": "旅行者の防具を全種類作る",
   "advancements.modernfoundry.tools.modified.title": "変更",
-  "advancements.modernfoundry.tools.modified.description": "Modern Foundryの道具に改造を付ける",
+  "advancements.modernfoundry.tools.modified.description": "ティンカーの道具に改造を付ける",
   "advancements.modernfoundry.tools.upgrade_slots.title": "全てのアップグレード",
   "advancements.modernfoundry.tools.upgrade_slots.description": "道具に余白、調和、仕切り直し、復活、金メッキを適用し、アップグレードスロットを6つ増やす",
   "advancements.modernfoundry.tools.glass_cannon.title": "ガラスキャノン",
@@ -3335,7 +3335,7 @@
   "advancements.modernfoundry.smeltery.structure.title": "応用精錬",
   "advancements.modernfoundry.smeltery.structure.description": "溶融した銅を染み込ませて乾式製錬炉コントローラーを作り、乾式製錬炉を建築してUIを開く",
   "advancements.modernfoundry.smeltery.tinkers_anvil.title": "高度な道具作成",
-  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "乾式製錬炉で作成した合金を使ってModern Foundry金床を作る！",
+  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "乾式製錬炉で作成した合金を使ってティンカー金床を作る！",
   "advancements.modernfoundry.smeltery.tool_forge.title": "道具鋳造工",
   "advancements.modernfoundry.smeltery.tool_forge.description": "金床でいずれか1つの大型道具を組み立てる",
   "advancements.modernfoundry.smeltery.abilities.title": "アビリティマスター",
@@ -3358,8 +3358,8 @@
   "advancements.modernfoundry.foundry.encyclopedia.description": "全ての本の知識が詰まった素材の大辞典を作る",
 
   "_comment": "Gadget Advancements",
-  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Modern Foundryのガジェット類",
-  "advancements.modernfoundry.world.tinkers_gadgetry.description": "「Modern Foundryのガジェット類」を作って世界を探検する",
+  "advancements.modernfoundry.world.tinkers_gadgetry.title": "ティンカーのガジェット類",
+  "advancements.modernfoundry.world.tinkers_gadgetry.description": "「ティンカーのガジェット類」を作って世界を探検する",
   "advancements.modernfoundry.world.earth_island.title": "アーススライム島",
   "advancements.modernfoundry.world.earth_island.description": "海上にあるアーススライム島に辿り着く",
   "advancements.modernfoundry.world.sky_island.title": "スカイスライム島",

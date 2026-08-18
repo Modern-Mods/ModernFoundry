@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.tools.modules.interaction;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -21,12 +22,12 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.array.ArrayLoadable;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.array.ArrayLoadable;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -98,7 +99,7 @@ public record FireballModule(List<FireballType> options, DamageTypePair damageTy
       ModifierEntry.LOADABLE.list(0).defaultField("ammo_modifiers", List.of(), false, FireballType::ammoModifiers),
       FireballType::new);
     /** Empty instance to make cache easier */
-    public static final FireballType EMPTY = new FireballType(Ingredient.EMPTY, null, 1f, List.of());
+    public static final FireballType EMPTY = new FireballType(null, null, 1f, List.of());
 
     /** Gets the damage type with the given fallback */
     public DamageTypePair damageType(DamageTypePair fallback) {
@@ -144,7 +145,7 @@ public record FireballModule(List<FireballType> options, DamageTypePair damageTy
     ItemStack fireball = BowAmmoModifierHook.consumeAmmo(tool, ItemStack.EMPTY, entity, player, this, 1);
     if (!fireball.isEmpty()) {
       // if we found a fireball, fire it
-      if (!level.isClientSide) {
+      if (!level.isClientSide()) {
         // fetch stats
         float power = ConditionalStatModifierHook.getModifiedStat(tool, entity, ToolStats.PROJECTILE_DAMAGE);
         float velocity = ConditionalStatModifierHook.getModifiedStat(tool, entity, ToolStats.VELOCITY);
@@ -192,7 +193,7 @@ public record FireballModule(List<FireballType> options, DamageTypePair damageTy
           ToolDamageUtil.damageAnimated(tool, durability.compute(modifier), entity, slot, modifier.getId());
         }
       }
-      entity.playSound(sound, 2.0F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
+      entity.playSound(sound, 2.0F, (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2F + 1.0F);
       return true;
     }
     return false;
@@ -203,7 +204,7 @@ public record FireballModule(List<FireballType> options, DamageTypePair damageTy
     if (condition.matches(tool, modifier) && !tool.isBroken() && tool.getHook(ToolHooks.INTERACTION).canInteract(tool, modifier.getId(), source)) {
       if (shoot(tool, modifier, player, player, Util.getSlotType(hand))) {
         GeneralInteractionModifierHook.addCooldown(tool, player, 1);
-        return InteractionResult.sidedSuccess(player.level().isClientSide);
+        return InteractionResult.SUCCESS;
       }
     }
     return InteractionResult.PASS;
@@ -213,7 +214,7 @@ public record FireballModule(List<FireballType> options, DamageTypePair damageTy
   public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
     if (keyModifier == TooltipKey.NORMAL && condition.matches(tool, modifier) && !tool.isBroken() && !player.hasEffect(TinkerEffects.holder(TinkerModifiers.fireballCooldownEffect))) {
       if (shoot(tool, modifier, player, player, slot)) {
-        if (!player.level().isClientSide) {
+        if (!player.level().isClientSide()) {
           player.addEffect(new MobEffectInstance(TinkerEffects.holder(TinkerModifiers.fireballCooldownEffect), GeneralInteractionModifierHook.getDrawtime(tool, player, 1)));
         }
         return true;
@@ -260,7 +261,7 @@ public record FireballModule(List<FireballType> options, DamageTypePair damageTy
 
     /** Creates a new fireball option */
     public Fireball fireball(TagKey<Item> tag) {
-      return fireball(Ingredient.of(tag));
+      return fireball(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag));
     }
 
     /** Creates a new fireball option */

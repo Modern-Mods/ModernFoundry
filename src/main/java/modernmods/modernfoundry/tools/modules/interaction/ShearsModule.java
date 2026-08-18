@@ -1,4 +1,5 @@
 package modernmods.modernfoundry.tools.modules.interaction;
+import modernmods.modernfoundry.library.tools.helper.ToolAttackUtil;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -14,8 +15,8 @@ import net.minecraft.world.level.Level;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.IForgeShearable;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.ItemAbilities;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.events.TinkerToolEvent.Result;
 import modernmods.modernfoundry.library.events.TinkerToolEvent.ToolShearEvent;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -98,7 +99,7 @@ public record ShearsModule(float flatBonus, float perLevelBonus, float expandedB
     }
     // fallback to forge shearable
     if (entity instanceof IForgeShearable target) {
-      if (!world.isClientSide) {
+      if (!world.isClientSide()) {
         List<ItemStack> drops = target.onSheared(player, itemStack, world, entity.blockPosition(), fortune);
         drops.forEach(stack -> ModifierUtil.dropItem(entity, stack));
         return !drops.isEmpty();
@@ -121,11 +122,11 @@ public record ShearsModule(float flatBonus, float perLevelBonus, float expandedB
     LootingContext context = new LootingContext(player, target, null, Util.getSlotType(hand));
     int looting = LootingModifierHook.getLooting(tool, context, EnchantmentHelper.getItemEnchantmentLevel(player.registryAccess().holderOrThrow(Enchantments.LOOTING), player.getItemInHand(hand)));
     looting = ArmorLootingModifierHook.getLooting(tool, context, looting);
-    Level world = player.getCommandSenderWorld();
+    Level world = player.level();
     if (shearEntity(stack, tool, world, player, target, looting)) {
       boolean broken = ToolDamageUtil.damageAnimated(tool, 1, player, slotType, modifier.getId());
       player.swing(hand);
-      player.sweepAttack();
+      ToolAttackUtil.sweepAttack(player);
       runShearHook(tool, player, target, true);
 
       // AOE shearing
@@ -133,7 +134,7 @@ public record ShearsModule(float flatBonus, float perLevelBonus, float expandedB
         // includes a flat bonus (legacy AOE), a level bonus (subtract 1 so it starts at level 2), and expanded
         float expanded = flatBonus + perLevelBonus * (modifier.getEffectiveLevel() - 1) + expandedBonus * tool.getVolatileData().getInt(IModifiable.EXPANDED);
         if (expanded > 0) {
-          for (LivingEntity aoeTarget : player.getCommandSenderWorld().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(expanded, 0.25D, expanded))) {
+          for (LivingEntity aoeTarget : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(expanded, 0.25D, expanded))) {
             if (aoeTarget != player && aoeTarget != target && (!(aoeTarget instanceof ArmorStand) || !((ArmorStand)aoeTarget).isMarker())) {
               if (shearEntity(stack, tool, world, player, aoeTarget, looting)) {
                 broken = ToolDamageUtil.damageAnimated(tool, 1, player, slotType, modifier.getId());

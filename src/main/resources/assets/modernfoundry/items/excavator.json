@@ -1,0 +1,40 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/excavator",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "head",
+        "index": 0
+      },
+      {
+        "name": "grip",
+        "index": 3
+      },
+      {
+        "name": "binding",
+        "index": 2
+      }
+    ],
+    "large": true,
+    "large_offset": [
+      -2,
+      2
+    ],
+    "modifier_maps": [
+      "modernfoundry:excavator"
+    ],
+    "small_modifier_roots": {
+      "small": [
+        "modernfoundry:item/tool/excavator/modifiers/"
+      ],
+      "large": [
+        "modernfoundry:item/tool/excavator/large/modifiers/"
+      ]
+    }
+  }
+}

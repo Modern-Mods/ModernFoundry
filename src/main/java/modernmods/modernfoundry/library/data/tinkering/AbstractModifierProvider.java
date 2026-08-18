@@ -5,9 +5,9 @@ import com.google.gson.JsonObject;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
-import net.neoforged.neoforge.common.crafting.CraftingHelper;
+import com.mojang.serialization.JsonOps;
 import net.neoforged.neoforge.common.conditions.ICondition;
-import modernmods.hilt.data.GenericDataProvider;
+import modernmods.mantle.data.GenericDataProvider;
 import modernmods.modernfoundry.library.json.JsonRedirect;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.modifiers.ModifierManager;
@@ -80,7 +80,7 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
 
   /** Makes a conditional redirect to the given ID */
   protected JsonRedirect conditionalRedirect(ModifierId id, @Nullable ICondition condition) {
-    return new JsonRedirect(id, condition);
+    return new JsonRedirect(id.getIdentifier(), condition);
   }
 
   /** Makes an unconditional redirect to the given ID */
@@ -91,7 +91,7 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
     addModifiers();
-    return allOf(composableModifiers.entrySet().stream().map(entry -> saveJson(cache, entry.getKey(), entry.getValue().serialize())));
+    return allOf(composableModifiers.entrySet().stream().map(entry -> saveJson(cache, entry.getKey().getIdentifier(), entry.getValue().serialize())));
   }
 
   /** Result for composable too */
@@ -112,7 +112,7 @@ public abstract class AbstractModifierProvider extends GenericDataProvider {
         json.add("redirects", array);
       }
       if (condition != null) {
-        json.add("condition", CraftingHelper.serialize(condition));
+        json.add("condition", ICondition.CODEC.encodeStart(JsonOps.INSTANCE, condition).getOrThrow());
       }
       return json;
     }

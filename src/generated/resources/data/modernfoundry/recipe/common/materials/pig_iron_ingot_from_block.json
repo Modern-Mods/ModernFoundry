@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "modernfoundry:pig_iron_ingot",
   "ingredients": [
-    {
-      "item": "modernfoundry:pig_iron_block"
-    }
+    "modernfoundry:pig_iron_block"
   ],
   "result": {
     "count": 9,

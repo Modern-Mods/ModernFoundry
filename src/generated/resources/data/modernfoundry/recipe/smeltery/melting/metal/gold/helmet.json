@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:damagable_melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/helmet",
-  "ingredient": {
-    "item": "minecraft:golden_helmet"
-  },
+  "ingredient": "minecraft:golden_helmet",
   "result": {
     "amount": 450,
     "tag": "c:molten_gold",

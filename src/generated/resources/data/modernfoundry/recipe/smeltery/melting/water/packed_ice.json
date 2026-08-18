@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/water/packed_ice",
-  "ingredient": {
-    "item": "minecraft:packed_ice"
-  },
+  "ingredient": "minecraft:packed_ice",
   "result": {
     "amount": 9000,
     "fluid": "minecraft:water"

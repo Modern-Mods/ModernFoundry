@@ -1,5 +1,5 @@
 {
-  "_comment": "Modern Foundry Common",
+  "_comment": "Tinkers Common",
 
   "block.modernfoundry.sky_slime": "碧空黏液块",
   "block.modernfoundry.sky_slime.tooltip": "可与黏液块和蜂蜜块相黏",
@@ -177,12 +177,12 @@
   "item.modernfoundry.knightslime_ingot.tooltip": "黏糊糊的，还有金属光泽，但却和石头似的？还真是魅力无限！",
   "item.modernfoundry.knightslime_nugget": "骑士史莱姆粒",
 
-  "item.modernfoundry.materials_and_you": "Modern Foundry宝典：材料与你",
+  "item.modernfoundry.materials_and_you": "匠魂宝典：材料与你",
   "item.modernfoundry.materials_and_you.tooltip": "深析工具与材料的指南手册\nSelena著",
-  "item.modernfoundry.encyclopedia": "Modern Foundry大百科",
-  "item.modernfoundry.encyclopedia.tooltip": "每位Modern Foundry人手一本的参考资料\nSelena著",
+  "item.modernfoundry.encyclopedia": "工匠大百科",
+  "item.modernfoundry.encyclopedia.tooltip": "每位工匠人手一本的参考资料\nSelena著",
 
-  "item.modernfoundry.tinkers_gadgetry": "Modern Foundry装置宝典",
+  "item.modernfoundry.tinkers_gadgetry": "工匠装置宝典",
   "item.modernfoundry.tinkers_gadgetry.tooltip": "在本书中探索黏液在日常事务中的妙用\nMelvin著",
 
   "item.modernfoundry.puny_smelting": "入门熔炼术",
@@ -294,7 +294,7 @@
   "item.modernfoundry.copper_can.contents": "%s：1锭",
 
 
-  "_comment": "Modern Foundry Patterns",
+  "_comment": "Tinkers Patterns",
 
   "pattern.modernfoundry.ingot": "锭",
   "pattern.modernfoundry.nugget": "粒",
@@ -352,7 +352,7 @@
   "pattern.modernfoundry.arrow_part": "箭头或箭杆",
 
 
-  "_comment": "Modern Foundry Gold Casts",
+  "_comment": "Tinkers Gold Casts",
 
   "item.modernfoundry.cast.cost": "材料消耗：%d",
 
@@ -405,7 +405,7 @@
   "item.modernfoundry.maille_cast": "锁链基底金质铸模",
 
 
-  "_comment": "Modern Foundry Sand Casts",
+  "_comment": "Tinkers Sand Casts",
 
   "item.modernfoundry.blank_sand_cast": "空白沙子铸模",
   "item.modernfoundry.ingot_sand_cast": "锭沙子铸模",
@@ -455,7 +455,7 @@
   "item.modernfoundry.maille_sand_cast": "锁链基底沙子铸模",
 
 
-  "_comment": "Modern Foundry Red Sand Casts",
+  "_comment": "Tinkers Red Sand Casts",
 
   "item.modernfoundry.blank_red_sand_cast": "空白红沙铸模",
   "item.modernfoundry.ingot_red_sand_cast": "锭红沙铸模",
@@ -505,7 +505,7 @@
   "item.modernfoundry.maille_red_sand_cast": "锁链基底红沙铸模",
 
 
-  "_comment": "Modern Foundry Fluids",
+  "_comment": "Tinkers Fluids",
 
   "block.modernfoundry.blazing_blood_fluid": "烈焰血",
   "fluid.modernfoundry.blazing_blood": "烈焰血",
@@ -1022,7 +1022,7 @@
   "fluid_effect.modernfoundry.explosion": "爆炸威力%s",
 
 
-  "_comment": "Modern Foundry Gadgets",
+  "_comment": "Tinkers Gadgets",
 
   "block.modernfoundry.punji": "尖竹钉",
   "block.modernfoundry.punji.tooltip": "很尖锐！还能钉在墙上。",
@@ -1071,13 +1071,13 @@
   "block.modernfoundry.zombified_piglin_head": "僵尸猪灵的头",
 
 
-  "_comment": "Modern Foundry Tables",
+  "_comment": "Tinkers Tables",
 
   "block.modernfoundry.crafting_station": "工作站",
 
-  "block.modernfoundry.tinker_station": "Modern Foundry站",
-  "block.modernfoundry.tinkers_anvil": "Modern Foundry砧",
-  "block.modernfoundry.scorched_anvil": "Modern Foundry砧",
+  "block.modernfoundry.tinker_station": "工匠站",
+  "block.modernfoundry.tinkers_anvil": "工匠砧",
+  "block.modernfoundry.scorched_anvil": "工匠砧",
   "block.modernfoundry.tool_forge": "工具锻造",
 
   "block.modernfoundry.part_builder": "部件制造台",
@@ -1086,7 +1086,7 @@
   "block.modernfoundry.part_chest": "部件箱",
   "block.modernfoundry.part_chest.tooltip": "可容纳256个不同的工具部件",
 
-  "block.modernfoundry.tinkers_chest": "Modern Foundry箱",
+  "block.modernfoundry.tinkers_chest": "工匠箱",
   "block.modernfoundry.tinkers_chest.tooltip": "可容纳64组物品，每组16个",
 
   "block.modernfoundry.cast_chest": "铸模箱",
@@ -1094,7 +1094,7 @@
 
   "item.modernfoundry.pattern": "模具",
 
-  "_comment": "Modern Foundry Tools",
+  "_comment": "Tinkers Tools",
 
   "_comment_on_format_": "These format allows you to have more control over separators in material names. By default we separate with space. You can use %1$s and %2$s if you wish to change the order.",
   "item.modernfoundry.tool.format": "%s%s",
@@ -1179,7 +1179,7 @@
   "item.modernfoundry.crystalshot": "水晶镞",
   "entity.modernfoundry.crystalshot": "水晶镞",
 
-  "_comment": "Modern Foundry Tool Parts",
+  "_comment": "Tinkers Tool Parts",
 
   "item.modernfoundry.dummy_tool_part.tooltip": "用于铸造铸模，但不能用于制造工具。",
 
@@ -1340,7 +1340,7 @@
   "multiblock.modernfoundry.tiny.no_fuel_tank": "必须放置于燃料储罐或加热器之上才可以正常运作",
 
 
-  "_comment": "Modern Foundry Smeltery",
+  "_comment": "Tinkers Smeltery",
 
   "block.modernfoundry.grout": "砖泥",
   "block.modernfoundry.grout.tooltip": "我是一块砖！……",
@@ -1444,7 +1444,7 @@
   "block.modernfoundry.seared_casting_tank": "浇注储罐",
   "block.modernfoundry.seared_casting_tank.tooltip": "能够装填或倒空物品内部储罐。\n被破坏后仍能保留其中的流体",
 
-  "_comment": "Modern Foundry Foundry",
+  "_comment": "Tinkers Foundry",
 
   "block.modernfoundry.nether_grout": "下界砖泥",
   "block.modernfoundry.nether_grout.tooltip": "……哪里需要哪里搬！……",
@@ -1502,7 +1502,7 @@
   "block.modernfoundry.scorched_basin.tooltip": "利用熔铸炉中的熔融材料铸造物品，在铸造时需要一个铸模或是金平台以成型",
   "block.modernfoundry.scorched_table": "焦褐铸件台",
   "block.modernfoundry.scorched_table.tooltip": "利用熔铸炉中的熔融材料铸造物品，在铸造时需要一个铸模或是金栏杆以成型",
-  "block.modernfoundry.scorched_proxy_tank": "焦褐Modern Foundry储罐",
+  "block.modernfoundry.scorched_proxy_tank": "焦褐工匠储罐",
   "block.modernfoundry.scorched_proxy_tank.tooltip": "能够装填或倒空物品内部储罐的储罐方块，但无法操作自带的内部储罐",
 
   "block.modernfoundry.scorched_channel": "焦褐浇注道",
@@ -1544,7 +1544,7 @@
   "gui.modernfoundry.fluid.hold_shift": "按住§e§oShift§r§7以桶为单位显示流体",
 
 
-  "_comment": "Modern Foundry World",
+  "_comment": "Tinkers World",
 
   "entity.modernfoundry.earth_slime": "大地史莱姆",
   "item.modernfoundry.earth_slime_spawn_egg": "大地史莱姆刷怪蛋",
@@ -1803,7 +1803,7 @@
   "material.modernfoundry.flint": "燧石",
   "material.modernfoundry.flint.basalt": "玄武岩",
   "material.modernfoundry.flint.deepslate": "深板岩",
-  "material.modernfoundry.flint.flavor": "点燃你滚烫的Modern Foundry之心！",
+  "material.modernfoundry.flint.flavor": "点燃你滚烫的工匠之心！",
   "material.modernfoundry.flint.encyclopedia": "每级使近战伤害提高已损失耐久值与工具耐久乘数之比的平方根的1%。",
   "material.modernfoundry.flint.ammo": "可向弹药类工具浇注药水。已浸药的工具在造成伤害的同时可以施加药水效果",
 
@@ -1834,7 +1834,7 @@
 
   "material.modernfoundry.string": "线",
   "material.modernfoundry.string.flavor": "理论上的最佳材料。",
-  "material.modernfoundry.string.encyclopedia": "可以在Modern Foundry站和工作台上使用线修复工具",
+  "material.modernfoundry.string.encyclopedia": "可以在工匠站和工作台上使用线修复工具",
   "material.modernfoundry.string.skull_flavor": "蜘蛛是药水大师，也许它们的秘密可以帮助我增强药水……",
   "material.modernfoundry.string.skull_encyclopedia": "使正面药水效果的持续时间延长25%",
 
@@ -2066,7 +2066,7 @@
   "material.modernfoundry.shulker.ammo": "现在除了击中方块的弹射物以外，命中了实体的弹射物也可以回收，由此使这些物品几乎无限回收。此外，带有此强化的物品不会自然消失。",
 
   "material.modernfoundry.manyullyn": "玛玉灵",
-  "material.modernfoundry.manyullyn.flavor": "没几个Modern Foundry能叫对这材料的名字。他们说这个材料能够斩断星辰。",
+  "material.modernfoundry.manyullyn.flavor": "没几个工匠能叫对这材料的名字。他们说这个材料能够斩断星辰。",
   "material.modernfoundry.manyullyn.encyclopedia": "每次攻击后，攻击伤害+0.5×等级，5次连续攻击后，攻击伤害加成上限为+2.5×等级",
   "material.modernfoundry.manyullyn.ranged": "每次箭矢命中后，弹射物力量+0.25×等级，5次连续的箭矢命中后，弹射物力量加成上限为+1.25×等级",
   "material.modernfoundry.manyullyn.armor": "受到伤害后，近战伤害暂时+1，至多为盔甲强化等级之和。",
@@ -2277,7 +2277,7 @@
 
   "_comment": "Modifiers",
 
-  "key.categories.modernfoundry": "Modern Foundry",
+  "key.category.modernfoundry.modernfoundry": "匠魂",
   "key.modernfoundry.helmet_interact": "头盔交互",
   "key.modernfoundry.leggings_interact": "护腿交互",
 
@@ -3599,30 +3599,30 @@
 
   "_comment": "GUIs",
 
-  "itemGroup.modernfoundry.general": "Modern Foundry丨常规物品",
-  "itemGroup.modernfoundry.tables": "Modern Foundry丨功能台",
-  "itemGroup.modernfoundry.tools": "Modern Foundry丨工具",
-  "itemGroup.modernfoundry.tool_parts": "Modern Foundry丨部件",
-  "itemGroup.modernfoundry.smeltery": "Modern Foundry丨冶炼",
-  "itemGroup.modernfoundry.fluids": "Modern Foundry丨流体",
-  "itemGroup.modernfoundry.world": "Modern Foundry丨世界",
+  "itemGroup.modernfoundry.general": "匠魂丨常规物品",
+  "itemGroup.modernfoundry.tables": "匠魂丨功能台",
+  "itemGroup.modernfoundry.tools": "匠魂丨工具",
+  "itemGroup.modernfoundry.tool_parts": "匠魂丨部件",
+  "itemGroup.modernfoundry.smeltery": "匠魂丨冶炼",
+  "itemGroup.modernfoundry.fluids": "匠魂丨流体",
+  "itemGroup.modernfoundry.world": "匠魂丨世界",
 
   "gui.modernfoundry.crafting_station": "工作站",
   "gui.modernfoundry.crafting_station.uncraftable": "玩家尚无法制作该物品",
 
   "gui.modernfoundry.part_builder": "部件制造台",
-  "gui.modernfoundry.part_builder.info": "在这里你能制作工具部件，从而实现你的Modern Foundry之梦。\n\n要制作一个工具部件，你需要将模具放入左侧的空槽，并选择目标部件类型。接着在右侧的槽中放入材料，即可制成对应材料的对应部件。",
+  "gui.modernfoundry.part_builder.info": "在这里你能制作工具部件，从而实现你的工匠之梦。\n\n要制作一个工具部件，你需要将模具放入左侧的空槽，并选择目标部件类型。接着在右侧的槽中放入材料，即可制成对应材料的对应部件。",
   "gui.modernfoundry.part_builder.material_value": "材料值：%s",
   "gui.modernfoundry.part_builder.cost": "模具消耗：%s",
   "gui.modernfoundry.part_builder.trait": "材料特性",
   "gui.modernfoundry.part_builder.uncraftable": "无法打造",
   "gui.modernfoundry.part_builder.uncraftable.tooltip": "部件制造台无法打造该材料。需使用浇注等方式进行部件成型。",
 
-  "gui.modernfoundry.tinkers_chest": "Modern Foundry箱",
+  "gui.modernfoundry.tinkers_chest": "工匠箱",
   "gui.modernfoundry.cast_chest": "铸模箱",
   "gui.modernfoundry.part_chest": "部件箱",
 
-  "gui.modernfoundry.tinker_station": "Modern Foundry站",
+  "gui.modernfoundry.tinker_station": "工匠站",
   "gui.modernfoundry.tinker_station.repair_limited": "修复与强化",
   "gui.modernfoundry.tinker_station.repair_limited.description": "可以制作基本工具，或者加持大多数强化。在左侧点击一个按钮来开始制作吧。",
   "gui.modernfoundry.tinker_station.repair": "修复与强化",
@@ -3894,7 +3894,7 @@
   "jei.modernfoundry.severing.title": "肢解",
 
   "jei.modernfoundry.tinkering.tool_building": "工具制造",
-  "jei.modernfoundry.tinkering.tool_building.anvil": "宽型工具需要Modern Foundry砧制造或替换部件",
+  "jei.modernfoundry.tinkering.tool_building.anvil": "宽型工具需要工匠砧制造或替换部件",
 
   "jei.modernfoundry.part_builder.title": "部件制造台",
   "jei.modernfoundry.part_builder.cost": "消耗：%s",
@@ -3904,20 +3904,20 @@
 
 
   "_comment": "Tool Advancements",
-  "advancements.modernfoundry.tools.materials_and_you.title": "Modern Foundry练手",
-  "advancements.modernfoundry.tools.materials_and_you.description": "制作一本《材料与你》，它将为你打开Modern Foundry的大门",
+  "advancements.modernfoundry.tools.materials_and_you.title": "工匠练手",
+  "advancements.modernfoundry.tools.materials_and_you.description": "制作一本《材料与你》，它将为你打开匠魂的大门",
   "advancements.modernfoundry.tools.part_builder.title": "部件制造台",
   "advancements.modernfoundry.tools.part_builder.description": "制造一个部件制造台，迈出工具制作的第一步",
   "advancements.modernfoundry.tools.make_part.title": "工具部件",
   "advancements.modernfoundry.tools.make_part.description": "在部件制造台中按一定的样式来排布材料，并打造出你的第一个工具部件",
-  "advancements.modernfoundry.tools.tinker_station.title": "Modern Foundry站",
-  "advancements.modernfoundry.tools.tinker_station.description": "制造一个Modern Foundry站，将部件组装成工具",
-  "advancements.modernfoundry.tools.tinker_tool.title": "Modern Foundry学徒",
-  "advancements.modernfoundry.tools.tinker_tool.description": "打造你的第一件Modern Foundry工具",
+  "advancements.modernfoundry.tools.tinker_station.title": "工匠站",
+  "advancements.modernfoundry.tools.tinker_station.description": "制造一个工匠站，将部件组装成工具",
+  "advancements.modernfoundry.tools.tinker_tool.title": "工匠学徒",
+  "advancements.modernfoundry.tools.tinker_tool.description": "打造你的第一件匠魂工具",
   "advancements.modernfoundry.tools.travelers_gear.title": "旅行者",
   "advancements.modernfoundry.tools.travelers_gear.description": "制作出全套的旅行者套装",
   "advancements.modernfoundry.tools.modified.title": "修缮强化",
-  "advancements.modernfoundry.tools.modified.description": "为Modern Foundry工具加持一个强化",
+  "advancements.modernfoundry.tools.modified.description": "为匠魂工具加持一个强化",
   "advancements.modernfoundry.tools.upgrade_slots.title": "升级大全",
   "advancements.modernfoundry.tools.upgrade_slots.description": "使用“铭刻”“镶金”“重置”“和睦”与“启示”为工具增加6个额外的升级槽",
   "advancements.modernfoundry.tools.glass_cannon.title": "玻璃大炮",
@@ -3949,9 +3949,9 @@
   "advancements.modernfoundry.smeltery.structure.title": "全能熔炼",
   "advancements.modernfoundry.smeltery.structure.description": "将熔融铜处理成型，并打造一台冶炼炉控制器，在完成冶炼炉的搭建后打开其界面",
   "advancements.modernfoundry.smeltery.tinkers_anvil.title": "进阶工具制作",
-  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "使用在冶炼炉中浇注出的合金打造一个Modern Foundry砧！",
+  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "使用在冶炼炉中浇注出的合金打造一个工匠砧！",
   "advancements.modernfoundry.smeltery.tool_forge.title": "工具锻造",
-  "advancements.modernfoundry.smeltery.tool_forge.description": "在Modern Foundry砧中锻造出任意一件宽型工具",
+  "advancements.modernfoundry.smeltery.tool_forge.description": "在工匠砧中锻造出任意一件宽型工具",
   "advancements.modernfoundry.smeltery.abilities.title": "能力熟手",
   "advancements.modernfoundry.smeltery.abilities.description": "将每个默认的能力强化至少加持于工具一次",
 
@@ -3969,11 +3969,11 @@
   "advancements.modernfoundry.foundry.manyullyn_lanterns.title": "饱和光照",
   "advancements.modernfoundry.foundry.manyullyn_lanterns.description": "制作一整组装满熔融玛玉灵的焦黑或焦褐灯笼",
   "advancements.modernfoundry.foundry.encyclopedia.title": "百科全书",
-  "advancements.modernfoundry.foundry.encyclopedia.description": "将你从书中得来的所有知识凝练成一本《Modern Foundry大百科》",
+  "advancements.modernfoundry.foundry.encyclopedia.description": "将你从书中得来的所有知识凝练成一本《工匠大百科》",
 
   "_comment": "Gadget Advancements",
-  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Modern Foundry装置",
-  "advancements.modernfoundry.world.tinkers_gadgetry.description": "合成一本《Modern Foundry装置宝典》，开始探索世界",
+  "advancements.modernfoundry.world.tinkers_gadgetry.title": "工匠装置",
+  "advancements.modernfoundry.world.tinkers_gadgetry.description": "合成一本《工匠装置宝典》，开始探索世界",
   "advancements.modernfoundry.world.earth_island.title": "大地黏液岛",
   "advancements.modernfoundry.world.earth_island.description": "在海洋中找到一座大地黏液岛",
   "advancements.modernfoundry.world.sky_island.title": "碧空黏液岛",

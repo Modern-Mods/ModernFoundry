@@ -1,17 +1,17 @@
 {
-  "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/metal/lead/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/lead"
     }
   ],
+  "type": "modernfoundry:casting_basin",
   "cooling_time": 130,
   "fluid": {
     "amount": 810,
     "tag": "c:molten_lead"
   },
+  "id": "modernfoundry:smeltery/casting/metal/lead/block",
   "result": {
     "tag": "c:storage_blocks/lead"
   }

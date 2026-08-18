@@ -37,7 +37,7 @@ public class EquipmentChangeWatcher {
     NeoForge.EVENT_BUS.addListener(EquipmentChangeWatcher::onEquipmentChange);
 
     // only need to use the cap and the player tick on the client
-    if (FMLEnvironment.dist == Dist.CLIENT) {
+    if (FMLEnvironment.getDist() == Dist.CLIENT) {
       NeoForge.EVENT_BUS.addListener(EquipmentChangeWatcher::onPlayerTick);
     }
   }
@@ -53,7 +53,7 @@ public class EquipmentChangeWatcher {
   /** Client side modifier hooks */
   private static void onPlayerTick(PlayerTickEvent.Post event) {
     // only run for client side players every 5 ticks
-    if (event.getEntity().level().isClientSide) {
+    if (event.getEntity().level().isClientSide()) {
       CLIENT_LAST_EQUIPMENT.computeIfAbsent(event.getEntity(), PlayerLastEquipment::new).update();
     }
   }

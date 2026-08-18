@@ -1,0 +1,9 @@
+{
+  "values": [
+    "modernfoundry:war_pick",
+    "modernfoundry:swasher",
+    "#modernfoundry:modifiable/interactable/right",
+    "#modernfoundry:modifiable/interactable/left",
+    "#modernfoundry:modifiable/armor/held"
+  ]
+}

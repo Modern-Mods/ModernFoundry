@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "modernfoundry:material",
+    "base_model": "modernfoundry:item/large_plate"
+  }
+}

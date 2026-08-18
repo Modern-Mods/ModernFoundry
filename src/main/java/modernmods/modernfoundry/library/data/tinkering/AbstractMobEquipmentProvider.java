@@ -5,15 +5,15 @@ import com.google.gson.JsonObject;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
-import net.neoforged.neoforge.common.crafting.CraftingHelper;
+import com.mojang.serialization.JsonOps;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
-import modernmods.hilt.data.GenericDataProvider;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.util.JsonHelper;
+import modernmods.mantle.data.GenericDataProvider;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.util.JsonHelper;
 import modernmods.modernfoundry.library.json.loot.equipment.MobEquipment;
 import modernmods.modernfoundry.library.json.loot.equipment.MobEquipmentManager;
 
@@ -38,7 +38,7 @@ public abstract class AbstractMobEquipmentProvider extends GenericDataProvider {
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
     addEquipment();
-    return allOf(equipment.entrySet().stream().map(entry -> saveJson(cache, new ResourceLocation(modId, entry.getKey()), entry.getValue().serialize())));
+    return allOf(equipment.entrySet().stream().map(entry -> saveJson(cache, Identifier.fromNamespaceAndPath(modId, entry.getKey()), entry.getValue().serialize())));
   }
 
   /** Creates a builder for the given entity */
@@ -65,12 +65,12 @@ public abstract class AbstractMobEquipmentProvider extends GenericDataProvider {
   /* Compat entity */
 
   /** Creates a builder for the given entity ID, used for optional compat */
-  public MobEquipment.Builder equip(String name, ResourceLocation entity, ICondition... conditions) {
+  public MobEquipment.Builder equip(String name, Identifier entity, ICondition... conditions) {
     return equip(name, conditions, entity.toString());
   }
 
   /** Creates a builder for the given entity ID with an automtic mod ID condition */
-  public MobEquipment.Builder equip(ResourceLocation entity) {
+  public MobEquipment.Builder equip(Identifier entity) {
     return equip(entity.getNamespace() + '_' + entity.getPath(), entity, new ModLoadedCondition(entity.getNamespace()));
   }
 
@@ -115,7 +115,7 @@ public abstract class AbstractMobEquipmentProvider extends GenericDataProvider {
       json.add("equip", MobEquipment.LIST_LOADABLE.serialize(equipment.build()));
       // serialize conditions
       if (conditions.length > 0) {
-        json.add("conditions", CraftingHelper.serialize(conditions));
+        json.add("conditions", ICondition.LIST_CODEC.encodeStart(JsonOps.INSTANCE, List.of(conditions)).getOrThrow());
       }
       return json;
     }

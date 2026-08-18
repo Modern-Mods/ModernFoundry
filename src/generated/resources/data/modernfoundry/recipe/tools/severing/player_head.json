@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:player_beheading",
-  "id": "modernfoundry:tools/severing/player_head",
   "looting_bonus": 0.02,
   "per_level_chance": 0.1
 }

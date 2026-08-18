@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.tools.modifiers.traits.skull;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.Ingredient;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.hook.interaction.KeybindInteractModifierHook;
@@ -18,6 +19,6 @@ public class FirebreathModifier extends NoLevelsModifier implements KeybindInter
 
   @Override
   protected void registerHooks(Builder hookBuilder) {
-    hookBuilder.addModule(FireballModule.builder().damageMultiplier(2.5f).fireball(Ingredient.of(TinkerTags.Items.FIREBALLS)).end().modifier(ModifierIds.fiery).build());
+    hookBuilder.addModule(FireballModule.builder().damageMultiplier(2.5f).fireball(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(TinkerTags.Items.FIREBALLS)).end().modifier(ModifierIds.fiery).build());
   }
 }

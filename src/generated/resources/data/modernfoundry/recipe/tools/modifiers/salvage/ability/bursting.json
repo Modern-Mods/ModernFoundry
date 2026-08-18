@@ -6,11 +6,7 @@
     "abilities": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/armor/chestplate"
-    },
-    {
-      "tag": "modernfoundry:modifiable/shields"
-    }
+    "#modernfoundry:modifiable/armor/chestplate",
+    "#modernfoundry:modifiable/shields"
   ]
 }

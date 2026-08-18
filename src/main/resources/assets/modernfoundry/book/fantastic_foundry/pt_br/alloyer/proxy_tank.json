@@ -1,9 +1,9 @@
 {
-  "title": "Tanque Modern Foundry",
+  "title": "Tanque Tinker",
   "item": "modernfoundry:scorched_proxy_tank",
   "text": [
     {
-      "text": "O tanque Modern Foundry é ótimo para encher ou esvaziar itens de fluido de tamanho variável, como ferramentas com tanques. Basta colocar a ferramenta no tanque e enchê-la usando itens de fluido, torneiras ou canais.",
+      "text": "O tanque tinker é ótimo para encher ou esvaziar itens de fluido de tamanho variável, como ferramentas com tanques. Basta colocar a ferramenta no tanque e enchê-la usando itens de fluido, torneiras ou canais.",
       "paragraph": true
     },
     {

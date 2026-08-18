@@ -1,6 +1,12 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "ignore": "modernfoundry:non_singular_ore_rates",
+      "match": "c:ores/copper"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/copper/ore_singular",
   "byproducts": [
     {
       "amount": 60,
@@ -8,21 +14,11 @@
       "tag": "c:molten_gold"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_combination_filled",
-      "ignore": "modernfoundry:non_singular_ore_rates",
-      "match": "c:ores/copper"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/metal/copper/ore_singular",
   "ingredient": {
-    "type": "neoforge:difference",
-    "base": {
-      "tag": "c:ores/copper"
-    },
-    "subtracted": {
-      "tag": "modernfoundry:non_singular_ore_rates"
-    }
+    "neoforge:ingredient_type": "neoforge:difference",
+    "base": "#c:ores/copper",
+    "subtracted": "#modernfoundry:non_singular_ore_rates"
   },
   "rate": "metal",
   "result": {

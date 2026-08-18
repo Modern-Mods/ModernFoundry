@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.library.recipe.material;
 
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.recipe.container.ISingleStackContainer;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.recipe.container.ISingleStackContainer;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
 
 /**

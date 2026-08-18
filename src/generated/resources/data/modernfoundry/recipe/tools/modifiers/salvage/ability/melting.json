@@ -6,11 +6,7 @@
     "abilities": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/melee"
-    },
-    {
-      "tag": "modernfoundry:modifiable/harvest"
-    }
+    "#modernfoundry:modifiable/melee",
+    "#modernfoundry:modifiable/harvest"
   ]
 }

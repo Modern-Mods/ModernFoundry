@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/war_pick",
+    "parts": [
+      {
+        "name": "body",
+        "index": 1
+      },
+      {
+        "name": "bowstring",
+        "index": 2
+      },
+      {
+        "name": "limb",
+        "index": 0
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:war_pick"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/war_pick/modifiers/"
+    ]
+  }
+}

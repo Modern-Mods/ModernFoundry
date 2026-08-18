@@ -1,10 +1,10 @@
 package modernmods.modernfoundry.library.tools.capability;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.modules.ModifierModule;
@@ -24,7 +24,7 @@ public record ToolEnergyCapability(Supplier<? extends IToolStackView> tool) impl
   /** Stat marking the max capacity */
   public static final CapacityStat MAX_STAT = new CapacityStat(new ToolStatId(TConstruct.MOD_ID, "max_energy"), 0xa00000, ENERGY_FORMAT);
   /** Persistent data key for fetching the current energy */
-  public static final ResourceLocation ENERGY_KEY = TConstruct.getResource("energy");
+  public static final Identifier ENERGY_KEY = TConstruct.getResource("energy");
   /** Include this module in a modifier adding energy capacity or functionality to ensure capacity changes are properly cleaned up */
   public static final ModifierModule ENERGY_HANDLER = new ModifierTraitModule(TinkerModifiers.energyHandler.getId(), 1, true);
 

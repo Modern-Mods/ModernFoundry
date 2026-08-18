@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/tin/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/tin"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/tin"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/tin/ingot",
+  "ingredient": "#c:ingots/tin",
   "result": {
     "amount": 90,
     "tag": "c:molten_tin"

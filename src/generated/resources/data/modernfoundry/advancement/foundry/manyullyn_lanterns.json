@@ -42,7 +42,7 @@
     "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:scorched_lantern",
+      "id": "modernfoundry:scorched_lantern",
       "nbt": "{tank:{Amount:50,FluidName:\"modernfoundry:molten_manyullyn\"}}"
     },
     "show_toast": true,

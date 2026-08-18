@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/constantan/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/constantan"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/constantan"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/gear",
+  "ingredient": "#c:gears/constantan",
   "result": {
     "amount": 360,
     "tag": "c:molten_constantan"

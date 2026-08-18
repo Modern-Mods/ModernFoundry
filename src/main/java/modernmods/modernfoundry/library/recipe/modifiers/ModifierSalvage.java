@@ -1,18 +1,18 @@
 package modernmods.modernfoundry.library.recipe.modifiers;
 
 import lombok.Getter;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ICustomOutputRecipe;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ICustomOutputRecipe;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
@@ -38,7 +38,7 @@ public class ModifierSalvage implements ICustomOutputRecipe<RecipeInput> {
     ModifierSalvage::new);
 
   @Getter
-  protected final ResourceLocation id;
+  protected final Identifier id;
   /** Ingredient determining tools matched by this */
   protected final Ingredient toolIngredient;
   /** Max size of the tool for this modifier. If the tool size is smaller, the salvage bonus will be reduced */
@@ -52,7 +52,7 @@ public class ModifierSalvage implements ICustomOutputRecipe<RecipeInput> {
   /** Slots restored by this recipe, if null no slots are restored */
   protected final SlotCount slots;
 
-  public ModifierSalvage(ResourceLocation id, Ingredient toolIngredient, int maxToolSize, ModifierId modifier, IntRange level, SlotCount slots) {
+  public ModifierSalvage(Identifier id, Ingredient toolIngredient, int maxToolSize, ModifierId modifier, IntRange level, SlotCount slots) {
     this.id = id;
     this.toolIngredient = toolIngredient;
     this.maxToolSize = maxToolSize;
@@ -83,8 +83,9 @@ public class ModifierSalvage implements ICustomOutputRecipe<RecipeInput> {
   }
 
   @Override
-  public RecipeType<?> getType() {
-    return TinkerRecipeTypes.DATA.get();
+  @SuppressWarnings("unchecked")
+  public RecipeType<? extends ModifierSalvage> getType() {
+    return (RecipeType<? extends ModifierSalvage>)(RecipeType<?>) TinkerRecipeTypes.DATA.get();
   }
 
   /** @deprecated Use {@link #matches(ItemStack, IToolStackView, int)} */
@@ -95,7 +96,7 @@ public class ModifierSalvage implements ICustomOutputRecipe<RecipeInput> {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ModifierSalvage> getSerializer() {
     return TinkerModifiers.modifierSalvageSerializer.get();
   }
 }

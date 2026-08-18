@@ -18,7 +18,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.EventBusSubscriber;
 import modernmods.modernfoundry.compat.neoforged.neoforge.network.NetworkHooks;
-import modernmods.hilt.inventory.BaseContainerMenu;
+import modernmods.mantle.inventory.BaseContainerMenu;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -38,10 +38,10 @@ public class CommonsEvents {
 
     // check if we jumped from a slime block
     BlockPos pos = BlockPos.containing(event.getEntity().position());
-    if (event.getEntity().getCommandSenderWorld().isEmptyBlock(pos)) {
+    if (event.getEntity().level().isEmptyBlock(pos)) {
       pos = pos.below();
     }
-    BlockState state = event.getEntity().getCommandSenderWorld().getBlockState(pos);
+    BlockState state = event.getEntity().level().getBlockState(pos);
     Block block = state.getBlock();
 
     if (TinkerWorld.congealedSlime.contains(block)) {

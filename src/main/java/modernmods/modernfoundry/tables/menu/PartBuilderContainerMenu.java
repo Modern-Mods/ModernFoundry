@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.util.sync.LambdaDataSlot;
+import modernmods.mantle.util.sync.LambdaDataSlot;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.tables.TinkerTables;
 import modernmods.modernfoundry.tables.block.entity.inventory.LazyResultContainer;

@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "mantle:retextured",
+    "model": "modernfoundry:item/tinkers_anvil",
+    "retextured": ["particle", "top"]
+  }
+}

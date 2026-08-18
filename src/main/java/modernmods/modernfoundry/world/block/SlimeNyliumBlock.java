@@ -25,8 +25,8 @@ public class SlimeNyliumBlock extends Block implements BonemealableBlock {
   private static boolean isDarkEnough(BlockState state, LevelReader reader, BlockPos pos) {
     BlockPos blockpos = pos.above();
     BlockState blockstate = reader.getBlockState(blockpos);
-    int i = LightEngine.getLightBlockInto(reader, state, pos, blockstate, blockpos, Direction.UP, blockstate.getLightBlock(reader, blockpos));
-    return i < reader.getMaxLightLevel();
+    int i = LightEngine.getLightBlockInto(state, blockstate, Direction.UP, blockstate.getLightDampening());
+    return i < LightEngine.MAX_LEVEL;
   }
 
   @SuppressWarnings("deprecation")

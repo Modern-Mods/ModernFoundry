@@ -1,14 +1,14 @@
 package modernmods.modernfoundry.library.recipe.casting.material;
 
 import lombok.Getter;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.recipe.casting.AbstractCastingRecipe;
@@ -25,22 +25,28 @@ public abstract class AbstractMaterialCastingRecipe extends AbstractCastingRecip
   protected static final LoadableField<Integer,AbstractMaterialCastingRecipe> ITEM_COST_FIELD = IntLoadable.FROM_ONE.requiredField("item_cost", r -> r.itemCost);
   protected static final LoadableField<IJsonPredicate<MaterialVariantId>,AbstractMaterialCastingRecipe> MATERIALS_FIELD = MaterialPredicate.LOADER.defaultField("allowed_materials", r -> r.materials);
 
-  @Getter
-  private final RecipeSerializer<?> serializer;
+  @Getter(lombok.AccessLevel.NONE)
+  private final TypeAwareRecipeSerializer<?> serializer;
   protected final int itemCost;
   protected final IJsonPredicate<MaterialVariantId> materials;
 
-  public AbstractMaterialCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient cast, int itemCost, boolean consumed, boolean switchSlots, IJsonPredicate<MaterialVariantId> materials) {
+  public AbstractMaterialCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, Ingredient cast, int itemCost, boolean consumed, boolean switchSlots, IJsonPredicate<MaterialVariantId> materials) {
     super(serializer.getType(), id, group, cast, consumed, switchSlots);
     this.serializer = serializer;
     this.itemCost = itemCost;
     this.materials = materials;
   }
 
-  /** @deprecated use {@link #AbstractMaterialCastingRecipe(TypeAwareRecipeSerializer, ResourceLocation, String, Ingredient, int, boolean, boolean, IJsonPredicate)} */
+  /** @deprecated use {@link #AbstractMaterialCastingRecipe(TypeAwareRecipeSerializer, Identifier, String, Ingredient, int, boolean, boolean, IJsonPredicate)} */
   @Deprecated(forRemoval = true)
-  public AbstractMaterialCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient cast, int itemCost, boolean consumed, boolean switchSlots) {
+  public AbstractMaterialCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, Ingredient cast, int itemCost, boolean consumed, boolean switchSlots) {
     this(serializer, id, group, cast, itemCost, consumed, switchSlots, MaterialPredicate.ANY);
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public RecipeSerializer<? extends AbstractMaterialCastingRecipe> getSerializer() {
+    return (RecipeSerializer<? extends AbstractMaterialCastingRecipe>) serializer.serializer();
   }
 
   /** Gets the material fluid recipe for the given recipe */

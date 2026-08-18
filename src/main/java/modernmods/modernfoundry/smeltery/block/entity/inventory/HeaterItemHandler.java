@@ -2,15 +2,15 @@ package modernmods.modernfoundry.smeltery.block.entity.inventory;
 
 import net.minecraft.world.item.ItemStack;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.ForgeHooks;
-import modernmods.hilt.block.entity.HiltBlockEntity;
-import modernmods.hilt.inventory.SingleItemHandler;
+import modernmods.mantle.block.entity.MantleBlockEntity;
+import modernmods.mantle.inventory.SingleItemHandler;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 
 /**
  * Item handler holding the heater inventory
  */
-public class HeaterItemHandler extends SingleItemHandler<HiltBlockEntity> {
-  public HeaterItemHandler(HiltBlockEntity parent) {
+public class HeaterItemHandler extends SingleItemHandler<MantleBlockEntity> {
+  public HeaterItemHandler(MantleBlockEntity parent) {
     super(parent, 64);
   }
 

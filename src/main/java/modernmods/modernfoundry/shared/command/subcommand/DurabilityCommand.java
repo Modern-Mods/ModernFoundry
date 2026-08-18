@@ -11,7 +11,7 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.command.HiltCommand;
+import modernmods.mantle.command.MantleCommand;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.tools.nbt.ToolStack;
@@ -33,7 +33,7 @@ public class DurabilityCommand {
    * @param subCommand  Command builder
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
-    subCommand.requires(sender -> sender.hasPermission(HiltCommand.PERMISSION_GAME_COMMANDS))
+    subCommand.requires(sender -> MantleCommand.hasPermission(sender, MantleCommand.PERMISSION_GAME_COMMANDS))
       .then(Commands.argument("targets", EntityArgument.entities())
         // durability <target> add <amount>
         .then(Commands.literal("add")

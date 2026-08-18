@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "sign",
   "key": {
-    "#": {
-      "item": "modernfoundry:greenheart_planks"
-    },
-    "X": {
-      "tag": "c:rods/wooden"
-    }
+    "#": "modernfoundry:greenheart_planks",
+    "X": "#c:rods/wooden"
   },
   "pattern": [
     "###",
@@ -18,6 +14,5 @@
   "result": {
     "count": 3,
     "id": "modernfoundry:greenheart_sign"
-  },
-  "show_notification": true
+  }
 }

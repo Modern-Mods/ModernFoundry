@@ -1,13 +1,10 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casts/gold/chestplate_plating",
   "cast": [
+    "modernfoundry:chestplate_plating_dummy",
     {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:chestplate_plating"
-    },
-    {
-      "item": "modernfoundry:chestplate_plating_dummy"
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:chestplate_plating"
     }
   ],
   "cast_consumed": true,
@@ -16,6 +13,7 @@
     "amount": 90,
     "tag": "c:molten_gold"
   },
+  "id": "modernfoundry:smeltery/casts/gold/chestplate_plating",
   "result": "modernfoundry:chestplate_plating_cast",
   "switch_slots": true
 }

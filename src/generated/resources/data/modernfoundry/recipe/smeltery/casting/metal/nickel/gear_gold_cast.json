@@ -1,20 +1,18 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/nickel/gear_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/gear"
-  },
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/nickel"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/multi_use/gear",
   "cooling_time": 130,
   "fluid": {
     "amount": 360,
     "tag": "c:molten_nickel"
   },
+  "id": "modernfoundry:smeltery/casting/metal/nickel/gear_gold_cast",
   "result": {
     "tag": "c:gears/nickel"
   }

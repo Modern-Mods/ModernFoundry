@@ -1,13 +1,13 @@
 package modernmods.modernfoundry.tools.modules.ranged.bow;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.json.LevelingInt;
@@ -26,7 +26,7 @@ public class QuiverInventoryModule extends InventoryModule {
   /** Loader instance */
   public static final RecordLoadable<QuiverInventoryModule> LOADER = RecordLoadable.create(KEY_FIELD, SLOTS_FIELD, LIMIT_FIELD, PATTERN_FIELD, ModifierCondition.CONTEXT_FIELD, VALIDATION_FIELD, QuiverInventoryModule::new);
 
-  private QuiverInventoryModule(@Nullable ResourceLocation key, LevelingInt slots, LevelingInt slotLimit, @Nullable Pattern pattern, ModifierCondition<IToolContext> condition, IntRange validationLevel) {
+  private QuiverInventoryModule(@Nullable Identifier key, LevelingInt slots, LevelingInt slotLimit, @Nullable Pattern pattern, ModifierCondition<IToolContext> condition, IntRange validationLevel) {
     super(key, slots, slotLimit, ItemPredicate.ANY, pattern, condition, validationLevel);
   }
 

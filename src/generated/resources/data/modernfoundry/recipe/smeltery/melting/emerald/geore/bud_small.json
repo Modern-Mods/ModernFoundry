@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:geore_small_buds/emerald"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/emerald/geore/bud_small",
   "byproducts": [
     {
       "amount": 100,
@@ -8,15 +13,8 @@
       "rate": "gem"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:geore_small_buds/emerald"
-    }
-  ],
-  "ingredient": {
-    "tag": "c:geore_small_buds/emerald"
-  },
+  "id": "modernfoundry:smeltery/melting/emerald/geore/bud_small",
+  "ingredient": "#c:geore_small_buds/emerald",
   "rate": "gem",
   "result": {
     "amount": 100,

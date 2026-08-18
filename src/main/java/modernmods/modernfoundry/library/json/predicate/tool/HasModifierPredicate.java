@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.json.predicate.tool;
 
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.json.predicate.modifier.ModifierPredicate;
 import modernmods.modernfoundry.library.json.predicate.modifier.SingleModifierPredicate;

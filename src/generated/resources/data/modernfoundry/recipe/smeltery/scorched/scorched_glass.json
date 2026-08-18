@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "G": {
-      "tag": "c:gems/quartz"
-    },
-    "b": {
-      "item": "modernfoundry:scorched_brick"
-    }
+    "G": "#c:gems/quartz",
+    "b": "modernfoundry:scorched_brick"
   },
   "pattern": [
     " b ",
@@ -16,6 +12,5 @@
   ],
   "result": {
     "id": "modernfoundry:scorched_glass"
-  },
-  "show_notification": true
+  }
 }

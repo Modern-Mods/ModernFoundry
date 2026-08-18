@@ -1,11 +1,11 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/metal/steel/block",
   "cooling_time": 194,
   "fluid": {
     "amount": 810,
     "tag": "c:molten_steel"
   },
+  "id": "modernfoundry:smeltery/casting/metal/steel/block",
   "result": {
     "tag": "c:storage_blocks/steel"
   }

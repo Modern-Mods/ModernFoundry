@@ -17,7 +17,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.ForgeHooks;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import modernmods.modernfoundry.compat.neoforged.neoforge.event.ForgeEventFactory;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
@@ -72,7 +72,7 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
     }
     // assume empty unless we learn otherwise
     ItemStack result = ItemStack.EMPTY;
-    if (!this.level.isClientSide && this.level.getServer() != null) {
+    if (!this.level.isClientSide() && this.level.getServer() != null) {
       RecipeManager manager = this.level.getServer().getRecipeManager();
 
       // first, try the cached recipe
@@ -87,7 +87,7 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
 
       // if we have a recipe, fetch its result
       if (recipe != null) {
-        result = recipe.value().assemble(input, level.registryAccess());
+        result = recipe.value().assemble(input);
 
         // sync if the recipe is different
         if (recipe != lastRecipe) {
@@ -99,7 +99,7 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
     }
     else if (this.lastRecipe != null && this.lastRecipe.value().matches(this.craftingInventory.asCraftingInput(), this.level)) {
       ForgeHooks.setCraftingPlayer(player);
-      result = this.lastRecipe.value().assemble(this.craftingInventory.asCraftingInput(), level.registryAccess());
+      result = this.lastRecipe.value().assemble(this.craftingInventory.asCraftingInput());
       ForgeHooks.setCraftingPlayer(null);
     }
     return result;
@@ -140,7 +140,7 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
 //      }
 //    }
 
-    ItemStack result = recipe.value().assemble(input, level.registryAccess());
+    ItemStack result = recipe.value().assemble(input);
     ForgeHooks.setCraftingPlayer(null);
     return result;
   }
@@ -162,38 +162,42 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
       // unlock the recipe if it was not unlocked, so it shows in the recipe book
       player.awardRecipes(Collections.singleton(recipe));
     }
-    result.onCraftedBy(this.level, player, amount);
+    result.onCraftedBy(player, amount);
     ForgeEventFactory.firePlayerCraftingEvent(player, result, this.craftingInventory);
 
-    // update all slots in the inventory
-    // remove remaining items
+    // consume the ingredients and place any remaining items (buckets, etc).
+    // CraftingInput.of() TRIMS empty edge rows/columns, so getRemainingItems is sized to the trimmed grid; mapping those
+    // indices straight onto the untrimmed 3x3 block-entity slots (the old `remaining.get(i)` -> getItem(i)) decrements the
+    // wrong slots, so any partial recipe (notably a 1x1 ore->ingot) never consumes its ingredient -> infinite crafting.
+    // Use the positioned input's left/top offset to map back to the real slot, mirroring vanilla ResultSlot.onTake.
     ForgeHooks.setCraftingPlayer(player);
-    CraftingInput.Positioned positionedInput = CraftingInput.ofPositioned(craftingInventory.getWidth(), craftingInventory.getHeight(), craftingInventory.getItems());
-    CraftingInput input = positionedInput.input();
+    CraftingInput.Positioned positioned = craftingInventory.asPositionedCraftInput();
+    CraftingInput input = positioned.input();
+    int recipeLeft = positioned.left();
+    int recipeTop = positioned.top();
     NonNullList<ItemStack> remaining = recipe.value().getRemainingItems(input);
     ForgeHooks.setCraftingPlayer(null);
-    for (int i = 0; i < input.size(); ++i) {
-      int recipeColumn = i % input.width();
-      int recipeRow = i / input.width();
-      int slot = positionedInput.left() + recipeColumn + (positionedInput.top() + recipeRow) * craftingInventory.getWidth();
-      ItemStack original = this.getItem(slot);
-      ItemStack newStack = i < remaining.size() ? remaining.get(i) : ItemStack.EMPTY;
-
-      // if empty or size 1, set directly (decreases by 1)
-      if (original.isEmpty() || original.getCount() == 1) {
-        this.setItem(i, newStack);
-      }
-      else if (ItemStack.isSameItemSameComponents(original, newStack)) {
-        // if matching, merge (decreasing by 1
-        newStack.grow(original.getCount() - 1);
-        this.setItem(i, newStack);
-      }
-      else {
-        // directly update the slot
-        this.setItem(i, original.copyWithCount(original.getCount() - 1));
-        // otherwise, drop the item as the player
-        if (!newStack.isEmpty() && !player.getInventory().add(newStack)) {
-          player.drop(newStack, false);
+    int width = craftingInventory.getWidth();
+    for (int y = 0; y < input.height(); y++) {
+      for (int x = 0; x < input.width(); x++) {
+        int slot = x + recipeLeft + (y + recipeTop) * width;
+        ItemStack current = this.getItem(slot);
+        ItemStack replacement = remaining.get(x + y * input.width());
+        if (!current.isEmpty()) {
+          this.removeItem(slot, 1);
+          current = this.getItem(slot);
+        }
+        if (!replacement.isEmpty()) {
+          if (current.isEmpty()) {
+            this.setItem(slot, replacement);
+          }
+          else if (ItemStack.isSameItemSameComponents(current, replacement)) {
+            replacement.grow(current.getCount());
+            this.setItem(slot, replacement);
+          }
+          else if (!player.getInventory().add(replacement)) {
+            player.drop(replacement, false);
+          }
         }
       }
     }
@@ -203,8 +207,8 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
   public void notifyUncraftable(Player player) {
     // if empty, send a message so the player is more aware of why they cannot craft it, sent to chat as status bar is not visible
     // TODO: consider moving into the UI somewhere
-    if (level != null && !level.isClientSide) {
-      player.displayClientMessage(CraftingStationBlockEntity.UNCRAFTABLE, false);
+    if (level != null && !level.isClientSide()) {
+      player.sendSystemMessage(CraftingStationBlockEntity.UNCRAFTABLE);
     }
   }
 
@@ -232,7 +236,7 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
    */
   public void syncRecipe(Player player) {
     // must have a last recipe and a server world
-    if (this.lastRecipe != null && this.level != null && !this.level.isClientSide && player instanceof ServerPlayer) {
+    if (this.lastRecipe != null && this.level != null && !this.level.isClientSide() && player instanceof ServerPlayer) {
       TinkerNetwork.getInstance().sendTo(new UpdateCraftingRecipePacket(this.worldPosition, this.lastRecipe), (ServerPlayer) player);
     }
   }

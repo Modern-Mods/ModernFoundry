@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casts/gold/nuggets",
-  "cast": {
-    "tag": "c:nuggets"
-  },
+  "cast": "#c:nuggets",
   "cast_consumed": true,
   "cooling_time": 57,
   "fluid": {
     "amount": 90,
     "tag": "c:molten_gold"
   },
+  "id": "modernfoundry:smeltery/casts/gold/nuggets",
   "result": "modernfoundry:nugget_cast",
   "switch_slots": true
 }

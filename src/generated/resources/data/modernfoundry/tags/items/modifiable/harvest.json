@@ -1,0 +1,10 @@
+{
+  "values": [
+    "modernfoundry:dagger",
+    "modernfoundry:sword",
+    "modernfoundry:cleaver",
+    "modernfoundry:swasher",
+    "#modernfoundry:modifiable/harvest/primary",
+    "#modernfoundry:modifiable/harvest/stone"
+  ]
+}

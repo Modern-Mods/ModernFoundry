@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steel/boots",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/steel/tools_costing_4"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/steel/tools_costing_4"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steel/boots",
+  "ingredient": "#modernfoundry:melting/steel/tools_costing_4",
   "result": {
     "amount": 360,
     "tag": "c:molten_steel",

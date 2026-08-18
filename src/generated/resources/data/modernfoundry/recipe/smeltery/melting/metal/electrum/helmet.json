@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/electrum/helmet",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/helmets/electrum"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/helmets/electrum"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/helmet",
+  "ingredient": "#c:armors/helmets/electrum",
   "result": {
     "amount": 450,
     "tag": "c:molten_electrum",

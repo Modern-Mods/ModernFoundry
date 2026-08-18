@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/fishing_rod",
+    "parts": [
+      {
+        "name": "rod",
+        "index": 0
+      },
+      {
+        "name": "string",
+        "index": 1
+      },
+      {
+        "name": "hook",
+        "index": 2
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:fishing_rod"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/fishing_rod/modifiers/"
+    ]
+  }
+}

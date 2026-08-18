@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steel/leggings",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/steel/tools_costing_7"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/steel/tools_costing_7"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steel/leggings",
+  "ingredient": "#modernfoundry:melting/steel/tools_costing_7",
   "result": {
     "amount": 630,
     "tag": "c:molten_steel",

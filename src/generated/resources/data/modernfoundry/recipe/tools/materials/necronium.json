@@ -1,6 +1,4 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/necronium",
   "neoforge:conditions": [
     {
       "type": "neoforge:or",
@@ -10,15 +8,15 @@
           "prop": "force_integration_materials"
         },
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/uranium"
         }
       ]
     }
   ],
-  "ingredient": {
-    "item": "modernfoundry:necronium_bone"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/necronium",
+  "ingredient": "modernfoundry:necronium_bone",
   "material": "modernfoundry:necronium",
   "needed": 1,
   "value": 1

@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/pickadze",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "pick",
+        "index": 0
+      },
+      {
+        "name": "adze",
+        "index": 2
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:pickadze"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/pickadze/modifiers/"
+    ]
+  }
+}

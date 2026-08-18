@@ -1,21 +1,21 @@
 {
-  "type": "modernfoundry:material_melting",
-  "id": "modernfoundry:tools/materials/melting/constantan",
   "neoforge:conditions": [
     {
       "type": "neoforge:or",
       "values": [
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/constantan"
         },
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/nickel"
         }
       ]
     }
   ],
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/constantan",
   "input": "modernfoundry:constantan",
   "result": {
     "amount": 90,

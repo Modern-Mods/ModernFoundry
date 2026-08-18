@@ -1,16 +1,16 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/tool_belt_1",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/tool_belt_1",
   "inputs": [
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     },
     {
-      "tag": "c:ingots/iron"
+      "ingredient": "#c:ingots/iron"
     },
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     }
   ],
   "level": 1,
@@ -18,7 +18,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/leggings"
-  }
+  "tools": "#modernfoundry:modifiable/armor/leggings"
 }

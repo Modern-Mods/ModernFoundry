@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/hydraulic_from_block",
   "allow_crystal": false,
   "amount_per_item": 4,
-  "input": {
-    "item": "minecraft:prismarine"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/hydraulic_from_block",
+  "input": "minecraft:prismarine",
   "leftover": "minecraft:prismarine_shard",
   "level": {
     "max": 5
@@ -15,7 +13,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/harvest"
-  }
+  "tools": "#modernfoundry:modifiable/harvest"
 }

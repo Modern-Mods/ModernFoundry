@@ -1,16 +1,16 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/lure",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/lure",
   "inputs": [
     {
-      "item": "modernfoundry:cheese_ingot"
+      "ingredient": "modernfoundry:cheese_ingot"
     },
     {
-      "item": "modernfoundry:cheese_ingot"
+      "ingredient": "modernfoundry:cheese_ingot"
     },
     {
-      "item": "modernfoundry:cheese_ingot"
+      "ingredient": "modernfoundry:cheese_ingot"
     }
   ],
   "level": {
@@ -20,7 +20,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/fishing_rods"
-  }
+  "tools": "#modernfoundry:modifiable/fishing_rods"
 }

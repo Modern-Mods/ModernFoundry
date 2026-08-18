@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/bronze/chestplate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/chestplates/bronze"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/chestplates/bronze"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/bronze/chestplate",
+  "ingredient": "#c:armors/chestplates/bronze",
   "result": {
     "amount": 720,
     "tag": "c:molten_bronze",

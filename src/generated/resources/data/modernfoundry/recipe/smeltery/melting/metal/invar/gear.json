@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/invar/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/invar"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/invar"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/gear",
+  "ingredient": "#c:gears/invar",
   "result": {
     "amount": 360,
     "tag": "c:molten_invar"

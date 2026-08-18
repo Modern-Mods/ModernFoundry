@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/sand/molding/adze_head",
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "material": "#modernfoundry:casts/sand",
   "pattern": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:adze_head"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:adze_head"
   },
   "result": "modernfoundry:adze_head_sand_cast"
 }

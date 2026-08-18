@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "modernfoundry:material",
+    "base_model": "modernfoundry:item/pick_head",
+    "offset": [
+      -2,
+      1
+    ]
+  }
+}

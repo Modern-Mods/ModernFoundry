@@ -1,22 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "neoforge:conditions": [
     {
       "type": "modernfoundry:config",
       "prop": "glass_recipe_fix"
     }
   ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
-    "G": {
-      "tag": "c:glass/colorless"
-    },
-    "O": {
-      "item": "minecraft:obsidian"
-    },
-    "S": {
-      "item": "minecraft:nether_star"
-    }
+    "G": "#c:glass_blocks/colorless",
+    "O": "minecraft:obsidian",
+    "S": "minecraft:nether_star"
   },
   "pattern": [
     "GGG",
@@ -25,6 +19,5 @@
   ],
   "result": {
     "id": "minecraft:beacon"
-  },
-  "show_notification": true
+  }
 }

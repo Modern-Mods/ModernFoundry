@@ -2,15 +2,9 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/entity_melting/heads/piglin",
   "ingredient": [
-    {
-      "item": "minecraft:piglin_head"
-    },
-    {
-      "item": "modernfoundry:piglin_brute_head"
-    },
-    {
-      "item": "modernfoundry:zombified_piglin_head"
-    }
+    "minecraft:piglin_head",
+    "modernfoundry:piglin_brute_head",
+    "modernfoundry:zombified_piglin_head"
   ],
   "result": {
     "amount": 90,

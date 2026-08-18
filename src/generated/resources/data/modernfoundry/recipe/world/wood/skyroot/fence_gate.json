@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "wooden_fence_gate",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "modernfoundry:skyroot_planks"
-    }
+    "#": "minecraft:stick",
+    "W": "modernfoundry:skyroot_planks"
   },
   "pattern": [
     "#W#",
@@ -16,6 +12,5 @@
   ],
   "result": {
     "id": "modernfoundry:skyroot_fence_gate"
-  },
-  "show_notification": true
+  }
 }

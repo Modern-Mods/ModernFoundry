@@ -1,16 +1,15 @@
 package modernmods.modernfoundry.library.client.book.elements;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
-import modernmods.hilt.client.book.action.StringActionProcessor;
-import modernmods.hilt.client.book.data.PageData;
-import modernmods.hilt.client.book.data.element.TextData;
-import modernmods.hilt.client.screen.book.element.SizedBookElement;
+import modernmods.mantle.client.book.action.StringActionProcessor;
+import modernmods.mantle.client.book.data.PageData;
+import modernmods.mantle.client.book.data.element.TextData;
+import modernmods.mantle.client.screen.book.element.SizedBookElement;
 
-/** @deprecated use {@link modernmods.hilt.client.screen.book.element.PageIconLinkElement} */
+/** @deprecated use {@link modernmods.mantle.client.screen.book.element.PageIconLinkElement} */
 @Deprecated(forRemoval = true)
 public class PageIconLinkElement extends SizedBookElement {
 
@@ -29,25 +28,24 @@ public class PageIconLinkElement extends SizedBookElement {
     this.displayElement = displayElement;
     this.pageData = pageData;
 
-    this.action = "hilt:go-to-page-rtn " + pageData.parent.name + "." + pageData.name;
+    this.action = "mantle:go-to-page-rtn " + pageData.parent.name + "." + pageData.name;
 
     this.name = name;
   }
 
   @Override
-  public void draw(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
+  public void draw(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
     boolean hover = this.isHovered(mouseX, mouseY);
 
     if (hover) {
       graphics.fill(this.x, this.y, this.x + this.width, this.y + this.height, this.parent.book.appearance.hoverColor | (0x77 << 24));
     }
 
-    RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
     this.displayElement.draw(graphics, mouseX, mouseY, partialTicks, fontRenderer);
   }
 
   @Override
-  public void drawOverlay(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
+  public void drawOverlay(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
     if (this.name != null && !this.name.getString().isEmpty() && this.isHovered(mouseX, mouseY)) {
       this.drawTooltip(graphics, ImmutableList.of(name), mouseX, mouseY, fontRenderer);
     }

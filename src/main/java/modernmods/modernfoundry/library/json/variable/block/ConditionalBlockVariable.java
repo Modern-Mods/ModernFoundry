@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.library.json.variable.block;
 
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.block.BlockPredicate;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.block.BlockPredicate;
 import modernmods.modernfoundry.library.json.variable.ConditionalVariable;
 
 /**

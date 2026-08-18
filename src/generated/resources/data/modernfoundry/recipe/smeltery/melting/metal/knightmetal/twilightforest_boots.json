@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/knightmetal/twilightforest_boots",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:knightmetal_boots"
+      "type": "neoforge:registered",
+      "value": "twilightforest:knightmetal_boots"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/knightmetal/twilightforest_boots",
   "ingredient": {
     "item": "twilightforest:knightmetal_boots"
   },

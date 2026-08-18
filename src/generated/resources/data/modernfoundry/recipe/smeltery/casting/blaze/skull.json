@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/blaze/skull",
-  "cast": {
-    "item": "minecraft:wither_skeleton_skull"
-  },
+  "cast": "minecraft:wither_skeleton_skull",
   "cast_consumed": true,
   "cooling_time": 189,
   "fluid": {
     "amount": 500,
     "tag": "modernfoundry:blazing_blood"
   },
+  "id": "modernfoundry:smeltery/casting/blaze/skull",
   "result": "modernfoundry:blazing_bone_head"
 }

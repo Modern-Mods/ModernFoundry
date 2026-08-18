@@ -9,16 +9,16 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.json.LevelingInt;
@@ -58,13 +58,13 @@ import java.util.function.Predicate;
 public class InventoryModule implements ModifierModule, InventoryModifierHook, VolatileDataModifierHook, ValidateModifierHook, ModifierRemovalHook, ModuleWithKey, ConditionalModule<IToolContext>, SlotStackModifierHook {
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<InventoryModule>defaultHooks(ToolInventoryCapability.HOOK, ModifierHooks.VOLATILE_DATA, ModifierHooks.VALIDATE, ModifierHooks.REMOVE, ModifierHooks.SLOT_STACK);
   /** Mod Data NBT mapper to get a compound list */
-  public static final BiFunction<CompoundTag,String,ListTag> GET_COMPOUND_LIST = (nbt, name) -> nbt.getList(name, Tag.TAG_COMPOUND);
+  public static final BiFunction<CompoundTag,String,ListTag> GET_COMPOUND_LIST = (nbt, name) -> nbt.getListOrEmpty(name);
   /** Error for if the container has items preventing modifier removal */
   private static final Component HAS_ITEMS = TConstruct.makeTranslation("modifier", "inventory_cannot_remove");
   /** NBT key to store the slot for a stack */
   public static final String TAG_SLOT = "Slot";
   // fields
-  protected static final LoadableField<ResourceLocation,? super InventoryModule> KEY_FIELD = ModuleWithKey.FIELD;
+  protected static final LoadableField<Identifier,? super InventoryModule> KEY_FIELD = ModuleWithKey.FIELD;
   protected static final LoadableField<LevelingInt, InventoryModule> SLOTS_FIELD = LevelingInt.LOADABLE.requiredField("slots", InventoryModule::slots);
   protected static final LoadableField<LevelingInt, InventoryModule> LIMIT_FIELD = LevelingInt.LOADABLE.defaultField("limit", LevelingInt.flat(64), InventoryModule::slotLimit);
   protected static final LoadableField<IJsonPredicate<Item>, InventoryModule> FILTER_FIELD = ItemPredicate.LOADER.defaultField("filter", InventoryModule::filter);
@@ -74,7 +74,7 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
   public static final RecordLoadable<InventoryModule> LOADER = RecordLoadable.create(KEY_FIELD, SLOTS_FIELD, LIMIT_FIELD, FILTER_FIELD, PATTERN_FIELD, ModifierCondition.CONTEXT_FIELD, VALIDATION_FIELD, InventoryModule::new);
 
   /** Module adding an inventory to a tool */
-  private final @Nullable ResourceLocation key;
+  private final @Nullable Identifier key;
   /** Location to save the inventory */
   private final LevelingInt slots;
   /** Slots to add to the tool */
@@ -140,12 +140,12 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
   @Override
   public ItemStack getStack(IToolStackView tool, ModifierEntry modifier, int slot) {
     IModDataView modData = tool.getPersistentData();
-    ResourceLocation key = getKey(modifier.getModifier());
-    if (slot < getSlots(tool, modifier) && modData.contains(key, Tag.TAG_LIST)) {
+    Identifier key = getKey(modifier.getModifier());
+    if (slot < getSlots(tool, modifier) && modData.contains(key)) {
       ListTag list = tool.getPersistentData().get(key, GET_COMPOUND_LIST);
       for (int i = 0; i < list.size(); i++) {
-        CompoundTag compound = list.getCompound(i);
-        if (compound.getInt(TAG_SLOT) == slot) {
+        CompoundTag compound = list.getCompoundOrEmpty(i);
+        if (compound.getIntOr(TAG_SLOT, -1) == slot) {
           return TagUtil.readItem(compound);
         }
       }
@@ -159,19 +159,19 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
       ListTag list;
       ModDataNBT modData = tool.getPersistentData();
       // if the tag exists, fetch it
-      ResourceLocation key = getKey(modifier.getModifier());
+      Identifier key = getKey(modifier.getModifier());
       int insertIndex = 0;
-      if (modData.contains(key, Tag.TAG_LIST)) {
+      if (modData.contains(key)) {
         list = modData.get(key, GET_COMPOUND_LIST);
         // first, try to find an existing stack in the slot
         for (int i = 0; i < list.size(); i++) {
-          CompoundTag compound = list.getCompound(i);
-          int listSlot = compound.getInt(TAG_SLOT);
+          CompoundTag compound = list.getCompoundOrEmpty(i);
+          int listSlot = compound.getIntOr(TAG_SLOT, 0);
           if (listSlot == slot) {
             if (stack.isEmpty()) {
               list.remove(i);
             } else {
-              compound.getAllKeys().clear();
+              compound.keySet().clear();
               writeStack(stack, slot, compound);
             }
             return;
@@ -210,9 +210,9 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
     // don't validate if the module is not running
     if (condition.tool().matches(tool) && validationLevel.test(modifier.getLevel())) {
       IModDataView persistentData = tool.getPersistentData();
-      ResourceLocation key = getKey(modifier.getModifier());
+      Identifier key = getKey(modifier.getModifier());
       int maxSlots = getSlots(tool, modifier);
-      if (persistentData.contains(key, Tag.TAG_LIST)) {
+      if (persistentData.contains(key)) {
         ListTag listNBT = persistentData.get(key, GET_COMPOUND_LIST);
         if (!listNBT.isEmpty()) {
           if (maxSlots == 0) {
@@ -222,11 +222,14 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
           BitSet freeSlots = new BitSet(maxSlots);
           freeSlots.set(0, maxSlots, true);
           for (int i = 0; i < listNBT.size(); i++) {
-            freeSlots.set(listNBT.getCompound(i).getInt(TAG_SLOT), false);
+            int usedSlot = listNBT.getCompoundOrEmpty(i).getIntOr(TAG_SLOT, -1);
+            if (usedSlot >= 0 && usedSlot < maxSlots) {
+              freeSlots.set(usedSlot, false);
+            }
           }
           for (int i = 0; i < listNBT.size(); i++) {
-            CompoundTag compoundNBT = listNBT.getCompound(i);
-            if (compoundNBT.getInt(TAG_SLOT) >= maxSlots) {
+            CompoundTag compoundNBT = listNBT.getCompoundOrEmpty(i);
+            if (compoundNBT.getIntOr(TAG_SLOT, -1) >= maxSlots) {
               int free = freeSlots.stream().findFirst().orElse(-1);
               if (free == -1) {
                 return HAS_ITEMS;
@@ -247,8 +250,8 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
   public Component onRemoved(IToolStackView tool, Modifier modifier) {
     // if we currently have item data, then return an error
     ModDataNBT persistentData = tool.getPersistentData();
-    ResourceLocation key = getKey(modifier);
-    if (persistentData.contains(key, Tag.TAG_LIST) && !persistentData.get(key, GET_COMPOUND_LIST).isEmpty()) {
+    Identifier key = getKey(modifier);
+    if (persistentData.contains(key) && !persistentData.get(key, GET_COMPOUND_LIST).isEmpty()) {
       return HAS_ITEMS;
     }
     // remove the data key, should be empty
@@ -278,14 +281,14 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
     int max = getSlots(tool, modifier);
     if (max > 0) {
       IModDataView persistentData = tool.getPersistentData();
-      ResourceLocation key = getKey(modifier.getModifier());
+      Identifier key = getKey(modifier.getModifier());
       ListTag slots = persistentData.get(key, GET_COMPOUND_LIST);
       if (!slots.isEmpty()) {
         // search all slots for the first match
         for (int i = 0; i < slots.size(); i++) {
-          CompoundTag compound = slots.getCompound(i);
+          CompoundTag compound = slots.getCompoundOrEmpty(i);
           // slot must be valid
-          int slot = compound.getInt(TAG_SLOT);
+          int slot = compound.getIntOr(TAG_SLOT, 0);
           if (slot < max) {
             ItemStack stack = TagUtil.readItem(compound);
             if (!stack.isEmpty() && predicate.test(stack)) {
@@ -304,16 +307,16 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
     int max = getSlots(tool, entry);
     if (max > 0) {
       IModDataView modData = tool.getPersistentData();
-      ResourceLocation key = getKey(entry.getModifier());
-      if (modData.contains(key, Tag.TAG_LIST)) {
+      Identifier key = getKey(entry.getModifier());
+      if (modData.contains(key)) {
         ListTag list = modData.get(key, GET_COMPOUND_LIST);
 
         // make sure the stacks are in order, NBT could store them in any order
         ItemStack[] parsed = new ItemStack[max];
         for (int i = 0; i < list.size(); i++) {
-          CompoundTag compound = list.getCompound(i);
+          CompoundTag compound = list.getCompoundOrEmpty(i);
           // slot must be valid
-          int slot = compound.getInt(TAG_SLOT);
+          int slot = compound.getIntOr(TAG_SLOT, 0);
           if (slot < max) {
             parsed[slot] = TagUtil.readItem(compound);
           }
@@ -351,7 +354,7 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
   @Setter
   public static class Builder extends ModuleBuilder.Context<Builder> {
     @Nullable
-    protected ResourceLocation key = null;
+    protected Identifier key = null;
     protected LevelingInt slotLimit = LevelingInt.flat(64);
     protected IJsonPredicate<Item> filter = ItemPredicate.ANY;
     @Nullable

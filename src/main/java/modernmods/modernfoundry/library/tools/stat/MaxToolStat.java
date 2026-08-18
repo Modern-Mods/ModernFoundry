@@ -13,7 +13,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.library.utils.TagUtil;
 import modernmods.modernfoundry.library.utils.Util;
 
@@ -75,7 +75,7 @@ public class MaxToolStat implements IToolStat<Integer> {
   @Override
   public Integer read(Tag tag) {
     if (TagUtil.isNumeric(tag)) {
-      return ((NumericTag)tag).getAsInt();
+      return ((NumericTag)tag).intValue();
     }
     return null;
   }
@@ -108,7 +108,7 @@ public class MaxToolStat implements IToolStat<Integer> {
 
   @Override
   public Component formatValue(Integer number) {
-    return Component.translatable(Util.makeTranslationKey("tool_stat", getName())).append(displayName.apply(number));
+    return Component.translatable(Util.makeTranslationKey("tool_stat", getName().getIdentifier())).append(displayName.apply(number));
   }
 
   @Override

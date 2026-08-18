@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:entity_melting",
-  "id": "modernfoundry:smeltery/entity_melting/meat_soup",
   "damage": 2,
   "entity": {
     "types": [
@@ -17,6 +16,7 @@
       "minecraft:tropical_fish"
     ]
   },
+  "id": "modernfoundry:smeltery/entity_melting/meat_soup",
   "result": {
     "amount": 50,
     "fluid": "modernfoundry:meat_soup"

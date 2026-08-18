@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/silver/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/silver"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/silver"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/silver/dust",
+  "ingredient": "#c:dusts/silver",
   "result": {
     "amount": 90,
     "tag": "c:molten_silver"

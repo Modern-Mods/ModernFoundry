@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_stairs",
   "key": {
-    "#": {
-      "item": "modernfoundry:enderbark_planks"
-    }
+    "#": "modernfoundry:enderbark_planks"
   },
   "pattern": [
     "#  ",
@@ -15,6 +13,5 @@
   "result": {
     "count": 4,
     "id": "modernfoundry:enderbark_planks_stairs"
-  },
-  "show_notification": true
+  }
 }

@@ -1,24 +1,22 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/clay",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/clay",
   "inputs": [
     {
-      "item": "minecraft:clay"
+      "ingredient": "minecraft:clay"
     },
     {
-      "item": "minecraft:clay_ball"
+      "ingredient": "minecraft:clay_ball"
     },
     {
-      "item": "minecraft:clay"
+      "ingredient": "minecraft:clay"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:clay"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/slime"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/slime",
   "variant_formatter": "modernfoundry:material"
 }

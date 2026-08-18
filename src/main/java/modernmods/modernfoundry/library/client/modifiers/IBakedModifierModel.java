@@ -1,10 +1,10 @@
 package modernmods.modernfoundry.library.client.modifiers;
 
 import com.mojang.math.Transformation;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
-import modernmods.hilt.util.ItemLayerPixels;
+import net.minecraft.client.resources.model.sprite.Material;
+import modernmods.mantle.util.ItemLayerPixels;
 import modernmods.modernfoundry.library.client.modifiers.model.ModifierModel;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
@@ -40,7 +40,7 @@ public interface IBakedModifierModel {
    * @param isLarge          If true, use the large sprites and quads
    * @param startTintIndex   First tint index that can be used for this model. Use with {@link #getTintIndexes()} and {@link #getTint(IToolStackView, ModifierEntry, int)}, if neither is used this index will not work
    * @param quadConsumer     Consumer accepting modifier quads. Note you are expected to add quads in top down order, that is whatever you want visible should be added first.
-   * @param pixels           Item layer pixels to reduce z-fighting. Pass into methods from {@link modernmods.hilt.client.model.util.HiltItemLayerModel}
+   * @param pixels           Item layer pixels to reduce z-fighting. Pass into methods from {@link modernmods.mantle.client.model.util.MantleItemLayerModel}
    */
   void addQuads(IToolStackView tool, ModifierEntry modifier, Function<Material,TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels);
 
@@ -53,7 +53,7 @@ public interface IBakedModifierModel {
   }
 
   /**
-   * Gets the color to tint this model. In general its better to use {@link modernmods.hilt.client.model.util.HiltItemLayerModel} as a baked color will be faster. Only use if you need dynamic colors
+   * Gets the color to tint this model. In general its better to use {@link modernmods.mantle.client.model.util.MantleItemLayerModel} as a baked color will be faster. Only use if you need dynamic colors
    * @param tool   Tool stack instance
    * @param entry  Modifier entry representing the relevant modifier
    * @param index  Localized tint index for this modifier, starting from 0. Only considers tint indexes this model handles as per {@link #getTintIndexes()}

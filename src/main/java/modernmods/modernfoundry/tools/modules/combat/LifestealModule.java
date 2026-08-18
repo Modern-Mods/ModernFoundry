@@ -7,15 +7,15 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.IntRange;
@@ -81,7 +81,7 @@ public record LifestealModule(LevelingValue percent, LevelingInt durabilityUsage
   public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
     LivingEntity attacker = context.getAttacker();
     Entity target = context.getTarget();
-    if (damage > 0 && this.modifierLevel.test(modifier.getLevel()) && !context.getTarget().getType().is(TinkerTags.EntityTypes.NECROTIC_BLACKLIST) && this.attacker.matches(attacker) && TinkerPredicate.matches(this.target, target)) {
+    if (damage > 0 && this.modifierLevel.test(modifier.getLevel()) && !context.getTarget().getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.NECROTIC_BLACKLIST) && this.attacker.matches(attacker) && TinkerPredicate.matches(this.target, target)) {
       // heals a percentage of damage dealt
       float level = modifier.getEffectiveLevel();
       float percent = this.percent.compute(modifier.getEffectiveLevel());
@@ -116,7 +116,7 @@ public record LifestealModule(LevelingValue percent, LevelingInt durabilityUsage
 
   @Override
   public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
-    if (notBlocked && target != null && attacker != null && !target.getType().is(TinkerTags.EntityTypes.NECROTIC_BLACKLIST) && this.attacker.matches(attacker) && this.target.matches(target)) {
+    if (notBlocked && target != null && attacker != null && !target.getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.NECROTIC_BLACKLIST) && this.attacker.matches(attacker) && this.target.matches(target)) {
       float level = modifier.getEffectiveLevel();
       float percent = this.percent.compute(modifier.getEffectiveLevel());
       if (percent > 0) {

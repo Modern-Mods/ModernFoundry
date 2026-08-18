@@ -7,7 +7,7 @@ import com.mojang.serialization.JsonOps;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.RegistryOps;
 import lombok.Getter;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.GsonHelper;
@@ -17,14 +17,14 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.conditions.ConditionalOps;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ICondition.IContext;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.bus.api.EventPriority;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
-import modernmods.hilt.util.JsonHelper;
-import modernmods.hilt.util.typed.TypedMapBuilder;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.util.JsonHelper;
+import modernmods.mantle.util.typed.TypedMapBuilder;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.utils.JsonUtils;
 
@@ -36,7 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 /** Manager for spilling fluids for spilling, slurping, and wetting */
-public class FluidEffectManager extends SimpleJsonResourceReloadListener {
+public class FluidEffectManager extends SimpleJsonResourceReloadListener<com.google.gson.JsonElement> {
   /** Recipe folder */
   public static final String FOLDER = "tinkering/fluid_effects";
 
@@ -58,35 +58,35 @@ public class FluidEffectManager extends SimpleJsonResourceReloadListener {
   private RegistryAccess registryAccess = RegistryAccess.EMPTY;
 
   private FluidEffectManager() {
-    super(JsonHelper.DEFAULT_GSON, FOLDER);
+    super(net.minecraft.util.ExtraCodecs.JSON, net.minecraft.resources.FileToIdConverter.json(FOLDER));
   }
 
   /** For internal use only */
   public void init() {
-    NeoForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, AddReloadListenerEvent.class, this::addDataPackListeners);
+    NeoForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, AddServerReloadListenersEvent.class, this::addDataPackListeners);
     NeoForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, OnDatapackSyncEvent.class, e -> JsonUtils.syncPackets(e, new UpdateFluidEffectsPacket(this.fluids)));
   }
 
   /** Adds the managers as datapack listeners */
-  private void addDataPackListeners(final AddReloadListenerEvent event) {
-    event.addListener(this);
+  private void addDataPackListeners(final AddServerReloadListenersEvent event) {
+    event.addListener(TConstruct.getResource("fluid_effects"), this);
     conditionContext = event.getConditionContext();
     registryAccess = event.getRegistryAccess();
   }
 
   /** Creates context for modifier parsing */
-  public static TypedMapBuilder contextBuilder(ResourceLocation key) {
+  public static TypedMapBuilder contextBuilder(Identifier key) {
     return TypedMapBuilder.builder().put(ContextKey.ID, key).put(ContextKey.DEBUG, "Fluid Effect " + key);
   }
 
   @Override
-  protected void apply(Map<ResourceLocation,JsonElement> splashList, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
+  protected void apply(Map<Identifier,JsonElement> splashList, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
     long time = System.nanoTime();
 
     // load spilling from JSON
     List<FluidEffects.Entry> fluids = new ArrayList<>(splashList.size());
-    for (Entry<ResourceLocation,JsonElement> entry : splashList.entrySet()) {
-      ResourceLocation key = entry.getKey();
+    for (Entry<Identifier,JsonElement> entry : splashList.entrySet()) {
+      Identifier key = entry.getKey();
       try {
         JsonObject json = GsonHelper.convertToJsonObject(entry.getValue(), "fluid_effect");
 

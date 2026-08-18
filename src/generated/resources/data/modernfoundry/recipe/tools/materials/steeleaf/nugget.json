@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/steeleaf/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/steeleaf"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/steeleaf"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/steeleaf/nugget",
+  "ingredient": "#c:nuggets/steeleaf",
   "material": "modernfoundry:steeleaf",
   "needed": 9,
   "value": 1

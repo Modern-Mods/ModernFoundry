@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wood/logs/crimson",
-  "ingredient": {
-    "tag": "minecraft:crimson_stems"
-  },
+  "ingredient": "#minecraft:crimson_stems",
   "leftover": "minecraft:crimson_planks",
   "material": "modernfoundry:wood#crimson",
   "needed": 1,

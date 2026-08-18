@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.materials.definition;
 
 import lombok.Getter;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class Material implements IMaterial {
   /** Default white color */
@@ -29,7 +29,7 @@ public class Material implements IMaterial {
    * Materials should only be created by the MaterialManager, except when used for data gen
    * They're synced over the network and other classes might lead to unexpected behaviour.
    */
-  public Material(ResourceLocation identifier, int tier, int order, boolean craftable, boolean hidden) {
+  public Material(Identifier identifier, int tier, int order, boolean craftable, boolean hidden) {
     this.identifier = new MaterialId(identifier);
     this.tier = tier;
     this.sortOrder = order;
@@ -37,7 +37,7 @@ public class Material implements IMaterial {
     this.hidden = hidden;
   }
 
-  protected Material(ResourceLocation identifier, boolean craftable, boolean hidden) {
+  protected Material(Identifier identifier, boolean craftable, boolean hidden) {
     this(identifier, 0, -1, craftable, hidden);
   }
 

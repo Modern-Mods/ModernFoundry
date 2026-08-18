@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/iron/bars",
   "cooling_time": 35,
   "fluid": {
     "amount": 30,
     "tag": "c:molten_iron"
   },
+  "id": "modernfoundry:smeltery/casting/metal/iron/bars",
   "result": "minecraft:iron_bars"
 }

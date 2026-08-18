@@ -5,7 +5,7 @@
       "color": "FFE5E533"
     }
   ],
-  "loader": "hilt:item_layer",
+  "loader": "mantle:item_layer",
   "render_type": "minecraft:translucent",
   "textures": {
     "layer0": "modernfoundry:block/clear_stained_glass"

@@ -1,16 +1,17 @@
 package modernmods.modernfoundry.tools;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.registration.object.EnumObject;
-import modernmods.hilt.registration.object.ItemObject;
+import modernmods.mantle.registration.object.EnumObject;
+import modernmods.mantle.registration.object.ItemObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerModule;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -93,13 +94,13 @@ public final class TinkerToolParts extends TinkerModule {
   public static final ItemObject<ToolPartItem> toolHandle = ITEMS.register("tool_handle", () -> new ToolPartItem(ITEM_PROPS, HandleMaterialStats.ID));
   public static final ItemObject<ToolPartItem> toughHandle = ITEMS.register("tough_handle", () -> new ToolPartItem(ITEM_PROPS, HandleMaterialStats.ID));
   // armor
-  public static final EnumObject<ArmorItem.Type,ToolPartItem> plating = ITEMS.registerEnum(ModifiableArmorMaterial.ARMOR_TYPES, "plating", type -> new ToolPartItem(ITEM_PROPS, PlatingMaterialStats.TYPES.get(type.ordinal()).getId()));
+  public static final EnumObject<ArmorType,ToolPartItem> plating = ITEMS.registerEnum(ModifiableArmorMaterial.ARMOR_TYPES, "plating", type -> new ToolPartItem(ITEM_PROPS, PlatingMaterialStats.TYPES.get(type.ordinal()).getStatId()));
   public static final ItemObject<ToolPartItem> maille = ITEMS.register("maille", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.MAILLE.getIdentifier()));
   public static final ItemObject<ToolPartItem> shieldCore = ITEMS.register("shield_core", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.SHIELD_CORE.getIdentifier()));
   // slimesuit
-  public static final ItemObject<ToolPartItem> ribcage = ITEMS.register("ribcage", () -> new ToolPartItem(ITEM_PROPS, RepairStats.RIBCAGE.getId()));
-  public static final ItemObject<ToolPartItem> shell = ITEMS.register("shell", () -> new ToolPartItem(ITEM_PROPS, RepairStats.SHELL.getId()));
-  public static final ItemObject<ToolPartItem> laces = ITEMS.register("laces", () -> new ToolPartItem(ITEM_PROPS, RepairStats.LACES.getId()));
+  public static final ItemObject<ToolPartItem> ribcage = ITEMS.register("ribcage", () -> new ToolPartItem(ITEM_PROPS, RepairStats.RIBCAGE.getStatId()));
+  public static final ItemObject<ToolPartItem> shell = ITEMS.register("shell", () -> new ToolPartItem(ITEM_PROPS, RepairStats.SHELL.getStatId()));
+  public static final ItemObject<ToolPartItem> laces = ITEMS.register("laces", () -> new ToolPartItem(ITEM_PROPS, RepairStats.LACES.getStatId()));
 
 
 
@@ -107,7 +108,7 @@ public final class TinkerToolParts extends TinkerModule {
   public static final DeferredHolder<? super BlockEntityType<MaterialBlockEntity>, BlockEntityType<MaterialBlockEntity>> materialBlock = BLOCK_ENTITIES.register("material_block", MaterialBlockEntity::new, fakeStorageBlock);
 
   // loot
-  public static final DeferredHolder<? super LootPoolEntryType, LootPoolEntryType> toolPartLootEntry = LOOT_ENTRIES.register("tool_part", () -> new LootPoolEntryType(ToolPartLootEntry.CODEC));
+  public static final DeferredHolder<MapCodec<? extends LootPoolEntryContainer>, ? extends MapCodec<? extends LootPoolEntryContainer>> toolPartLootEntry = LOOT_ENTRIES.register("tool_part", () -> ToolPartLootEntry.CODEC);
 
   /** Adds all relevant items to the creative tab */
   private static void addTabItems(ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output tab) {
@@ -137,7 +138,7 @@ public final class TinkerToolParts extends TinkerModule {
     accept(output, arrowShaft);
     accept(output, fletching);
     // plating, pair each one with the dummy plating item
-    for (ArmorItem.Type type : ModifiableArmorMaterial.ARMOR_TYPES) {
+    for (ArmorType type : ModifiableArmorMaterial.ARMOR_TYPES) {
       tab.accept(TinkerSmeltery.dummyPlating.get(type));
       plating.get(type).addVariants(output, "");
     }

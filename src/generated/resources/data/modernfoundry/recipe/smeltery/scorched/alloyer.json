@@ -2,18 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "modernfoundry:scorched_brick"
-    },
+    "B": "modernfoundry:scorched_brick",
     "G": {
-      "type": "modernfoundry:no_container",
+      "neoforge:ingredient_type": "modernfoundry:no_container",
       "match": [
-        {
-          "item": "modernfoundry:scorched_ingot_gauge"
-        },
-        {
-          "item": "modernfoundry:scorched_fuel_gauge"
-        }
+        "modernfoundry:scorched_ingot_gauge",
+        "modernfoundry:scorched_fuel_gauge"
       ]
     }
   },
@@ -23,6 +17,5 @@
   ],
   "result": {
     "id": "modernfoundry:scorched_alloyer"
-  },
-  "show_notification": true
+  }
 }

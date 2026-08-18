@@ -2,24 +2,12 @@
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/copper/oxidized",
   "ingredient": [
-    {
-      "item": "minecraft:exposed_copper"
-    },
-    {
-      "item": "minecraft:weathered_copper"
-    },
-    {
-      "item": "minecraft:oxidized_copper"
-    },
-    {
-      "item": "minecraft:waxed_exposed_copper"
-    },
-    {
-      "item": "minecraft:waxed_weathered_copper"
-    },
-    {
-      "item": "minecraft:waxed_oxidized_copper"
-    }
+    "minecraft:exposed_copper",
+    "minecraft:weathered_copper",
+    "minecraft:oxidized_copper",
+    "minecraft:waxed_exposed_copper",
+    "minecraft:waxed_weathered_copper",
+    "minecraft:waxed_oxidized_copper"
   ],
   "leftover": {
     "count": 1,

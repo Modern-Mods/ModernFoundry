@@ -1,13 +1,11 @@
 {
   "type": "modernfoundry:casting_table_tipping",
-  "id": "modernfoundry:tools/modifiers/slotless/fishing_rod_tipping",
   "cooling_time": 20,
   "fluid": {
     "amount": 250,
     "tag": "c:potion"
   },
+  "id": "modernfoundry:tools/modifiers/slotless/fishing_rod_tipping",
   "modifier": "modernfoundry:tipped",
-  "tools": {
-    "tag": "modernfoundry:modifiable/fishing_rods"
-  }
+  "tools": "#modernfoundry:modifiable/fishing_rods"
 }

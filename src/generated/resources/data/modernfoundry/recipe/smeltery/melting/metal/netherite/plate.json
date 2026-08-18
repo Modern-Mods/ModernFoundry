@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/netherite/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/netherite"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/netherite"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/netherite/plate",
+  "ingredient": "#c:plates/netherite",
   "result": {
     "amount": 90,
     "tag": "c:molten_netherite"

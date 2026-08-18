@@ -1,17 +1,13 @@
 {
-  "type": "modernfoundry:molding_table",
-  "id": "modernfoundry:smeltery/casts/sand/molding/coins",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins"
     }
   ],
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
-  "pattern": {
-    "tag": "c:coins"
-  },
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/sand/molding/coins",
+  "material": "#modernfoundry:casts/sand",
+  "pattern": "#c:coins",
   "result": "modernfoundry:coin_sand_cast"
 }

@@ -5,7 +5,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/ranged/power"
-  }
+  "tools": "#modernfoundry:modifiable/ranged/power"
 }

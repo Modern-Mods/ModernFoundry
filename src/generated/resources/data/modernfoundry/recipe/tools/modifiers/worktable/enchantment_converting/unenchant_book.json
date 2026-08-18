@@ -3,11 +3,11 @@
   "id": "modernfoundry:tools/modifiers/worktable/enchantment_converting/unenchant_book",
   "inputs": [
     {
-      "item": "modernfoundry:ender_slime_crystal"
+      "ingredient": "modernfoundry:ender_slime_crystal"
     },
     {
       "amount_needed": 5,
-      "item": "minecraft:dragon_breath"
+      "ingredient": "minecraft:dragon_breath"
     }
   ],
   "match_book": true,

@@ -8,8 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 import modernmods.modernfoundry.compat.minecraft.world.item.alchemy.PotionUtils;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.fluid.EffectLevel;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffect;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffectContext;
@@ -49,9 +49,9 @@ public record PotionFluidEffect(float scale, TagPredicate predicate) implements 
           if (effect.value().isInstantenous()) {
             // instant effects just apply full value always
             used = level.value();
-            if (action.execute()) {
+            if (action.execute() && target.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
               target.invulnerableTime = 0;
-              effect.value().applyInstantenousEffect(directSource, attacker, target, instance.getAmplifier(), used * scale);
+              effect.value().applyInstantenousEffect(serverLevel, directSource, attacker, target, instance.getAmplifier(), used * scale);
             }
           } else {
             // if the potion already exists, we scale up the existing time

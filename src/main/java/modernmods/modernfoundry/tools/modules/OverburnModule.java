@@ -4,12 +4,12 @@ import lombok.Getter;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -48,7 +48,7 @@ public enum OverburnModule implements ModifierModule, InventoryTickModifierHook,
   @Nullable
   @Override
   public Component onRemoved(IToolStackView tool, Modifier modifier) {
-    tool.getPersistentData().remove(modifier.getId());
+    tool.getPersistentData().remove(modifier.getId().getIdentifier());
     return null;
   }
 
@@ -63,17 +63,17 @@ public enum OverburnModule implements ModifierModule, InventoryTickModifierHook,
 
     /** Reads the info from the tool */
     @Nullable
-    public static FuelInfo read(IToolStackView tool, ResourceLocation location) {
+    public static FuelInfo read(IToolStackView tool, Identifier location) {
       ModDataNBT persistentData = tool.getPersistentData();
-      if (persistentData.contains(location, Tag.TAG_COMPOUND)) {
+      if (persistentData.contains(location)) {
         CompoundTag tag = persistentData.getCompound(location);
-        return new FuelInfo(tag.getLong(EXPIRATION), tag.getInt(RATE));
+        return new FuelInfo(tag.getLongOr(EXPIRATION, 0L), tag.getIntOr(RATE, 0));
       }
       return null;
     }
 
     /** Writes the info to the tool */
-    public void write(IToolStackView tool, ResourceLocation location) {
+    public void write(IToolStackView tool, Identifier location) {
       CompoundTag tag = new CompoundTag();
       tag.putLong(EXPIRATION, expiration);
       tag.putInt(RATE, rate);
@@ -91,11 +91,11 @@ public enum OverburnModule implements ModifierModule, InventoryTickModifierHook,
 
     // don't run if drawing back a bow, prevents losing animation
     // does mean you may end up wasting some fuel, could be as much as 19 lost. So, don't hold your bows for 20 updates?
-    if (!world.isClientSide && holder.tickCount % updateInterval == 0 && holder.getUseItem() != stack) {
+    if (!world.isClientSide() && holder.tickCount % updateInterval == 0 && holder.getUseItem() != stack) {
       // must have overslime and space to fill
       if (OverslimeModule.INSTANCE.getAmount(tool) < OverslimeModule.getCapacity(tool)) {
         // find current fuel info
-        ResourceLocation key = modifier.getId();
+        Identifier key = modifier.getId().getIdentifier();
         FuelInfo info = FuelInfo.read(tool, key);
 
         // if we have no fuel, try and find some

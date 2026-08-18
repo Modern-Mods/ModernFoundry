@@ -2,8 +2,8 @@ package modernmods.modernfoundry.library.json.variable.block;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 
 /** Fetches a value of an integer property */
 public record StatePropertyVariable(String name) implements BlockVariable {

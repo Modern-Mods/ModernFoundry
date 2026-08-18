@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.recipe.alloying;
 
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.recipe.container.IEmptyContainer;
+import modernmods.mantle.recipe.container.IEmptyContainer;
 
 /**
  * Inventory interface for the sake of alloying

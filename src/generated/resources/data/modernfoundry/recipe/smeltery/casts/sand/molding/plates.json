@@ -1,17 +1,13 @@
 {
-  "type": "modernfoundry:molding_table",
-  "id": "modernfoundry:smeltery/casts/sand/molding/plates",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates"
     }
   ],
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
-  "pattern": {
-    "tag": "c:plates"
-  },
+  "type": "modernfoundry:molding_table",
+  "id": "modernfoundry:smeltery/casts/sand/molding/plates",
+  "material": "#modernfoundry:casts/sand",
+  "pattern": "#c:plates",
   "result": "modernfoundry:plate_sand_cast"
 }

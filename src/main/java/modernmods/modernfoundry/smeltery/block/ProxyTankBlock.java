@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -19,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import modernmods.hilt.block.InventoryBlock;
+import modernmods.mantle.block.InventoryBlock;
 import modernmods.modernfoundry.smeltery.block.entity.ProxyTankBlockEntity;
 
 import javax.annotation.Nullable;
@@ -78,9 +77,9 @@ public class ProxyTankBlock extends Block implements EntityBlock {
   /* Inventory */
 
   @Override
-  protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+  protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
     interact(state, world, pos, player, hand, hit);
-    return ItemInteractionResult.SUCCESS;
+    return InteractionResult.SUCCESS;
   }
 
   @Override
@@ -112,16 +111,6 @@ public class ProxyTankBlock extends Block implements EntityBlock {
     }
   }
 
-  @Deprecated
-  @Override
-  public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
-    if (state.getBlock() != newState.getBlock() && world.getBlockEntity(pos) instanceof ProxyTankBlockEntity tank) {
-      InventoryBlock.dropInventoryItems(world, pos, tank.getItemTank());
-    }
-    super.onRemove(state, world, pos, newState, isMoving);
-  }
-
-
   /* Tank */
 
   @Deprecated
@@ -138,7 +127,7 @@ public class ProxyTankBlock extends Block implements EntityBlock {
 
   @Deprecated
   @Override
-  public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos) {
+  public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos, net.minecraft.core.Direction direction) {
     if (world.getBlockEntity(pos) instanceof ProxyTankBlockEntity tank) {
       return tank.getComparatorStrength();
     }

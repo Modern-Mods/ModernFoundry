@@ -1,6 +1,8 @@
 package modernmods.modernfoundry.fluids.item;
 
 import net.minecraft.advancements.CriteriaTriggers;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -45,24 +47,14 @@ public class PotionBucketItem extends PotionItem {
   }
 
   @Override
-  public String getDescriptionId(ItemStack stack) {
-    Holder<Potion> potion = PotionUtils.getPotion(TagUtil.getTag(stack));
-    String bucketKey = Potion.getName(Optional.of(potion), getDescriptionId() + ".effect.");
-    if (Util.canTranslate(bucketKey)) {
-      return bucketKey;
-    }
-    return super.getDescriptionId();
-  }
-
-  @Override
   public Component getName(ItemStack stack) {
     Holder<Potion> potion = PotionUtils.getPotion(TagUtil.getTag(stack));
-    String bucketKey = Potion.getName(Optional.of(potion), getDescriptionId() + ".effect.");
+    String bucketKey = getDescriptionId() + ".effect." + potion.value().name();
     if (Util.canTranslate(bucketKey)) {
       return Component.translatable(bucketKey);
     }
     // default to filling with the contents
-    return Component.translatable(getDescriptionId() + ".contents", Component.translatable(Potion.getName(Optional.of(potion), "item.minecraft.potion.effect.")));
+    return Component.translatable(getDescriptionId() + ".contents", Component.translatable("item.minecraft.potion.effect." + potion.value().name()));
   }
 
   @Override
@@ -78,10 +70,10 @@ public class PotionBucketItem extends PotionItem {
     }
 
     // effects are 2x duration
-    if (!level.isClientSide) {
+    if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
       for (MobEffectInstance effect : PotionUtils.getMobEffects(stack)) {
         if (effect.getEffect().value().isInstantenous()) {
-          effect.getEffect().value().applyInstantenousEffect(player, player, living, effect.getAmplifier(), 2.5D);
+          effect.getEffect().value().applyInstantenousEffect(serverLevel, player, player, living, effect.getAmplifier(), 2.5D);
         } else {
           MobEffectInstance newEffect = new MobEffectInstance(effect.getEffect(), effect.getDuration() * 5 / 2, effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon());
           living.addEffect(newEffect);
@@ -109,8 +101,11 @@ public class PotionBucketItem extends PotionItem {
   }
 
   @Override
-  public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltip, TooltipFlag pFlag) {
+  public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, TooltipDisplay tooltipDisplay, Consumer<Component> pTooltipConsumer, TooltipFlag pFlag) {
+    List<Component> pTooltip = new java.util.ArrayList<>();
     PotionUtils.addPotionTooltip(pStack, pTooltip, 2.5f);
+  
+    pTooltip.forEach(pTooltipConsumer);
   }
 
   @Override

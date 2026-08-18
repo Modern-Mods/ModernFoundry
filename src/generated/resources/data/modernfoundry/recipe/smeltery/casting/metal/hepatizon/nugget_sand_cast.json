@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/hepatizon/nugget_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/nugget"
-  },
+  "cast": "#modernfoundry:casts/single_use/nugget",
   "cast_consumed": true,
   "cooling_time": 26,
   "fluid": {
     "amount": 10,
     "tag": "c:molten_hepatizon"
   },
+  "id": "modernfoundry:smeltery/casting/metal/hepatizon/nugget_sand_cast",
   "result": {
     "tag": "c:nuggets/hepatizon"
   }

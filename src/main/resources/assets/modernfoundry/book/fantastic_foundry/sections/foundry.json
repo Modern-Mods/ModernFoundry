@@ -1,89 +1,89 @@
 [
   {
     "name": "index",
-    "type": "hilt:index",
+    "type": "mantle:index",
     "data": "foundry/index.json"
   },
 
   {
     "name": "features",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "foundry/features.json"
   },
   {
     "name": "byproducts",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "foundry/byproducts.json"
   },
   {
     "name": "controller",
-    "type": "hilt:image_text",
+    "type": "mantle:image_text",
     "data": "foundry/controller.json"
   },
   {
     "name": "structure",
-    "type": "hilt:structure",
+    "type": "mantle:structure",
     "data": "foundry/multiblock.json"
   },
   {
     "name": "structurereq",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "foundry/structurerequirements.json"
   },
   {
     "name": "fgui1",
-    "type": "hilt:image_text",
+    "type": "mantle:image_text",
     "data": "foundry/gui1.json"
   },
   {
     "name": "fgui2",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "foundry/gui2.json"
   },
 
   {
     "name": "scorched_tanks",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "foundry/tanks.json"
   },
   {
     "name": "scorched_blocks",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "foundry/scorchedblocks.json"
   },
   {
     "name": "scorched_ladder",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "foundry/scorchedladder.json"
   },
   {
     "name": "scorched_glass",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "foundry/scorchedglass.json"
   },
   {
     "name": "tinted_glass",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "foundry/tinted_glass.json"
   },
   {
     "name": "soul_glass",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "foundry/soul_glass.json"
   },
   {
     "name": "scorched_drain",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "foundry/scorched_drain.json"
   },
   {
     "name": "scorched_duct",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "foundry/scorched_duct.json"
   },
   {
     "name": "scorched_chute",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "foundry/scorched_chute.json"
   }
 ]

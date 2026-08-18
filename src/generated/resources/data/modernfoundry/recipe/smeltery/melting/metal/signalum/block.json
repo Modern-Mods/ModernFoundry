@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/signalum/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/signalum"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/signalum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/signalum/block",
+  "ingredient": "#c:storage_blocks/signalum",
   "result": {
     "amount": 810,
     "tag": "c:molten_signalum"

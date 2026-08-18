@@ -1,0 +1,14 @@
+{
+  "values": [
+    "modernfoundry:tool_container",
+    "modernfoundry:tinker_chest",
+    "modernfoundry:single_item",
+    "modernfoundry:crafting_station",
+    "modernfoundry:part_builder",
+    "modernfoundry:tinker_station",
+    "modernfoundry:modifier_worktable",
+    "modernfoundry:melter",
+    "modernfoundry:alloyer",
+    "modernfoundry:smeltery"
+  ]
+}

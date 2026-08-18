@@ -1,66 +1,8 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/tool/war_pick/display",
   "textures": {
-    "limb":      "modernfoundry:item/tool/war_pick/limb",
-    "body":      "modernfoundry:item/tool/war_pick/body",
+    "limb": "modernfoundry:item/tool/war_pick/limb",
+    "body": "modernfoundry:item/tool/war_pick/body",
     "bowstring": "modernfoundry:item/tool/war_pick/bowstring"
-  },
-  "modifier_maps": ["modernfoundry:war_pick"],
-  "modifier_roots": [ "modernfoundry:item/tool/war_pick/modifiers/" ],
-  "parts": [
-    { "name": "body",      "index": 1 },
-    { "name": "bowstring", "index": 2 },
-    { "name": "limb",      "index": 0 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 1 },
-      "model": "modernfoundry:item/tool/war_pick/pulling_1"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.58 },
-      "model": "modernfoundry:item/tool/war_pick/pulling_2"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 1.0 },
-      "model": "modernfoundry:item/tool/war_pick/pulling_3"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/war_pick/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.05 },
-      "model": "modernfoundry:item/tool/war_pick/blocking_1"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.58 },
-      "model": "modernfoundry:item/tool/war_pick/blocking_2"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 1.0 },
-      "model": "modernfoundry:item/tool/war_pick/blocking_3"
-    },
-    {
-      "predicate": { "modernfoundry:ammo": 1 },
-      "model": "modernfoundry:item/tool/war_pick/pulling_3"
-    },
-    {
-      "predicate": { "modernfoundry:ammo": 1, "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/war_pick/blocking_3"
-    },
-    {
-      "predicate": { "modernfoundry:ammo": 2 },
-      "model": "modernfoundry:item/tool/war_pick/firework"
-    },
-    {
-      "predicate": { "modernfoundry:ammo": 2, "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/war_pick/firework_blocking"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/war_pick/broken"
-    }
-  ]
+  }
 }

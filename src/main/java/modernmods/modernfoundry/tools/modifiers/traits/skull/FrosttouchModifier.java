@@ -32,7 +32,7 @@ public class FrosttouchModifier extends NoLevelsModifier implements DamageDealtM
     if (isDirectDamage) {
       boolean isCalcified = context.getEntity().hasEffect(TinkerEffects.holder(TinkerModifiers.calcifiedEffect));
       if (isCalcified || source.is(DamageTypeTags.IS_PROJECTILE)) {
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 300, isCalcified ? 1 : 0), context.getEntity());
+        target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 300, isCalcified ? 1 : 0), context.getEntity());
       }
     }
   }

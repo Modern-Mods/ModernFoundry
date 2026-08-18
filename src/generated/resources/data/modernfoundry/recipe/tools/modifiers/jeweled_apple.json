@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:tools/modifiers/jeweled_apple",
-  "cast": {
-    "item": "minecraft:apple"
-  },
+  "cast": "minecraft:apple",
   "cast_consumed": true,
   "cooling_time": 118,
   "fluid": {
     "amount": 200,
     "tag": "modernfoundry:molten_diamond"
   },
+  "id": "modernfoundry:tools/modifiers/jeweled_apple",
   "result": "modernfoundry:jeweled_apple"
 }

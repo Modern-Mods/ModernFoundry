@@ -1,12 +1,13 @@
 package modernmods.modernfoundry.gadgets.item;
 
+import net.minecraft.world.entity.EntitySpawnReason;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -26,7 +27,7 @@ public class ShootProjectileDispenserBehavior extends DefaultDispenseItemBehavio
   @Override
   public ItemStack execute(BlockSource source, ItemStack stack) {
     Level level = source.level();
-    ThrowableItemProjectile projectile = entity.create(level);
+    ThrowableItemProjectile projectile = entity.create(level, EntitySpawnReason.DISPENSER);
     if (projectile != null) {
       Position position = DispenserBlock.getDispensePosition(source);
       Direction direction = source.state().getValue(DispenserBlock.FACING);

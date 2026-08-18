@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:item",
+    "modernfoundry:indestructible_item",
+    "minecraft:experience_orb",
+    "#c:tridents",
+    "#modernfoundry:collectables/discardable",
+    {
+      "id": "#c:collectables",
+      "required": false
+    }
+  ]
+}

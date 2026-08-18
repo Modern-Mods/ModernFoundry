@@ -2,8 +2,6 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/sand/builder_cast/broad_axe_head",
   "pattern": "modernfoundry:broad_axe_head",
-  "pattern_item": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "pattern_item": "#modernfoundry:casts/sand",
   "result": "modernfoundry:broad_axe_head_sand_cast"
 }

@@ -8,7 +8,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IModIdHelper;
-import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
+import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandlerHelper;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
@@ -19,6 +19,7 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
+import mezz.jei.api.recipe.IRecipeManager;
 import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
@@ -26,7 +27,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet.Named;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -35,7 +36,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeMap;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -44,9 +45,10 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.fml.ModList;
-import modernmods.hilt.client.SafeClientAccess;
-import modernmods.hilt.recipe.helper.RecipeHelper;
-import modernmods.hilt.util.RetexturedHelper;
+import modernmods.mantle.data.loadable.LoadableCodec;
+import modernmods.mantle.recipe.helper.RecipeHelper;
+import modernmods.mantle.recipe.sync.ClientRecipeCache;
+import modernmods.mantle.util.RetexturedHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.config.Config;
@@ -68,6 +70,7 @@ import modernmods.modernfoundry.library.recipe.modifiers.adding.IDisplayModifier
 import modernmods.modernfoundry.library.recipe.modifiers.severing.SeveringRecipe;
 import modernmods.modernfoundry.library.recipe.molding.MoldingRecipe;
 import modernmods.modernfoundry.library.recipe.partbuilder.IDisplayPartBuilderRecipe;
+import modernmods.modernfoundry.library.recipe.partbuilder.Pattern;
 import modernmods.modernfoundry.library.recipe.tinkerstation.building.ToolBuildingRecipe;
 import modernmods.modernfoundry.library.recipe.worktable.IModifierWorktableRecipe;
 import modernmods.modernfoundry.library.tools.SlotType;
@@ -123,7 +126,7 @@ import modernmods.modernfoundry.tools.item.CreativeSlotItem;
 import modernmods.modernfoundry.tools.item.ModifierCrystalItem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Set;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -132,12 +135,12 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static modernmods.hilt.Hilt.commonResource;
+import static modernmods.mantle.Mantle.commonResource;
 
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
   /** Recipes that are meant as jokes and tend to confuse players, so are hidden */
-  private static final ResourceLocation[] EASTER_EGG_RECIPES = {
+  private static final Identifier[] EASTER_EGG_RECIPES = {
     TConstruct.getResource("tables/tinkers_forge"),
     TConstruct.getResource("tables/scorched_forge"),
     TConstruct.getResource("tables/seared_forge_material"),
@@ -146,7 +149,7 @@ public class JEIPlugin implements IModPlugin {
   public static IModIdHelper modIdHelper;
 
   @Override
-  public ResourceLocation getPluginUid() {
+  public Identifier getPluginUid() {
     return TConstructJEIConstants.PLUGIN;
   }
 
@@ -178,11 +181,11 @@ public class JEIPlugin implements IModPlugin {
     if (Config.CLIENT.showModifiersInJEI.get()) {
       modifiers = ModifierRecipeLookup.getRecipeModifierList();
     }
-    registration.register(TConstructJEIConstants.MODIFIER_TYPE, modifiers, new ModifierIngredientHelper(), ModifierBookmarkIngredientRenderer.INSTANCE);
-    registration.register(TConstructJEIConstants.PATTERN_TYPE, Collections.emptyList(), new PatternIngredientHelper(), PatternIngredientRenderer.INSTANCE);
+    registration.register(TConstructJEIConstants.MODIFIER_TYPE, modifiers, new ModifierIngredientHelper(), ModifierBookmarkIngredientRenderer.INSTANCE, new LoadableCodec<>(ModifierEntry.LOADABLE));
+    registration.register(TConstructJEIConstants.PATTERN_TYPE, Collections.emptyList(), new PatternIngredientHelper(), PatternIngredientRenderer.INSTANCE, Identifier.CODEC.xmap(Pattern::new, Pattern::getIdentifier));
     List<SlotCount> slots = SlotType.getAllSlotTypes().stream().map(type -> new SlotCount(type, 1)).toList();
     SlotIngredientRenderer.clearCache();
-    registration.register(TConstructJEIConstants.SLOT_TYPE, slots, new SlotIngredientHelper(), SlotIngredientRenderer.INGREDIENT);
+    registration.register(TConstructJEIConstants.SLOT_TYPE, slots, new SlotIngredientHelper(), SlotIngredientRenderer.INGREDIENT, new LoadableCodec<>(SlotType.SlotCount.LOADABLE));
   }
 
   @Override
@@ -197,7 +200,8 @@ public class JEIPlugin implements IModPlugin {
     Level level = Minecraft.getInstance().level;
     assert level != null;
     RegistryAccess access = level.registryAccess();
-    RecipeManager manager = level.getRecipeManager();
+    // client has no RecipeManager in 26.1; read custom recipes from Mantle's synced client recipe map
+    RecipeMap manager = ClientRecipeCache.getRecipeMap();
     // casting
     List<IDisplayableCastingRecipe> castingBasinRecipes = RecipeHelper.getJEIRecipes(access, manager, TinkerRecipeTypes.CASTING_BASIN.get(), IDisplayableCastingRecipe.class);
     register.addRecipes(TConstructJEIConstants.CASTING_BASIN, castingBasinRecipes);
@@ -269,7 +273,7 @@ public class JEIPlugin implements IModPlugin {
     ItemStack stack = new ItemStack(item);
     registry.addRecipeCatalyst(stack, ownCategory);
     assert Minecraft.getInstance().level != null;
-    if (!RecipeHelper.getRecipes(Minecraft.getInstance().level.getRecipeManager(), type).isEmpty()) {
+    if (!RecipeHelper.getRecipes(ClientRecipeCache.getRecipeMap(), type).isEmpty()) {
       registry.addRecipeCatalyst(stack, TConstructJEIConstants.MOLDING);
     }
   }
@@ -285,7 +289,7 @@ public class JEIPlugin implements IModPlugin {
 
     // smeltery
     registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.searedMelter), TConstructJEIConstants.MELTING);
-    registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.searedHeater), RecipeTypes.FUELING);
+    registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.searedHeater), RecipeTypes.SMELTING_FUEL);
     addCastingCatalyst(registry, TinkerSmeltery.searedTable, TConstructJEIConstants.CASTING_TABLE, TinkerRecipeTypes.MOLDING_TABLE.get());
     addCastingCatalyst(registry, TinkerSmeltery.searedBasin, TConstructJEIConstants.CASTING_BASIN, TinkerRecipeTypes.MOLDING_BASIN.get());
     registry.addRecipeCatalyst(new ItemStack(TinkerSmeltery.smelteryController), TConstructJEIConstants.MELTING, TConstructJEIConstants.ALLOY, TConstructJEIConstants.ENTITY_MELTING);
@@ -322,11 +326,11 @@ public class JEIPlugin implements IModPlugin {
   @Override
   public void registerItemSubtypes(ISubtypeRegistration registry) {
     // retexturable blocks
-    IIngredientSubtypeInterpreter<ItemStack> tables = (stack, context) -> {
+    ISubtypeInterpreter<ItemStack> tables = (stack, context) -> {
       if (context == UidContext.Ingredient) {
         return RetexturedHelper.getTextureName(stack);
       }
-      return IIngredientSubtypeInterpreter.NONE;
+      return null;
     };
     registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, TinkerTables.craftingStation.asItem(), tables);
     registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, TinkerTables.partBuilder.asItem(), tables);
@@ -342,15 +346,15 @@ public class JEIPlugin implements IModPlugin {
     registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, TinkerSmeltery.scorchedChute.asItem(), tables);
 
     // anvils have both texture and material blocks
-    IIngredientSubtypeInterpreter<ItemStack> anvils = (stack, context) -> {
+    ISubtypeInterpreter<ItemStack> anvils = (stack, context) -> {
       if (context == UidContext.Ingredient) {
         String name = RetexturedHelper.getTextureName(stack);
         if (!name.isEmpty()) {
           return '#' + name;
         }
-        return ToolPartSubtypeInterpreter.INSTANCE.apply(stack, UidContext.Ingredient);
+        return ToolPartSubtypeInterpreter.INSTANCE.getSubtypeData(stack, UidContext.Ingredient);
       }
-      return IIngredientSubtypeInterpreter.NONE;
+      return null;
     };
     registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, TinkerTables.tinkersAnvil.asItem(), anvils);
     registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, TinkerTables.scorchedAnvil.asItem(), anvils);
@@ -372,7 +376,7 @@ public class JEIPlugin implements IModPlugin {
 
     // fluid containers have types based on fluid, don't bother with different sizes
     registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, TinkerSmeltery.copperCan.get(), (stack, context) -> CopperCanItem.getSubtype(stack));
-    IIngredientSubtypeInterpreter<ItemStack> tankInterpreter = (stack, context) -> TankItem.getSubtype(stack);
+    ISubtypeInterpreter<ItemStack> tankInterpreter = (stack, context) -> TankItem.getSubtype(stack);
     for (TankType type : TankType.values()) {
       registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, TinkerSmeltery.searedTank.get(type).asItem(), tankInterpreter);
       registry.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, TinkerSmeltery.scorchedTank.get(type).asItem(), tankInterpreter);
@@ -422,7 +426,7 @@ public class JEIPlugin implements IModPlugin {
   /** Checks if the given tag exists */
   @SuppressWarnings("deprecation")
   private static boolean tagExists(String name) {
-    Optional<Named<Item>> tag = BuiltInRegistries.ITEM.getTag(ItemTags.create(commonResource(name)));
+    Optional<Named<Item>> tag = BuiltInRegistries.ITEM.get(ItemTags.create(commonResource(name)));
     return tag.isPresent() && tag.get().size() > 0;
   }
 
@@ -533,7 +537,7 @@ public class JEIPlugin implements IModPlugin {
     // add potion fluids for each potion variant if requested
     if (Config.CLIENT.showPotionFluidInJEI.get()) {
       manager.addIngredientsAtRuntime(NeoForgeTypes.FLUID_STACK,
-                                      BuiltInRegistries.POTION.holders().filter(holder -> {
+                                      BuiltInRegistries.POTION.listElements().filter(holder -> {
                                         Potion potion = holder.value();
                                         return potion != Potions.WATER.value() && !holder.is(TinkerTags.Potions.HIDDEN_FLUID);
                                       }).map(holder -> PotionFluidType.potionFluid(holder.key(), FluidType.BUCKET_VOLUME)).toList());
@@ -544,19 +548,15 @@ public class JEIPlugin implements IModPlugin {
     // remove all the fluids
     manager.removeIngredientsAtRuntime(NeoForgeTypes.FLUID_STACK, removeFluids);
 
-    // hide easter egg recipes
-    Level level = SafeClientAccess.getLevel();
-    if (level != null) {
-      RecipeManager recipes = level.getRecipeManager();
-      @SuppressWarnings("unchecked")
-      List<RecipeHolder<CraftingRecipe>> easterEggs = Arrays.stream(EASTER_EGG_RECIPES)
-        .flatMap(id -> recipes.byKey(id).stream())
-        .filter(recipe -> recipe.value() instanceof CraftingRecipe)
-        .map(recipe -> (RecipeHolder<CraftingRecipe>)(RecipeHolder<?>)recipe)
-        .toList();
-      if (!easterEggs.isEmpty()) {
-        jeiRuntime.getRecipeManager().hideRecipes(RecipeTypes.CRAFTING, easterEggs);
-      }
+    // hide easter egg recipes; source vanilla crafting recipes from JEI's own synced data (there is no client RecipeManager in 26.1)
+    Set<Identifier> easterEggIds = Set.of(EASTER_EGG_RECIPES);
+    IRecipeManager recipeManager = jeiRuntime.getRecipeManager();
+    List<RecipeHolder<CraftingRecipe>> easterEggs = recipeManager.createRecipeLookup(RecipeTypes.CRAFTING)
+      .includeHidden().get()
+      .filter(holder -> easterEggIds.contains(holder.id().identifier()))
+      .toList();
+    if (!easterEggs.isEmpty()) {
+      recipeManager.hideRecipes(RecipeTypes.CRAFTING, easterEggs);
     }
 
     modIdHelper = jeiRuntime.getJeiHelpers().getModIdHelper();

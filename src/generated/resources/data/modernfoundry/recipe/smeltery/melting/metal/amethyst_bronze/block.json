@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/amethyst_bronze/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/amethyst_bronze"
-  },
+  "ingredient": "#c:storage_blocks/amethyst_bronze",
   "result": {
     "amount": 810,
     "tag": "c:molten_amethyst_bronze"

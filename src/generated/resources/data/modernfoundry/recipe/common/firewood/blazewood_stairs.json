@@ -3,9 +3,7 @@
   "category": "building",
   "group": "modernfoundry:blazewood_stairs",
   "key": {
-    "B": {
-      "item": "modernfoundry:blazewood"
-    }
+    "B": "modernfoundry:blazewood"
   },
   "pattern": [
     "B  ",
@@ -15,6 +13,5 @@
   "result": {
     "count": 4,
     "id": "modernfoundry:blazewood_stairs"
-  },
-  "show_notification": true
+  }
 }

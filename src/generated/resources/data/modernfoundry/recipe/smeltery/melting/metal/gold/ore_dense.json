@@ -1,6 +1,14 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "c:ores/gold",
+        "c:ore_rates/dense"
+      ]
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/gold/ore_dense",
   "byproducts": [
     {
       "amount": 540,
@@ -8,24 +16,12 @@
       "tag": "c:molten_cobalt"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_combination_filled",
-      "match": [
-        "c:ores/gold",
-        "c:ore_rates/dense"
-      ]
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/metal/gold/ore_dense",
   "ingredient": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "c:ores/gold"
-      },
-      {
-        "tag": "c:ore_rates/dense"
-      }
+      "#c:ores/gold",
+      "#c:ore_rates/dense"
     ]
   },
   "rate": "metal",

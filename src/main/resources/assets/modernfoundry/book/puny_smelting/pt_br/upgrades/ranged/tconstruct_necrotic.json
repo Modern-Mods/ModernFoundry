@@ -1,0 +1,14 @@
+{
+  "modifier_id": "modernfoundry:necrotic",
+  "text": [
+    {
+      "text": "Colete a vida dos seus inimigos para sobreviver por mais tempo."
+    }
+  ],
+  "tool_filter": "modernfoundry:modifiable/ranged",
+  "effects": [
+    "Flechas totalmente carregadas roubam vida dos seus inimigos para curar você",
+    "Múltiplos níveis, aumenta a quantidade de roubo de vida por nível",
+    "Requer 1 slot de melhoria por nível"
+  ]
+}

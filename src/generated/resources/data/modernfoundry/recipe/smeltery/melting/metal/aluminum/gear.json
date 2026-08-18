@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/aluminum/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/aluminum"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/aluminum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/aluminum/gear",
+  "ingredient": "#c:gears/aluminum",
   "result": {
     "amount": 360,
     "tag": "c:molten_aluminum"

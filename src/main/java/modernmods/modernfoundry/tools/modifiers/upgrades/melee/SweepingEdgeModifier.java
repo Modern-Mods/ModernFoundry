@@ -3,7 +3,7 @@ package modernmods.modernfoundry.tools.modifiers.upgrades.melee;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;

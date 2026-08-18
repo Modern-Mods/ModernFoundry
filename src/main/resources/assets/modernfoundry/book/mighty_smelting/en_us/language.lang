@@ -8,7 +8,7 @@ armor_materials=Tier 3 Armor Materials
 armor_materials.subtext=These materials can be casted into armor and shields.
 
 tools=Broad Tools
-tools.subtext=Broad tools all require the use of a Modern Foundry anvil to create
+tools.subtext=Broad tools all require the use of a tinker's anvil to create
 tools.group_general=General
 tools.group_ranged=Ranged
 tools.group_info=Information

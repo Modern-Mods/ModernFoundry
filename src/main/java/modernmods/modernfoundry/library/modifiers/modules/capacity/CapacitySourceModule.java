@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.modifiers.modules.capacity;
 
-import modernmods.hilt.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.field.LoadableField;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.ModifierId;

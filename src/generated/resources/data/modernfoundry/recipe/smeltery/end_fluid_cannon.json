@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "C": {
-      "tag": "c:ingots/knightmetal"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    },
-    "T": {
-      "item": "minecraft:shulker_shell"
-    }
+    "C": "#c:ingots/knightmetal",
+    "R": "#c:dusts/redstone",
+    "T": "minecraft:shulker_shell"
   },
   "pattern": [
     " R ",
@@ -19,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:end_fluid_cannon"
-  },
-  "show_notification": true
+  }
 }

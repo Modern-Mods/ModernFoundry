@@ -1,16 +1,12 @@
 {
   "type": "modernfoundry:item_part_builder",
-  "id": "modernfoundry:tools/parts/builder/leggings_plating",
   "cost": 5,
+  "id": "modernfoundry:tools/parts/builder/leggings_plating",
   "material": "modernfoundry:rock",
   "pattern": "modernfoundry:leggings_plating",
   "pattern_item": [
-    {
-      "tag": "modernfoundry:patterns/default"
-    },
-    {
-      "item": "modernfoundry:leggings_plating_cast"
-    }
+    "#modernfoundry:patterns/default",
+    "modernfoundry:leggings_plating_cast"
   ],
   "result": "modernfoundry:leggings_plating_dummy"
 }

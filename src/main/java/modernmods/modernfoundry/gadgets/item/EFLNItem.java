@@ -1,17 +1,19 @@
 package modernmods.modernfoundry.gadgets.item;
 
 import net.minecraft.network.chat.Component;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.SnowballItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.util.TranslationHelper;
+import modernmods.mantle.util.TranslationHelper;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.gadgets.entity.EFLNEntity;
 
@@ -26,7 +28,7 @@ public class EFLNItem extends SnowballItem {
   }
 
   @Override
-  public InteractionResultHolder<ItemStack> use(Level level, Player playerIn, InteractionHand handIn) {
+  public InteractionResult use(Level level, Player playerIn, InteractionHand handIn) {
     ItemStack stack = playerIn.getItemInHand(handIn);
     if (!playerIn.getAbilities().instabuild) {
       stack.shrink(1);
@@ -41,12 +43,15 @@ public class EFLNItem extends SnowballItem {
     }
 
     playerIn.awardStat(Stats.ITEM_USED.get(this));
-    return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+    return InteractionResult.SUCCESS;
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flag) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     TranslationHelper.addOptionalTooltip(stack, tooltip);
-    super.appendHoverText(stack, context, tooltip, flag);
+    super.appendHoverText(stack, context, tooltipDisplay, tooltip::add, flag);
+  
+    tooltip.forEach(tooltipConsumer);
   }
 }

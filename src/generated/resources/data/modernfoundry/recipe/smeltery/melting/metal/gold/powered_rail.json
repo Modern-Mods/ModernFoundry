@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/powered_rail",
-  "ingredient": {
-    "item": "minecraft:powered_rail"
-  },
+  "ingredient": "minecraft:powered_rail",
   "result": {
     "amount": 90,
     "tag": "c:molten_gold"

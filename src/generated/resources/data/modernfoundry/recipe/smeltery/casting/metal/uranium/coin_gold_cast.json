@@ -1,20 +1,18 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/uranium/coin_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/coin"
-  },
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/uranium"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/multi_use/coin",
   "cooling_time": 35,
   "fluid": {
     "amount": 30,
     "tag": "c:molten_uranium"
   },
+  "id": "modernfoundry:smeltery/casting/metal/uranium/coin_gold_cast",
   "result": {
     "tag": "c:coins/uranium"
   }

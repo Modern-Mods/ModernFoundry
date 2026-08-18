@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/gold/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/gold"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/gold"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/gold/dust",
+  "ingredient": "#c:dusts/gold",
   "result": {
     "amount": 90,
     "tag": "c:molten_gold"

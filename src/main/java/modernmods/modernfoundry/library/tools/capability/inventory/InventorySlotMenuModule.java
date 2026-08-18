@@ -7,8 +7,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -41,7 +41,7 @@ public enum InventorySlotMenuModule implements ModifierModule, SlotStackModifier
   @Override
   public boolean overrideOtherStackedOnMe(IToolStackView slotTool, ModifierEntry modifier, ItemStack held, Slot slot, Player player, SlotAccess access) {
     if (held.isEmpty() && slot.container == player.getInventory() && isValidContainer(player.containerMenu)) {
-      if (!player.level().isClientSide) {
+      if (!player.level().isClientSide()) {
         // during inventory slot interactions, the menu calls `suppressRemoteUpdates()` and calls `resumeRemoteUpdates()` later
         // But we are swapping the open menu, so resume will never get called and we are possibly improperly resumed
         // mostly is an issue for inventoryMenu itself

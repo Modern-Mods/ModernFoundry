@@ -1,21 +1,19 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/tool_belt_6",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/ability/tool_belt_6",
   "inputs": [
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     },
     {
-      "tag": "c:ingots/manyullyn"
+      "ingredient": "#c:ingots/manyullyn"
     },
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     }
   ],
   "level": 6,
   "result": "modernfoundry:tool_belt",
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/leggings"
-  }
+  "tools": "#modernfoundry:modifiable/armor/leggings"
 }

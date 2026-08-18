@@ -9,13 +9,13 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.json.LevelingValue;
@@ -81,11 +81,11 @@ public record SlurpingModule(LevelingValue strength, LevelingInt duration) imple
     if (!fluid.isEmpty()) {
       // sound and particles
       if (playSound) {
-        entity.playSound(SoundEvents.GENERIC_DRINK, 0.5F, entity.getRandom().nextFloat() * 0.1f + 0.9f);
+        entity.playSound(SoundEvents.GENERIC_DRINK.value(), 0.5F, entity.getRandom().nextFloat() * 0.1f + 0.9f);
       }
       addFluidParticles(entity, fluid, 16);
       // apply effect
-      if (!entity.level().isClientSide) {
+      if (!entity.level().isClientSide()) {
         Player player = asPlayer(entity);
         int consumed = slurp(fluid, modifier, entity, player, FluidAction.EXECUTE);
         if (consumed > 0 && (player == null || !player.isCreative())) {
@@ -137,8 +137,8 @@ public record SlurpingModule(LevelingValue strength, LevelingInt duration) imple
   }
 
   @Override
-  public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-    return UseAnim.DRINK;
+  public ItemUseAnimation getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    return ItemUseAnimation.DRINK;
   }
 
   @Override
@@ -149,7 +149,7 @@ public record SlurpingModule(LevelingValue strength, LevelingInt duration) imple
     if (notActive && useTime == 0) {
       FluidStack fluid = TANK_HELPER.getFluid(tool);
       if (!fluid.isEmpty() && slurp(fluid, modifier, entity, asPlayer(entity), FluidAction.SIMULATE) > 0) {
-        tool.getPersistentData().putBoolean(modifier.getId(), true);
+        tool.getPersistentData().putBoolean(modifier.getId().getIdentifier(), true);
       }
     }
 
@@ -157,16 +157,16 @@ public record SlurpingModule(LevelingValue strength, LevelingInt duration) imple
     int duration = getUseDuration(tool, modifier);
     if (notActive && useTime == duration) {
       finishDrinking(tool, modifier, entity, true);
-      tool.getPersistentData().remove(modifier.getId());
+      tool.getPersistentData().remove(modifier.getId().getIdentifier());
     }
     // if we have not finished drinking, and we can drink, play effects
-    else if (useTime < duration && useTime % 4 == 0 && (!notActive || tool.getPersistentData().getBoolean(modifier.getId()))) {
+    else if (useTime < duration && useTime % 4 == 0 && (!notActive || tool.getPersistentData().getBoolean(modifier.getId().getIdentifier()))) {
       FluidStack fluid = TANK_HELPER.getFluid(tool);
       if (!fluid.isEmpty()) {
         addFluidParticles(entity, fluid, 5);
         // add drinking sounds if blocking or using another modifier
         if (notActive) {
-          entity.playSound(SoundEvents.GENERIC_DRINK, 0.5F, entity.getRandom().nextFloat() * 0.1f + 0.9f);
+          entity.playSound(SoundEvents.GENERIC_DRINK.value(), 0.5F, entity.getRandom().nextFloat() * 0.1f + 0.9f);
         }
       }
     }
@@ -177,7 +177,7 @@ public record SlurpingModule(LevelingValue strength, LevelingInt duration) imple
     if (useDuration - timeLeft == getUseDuration(tool, modifier)) {
       finishDrinking(tool, modifier, entity, modifier != activeModifier);
     }
-    tool.getPersistentData().remove(modifier.getId());
+    tool.getPersistentData().remove(modifier.getId().getIdentifier());
   }
 
 
@@ -187,7 +187,7 @@ public record SlurpingModule(LevelingValue strength, LevelingInt duration) imple
   public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
     if (keyModifier == TooltipKey.NORMAL) {
       if (slurp(TANK_HELPER.getFluid(tool), modifier, player, player, FluidAction.SIMULATE) > 0) {
-        tool.getPersistentData().putInt(modifier.getId(), player.tickCount + duration.compute(modifier.getEffectiveLevel()));
+        tool.getPersistentData().putInt(modifier.getId().getIdentifier(), player.tickCount + duration.compute(modifier.getEffectiveLevel()));
         return true;
       }
     }
@@ -196,7 +196,7 @@ public record SlurpingModule(LevelingValue strength, LevelingInt duration) imple
 
   @Override
   public void stopInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot) {
-    tool.getPersistentData().remove(modifier.getId());
+    tool.getPersistentData().remove(modifier.getId().getIdentifier());
   }
 
   @Override
@@ -204,8 +204,8 @@ public record SlurpingModule(LevelingValue strength, LevelingInt duration) imple
     IToolStackView replacement = context.getReplacementTool();
     // modifier list changing is a good heuristic for tool changing, avoids deleting during the slurp
     Level level = context.getLevel();
-    if (!level.isClientSide && (replacement == null || replacement.getItem() != tool.getItem() || !replacement.getModifiers().equals(tool.getModifiers()))) {
-      tool.getPersistentData().remove(modifier.getId());
+    if (!level.isClientSide() && (replacement == null || replacement.getItem() != tool.getItem() || !replacement.getModifiers().equals(tool.getModifiers()))) {
+      tool.getPersistentData().remove(modifier.getId().getIdentifier());
     }
   }
 
@@ -213,7 +213,7 @@ public record SlurpingModule(LevelingValue strength, LevelingInt duration) imple
   public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
     if (isCorrectSlot && tool.hasTag(TinkerTags.Items.WORN_ARMOR)) {
       ModDataNBT persistentData = tool.getPersistentData();
-      int finishTime = persistentData.getInt(modifier.getId());
+      int finishTime = persistentData.getInt(modifier.getId().getIdentifier());
       if (finishTime > 0) {
         // how long we have left?
         int timeLeft = finishTime - holder.tickCount;
@@ -222,11 +222,11 @@ public record SlurpingModule(LevelingValue strength, LevelingInt duration) imple
           finishDrinking(tool, modifier, holder, true);
 
           // stop drinking
-          persistentData.remove(modifier.getId());
+          persistentData.remove(modifier.getId().getIdentifier());
         }
         // sound is only every 4 ticks
         else if (timeLeft % 4 == 0) {
-          holder.playSound(SoundEvents.GENERIC_DRINK, 0.5F, holder.getRandom().nextFloat() * 0.1f + 0.9f);
+          holder.playSound(SoundEvents.GENERIC_DRINK.value(), 0.5F, holder.getRandom().nextFloat() * 0.1f + 0.9f);
           addFluidParticles(holder, TANK_HELPER.getFluid(tool), 5);
         }
       }

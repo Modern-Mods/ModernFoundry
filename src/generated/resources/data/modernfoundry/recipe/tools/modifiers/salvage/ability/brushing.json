@@ -6,14 +6,10 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/durability"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable/right"
-      }
+      "#modernfoundry:modifiable/durability",
+      "#modernfoundry:modifiable/interactable/right"
     ]
   }
 }

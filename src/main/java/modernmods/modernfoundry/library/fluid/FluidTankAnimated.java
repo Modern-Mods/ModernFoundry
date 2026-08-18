@@ -2,13 +2,13 @@ package modernmods.modernfoundry.library.fluid;
 
 import lombok.Getter;
 import lombok.Setter;
-import modernmods.hilt.block.entity.HiltBlockEntity;
+import modernmods.mantle.block.entity.MantleBlockEntity;
 
-public class FluidTankAnimated extends FluidTankBase<HiltBlockEntity> {
+public class FluidTankAnimated extends FluidTankBase<MantleBlockEntity> {
   @Getter @Setter
   private float renderOffset;
 
-  public FluidTankAnimated(int capacity, HiltBlockEntity parent) {
+  public FluidTankAnimated(int capacity, MantleBlockEntity parent) {
     super(capacity, parent);
   }
 }

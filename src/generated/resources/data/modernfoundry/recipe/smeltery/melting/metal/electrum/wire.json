@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/electrum/wire",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:wires/electrum"
     }
   ],
-  "ingredient": {
-    "tag": "c:wires/electrum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/wire",
+  "ingredient": "#c:wires/electrum",
   "result": {
     "amount": 45,
     "tag": "c:molten_electrum"

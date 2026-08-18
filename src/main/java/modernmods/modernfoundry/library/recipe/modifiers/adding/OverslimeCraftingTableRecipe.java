@@ -1,19 +1,21 @@
 package modernmods.modernfoundry.library.recipe.modifiers.adding;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.modules.capacity.OverslimeModule;
@@ -27,7 +29,7 @@ import java.util.function.Predicate;
 public class OverslimeCraftingTableRecipe extends CustomRecipe {
   public static final RecordLoadable<OverslimeCraftingTableRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
-    IngredientLoadable.DISALLOW_EMPTY.defaultField("tools", Ingredient.of(TinkerTags.Items.DURABILITY), r -> r.tools),
+    IngredientLoadable.DISALLOW_EMPTY.defaultField("tools", modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(TinkerTags.Items.DURABILITY), r -> r.tools),
     IngredientLoadable.DISALLOW_EMPTY.requiredField("ingredient", r -> r.ingredient),
     IntLoadable.FROM_ONE.requiredField("restore_amount", r -> r.restoreAmount),
     OverslimeCraftingTableRecipe::new);
@@ -35,17 +37,21 @@ public class OverslimeCraftingTableRecipe extends CustomRecipe {
   private final Ingredient tools;
   private final Ingredient ingredient;
   private final int restoreAmount;
-  private final ResourceLocation id;
+  private final Identifier id;
 
-  public OverslimeCraftingTableRecipe(ResourceLocation id, Ingredient tools, Ingredient ingredient, int restoreAmount) {
-    super(CraftingBookCategory.EQUIPMENT);
+  public OverslimeCraftingTableRecipe(Identifier id, Ingredient tools, Ingredient ingredient, int restoreAmount) {
     this.id = id;
     this.tools = tools;
     this.ingredient = ingredient;
     this.restoreAmount = restoreAmount;
   }
 
-  public ResourceLocation getId() {
+  @Override
+  public CraftingBookCategory category() {
+    return CraftingBookCategory.EQUIPMENT;
+  }
+
+  public Identifier getId() {
     return id;
   }
 
@@ -103,7 +109,7 @@ public class OverslimeCraftingTableRecipe extends CustomRecipe {
   }
 
   @Override
-  public ItemStack assemble(CraftingInput inv, HolderLookup.Provider registryAccess) {
+  public ItemStack assemble(CraftingInput inv) {
     ToolFound match = findTool(inv, tools, ingredient);
     if (match == null) {
       TConstruct.LOG.error("Overslime crafting table recipe {} failed to find tool after matching", getId());
@@ -127,8 +133,9 @@ public class OverslimeCraftingTableRecipe extends CustomRecipe {
         }
         repairNeeded -= repairPerItem;
       }
-      if (stack.hasCraftingRemainingItem()) {
-        list.set(i, stack.getCraftingRemainingItem());
+      ItemStackTemplate remainderTemplate = stack.getItem().getCraftingRemainder(stack);
+      if (remainderTemplate != null) {
+        list.set(i, remainderTemplate.create());
       }
     }
     return list;
@@ -151,12 +158,7 @@ public class OverslimeCraftingTableRecipe extends CustomRecipe {
   }
 
   @Override
-  public boolean canCraftInDimensions(int width, int height) {
-    return width * height >= 2;
-  }
-
-  @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends OverslimeCraftingTableRecipe> getSerializer() {
     return TinkerModifiers.craftingOverslimeSerializer.get();
   }
 }

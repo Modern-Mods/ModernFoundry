@@ -3,20 +3,20 @@
   "id": "modernfoundry:tools/modifiers/worktable/extract/upgrade",
   "inputs": [
     {
-      "item": "modernfoundry:sky_slime_crystal"
+      "ingredient": "modernfoundry:sky_slime_crystal"
     },
     {
-      "item": "minecraft:wet_sponge"
+      "ingredient": "minecraft:wet_sponge"
     }
   ],
   "leftovers": [
     "minecraft:sponge"
   ],
   "modifier_predicate": {
-    "type": "hilt:and",
+    "type": "mantle:and",
     "predicates": [
       {
-        "type": "hilt:inverted",
+        "type": "mantle:inverted",
         "inverted_type": "modernfoundry:tag",
         "tag": "modernfoundry:extract_blacklist/tools"
       },
@@ -28,12 +28,8 @@
   },
   "name": "upgrades",
   "tools": {
-    "type": "neoforge:difference",
-    "base": {
-      "tag": "modernfoundry:modifiable"
-    },
-    "subtracted": {
-      "tag": "modernfoundry:modifiable/unsalvageable"
-    }
+    "neoforge:ingredient_type": "neoforge:difference",
+    "base": "#modernfoundry:modifiable",
+    "subtracted": "#modernfoundry:modifiable/unsalvageable"
   }
 }

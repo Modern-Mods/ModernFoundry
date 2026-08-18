@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/lumium/coin",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/lumium"
     }
   ],
-  "ingredient": {
-    "tag": "c:coins/lumium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/lumium/coin",
+  "ingredient": "#c:coins/lumium",
   "result": {
     "amount": 30,
     "tag": "c:molten_lumium"

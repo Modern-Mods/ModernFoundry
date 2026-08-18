@@ -12,8 +12,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.client.ResourceColorManager;
-import modernmods.hilt.registration.object.IdAwareObject;
+import modernmods.mantle.client.ResourceColorManager;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierManager.ModifierRegistrationEvent;
 import modernmods.modernfoundry.library.modifiers.hook.mining.BreakSpeedContext;
@@ -38,7 +37,7 @@ import java.util.Random;
  * @see #registerHooks(Builder)
  */
 @SuppressWarnings("unused")
-public class Modifier implements IdAwareObject {
+public class Modifier {
   /** Modifier random instance, use for chance based effects */
   public static Random RANDOM = new Random();
 
@@ -103,7 +102,6 @@ public class Modifier implements IdAwareObject {
     this.id = name;
   }
 
-  @Override
   public ModifierId getId() {
     return Objects.requireNonNull(id, "Modifier has null registry name");
   }
@@ -141,7 +139,7 @@ public class Modifier implements IdAwareObject {
    * @return  Translation key
    */
   protected String makeTranslationKey() {
-    return Util.makeTranslationKey("modifier", Objects.requireNonNull(id));
+    return Util.makeTranslationKey("modifier", Objects.requireNonNull(id).getIdentifier());
   }
 
   /**

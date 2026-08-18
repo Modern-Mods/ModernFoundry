@@ -1,15 +1,11 @@
 {
   "type": "modernfoundry:part_builder",
-  "id": "modernfoundry:tools/parts/builder/broad_axe_head",
   "cost": 8,
+  "id": "modernfoundry:tools/parts/builder/broad_axe_head",
   "pattern": "modernfoundry:broad_axe_head",
   "pattern_item": [
-    {
-      "tag": "modernfoundry:patterns/default"
-    },
-    {
-      "item": "modernfoundry:broad_axe_head_cast"
-    }
+    "#modernfoundry:patterns/default",
+    "modernfoundry:broad_axe_head_cast"
   ],
   "result": {
     "item": "modernfoundry:broad_axe_head"

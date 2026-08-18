@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.json.predicate.tool;
 
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.predicate.VariableRangePredicate;
 import modernmods.modernfoundry.library.json.variable.tool.ToolVariable;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;

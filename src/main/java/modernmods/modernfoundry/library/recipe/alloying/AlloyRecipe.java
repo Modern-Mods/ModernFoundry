@@ -2,18 +2,18 @@ package modernmods.modernfoundry.library.recipe.alloying;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ICustomOutputRecipe;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ICustomOutputRecipe;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
@@ -34,7 +34,7 @@ public class AlloyRecipe implements ICustomOutputRecipe<IAlloyTank> {
     AlloyRecipe::new);
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   /**
    * List of input ingredients.
    * Order matters, as if a fluid matches multiple ingredients it may produce unexpected behavior.
@@ -194,12 +194,12 @@ public class AlloyRecipe implements ICustomOutputRecipe<IAlloyTank> {
   }
 
   @Override
-  public RecipeType<?> getType() {
+  public RecipeType<? extends AlloyRecipe> getType() {
     return TinkerRecipeTypes.ALLOYING.get();
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends AlloyRecipe> getSerializer() {
     return TinkerSmeltery.alloyingSerializer.get();
   }
 

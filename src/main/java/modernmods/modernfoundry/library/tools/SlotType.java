@@ -9,14 +9,14 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
-import modernmods.hilt.client.ResourceColorManager;
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.client.ResourceColorManager;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.util.typed.TypedMap;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.tools.stat.IToolStat;
 
@@ -77,7 +77,7 @@ public final class SlotType {
 
   /**
    * Gets an existing slot type, or creates it if missing.
-   * Note that you will also want to define a texture for the creative modifier and JEI using {@link modernmods.hilt.client.model.NBTKeyModel#registerExtraTexture(ResourceLocation, String, ResourceLocation)}
+   * Note that you will also want to define a texture for the creative modifier and JEI using {@link modernmods.mantle.client.model.NBTKeyModel#registerExtraTexture(Identifier, String, Identifier)}
    * @param name     Name of the slot type
    * @return  Slot type instance for the name, only once instance for each name
    * @throws IllegalArgumentException  Error if a name is invalid

@@ -1,45 +1,10 @@
 package modernmods.modernfoundry.common;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.client.color.block.BlockColors;
-import net.minecraft.client.color.item.ItemColors;
-import modernmods.hilt.registration.object.EnumObject;
-
-import java.util.function.Supplier;
-
 /**
- * Contains helpers to use for registering client events
+ * Contains helpers to use for registering client events.
+ * <p>
+ * 26.1 removed {@code net.minecraft.client.color.item.ItemColors} (item tints are now data-driven via item model
+ * tint sources), so the old block-item color alias helpers were dropped; they had no callers.
  */
 public abstract class ClientEventBase {
-  /**
-   * Registers a block colors alias for the given block
-   * @param blockColors  BlockColors instance
-   * @param itemColors   ItemColors instance
-   * @param block        Block to register
-   */
-  protected static void registerBlockItemColorAlias(BlockColors blockColors, ItemColors itemColors, Block block) {
-    itemColors.register((stack, index) -> 0xFF000000 | blockColors.getColor(block.defaultBlockState(), null, null, index), block);
-  }
-
-  /**
-   * Registers a block colors alias for the given block suppliers
-   * @param blockColors  BlockColors instance
-   * @param itemColors   ItemColors instance
-   * @param block        Block to register
-   */
-  protected static void registerBlockItemColorAlias(BlockColors blockColors, ItemColors itemColors, Supplier<? extends Block> block) {
-    registerBlockItemColorAlias(blockColors, itemColors, block.get());
-  }
-
-  /**
-   * Registers a block colors alias for all blocks in the given instance
-   * @param blockColors  BlockColors instance
-   * @param itemColors   ItemColors instance
-   * @param blocks       EnumBlock instance
-   */
-  protected static <B extends Block> void registerBlockItemColorAlias(BlockColors blockColors, ItemColors itemColors, EnumObject<?,B> blocks) {
-    for (B block : blocks.values()) {
-      registerBlockItemColorAlias(blockColors, itemColors, block);
-    }
-  }
 }

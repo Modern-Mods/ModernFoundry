@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/aluminum/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/aluminum"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/aluminum"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/aluminum/block",
+  "ingredient": "#c:storage_blocks/aluminum",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/aluminum"

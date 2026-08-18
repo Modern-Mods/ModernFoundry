@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/produce",
   "ingredient": [
-    {
-      "item": "minecraft:glistering_melon_slice"
-    },
-    {
-      "item": "minecraft:golden_carrot"
-    }
+    "minecraft:glistering_melon_slice",
+    "minecraft:golden_carrot"
   ],
   "result": {
     "amount": 80,

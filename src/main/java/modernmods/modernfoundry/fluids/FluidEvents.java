@@ -8,7 +8,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.fluids.util.ConstantFluidContainerWrapper;
 
@@ -17,7 +16,7 @@ import modernmods.modernfoundry.fluids.util.ConstantFluidContainerWrapper;
  * Note the way the subscribers are set up, technically works on anything that has the tic_modifiers tag
  */
 @SuppressWarnings("unused")
-@EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.GAME)
+@EventBusSubscriber(modid = TConstruct.MOD_ID)
 public class FluidEvents {
   @SubscribeEvent
   static void onFurnaceFuel(FurnaceFuelBurnTimeEvent event) {
@@ -29,8 +28,8 @@ public class FluidEvents {
 
   static void registerCapabilities(RegisterCapabilitiesEvent event) {
     event.registerItem(
-      Capabilities.FluidHandler.ITEM,
-      (stack, context) -> new ConstantFluidContainerWrapper(new FluidStack(TinkerFluids.powderedSnow.get(), FluidType.BUCKET_VOLUME), stack, Items.BUCKET.getDefaultInstance()),
+      Capabilities.Fluid.ITEM,
+      (stack, access) -> new ConstantFluidContainerWrapper(access, new FluidStack(TinkerFluids.powderedSnow.get(), FluidType.BUCKET_VOLUME), net.neoforged.neoforge.transfer.item.ItemResource.of(Items.BUCKET)),
       Items.POWDER_SNOW_BUCKET);
   }
 }

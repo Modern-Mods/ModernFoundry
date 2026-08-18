@@ -2,21 +2,21 @@ package modernmods.modernfoundry.library.recipe.modifiers.severing;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ICustomOutputRecipe;
-import modernmods.hilt.recipe.container.IEmptyContainer;
-import modernmods.hilt.recipe.helper.ItemOutput;
-import modernmods.hilt.recipe.ingredient.EntityIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ICustomOutputRecipe;
+import modernmods.mantle.recipe.container.IEmptyContainer;
+import modernmods.mantle.recipe.helper.ItemOutput;
+import modernmods.mantle.recipe.ingredient.EntityIngredient;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 import modernmods.modernfoundry.tools.TinkerModifiers;
 
@@ -36,16 +36,16 @@ public class SeveringRecipe implements ICustomOutputRecipe<IEmptyContainer> {
     SeveringRecipe::new);
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   @Getter
   protected final EntityIngredient ingredient;
   protected final ItemOutput output;
   protected final float baseChance;
   protected final float lootingBonus;
 
-  /** @deprecated use {@link #SeveringRecipe(ResourceLocation, EntityIngredient, ItemOutput, float, float)} */
+  /** @deprecated use {@link #SeveringRecipe(Identifier, EntityIngredient, ItemOutput, float, float)} */
   @Deprecated(forRemoval = true)
-  public SeveringRecipe(ResourceLocation id, EntityIngredient ingredient, ItemOutput output) {
+  public SeveringRecipe(Identifier id, EntityIngredient ingredient, ItemOutput output) {
     this(id, ingredient, output, 0.05f, 0.01f);
   }
 
@@ -81,12 +81,12 @@ public class SeveringRecipe implements ICustomOutputRecipe<IEmptyContainer> {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends SeveringRecipe> getSerializer() {
     return TinkerModifiers.severingSerializer.get();
   }
 
   @Override
-  public RecipeType<?> getType() {
+  public RecipeType<? extends SeveringRecipe> getType() {
     return TinkerRecipeTypes.SEVERING.get();
   }
 

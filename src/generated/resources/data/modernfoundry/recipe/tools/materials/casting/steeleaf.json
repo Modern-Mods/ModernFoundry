@@ -1,16 +1,16 @@
 {
-  "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/steeleaf",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/steeleaf"
     }
   ],
+  "type": "modernfoundry:material_fluid",
   "fluid": {
     "amount": 90,
     "tag": "modernfoundry:molten_steeleaf"
   },
+  "id": "modernfoundry:tools/materials/casting/steeleaf",
   "output": "modernfoundry:steeleaf",
   "temperature": 934
 }

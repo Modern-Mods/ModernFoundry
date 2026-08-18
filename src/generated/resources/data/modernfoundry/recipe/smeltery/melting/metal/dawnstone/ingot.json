@@ -1,20 +1,18 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/dawnstone/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/dawnstone"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "registry": "minecraft:fluid",
       "tag": "c:molten_dawnstone"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/dawnstone"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/dawnstone/ingot",
+  "ingredient": "#c:ingots/dawnstone",
   "result": {
     "amount": 90,
     "tag": "c:molten_dawnstone"

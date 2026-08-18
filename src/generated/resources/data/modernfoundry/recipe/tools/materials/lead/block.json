@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/lead/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/lead"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/lead"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/lead/block",
+  "ingredient": "#c:storage_blocks/lead",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/lead"

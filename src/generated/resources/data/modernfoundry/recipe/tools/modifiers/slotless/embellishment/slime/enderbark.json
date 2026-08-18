@@ -1,24 +1,22 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/enderbark",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/enderbark",
   "inputs": [
     {
-      "item": "modernfoundry:enderbark_planks"
+      "ingredient": "modernfoundry:enderbark_planks"
     },
     {
-      "item": "modernfoundry:ender_slime_sapling"
+      "ingredient": "modernfoundry:ender_slime_sapling"
     },
     {
-      "item": "modernfoundry:enderbark_planks"
+      "ingredient": "modernfoundry:enderbark_planks"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:enderslime"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/slime"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/slime",
   "variant_formatter": "modernfoundry:material"
 }

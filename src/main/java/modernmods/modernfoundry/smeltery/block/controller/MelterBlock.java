@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.entity.controller.MelterBlockEntity;
 
@@ -28,7 +28,7 @@ public class MelterBlock extends TinyMultiblockControllerBlock {
   @Nullable
   @Override
   public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> check) {
-    return pLevel.isClientSide ? null : BlockEntityHelper.castTicker(check, TinkerSmeltery.melter.get(), MelterBlockEntity.SERVER_TICKER);
+    return pLevel.isClientSide() ? null : BlockEntityHelper.castTicker(check, TinkerSmeltery.melter.get(), MelterBlockEntity.SERVER_TICKER);
   }
 
 
@@ -43,7 +43,7 @@ public class MelterBlock extends TinyMultiblockControllerBlock {
   }
 
   @Override
-  public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+  protected boolean propagatesSkylightDown(BlockState state) {
     return true;
   }
 

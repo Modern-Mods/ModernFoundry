@@ -1,5 +1,7 @@
 package modernmods.modernfoundry.tools.entity;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.core.BlockPos;
@@ -14,6 +16,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,8 +33,9 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
 import modernmods.modernfoundry.fluids.TinkerFluids;
 import modernmods.modernfoundry.library.modifiers.entity.ProjectileWithKnockback;
 import modernmods.modernfoundry.library.modifiers.entity.ProjectileWithPower;
@@ -134,19 +138,16 @@ public class FluidEffectProjectile extends Projectile implements ProjectileWithK
 
   @Override
   protected Component getTypeName() {
-    return getFluid().getDisplayName();
+    return getFluid().getHoverName();
   }
 
-  /** Gets the cannon tank */
+  /** Gets the cannon item handler as a resource handler */
   @Nullable
-  private IItemHandlerModifiable getCannonInventory() {
+  private ResourceHandler<ItemResource> getCannonInventory() {
     Level level = level();
     if (this.cannon != null && level.isLoaded(this.cannon)) {
       BlockEntity cannonBE = level.getBlockEntity(this.cannon);
-      IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, this.cannon, cannonBE == null ? null : cannonBE.getBlockState(), cannonBE, null);
-      if (handler instanceof IItemHandlerModifiable modifiable) {
-        return modifiable;
-      }
+      return level.getCapability(Capabilities.Item.BLOCK, this.cannon, cannonBE == null ? null : cannonBE.getBlockState(), cannonBE, null);
     }
     return null;
   }
@@ -160,9 +161,9 @@ public class FluidEffectProjectile extends Projectile implements ProjectileWithK
       builder.user(owner);
     }
     if (this.cannon != null) {
-      IItemHandler handler = getCannonInventory();
-      if (handler != null) {
-        builder.stack(handler.getStackInSlot(0).copy());
+      ResourceHandler<ItemResource> handler = getCannonInventory();
+      if (handler != null && handler.size() > 0) {
+        builder.stack(handler.getResource(0).toStack(Math.max(1, handler.getAmountAsInt(0))));
       }
     }
     return builder;
@@ -171,9 +172,21 @@ public class FluidEffectProjectile extends Projectile implements ProjectileWithK
   /** Updates the stack for the fluid cannon */
   private void updateCannonStack(FluidEffectContext context) {
     if (cannon != null) {
-      IItemHandlerModifiable handler = getCannonInventory();
-      if (handler != null) {
-        handler.setStackInSlot(0, context.getStack());
+      ResourceHandler<ItemResource> handler = getCannonInventory();
+      if (handler != null && handler.size() > 0) {
+        // replace the single cannon slot with the updated container item within one transaction
+        ItemStack stack = context.getStack();
+        try (Transaction tx = Transaction.openRoot()) {
+          ItemResource existing = handler.getResource(0);
+          int existingAmount = handler.getAmountAsInt(0);
+          if (!existing.isEmpty() && existingAmount > 0) {
+            handler.extract(0, existing, existingAmount, tx);
+          }
+          if (!stack.isEmpty()) {
+            handler.insert(0, ItemResource.of(stack), stack.getCount(), tx);
+          }
+          tx.commit();
+        }
       }
     }
   }
@@ -214,7 +227,7 @@ public class FluidEffectProjectile extends Projectile implements ProjectileWithK
     }
     // if the projectile moves above the world, delete it
     // only likely to happen for lighter than air fluids
-    if (getY() > level().getMaxBuildHeight() + 64) {
+    if (getY() > level().getMaxY() + 1 + 64) {
       this.discard();
     }
   }
@@ -231,7 +244,7 @@ public class FluidEffectProjectile extends Projectile implements ProjectileWithK
     }
     FluidStack fluid = getFluid();
     Level level = level();
-    if (!level.isClientSide && !fluid.isEmpty()) {
+    if (!level.isClientSide() && !fluid.isEmpty()) {
       FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
       if (recipe.hasEntityEffects()) {
         FluidEffectContext.Entity context = buildContext().location(result.getLocation()).target(target);
@@ -273,7 +286,7 @@ public class FluidEffectProjectile extends Projectile implements ProjectileWithK
     // hit the block
     // handle the fluid
     Level level = level();
-    if (!level.isClientSide) {
+    if (!level.isClientSide()) {
       FluidStack fluid = getFluid();
       if (!fluid.isEmpty()) {
         FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
@@ -325,9 +338,10 @@ public class FluidEffectProjectile extends Projectile implements ProjectileWithK
   public void recreateFromPacket(ClientboundAddEntityPacket packet) {
     // copied from llama spit
     super.recreateFromPacket(packet);
-    double x = packet.getXa();
-    double y = packet.getYa();
-    double z = packet.getZa();
+    net.minecraft.world.phys.Vec3 movement = packet.getMovement();
+    double x = movement.x;
+    double y = movement.y;
+    double z = movement.z;
     for(int i = 0; i < 7; i++) {
       double offset = 0.4D + 0.1D * i;
       this.level().addParticle(ParticleTypes.SPIT, this.getX(), this.getY(), this.getZ(), x * offset, y, z * offset);
@@ -336,31 +350,27 @@ public class FluidEffectProjectile extends Projectile implements ProjectileWithK
   }
 
   @Override
-  protected void addAdditionalSaveData(CompoundTag nbt) {
-    super.addAdditionalSaveData(nbt);
-    nbt.putFloat(KEY_POWER, power);
-    nbt.putFloat(KEY_KNOCKBACK, knockback);
-    nbt.putFloat(KEY_WATER_INERTIA, this.entityData.get(WATER_INERTIA));
+  protected void addAdditionalSaveData(ValueOutput output) {
+    super.addAdditionalSaveData(output);
+    output.putFloat(KEY_POWER, power);
+    output.putFloat(KEY_KNOCKBACK, knockback);
+    output.putFloat(KEY_WATER_INERTIA, this.entityData.get(WATER_INERTIA));
     if (cannon != null) {
-      nbt.put(KEY_CANNON, NbtUtils.writeBlockPos(cannon));
+      output.store(KEY_CANNON, BlockPos.CODEC, cannon);
     }
     FluidStack fluid = getFluid();
     if (!fluid.isEmpty()) {
-      nbt.put(KEY_FLUID, fluid.save(TagUtil.BUILTIN_LOOKUP));
+      output.store(KEY_FLUID, FluidStack.CODEC, fluid);
     }
   }
 
   @Override
-  protected void readAdditionalSaveData(CompoundTag nbt) {
-    super.readAdditionalSaveData(nbt);
-    this.power = nbt.getFloat(KEY_POWER);
-    this.knockback = nbt.getFloat(KEY_KNOCKBACK);
-    this.entityData.set(WATER_INERTIA, nbt.getFloat(KEY_WATER_INERTIA));
-    if (nbt.contains(KEY_CANNON)) {
-      this.cannon = NbtUtils.readBlockPos(nbt, KEY_CANNON).orElse(null);
-    } else {
-      this.cannon = null;
-    }
-    setFluid(FluidStack.parseOptional(TagUtil.BUILTIN_LOOKUP, nbt.getCompound(KEY_FLUID)));
+  protected void readAdditionalSaveData(ValueInput input) {
+    super.readAdditionalSaveData(input);
+    this.power = input.getFloatOr(KEY_POWER, 0f);
+    this.knockback = input.getFloatOr(KEY_KNOCKBACK, 0f);
+    this.entityData.set(WATER_INERTIA, input.getFloatOr(KEY_WATER_INERTIA, 0f));
+    this.cannon = input.read(KEY_CANNON, BlockPos.CODEC).orElse(null);
+    setFluid(input.read(KEY_FLUID, FluidStack.CODEC).orElse(FluidStack.EMPTY));
   }
 }

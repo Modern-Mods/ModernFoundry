@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:manyullyn_block",
   "key": {
-    "#": {
-      "tag": "c:ingots/manyullyn"
-    },
-    "*": {
-      "item": "modernfoundry:manyullyn_ingot"
-    }
+    "#": "#c:ingots/manyullyn",
+    "*": "modernfoundry:manyullyn_ingot"
   },
   "pattern": [
     "###",
@@ -17,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:manyullyn_block"
-  },
-  "show_notification": true
+  }
 }

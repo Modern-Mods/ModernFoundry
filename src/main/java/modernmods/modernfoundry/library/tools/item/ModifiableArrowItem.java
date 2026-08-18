@@ -1,17 +1,20 @@
 package modernmods.modernfoundry.library.tools.item;
 
 import lombok.Getter;
+import net.minecraft.server.level.ServerLevel;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ArrowItem;
@@ -21,8 +24,8 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ICapabilityProvider;
-import modernmods.hilt.client.SafeClientAccess;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.SafeClientAccess;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.hook.build.ConditionalStatModifierHook;
@@ -76,12 +79,12 @@ public class ModifiableArrowItem extends ArrowItem implements IModifiableDisplay
   /* Shurikening */
 
   @Override
-  public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+  public InteractionResult use(Level level, Player player, InteractionHand hand) {
     ItemStack stack = player.getItemInHand(hand);
     // only throw arrows if they have the throwable tool action. Useful for the other style of projectile in addons, or a really weird arrow modifier.
     if (stack.is(TinkerTags.Items.THROWN_AMMO)) {
       level.playSound(null, player.getX(), player.getY(), player.getZ(), Sounds.SHURIKEN_THROW.getSound(), SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
-      player.getCooldowns().addCooldown(stack.getItem(), 10);
+      player.getCooldowns().addCooldown(stack, 10);
       if (!level.isClientSide()) {
         ModifiableArrow arrow = new ModifiableArrow(level, player);
         IToolStackView tool = arrow.onCreate(stack, player);
@@ -95,9 +98,9 @@ public class ModifiableArrowItem extends ArrowItem implements IModifiableDisplay
         stack.shrink(1);
       }
 
-      return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+      return InteractionResult.SUCCESS;
     }
-    return InteractionResultHolder.pass(stack);
+    return InteractionResult.PASS;
   }
 
 
@@ -113,7 +116,7 @@ public class ModifiableArrowItem extends ArrowItem implements IModifiableDisplay
   }
 
   @Override
-  public void onCraftedBy(ItemStack stack, Level worldIn, Player playerIn) {
+  public void onCraftedBy(ItemStack stack, Player playerIn) {
     ToolStack.ensureInitialized(stack, getToolDefinition());
   }
 
@@ -149,8 +152,8 @@ public class ModifiableArrowItem extends ArrowItem implements IModifiableDisplay
   /* Modifier interactions */
 
   @Override
-  public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    InventoryTickModifierHook.heldInventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+  public void inventoryTick(ItemStack stack, ServerLevel worldIn, Entity entityIn, @javax.annotation.Nullable net.minecraft.world.entity.EquipmentSlot slot) {
+    InventoryTickModifierHook.heldInventoryTick(stack, worldIn, entityIn, slot != null ? slot.getIndex() : 0, slot == net.minecraft.world.entity.EquipmentSlot.MAINHAND);
   }
 
   @Override
@@ -172,8 +175,11 @@ public class ModifiableArrowItem extends ArrowItem implements IModifiableDisplay
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flag) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     TooltipUtil.addInformation(this, stack, context.level(), tooltip, SafeClientAccess.getTooltipKey(), flag);
+  
+    tooltip.forEach(tooltipConsumer);
   }
 
   public int getDefaultTooltipHideFlags(ItemStack stack) {

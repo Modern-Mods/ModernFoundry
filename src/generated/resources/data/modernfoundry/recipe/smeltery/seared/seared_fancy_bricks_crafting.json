@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "s": {
-      "item": "modernfoundry:seared_bricks_slab"
-    }
+    "s": "modernfoundry:seared_bricks_slab"
   },
   "pattern": [
     "s",
@@ -12,6 +10,5 @@
   ],
   "result": {
     "id": "modernfoundry:seared_fancy_bricks"
-  },
-  "show_notification": true
+  }
 }

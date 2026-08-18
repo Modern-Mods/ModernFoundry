@@ -1,33 +1,27 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/melting",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/melting",
   "inputs": [
     {
-      "item": "minecraft:blaze_rod"
+      "ingredient": "minecraft:blaze_rod"
     },
     {
       "ingredient": [
-        {
-          "item": "modernfoundry:seared_melter"
-        },
-        {
-          "item": "modernfoundry:smeltery_controller"
-        },
-        {
-          "item": "modernfoundry:foundry_controller"
-        }
+        "modernfoundry:seared_melter",
+        "modernfoundry:smeltery_controller",
+        "modernfoundry:foundry_controller"
       ]
     },
     {
-      "item": "minecraft:blaze_rod"
+      "ingredient": "minecraft:blaze_rod"
     },
     {
-      "item": "minecraft:lava_bucket"
+      "ingredient": "minecraft:lava_bucket"
     },
     {
-      "item": "minecraft:lava_bucket"
+      "ingredient": "minecraft:lava_bucket"
     }
   ],
   "level": 1,
@@ -36,11 +30,7 @@
     "abilities": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/melee"
-    },
-    {
-      "tag": "modernfoundry:modifiable/harvest"
-    }
+    "#modernfoundry:modifiable/melee",
+    "#modernfoundry:modifiable/harvest"
   ]
 }

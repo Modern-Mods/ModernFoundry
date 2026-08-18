@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/tin/oreberry",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "oreberriesreplanted:tin_oreberry"
+      "type": "neoforge:registered",
+      "value": "oreberriesreplanted:tin_oreberry"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/tin/oreberry",
   "ingredient": {
     "item": "oreberriesreplanted:tin_oreberry"
   },

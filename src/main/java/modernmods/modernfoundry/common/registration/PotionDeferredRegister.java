@@ -6,13 +6,13 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.registration.deferred.DeferredRegisterWrapper;
-import modernmods.hilt.registration.object.EnumObject;
+import modernmods.mantle.registration.deferred.DeferredRegisterWrapper;
+import modernmods.mantle.registration.object.EnumObject;
 
 import java.util.Locale;
 import java.util.function.Supplier;
 
-/** @deprecated use {@link modernmods.hilt.registration.deferred.PotionDeferredRegister} */
+/** @deprecated use {@link modernmods.mantle.registration.deferred.PotionDeferredRegister} */
 @Deprecated(forRemoval = true)
 public class PotionDeferredRegister extends DeferredRegisterWrapper<Potion> {
   public PotionDeferredRegister(String modID) {

@@ -7,8 +7,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import modernmods.modernfoundry.compat.neoforged.neoforge.event.ForgeEventFactory;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import modernmods.modernfoundry.TConstruct;
@@ -78,12 +79,17 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
       if (getItem(PATTERN_SLOT).isEmpty()) {
         recipes = Collections.emptyMap();
         sortedButtons = Collections.emptyList();
+      } else if (level.getServer() == null) {
+        // 26.1: recipe matching needs the server-side RecipeManager, which the client no longer has (level.getServer() is
+        // null on the client). Without this guard the part builder screen NPE-crashed on render. Client shows no buttons.
+        recipes = Collections.emptyMap();
+        sortedButtons = Collections.emptyList();
       } else {
         record PatternRecipe(Pattern pattern, IPartBuilderRecipe recipe) {}
         // fetch all recipes that can match these inputs, the map ensures the patterns are unique
-        recipes = level.getRecipeManager().getAllRecipesFor(TinkerRecipeTypes.PART_BUILDER.get()).stream()
+        recipes = level.getServer().getRecipeManager().recipeMap().byType(TinkerRecipeTypes.PART_BUILDER.get()).stream()
                        .filter(holder -> holder.value().partialMatch(inventoryWrapper))
-                       .sorted(Comparator.comparing(holder -> holder.id()))
+                       .sorted(Comparator.comparing(holder -> holder.id().identifier()))
                        .flatMap(holder -> holder.value().getPatterns(inventoryWrapper).map(p -> new PatternRecipe(p, holder.value())))
                        .collect(Collectors.toMap(PatternRecipe::pattern, PatternRecipe::recipe, (a, b) -> a));
         sortedButtons = recipes.entrySet()
@@ -263,7 +269,8 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
     }
     ItemStack stack = getItem(slot);
     if (!stack.isEmpty()) {
-      ItemStack container = stack.getCraftingRemainingItem().copy();
+      ItemStackTemplate remainderTemplate = stack.getItem().getCraftingRemainder(stack);
+      ItemStack container = remainderTemplate != null ? remainderTemplate.create() : ItemStack.EMPTY;
       if (amount > 1) {
         container.setCount(container.getCount() * amount);
       }
@@ -288,12 +295,12 @@ public class PartBuilderBlockEntity extends RetexturedTableBlockEntity implement
     }
 
     // we are definitely crafting at this point
-    result.onCraftedBy(this.level, player, amount);
+    result.onCraftedBy(player, amount);
     ForgeEventFactory.firePlayerCraftingEvent(player, result, this.inventoryWrapper);
     this.playCraftSound(player);
 
     // give the player any leftovers
-    if (level != null && !level.isClientSide) {
+    if (level != null && !level.isClientSide()) {
       ItemStack leftover = recipe.getLeftover(inventoryWrapper, selectedPattern);
       if (!leftover.isEmpty()) {
         ItemHandlerHelper.giveItemToPlayer(player, leftover);

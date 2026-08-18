@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/ancient/ingot",
-  "ingredient": {
-    "tag": "c:ingots/netherite_scrap"
-  },
+  "ingredient": "#c:ingots/netherite_scrap",
   "material": "modernfoundry:ancient",
   "needed": 1,
   "value": 1

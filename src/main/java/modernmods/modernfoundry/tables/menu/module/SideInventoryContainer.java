@@ -7,11 +7,11 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.items.IItemHandler;
-import modernmods.hilt.inventory.BaseContainerMenu;
-import modernmods.hilt.inventory.EmptyItemHandler;
-import modernmods.hilt.inventory.SmartItemHandlerSlot;
+import modernmods.mantle.inventory.BaseContainerMenu;
+import modernmods.mantle.inventory.EmptyItemHandler;
+import modernmods.mantle.inventory.SmartItemHandlerSlot;
 
 import javax.annotation.Nullable;
 
@@ -24,20 +24,32 @@ public class SideInventoryContainer<TILE extends BlockEntity> extends BaseContai
   protected final LazyOptional<IItemHandler> itemHandler;
 
   public SideInventoryContainer(MenuType<?> containerType, int windowId, Inventory inv, @Nullable TILE tile, int x, int y, int columns) {
-    this(containerType, windowId, inv, tile, null, x, y, columns);
+    this(containerType, windowId, inv, tile, (Direction) null, x, y, columns);
+  }
+
+  /** Resolves the item handler from the block's {@link Capabilities#Item} capability, wrapping it as a legacy handler. */
+  @Nullable
+  private static IItemHandler resolveHandler(@Nullable BlockEntity tile, @Nullable Direction inventoryDirection) {
+    if (tile == null) {
+      return EmptyItemHandler.INSTANCE;
+    }
+    var level = tile.getLevel();
+    var handlerRh = level == null ? null : level.getCapability(Capabilities.Item.BLOCK, tile.getBlockPos(), tile.getBlockState(), tile, inventoryDirection);
+    return handlerRh == null ? null : IItemHandler.of(handlerRh);
   }
 
   public SideInventoryContainer(MenuType<?> containerType, int windowId, Inventory inv, @Nullable TILE tile, @Nullable Direction inventoryDirection, int x, int y, int columns) {
-    super(containerType, windowId, inv, tile);
+    this(containerType, windowId, inv, tile, resolveHandler(tile, inventoryDirection), x, y, columns);
+  }
 
-    // must have a TE
-    if (tile == null) {
-      this.itemHandler = LazyOptional.of(() -> EmptyItemHandler.INSTANCE);
-    } else {
-      var level = tile.getLevel();
-      IItemHandler handler = level == null ? null : level.getCapability(Capabilities.ItemHandler.BLOCK, tile.getBlockPos(), tile.getBlockState(), tile, inventoryDirection);
-      this.itemHandler = LazyOptional.ofNullable(handler);
-    }
+  /**
+   * Constructor taking the item handler directly, bypassing the {@link Capabilities#Item} lookup. Used by block entities
+   * that own their inventory (e.g. the smeltery), whose handler is a legacy {@link IItemHandler} and cannot be exposed as
+   * a {@code ResourceHandler} without a full transfer-API port; the menu manipulates the slots directly regardless.
+   */
+  public SideInventoryContainer(MenuType<?> containerType, int windowId, Inventory inv, @Nullable TILE tile, @Nullable IItemHandler providedHandler, int x, int y, int columns) {
+    super(containerType, windowId, inv, tile);
+    this.itemHandler = LazyOptional.ofNullable(providedHandler);
 
     // slot properties
     IItemHandler handler = itemHandler.orElse(EmptyItemHandler.INSTANCE);

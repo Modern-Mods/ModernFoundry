@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/sand/molding/bow_limb",
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "material": "#modernfoundry:casts/sand",
   "pattern": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:bow_limb"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:bow_limb"
   },
   "result": "modernfoundry:bow_limb_sand_cast"
 }

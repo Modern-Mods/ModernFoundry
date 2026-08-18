@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/trueshot",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "minecraft:target"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/trueshot",
+  "input": "minecraft:target",
   "level": {
     "max": 3
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/ranged"
-  }
+  "tools": "#modernfoundry:modifiable/ranged"
 }

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/aluminum/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/aluminum"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/aluminum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/aluminum/nugget",
+  "ingredient": "#c:nuggets/aluminum",
   "result": {
     "amount": 10,
     "tag": "c:molten_aluminum"

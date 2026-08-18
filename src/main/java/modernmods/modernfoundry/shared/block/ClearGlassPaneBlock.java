@@ -5,9 +5,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.LevelAccessor;
-import modernmods.hilt.block.IMultipartConnectedBlock;
-import modernmods.hilt.client.model.connected.ConnectedModelRegistry;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import modernmods.mantle.block.IMultipartConnectedBlock;
+import modernmods.mantle.client.model.connected.ConnectedModelRegistry;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
@@ -24,8 +26,8 @@ public class ClearGlassPaneBlock extends BetterPaneBlock implements IMultipartCo
   }
 
   @Override
-  public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
-    BlockState state = super.updateShape(stateIn, facing, facingState, world, currentPos, facingPos);
+  protected BlockState updateShape(BlockState stateIn, LevelReader level, ScheduledTickAccess tickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource random) {
+    BlockState state = super.updateShape(stateIn, level, tickAccess, currentPos, facing, facingPos, facingState, random);
     return getConnectionUpdate(state, facing, facingState);
   }
 

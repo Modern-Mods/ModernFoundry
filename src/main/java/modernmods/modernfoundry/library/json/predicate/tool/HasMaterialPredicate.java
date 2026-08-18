@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.json.predicate.tool;
 
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicateField;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;

@@ -1,10 +1,5 @@
 {
   "parent": "neoforge:item/default",
-  "loader": "modernfoundry:material",
-  "offset": [
-    -2,
-    -2
-  ],
   "textures": {
     "texture": "modernfoundry:item/tool/crossbow/body"
   }

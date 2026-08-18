@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/slimeskin/composite/sky",
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:sky_slime"
   },
+  "id": "modernfoundry:tools/materials/slimeskin/composite/sky",
   "input": "modernfoundry:leather",
   "output": "modernfoundry:skyslime_vine#slimeskin",
   "temperature": 10

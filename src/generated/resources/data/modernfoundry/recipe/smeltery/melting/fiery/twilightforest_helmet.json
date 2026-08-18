@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "value": "twilightforest:fiery_helmet"
+    }
+  ],
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/fiery/twilightforest_helmet",
   "byproducts": [
     {
       "amount": 450,
@@ -8,12 +13,7 @@
       "unit_size": 10
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:fiery_helmet"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/fiery/twilightforest_helmet",
   "ingredient": {
     "item": "twilightforest:fiery_helmet"
   },

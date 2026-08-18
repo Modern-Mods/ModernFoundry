@@ -1,10 +1,11 @@
 package modernmods.modernfoundry.plugin.jei.modifiers;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import org.joml.Matrix3x2fStack;
 import lombok.Getter;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocus;
@@ -14,9 +15,9 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -46,7 +47,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierRecipe> {
-  protected static final ResourceLocation BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
+  protected static final Identifier BACKGROUND_LOC = TConstruct.getResource("textures/gui/jei/tinker_station.png");
   private static final Component TITLE = TConstruct.makeTranslation("jei", "modifiers.title");
 
   // translation
@@ -87,7 +88,7 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
   }
 
   /** Draws a single slot icon */
-  private void drawSlot(GuiGraphics graphics, IDisplayModifierRecipe recipe, int slot, int x, int y) {
+  private void drawSlot(GuiGraphicsExtractor graphics, IDisplayModifierRecipe recipe, int slot, int x, int y) {
     List<ItemStack> stacks = recipe.getDisplayItems(slot);
     if (stacks.isEmpty()) {
       // -1 as the item list includes the output slot, we skip that
@@ -96,7 +97,19 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
   }
 
   @Override
-  public void draw(IDisplayModifierRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+  public int getWidth() {
+    return 128;
+  }
+
+  @Override
+  public int getHeight() {
+    return 77;
+  }
+
+  @Override
+  public void draw(IDisplayModifierRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor graphics, double mouseX, double mouseY) {
+    // getBackground() was removed in JEI 27.x; draw our background ourselves
+    background.draw(graphics, 0, 0);
     drawSlot(graphics, recipe, 0,  2, 32);
     drawSlot(graphics, recipe, 1, 24, 14);
     drawSlot(graphics, recipe, 2, 46, 32);
@@ -137,40 +150,38 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     if (levelText != null) {
       // center string
       Font fontRenderer = Minecraft.getInstance().font;
-      graphics.drawString(fontRenderer, levelText, 86 - fontRenderer.width(levelText) / 2, 16, Color.GRAY.getRGB(), false);
+      graphics.text(fontRenderer, levelText, 86 - fontRenderer.width(levelText) / 2, 16, Color.GRAY.getRGB(), false);
     }
 
     // draw slotless icon if needed. Slots are handled by ingredient renderer.
     SlotCount slots = recipe.getSlots();
     if (slots == null) {
-      PoseStack pose = graphics.pose();
-      pose.pushPose();
-      pose.translate(102, 58, 0);
+      Matrix3x2fStack pose = graphics.pose();
+      pose.pushMatrix();
+      pose.translate(102, 58);
       SlotIngredientRenderer.INPUT.render(graphics, null);
-      pose.popPose();
+      pose.popMatrix();
     }
   }
 
   @Override
-  public List<Component> getTooltipStrings(IDisplayModifierRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+  public void getTooltip(ITooltipBuilder tooltip, IDisplayModifierRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
     int checkX = (int) mouseX;
     int checkY = (int) mouseY;
     ModifierEntry result = recipe.getDisplayResult();
     if (GuiUtil.isHovered(checkX, checkY, 66, 58, 16, 16)) {
       Component requirements = result.getHook(ModifierHooks.REQUIREMENTS).requirementsError(result);
       if (requirements != null) {
-        return Collections.singletonList(requirements);
+        tooltip.add(requirements);
       }
     }
     if (recipe.isIncremental() && GuiUtil.isHovered(checkX, checkY, 83, 59, 16, 16)) {
-      return TEXT_INCREMENTAL;
+      tooltip.addAll(TEXT_INCREMENTAL);
     }
     SlotCount slots = recipe.getSlots();
     if (slots == null && GuiUtil.isHovered(checkX, checkY, 102, 58, 24, 16)) {
-      return SlotIngredientRenderer.INPUT.getTooltip(null, TooltipFlag.NORMAL);
+      tooltip.addAll(SlotIngredientRenderer.INPUT.getTooltip(null, TooltipFlag.NORMAL));
     }
-    
-    return Collections.emptyList();
   }
 
   @Override
@@ -194,14 +205,14 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
     // hack: if a single part tool is in the recipe, add variants of it as invisible ingredients
     for (ItemStack stack : toolWithoutModifier) {
       if (stack.is(TinkerTags.Items.SINGLEPART_TOOL) && stack.getItem() instanceof IModifiable modifiable) {
-        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addItemStacks(getLookupTools(modifiable));
+        builder.addInvisibleIngredients(RecipeIngredientRole.CRAFTING_STATION).addItemStacks(getLookupTools(modifiable));
       }
     }
 
     // JEI is currently being dumb and using ingredient subtypes within recipe focuses
     // we use a more strict subtype for tools in ingredients so they all show in JEI, but do not care in recipes
     // thus, manually handle the focuses
-    IFocus<ItemStack> focus = focuses.getFocuses(VanillaTypes.ITEM_STACK).filter(f -> f.getRole() == RecipeIngredientRole.CATALYST).findFirst().orElse(null);
+    IFocus<ItemStack> focus = focuses.getFocuses(VanillaTypes.ITEM_STACK).filter(f -> f.getRole() == RecipeIngredientRole.CRAFTING_STATION).findFirst().orElse(null);
     if (focus != null) {
       Item item = focus.getTypedValue().getIngredient().getItem();
       for (ItemStack stack : toolWithoutModifier) {
@@ -217,8 +228,8 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
         }
       }
     }
-    builder.addSlot(RecipeIngredientRole.CATALYST,  25, 38).addItemStacks(toolWithoutModifier);
-    builder.addSlot(RecipeIngredientRole.CATALYST, 105, 34).addItemStacks(toolWithModifier);
+    builder.addSlot(RecipeIngredientRole.CRAFTING_STATION,  25, 38).addItemStacks(toolWithoutModifier);
+    builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 105, 34).addItemStacks(toolWithModifier);
 
     // modifier slots
     SlotCount slots = recipe.getSlots();
@@ -233,7 +244,7 @@ public class ModifierRecipeCategory implements IRecipeCategory<IDisplayModifierR
 
   @Nullable
   @Override
-  public ResourceLocation getRegistryName(IDisplayModifierRecipe recipe) {
+  public Identifier getRegistryName(IDisplayModifierRecipe recipe) {
     return recipe.getRecipeId();
   }
 

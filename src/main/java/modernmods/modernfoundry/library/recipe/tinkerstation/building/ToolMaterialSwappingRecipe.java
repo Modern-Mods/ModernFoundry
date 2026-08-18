@@ -1,15 +1,15 @@
 package modernmods.modernfoundry.library.recipe.tinkerstation.building;
 
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.stats.MaterialStatsId;
@@ -36,7 +36,7 @@ public class ToolMaterialSwappingRecipe extends MaterialSwappingRecipe {
 
   /** @apiNote Internal usage. To create see {@link modernmods.modernfoundry.tables.recipe.TinkerStationPartSwappingBuilder} */
   @Internal
-  public ToolMaterialSwappingRecipe(ResourceLocation id, Ingredient tools, int maxStackSize, List<SizedIngredient> extraRequirements) {
+  public ToolMaterialSwappingRecipe(Identifier id, Ingredient tools, int maxStackSize, List<SizedIngredient> extraRequirements) {
     super(id, tools, maxStackSize, extraRequirements);
   }
 
@@ -121,7 +121,7 @@ public class ToolMaterialSwappingRecipe extends MaterialSwappingRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ToolMaterialSwappingRecipe> getSerializer() {
     return TinkerTables.toolMaterialSwapping.get();
   }
 }

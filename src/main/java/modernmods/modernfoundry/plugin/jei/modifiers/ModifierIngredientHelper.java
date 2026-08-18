@@ -3,7 +3,7 @@ package modernmods.modernfoundry.plugin.jei.modifiers;
 import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -33,13 +33,13 @@ public class ModifierIngredientHelper implements IIngredientHelper<ModifierEntry
   }
 
   @Override
-  public String getUniqueId(ModifierEntry entry, UidContext context) {
+  public Object getUid(ModifierEntry entry, UidContext context) {
     return entry.getId().toString();
   }
 
   @Override
-  public ResourceLocation getResourceLocation(ModifierEntry entry) {
-    return entry.getId();
+  public Identifier getIdentifier(ModifierEntry entry) {
+    return entry.getId().getIdentifier();
   }
 
   @Override
@@ -93,7 +93,7 @@ public class ModifierIngredientHelper implements IIngredientHelper<ModifierEntry
   /* Tags */
 
   @Override
-  public Stream<ResourceLocation> getTagStream(ModifierEntry entry) {
+  public Stream<Identifier> getTagStream(ModifierEntry entry) {
     return ModifierManager.getTagKeys(entry.getId()).map(TagKey::location);
   }
 

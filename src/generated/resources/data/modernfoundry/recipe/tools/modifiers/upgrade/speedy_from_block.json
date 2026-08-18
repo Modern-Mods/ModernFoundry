@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/speedy_from_block",
   "allow_crystal": false,
   "amount_per_item": 9,
-  "input": {
-    "tag": "c:storage_blocks/redstone"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/speedy_from_block",
+  "input": "#c:storage_blocks/redstone",
   "leftover": "minecraft:redstone",
   "level": {
     "max": 3
@@ -15,7 +13,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/leggings"
-  }
+  "tools": "#modernfoundry:modifiable/armor/leggings"
 }

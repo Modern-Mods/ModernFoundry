@@ -1,6 +1,9 @@
 package modernmods.modernfoundry.shared.item;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -30,7 +33,9 @@ public class CheeseBlockItem extends BlockItem {
           player.drop(cheese, false);
         }
       } else {
-        living.spawnAtLocation(cheese);
+        if (level instanceof ServerLevel serverLevel) {
+          living.spawnAtLocation(serverLevel, cheese);
+        }
       }
 
     }
@@ -38,7 +43,10 @@ public class CheeseBlockItem extends BlockItem {
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag pIsAdvanced) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag pIsAdvanced) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     tooltip.add(CheeseItem.TOOLTIP);
+  
+    tooltip.forEach(tooltipConsumer);
   }
 }

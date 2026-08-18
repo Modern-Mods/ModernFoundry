@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import modernmods.hilt.item.TooltipItem;
+import modernmods.mantle.item.TooltipItem;
 import modernmods.modernfoundry.world.TinkerWorld;
 import modernmods.modernfoundry.world.block.DirtType;
 import modernmods.modernfoundry.world.block.FoliageType;
@@ -80,7 +80,7 @@ public class SlimeGrassSeedItem extends TooltipItem {
     }
 
     // will have a state at this point
-    if (!world.isClientSide) {
+    if (!world.isClientSide()) {
       world.setBlockAndUpdate(pos, newState);
       world.playSound(null, pos, newState.getSoundType(world, pos, context.getPlayer()).getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
       Player player = context.getPlayer();

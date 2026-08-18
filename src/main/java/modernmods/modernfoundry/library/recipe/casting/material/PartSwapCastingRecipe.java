@@ -3,20 +3,20 @@ package modernmods.modernfoundry.library.recipe.casting.material;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
@@ -68,14 +68,14 @@ public class PartSwapCastingRecipe extends AbstractMaterialCastingRecipe impleme
   @Nullable
   private MaterialFluidRecipe cachedPartSwapping = null;
 
-  protected PartSwapCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient cast, int itemCost, int index, IJsonPredicate<MaterialVariantId> materials) {
+  protected PartSwapCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, Ingredient cast, int itemCost, int index, IJsonPredicate<MaterialVariantId> materials) {
     super(serializer, id, group, cast, itemCost, true, false, materials);
     this.index = index;
   }
 
-  /** @deprecated use {@link #PartSwapCastingRecipe(TypeAwareRecipeSerializer, ResourceLocation, String, Ingredient, int, int, IJsonPredicate)} */
+  /** @deprecated use {@link #PartSwapCastingRecipe(TypeAwareRecipeSerializer, Identifier, String, Ingredient, int, int, IJsonPredicate)} */
   @Deprecated(forRemoval = true)
-  protected PartSwapCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient cast, int itemCost, int index) {
+  protected PartSwapCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, Ingredient cast, int itemCost, int index) {
     this(serializer, id, group, cast, itemCost, index, MaterialPredicate.ANY);
   }
 
@@ -149,15 +149,13 @@ public class PartSwapCastingRecipe extends AbstractMaterialCastingRecipe impleme
 
   @Override
   public boolean matches(ICastingContainer inv, Level level) {
-    return getCast().test(inv.getStack()) && canPartSwap(inv);
+    return testCast(inv.getStack()) && canPartSwap(inv);
   }
 
-  @Override
   public ItemStack getResultItem(HolderLookup.Provider registryAccess) {
-    return getCast().getItems()[0].copy();
+    return getCast().items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)[0].copy();
   }
 
-  @Override
   public ItemStack assemble(ICastingContainer inv, HolderLookup.Provider access) {
     MaterialFluidRecipe fluidRecipe = getFluidRecipe(inv);
     MaterialVariant material = fluidRecipe.getOutput();
@@ -223,7 +221,7 @@ public class PartSwapCastingRecipe extends AbstractMaterialCastingRecipe impleme
   @Override
   public List<IDisplayableCastingRecipe> getRecipes(RegistryAccess access) {
     if (multiRecipes == null) {
-      List<ItemStack> casts = List.of(getCast().getItems());
+      List<ItemStack> casts = List.of(getCast().items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
       Predicate<MaterialFluidRecipe> validRecipe = recipe -> recipe.isVisible() && materials.matches(recipe.getOutput().getVariant());
       multiRecipes = Stream.concat(
           // show recipes for creating the tool from all castable fluids

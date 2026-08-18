@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/invar/helmet",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/helmets/invar"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/helmets/invar"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/helmet",
+  "ingredient": "#c:armors/helmets/invar",
   "result": {
     "amount": 450,
     "tag": "c:molten_invar",

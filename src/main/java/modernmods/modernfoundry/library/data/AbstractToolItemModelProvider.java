@@ -7,18 +7,18 @@ import com.google.gson.JsonObject;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.ApiStatus.NonExtendable;
-import modernmods.hilt.data.GenericDataProvider;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.registration.object.EnumObject;
-import modernmods.hilt.registration.object.IdAwareObject;
+import modernmods.mantle.data.GenericDataProvider;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.registration.object.EnumObject;
+import modernmods.mantle.registration.object.IdAwareObject;
 import modernmods.modernfoundry.library.tools.item.ranged.ModifiableCrossbowItem;
 import modernmods.modernfoundry.library.tools.item.ranged.ModifiableLauncherItem;
 
@@ -62,7 +62,7 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
 
   /** Creates models for blocking and broken for the given tool */
   protected void tool(IdAwareObject tool, @Nullable JsonObject blocking, String... brokenParts) throws IOException {
-    ResourceLocation id = tool.getId();
+    Identifier id = tool.getId();
     String name = id.getPath();
     if (blocking != null) {
       withDisplay("tool/" + name + "/blocking", id, blocking);
@@ -191,7 +191,7 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
 
   /** Creates a model in the blocking folder with the given copied display */
   protected void pulling(IdAwareObject bow, JsonObject blocking, AmmoHandler ammo, String brokenPart, int pullingCount, String... pullingParts) throws IOException {
-    ResourceLocation id = bow.getId();
+    Identifier id = bow.getId();
     String name = id.getPath();
     JsonObject base = readJson(id);
     base.remove("overrides"); // don't need them anywhere, notably ditching for the sake of ammo models
@@ -204,7 +204,7 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
 
   /** Creates models for blocking, broken and fully charged for the given tool */
   protected void charged(IdAwareObject bow, JsonObject properties, String... brokenParts) throws IOException {
-    ResourceLocation id = bow.getId();
+    Identifier id = bow.getId();
     String name = id.getPath();
     JsonObject base = readJson(id);
     base.remove("overrides");
@@ -220,7 +220,7 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
 
   /** Creates a model in the blocking folder with the given copied display */
   protected void staff(IdAwareObject staff, JsonObject properties) throws IOException {
-    ResourceLocation id = staff.getId();
+    Identifier id = staff.getId();
     String path = id.getPath();
     String name = path.substring(0, path.length() - "_staff".length());
     JsonObject base = readJson(id);
@@ -235,13 +235,13 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
 
   /** Adds broken and blocking models for the shield */
   protected void shield(String setName, IdAwareObject shield, JsonObject properties, String... parts) throws IOException {
-    ResourceLocation id = shield.getId();
+    Identifier id = shield.getId();
     withDisplay("armor/" + setName + "/shield_blocking", id, Objects.requireNonNull(properties));
     transformTool("armor/" + setName + "/shield_broken", readJson(id), "", false, '_', "broken", parts);
   }
 
   /** Adds broken and blocking models for the armor item */
-  protected void armor(String overrideName, ResourceLocation itemId, String... textures) throws IOException {
+  protected void armor(String overrideName, Identifier itemId, String... textures) throws IOException {
     transformTool("armor/" + overrideName + "_broken", readJson(itemId), "", false, '_', "broken", textures);
   }
 
@@ -251,26 +251,26 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
   }
 
   /** Adds broken and blocking models for the armor item */
-  protected void armor(String name, EnumObject<ArmorItem.Type,? extends Item> armor, ArmorItem.Type slot, String... textures) throws IOException {
+  protected void armor(String name, EnumObject<ArmorType,? extends Item> armor, ArmorType slot, String... textures) throws IOException {
     armor(name + '/' + slot.getName(), Loadables.ITEM.getKey(armor.get(slot)), textures);
   }
 
   /** Adds broken and blocking models for the armor set */
-  protected void armor(String name, EnumObject<ArmorItem.Type,? extends Item> armor, ArmorItem.Type[] types, String... textures) throws IOException {
-    for (ArmorItem.Type slot : types) {
+  protected void armor(String name, EnumObject<ArmorType,? extends Item> armor, ArmorType[] types, String... textures) throws IOException {
+    for (ArmorType slot : types) {
       armor(name, armor, slot, textures);
     }
   }
 
   /** Adds broken and blocking models for the armor set */
-  protected void armor(String name, EnumObject<ArmorItem.Type,? extends Item> armor, String... textures) throws IOException {
+  protected void armor(String name, EnumObject<ArmorType,? extends Item> armor, String... textures) throws IOException {
     armor(name, armor, modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES, textures);
   }
 
   /** Creates models for fishing rods cast and broken */
   @SuppressWarnings("SameParameterValue") // API
   protected void fishingRod(IdAwareObject tool, @Nullable JsonObject blocking, String[] castParts, String[] brokenParts) throws IOException {
-    ResourceLocation id = tool.getId();
+    Identifier id = tool.getId();
     String name = id.getPath();
     JsonObject base = readJson(id);
     String cast = "tool/" + name + "/cast";
@@ -285,7 +285,7 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
   /* Helpers */
 
   /** Reads a JSON file */
-  protected JsonObject readJson(ResourceLocation path) throws IOException {
+  protected JsonObject readJson(Identifier path) throws IOException {
     try (BufferedReader reader = existingFileHelper.getResource(path, PackType.CLIENT_RESOURCES, ".json", "models/item").openAsReader()) {
       return GsonHelper.parse(reader);
     }
@@ -293,12 +293,12 @@ public abstract class AbstractToolItemModelProvider extends GenericDataProvider 
 
   /** Creates a resource location under this mod */
   @SuppressWarnings("removal")
-  protected ResourceLocation resource(String name) {
-    return ResourceLocation.fromNamespaceAndPath(modId, name);
+  protected Identifier resource(String name) {
+    return Identifier.fromNamespaceAndPath(modId, name);
   }
 
   /** Creates a model with display from the given target */
-  protected void withDisplay(String destination, ResourceLocation parent, JsonObject properties) {
+  protected void withDisplay(String destination, Identifier parent, JsonObject properties) {
     JsonObject model = new JsonObject();
     model.addProperty("parent", parent.withPrefix("item/").toString());
     model.add("display", properties.get("display"));

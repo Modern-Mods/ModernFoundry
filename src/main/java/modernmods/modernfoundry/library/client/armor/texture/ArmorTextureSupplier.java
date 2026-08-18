@@ -4,13 +4,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.listener.ResourceValidator;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.registry.GenericLoaderRegistry;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.data.listener.ResourceValidator;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.registry.GenericLoaderRegistry;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
 
 /** Logic to get an armor texture given a stack */
 public interface ArmorTextureSupplier extends IHaveLoader {
@@ -59,7 +59,7 @@ public interface ArmorTextureSupplier extends IHaveLoader {
   /**
    * Gets a texture using the named format
    */
-  static ResourceLocation getTexturePath(ResourceLocation name) {
-    return new ResourceLocation(name.getNamespace(), FOLDER + '/' + name.getPath() + ".png");
+  static Identifier getTexturePath(Identifier name) {
+    return Identifier.fromNamespaceAndPath(name.getNamespace(), FOLDER + '/' + name.getPath() + ".png");
   }
 }

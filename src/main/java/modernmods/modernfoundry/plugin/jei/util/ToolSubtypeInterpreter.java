@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.plugin.jei.util;
 
-import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
+import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.world.item.ItemStack;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Subtype interpreter for tools, treats the tool as unique in ingredient list, generic in recipes
  */
-public enum ToolSubtypeInterpreter implements IIngredientSubtypeInterpreter<ItemStack> {
+public enum ToolSubtypeInterpreter implements ISubtypeInterpreter<ItemStack> {
   /** Materials are always considered */
   ALWAYS,
   /** Materials are only considered in the ingredients view */
@@ -21,7 +21,7 @@ public enum ToolSubtypeInterpreter implements IIngredientSubtypeInterpreter<Item
   FIRST;
 
   @Override
-  public String apply(ItemStack itemStack, UidContext context) {
+  public Object getSubtypeData(ItemStack itemStack, UidContext context) {
     boolean isIngredient = context == UidContext.Ingredient;
     if (isIngredient || this != INGREDIENT) {
       List<MaterialVariantId> materialList = MaterialIdNBT.from(itemStack).getMaterials();
@@ -41,6 +41,6 @@ public enum ToolSubtypeInterpreter implements IIngredientSubtypeInterpreter<Item
         return builder.toString();
       }
     }
-    return NONE;
+    return null;
   }
 }

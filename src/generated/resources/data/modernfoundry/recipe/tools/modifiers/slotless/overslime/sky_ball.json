@@ -1,11 +1,7 @@
 {
   "type": "modernfoundry:overslime_modifier",
   "id": "modernfoundry:tools/modifiers/slotless/overslime/sky_ball",
-  "ingredient": {
-    "item": "modernfoundry:sky_slime_ball"
-  },
+  "ingredient": "modernfoundry:sky_slime_ball",
   "restore_amount": 50,
-  "tools": {
-    "tag": "modernfoundry:modifiable/durability"
-  }
+  "tools": "#modernfoundry:modifiable/durability"
 }

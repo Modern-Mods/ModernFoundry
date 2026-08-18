@@ -4,7 +4,7 @@ import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
 import modernmods.modernfoundry.library.tools.part.ToolPartItem;
 import modernmods.modernfoundry.tools.stats.HandleMaterialStats;
 import modernmods.modernfoundry.tools.stats.HeadMaterialStats;

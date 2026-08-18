@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.client.data.spritetransformer;
 
 
-import modernmods.hilt.data.gson.GenericRegisteredSerializer;
-import modernmods.hilt.data.gson.GenericRegisteredSerializer.IJsonSerializable;
+import modernmods.mantle.data.gson.GenericRegisteredSerializer;
+import modernmods.mantle.data.gson.GenericRegisteredSerializer.IJsonSerializable;
 
 /** Logic to map a color to another color */
 public interface IColorMapping extends IJsonSerializable {

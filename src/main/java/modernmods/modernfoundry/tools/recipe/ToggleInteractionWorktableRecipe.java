@@ -3,12 +3,12 @@ package modernmods.modernfoundry.tools.recipe;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -46,7 +46,7 @@ public class ToggleInteractionWorktableRecipe extends AbstractWorktableRecipe {
   /** Cached list of modifiers shown in JEI */
   private List<ModifierEntry> filteredModifiers = null;
 
-  public ToggleInteractionWorktableRecipe(ResourceLocation id, Ingredient toolRequirement, List<SizedIngredient> inputs) {
+  public ToggleInteractionWorktableRecipe(Identifier id, Ingredient toolRequirement, List<SizedIngredient> inputs) {
     super(id, toolRequirement, inputs);
   }
 
@@ -109,7 +109,7 @@ public class ToggleInteractionWorktableRecipe extends AbstractWorktableRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ToggleInteractionWorktableRecipe> getSerializer() {
     return TinkerModifiers.toggleInteractionSerializer.get();
   }
 }

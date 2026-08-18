@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:geore_clusters/gold"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/gold/geore/cluster",
   "byproducts": [
     {
       "amount": 360,
@@ -8,15 +13,8 @@
       "tag": "c:molten_cobalt"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:geore_clusters/gold"
-    }
-  ],
-  "ingredient": {
-    "tag": "c:geore_clusters/gold"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/gold/geore/cluster",
+  "ingredient": "#c:geore_clusters/gold",
   "rate": "metal",
   "result": {
     "amount": 360,

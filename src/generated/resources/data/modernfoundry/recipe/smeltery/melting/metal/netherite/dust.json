@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/netherite/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/netherite"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/netherite"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/netherite/dust",
+  "ingredient": "#c:dusts/netherite",
   "result": {
     "amount": 90,
     "tag": "c:molten_netherite"

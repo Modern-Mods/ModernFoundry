@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/ender/end_crystal",
   "byproducts": [
     {
       "amount": 7000,
       "fluid": "modernfoundry:molten_glass"
     }
   ],
-  "ingredient": {
-    "item": "minecraft:end_crystal"
-  },
+  "id": "modernfoundry:smeltery/melting/ender/end_crystal",
+  "ingredient": "minecraft:end_crystal",
   "result": {
     "amount": 250,
     "tag": "c:ender"

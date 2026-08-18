@@ -1,13 +1,7 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "neoforge:item/default",
   "textures": {
-    "top":    "modernfoundry:item/tool/ammo/shuriken_top",
+    "top": "modernfoundry:item/tool/ammo/shuriken_top",
     "bottom": "modernfoundry:item/tool/ammo/shuriken_bottom"
-  },
-  "modifier_maps": ["modernfoundry:shuriken"],
-  "parts": [
-    { "name": "bottom", "index": 1 },
-    { "name": "top",    "index": 0 }
-  ]
+  }
 }

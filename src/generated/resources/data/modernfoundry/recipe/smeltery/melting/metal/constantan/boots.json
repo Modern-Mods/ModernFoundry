@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/constantan/boots",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/boots/constantan"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/boots/constantan"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/boots",
+  "ingredient": "#c:armors/boots/constantan",
   "result": {
     "amount": 360,
     "tag": "c:molten_constantan",

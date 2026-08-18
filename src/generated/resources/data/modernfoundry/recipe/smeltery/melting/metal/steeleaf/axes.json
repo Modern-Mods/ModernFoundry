@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steeleaf/axes",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/steeleaf/tools_costing_3"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/steeleaf/tools_costing_3"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steeleaf/axes",
+  "ingredient": "#modernfoundry:melting/steeleaf/tools_costing_3",
   "result": {
     "amount": 270,
     "fluid": "modernfoundry:molten_steeleaf",

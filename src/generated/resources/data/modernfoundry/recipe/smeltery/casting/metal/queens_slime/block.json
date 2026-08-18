@@ -1,11 +1,11 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/metal/queens_slime/block",
   "cooling_time": 212,
   "fluid": {
     "amount": 810,
     "tag": "modernfoundry:molten_queens_slime"
   },
+  "id": "modernfoundry:smeltery/casting/metal/queens_slime/block",
   "result": {
     "tag": "c:storage_blocks/queens_slime"
   }

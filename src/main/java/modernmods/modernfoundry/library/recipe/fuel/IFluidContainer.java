@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.recipe.fuel;
 
 import net.minecraft.world.level.material.Fluid;
-import modernmods.hilt.recipe.container.IEmptyContainer;
+import modernmods.mantle.recipe.container.IEmptyContainer;
 
 /**
  * Inventory containing just a single fluid

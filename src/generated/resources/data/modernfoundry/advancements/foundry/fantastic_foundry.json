@@ -1,0 +1,38 @@
+{
+  "parent": "modernfoundry:tools/materials_and_you",
+  "criteria": {
+    "crafted_book": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:fantastic_foundry"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.modernfoundry.foundry.fantastic_foundry.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:fantastic_foundry"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.foundry.fantastic_foundry.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted_book"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

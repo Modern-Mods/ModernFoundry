@@ -1,18 +1,18 @@
 package modernmods.modernfoundry.library.recipe.fuel;
 
 import lombok.Getter;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ICustomOutputRecipe;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ICustomOutputRecipe;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.component.SearedTankBlock.TankType;
@@ -38,13 +38,13 @@ public class MeltingFuel implements ICustomOutputRecipe<IFluidContainer> {
       return fuel;
     });
 
-  private final ResourceLocation id;
+  private final Identifier id;
   private final FluidIngredient input;
   private final int duration;
   private final int temperature;
   private final int rate;
 
-  public MeltingFuel(ResourceLocation id, FluidIngredient input, int duration, int temperature, int rate) {
+  public MeltingFuel(Identifier id, FluidIngredient input, int duration, int temperature, int rate) {
     this.id = id;
     this.input = input;
     this.duration = duration;
@@ -99,17 +99,16 @@ public class MeltingFuel implements ICustomOutputRecipe<IFluidContainer> {
   /* Recipe type methods */
 
   @Override
-  public RecipeType<?> getType() {
+  public RecipeType<? extends MeltingFuel> getType() {
     return TinkerRecipeTypes.FUEL.get();
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends MeltingFuel> getSerializer() {
     return TinkerSmeltery.fuelSerializer.get();
   }
 
-  @Override
-  public ItemStack getToastSymbol() {
+    public ItemStack getToastSymbol() {
     return new ItemStack(TinkerSmeltery.searedTank.get(TankType.FUEL_TANK));
   }
 }

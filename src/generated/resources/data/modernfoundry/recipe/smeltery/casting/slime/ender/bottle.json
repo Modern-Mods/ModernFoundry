@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/slime/ender/bottle",
-  "cast": {
-    "item": "minecraft:glass_bottle"
-  },
+  "cast": "minecraft:glass_bottle",
   "cast_consumed": true,
   "cooling_time": 1,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:ender_slime"
   },
+  "id": "modernfoundry:smeltery/casting/slime/ender/bottle",
   "result": "modernfoundry:ender_slime_bottle"
 }

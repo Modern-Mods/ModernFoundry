@@ -6,10 +6,8 @@
     "modernfoundry:bow_limb",
     "modernfoundry:bowstring"
   ],
-  "pattern": {
-    "item": "modernfoundry:venom_bottle"
-  },
+  "pattern": "modernfoundry:venom_bottle",
   "tools": {
-    "item": "modernfoundry:war_pick"
+    "ingredient": "modernfoundry:war_pick"
   }
 }

@@ -1,16 +1,16 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/padded",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/padded",
   "inputs": [
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     },
     {
-      "tag": "minecraft:wool"
+      "ingredient": "#minecraft:wool"
     },
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     }
   ],
   "level": {
@@ -20,7 +20,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/melee"
-  }
+  "tools": "#modernfoundry:modifiable/melee"
 }

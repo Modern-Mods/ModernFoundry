@@ -1,23 +1,23 @@
 {
-  "ignore": "hilt:any",
-  "inputs": "hilt:any",
+  "ignore": "mantle:any",
+  "inputs": "mantle:any",
   "melt": {
-    "type": "hilt:inverted",
-    "inverted_type": "hilt:or",
+    "type": "mantle:inverted",
+    "inverted_type": "mantle:or",
     "predicates": [
       {
-        "type": "hilt:tag",
+        "type": "mantle:tag",
         "tag": "modernfoundry:modifiable"
       },
       {
-        "type": "hilt:tag",
+        "type": "mantle:tag",
         "tag": "c:books"
       },
       {
-        "type": "hilt:tag",
+        "type": "mantle:tag",
         "tag": "c:dyes"
       },
-      "hilt:has_container"
+      "mantle:has_container"
     ]
   },
   "skip_recipes": []

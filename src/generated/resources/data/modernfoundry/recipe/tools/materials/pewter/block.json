@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/pewter/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/pewter"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/pewter"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/pewter/block",
+  "ingredient": "#c:storage_blocks/pewter",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/pewter"

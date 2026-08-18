@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:entity_melting",
-  "id": "modernfoundry:smeltery/entity_melting/shulker",
   "damage": 3,
   "entity": {
     "type": "minecraft:shulker"
   },
+  "id": "modernfoundry:smeltery/entity_melting/shulker",
   "result": {
     "amount": 25,
     "nbt": {

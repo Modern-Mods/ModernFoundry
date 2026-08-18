@@ -2,24 +2,24 @@ package modernmods.modernfoundry.tables.network;
 
 import lombok.RequiredArgsConstructor;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.library.tools.layout.StationSlotLayoutLoader;
 import modernmods.modernfoundry.tables.menu.TinkerStationContainerMenu;
 
 @RequiredArgsConstructor
 public class TinkerStationSelectionPacket implements IThreadsafePacket {
-  private final ResourceLocation layoutName;
+  private final Identifier layoutName;
   public TinkerStationSelectionPacket(FriendlyByteBuf buffer) {
-    this.layoutName = buffer.readResourceLocation();
+    this.layoutName = buffer.readIdentifier();
   }
 
   @Override
   public void encode(FriendlyByteBuf buffer) {
-    buffer.writeResourceLocation(this.layoutName);
+    buffer.writeIdentifier(this.layoutName);
   }
 
   @Override

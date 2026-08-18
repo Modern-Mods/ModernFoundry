@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/netherite/boots",
   "byproducts": [
     {
       "amount": 400,
@@ -8,9 +7,8 @@
       "unit_size": 25
     }
   ],
-  "ingredient": {
-    "item": "minecraft:netherite_boots"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/netherite/boots",
+  "ingredient": "minecraft:netherite_boots",
   "result": {
     "amount": 90,
     "tag": "c:molten_netherite",

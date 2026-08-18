@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steeleaf/twilightforest_boots",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:steeleaf_boots"
+      "type": "neoforge:registered",
+      "value": "twilightforest:steeleaf_boots"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steeleaf/twilightforest_boots",
   "ingredient": {
     "item": "twilightforest:steeleaf_boots"
   },

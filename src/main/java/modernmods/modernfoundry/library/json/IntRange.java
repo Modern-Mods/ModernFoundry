@@ -6,9 +6,9 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.util.typed.TypedMap;
 
 import java.util.function.Function;
 import java.util.function.IntPredicate;

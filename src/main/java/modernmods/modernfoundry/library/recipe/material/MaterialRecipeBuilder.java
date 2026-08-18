@@ -1,16 +1,17 @@
 package modernmods.modernfoundry.library.recipe.material;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 
 import java.util.function.Consumer;
@@ -22,7 +23,7 @@ import java.util.function.Consumer;
 @Accessors(chain = true)
 public class MaterialRecipeBuilder extends AbstractRecipeBuilder<MaterialRecipeBuilder> {
   private final MaterialVariantId material;
-  private Ingredient ingredient = Ingredient.EMPTY;
+  @javax.annotation.Nullable private Ingredient ingredient = null;
   @Setter
   private int value = 1;
   @Setter
@@ -36,7 +37,7 @@ public class MaterialRecipeBuilder extends AbstractRecipeBuilder<MaterialRecipeB
    * @return  Builder instance
    */
   public MaterialRecipeBuilder setIngredient(TagKey<Item> tag) {
-    return this.setIngredient(Ingredient.of(tag));
+    return this.setIngredient(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag));
   }
 
   /**
@@ -60,15 +61,15 @@ public class MaterialRecipeBuilder extends AbstractRecipeBuilder<MaterialRecipeB
 
   @Override
   public void save(Consumer<FinishedRecipe> consumerIn) {
-    this.save(consumerIn, material.getId());
+    this.save(consumerIn, material.getId().getIdentifier());
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumerIn, Identifier id) {
     if (this.material == null) {
       throw new IllegalStateException("recipe " + id + " has no material associated with it");
     }
-    if (this.ingredient == Ingredient.EMPTY) {
+    if (this.ingredient == null) {
       throw new IllegalStateException("recipe " + id + " must have ingredient set");
     }
     if (this.value <= 0) {
@@ -77,7 +78,7 @@ public class MaterialRecipeBuilder extends AbstractRecipeBuilder<MaterialRecipeB
     if (this.needed <= 0) {
       throw new IllegalStateException("recipe " + id + " has no needed associated with it");
     }
-    ResourceLocation advancementId = this.buildOptionalAdvancement(id, "materials");
+    Identifier advancementId = this.buildOptionalAdvancement(id, "materials");
     consumerIn.accept(new LoadableFinishedRecipe<>(id, new MaterialRecipe(id, group, ingredient, value, needed, material, leftover), MaterialRecipe.LOADER, advancementId));
   }
 }

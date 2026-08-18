@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/writable",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/slotless/writable",
   "inputs": [
     {
-      "item": "minecraft:writable_book"
+      "ingredient": "minecraft:writable_book"
     }
   ],
   "level": 1,
   "result": "modernfoundry:writable",
-  "tools": {
-    "tag": "modernfoundry:modifiable/bonus_slots"
-  }
+  "tools": "#modernfoundry:modifiable/bonus_slots"
 }

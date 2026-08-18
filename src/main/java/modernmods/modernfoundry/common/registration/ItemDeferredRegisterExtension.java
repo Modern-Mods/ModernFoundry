@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.common.registration;
 
 import net.minecraft.world.item.Item;
-import modernmods.hilt.registration.deferred.ItemDeferredRegister;
-import modernmods.hilt.registration.object.ItemObject;
+import modernmods.mantle.registration.deferred.ItemDeferredRegister;
+import modernmods.mantle.registration.object.ItemObject;
 import modernmods.modernfoundry.library.tools.part.IMaterialItem;
 import modernmods.modernfoundry.library.tools.part.PartCastItem;
 

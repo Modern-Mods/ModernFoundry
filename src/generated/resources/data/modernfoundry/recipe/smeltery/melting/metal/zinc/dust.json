@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/zinc/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/zinc"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/zinc"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/zinc/dust",
+  "ingredient": "#c:dusts/zinc",
   "result": {
     "amount": 90,
     "tag": "c:molten_zinc"

@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/seared/faucet",
   "ingredient": [
-    {
-      "item": "modernfoundry:seared_faucet"
-    },
-    {
-      "item": "modernfoundry:seared_channel"
-    }
+    "modernfoundry:seared_faucet",
+    "modernfoundry:seared_channel"
   ],
   "result": {
     "amount": 250,

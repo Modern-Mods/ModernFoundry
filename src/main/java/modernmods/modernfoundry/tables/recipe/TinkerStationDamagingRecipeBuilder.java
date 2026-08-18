@@ -2,11 +2,11 @@ package modernmods.modernfoundry.tables.recipe;
 
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
 
 import java.util.function.Consumer;
 
@@ -19,7 +19,7 @@ public class TinkerStationDamagingRecipeBuilder extends AbstractRecipeBuilder<Ti
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    ItemStack[] stacks = ingredient.getItems();
+    ItemStack[] stacks = ingredient.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new);
     if (stacks.length == 0) {
       throw new IllegalStateException("Empty ingredient not allowed");
     }
@@ -27,11 +27,11 @@ public class TinkerStationDamagingRecipeBuilder extends AbstractRecipeBuilder<Ti
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-    if (ingredient == Ingredient.EMPTY) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
+    if (ingredient.isEmpty()) {
       throw new IllegalStateException("Empty ingredient not allowed");
     }
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "tinker_station");
+    Identifier advancementId = buildOptionalAdvancement(id, "tinker_station");
     consumer.accept(new LoadableFinishedRecipe<>(id, new TinkerStationDamagingRecipe(id, ingredient, damageAmount), TinkerStationDamagingRecipe.LOADER, advancementId));
   }
 }

@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.tools.modifiers.ability.sling;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -25,7 +25,7 @@ public class BonkingModifier extends SlingModifier implements MeleeHitModifierHo
   private static final SlingKnockbackModule BONKING = new SlingKnockbackModule(LevelingValue.flat(3), 1.5f, 1.5f, LivingEntityPredicate.ANY, ModifierCondition.ANY_TOOL);
   /** @deprecated use {@link SlingKnockbackModule#IS_BONKING}. */
   @Deprecated(forRemoval = true)
-  public static final ResourceLocation IS_BONKING = SlingKnockbackModule.IS_BONKING;
+  public static final Identifier IS_BONKING = SlingKnockbackModule.IS_BONKING;
 
   @Override
   protected void registerHooks(Builder builder) {

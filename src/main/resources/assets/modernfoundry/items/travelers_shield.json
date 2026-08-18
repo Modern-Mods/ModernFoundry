@@ -1,0 +1,25 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/travelers_shield",
+    "parts": [
+      {
+        "name": "cuirass",
+        "index": 1
+      },
+      {
+        "name": "wood",
+        "index": 0
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:travelers/shield"
+    ],
+    "first_modifiers": [
+      "modernfoundry:dyed"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/armor/travelers/shield/modifiers/"
+    ]
+  }
+}

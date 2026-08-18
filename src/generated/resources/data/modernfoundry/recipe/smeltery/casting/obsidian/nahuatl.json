@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/obsidian/nahuatl",
-  "cast": {
-    "tag": "minecraft:planks"
-  },
+  "cast": "#minecraft:planks",
   "cast_consumed": true,
   "cooling_time": 111,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:molten_obsidian"
   },
+  "id": "modernfoundry:smeltery/casting/obsidian/nahuatl",
   "result": "modernfoundry:nahuatl"
 }

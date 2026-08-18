@@ -2,19 +2,19 @@ package modernmods.modernfoundry.library.recipe.material;
 
 import lombok.Getter;
 import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ICustomOutputRecipe;
-import modernmods.hilt.recipe.container.ISingleStackContainer;
-import modernmods.hilt.recipe.helper.ItemOutput;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ICustomOutputRecipe;
+import modernmods.mantle.recipe.container.ISingleStackContainer;
+import modernmods.mantle.recipe.helper.ItemOutput;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer>, IMaterialValue {
   /** Empty material instance for the cache */
   @SuppressWarnings("removal")
-  public static final MaterialRecipe EMPTY = new MaterialRecipe(ResourceLocation.parse("missingno"), "", Ingredient.EMPTY, 0, 0, IMaterial.UNKNOWN_ID, ItemOutput.EMPTY);
+  public static final MaterialRecipe EMPTY = new MaterialRecipe(Identifier.parse("missingno"), "", null, 0, 0, IMaterial.UNKNOWN_ID, ItemOutput.EMPTY);
   public static final RecordLoadable<MaterialRecipe> LOADER = RecordLoadable.create(
     ContextKey.ID.requiredField(),
     LoadableRecipeSerializer.RECIPE_GROUP,
@@ -46,7 +46,7 @@ public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer
   public static final float INGOTS_PER_REPAIR = 3f;
 
   @Getter
-  protected final ResourceLocation id;
+  protected final Identifier id;
   @Getter
   protected final String group;
   @Getter
@@ -67,7 +67,7 @@ public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer
    * Creates a new material recipe
    */
   @SuppressWarnings("WeakerAccess")
-  public MaterialRecipe(ResourceLocation id, String group, Ingredient ingredient, int value, int needed, MaterialVariantId materialId, ItemOutput leftover) {
+  public MaterialRecipe(Identifier id, String group, Ingredient ingredient, int value, int needed, MaterialVariantId materialId, ItemOutput leftover) {
     this.id = id;
     this.group = group;
     this.ingredient = ingredient;
@@ -84,17 +84,16 @@ public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer
   /* Basic */
 
   @Override
-  public RecipeType<?> getType() {
+  public RecipeType<? extends MaterialRecipe> getType() {
     return TinkerRecipeTypes.MATERIAL.get();
   }
 
-  @Override
   public ItemStack getToastSymbol() {
     return new ItemStack(TinkerTables.partBuilder);
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends MaterialRecipe> getSerializer() {
     return TinkerTables.materialRecipeSerializer.get();
   }
 
@@ -115,9 +114,31 @@ public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer
     return !material.isUnknown() && this.ingredient.test(inv.getStack());
   }
 
-  @Override
+  /**
+   * Finds the material recipe matching the given inventory, reading from the correct recipe source per side. 26.1 removed
+   * {@code Level#getRecipeManager}: the server uses {@code getServer().getRecipeManager()} (null on the client, so calling
+   * it client-side NPEs), while the client reads the synced {@link modernmods.mantle.recipe.sync.ClientRecipeCache}
+   * (MATERIAL is registered syncable). Used by the tinker station / part builder which resolve materials on both sides.
+   */
+  @javax.annotation.Nullable
+  public static MaterialRecipe getRecipe(ISingleStackContainer inv, Level world) {
+    if (world.isClientSide()) {
+      for (MaterialRecipe recipe : modernmods.mantle.recipe.helper.RecipeHelper.getRecipes(modernmods.mantle.recipe.sync.ClientRecipeCache.getRecipeMap(), TinkerRecipeTypes.MATERIAL.get(), MaterialRecipe.class)) {
+        if (recipe.matches(inv, world)) {
+          return recipe;
+        }
+      }
+      return null;
+    }
+    return world.getServer().getRecipeManager().getRecipeFor(TinkerRecipeTypes.MATERIAL.get(), inv, world).map(net.minecraft.world.item.crafting.RecipeHolder::value).orElse(null);
+  }
+
   public NonNullList<Ingredient> getIngredients() {
-    return NonNullList.of(Ingredient.EMPTY, ingredient);
+    NonNullList<Ingredient> list = NonNullList.create();
+    if (ingredient != null) {
+      list.add(ingredient);
+    }
+    return list;
   }
 
   /** Cache of the display items list */
@@ -127,11 +148,11 @@ public class MaterialRecipe implements ICustomOutputRecipe<ISingleStackContainer
   public List<ItemStack> getDisplayItems() {
     if (displayItems == null) {
       if (needed > 1) {
-        displayItems = Arrays.stream(ingredient.getItems())
+        displayItems = Arrays.stream(ingredient.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new))
                              .map(stack -> stack.copyWithCount(needed))
                              .collect(Collectors.toList());
       } else {
-        displayItems = Arrays.asList(ingredient.getItems());
+        displayItems = Arrays.asList(ingredient.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
       }
     }
     return displayItems;

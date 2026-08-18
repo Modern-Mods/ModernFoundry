@@ -1,22 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "redstone",
   "neoforge:conditions": [
     {
       "type": "modernfoundry:config",
       "prop": "glass_recipe_fix"
     }
   ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
   "key": {
-    "G": {
-      "tag": "c:glass/colorless"
-    },
-    "Q": {
-      "item": "minecraft:quartz"
-    },
-    "W": {
-      "tag": "minecraft:wooden_slabs"
-    }
+    "G": "#c:glass_blocks/colorless",
+    "Q": "minecraft:quartz",
+    "W": "#minecraft:wooden_slabs"
   },
   "pattern": [
     "GGG",
@@ -25,6 +19,5 @@
   ],
   "result": {
     "id": "minecraft:daylight_detector"
-  },
-  "show_notification": true
+  }
 }

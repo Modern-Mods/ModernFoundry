@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/amethyst/gem",
-  "ingredient": {
-    "tag": "c:gems/amethyst"
-  },
+  "ingredient": "#c:gems/amethyst",
   "result": {
     "amount": 100,
     "fluid": "modernfoundry:molten_amethyst"

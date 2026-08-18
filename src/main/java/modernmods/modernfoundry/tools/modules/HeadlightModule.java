@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.tools.modules;
 
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -34,7 +34,7 @@ public record HeadlightModule(int defaultLight) implements ModifierModule, RawDa
 
   @Override
   public void addRawData(IToolStackView tool, ModifierEntry modifier, RestrictedCompoundTag tag) {
-    String lightStr = tool.getPersistentData().getString(modifier.getId());
+    String lightStr = tool.getPersistentData().getString(modifier.getId().getIdentifier());
     if (!lightStr.isEmpty()) {
       try {
         tag.putInt(HEADLIGHT_LIGHT, Integer.parseInt(lightStr));

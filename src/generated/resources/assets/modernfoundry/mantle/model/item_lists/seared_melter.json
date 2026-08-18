@@ -1,0 +1,33 @@
+{
+  "variants": {
+    "": [
+      {
+        "center": [
+          8.0,
+          12.0,
+          12.0
+        ],
+        "size": 7.5,
+        "transform": "minecraft:none"
+      },
+      {
+        "center": [
+          4.0,
+          12.0,
+          4.0
+        ],
+        "size": 7.5,
+        "transform": "minecraft:none"
+      },
+      {
+        "center": [
+          12.0,
+          12.0,
+          4.0
+        ],
+        "size": 7.5,
+        "transform": "minecraft:none"
+      }
+    ]
+  }
+}

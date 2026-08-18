@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/steeleaf/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/steeleaf"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/steeleaf"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/steeleaf/block",
+  "ingredient": "#c:storage_blocks/steeleaf",
   "result": {
     "amount": 810,
     "fluid": "modernfoundry:molten_steeleaf"

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/honey_block",
-  "ingredient": {
-    "item": "minecraft:honey_block"
-  },
+  "ingredient": "minecraft:honey_block",
   "result": {
     "amount": 1000,
     "tag": "c:honey"

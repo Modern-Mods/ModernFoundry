@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/nickel/sheetmetal",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:sheetmetals/nickel"
     }
   ],
-  "ingredient": {
-    "tag": "c:sheetmetals/nickel"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/nickel/sheetmetal",
+  "ingredient": "#c:sheetmetals/nickel",
   "result": {
     "amount": 90,
     "tag": "c:molten_nickel"

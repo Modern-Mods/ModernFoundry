@@ -5,7 +5,5 @@
   "slots": {
     "abilities": 2
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/chestplate"
-  }
+  "tools": "#modernfoundry:modifiable/armor/chestplate"
 }

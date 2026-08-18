@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.tools.definition.module.material;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.util.RandomSource;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.RandomMaterial;

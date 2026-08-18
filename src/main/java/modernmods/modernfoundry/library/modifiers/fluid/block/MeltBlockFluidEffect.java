@@ -11,10 +11,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.block.BlockPredicate;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.block.BlockPredicate;
 import modernmods.modernfoundry.library.modifiers.fluid.EffectLevel;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffect;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffectContext;
@@ -65,7 +65,7 @@ public record MeltBlockFluidEffect(IJsonPredicate<BlockState> validBlocks, int m
     }
 
     // from this point on the block will melt, just a question of whether it leaves fluid behind or air
-    if (action.execute() && !world.isClientSide) {
+    if (action.execute() && !world.isClientSide()) {
       // if we don't have enough and its not flowing, nothing much to do
       BlockState toPlace = Blocks.AIR.defaultBlockState();
       // have enough? place full block

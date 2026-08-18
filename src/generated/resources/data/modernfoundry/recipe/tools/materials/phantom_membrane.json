@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/phantom_membrane",
-  "ingredient": {
-    "item": "minecraft:phantom_membrane"
-  },
+  "ingredient": "minecraft:phantom_membrane",
   "material": "modernfoundry:phantom",
   "needed": 1,
   "value": 1

@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.json.variable.power;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.math.ModifierFormula;
 import modernmods.modernfoundry.library.json.variable.VariableFormula;
 import modernmods.modernfoundry.library.json.variable.VariableFormulaLoadable;

@@ -1,12 +1,12 @@
 package modernmods.modernfoundry.common.data.tags;
 
+import net.minecraft.tags.TagEntry;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.tools.TinkerTools;
@@ -14,7 +14,7 @@ import modernmods.modernfoundry.world.TinkerWorld;
 
 import java.util.concurrent.CompletableFuture;
 
-import static modernmods.hilt.Hilt.commonResource;
+import static modernmods.mantle.Mantle.commonResource;
 import static modernmods.modernfoundry.common.TinkerTags.EntityTypes.COLLECTABLES;
 import static modernmods.modernfoundry.common.TinkerTags.EntityTypes.DISCARDABLE_COLLECTABLES;
 import static modernmods.modernfoundry.common.TinkerTags.EntityTypes.NECROTIC_BLACKLIST;
@@ -25,8 +25,8 @@ import static modernmods.modernfoundry.common.TinkerTags.EntityTypes.TRIDENTS;
 @SuppressWarnings("unchecked")
 public class EntityTypeTagProvider extends EntityTypeTagsProvider {
 
-  public EntityTypeTagProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-    super(packOutput, lookupProvider, TConstruct.MOD_ID, existingFileHelper);
+  public EntityTypeTagProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider) {
+    super(packOutput, lookupProvider, TConstruct.MOD_ID);
   }
 
   @SuppressWarnings("removal")
@@ -65,8 +65,8 @@ public class EntityTypeTagProvider extends EntityTypeTagsProvider {
     this.tag(TinkerTags.EntityTypes.ENDERFERENCE_ARROW_BLACKLIST).addTag(TRIDENTS);
     // prevent dummy from healing you with necrotic
     this.tag(NECROTIC_BLACKLIST)
-      .addOptional(ResourceLocation.fromNamespaceAndPath("dummmmmmy", "target_dummy"))
-      .addOptionalTag(commonResource(NECROTIC_BLACKLIST.location().getPath()));
+      .add(TagEntry.optionalElement(Identifier.fromNamespaceAndPath("dummmmmmy", "target_dummy")))
+      .add(TagEntry.optionalTag(commonResource(NECROTIC_BLACKLIST.location().getPath())));
 
     // melting
     this.tag(TinkerTags.EntityTypes.MELTING_SHOW).add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.VILLAGER, EntityType.PLAYER);
@@ -77,18 +77,18 @@ public class EntityTypeTagProvider extends EntityTypeTagsProvider {
         EntityType.ITEM, TinkerTools.indestructibleItem.get(),
         EntityType.EXPERIENCE_ORB
       ).addTags(TRIDENTS, DISCARDABLE_COLLECTABLES)
-      .addOptionalTag(commonResource(COLLECTABLES.location().getPath()));
+      .add(TagEntry.optionalTag(commonResource(COLLECTABLES.location().getPath())));
     this.tag(DISCARDABLE_COLLECTABLES).add(EntityType.ARROW, EntityType.SPECTRAL_ARROW, TinkerTools.materialArrow.get())
-      .addOptionalTag(commonResource(DISCARDABLE_COLLECTABLES.location().getPath()));
+      .add(TagEntry.optionalTag(commonResource(DISCARDABLE_COLLECTABLES.location().getPath())));
 
     // reflecting - TODO 1.21: remove legacy tags
-    this.tag(REFLECTING_BLACKLIST).addOptionalTag(commonResource(REFLECTING_BLACKLIST.location().getPath()));
+    this.tag(REFLECTING_BLACKLIST).add(TagEntry.optionalTag(commonResource(REFLECTING_BLACKLIST.location().getPath())));
     this.tag(REFLECTING_PRESERVE_OWNER).add(EntityType.FISHING_BOBBER, TinkerTools.fishingHook.get())
-      .addOptionalTag(commonResource(REFLECTING_PRESERVE_OWNER.location().getPath()));
+      .add(TagEntry.optionalTag(commonResource(REFLECTING_PRESERVE_OWNER.location().getPath())));
   }
 
   @Override
   public String getName() {
-    return "Modern Foundry Entity Type Tags";
+    return "Tinkers Construct Entity Type TinkerTags";
   }
 }

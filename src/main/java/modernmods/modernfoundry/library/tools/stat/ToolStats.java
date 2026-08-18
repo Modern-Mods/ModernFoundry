@@ -2,8 +2,8 @@ package modernmods.modernfoundry.library.tools.stat;
 
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 
@@ -12,8 +12,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import static modernmods.hilt.data.predicate.item.ItemPredicate.or;
-import static modernmods.hilt.data.predicate.item.ItemPredicate.tag;
+import static modernmods.mantle.data.predicate.item.ItemPredicate.or;
+import static modernmods.mantle.data.predicate.item.ItemPredicate.tag;
 
 /**
  * Class handling all tool stats.
@@ -104,7 +104,7 @@ public class ToolStats {
   /** @deprecated use {@link #LOADER} with {@link StringLoadable#parseString(String, String)} */
   @Deprecated(forRemoval = true)
   public static IToolStat<?> fromJson(String key) {
-    ResourceLocation location = ResourceLocation.tryParse(key);
+    Identifier location = Identifier.tryParse(key);
     if (location != null) {
       IToolStat<?> stat = ToolStats.getToolStat(new ToolStatId(location));
       if (stat != null) {
@@ -123,13 +123,13 @@ public class ToolStats {
     throw new JsonSyntaxException("Invalid tool stat " + key + ", must be a numeric stat");
   }
 
-  /** @deprecated use {@link #LOADER} with {@link modernmods.hilt.data.loadable.Loadable#decode(FriendlyByteBuf)} */
+  /** @deprecated use {@link #LOADER} with {@link modernmods.mantle.data.loadable.Loadable#decode(FriendlyByteBuf)} */
   @Deprecated(forRemoval = true)
   public static IToolStat<?> fromNetwork(FriendlyByteBuf buffer) {
     return LOADER.decode(buffer);
   }
 
-  /** @deprecated use {@link #NUMERIC_LOADER} with {@link modernmods.hilt.data.loadable.Loadable#decode(FriendlyByteBuf)} */
+  /** @deprecated use {@link #NUMERIC_LOADER} with {@link modernmods.mantle.data.loadable.Loadable#decode(FriendlyByteBuf)} */
   @Deprecated(forRemoval = true)
   public static INumericToolStat<?> numericFromNetwork(FriendlyByteBuf buffer) {
     return NUMERIC_LOADER.decode(buffer);

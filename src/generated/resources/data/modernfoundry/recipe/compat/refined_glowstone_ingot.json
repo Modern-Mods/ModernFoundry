@@ -1,25 +1,23 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:compat/refined_glowstone_ingot",
-  "cast": {
-    "tag": "c:dusts/glowstone"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/refined_glowstone"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/osmium"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#c:dusts/glowstone",
+  "cast_consumed": true,
   "cooling_time": 66,
   "fluid": {
     "amount": 90,
     "tag": "c:molten_osmium"
   },
+  "id": "modernfoundry:compat/refined_glowstone_ingot",
   "result": {
     "tag": "c:ingots/refined_glowstone"
   }

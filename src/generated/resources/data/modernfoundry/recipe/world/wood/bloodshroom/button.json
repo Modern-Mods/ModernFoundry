@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wooden_button",
   "ingredients": [
-    {
-      "item": "modernfoundry:bloodshroom_planks"
-    }
+    "modernfoundry:bloodshroom_planks"
   ],
   "result": {
     "id": "modernfoundry:bloodshroom_button"

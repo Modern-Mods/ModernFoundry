@@ -3,7 +3,7 @@ package modernmods.modernfoundry.tools.modifiers.ability.tool;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.fluids.FluidType;
-import modernmods.hilt.data.predicate.fluid.FluidPredicate;
+import modernmods.mantle.data.predicate.fluid.FluidPredicate;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.hook.interaction.InteractionSource;

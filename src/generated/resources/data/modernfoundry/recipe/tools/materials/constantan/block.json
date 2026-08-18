@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/constantan/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/constantan"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/constantan"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/constantan/block",
+  "ingredient": "#c:storage_blocks/constantan",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/constantan"

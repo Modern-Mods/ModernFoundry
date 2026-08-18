@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/quartz/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/quartz"
-  },
+  "ingredient": "#c:storage_blocks/quartz",
   "result": {
     "amount": 400,
     "fluid": "modernfoundry:molten_quartz"

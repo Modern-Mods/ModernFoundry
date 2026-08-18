@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/scorched_stone/brick",
-  "ingredient": {
-    "item": "modernfoundry:scorched_brick"
-  },
+  "ingredient": "modernfoundry:scorched_brick",
   "material": "modernfoundry:scorched_stone",
   "needed": 1,
   "value": 1

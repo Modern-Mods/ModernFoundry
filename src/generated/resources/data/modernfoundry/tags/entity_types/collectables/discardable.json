@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:arrow",
+    "minecraft:spectral_arrow",
+    "modernfoundry:arrow",
+    {
+      "id": "#c:collectables/discardable",
+      "required": false
+    }
+  ]
+}

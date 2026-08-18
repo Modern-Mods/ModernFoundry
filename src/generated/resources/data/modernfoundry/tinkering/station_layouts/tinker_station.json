@@ -20,9 +20,7 @@
     }
   ],
   "tool_slot": {
-    "filter": {
-      "tag": "modernfoundry:modifiable"
-    },
+    "filter": "#modernfoundry:modifiable",
     "icon": "modernfoundry:pickaxe",
     "x": 53,
     "y": 41

@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.entity.controller.FoundryBlockEntity;
 import modernmods.modernfoundry.smeltery.block.entity.controller.HeatingStructureBlockEntity;
@@ -43,14 +43,6 @@ public class FoundryControllerBlock extends HeatingControllerBlock {
     BlockEntityHelper.get(FoundryBlockEntity.class, worldIn, pos).ifPresent(FoundryBlockEntity::updateStructure);
   }
 
-  @Override
-  @Deprecated
-  public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-    if (!newState.is(this)) {
-      BlockEntityHelper.get(FoundryBlockEntity.class, worldIn, pos).ifPresent(FoundryBlockEntity::invalidateStructure);
-    }
-    super.onRemove(state, worldIn, pos, newState, isMoving);
-  }
 
   @Override
   public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource rand) {

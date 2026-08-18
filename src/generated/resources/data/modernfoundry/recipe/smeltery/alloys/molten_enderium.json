@@ -1,16 +1,16 @@
 {
-  "type": "modernfoundry:alloy",
-  "id": "modernfoundry:smeltery/alloys/molten_enderium",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/enderium"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/lead"
     }
   ],
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_enderium",
   "inputs": [
     {
       "amount": 270,

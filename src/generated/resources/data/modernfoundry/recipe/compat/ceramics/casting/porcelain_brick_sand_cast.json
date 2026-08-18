@@ -1,20 +1,18 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:compat/ceramics/casting/porcelain_brick_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/ingot"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "ceramics"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/single_use/ingot",
+  "cast_consumed": true,
   "cooling_time": 95,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:molten_porcelain"
   },
+  "id": "modernfoundry:compat/ceramics/casting/porcelain_brick_sand_cast",
   "result": "ceramics:porcelain_brick"
 }

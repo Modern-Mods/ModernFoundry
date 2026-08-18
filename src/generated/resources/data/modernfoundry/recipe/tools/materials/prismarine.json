@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/prismarine",
-  "ingredient": {
-    "tag": "c:gems/prismarine"
-  },
+  "ingredient": "#c:gems/prismarine",
   "material": "modernfoundry:prismarine",
   "needed": 1,
   "value": 1

@@ -1,10 +1,12 @@
 package modernmods.modernfoundry.library.tools.part;
 
 import net.minecraft.ChatFormatting;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +39,7 @@ public class MaterialItem extends Item implements IMaterialItem {
   /** Gets the material ID for the given NBT compound */
   public static MaterialVariantId getMaterialId(@Nullable CompoundTag nbt) {
     if (nbt != null) {
-      String str = nbt.getString(MATERIAL_TAG);
+      String str = nbt.getStringOr(MATERIAL_TAG, "");
       if (!str.isEmpty()) {
         MaterialVariantId id = MaterialVariantId.tryParse(str);
         if (id != null) {
@@ -56,7 +58,7 @@ public class MaterialItem extends Item implements IMaterialItem {
   @Nullable
   private static Component getName(String baseKey, MaterialVariantId material) {
     // if there is a specific name, use that
-    ResourceLocation location = material.getLocation('.');
+    Identifier location = material.getLocation('.');
     String fullKey = String.format("%s.%s.%s", baseKey, location.getNamespace(), location.getPath());
     if (Util.canTranslate(fullKey)) {
       return Component.translatable(fullKey);
@@ -78,7 +80,7 @@ public class MaterialItem extends Item implements IMaterialItem {
   public static Component getName(IMaterialItem self, ItemStack stack) {
     // if no material, return part name directly
     MaterialVariantId material = self.getMaterial(stack);
-    String key = self.asItem().getDescriptionId(stack);
+    String key = self.asItem().getDescriptionId();
     if (material.equals(IMaterial.UNKNOWN_ID)) {
       return Component.translatable(key);
     }
@@ -113,8 +115,11 @@ public class MaterialItem extends Item implements IMaterialItem {
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flag) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     appendHoverText(this, stack, tooltip, flag);
+  
+    tooltip.forEach(tooltipConsumer);
   }
 
   /** Gets the creator mod ID based on the material. */
@@ -133,7 +138,7 @@ public class MaterialItem extends Item implements IMaterialItem {
 
   @Nullable
   @Override
-  public String getCreatorModId(ItemStack stack) {
+  public String getCreatorModId(net.minecraft.core.HolderLookup.Provider registries, ItemStack stack) {
     return getCreatorModId(this, stack);
   }
 

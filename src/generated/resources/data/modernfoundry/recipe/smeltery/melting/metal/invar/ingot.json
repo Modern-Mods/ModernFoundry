@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/invar/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/invar"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/invar"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/ingot",
+  "ingredient": "#c:ingots/invar",
   "result": {
     "amount": 90,
     "tag": "c:molten_invar"

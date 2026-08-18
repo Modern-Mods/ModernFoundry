@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/lead/helmet",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/helmets/lead"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/helmets/lead"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/lead/helmet",
+  "ingredient": "#c:armors/helmets/lead",
   "result": {
     "amount": 450,
     "tag": "c:molten_lead",

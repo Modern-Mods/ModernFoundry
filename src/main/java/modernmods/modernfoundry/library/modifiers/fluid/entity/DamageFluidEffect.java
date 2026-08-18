@@ -10,9 +10,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 import modernmods.modernfoundry.library.modifiers.fluid.EffectLevel;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffect;
@@ -70,7 +70,7 @@ public record DamageFluidEffect(float damage, @Nullable DamageTypePair damageTyp
   public Component getDescription(RegistryAccess registryAccess) {
     String translationKey = FluidEffect.getTranslationKey(getLoader());
     if (this.damageType != null) {
-      DamageType damageType = registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).get(this.damageType.melee);
+      DamageType damageType = registryAccess.lookupOrThrow(Registries.DAMAGE_TYPE).getValue(this.damageType.melee);
       if (damageType != null) {
         translationKey += '.' + damageType.msgId();
       }

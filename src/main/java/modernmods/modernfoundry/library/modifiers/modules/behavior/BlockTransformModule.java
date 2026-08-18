@@ -1,4 +1,5 @@
 package modernmods.modernfoundry.library.modifiers.modules.behavior;
+import modernmods.modernfoundry.library.tools.helper.ToolAttackUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -68,7 +69,7 @@ public interface BlockTransformModule extends ModifierModule, BlockInteractionMo
     // if we made a successful transform, client can stop early
     EquipmentSlot slotType = source.getSlot(context.getHand());
     if (didTransform) {
-      if (world.isClientSide) {
+      if (world.isClientSide()) {
         return InteractionResult.SUCCESS;
       }
 
@@ -104,14 +105,14 @@ public interface BlockTransformModule extends ModifierModule, BlockInteractionMo
             totalTransformed++;
             didTransform = true;
 
-            if (world.isClientSide) {
+            if (world.isClientSide()) {
               break;
             }
 
             // stop if the tool broke
             if (ToolDamageUtil.damage(tool, 1, player, stack, modifier.getId())) {
               if (player != null) {
-                player.onEquippedItemBroken(stack.getItem(), LivingEntity.getSlotForHand(context.getHand()));
+                player.onEquippedItemBroken(stack.getItem(), context.getHand().asEquipmentSlot());
               }
               break;
             }
@@ -120,13 +121,13 @@ public interface BlockTransformModule extends ModifierModule, BlockInteractionMo
 
         // sweep attack if we transformed any
         if (totalTransformed > 0 && player != null) {
-          player.sweepAttack();
+          ToolAttackUtil.sweepAttack(player);
         }
       }
     }
 
     // if anything happened, return success
-    return didTransform ? InteractionResult.sidedSuccess(world.isClientSide) : InteractionResult.PASS;
+    return didTransform ? InteractionResult.SUCCESS : InteractionResult.PASS;
   }
 
   /** Applies this transformation */

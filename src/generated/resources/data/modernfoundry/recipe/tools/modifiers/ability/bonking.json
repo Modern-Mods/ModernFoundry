@@ -1,23 +1,23 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/bonking",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/bonking",
   "inputs": [
     {
-      "item": "minecraft:weeping_vines"
+      "ingredient": "minecraft:weeping_vines"
     },
     {
-      "item": "modernfoundry:ichor_slime_crystal"
+      "ingredient": "modernfoundry:ichor_slime_crystal"
     },
     {
-      "item": "minecraft:weeping_vines"
+      "ingredient": "minecraft:weeping_vines"
     },
     {
-      "item": "modernfoundry:ichor_congealed_slime"
+      "ingredient": "modernfoundry:ichor_congealed_slime"
     },
     {
-      "item": "modernfoundry:ichor_congealed_slime"
+      "ingredient": "modernfoundry:ichor_congealed_slime"
     }
   ],
   "level": 1,
@@ -26,14 +26,10 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/durability"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable/charge"
-      }
+      "#modernfoundry:modifiable/durability",
+      "#modernfoundry:modifiable/interactable/charge"
     ]
   }
 }

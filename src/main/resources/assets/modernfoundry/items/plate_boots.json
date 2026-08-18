@@ -1,0 +1,23 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/plate_boots",
+    "parts": [
+      {
+        "name": "plating",
+        "index": 0
+      },
+      {
+        "name": "maille",
+        "index": 1
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:plate/boots"
+    ],
+    "first_modifiers": [
+      "modernfoundry:dyed",
+      "modernfoundry:trim"
+    ]
+  }
+}

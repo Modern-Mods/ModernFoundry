@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/copper/smeltery_controller",
   "byproducts": [
     {
       "amount": 1000,
       "fluid": "modernfoundry:seared_stone"
     }
   ],
-  "ingredient": {
-    "item": "modernfoundry:smeltery_controller"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/copper/smeltery_controller",
+  "ingredient": "modernfoundry:smeltery_controller",
   "result": {
     "amount": 360,
     "tag": "c:molten_copper"

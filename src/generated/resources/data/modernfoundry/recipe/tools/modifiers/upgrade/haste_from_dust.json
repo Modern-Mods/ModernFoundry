@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/haste_from_dust",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "tag": "c:dusts/redstone"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/haste_from_dust",
+  "input": "#c:dusts/redstone",
   "level": {
     "max": 5
   },
@@ -15,11 +13,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/harvest"
-    },
-    {
-      "tag": "modernfoundry:modifiable/armor/chestplate"
-    }
+    "#modernfoundry:modifiable/harvest",
+    "#modernfoundry:modifiable/armor/chestplate"
   ]
 }

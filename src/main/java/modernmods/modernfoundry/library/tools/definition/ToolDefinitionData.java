@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.tools.definition;
 
 import lombok.Getter;
-import modernmods.hilt.data.loadable.ErrorFactory;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.ErrorFactory;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.module.ModuleHook;
 import modernmods.modernfoundry.library.module.ModuleHookMap;
 import modernmods.modernfoundry.library.module.WithHooks;

@@ -3,7 +3,7 @@ package modernmods.modernfoundry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
@@ -17,6 +17,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import modernmods.modernfoundry.common.data.TinkerServerData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import modernmods.modernfoundry.common.TinkerModule;
@@ -26,7 +28,9 @@ import modernmods.modernfoundry.common.network.TinkerNetwork;
 import modernmods.modernfoundry.fluids.TinkerFluids;
 import modernmods.modernfoundry.gadgets.TinkerGadgets;
 import modernmods.modernfoundry.library.TinkerItemDisplays;
+import modernmods.mantle.recipe.sync.SyncableRecipes;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
+import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 import modernmods.modernfoundry.library.tools.capability.TinkerDataCapability.ComputableDataKey;
 import modernmods.modernfoundry.library.tools.capability.TinkerDataCapability.TinkerDataKey;
 import modernmods.modernfoundry.library.tools.definition.ToolDefinitionLoader;
@@ -56,7 +60,7 @@ import java.util.function.Supplier;
  */
 
 @Mod(TConstruct.MOD_ID)
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class TConstruct {
 
   public static final String MOD_ID = "modernfoundry";
@@ -98,9 +102,11 @@ public class TConstruct {
     TinkerModule.initRegisters(bus);
     TinkerNetwork.setup();
     bus.addListener(EventPriority.NORMAL, false, RegisterPayloadHandlersEvent.class, TinkerNetwork.getInstance()::registerPayloads);
+    // 26.1 datagen: register the server data providers on the mod bus (fired by the runServerData run)
+    bus.addListener(GatherDataEvent.Server.class, TinkerServerData::gatherData);
     TinkerTags.init();
     // init client logic
-    if (FMLEnvironment.dist == Dist.CLIENT) {
+    if (FMLEnvironment.getDist() == Dist.CLIENT) {
       TinkerClient.onConstruct();
     }
 
@@ -115,6 +121,23 @@ public class TConstruct {
   static void commonSetup(final FMLCommonSetupEvent event) {
     ToolDefinitionLoader.init();
     StationSlotLayoutLoader.init();
+    // opt into Mantle's client recipe sync for every custom recipe type that JEI or the book need client-side.
+    // must run before any world join, as the syncable set freezes on first sync. Vanilla crafting is not synced here.
+    event.enqueueWork(() -> {
+      SyncableRecipes.register(TinkerRecipeTypes.PART_BUILDER.get());
+      SyncableRecipes.register(TinkerRecipeTypes.MATERIAL.get());
+      SyncableRecipes.register(TinkerRecipeTypes.TINKER_STATION.get());
+      SyncableRecipes.register(TinkerRecipeTypes.MODIFIER_WORKTABLE.get());
+      SyncableRecipes.register(TinkerRecipeTypes.CASTING_BASIN.get());
+      SyncableRecipes.register(TinkerRecipeTypes.CASTING_TABLE.get());
+      SyncableRecipes.register(TinkerRecipeTypes.MOLDING_TABLE.get());
+      SyncableRecipes.register(TinkerRecipeTypes.MOLDING_BASIN.get());
+      SyncableRecipes.register(TinkerRecipeTypes.MELTING.get());
+      SyncableRecipes.register(TinkerRecipeTypes.ENTITY_MELTING.get());
+      SyncableRecipes.register(TinkerRecipeTypes.FUEL.get());
+      SyncableRecipes.register(TinkerRecipeTypes.ALLOYING.get());
+      SyncableRecipes.register(TinkerRecipeTypes.SEVERING.get());
+    });
   }
 
   /* Utils */
@@ -125,8 +148,8 @@ public class TConstruct {
    * @return  Location for tinkers
    */
   @SuppressWarnings("removal")
-  public static ResourceLocation getResource(String name) {
-    return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
+  public static Identifier getResource(String name) {
+    return Identifier.fromNamespaceAndPath(MOD_ID, name);
   }
 
   /**

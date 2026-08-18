@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/cast",
-  "ingredient": {
-    "tag": "modernfoundry:casts/gold"
-  },
+  "ingredient": "#modernfoundry:casts/gold",
   "result": {
     "amount": 90,
     "tag": "c:molten_gold"

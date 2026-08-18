@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.materials.stats;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.ApiStatus.NonExtendable;
 import modernmods.modernfoundry.library.tools.stat.ModifierStatsBuilder;
 import modernmods.modernfoundry.library.utils.Util;
@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Basic interface for all material stats.
- * TODO 1.21: Make {@link modernmods.hilt.registration.object.IdAwareObject}
+ * TODO 1.21: Make {@link modernmods.mantle.registration.object.IdAwareObject}
  */
 public interface IMaterialStats {
   /**
@@ -20,18 +20,18 @@ public interface IMaterialStats {
   MaterialStatType<?> getType();
 
   /**
-   * Returns a unique ResourceLocation to identify the type of stats the material has.
+   * Returns a unique Identifier to identify the type of stats the material has.
    */
   @NonExtendable
   default MaterialStatsId getIdentifier() {
-    return getType().getId();
+    return getType().getStatId();
   }
 
   /**
    * Returns the name of the stat type, to be displayed to the player.
    */
   default MutableComponent getLocalizedName() {
-    return Component.translatable(Util.makeTranslationKey("stat", getIdentifier()));
+    return Component.translatable(Util.makeTranslationKey("stat", getIdentifier().getIdentifier()));
   }
 
   /**
@@ -80,7 +80,7 @@ public interface IMaterialStats {
    * @param name  name
    * @return  Text component
    */
-  static String makeTooltipKey(ResourceLocation name) {
+  static String makeTooltipKey(Identifier name) {
     return Util.makeTranslationKey("tool_stat", name);
   }
 
@@ -89,7 +89,7 @@ public interface IMaterialStats {
    * @param name  name
    * @return  Text component
    */
-  static Component makeTooltip(ResourceLocation name) {
+  static Component makeTooltip(Identifier name) {
     return Component.translatable(makeTooltipKey(name));
   }
 

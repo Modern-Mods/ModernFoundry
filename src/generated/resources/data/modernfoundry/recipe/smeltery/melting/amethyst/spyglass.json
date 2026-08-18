@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/amethyst/spyglass",
   "byproducts": [
     {
       "amount": 180,
       "tag": "c:molten_copper"
     }
   ],
-  "ingredient": {
-    "item": "minecraft:spyglass"
-  },
+  "id": "modernfoundry:smeltery/melting/amethyst/spyglass",
+  "ingredient": "minecraft:spyglass",
   "result": {
     "amount": 100,
     "fluid": "modernfoundry:molten_amethyst"

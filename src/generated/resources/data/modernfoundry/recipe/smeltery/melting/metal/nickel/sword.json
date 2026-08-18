@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/nickel/sword",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/nickel/tools_costing_2"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/nickel/tools_costing_2"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/nickel/sword",
+  "ingredient": "#modernfoundry:melting/nickel/tools_costing_2",
   "result": {
     "amount": 180,
     "tag": "c:molten_nickel",

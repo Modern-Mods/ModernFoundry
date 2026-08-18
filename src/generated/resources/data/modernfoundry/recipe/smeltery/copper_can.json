@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "c": {
-      "tag": "c:ingots/copper"
-    }
+    "c": "#c:ingots/copper"
   },
   "pattern": [
     "c c",
@@ -13,6 +11,5 @@
   "result": {
     "count": 3,
     "id": "modernfoundry:copper_can"
-  },
-  "show_notification": true
+  }
 }

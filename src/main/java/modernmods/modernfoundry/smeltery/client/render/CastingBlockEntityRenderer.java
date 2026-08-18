@@ -3,14 +3,17 @@ package modernmods.modernfoundry.smeltery.client.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.client.render.FluidCuboid;
-import modernmods.hilt.client.render.FluidRenderer;
-import modernmods.hilt.client.render.RenderItem;
-import modernmods.hilt.client.render.RenderingHelper;
+import modernmods.mantle.client.render.FluidCuboid;
+import modernmods.mantle.client.render.FluidRenderer;
+import modernmods.mantle.client.render.RenderItem;
+import modernmods.mantle.client.render.RenderingHelper;
 import modernmods.modernfoundry.library.client.RenderUtils;
 import modernmods.modernfoundry.smeltery.block.entity.CastingBlockEntity;
 import modernmods.modernfoundry.smeltery.block.entity.tank.CastingFluidHandler;
@@ -18,80 +21,66 @@ import modernmods.modernfoundry.smeltery.client.util.CastingItemRenderTypeBuffer
 
 import java.util.List;
 
-public class CastingBlockEntityRenderer implements BlockEntityRenderer<CastingBlockEntity> {
+public class CastingBlockEntityRenderer implements BlockEntityRenderer<CastingBlockEntity, BlockEntityRenderState> {
   public CastingBlockEntityRenderer(Context context) {}
 
+  public BlockEntityRenderState createRenderState() {
+    return new BlockEntityRenderState();
+  }
+
   @Override
-  public void render(CastingBlockEntity casting, float partialTicks, PoseStack matrices, MultiBufferSource buffer, int light, int combinedOverlayIn) {
-    BlockState state = casting.getBlockState();
-    List<FluidCuboid> fluids = FluidCuboid.REGISTRY.get(state, List.of());
-    List<RenderItem> renderItems = RenderItem.STATE_REGISTRY.get(state, List.of());
+  public void submit(BlockEntityRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera) {
+    // 26.1: render the casting fluid and the cast/output items from the live block entity via the submit-node pipeline.
+    net.minecraft.world.level.Level world = net.minecraft.client.Minecraft.getInstance().level;
+    if (world == null || !(world.getBlockEntity(state.blockPos) instanceof CastingBlockEntity casting)) {
+      return;
+    }
+    BlockState blockState = world.getBlockState(state.blockPos);
+    List<FluidCuboid> fluids = FluidCuboid.REGISTRY.get(blockState, List.of());
+    List<RenderItem> renderItems = RenderItem.STATE_REGISTRY.get(blockState, List.of());
+    if (fluids.isEmpty() && renderItems.isEmpty()) {
+      return;
+    }
+    int light = state.lightCoords;
+    boolean isRotated = RenderingHelper.applyRotation(poseStack, blockState);
 
-    // rotate the matrix
-    if (!fluids.isEmpty() || !renderItems.isEmpty()) {
-      boolean isRotated = RenderingHelper.applyRotation(matrices, state);
-
-      // if the recipe is in progress, start fading the item away
-      int timer = casting.getTimer();
-      int totalTime = casting.getCoolingTime();
-      int itemOpacity = 0;
-      int fluidOpacity = 0xFF;
-      if (timer > 0 && totalTime > 0) {
-        int opacity = (4 * 0xFF) * timer / totalTime;
-        // fade item in
-        itemOpacity = opacity / 4;
-
-        // fade fluid and temperature out during last 10%
-        if (opacity > 3 * 0xFF) {
-          fluidOpacity = (4 * 0xFF) - opacity;
-        }
-      }
-
-      // render fluids
-      if (!fluids.isEmpty()) {
-        CastingFluidHandler tank = casting.getTank();
-        FluidStack fluidStack = tank.getFluid();
-        int capacity = tank.getCapacity();
-        // if full, start rendering with opacity for progress
-        if (fluidStack.getAmount() == capacity) {
-          for (FluidCuboid fluid : fluids) {
-            RenderUtils.renderTransparentCuboid(matrices, buffer, fluid, fluidStack, fluidOpacity, light);
+    // render fluids
+    if (!fluids.isEmpty()) {
+      CastingFluidHandler tank = casting.getTank();
+      FluidStack fluidStack = tank.getFluid();
+      int capacity = tank.getCapacity();
+      if (!fluidStack.isEmpty() && capacity > 0) {
+        collector.submitCustomGeometry(poseStack, modernmods.mantle.client.render.MantleRenderTypes.FLUID, (pose, buffer) -> {
+          PoseStack local = new PoseStack();
+          local.last().pose().set(pose.pose());
+          for (FluidCuboid cube : fluids) {
+            FluidRenderer.renderScaledCuboid(local, buffer, cube, fluidStack, 0, capacity, light, false);
           }
-        } else {
-          // not strictly useful to scale the fluids down, but who knows what the modeler does
-          for (FluidCuboid fluid : fluids) {
-            FluidRenderer.renderScaledCuboid(matrices, RenderUtils.fluidRenderBuffer(buffer), fluid, fluidStack, 0, capacity, light, false);
-          }
-        }
-      }
-
-      // render renderItems
-      if (!renderItems.isEmpty()) {
-        // render renderItems
-        // input is normal
-        RenderingHelper.renderItem(matrices, buffer, casting.getItem(0), renderItems.get(0), light);
-
-        // output may be the recipe output instead of the current item
-        if (renderItems.size() >= 2) {
-          RenderItem outputModel = renderItems.get(1);
-          if (!outputModel.isHidden()) {
-            // get output stack
-            ItemStack output = casting.getItem(1);
-            MultiBufferSource outputBuffer = buffer;
-            if (itemOpacity > 0 && output.isEmpty()) {
-              output = casting.getRecipeOutput();
-              // apply a buffer wrapper to tint and add opacity
-              outputBuffer = new CastingItemRenderTypeBuffer(buffer, itemOpacity, fluidOpacity);
-            }
-            RenderingHelper.renderItem(matrices, outputBuffer, output, outputModel, light);
-          }
-        }
-      }
-
-      // pop back rotation
-      if (isRotated) {
-        matrices.popPose();
+        });
       }
     }
+
+    // render items (input cast + output). Opacity fading from the pre-26.1 renderer is dropped; the item submit path
+    // resolves the item model directly without a tint/opacity buffer wrapper.
+    if (!renderItems.isEmpty()) {
+      // input cast is drawn as-is
+      RenderingHelper.renderItem(poseStack, collector, casting.getItem(0), renderItems.get(0), light);
+      // output may be the recipe output instead of the current item
+      if (renderItems.size() >= 2) {
+        RenderItem outputModel = renderItems.get(1);
+        if (!outputModel.isHidden()) {
+          ItemStack output = casting.getItem(1);
+          if (output.isEmpty()) {
+            output = casting.getRecipeOutput();
+          }
+          RenderingHelper.renderItem(poseStack, collector, output, outputModel, light);
+        }
+      }
+    }
+
+    if (isRotated) {
+      poseStack.popPose();
+    }
   }
+
 }

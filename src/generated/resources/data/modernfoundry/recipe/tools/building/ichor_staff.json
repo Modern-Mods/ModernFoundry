@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "modernfoundry:ichor_slime_crystal"
-    },
-    "I": {
-      "tag": "c:ingots/queens_slime"
-    },
-    "W": {
-      "tag": "modernfoundry:bloodshroom_logs"
-    }
+    "C": "modernfoundry:ichor_slime_crystal",
+    "I": "#c:ingots/queens_slime",
+    "W": "#modernfoundry:bloodshroom_logs"
   },
   "pattern": [
     "CWC",
@@ -19,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:ichor_staff"
-  },
-  "show_notification": true
+  }
 }

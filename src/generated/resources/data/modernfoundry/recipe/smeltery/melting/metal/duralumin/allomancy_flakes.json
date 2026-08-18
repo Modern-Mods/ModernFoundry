@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/duralumin/allomancy_flakes",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "allomancy:duralumin_flakes"
+      "type": "neoforge:registered",
+      "value": "allomancy:duralumin_flakes"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/duralumin/allomancy_flakes",
   "ingredient": {
     "item": "allomancy:duralumin_flakes"
   },

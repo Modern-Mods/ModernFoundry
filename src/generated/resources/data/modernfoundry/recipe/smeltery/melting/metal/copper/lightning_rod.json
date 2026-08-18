@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/copper/lightning_rod",
-  "ingredient": {
-    "item": "minecraft:lightning_rod"
-  },
+  "ingredient": "minecraft:lightning_rod",
   "result": {
     "amount": 270,
     "tag": "c:molten_copper"

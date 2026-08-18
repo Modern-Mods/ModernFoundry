@@ -1,13 +1,9 @@
 {
-  "type": "hilt:crafting_shaped_retextured",
+  "type": "mantle:crafting_shaped_retextured",
   "category": "misc",
   "key": {
-    "p": {
-      "item": "modernfoundry:pattern"
-    },
-    "w": {
-      "tag": "minecraft:logs"
-    }
+    "p": "modernfoundry:pattern",
+    "w": "#minecraft:logs"
   },
   "match_all": false,
   "pattern": [
@@ -17,6 +13,5 @@
   "result": {
     "id": "modernfoundry:crafting_station"
   },
-  "show_notification": true,
   "texture": "w"
 }

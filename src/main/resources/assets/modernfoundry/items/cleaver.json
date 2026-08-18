@@ -1,0 +1,40 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/cleaver",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "head",
+        "index": 0
+      },
+      {
+        "name": "shield",
+        "index": 3
+      },
+      {
+        "name": "guard",
+        "index": 2
+      }
+    ],
+    "large": true,
+    "large_offset": [
+      -2,
+      2
+    ],
+    "modifier_maps": [
+      "modernfoundry:cleaver"
+    ],
+    "small_modifier_roots": {
+      "small": [
+        "modernfoundry:item/tool/cleaver/modifiers/"
+      ],
+      "large": [
+        "modernfoundry:item/tool/cleaver/large/modifiers/"
+      ]
+    }
+  }
+}

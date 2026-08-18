@@ -1,9 +1,9 @@
 {
   "type": "modernfoundry:severing",
-  "id": "modernfoundry:tools/severing/piglin_head",
   "entity": {
     "type": "minecraft:piglin"
   },
+  "id": "modernfoundry:tools/severing/piglin_head",
   "looting_bonus": 0.01,
   "per_level_chance": 0.05,
   "result": "minecraft:piglin_head"

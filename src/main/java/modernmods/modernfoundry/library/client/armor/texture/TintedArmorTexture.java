@@ -8,11 +8,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.feature.ItemFeatureRenderer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.resources.Identifier;
 import modernmods.modernfoundry.library.client.armor.AbstractArmorModel;
 import modernmods.modernfoundry.library.client.armor.texture.ArmorTextureSupplier.ArmorTexture;
 
@@ -22,15 +21,16 @@ import modernmods.modernfoundry.library.client.armor.texture.ArmorTextureSupplie
 @RequiredArgsConstructor
 @Setter
 public class TintedArmorTexture implements ArmorTexture {
-  private static final int MAX_LIGHT = LightTexture.pack(15, 15);
+  // full-bright packed lightmap (block 15, sky 15); LightTexture.pack was removed in 26.1
+  private static final int MAX_LIGHT = 0xF000F0;
 
-  private final ResourceLocation texture;
+  private final Identifier texture;
   @Getter
   private int color = -1;
   @Getter
   private int luminosity = 0;
 
-  public TintedArmorTexture(ResourceLocation texture, int color) {
+  public TintedArmorTexture(Identifier texture, int color) {
     this(texture, color, 0);
   }
 
@@ -47,7 +47,7 @@ public class TintedArmorTexture implements ArmorTexture {
 
   @Override
   public void renderTexture(Model model, PoseStack matrices, MultiBufferSource bufferSource, int packedLight, int packedOverlay, float red, float green, float blue, float alpha, boolean hasGlint) {
-    VertexConsumer buffer = ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.armorCutoutNoCull(texture), hasGlint);
+    VertexConsumer buffer = ItemFeatureRenderer.getFoilBuffer(bufferSource, RenderTypes.armorCutoutNoCull(texture), false, hasGlint);
     if (luminosity > 0) {
       packedLight = applyLuminosity(packedLight, luminosity);
     }

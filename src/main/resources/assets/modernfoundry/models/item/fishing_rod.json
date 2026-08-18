@@ -1,34 +1,8 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/base/rod",
   "textures": {
-    "rod":    "modernfoundry:item/tool/fishing_rod/rod",
+    "rod": "modernfoundry:item/tool/fishing_rod/rod",
     "string": "modernfoundry:item/tool/fishing_rod/string",
-    "hook":   "modernfoundry:item/tool/fishing_rod/hook"
-  },
-  "modifier_maps": ["modernfoundry:fishing_rod"],
-  "modifier_roots": [ "modernfoundry:item/tool/fishing_rod/modifiers/" ],
-  "parts": [
-    { "name": "rod",    "index": 0 },
-    { "name": "string", "index": 1 },
-    { "name": "hook",   "index": 2 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/fishing_rod/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:cast": 1 },
-      "model": "modernfoundry:item/tool/fishing_rod/cast"
-    },
-    {
-      "predicate": { "modernfoundry:cast": 1, "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/fishing_rod/blocking_cast"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/fishing_rod/broken"
-    }
-  ]
+    "hook": "modernfoundry:item/tool/fishing_rod/hook"
+  }
 }

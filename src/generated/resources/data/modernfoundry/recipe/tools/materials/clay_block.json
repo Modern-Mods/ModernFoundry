@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/clay_block",
-  "ingredient": {
-    "item": "minecraft:clay"
-  },
+  "ingredient": "minecraft:clay",
   "material": "modernfoundry:clay",
   "needed": 1,
   "value": 4

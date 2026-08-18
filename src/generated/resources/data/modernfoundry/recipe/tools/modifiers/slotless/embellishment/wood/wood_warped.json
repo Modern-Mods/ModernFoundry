@@ -1,24 +1,22 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/wood_warped",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/wood_warped",
   "inputs": [
     {
-      "item": "minecraft:warped_planks"
+      "ingredient": "minecraft:warped_planks"
     },
     {
-      "item": "modernfoundry:pattern"
+      "ingredient": "modernfoundry:pattern"
     },
     {
-      "item": "minecraft:warped_planks"
+      "ingredient": "minecraft:warped_planks"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:wood#warped"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/wood"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/wood",
   "variant_formatter": "modernfoundry:material"
 }

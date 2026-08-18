@@ -2,12 +2,12 @@ package modernmods.modernfoundry.library.client.book.content;
 
 import com.google.common.collect.Lists;
 import lombok.Getter;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.PageData;
-import modernmods.hilt.client.book.data.content.PageContent;
-import modernmods.hilt.client.book.data.element.TextData;
-import modernmods.hilt.client.screen.book.BookScreen;
-import modernmods.hilt.client.screen.book.element.BookElement;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.PageData;
+import modernmods.mantle.client.book.data.content.PageContent;
+import modernmods.mantle.client.book.data.element.TextData;
+import modernmods.mantle.client.screen.book.BookScreen;
+import modernmods.mantle.client.screen.book.element.BookElement;
 import modernmods.modernfoundry.library.client.book.elements.ListingCenteredElement;
 
 import javax.annotation.Nullable;
@@ -23,7 +23,7 @@ public class ContentListingCentered extends PageContent {
   public void addEntry(String text, @Nullable PageData link) {
     TextData data = new TextData(text);
     if (link != null) {
-      data.action = "hilt:go-to-page-rtn " + link.parent.name + "." + link.name;
+      data.action = "mantle:go-to-page-rtn " + link.parent.name + "." + link.name;
     }
     this.entries.add(data);
   }

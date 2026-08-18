@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -18,13 +18,13 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.state.BlockState;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.block.BlockPredicate;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
-import modernmods.hilt.util.LogicHelper;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.block.BlockPredicate;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
+import modernmods.mantle.util.LogicHelper;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -115,7 +115,7 @@ public interface EnchantmentModule extends ModifierModule, LevelingIntModule, Co
      * @param key  Key to use for checking conditions, needs to be unique. Recommend suffixing the modifier ID (using the modifier ID will conflict with incremental)
      * @return  Module instance
      */
-    public MainHandHarvest mainHandHarvest(ResourceLocation key) {
+    public MainHandHarvest mainHandHarvest(Identifier key) {
       return new MainHandHarvest(enchantment, lootingLevel, condition, key, block, holder);
     }
 
@@ -235,17 +235,17 @@ public interface EnchantmentModule extends ModifierModule, LevelingIntModule, Co
    * Enchantment module that can condition on the block mined or the entity mining.
    * Exists as {@link HarvestEnchantmentsModifierHook} does not currently run on the main hand. TODO 1.21: update it to run on mainhand.
    */
-  record MainHandHarvest(Enchantment enchantment, LevelingInt level, ModifierCondition<IToolStackView> condition, ResourceLocation conditionFlag, IJsonPredicate<BlockState> block, IJsonPredicate<LivingEntity> holder) implements EnchantmentModule, EnchantmentModifierHook, BlockHarvestModifierHook {
+  record MainHandHarvest(Enchantment enchantment, LevelingInt level, ModifierCondition<IToolStackView> condition, Identifier conditionFlag, IJsonPredicate<BlockState> block, IJsonPredicate<LivingEntity> holder) implements EnchantmentModule, EnchantmentModifierHook, BlockHarvestModifierHook {
     private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MainHandHarvest>defaultHooks(ModifierHooks.ENCHANTMENTS, ModifierHooks.BLOCK_HARVEST);
     public static final RecordLoadable<MainHandHarvest> LOADER = RecordLoadable.create(ENCHANTMENT, LevelingIntModule.FIELD, ModifierCondition.TOOL_FIELD, Loadables.RESOURCE_LOCATION.requiredField("condition_flag", MainHandHarvest::conditionFlag), BLOCK, HOLDER, MainHandHarvest::new);
 
-    /** @apiNote use {@link Builder#mainHandHarvest(ResourceLocation)} */
+    /** @apiNote use {@link Builder#mainHandHarvest(Identifier)} */
     @Internal
     public MainHandHarvest {}
 
-    /** @deprecated use {@link Builder#mainHandHarvest(ResourceLocation)} */
+    /** @deprecated use {@link Builder#mainHandHarvest(Identifier)} */
     @Deprecated(forRemoval = true)
-    public MainHandHarvest(Enchantment enchantment, int level, ModifierCondition<IToolStackView> condition, ResourceLocation conditionFlag, IJsonPredicate<BlockState> block, IJsonPredicate<LivingEntity> holder) {
+    public MainHandHarvest(Enchantment enchantment, int level, ModifierCondition<IToolStackView> condition, Identifier conditionFlag, IJsonPredicate<BlockState> block, IJsonPredicate<LivingEntity> holder) {
       this(enchantment, LevelingInt.eachLevel(level), condition, conditionFlag, block, holder);
     }
 

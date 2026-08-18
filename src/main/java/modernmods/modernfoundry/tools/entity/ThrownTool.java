@@ -4,12 +4,13 @@ import lombok.Setter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -19,13 +20,16 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -64,9 +68,9 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
   /** Movement speed in water */
   protected static final EntityDataAccessor<Float> WATER_INERTIA = SynchedEntityData.defineId(ThrownTool.class, EntityDataSerializers.FLOAT);
   /** Volatile integer key for the loyalty level */
-  public static final ResourceLocation LOYALTY = TConstruct.getResource("loyalty");
+  public static final Identifier LOYALTY = TConstruct.getResource("loyalty");
   /** Volatile integer key for the magnet level */
-  public static final ResourceLocation MAGNET = TConstruct.getResource("magnet");
+  public static final Identifier MAGNET = TConstruct.getResource("magnet");
 
   @Nullable
   private IToolStackView tool = null;
@@ -78,6 +82,12 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
   @Setter
   private int originalSlot = -1;
   private boolean hitBlock = false;
+  /** Loyalty level of the tool; parent's synced loyalty is now private, so we track it ourselves */
+  private int loyalty = 0;
+  /** Whether this projectile already dealt damage; parent's field is now private */
+  private boolean dealtDamage = false;
+  /** Despawn timer; parent's life field is now private */
+  private int life = 0;
   /** Tasks queued by modifiers */
   private Schedule tasks = Schedule.EMPTY;
 
@@ -107,12 +117,25 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
   private void updateFromStack() {
     this.setPickupItemStack(tridentItem);
     this.entityData.set(STACK, tridentItem);
-    this.entityData.set(ID_LOYALTY, (byte) ModifierUtil.getVolatileInt(tridentItem, LOYALTY));
-    this.entityData.set(ID_FOIL, ModifierUtil.checkVolatileFlag(tridentItem, ModifiableItem.SHINY));
+    this.loyalty = ModifierUtil.getVolatileInt(tridentItem, LOYALTY);
     this.noDespawn = ModifierUtil.checkVolatileFlag(tridentItem, IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY);
-    if (!level().isClientSide) {
+    if (!level().isClientSide()) {
       this.magnet = ModifierUtil.getVolatileInt(tridentItem, MAGNET);
     }
+  }
+
+  @Override
+  public boolean isFoil() {
+    return ModifierUtil.checkVolatileFlag(getDisplayTool(), ModifiableItem.SHINY);
+  }
+
+  /** Reimplements the parent's private return-owner check */
+  private boolean canReturnToOwner() {
+    Entity owner = getOwner();
+    if (owner == null || !owner.isAlive()) {
+      return false;
+    }
+    return !(owner instanceof ServerPlayer player) || !player.isSpectator();
   }
 
   /** Called after {@link #shoot(double, double, double, float, float)} but before the first tick of hte projectile to do final setup. */
@@ -154,7 +177,7 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
         this.discard();
       }
       // if its worldbound or loyalty, don't despawn
-    } else if (!noDespawn && this.entityData.get(ID_LOYALTY) == 0) {
+    } else if (!noDespawn && this.loyalty == 0) {
       // otherwise despawn in 5 minutes like a normal item. Like seriously mojang, why does your rare enchanted trident despawn in 1 minute?
       this.life += 1;
       if (this.life >= 6000) {
@@ -166,7 +189,7 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
   @Override
   protected void onBelowWorld() {
     // don't discard tools below world if they have loyalty
-    if (pickup == Pickup.ALLOWED && this.entityData.get(ID_LOYALTY) != 0) {
+    if (pickup == Pickup.ALLOWED && this.loyalty != 0) {
       // ensure it returns
       dealtDamage = true;
       // we don't damage the tool on throw, so instead damage it when it hits a block or an entity
@@ -194,13 +217,38 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
     // TODO: consider expiry time for loyalty
     if (!dealtDamage && inGroundTime > 4) {
       // we don't damage the tool on throw, so instead damage it when it hits a block or an entity
-      if (!tridentItem.isEmpty() && !level().isClientSide) {
+      if (!tridentItem.isEmpty() && !level().isClientSide()) {
         ToolDamageUtil.damage(getTool(), 1, getOwner() instanceof LivingEntity l ? l : null, tridentItem);
         // update the stack so visual changes to the tool render (e.g. broken or fluid)
         // need to force since its the same instance, just NBT changes
         this.entityData.set(STACK, tridentItem, true);
       }
       dealtDamage = true;
+    }
+
+    // loyalty return: the parent's return logic reads its now-private loyalty accessor (always 0 for us), so run it here
+    Entity owner = getOwner();
+    if (loyalty > 0 && (dealtDamage || isNoPhysics()) && owner != null) {
+      if (!canReturnToOwner()) {
+        if (level() instanceof ServerLevel server && pickup == Pickup.ALLOWED) {
+          spawnAtLocation(server, getPickupItem(), 0.1f);
+        }
+        discard();
+      } else {
+        if (!(owner instanceof Player) && position().distanceTo(owner.getEyePosition()) < owner.getBbWidth() + 1.0) {
+          discard();
+          return;
+        }
+        setNoPhysics(true);
+        Vec3 toOwner = owner.getEyePosition().subtract(position());
+        setPosRaw(getX(), getY() + toOwner.y * 0.015 * loyalty, getZ());
+        double accel = 0.05 * loyalty;
+        setDeltaMovement(getDeltaMovement().scale(0.95).add(toOwner.normalize().scale(accel)));
+        if (clientSideReturnTridentTickCount == 0) {
+          playSound(SoundEvents.TRIDENT_RETURN, 10.0f, 1.0f);
+        }
+        clientSideReturnTridentTickCount++;
+      }
     }
     super.tick();
 
@@ -213,6 +261,13 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
     if (!tasks.isEmpty() && !tridentItem.isEmpty()) {
       ScheduledProjectileTaskModifierHook.checkSchedule(getTool(), tridentItem, this, null, tasks);
     }
+  }
+
+  @Nullable
+  @Override
+  protected EntityHitResult findHitEntity(Vec3 from, Vec3 to) {
+    // parent gates re-hits on its now-private dealtDamage; replicate with our own field
+    return dealtDamage ? null : super.findHitEntity(from, to);
   }
 
   @Override
@@ -259,10 +314,10 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
 
       // back off from the target
       this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01, -0.1, -0.01));
-      if (!level().isClientSide) {
+      if (!level().isClientSide()) {
         // play sound
         if (tool.getModifiers().getLevel(ModifierIds.channeling) == 0) {
-          this.playSound(tool.isBroken() ? SoundEvents.ITEM_BREAK : SoundEvents.TRIDENT_HIT, 1.0f, 1.0f);
+          this.playSound(tool.isBroken() ? SoundEvents.ITEM_BREAK.value() : SoundEvents.TRIDENT_HIT, 1.0f, 1.0f);
         }
         // update the stack so visual changes to the tool render (e.g. broken or fluid)
         // need to force since its the same instance, just NBT changes
@@ -329,7 +384,7 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
                 this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01, -0.1, -0.01));
                 // update the stack so visual changes to the tool render (e.g. broken or fluid)
                 // need to force since its the same instance, just NBT changes
-                if (!level.isClientSide) {
+                if (!level.isClientSide()) {
                   this.entityData.set(STACK, tridentItem, true);
                 }
                 return;
@@ -399,39 +454,41 @@ public class ThrownTool extends ThrownTrident implements ToolProjectile {
   private static final String KEY_TASKS = "tasks";
 
   @Override
-  public void addAdditionalSaveData(CompoundTag tag) {
-    super.addAdditionalSaveData(tag);
-    tag.putFloat(KEY_CHARGE, this.charge);
-    tag.putFloat(KEY_MULTIPLIER, this.multiplier);
-    tag.putFloat(KEY_WATER_INERTIA, this.entityData.get(WATER_INERTIA));
-    tag.putBoolean(KEY_HIT_BLOCK, hitBlock);
+  public void addAdditionalSaveData(ValueOutput output) {
+    super.addAdditionalSaveData(output);
+    output.putFloat(KEY_CHARGE, this.charge);
+    output.putFloat(KEY_MULTIPLIER, this.multiplier);
+    output.putFloat(KEY_WATER_INERTIA, this.entityData.get(WATER_INERTIA));
+    output.putBoolean(KEY_HIT_BLOCK, hitBlock);
     if (this.originalSlot != -1) {
-      tag.putInt(KEY_ORIGINAL_SLOT, this.originalSlot);
+      output.putInt(KEY_ORIGINAL_SLOT, this.originalSlot);
     }
     if (!this.tasks.isEmpty()) {
-      tag.put(KEY_TASKS, this.tasks.serialize());
+      // ValueOutput has no raw-tag put, so wrap the task list in a compound stored via its codec
+      CompoundTag wrapper = new CompoundTag();
+      wrapper.put(KEY_TASKS, this.tasks.serialize());
+      output.store(KEY_TASKS, CompoundTag.CODEC, wrapper);
     }
   }
 
   @Override
-  public void readAdditionalSaveData(CompoundTag tag) {
-    super.readAdditionalSaveData(tag);
+  public void readAdditionalSaveData(ValueInput input) {
+    super.readAdditionalSaveData(input);
     // update the tool to sync to client, if its set
     this.tridentItem = this.getPickupItemStackOrigin().copy();
     if (!this.tridentItem.isEmpty()) {
       updateFromStack();
     }
-    this.charge = tag.getFloat(KEY_CHARGE);
-    this.multiplier = tag.getFloat(KEY_MULTIPLIER);
-    this.entityData.set(WATER_INERTIA, tag.getFloat(KEY_WATER_INERTIA));
-    this.hitBlock = tag.getBoolean(KEY_HIT_BLOCK);
-    if (tag.contains(KEY_ORIGINAL_SLOT, Tag.TAG_ANY_NUMERIC)) {
-      this.originalSlot = tag.getInt(KEY_ORIGINAL_SLOT);
-    } else {
-      this.originalSlot = -1;
-    }
-    if (tag.contains(KEY_TASKS, CompoundTag.TAG_LIST)) {
-      this.tasks = Schedule.deserialize(tag.getList(KEY_TASKS, CompoundTag.TAG_COMPOUND));
-    }
+    this.charge = input.getFloatOr(KEY_CHARGE, 0);
+    this.multiplier = input.getFloatOr(KEY_MULTIPLIER, 0);
+    this.entityData.set(WATER_INERTIA, input.getFloatOr(KEY_WATER_INERTIA, 0.6f));
+    this.hitBlock = input.getBooleanOr(KEY_HIT_BLOCK, false);
+    this.originalSlot = input.getIntOr(KEY_ORIGINAL_SLOT, -1);
+    input.read(KEY_TASKS, CompoundTag.CODEC).ifPresent(wrapper -> {
+      ListTag list = wrapper.getListOrEmpty(KEY_TASKS);
+      if (!list.isEmpty()) {
+        this.tasks = Schedule.deserialize(list);
+      }
+    });
   }
 }

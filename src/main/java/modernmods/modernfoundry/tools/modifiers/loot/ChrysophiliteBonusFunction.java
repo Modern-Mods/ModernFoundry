@@ -4,14 +4,13 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import modernmods.modernfoundry.tools.TinkerModifiers;
 import modernmods.modernfoundry.tools.modifiers.traits.skull.ChrysophiliteModifier;
 
 import java.util.List;
@@ -58,7 +57,7 @@ public class ChrysophiliteBonusFunction extends LootItemConditionalFunction {
 
   @Override
   protected ItemStack run(ItemStack stack, LootContext context) {
-    int level = ChrysophiliteModifier.getTotalGold(context.getParamOrNull(LootContextParams.THIS_ENTITY));
+    int level = ChrysophiliteModifier.getTotalGold(context.getOptionalParameter(LootContextParams.THIS_ENTITY));
     if (!includeBase) {
       level--;
     }
@@ -69,13 +68,13 @@ public class ChrysophiliteBonusFunction extends LootItemConditionalFunction {
   }
 
   @Override
-  public Set<LootContextParam<?>> getReferencedContextParams() {
+  public Set<ContextKey<?>> getReferencedContextParams() {
     return ImmutableSet.of(LootContextParams.THIS_ENTITY);
   }
 
   @Override
-  public LootItemFunctionType getType() {
-    return TinkerModifiers.chrysophiliteBonusFunction.get();
+  public MapCodec<? extends LootItemConditionalFunction> codec() {
+    return CODEC;
   }
 
 }

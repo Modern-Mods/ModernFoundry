@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/mattock",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "axe",
+        "index": 0
+      },
+      {
+        "name": "pick",
+        "index": 2
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:mattock"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/mattock/modifiers/"
+    ]
+  }
+}

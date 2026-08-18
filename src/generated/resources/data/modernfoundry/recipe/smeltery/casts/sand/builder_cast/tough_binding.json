@@ -2,8 +2,6 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/sand/builder_cast/tough_binding",
   "pattern": "modernfoundry:tough_binding",
-  "pattern_item": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "pattern_item": "#modernfoundry:casts/sand",
   "result": "modernfoundry:tough_binding_sand_cast"
 }

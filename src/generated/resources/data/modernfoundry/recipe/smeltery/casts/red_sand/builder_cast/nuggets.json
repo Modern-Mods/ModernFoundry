@@ -2,8 +2,6 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/red_sand/builder_cast/nuggets",
   "pattern": "modernfoundry:nugget",
-  "pattern_item": {
-    "tag": "modernfoundry:casts/red_sand"
-  },
+  "pattern_item": "#modernfoundry:casts/red_sand",
   "result": "modernfoundry:nugget_red_sand_cast"
 }

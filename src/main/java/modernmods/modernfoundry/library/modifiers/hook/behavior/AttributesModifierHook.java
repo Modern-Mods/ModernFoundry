@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.modifiers.hook.behavior;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlot.Type;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -42,7 +42,7 @@ public interface AttributesModifierHook {
   void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute,AttributeModifier> consumer);
 
   /** Gets a stable modifier ID for held armor stats. */
-  private static ResourceLocation heldArmorId(String stat, EquipmentSlot slot) {
+  private static Identifier heldArmorId(String stat, EquipmentSlot slot) {
     return TConstruct.getResource("held_" + stat + "_" + slot.getName());
   }
 

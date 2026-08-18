@@ -1,16 +1,16 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/depth_strider",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/depth_strider",
   "inputs": [
     {
-      "tag": "minecraft:fishes"
+      "ingredient": "#minecraft:fishes"
     },
     {
-      "item": "minecraft:prismarine_bricks"
+      "ingredient": "minecraft:prismarine_bricks"
     },
     {
-      "tag": "minecraft:fishes"
+      "ingredient": "#minecraft:fishes"
     }
   ],
   "level": {
@@ -20,7 +20,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/boots"
-  }
+  "tools": "#modernfoundry:modifiable/armor/boots"
 }

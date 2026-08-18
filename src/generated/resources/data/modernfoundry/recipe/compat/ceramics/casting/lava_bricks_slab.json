@@ -1,20 +1,18 @@
 {
-  "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:compat/ceramics/casting/lava_bricks_slab",
-  "cast": {
-    "item": "minecraft:brick_slab"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "ceramics"
     }
   ],
+  "type": "modernfoundry:casting_basin",
+  "cast": "minecraft:brick_slab",
+  "cast_consumed": true,
   "cooling_time": 49,
   "fluid": {
     "amount": 50,
     "fluid": "minecraft:lava"
   },
+  "id": "modernfoundry:compat/ceramics/casting/lava_bricks_slab",
   "result": "ceramics:lava_bricks_slab"
 }

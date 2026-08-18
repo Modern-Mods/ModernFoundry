@@ -1,15 +1,14 @@
 package modernmods.modernfoundry.common.data.tags;
 
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.data.tinkering.AbstractMaterialTagProvider;
 import modernmods.modernfoundry.tools.data.material.MaterialIds;
 
 public class MaterialTagProvider extends AbstractMaterialTagProvider {
-  public MaterialTagProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
-    super(packOutput, TConstruct.MOD_ID, existingFileHelper);
+  public MaterialTagProvider(PackOutput packOutput) {
+    super(packOutput, TConstruct.MOD_ID);
   }
 
   @Override
@@ -42,7 +41,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
       // tier 4
       MaterialIds.manyullyn, MaterialIds.hepatizon, MaterialIds.cinderslime,
       MaterialIds.queensSlime, MaterialIds.blazingBone, MaterialIds.blazewood,
-      MaterialIds.jeweledHide, MaterialIds.jadeite,
+      MaterialIds.jeweledHide,
       // ammo
       MaterialIds.glowstone, MaterialIds.ichor, MaterialIds.quartz, MaterialIds.blaze, MaterialIds.magma
     ).addOptional(MaterialIds.necronium);
@@ -227,6 +226,6 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry Material Tag Provider";
+    return "Tinkers' Construct Material Tag Provider";
   }
 }

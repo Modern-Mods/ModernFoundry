@@ -1,17 +1,10 @@
 {
   "type": "modernfoundry:table_duplication",
-  "id": "modernfoundry:smeltery/casting/diamond/smithing_template",
-  "cast": [
-    {
-      "item": "minecraft:netherite_upgrade_smithing_template"
-    },
-    {
-      "tag": "minecraft:trim_templates"
-    }
-  ],
+  "cast": "minecraft:netherite_upgrade_smithing_template",
   "cooling_time": 186,
   "fluid": {
     "amount": 500,
     "tag": "modernfoundry:molten_diamond"
-  }
+  },
+  "id": "modernfoundry:smeltery/casting/diamond/smithing_template"
 }

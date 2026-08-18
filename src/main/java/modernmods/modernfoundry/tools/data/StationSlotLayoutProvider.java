@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.tools.data;
 
+import modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -22,7 +23,7 @@ public class StationSlotLayoutProvider extends AbstractStationSlotLayoutProvider
   @Override
   protected void addLayouts() {
     // stations
-    Ingredient modifiable = Ingredient.of(TinkerTags.Items.MODIFIABLE);
+    Ingredient modifiable = LazyTagIngredient.of(TinkerTags.Items.MODIFIABLE);
     define(TinkerTables.tinkerStation)
       .translationKey(TConstruct.makeTranslationKey("gui", "tinker_station.repair_limited"))
       .icon(Patterns.REPAIR)
@@ -188,6 +189,6 @@ public class StationSlotLayoutProvider extends AbstractStationSlotLayoutProvider
 
   @Override
   public String getName() {
-    return "Modern Foundry Station Slot Layouts";
+    return "Tinkers' Construct Tinker Station Slot Layouts";
   }
 }

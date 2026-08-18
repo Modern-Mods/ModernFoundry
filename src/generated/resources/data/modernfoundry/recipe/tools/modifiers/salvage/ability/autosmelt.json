@@ -6,11 +6,7 @@
     "abilities": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/harvest"
-    },
-    {
-      "tag": "modernfoundry:modifiable/fishing_rods"
-    }
+    "#modernfoundry:modifiable/harvest",
+    "#modernfoundry:modifiable/fishing_rods"
   ]
 }

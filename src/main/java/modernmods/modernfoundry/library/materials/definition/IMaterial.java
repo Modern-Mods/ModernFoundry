@@ -4,7 +4,7 @@ import modernmods.modernfoundry.TConstruct;
 
 /**
  * Base interface for all materials.
- * TODO 1.21: Make {@link modernmods.hilt.registration.object.IdAwareObject}
+ * TODO 1.21: Make {@link modernmods.mantle.registration.object.IdAwareObject}
  */
 public interface IMaterial extends Comparable<IMaterial> {
   /** ID of fallback material */
@@ -17,7 +17,7 @@ public interface IMaterial extends Comparable<IMaterial> {
    * <p>
    * The fallback material needs to have all part types associated with it.
    */
-  IMaterial UNKNOWN = new Material(UNKNOWN_ID, false, true);
+  IMaterial UNKNOWN = new Material(UNKNOWN_ID.getIdentifier(), false, true);
 
   /**
    * Used to identify the material in NBT and other constructs.

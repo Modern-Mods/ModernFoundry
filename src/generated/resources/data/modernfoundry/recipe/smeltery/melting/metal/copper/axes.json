@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/copper/axes",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/copper/tools_costing_3"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/copper/tools_costing_3"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/copper/axes",
+  "ingredient": "#modernfoundry:melting/copper/tools_costing_3",
   "result": {
     "amount": 270,
     "tag": "c:molten_copper",

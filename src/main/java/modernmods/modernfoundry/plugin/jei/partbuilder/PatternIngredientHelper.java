@@ -3,7 +3,7 @@ package modernmods.modernfoundry.plugin.jei.partbuilder;
 import mezz.jei.api.ingredients.IIngredientHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.UidContext;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import modernmods.modernfoundry.library.recipe.partbuilder.Pattern;
 import modernmods.modernfoundry.plugin.jei.TConstructJEIConstants;
 
@@ -24,13 +24,13 @@ public class PatternIngredientHelper implements IIngredientHelper<Pattern> {
   }
 
   @Override
-  public String getUniqueId(Pattern pattern, UidContext context) {
+  public Object getUid(Pattern pattern, UidContext context) {
     return pattern.toString();
   }
 
   @Override
-  public ResourceLocation getResourceLocation(Pattern pattern) {
-    return pattern;
+  public Identifier getIdentifier(Pattern pattern) {
+    return pattern.getIdentifier();
   }
 
   @Override

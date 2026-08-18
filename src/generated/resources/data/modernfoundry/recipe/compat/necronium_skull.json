@@ -1,20 +1,18 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:compat/necronium_skull",
-  "cast": {
-    "item": "minecraft:wither_skeleton_skull"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/uranium"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "minecraft:wither_skeleton_skull",
+  "cast_consumed": true,
   "cooling_time": 106,
   "fluid": {
     "amount": 270,
     "tag": "c:molten_uranium"
   },
+  "id": "modernfoundry:compat/necronium_skull",
   "result": "modernfoundry:necronium_head"
 }

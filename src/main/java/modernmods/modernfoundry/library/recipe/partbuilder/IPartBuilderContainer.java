@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.recipe.partbuilder;
 
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.recipe.container.ISingleStackContainer;
+import modernmods.mantle.recipe.container.ISingleStackContainer;
 import modernmods.modernfoundry.library.recipe.material.IMaterialValue;
 
 import javax.annotation.Nullable;
@@ -27,7 +27,7 @@ public interface IPartBuilderContainer extends ISingleStackContainer {
    * Gets the currently selected pattern item
    * @return
    */
-  //ResourceLocation getPattern();
+  //Identifier getPattern();
 
   /** @deprecated use {{@link #getStack()}} */
   @Deprecated

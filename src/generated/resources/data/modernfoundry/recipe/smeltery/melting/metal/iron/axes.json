@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:damagable_melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/axes",
-  "ingredient": {
-    "tag": "modernfoundry:melting/iron/tools_costing_3"
-  },
+  "ingredient": "#modernfoundry:melting/iron/tools_costing_3",
   "result": {
     "amount": 270,
     "tag": "c:molten_iron",

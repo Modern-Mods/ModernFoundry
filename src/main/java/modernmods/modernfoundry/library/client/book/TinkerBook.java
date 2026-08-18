@@ -1,12 +1,15 @@
 package modernmods.modernfoundry.library.client.book;
 
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonParseException;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.network.chat.Component;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.client.book.BookLoader;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.repository.FileRepository;
-import modernmods.hilt.client.book.transformer.BookTransformer;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.client.book.BookLoader;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.repository.FileRepository;
+import modernmods.mantle.client.book.transformer.BookTransformer;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.client.book.content.AmmoMaterialContent;
 import modernmods.modernfoundry.library.client.book.content.ArmorMaterialContent;
@@ -24,6 +27,7 @@ import modernmods.modernfoundry.library.client.book.sectiontransformer.ToolSecti
 import modernmods.modernfoundry.library.client.book.sectiontransformer.ToolTagInjectorTransformer;
 import modernmods.modernfoundry.library.client.book.sectiontransformer.materials.TierRangeMaterialSectionTransformer;
 import modernmods.modernfoundry.library.materials.IMaterialRegistry;
+import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.shared.item.TinkerBookItem.BookType;
@@ -63,7 +67,9 @@ public class TinkerBook extends BookData {
    * Initializes the books
    */
   public static void initBook() {
-    BookLoader.registerGsonTypeAdapter(Component.class, new Component.SerializerAdapter(RegistryAccess.EMPTY));
+    // Component.SerializerAdapter was removed in 26.1; deserialize via the codec instead
+    BookLoader.registerGsonTypeAdapter(Component.class, (JsonDeserializer<Component>) (json, typeOfT, context) ->
+      ComponentSerialization.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow(JsonParseException::new));
 
     // register page types
     BookLoader.registerPageType(MeleeHarvestMaterialContent.ID, MeleeHarvestMaterialContent.class);
@@ -92,7 +98,7 @@ public class TinkerBook extends BookData {
         .thenComparing(hasStatType(StatlessMaterialStats.ARROW_SHAFT)),
       StatlessMaterialStats.ARROW_HEAD.getIdentifier(), StatlessMaterialStats.ARROW_SHAFT.getIdentifier(), StatlessMaterialStats.FLETCHING.getIdentifier());
     TierRangeMaterialSectionTransformer.registerMaterialType(getResource("armor"), ArmorMaterialContent::new,
-      Comparator.comparing(mat -> {
+      Comparator.comparing((IMaterial mat) -> {
         // ordering:
         // 1: cuirass exclusive
         // 2: cuirass + maille
@@ -108,13 +114,13 @@ public class TinkerBook extends BookData {
           return registry.getMaterialStats(id, StatlessMaterialStats.MAILLE.getIdentifier()).isPresent() ? 2 : 1;
         }
         // anything with plating goes 4th
-        if (registry.getMaterialStats(id, CHESTPLATE.getId()).isPresent()) {
+        if (registry.getMaterialStats(id, CHESTPLATE.getStatId()).isPresent()) {
           return 4;
         }
         // if it has maille, it goes before plating. Otherwise (shield cores), it goes after
         return registry.getMaterialStats(id, StatlessMaterialStats.MAILLE.getIdentifier()).isPresent() ? 3 : 5;
       }),
-      HELMET.getId(), CHESTPLATE.getId(), LEGGINGS.getId(), BOOTS.getId(), SHIELD.getId(),
+      HELMET.getStatId(), CHESTPLATE.getStatId(), LEGGINGS.getStatId(), BOOTS.getStatId(), SHIELD.getStatId(),
       StatlessMaterialStats.MAILLE.getIdentifier(), StatlessMaterialStats.CUIRASS.getIdentifier(),
       StatlessMaterialStats.SHIELD_CORE.getIdentifier());
     TierRangeMaterialSectionTransformer.registerMaterialType(getResource("skull"), ContentMaterialSkull::new,
@@ -166,8 +172,8 @@ public class TinkerBook extends BookData {
    * @param id   Book ID
    */
   @SuppressWarnings("removal")
-  private static void addStandardData(BookData book, ResourceLocation id, BookTransformer... extraTransformers) {
-    book.addRepository(new FileRepository(ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "book/" + id.getPath())));
+  private static void addStandardData(BookData book, Identifier id, BookTransformer... extraTransformers) {
+    book.addRepository(new FileRepository(Identifier.fromNamespaceAndPath(id.getNamespace(), "book/" + id.getPath())));
     book.addTransformer(BookTransformer.indexTranformer());
     book.addTransformer(TierRangeMaterialSectionTransformer.INSTANCE);
 

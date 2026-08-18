@@ -2,24 +2,24 @@ package modernmods.modernfoundry.library.json;
 
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.stats.StatType;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.TierSortingRegistry;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.common.RegistryLoadable;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.common.RegistryLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialManager;
 import modernmods.modernfoundry.library.modifiers.Modifier;
@@ -44,7 +44,7 @@ public class TinkerLoadables {
   }, (operation, error) -> OPERATION_ENUM.getString(operation));
   public static final StringLoadable<EquipmentSlot> EQUIPMENT_SLOT = new EnumLoadable<>(EquipmentSlot.class);
   public static final Loadable<Set<EquipmentSlot>> EQUIPMENT_SLOT_SET = EQUIPMENT_SLOT.set();
-  public static final StringLoadable<ArmorItem.Type> ARMOR_SLOT = new EnumLoadable<>(ArmorItem.Type.class);
+  public static final StringLoadable<ArmorType> ARMOR_SLOT = new EnumLoadable<>(ArmorType.class);
   public static final StringLoadable<LightLayer> LIGHT_LAYER = new EnumLoadable<>(LightLayer.class);
   public static final StringLoadable<InteractionSource> INTERACTION_SOURCE = new EnumLoadable<>(InteractionSource.class);
   public static final StringLoadable<OreRateType> ORE_RATE_TYPE = new EnumLoadable<>(OreRateType.class);
@@ -52,7 +52,7 @@ public class TinkerLoadables {
 
   /* Registries */
   public static final StringLoadable<StatType<?>> STAT_TYPE = new RegistryLoadable<>(BuiltInRegistries.STAT_TYPE);
-  public static final StringLoadable<ResourceLocation> CUSTOM_STAT = new RegistryLoadable<>(BuiltInRegistries.CUSTOM_STAT);
+  public static final StringLoadable<Identifier> CUSTOM_STAT = new RegistryLoadable<>(BuiltInRegistries.CUSTOM_STAT);
   public static final StringLoadable<RecipeType<?>> RECIPE_TYPE = new RegistryLoadable<>(BuiltInRegistries.RECIPE_TYPE);
 
   /* Tag keys */
@@ -66,15 +66,15 @@ public class TinkerLoadables {
   public static final StringLoadable<SimpleParticleType> SIMPLE_PARTICLE = instance(Loadables.PARTICLE_TYPE, SimpleParticleType.class, "Expected particle type to be instance of SimpleParticleType");
   public static final StringLoadable<BlockItem> BLOCK_ITEM = instance(Loadables.ITEM, BlockItem.class, "Expected item to be instance of BlockItem");
 
-  /** Tier loadable from the forge tier sorting registry */
-  public static final StringLoadable<Tier> TIER = Loadables.RESOURCE_LOCATION.xmap((id, error) -> {
-    Tier tier = TierSortingRegistry.byName(id);
+  /** Tier loadable from the tier sorting registry */
+  public static final StringLoadable<ToolMaterial> TIER = Loadables.RESOURCE_LOCATION.xmap((id, error) -> {
+    ToolMaterial tier = TierSortingRegistry.byName(id);
     if (tier != null) {
       return tier;
     }
     throw error.create("Unknown harvest tier " + id);
   }, (tier, error) -> {
-    ResourceLocation id = TierSortingRegistry.getName(tier);
+    Identifier id = TierSortingRegistry.getName(tier);
     if (id != null) {
       return id;
     }

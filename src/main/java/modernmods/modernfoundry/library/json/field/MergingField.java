@@ -3,8 +3,8 @@ package modernmods.modernfoundry.library.json.field;
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.util.typed.TypedMap;
 
 /**
  * Field which creates a JSON object to contain its value.

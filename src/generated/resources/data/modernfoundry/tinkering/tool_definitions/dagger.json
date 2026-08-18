@@ -63,15 +63,8 @@
       ]
     },
     {
-      "type": "modernfoundry:tool_actions",
-      "tool_actions": [
-        "sword_dig",
-        "hoe_dig"
-      ]
-    },
-    {
       "type": "modernfoundry:is_effective",
-      "predicate_type": "hilt:tag",
+      "predicate_type": "mantle:tag",
       "tag": "modernfoundry:mineable/dagger"
     },
     {
@@ -80,7 +73,7 @@
         "minecraft:cobweb"
       ],
       "modifier": 7.5,
-      "predicate_type": "hilt:set"
+      "predicate_type": "mantle:set"
     },
     {
       "type": "modernfoundry:fixed_material_name",

@@ -6,19 +6,16 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
+      "#modernfoundry:modifiable/durability",
       {
-        "tag": "modernfoundry:modifiable/durability"
-      },
-      [
-        {
-          "tag": "modernfoundry:modifiable/interactable"
-        },
-        {
-          "tag": "modernfoundry:modifiable/armor/boots"
-        }
-      ]
+        "neoforge:ingredient_type": "neoforge:compound",
+        "children": [
+          "#modernfoundry:modifiable/interactable",
+          "#modernfoundry:modifiable/armor/boots"
+        ]
+      }
     ]
   }
 }

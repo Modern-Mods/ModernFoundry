@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:geore_medium_buds/iron"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/geore/bud_medium",
   "byproducts": [
     {
       "amount": 180,
@@ -8,15 +13,8 @@
       "tag": "c:molten_steel"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:geore_medium_buds/iron"
-    }
-  ],
-  "ingredient": {
-    "tag": "c:geore_medium_buds/iron"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/iron/geore/bud_medium",
+  "ingredient": "#c:geore_medium_buds/iron",
   "rate": "metal",
   "result": {
     "amount": 180,

@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/ability/strength",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "modernfoundry:ichor_slime_crystal"
-  },
+  "id": "modernfoundry:tools/modifiers/ability/strength",
+  "input": "modernfoundry:ichor_slime_crystal",
   "level": {
     "max": 2
   },
@@ -14,7 +12,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/chestplate"
-  }
+  "tools": "#modernfoundry:modifiable/armor/chestplate"
 }

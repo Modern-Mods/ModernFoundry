@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -16,10 +16,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -43,7 +43,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /** Module that sets an attribute value on the entity based on the largest level equipped. TODO: tooltip value on max piece. */
-public record MaxArmorAttributeModule(String unique, Attribute attribute, Operation operation, LevelingValue amount, ResourceLocation id, ComputableDataKey<ModifierMaxLevel> maxLevel, boolean allowBroken, @Nullable TagKey<Item> heldTag, TooltipStyle tooltipStyle, ModifierCondition<IToolStackView> condition) implements EquipmentChangeModifierHook, ModifierModule, MaxArmorLevelModule, TooltipModifierHook {
+public record MaxArmorAttributeModule(String unique, Attribute attribute, Operation operation, LevelingValue amount, Identifier id, ComputableDataKey<ModifierMaxLevel> maxLevel, boolean allowBroken, @Nullable TagKey<Item> heldTag, TooltipStyle tooltipStyle, ModifierCondition<IToolStackView> condition) implements EquipmentChangeModifierHook, ModifierModule, MaxArmorLevelModule, TooltipModifierHook {
   public static final RecordLoadable<MaxArmorAttributeModule> LOADER = RecordLoadable.create(
     new AttributeUniqueField<>(MaxArmorAttributeModule::unique),
     Loadables.ATTRIBUTE.requiredField("attribute", MaxArmorAttributeModule::attribute),
@@ -60,7 +60,7 @@ public record MaxArmorAttributeModule(String unique, Attribute attribute, Operat
   public MaxArmorAttributeModule {}
 
   private MaxArmorAttributeModule(String unique, Attribute attribute, Operation operation, LevelingValue amount, boolean allowBroken, @Nullable TagKey<Item> heldTag, TooltipStyle tooltipStyle, ModifierCondition<IToolStackView> condition) {
-    this(unique, attribute, operation, amount, ResourceLocation.fromNamespaceAndPath("modernfoundry", unique.isEmpty() ? "max_armor_attribute" : unique.replace(':', '.')), MaxArmorLevelModule.createKey(BuiltInRegistries.ATTRIBUTE.getKey(attribute)), allowBroken, heldTag, tooltipStyle, condition);
+    this(unique, attribute, operation, amount, Identifier.fromNamespaceAndPath("modernfoundry", unique.isEmpty() ? "max_armor_attribute" : unique.replace(':', '.')), MaxArmorLevelModule.createKey(BuiltInRegistries.ATTRIBUTE.getKey(attribute)), allowBroken, heldTag, tooltipStyle, condition);
   }
 
   @Override
@@ -126,7 +126,7 @@ public record MaxArmorAttributeModule(String unique, Attribute attribute, Operat
     /**
      * Sets the unique string using a resource location
      */
-    public Builder uniqueFrom(ResourceLocation id) {
+    public Builder uniqueFrom(Identifier id) {
       return unique(id.getNamespace() + ".modifier." + id.getPath());
     }
 

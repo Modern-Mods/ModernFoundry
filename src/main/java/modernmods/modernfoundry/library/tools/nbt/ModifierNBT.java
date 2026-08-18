@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.library.modifiers.IncrementalModifierEntry;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -229,13 +229,13 @@ public class ModifierNBT implements Iterable<ModifierEntry> {
     }
 
     ListTag listNBT = (ListTag)inbt;
-    if (listNBT.getElementType() != Tag.TAG_COMPOUND) {
+    if (listNBT.isEmpty() || listNBT.getCompound(0).isEmpty()) {
       return EMPTY;
     }
 
     ImmutableList.Builder<ModifierEntry> builder = ImmutableList.builder();
     for (int i = 0; i < listNBT.size(); i++) {
-      ModifierEntry entry = ModifierEntry.readFromNBT(listNBT.getCompound(i));
+      ModifierEntry entry = ModifierEntry.readFromNBT(listNBT.getCompoundOrEmpty(i));
       if (entry != ModifierEntry.EMPTY) {
         builder.add(entry);
       }

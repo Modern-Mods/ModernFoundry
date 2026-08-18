@@ -20,7 +20,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:pick_head_cast"
+      "id": "modernfoundry:pick_head_cast"
     },
     "show_toast": true,
     "title": {

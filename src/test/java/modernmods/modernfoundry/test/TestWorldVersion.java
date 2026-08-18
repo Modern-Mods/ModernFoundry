@@ -23,7 +23,7 @@ public class TestWorldVersion implements WorldVersion {
 
   @Override
   public String getName() {
-    return "Modern Foundry Automated Test";
+    return "Tinkers' Construct Automated Test";
   }
 
   @Override

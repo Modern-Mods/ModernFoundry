@@ -1,15 +1,12 @@
 package modernmods.modernfoundry.library.modifiers;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.With;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.modifiers.util.LazyModifier;
 import modernmods.modernfoundry.library.modifiers.util.OptionalModifier;
@@ -20,7 +17,6 @@ import javax.annotation.Nullable;
 /**
  * Data class holding a modifier with a level
  */
-@RequiredArgsConstructor
 public class ModifierEntry implements Comparable<ModifierEntry> {
   /** Key for modifier IDs in NBT and JSON */
   public static final String TAG_MODIFIER = "name";
@@ -60,8 +56,22 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
   /** Modifier instance */
   protected final LazyModifier modifier;
   /** Current level */
-  @Getter @With
   protected final int level;
+
+  public ModifierEntry(LazyModifier modifier, int level) {
+    this.modifier = modifier;
+    this.level = level;
+  }
+
+  /** Current level */
+  public int getLevel() {
+    return level;
+  }
+
+  /** Returns a copy of this entry with the given level */
+  public ModifierEntry withLevel(int level) {
+    return this.level == level ? this : new ModifierEntry(this.modifier, level);
+  }
 
   public ModifierEntry(ModifierId id, int level) {
     this(new LazyModifier(id), level);
@@ -203,12 +213,12 @@ public class ModifierEntry implements Comparable<ModifierEntry> {
 
   /** Reads a modifier entry from NBT */
   public static ModifierEntry readFromNBT(CompoundTag tag) {
-    if (tag.contains(TAG_MODIFIER, Tag.TAG_STRING)) {
-      ModifierId id = ModifierId.tryParse(tag.getString(TAG_MODIFIER));
-      int level = tag.getInt(TAG_LEVEL);
+    if (tag.contains(TAG_MODIFIER)) {
+      ModifierId id = ModifierId.tryParse(tag.getStringOr(TAG_MODIFIER, ""));
+      int level = tag.getIntOr(TAG_LEVEL, 0);
       if (id != null && level > 0) {
         // incremental just has more tags, if they are missing they will just 0 and of will give us the base class
-        return IncrementalModifierEntry.of(id, level, tag.getInt(TAG_AMOUNT), tag.getInt(TAG_NEEDED));
+        return IncrementalModifierEntry.of(id, level, tag.getIntOr(TAG_AMOUNT, 0), tag.getIntOr(TAG_NEEDED, 0));
       }
     }
     return EMPTY;

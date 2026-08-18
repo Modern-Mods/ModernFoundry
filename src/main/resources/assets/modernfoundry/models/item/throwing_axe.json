@@ -1,13 +1,7 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "neoforge:item/default-tool",
   "textures": {
-    "head":  "modernfoundry:item/tool/ammo/axe_head",
+    "head": "modernfoundry:item/tool/ammo/axe_head",
     "shaft": "modernfoundry:item/tool/ammo/arrow_shaft"
-  },
-  "modifier_maps": ["modernfoundry:throwing_axe"],
-  "parts": [
-    { "name": "shaft", "index": 1 },
-    { "name": "head",  "index": 0 }
-  ]
+  }
 }

@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import modernmods.hilt.data.loadable.ErrorFactory;
+import modernmods.mantle.data.loadable.ErrorFactory;
 import modernmods.modernfoundry.library.module.ModuleHook;
 import modernmods.modernfoundry.library.module.WithHooks;
 import modernmods.modernfoundry.library.tools.SlotType;

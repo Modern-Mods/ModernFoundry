@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/invar/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/invar"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/invar"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/block",
+  "ingredient": "#c:storage_blocks/invar",
   "result": {
     "amount": 810,
     "tag": "c:molten_invar"

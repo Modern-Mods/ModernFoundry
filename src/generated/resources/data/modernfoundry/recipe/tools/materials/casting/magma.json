@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/magma",
   "fluid": {
     "amount": 250,
     "tag": "c:magma"
   },
+  "id": "modernfoundry:tools/materials/casting/magma",
   "output": "modernfoundry:magma",
   "temperature": 300
 }

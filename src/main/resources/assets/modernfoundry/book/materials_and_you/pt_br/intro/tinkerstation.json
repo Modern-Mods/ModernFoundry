@@ -1,5 +1,5 @@
 {
-  "title": "Estação do Modern Foundry",
+  "title": "Estação do Tinker",
   "image": {
     "file": "modernfoundry:book/images/tinkerstation.png",
     "width": 135,
@@ -7,7 +7,7 @@
   },
   "text": [
     {
-      "text": "Coloque isso aqui, aquilo ali e, óh!, isso é ao contrário. É melhor continuar Modern Foundry.",
+      "text": "Coloque isso aqui, aquilo ali e, óh!, isso é ao contrário. É melhor continuar tinkerando.",
       "paragraph": true
     }
 	]

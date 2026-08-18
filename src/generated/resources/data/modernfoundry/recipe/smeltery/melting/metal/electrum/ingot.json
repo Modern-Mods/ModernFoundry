@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/electrum/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/electrum"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/electrum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/ingot",
+  "ingredient": "#c:ingots/electrum",
   "result": {
     "amount": 90,
     "tag": "c:molten_electrum"

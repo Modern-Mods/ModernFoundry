@@ -1,23 +1,23 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/blocking",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/blocking",
   "inputs": [
     {
-      "tag": "minecraft:planks"
+      "ingredient": "#minecraft:planks"
     },
     {
-      "tag": "c:ingots/steel"
+      "ingredient": "#c:ingots/steel"
     },
     {
-      "tag": "minecraft:planks"
+      "ingredient": "#minecraft:planks"
     },
     {
-      "tag": "minecraft:planks"
+      "ingredient": "#minecraft:planks"
     },
     {
-      "tag": "minecraft:planks"
+      "ingredient": "#minecraft:planks"
     }
   ],
   "level": 1,
@@ -26,25 +26,20 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:difference",
+    "neoforge:ingredient_type": "neoforge:difference",
     "base": {
-      "type": "neoforge:intersection",
+      "neoforge:ingredient_type": "neoforge:intersection",
       "children": [
-        {
-          "tag": "modernfoundry:modifiable/interactable/charge"
-        },
-        {
-          "tag": "modernfoundry:modifiable/durability"
-        }
+        "#modernfoundry:modifiable/interactable/charge",
+        "#modernfoundry:modifiable/durability"
       ]
     },
-    "subtracted": [
-      {
-        "tag": "modernfoundry:modifiable/melee/parry"
-      },
-      {
-        "tag": "modernfoundry:modifiable/shields"
-      }
-    ]
+    "subtracted": {
+      "neoforge:ingredient_type": "neoforge:compound",
+      "children": [
+        "#modernfoundry:modifiable/melee/parry",
+        "#modernfoundry:modifiable/shields"
+      ]
+    }
   }
 }

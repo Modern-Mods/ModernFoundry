@@ -1,5 +1,5 @@
 {
-  "_comment": "Modern Foundry Common",
+  "_comment": "Tinkers Common",
 
   "block.modernfoundry.sky_slime": "Небослизовий блок",
   "block.modernfoundry.sky_slime.tooltip": "Прилипає і до слизу, і до меду",
@@ -170,10 +170,10 @@
 
   "item.modernfoundry.materials_and_you": "Матеріали й Ви",
   "item.modernfoundry.materials_and_you.tooltip": "Вступна книга про інструменти й матеріали\nАвтор: Selena",
-  "item.modernfoundry.encyclopedia": "Енциклопедія Modern Foundry",
-  "item.modernfoundry.encyclopedia.tooltip": "Довідник, необхідний кожному Modern Foundry\nАвтор: Selena",
+  "item.modernfoundry.encyclopedia": "Енциклопедія інженерії",
+  "item.modernfoundry.encyclopedia.tooltip": "Довідник, необхідний кожному інженерові\nАвтор: Selena",
 
-  "item.modernfoundry.tinkers_gadgetry": "Modern Foundry причандали",
+  "item.modernfoundry.tinkers_gadgetry": "Інженерні причандали",
   "item.modernfoundry.tinkers_gadgetry.tooltip": "Книга про використання слизу в щоденних завданнях\nАвтор: Melvin",
 
   "item.modernfoundry.puny_smelting": "Мізерне плавлення",
@@ -263,7 +263,7 @@
   "item.modernfoundry.copper_can.contents": "Містить: 1 злиток (%s)",
 
 
-  "_comment": "Modern Foundry Patterns",
+  "_comment": "Tinkers Patterns",
 
   "pattern.modernfoundry.repair_kit": "Ремонтний набір",
 
@@ -293,7 +293,7 @@
   "pattern.modernfoundry.tough_handle": "Міцний стержень",
 
 
-  "_comment": "Modern Foundry Gold Casts",
+  "_comment": "Tinkers Gold Casts",
 
   "item.modernfoundry.blank_cast": "Пуста золота форма",
   "item.modernfoundry.ingot_cast": "Золота форма для злитка",
@@ -334,7 +334,7 @@
   "item.modernfoundry.tough_handle_cast": "Золота форма для міцного стержня",
 
 
-  "_comment": "Modern Foundry Sand Casts",
+  "_comment": "Tinkers Sand Casts",
 
   "item.modernfoundry.blank_sand_cast": "Пуста піщана форма",
   "item.modernfoundry.ingot_sand_cast": "Піщана форма для злитка",
@@ -375,7 +375,7 @@
   "item.modernfoundry.tough_handle_sand_cast": "Піщана форма для міцного стержня",
 
 
-  "_comment": "Modern Foundry Red Sand Casts",
+  "_comment": "Tinkers Red Sand Casts",
 
   "item.modernfoundry.blank_red_sand_cast": "Пуста червона піщана форма",
   "item.modernfoundry.ingot_red_sand_cast": "Червона піщана форма для злитка",
@@ -416,7 +416,7 @@
   "item.modernfoundry.tough_handle_red_sand_cast": "Червона піщана форма для міцного стержня",
 
 
-  "_comment": "Modern Foundry Fluids",
+  "_comment": "Tinkers Fluids",
 
   "block.modernfoundry.blazing_blood_fluid": "Пломениста кров",
   "fluid.modernfoundry.blazing_blood": "Пломениста кров",
@@ -576,10 +576,10 @@
   "fluid.modernfoundry.flowing_molten_slimesteel": "Текуча розплавлена слизосталь",
   "item.modernfoundry.molten_slimesteel_bucket": "Відро розплавленої слизосталі",
 
-  "block.modernfoundry.molten_tinkers_bronze_fluid": "Розплавлена Modern Foundry бронза",
-  "fluid.modernfoundry.molten_tinkers_bronze": "Розплавлена Modern Foundry бронза",
-  "fluid.modernfoundry.flowing_molten_tinkers_bronze": "Текуча розплавлена Modern Foundry бронза",
-  "item.modernfoundry.molten_tinkers_bronze_bucket": "Відро розплавленої Modern Foundry бронзи",
+  "block.modernfoundry.molten_tinkers_bronze_fluid": "Розплавлена інженерова бронза",
+  "fluid.modernfoundry.molten_tinkers_bronze": "Розплавлена інженерова бронза",
+  "fluid.modernfoundry.flowing_molten_tinkers_bronze": "Текуча розплавлена інженерова бронза",
+  "item.modernfoundry.molten_tinkers_bronze_bucket": "Відро розплавленої інженерової бронзи",
   
   "block.modernfoundry.molten_amethyst_bronze_fluid": "Розплавлена аметистова бронза",
   "fluid.modernfoundry.molten_amethyst_bronze": "Розплавлена аметистова бронза",
@@ -747,7 +747,7 @@
   "item.modernfoundry.molten_refined_obsidian_bucket": "Відро розплавленого очищеного обсидіану",
 
 
-  "_comment": "Modern Foundry Gadgets",
+  "_comment": "Tinkers Gadgets",
 
   "block.modernfoundry.punji": "Бамбукові кілки",
   "block.modernfoundry.punji.tooltip": "Гострені! Також тримаються на стіні.",
@@ -801,20 +801,20 @@
   "block.modernfoundry.zombified_piglin_head": "Голова зомбованого піґліна",
 
 
-  "_comment": "Modern Foundry Tables",
+  "_comment": "Tinkers Tables",
 
   "block.modernfoundry.crafting_station": "Верстат",
 
-  "block.modernfoundry.tinker_station": "Modern Foundry станція",
-  "block.modernfoundry.tinkers_anvil": "Modern Foundry ковадло",
-  "block.modernfoundry.scorched_anvil": "Modern Foundry ковадло",
+  "block.modernfoundry.tinker_station": "Інженерна станція",
+  "block.modernfoundry.tinkers_anvil": "Інженерове ковадло",
+  "block.modernfoundry.scorched_anvil": "Інженерове ковадло",
 
   "block.modernfoundry.part_builder": "Збирач деталей",
 
   "block.modernfoundry.part_chest": "Скриня для деталей",
   "block.modernfoundry.part_chest.tooltip": "Зберігає до 256-ти різних деталей інструментів",
 
-  "block.modernfoundry.tinkers_chest": "Modern Foundry скриня",
+  "block.modernfoundry.tinkers_chest": "Інженерова скриня",
   "block.modernfoundry.tinkers_chest.tooltip": "Зберігає до 64-ьох стаків 16-ти предметів",
 
   "block.modernfoundry.cast_chest": "Скриня для форм",
@@ -822,7 +822,7 @@
 
   "item.modernfoundry.pattern": "Шаблон",
 
-  "_comment": "Modern Foundry Tools",
+  "_comment": "Tinkers Tools",
 
   "item.modernfoundry.pickaxe": "Кайло",
   "item.modernfoundry.sledge_hammer": "Молот-вершляг",
@@ -874,7 +874,7 @@
   "item.modernfoundry.slime_helmet.material.modernfoundry.pig_iron":      "Слизочереп зомбованого піґліна",
 
 
-  "_comment": "Modern Foundry Tool Parts",
+  "_comment": "Tinkers Tool Parts",
 
   "item.modernfoundry.repair_kit": "Ремонтний набір",
 
@@ -966,7 +966,7 @@
   "multiblock.modernfoundry.tiny.no_fuel_tank": "Має бути поставлено над паливним резервуаром або нагрівачем, щоб працювати",
 
 
-  "_comment": "Modern Foundry Smeltery",
+  "_comment": "Tinkers Smeltery",
 
   "block.modernfoundry.grout": "Цемент",
   "block.modernfoundry.grout.tooltip": "Звичайний мент",
@@ -1053,7 +1053,7 @@
   "block.modernfoundry.seared_chute.tooltip": "Вхід/вихід предметів для плавильні",
 
 
-  "_comment": "Modern Foundry Foundry",
+  "_comment": "Tinkers Foundry",
 
   "block.modernfoundry.nether_grout": "Незерський цемент",
   "block.modernfoundry.nether_grout.tooltip": "Мент із пекла",
@@ -1140,7 +1140,7 @@
   "gui.modernfoundry.fluid.hold_shift": "Тримайте §e§oShift§r§7 для вимірювання у відрах",
 
 
-  "_comment": "Modern Foundry World",
+  "_comment": "Tinkers World",
 
   "entity.modernfoundry.earth_slime": "Землеслимак",
   "item.modernfoundry.earth_slime_spawn_egg": "Яйце виклику землеслимака",
@@ -1344,7 +1344,7 @@
   "material.modernfoundry.flint": "Кремінь",
   "material.modernfoundry.flint.basalt": "Базальт",
   "material.modernfoundry.flint.format": "%s з кременю",
-  "material.modernfoundry.flint.flavor": "Запалить вогник у серці Modern Foundry!",
+  "material.modernfoundry.flint.flavor": "Запалить вогник у серці Інженера!",
   "material.modernfoundry.flint.encyclopedia": "Збільшує шкоду на чверть квардратного кореня втраченої міцности",
 
   "material.modernfoundry.bone": "Кістка",
@@ -1364,7 +1364,7 @@
   "material.modernfoundry.string": "Нитка",
   "material.modernfoundry.string.format": "%s з нитки",
   "material.modernfoundry.string.flavor": "Теоретично найкращий матеріал.",
-  "material.modernfoundry.string.encyclopedia": "Дозволяє ремонтувати інструмент ниткою на Modern Foundry станції чи верстаку",
+  "material.modernfoundry.string.encyclopedia": "Дозволяє ремонтувати інструмент ниткою на інженерній станції чи верстаку",
   "material.modernfoundry.string.skull_flavor": "Павуки є майстрами зіллєварства, можливо, їхній секрет може допомогти мені посилити зілля...",
   "material.modernfoundry.string.skull_encyclopedia": "Змушує позитивні ефекти тривати на 25% довше",
 
@@ -1475,7 +1475,7 @@
 
   "material.modernfoundry.manyullyn": "Маньюлін",
   "material.modernfoundry.cobalt.format": "%s з маньюліну",
-  "material.modernfoundry.manyullyn.flavor": "Метал, назву яког більшість Modern Foundry ніколи правильно не вимовить. Також відомий як зореріжучий матеріал.",
+  "material.modernfoundry.manyullyn.flavor": "Метал, назву яког більшість інженерів ніколи правильно не вимовить. Також відомий як зореріжучий матеріал.",
   "material.modernfoundry.manyullyn.encyclopedia": "Надає +2 шкоди на рівень після 8 послідовних ударів",
 
   "material.modernfoundry.hepatizon": "Гепатизон",
@@ -1632,7 +1632,7 @@
 
   "_comment": "Modifiers",
 
-  "key.categories.modernfoundry": "Modern Foundry",
+  "key.category.modernfoundry.modernfoundry": "Modern Foundry",
   "key.modernfoundry.helmet_interact": "Узаємодія з шоломом",
   "key.modernfoundry.leggings_interact": "Узаємодія з наголінниками",
 
@@ -2424,29 +2424,29 @@
 
   "_comment": "GUIs",
 
-  "itemGroup.modernfoundry.general": "Modern Foundry загальні предмети",
-  "itemGroup.modernfoundry.tools": "Modern Foundry інструменти",
-  "itemGroup.modernfoundry.tool_parts": "Modern Foundry деталі",
-  "itemGroup.modernfoundry.smeltery": "Modern Foundry плавильня",
-  "itemGroup.modernfoundry.world": "Modern Foundry світ",
-  "itemGroup.modernfoundry.gadgets": "Modern Foundry причандали",
+  "itemGroup.modernfoundry.general": "Інженерові загальні предмети",
+  "itemGroup.modernfoundry.tools": "Інженерові інструменти",
+  "itemGroup.modernfoundry.tool_parts": "Інженерові деталі",
+  "itemGroup.modernfoundry.smeltery": "Інженерова плавильня",
+  "itemGroup.modernfoundry.world": "Інженерів світ",
+  "itemGroup.modernfoundry.gadgets": "Інженерові причандали",
 
   "gui.modernfoundry.crafting_station": "Верстат",
   "gui.modernfoundry.crafting_station.uncraftable": "Цей предмет зараз не може бути створений гравцем",
 
   "gui.modernfoundry.part_builder": "Збирач деталей",
-  "gui.modernfoundry.part_builder.info": "Тут ти можеш створювати інструментні деталі для справдження своїх Modern Foundry фантазій.\n\nЩоб створити деталь, просто розмістіть пустий шаблон у лівому слоті й обери бажану деталь. В инший слот покладіть матеріал, з якого ви хочете створити деталь.",
+  "gui.modernfoundry.part_builder.info": "Тут ти можеш створювати інструментні деталі для справдження своїх інженерних фантазій.\n\nЩоб створити деталь, просто розмістіть пустий шаблон у лівому слоті й обери бажану деталь. В инший слот покладіть матеріал, з якого ви хочете створити деталь.",
   "gui.modernfoundry.part_builder.material_value": "Вартість матеріалу: %s",
   "gui.modernfoundry.part_builder.cost": "Вартість шаблону: %s",
   "gui.modernfoundry.part_builder.trait": "Особливість",
   "gui.modernfoundry.part_builder.uncraftable": "Не можна сформувати",
   "gui.modernfoundry.part_builder.uncraftable.tooltip": "Матеріал не може бути скований у збирачі деталей. Потрібні инші методи, як-от лиття.",
 
-  "gui.modernfoundry.tinkers_chest": "Modern Foundry скриня",
+  "gui.modernfoundry.tinkers_chest": "Інженерова скриня",
   "gui.modernfoundry.cast_chest": "Скриня для форм",
   "gui.modernfoundry.part_chest": "Скриня для деталей",
 
-  "gui.modernfoundry.tinker_station": "Modern Foundry станція",
+  "gui.modernfoundry.tinker_station": "Інженерна станція",
   "gui.modernfoundry.tinker_station.repair_limited": "Ремонт і модифікація",
   "gui.modernfoundry.tinker_station.repair_limited.description": "Дозволяє створювати всі базові інструменти й накладати більшість модифікаторів. Оберіть макет серед кнопок зліва, щоб розпочати.",
   "gui.modernfoundry.tinker_station.repair": "Ремонт і модифікація",
@@ -2618,20 +2618,20 @@
 
 
   "_comment": "Tool Advancements",
-  "advancements.modernfoundry.tools.materials_and_you.title": "Modern Foundry у навчанні",
+  "advancements.modernfoundry.tools.materials_and_you.title": "Інженер у навчанні",
   "advancements.modernfoundry.tools.materials_and_you.description": "Створіть «Матеріали і ви», вступну книга для Modern Foundry",
   "advancements.modernfoundry.tools.part_builder.title": "Збирач деталей",
   "advancements.modernfoundry.tools.part_builder.description": "Створіть збирач деталей, ваш перший крок до створення інструментів",
   "advancements.modernfoundry.tools.make_part.title": "Деталі",
   "advancements.modernfoundry.tools.make_part.description": "Створіть свою першу деталь із шаблону й дрібки матеріалу в збирачі деталей",
-  "advancements.modernfoundry.tools.tinker_station.title": "Modern Foundry станція",
-  "advancements.modernfoundry.tools.tinker_station.description": "Створіть Modern Foundry станцію, щоб поєднувати деталі в інструменти ",
-  "advancements.modernfoundry.tools.tinker_tool.title": "Modern Foundry-новачок",
+  "advancements.modernfoundry.tools.tinker_station.title": "Інженерна станція",
+  "advancements.modernfoundry.tools.tinker_station.description": "Створіть інженерну станцію, щоб поєднувати деталі в інструменти ",
+  "advancements.modernfoundry.tools.tinker_tool.title": "Інженер-новачок",
   "advancements.modernfoundry.tools.tinker_tool.description": "Створіть свій перший інструмент",
   "advancements.modernfoundry.tools.travelers_gear.title": "Мандрівник",
   "advancements.modernfoundry.tools.travelers_gear.description": "Створи повний костюм мандрівника",
   "advancements.modernfoundry.tools.modified.title": "Модифікація",
-  "advancements.modernfoundry.tools.modified.description": "Накладіть модифікатор на Modern Foundry інструмент",
+  "advancements.modernfoundry.tools.modified.description": "Накладіть модифікатор на інженерний інструмент",
   "advancements.modernfoundry.tools.upgrade_slots.title": "Усі покращення",
   "advancements.modernfoundry.tools.upgrade_slots.description": "Надай інструментові 6 додаткових слотів для покращення за допомогою письменности, переголовлення, гармонійности, відродження та позолоти",
   "advancements.modernfoundry.tools.glass_cannon.title": "Скляна гармата",
@@ -2657,9 +2657,9 @@
   "advancements.modernfoundry.smeltery.structure.title": "Могутня плавильня",
   "advancements.modernfoundry.smeltery.structure.description": "Створіть контролер плавильні литтям міді, побудуйте плавильню й відкрийте її користувацький інтерфейс",
   "advancements.modernfoundry.smeltery.tinkers_anvil.title": "Просунута інструментальня",
-  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Створіть Modern Foundry ковадло зі сплавів плавильні!",
+  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Створіть інженерове ковадло зі сплавів плавильні!",
   "advancements.modernfoundry.smeltery.tool_forge.title": "Інструментна кузня",
-  "advancements.modernfoundry.smeltery.tool_forge.description": "Викуйте кожний широкий інструмент на Modern Foundry ковадлі",
+  "advancements.modernfoundry.smeltery.tool_forge.description": "Викуйте кожний широкий інструмент на інженеровому ковадлі",
   "advancements.modernfoundry.smeltery.abilities.title": "Майстер умінь",
   "advancements.modernfoundry.smeltery.abilities.description": "Накладіть кожне основне вміння на інструмент хоча б раз",
 
@@ -2680,8 +2680,8 @@
   "advancements.modernfoundry.foundry.encyclopedia.description": "Створіть енциклопедію матеріалів зі своїми знаннями з усіх инших книг",
 
   "_comment": "Gadget Advancements",
-  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Modern Foundry причандали",
-  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Створіть «Modern Foundry причандали», щоб почати досліджувати світ",
+  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Інженерові причандали",
+  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Створіть «Інженерові причандали», щоб почати досліджувати світ",
   "advancements.modernfoundry.world.earth_island.title": "Землеслизовий острів",
   "advancements.modernfoundry.world.earth_island.description": "Знайдіть землеслизовий острів в океані",
   "advancements.modernfoundry.world.sky_island.title": "Небослизовий острів",

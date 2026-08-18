@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:entity_melting",
-  "id": "modernfoundry:smeltery/entity_melting/water_breathing",
   "damage": 2,
   "entity": {
     "types": [
@@ -8,6 +7,7 @@
       "minecraft:pufferfish"
     ]
   },
+  "id": "modernfoundry:smeltery/entity_melting/water_breathing",
   "result": {
     "amount": 50,
     "nbt": {

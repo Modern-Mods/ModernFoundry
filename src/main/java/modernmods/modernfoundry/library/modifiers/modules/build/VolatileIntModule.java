@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.library.modifiers.modules.build;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -29,14 +29,14 @@ import java.util.List;
  * @see modernmods.modernfoundry.library.tools.definition.module.build.VolatileIntModule
  * @see VolatileFloatModule
  */
-public record VolatileIntModule(ResourceLocation flag, LevelingInt value, ModifierCondition<IToolContext> condition) implements VolatileDataModifierHook, ProjectileLaunchModifierHook, ModifierModule, ConditionalModule<IToolContext> {
+public record VolatileIntModule(Identifier flag, LevelingInt value, ModifierCondition<IToolContext> condition) implements VolatileDataModifierHook, ProjectileLaunchModifierHook, ModifierModule, ConditionalModule<IToolContext> {
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<VolatileIntModule>defaultHooks(ModifierHooks.VOLATILE_DATA);
   public static final RecordLoadable<VolatileIntModule> LOADER = RecordLoadable.create(
     Loadables.RESOURCE_LOCATION.requiredField("flag", VolatileIntModule::flag),
     LevelingInt.LOADABLE.directField(VolatileIntModule::value),
     ModifierCondition.CONTEXT_FIELD, VolatileIntModule::new);
 
-  public VolatileIntModule(ResourceLocation flag, LevelingInt value) {
+  public VolatileIntModule(Identifier flag, LevelingInt value) {
     this(flag, value, ModifierCondition.ANY_CONTEXT);
   }
 

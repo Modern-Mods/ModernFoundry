@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "modernfoundry:seared_bricks"
-    },
-    "C": {
-      "tag": "c:chests/wooden"
-    },
-    "b": {
-      "item": "modernfoundry:seared_brick"
-    },
-    "c": {
-      "tag": "modernfoundry:casts/gold"
-    }
+    "B": "modernfoundry:seared_bricks",
+    "C": "#c:chests/wooden",
+    "b": "modernfoundry:seared_brick",
+    "c": "#modernfoundry:casts/gold"
   },
   "pattern": [
     " c ",
@@ -22,6 +14,5 @@
   ],
   "result": {
     "id": "modernfoundry:cast_chest"
-  },
-  "show_notification": true
+  }
 }

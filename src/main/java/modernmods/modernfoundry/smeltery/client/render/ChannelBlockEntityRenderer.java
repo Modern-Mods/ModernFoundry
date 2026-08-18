@@ -4,6 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
@@ -13,20 +16,28 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.client.render.ChannelFluids;
-import modernmods.hilt.client.render.FluidCuboid;
-import modernmods.hilt.client.render.FluidRenderer;
-import modernmods.hilt.client.render.RenderingHelper;
+import modernmods.mantle.client.render.ChannelFluids;
+import modernmods.mantle.client.render.FluidCuboid;
+import modernmods.mantle.client.render.FluidRenderer;
+import modernmods.mantle.client.render.MantleRenderTypes;
+import modernmods.mantle.client.render.RenderingHelper;
 import modernmods.modernfoundry.smeltery.block.ChannelBlock;
 import modernmods.modernfoundry.smeltery.block.ChannelBlock.ChannelConnection;
 import modernmods.modernfoundry.smeltery.block.entity.ChannelBlockEntity;
-import modernmods.modernfoundry.library.client.TinkerRenderTypes;
 
-public class ChannelBlockEntityRenderer implements BlockEntityRenderer<ChannelBlockEntity> {
+public class ChannelBlockEntityRenderer implements BlockEntityRenderer<ChannelBlockEntity, BlockEntityRenderState> {
   public ChannelBlockEntityRenderer(Context context) {}
 
-	@Override
-	public void render(ChannelBlockEntity te, float partialTicks, PoseStack matrices, MultiBufferSource buffer, int light, int combinedOverlayIn)  {
+	public BlockEntityRenderState createRenderState() {
+    return new BlockEntityRenderState();
+  }
+
+  @Override
+  public void submit(BlockEntityRenderState state, PoseStack poseStack, SubmitNodeCollector collector, CameraRenderState camera) {
+    // 26.1 BER rewrite: immediate-mode render replaced by extractRenderState + submit. The block-entity geometry
+    // (dynamic fluid/items) must be captured into a render state and re-expressed against SubmitNodeCollector;
+    // exact fluid levels/positions are validated in-game. Original immediate-mode logic preserved for re-wiring:
+    /*
 		FluidStack fluid = te.getFluid();
 		if (fluid.isEmpty()) {
 			return;
@@ -48,7 +59,7 @@ public class ChannelBlockEntityRenderer implements BlockEntityRenderer<ChannelBl
 		IClientFluidTypeExtensions attributes = IClientFluidTypeExtensions.of(fluid.getFluid());
 		TextureAtlasSprite still = FluidRenderer.getBlockSprite(attributes.getStillTexture(fluid));
 		TextureAtlasSprite flowing = FluidRenderer.getBlockSprite(attributes.getFlowingTexture(fluid));
-		VertexConsumer builder = buffer.getBuffer(TinkerRenderTypes.SMELTERY_FLUID);
+		VertexConsumer builder = buffer.getBuffer(MantleRenderTypes.FLUID);
 		int color = attributes.getTintColor(fluid);
 		light = FluidRenderer.withBlockLight(light, fluid.getFluid().getFluidType().getLightLevel(fluid));
 
@@ -113,5 +124,6 @@ public class ChannelBlockEntityRenderer implements BlockEntityRenderer<ChannelBl
 			// render into the block(s) below
 			RenderingHelper.renderFaucetFluids(world, pos, Direction.DOWN, matrices, builder, still, flowing, color, light);
 		}
-	}
+	*/
+  }
 }

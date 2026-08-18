@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/scorched/glass_pane",
-  "cast": {
-    "item": "modernfoundry:scorched_brick"
-  },
+  "cast": "modernfoundry:scorched_brick",
   "cast_consumed": true,
   "cooling_time": 29,
   "fluid": {
     "amount": 25,
     "tag": "modernfoundry:molten_quartz"
   },
+  "id": "modernfoundry:smeltery/casting/scorched/glass_pane",
   "result": "modernfoundry:scorched_glass_pane"
 }

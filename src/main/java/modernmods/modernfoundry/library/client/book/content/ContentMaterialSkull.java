@@ -3,14 +3,15 @@ package modernmods.modernfoundry.library.client.book.content;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.screen.book.element.ItemElement;
-import modernmods.hilt.recipe.helper.RecipeHelper;
-import modernmods.hilt.util.html.HtmlSerializable;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.screen.book.element.ItemElement;
+import modernmods.mantle.recipe.helper.RecipeHelper;
+import modernmods.mantle.recipe.sync.ClientRecipeCache;
+import modernmods.mantle.util.html.HtmlSerializable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.book.elements.TinkerItemElement;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
@@ -33,7 +34,7 @@ public class ContentMaterialSkull extends AbstractMaterialContent {
   /** Translation key for skull recipe */
   private static final String SKULL_FROM = TConstruct.makeTranslationKey("book", "material.skull_from");
   /** Page ID for using this index directly */
-  public static final ResourceLocation ID = TConstruct.getResource("skull_material");
+  public static final Identifier ID = TConstruct.getResource("skull_material");
 
   /** casting recipe used to create this item */
   protected transient IDisplayableCastingRecipe skullRecipe = null;
@@ -47,7 +48,7 @@ public class ContentMaterialSkull extends AbstractMaterialContent {
   }
 
   @Override
-  public ResourceLocation getId() {
+  public Identifier getId() {
     return ID;
   }
 
@@ -67,12 +68,12 @@ public class ContentMaterialSkull extends AbstractMaterialContent {
   private IDisplayableCastingRecipe getSkullRecipe() {
     Level world = Minecraft.getInstance().level;
     if (!searchedSkullRecipe && world != null) {
-      skullRecipe = RecipeHelper.getRecipes(world.getRecipeManager(), TinkerRecipeTypes.CASTING_BASIN.get()).stream()
+      skullRecipe = RecipeHelper.getRecipes(ClientRecipeCache.getRecipeMap(), TinkerRecipeTypes.CASTING_BASIN.get()).stream()
 												 .filter(recipe -> recipe instanceof IDisplayableCastingRecipe)
 												 .map(recipe -> (IDisplayableCastingRecipe)recipe)
 												 .filter(recipe -> {
                            ItemStack output = recipe.getOutput();
-                           return output.getItem() == TinkerTools.slimesuit.get(ArmorItem.Type.HELMET) && MaterialIdNBT.from(output).getMaterial(0).getId().toString().equals(materialName);
+                           return output.getItem() == TinkerTools.slimesuit.get(ArmorType.HELMET) && MaterialIdNBT.from(output).getMaterial(0).getId().toString().equals(materialName);
                          })
 												 .findFirst()
 												 .orElse(null);

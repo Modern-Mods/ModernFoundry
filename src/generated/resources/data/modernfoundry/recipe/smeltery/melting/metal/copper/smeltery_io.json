@@ -1,19 +1,15 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/copper/smeltery_io",
   "byproducts": [
     {
       "amount": 1000,
       "fluid": "modernfoundry:seared_stone"
     }
   ],
+  "id": "modernfoundry:smeltery/melting/metal/copper/smeltery_io",
   "ingredient": [
-    {
-      "item": "modernfoundry:seared_drain"
-    },
-    {
-      "item": "modernfoundry:seared_chute"
-    }
+    "modernfoundry:seared_drain",
+    "modernfoundry:seared_chute"
   ],
   "result": {
     "amount": 180,

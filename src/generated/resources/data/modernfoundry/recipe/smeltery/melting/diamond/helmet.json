@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:damagable_melting",
   "id": "modernfoundry:smeltery/melting/diamond/helmet",
-  "ingredient": {
-    "item": "minecraft:diamond_helmet"
-  },
+  "ingredient": "minecraft:diamond_helmet",
   "result": {
     "amount": 500,
     "fluid": "modernfoundry:molten_diamond",

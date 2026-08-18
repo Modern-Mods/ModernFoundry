@@ -6,18 +6,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.json.field.MergingField;
 import modernmods.modernfoundry.library.json.field.MergingField.MissingMode;
@@ -52,7 +52,7 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<IDisplayPart
     PartRecipe::new);
 
   @Getter
-  protected final ResourceLocation id;
+  protected final Identifier id;
   @Getter
   protected final String group;
   @Getter
@@ -70,14 +70,14 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<IDisplayPart
   /** Count for the recipe output */
   protected final int outputCount;
 
-  /** @deprecated use {@link #PartRecipe(ResourceLocation, String, Pattern, Ingredient, int, boolean, IMaterialItem, int)} */
+  /** @deprecated use {@link #PartRecipe(Identifier, String, Pattern, Ingredient, int, boolean, IMaterialItem, int)} */
   @Deprecated(forRemoval = true)
-  public PartRecipe(ResourceLocation id, String group, Pattern pattern, Ingredient patternItem, int cost, IMaterialItem output, int outputCount) {
+  public PartRecipe(Identifier id, String group, Pattern pattern, Ingredient patternItem, int cost, IMaterialItem output, int outputCount) {
     this(id, group, pattern, patternItem, cost, false, output, outputCount);
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends PartRecipe> getSerializer() {
     return TinkerTables.partRecipeSerializer.get();
   }
 
@@ -126,7 +126,6 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<IDisplayPart
 
   /** @deprecated use {@link #getRecipeOutput(MaterialVariantId)} */
   @Deprecated
-  @Override
   public ItemStack getResultItem(HolderLookup.Provider access) {
     return new ItemStack(output);
   }
@@ -149,7 +148,6 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<IDisplayPart
     return getRecipeOutput(material, outputCount);
   }
 
-  @Override
   public ItemStack assemble(IPartBuilderContainer inv, HolderLookup.Provider access) {
     MaterialVariant material = MaterialVariant.UNKNOWN;
     int count = outputCount;
@@ -212,7 +210,7 @@ public class PartRecipe implements IPartBuilderRecipe, IMultiRecipe<IDisplayPart
             materialItems = List.copyOf(materialItems);
             resultItems = List.copyOf(resultItems);
           }
-          return Stream.of(new DisplayPartRecipe(id, materialTitle, pattern, List.of(patternItem.getItems()), getCost(), materialItems, resultItems));
+          return Stream.of(new DisplayPartRecipe(id, materialTitle, pattern, List.of(patternItem.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)), getCost(), materialItems, resultItems));
         })
         .collect(Collectors.toUnmodifiableList());
     }

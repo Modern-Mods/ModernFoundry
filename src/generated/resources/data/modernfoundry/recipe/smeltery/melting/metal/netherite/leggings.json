@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/netherite/leggings",
   "byproducts": [
     {
       "amount": 700,
@@ -8,9 +7,8 @@
       "unit_size": 25
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/netherite/tools_costing_7"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/netherite/leggings",
+  "ingredient": "#modernfoundry:melting/netherite/tools_costing_7",
   "result": {
     "amount": 90,
     "tag": "c:molten_netherite",

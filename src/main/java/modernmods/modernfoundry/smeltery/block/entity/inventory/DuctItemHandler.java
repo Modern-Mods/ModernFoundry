@@ -2,12 +2,13 @@ package modernmods.modernfoundry.smeltery.block.entity.inventory;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidUtil;
-import modernmods.hilt.inventory.SingleItemHandler;
+import modernmods.mantle.inventory.SingleItemHandler;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.network.InventorySlotSyncPacket;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
@@ -54,7 +55,7 @@ public class DuctItemHandler extends SingleItemHandler<DuctBlockEntity> {
     if (hasChange) {
       updateFluid();
       if (world != null) {
-        if (!world.isClientSide) {
+        if (!world.isClientSide()) {
           BlockPos pos = parent.getBlockPos();
           TinkerNetwork.getInstance().sendToClientsAround(new InventorySlotSyncPacket(newStack, 0, pos), world, pos);
         } else {
@@ -68,14 +69,15 @@ public class DuctItemHandler extends SingleItemHandler<DuctBlockEntity> {
   protected boolean isItemValid(ItemStack stack) {
     // the item or its container must be in the tag
     if (!stack.is(TinkerTags.Items.DUCT_CONTAINERS)) {
-      ItemStack container = stack.getCraftingRemainingItem();
+      ItemStackTemplate remainderTemplate = stack.getItem().getCraftingRemainder(stack);
+      ItemStack container = remainderTemplate != null ? remainderTemplate.create() : ItemStack.EMPTY;
       if (container.isEmpty() || !container.is(TinkerTags.Items.DUCT_CONTAINERS)) {
         return false;
       }
     }
     // the item must contain fluid (no empty cans or buckets)
-    net.neoforged.neoforge.fluids.capability.IFluidHandlerItem capability = stack.getCapability(Capabilities.FluidHandler.ITEM);
-    return capability != null && !capability.getFluidInTank(0).isEmpty();
+    net.neoforged.neoforge.transfer.ResourceHandler<net.neoforged.neoforge.transfer.fluid.FluidResource> capability = Capabilities.Fluid.ITEM.getCapability(stack, net.neoforged.neoforge.transfer.access.ItemAccess.forStack(stack));
+    return capability != null && capability.size() > 0 && !capability.getResource(0).isEmpty();
   }
 
   /**

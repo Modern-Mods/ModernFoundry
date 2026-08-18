@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/smite",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "minecraft:glistering_melon_slice"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/smite",
+  "input": "minecraft:glistering_melon_slice",
   "level": {
     "max": 5
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/melee"
-  }
+  "tools": "#modernfoundry:modifiable/melee"
 }

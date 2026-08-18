@@ -4,9 +4,7 @@
   "cookingtime": 200,
   "experience": 0.2,
   "group": "modernfoundry:slime_crystal",
-  "ingredient": {
-    "item": "modernfoundry:earth_slime_crystal"
-  },
+  "ingredient": "modernfoundry:earth_slime_crystal",
   "result": {
     "id": "minecraft:slime_ball"
   }

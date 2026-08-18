@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.client.book.sectiontransformer.materials;
 
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.SectionData;
-import modernmods.hilt.client.book.transformer.SectionTransformer;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.SectionData;
+import modernmods.mantle.client.book.transformer.SectionTransformer;
 import modernmods.modernfoundry.library.client.book.content.AbstractMaterialContent;
 import modernmods.modernfoundry.library.client.book.content.MeleeHarvestMaterialContent;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;

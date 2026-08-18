@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/gold/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/gold"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/gold"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/gold/plate",
+  "ingredient": "#c:plates/gold",
   "result": {
     "amount": 90,
     "tag": "c:molten_gold"

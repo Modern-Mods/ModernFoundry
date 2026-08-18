@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:book"
-    },
-    {
-      "item": "modernfoundry:nether_grout"
-    }
+    "minecraft:book",
+    "modernfoundry:nether_grout"
   ],
   "result": {
     "id": "modernfoundry:fantastic_foundry"

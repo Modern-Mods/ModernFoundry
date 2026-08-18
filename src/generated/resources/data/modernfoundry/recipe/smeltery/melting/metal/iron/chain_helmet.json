@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/chain_helmet",
   "byproducts": [
     {
       "amount": 150,
@@ -8,9 +7,8 @@
       "unit_size": 10
     }
   ],
-  "ingredient": {
-    "item": "minecraft:chainmail_helmet"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/iron/chain_helmet",
+  "ingredient": "minecraft:chainmail_helmet",
   "result": {
     "amount": 300,
     "tag": "c:molten_iron",

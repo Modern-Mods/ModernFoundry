@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.client.modifiers;
 
 import com.google.gson.JsonObject;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.sprite.Material;
 import modernmods.modernfoundry.library.client.modifiers.model.ModifierModel;
 
 import javax.annotation.Nullable;
@@ -10,7 +10,7 @@ import java.util.function.Function;
 /**
  * This interface converts from tool data to quads for a modifier. The default just loads a flat texture, but can be extended to dynamically load textures.
  * There is one copy of a class implementing this interface per modifier.
- * @deprecated use {@link ModifierModel} with {@link modernmods.hilt.data.loadable.record.RecordLoadable}.
+ * @deprecated use {@link ModifierModel} with {@link modernmods.mantle.data.loadable.record.RecordLoadable}.
  */
 public interface IUnbakedModifierModel {
   /**

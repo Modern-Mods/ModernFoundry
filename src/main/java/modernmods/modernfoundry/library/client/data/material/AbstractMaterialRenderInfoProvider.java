@@ -8,9 +8,9 @@ import lombok.experimental.Accessors;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
-import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import modernmods.hilt.data.GenericDataProvider;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.resources.ResourceManager;
+import modernmods.mantle.data.GenericDataProvider;
 import modernmods.modernfoundry.library.client.data.material.AbstractMaterialSpriteProvider.MaterialSpriteInfo;
 import modernmods.modernfoundry.library.client.materials.MaterialGeneratorInfo;
 import modernmods.modernfoundry.library.client.materials.MaterialRenderInfo;
@@ -30,12 +30,12 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
   @Nullable
   private final AbstractMaterialSpriteProvider materialSprites;
   @Nullable
-  private final ExistingFileHelper existingFileHelper;
+  private final ResourceManager resourceManager;
 
-  public AbstractMaterialRenderInfoProvider(PackOutput packOutput, @Nullable AbstractMaterialSpriteProvider materialSprites, @Nullable ExistingFileHelper existingFileHelper) {
+  public AbstractMaterialRenderInfoProvider(PackOutput packOutput, @Nullable AbstractMaterialSpriteProvider materialSprites, @Nullable ResourceManager resourceManager) {
     super(packOutput, Target.RESOURCE_PACK, MaterialRenderInfoLoader.FOLDER);
     this.materialSprites = materialSprites;
-    this.existingFileHelper = existingFileHelper;
+    this.resourceManager = resourceManager;
   }
 
   public AbstractMaterialRenderInfoProvider(PackOutput packOutput) {
@@ -47,15 +47,15 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
 
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
-    if (existingFileHelper != null) {
-      MaterialPartTextureGenerator.runCallbacks(existingFileHelper, null);
+    if (resourceManager != null) {
+      MaterialPartTextureGenerator.runCallbacks(resourceManager);
     }
     addMaterialRenderInfo();
     // generate
     return allOf(allRenderInfo.entrySet().stream().map((entry) -> saveJson(cache, entry.getKey().getLocation('/'), entry.getValue().build(entry.getKey()))))
       .thenRunAsync(() -> {
-        if (existingFileHelper != null) {
-          MaterialPartTextureGenerator.runCallbacks(null, null);
+        if (resourceManager != null) {
+          MaterialPartTextureGenerator.runCallbacks(null);
         }
     });
   }
@@ -64,7 +64,7 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
   /* Helpers */
 
   /** Initializes a builder for the given material */
-  private RenderInfoBuilder getBuilder(@Nullable ResourceLocation texture) {
+  private RenderInfoBuilder getBuilder(@Nullable Identifier texture) {
     RenderInfoBuilder builder = new RenderInfoBuilder().texture(texture);
     if (materialSprites != null && texture != null) {
       MaterialSpriteInfo spriteInfo = materialSprites.getMaterialInfo(texture);
@@ -90,7 +90,7 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
    * Starts a builder for a general render info with an overridden texture.
    * Use {@link #buildRenderInfo(MaterialVariantId)} if you plan to override the texture without copying the datagen settings
    */
-  protected RenderInfoBuilder buildRenderInfo(MaterialVariantId materialId, @Nullable ResourceLocation texture) {
+  protected RenderInfoBuilder buildRenderInfo(MaterialVariantId materialId, @Nullable Identifier texture) {
     return allRenderInfo.computeIfAbsent(materialId, id -> getBuilder(texture));
   }
 
@@ -105,10 +105,10 @@ public abstract class AbstractMaterialRenderInfoProvider extends GenericDataProv
   protected static class RenderInfoBuilder {
     @Setter
     @Nullable
-    private ResourceLocation texture = null;
+    private Identifier texture = null;
     @Setter
     @Nullable
-    private ResourceLocation parent = null;
+    private Identifier parent = null;
     private String[] fallbacks = new String[0];
     private int color = -1;
     @Setter

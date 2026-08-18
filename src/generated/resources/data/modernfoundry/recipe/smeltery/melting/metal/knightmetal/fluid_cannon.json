@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/knightmetal/fluid_cannon",
-  "ingredient": {
-    "item": "modernfoundry:end_fluid_cannon"
-  },
+  "ingredient": "modernfoundry:end_fluid_cannon",
   "result": {
     "amount": 450,
     "fluid": "modernfoundry:molten_knightmetal"

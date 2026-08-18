@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/duralumin/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/duralumin"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/duralumin"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/duralumin/dust",
+  "ingredient": "#c:dusts/duralumin",
   "result": {
     "amount": 90,
     "tag": "c:molten_duralumin"

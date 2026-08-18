@@ -64,20 +64,14 @@
       ]
     },
     {
-      "type": "modernfoundry:tool_actions",
-      "tool_actions": [
-        "hoe_dig"
-      ]
-    },
-    {
       "type": "modernfoundry:is_effective",
-      "predicate_type": "hilt:tag",
+      "predicate_type": "mantle:tag",
       "tag": "modernfoundry:mineable/scythe"
     },
     {
       "type": "modernfoundry:mining_speed_modifier",
       "modifier": 0.3,
-      "predicate_type": "hilt:tag",
+      "predicate_type": "mantle:tag",
       "tag": "minecraft:wool"
     },
     {
@@ -87,7 +81,7 @@
         "minecraft:glow_lichen"
       ],
       "modifier": 0.1,
-      "predicate_type": "hilt:set"
+      "predicate_type": "mantle:set"
     },
     {
       "type": "modernfoundry:circle_aoe",

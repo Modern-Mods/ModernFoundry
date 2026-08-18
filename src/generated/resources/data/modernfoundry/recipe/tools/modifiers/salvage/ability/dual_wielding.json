@@ -6,20 +6,14 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:difference",
+    "neoforge:ingredient_type": "neoforge:difference",
     "base": {
-      "type": "neoforge:intersection",
+      "neoforge:ingredient_type": "neoforge:intersection",
       "children": [
-        {
-          "tag": "modernfoundry:modifiable/melee/weapon"
-        },
-        {
-          "tag": "modernfoundry:modifiable/interactable/right"
-        }
+        "#modernfoundry:modifiable/melee/weapon",
+        "#modernfoundry:modifiable/interactable/right"
       ]
     },
-    "subtracted": {
-      "item": "modernfoundry:dagger"
-    }
+    "subtracted": "modernfoundry:dagger"
   }
 }

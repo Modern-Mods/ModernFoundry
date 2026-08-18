@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/seared/melter",
   "byproducts": [
     {
       "amount": 1250,
       "fluid": "modernfoundry:molten_glass"
     }
   ],
-  "ingredient": {
-    "item": "modernfoundry:seared_melter"
-  },
+  "id": "modernfoundry:smeltery/melting/seared/melter",
+  "ingredient": "modernfoundry:seared_melter",
   "result": {
     "amount": 2250,
     "fluid": "modernfoundry:seared_stone"

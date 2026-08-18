@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/invar/shovel",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/invar/tools_costing_1"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/invar/tools_costing_1"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/shovel",
+  "ingredient": "#modernfoundry:melting/invar/tools_costing_1",
   "result": {
     "amount": 90,
     "tag": "c:molten_invar",

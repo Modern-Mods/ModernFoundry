@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/iron"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/iron"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/iron/plate",
+  "ingredient": "#c:plates/iron",
   "result": {
     "amount": 90,
     "tag": "c:molten_iron"

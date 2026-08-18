@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.tools.modifiers.traits;
 
 import net.minecraft.tags.DamageTypeTags;
-import modernmods.hilt.data.predicate.damage.DamageSourcePredicate;
+import modernmods.mantle.data.predicate.damage.DamageSourcePredicate;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.modules.capacity.CapacityBarModule;

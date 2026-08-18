@@ -1,0 +1,13 @@
+{
+  "tag": "modernfoundry:tooltips/glass",
+  "units": [
+    {
+      "key": "gui.modernfoundry.fluid.block",
+      "needed": 1000
+    },
+    {
+      "key": "gui.modernfoundry.fluid.pane",
+      "needed": 250
+    }
+  ]
+}

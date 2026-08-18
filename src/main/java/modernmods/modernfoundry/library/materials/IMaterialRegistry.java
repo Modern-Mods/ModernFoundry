@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.library.materials;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.materials.stats.IMaterialStats;
@@ -94,7 +94,7 @@ public interface IMaterialRegistry {
   Loadable<MaterialStatType<?>> getStatTypeLoader();
 
   /** Gets a lit of all material stat IDs */
-  default Collection<ResourceLocation> getAllStatTypeIds() {
+  default Collection<Identifier> getAllStatTypeIds() {
     return Collections.emptyList();
   }
 

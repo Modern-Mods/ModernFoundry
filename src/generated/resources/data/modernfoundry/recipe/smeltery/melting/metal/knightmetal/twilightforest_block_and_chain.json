@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/knightmetal/twilightforest_block_and_chain",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:block_and_chain"
+      "type": "neoforge:registered",
+      "value": "twilightforest:block_and_chain"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/knightmetal/twilightforest_block_and_chain",
   "ingredient": {
     "item": "twilightforest:block_and_chain"
   },

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/rock/blackstone",
-  "ingredient": {
-    "tag": "c:blackstone"
-  },
+  "ingredient": "#c:blackstone",
   "material": "modernfoundry:rock#blackstone",
   "needed": 1,
   "value": 1

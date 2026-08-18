@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steeleaf/twilightforest_shovel",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:steeleaf_shovel"
+      "type": "neoforge:registered",
+      "value": "twilightforest:steeleaf_shovel"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steeleaf/twilightforest_shovel",
   "ingredient": {
     "item": "twilightforest:steeleaf_shovel"
   },

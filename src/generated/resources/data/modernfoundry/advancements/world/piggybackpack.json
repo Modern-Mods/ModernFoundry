@@ -1,0 +1,45 @@
+{
+  "parent": "modernfoundry:world/tinkers_gadgetry",
+  "criteria": {
+    "used_pack": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:pig"
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "modernfoundry:piggy_backpack"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.world.piggybackpack.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:piggy_backpack"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.world.piggybackpack.title"
+    }
+  },
+  "requirements": [
+    [
+      "used_pack"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

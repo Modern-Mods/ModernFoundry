@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.tools.modifiers.traits.ranged;
 
 import modernmods.modernfoundry.compat.minecraft.world.entity.MobType;
-import modernmods.hilt.data.predicate.entity.MobTypePredicate;
+import modernmods.mantle.data.predicate.entity.MobTypePredicate;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.modules.combat.ConditionalPowerModule;
 import modernmods.modernfoundry.library.module.ModuleHookMap.Builder;

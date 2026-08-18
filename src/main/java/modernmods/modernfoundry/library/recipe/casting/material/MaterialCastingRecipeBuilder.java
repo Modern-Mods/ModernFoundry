@@ -4,15 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.recipe.casting.material.ToolCastingRecipe.CastPurpose;
@@ -35,7 +35,7 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
   @Nullable
   private final IModifiable resultTool;
   private final TypeAwareRecipeSerializer<? extends AbstractMaterialCastingRecipe> recipeSerializer;
-  private Ingredient cast = Ingredient.EMPTY;
+  @javax.annotation.Nullable private Ingredient cast = null;
   @Setter
   private int itemCost = 0;
   private CastPurpose castPurpose = CastPurpose.CATALYST;
@@ -51,7 +51,7 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
    * @return  Builder instance
    */
   public static MaterialCastingRecipeBuilder basinRecipe(IMaterialItem result) {
-    return castingRecipe(result, null, TinkerSmeltery.basinMaterialSerializer.get());
+    return castingRecipe(result, null, TinkerSmeltery.basinMaterialSerializer);
   }
 
   /**
@@ -60,7 +60,7 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
    * @return  Builder instance
    */
   public static MaterialCastingRecipeBuilder tableRecipe(IMaterialItem result) {
-    return castingRecipe(result, null, TinkerSmeltery.tableMaterialSerializer.get());
+    return castingRecipe(result, null, TinkerSmeltery.tableMaterialSerializer);
   }
 
   /**
@@ -69,7 +69,7 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
    * @return  Builder instance
    */
   public static MaterialCastingRecipeBuilder basinRecipe(IModifiable result) {
-    return castingRecipe(null, result, TinkerSmeltery.basinToolSerializer.get());
+    return castingRecipe(null, result, TinkerSmeltery.basinToolSerializer);
   }
 
   /**
@@ -78,7 +78,7 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
    * @return  Builder instance
    */
   public static MaterialCastingRecipeBuilder tableRecipe(IModifiable result) {
-    return castingRecipe(null, result, TinkerSmeltery.tableToolSerializer.get());
+    return castingRecipe(null, result, TinkerSmeltery.tableToolSerializer);
   }
 
   /**
@@ -131,7 +131,7 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
    * @return  Builder instance
    */
   public MaterialCastingRecipeBuilder setCast(TagKey<Item> tag, boolean consumed) {
-    return this.setCast(Ingredient.of(tag), consumed);
+    return this.setCast(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag), consumed);
   }
 
   /**
@@ -155,11 +155,11 @@ public class MaterialCastingRecipeBuilder extends AbstractRecipeBuilder<Material
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (this.itemCost <= 0) {
       throw new IllegalStateException("Material casting recipes require a positive amount of fluid");
     }
-    ResourceLocation advancementId = this.buildOptionalAdvancement(id, "casting");
+    Identifier advancementId = this.buildOptionalAdvancement(id, "casting");
     if (result != null) {
       consumer.accept(new LoadableFinishedRecipe<>(id, new MaterialCastingRecipe(recipeSerializer, id, group, cast, itemCost, result, allowedMaterials, castPurpose != CastPurpose.CATALYST, switchSlots), MaterialCastingRecipe.LOADER, advancementId));
     } else if (resultTool != null) {

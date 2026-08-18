@@ -3,7 +3,7 @@ package modernmods.modernfoundry.plugin.jei;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.IIngredientTypeWithSubtypes;
 import mezz.jei.api.recipe.RecipeType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -22,7 +22,7 @@ import modernmods.modernfoundry.library.tools.SlotType;
 import modernmods.modernfoundry.library.tools.SlotType.SlotCount;
 
 public class TConstructJEIConstants {
-  public static final ResourceLocation PLUGIN = TConstruct.getResource("jei_plugin");
+  public static final Identifier PLUGIN = TConstruct.getResource("jei_plugin");
 
   // ingredient types
   public static final IIngredientTypeWithSubtypes<Modifier,ModifierEntry> MODIFIER_TYPE = new IIngredientTypeWithSubtypes<>() {

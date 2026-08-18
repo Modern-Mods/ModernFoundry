@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.recipe;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.recipe.container.ISingleStackContainer;
+import modernmods.mantle.recipe.container.ISingleStackContainer;
 
 /** Simple class for an inventory containing just one item */
 public class SingleItemContainer implements ISingleStackContainer {

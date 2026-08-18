@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/ironwood/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/ironwood"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/ironwood"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/ironwood/ingot",
+  "ingredient": "#c:ingots/ironwood",
   "material": "modernfoundry:ironwood",
   "needed": 1,
   "value": 1

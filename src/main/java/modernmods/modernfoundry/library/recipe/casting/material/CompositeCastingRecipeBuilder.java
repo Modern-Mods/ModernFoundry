@@ -5,12 +5,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.materials.stats.MaterialStatsId;
@@ -33,11 +33,11 @@ public class CompositeCastingRecipeBuilder extends AbstractRecipeBuilder<Composi
   private IJsonPredicate<MaterialVariantId> allowedMaterials = MaterialPredicate.ANY;
 
   public static CompositeCastingRecipeBuilder basin(IMaterialItem result, int itemCost) {
-    return composite(result, itemCost, TinkerSmeltery.basinCompositeSerializer.get());
+    return composite(result, itemCost, TinkerSmeltery.basinCompositeSerializer);
   }
 
   public static CompositeCastingRecipeBuilder table(IMaterialItem result, int itemCost) {
-    return composite(result, itemCost, TinkerSmeltery.tableCompositeSerializer.get());
+    return composite(result, itemCost, TinkerSmeltery.tableCompositeSerializer);
   }
 
   @Override
@@ -46,13 +46,13 @@ public class CompositeCastingRecipeBuilder extends AbstractRecipeBuilder<Composi
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-    ResourceLocation advancementId = this.buildOptionalAdvancement(id, "casting");
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
+    Identifier advancementId = this.buildOptionalAdvancement(id, "casting");
     consumer.accept(new LoadableFinishedRecipe<>(id, new CompositeCastingRecipe(serializer, id, group, itemCost, result, allowedMaterials, castingStatConflict), CompositeCastingRecipe.LOADER, advancementId));
   }
 
   private class Finished extends AbstractFinishedRecipe {
-    public Finished(ResourceLocation ID, @Nullable ResourceLocation advancementID) {
+    public Finished(Identifier ID, @Nullable Identifier advancementID) {
       super(ID, advancementID);
     }
 
@@ -67,7 +67,7 @@ public class CompositeCastingRecipeBuilder extends AbstractRecipeBuilder<Composi
 
     @Override
     public RecipeSerializer<?> getType() {
-      return serializer;
+      return serializer.serializer();
     }
   }
 }

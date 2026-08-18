@@ -47,7 +47,7 @@
     },
     {
       "type": "test:is_effective",
-      "predicate_type": "hilt:set",
+      "predicate_type": "mantle:set",
       "blocks": ["minecraft:diamond_block"],
       "ignore_tier": true
     },

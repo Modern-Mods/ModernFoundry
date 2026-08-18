@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/ancient/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/netherite_scrap"
-  },
+  "ingredient": "#c:nuggets/netherite_scrap",
   "material": "modernfoundry:ancient",
   "needed": 9,
   "value": 1

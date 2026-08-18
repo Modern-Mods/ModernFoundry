@@ -1,0 +1,22 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/dagger",
+    "parts": [
+      {
+        "name": "head",
+        "index": 0
+      },
+      {
+        "name": "crossguard",
+        "index": 1
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:dagger"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/dagger/modifiers/"
+    ]
+  }
+}

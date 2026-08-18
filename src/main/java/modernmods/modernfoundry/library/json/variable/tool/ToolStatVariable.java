@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.json.variable.tool;
 
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 import modernmods.modernfoundry.library.tools.stat.INumericToolStat;
 import modernmods.modernfoundry.library.tools.stat.ToolStats;

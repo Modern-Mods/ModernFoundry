@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/fiery/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/fiery"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/fiery"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/fiery/block",
+  "ingredient": "#c:storage_blocks/fiery",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/fiery"

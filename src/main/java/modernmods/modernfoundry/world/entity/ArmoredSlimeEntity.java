@@ -1,5 +1,7 @@
 package modernmods.modernfoundry.world.entity;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -13,7 +15,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -39,7 +41,7 @@ public abstract class ArmoredSlimeEntity extends Slime {
   public static final String TAG_METAL = "metal";
   public ArmoredSlimeEntity(EntityType<? extends ArmoredSlimeEntity> type, Level world) {
     super(type, world);
-    if (!world.isClientSide) {
+    if (!world.isClientSide()) {
       tryAddAttribute(Attributes.ARMOR, new AttributeModifier(TConstruct.getResource("small_armor_bonus"), 3, Operation.ADD_MULTIPLIED_TOTAL));
       tryAddAttribute(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(TConstruct.getResource("small_toughness_bonus"), 3, Operation.ADD_MULTIPLIED_TOTAL));
       tryAddAttribute(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(TConstruct.getResource("small_resistence_bonus"), 3, Operation.ADD_MULTIPLIED_TOTAL));
@@ -79,7 +81,7 @@ public abstract class ArmoredSlimeEntity extends Slime {
 
   @Nullable
   @Override
-  public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance difficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData) {
+  public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance difficulty, EntitySpawnReason pReason, @Nullable SpawnGroupData pSpawnData) {
     SpawnGroupData spawnData = super.finalizeSpawn(pLevel, difficulty, pReason, pSpawnData);
     this.setCanPickUpLoot(this.random.nextFloat() < (0.55f * difficulty.getSpecialMultiplier()));
 
@@ -90,7 +92,7 @@ public abstract class ArmoredSlimeEntity extends Slime {
       LocalDate localdate = LocalDate.now();
       if (localdate.get(ChronoField.MONTH_OF_YEAR) == 10 && localdate.get(ChronoField.DAY_OF_MONTH) == 31 && this.random.nextFloat() < 0.25F) {
         this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(this.random.nextFloat() < 0.1F ? Blocks.JACK_O_LANTERN : Blocks.CARVED_PUMPKIN));
-        this.armorDropChances[EquipmentSlot.HEAD.getIndex()] = 0.0F;
+        this.setDropChance(EquipmentSlot.HEAD, 0.0F);
       }
     }
 
@@ -106,11 +108,6 @@ public abstract class ArmoredSlimeEntity extends Slime {
   }
 
   @Override
-  public Iterable<ItemStack> getArmorSlots() {
-    return List.of(getItemBySlot(EquipmentSlot.HEAD));
-  }
-
-  @Override
   public boolean canHoldItem(ItemStack stack) {
     // only pick up items that go in the head slot, don't have a renderer for other slots
     return getEquipmentSlotForItem(stack) == EquipmentSlot.HEAD;
@@ -119,7 +116,7 @@ public abstract class ArmoredSlimeEntity extends Slime {
   @Override
   protected void dropCustomDeathLoot(ServerLevel level, DamageSource source, boolean recentlyHit) {
     ItemStack stack = this.getItemBySlot(EquipmentSlot.HEAD);
-    float slotChance = this.getEquipmentDropChance(EquipmentSlot.HEAD);
+    float slotChance = this.getDropChances().byEquipment(EquipmentSlot.HEAD);
     // items do not always drop if a large slime, increases chance of inheritance
     // small slimes always drop, no losing gear
     if (slotChance > 0.25f && getSize() > 1) {
@@ -132,7 +129,7 @@ public abstract class ArmoredSlimeEntity extends Slime {
           int max = stack.getMaxDamage();
           stack.setDamageValue(max - this.random.nextInt(1 + this.random.nextInt(Math.max(max - 3, 1))));
         }
-        this.spawnAtLocation(stack);
+        this.spawnAtLocation(level, stack);
         this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
       }
     }
@@ -144,7 +141,7 @@ public abstract class ArmoredSlimeEntity extends Slime {
     // on death, split into multiple slimes, and let them inherit armor if it did not drop
     int size = this.getSize();
     Level level = level();
-    if (!level.isClientSide && size > 1 && this.isDeadOrDying()) {
+    if (!level.isClientSide() && size > 1 && this.isDeadOrDying()) {
       Component name = this.getCustomName();
       boolean noAi = this.isNoAi();
       boolean invulnerable = this.isInvulnerable();
@@ -160,11 +157,11 @@ public abstract class ArmoredSlimeEntity extends Slime {
       }
 
       // spawn all children
-      float dropChance = getEquipmentDropChance(EquipmentSlot.HEAD);
+      float dropChance = getDropChances().byEquipment(EquipmentSlot.HEAD);
       for(int i = 0; i < count; ++i) {
         float x = ((i % 2) - 0.5F) * offset;
         float z = ((i / 2) - 0.5F) * offset;
-        ArmoredSlimeEntity slime = this.getType().create(level);
+        ArmoredSlimeEntity slime = this.getType().create(level, EntitySpawnReason.TRIGGERED);
         assert slime != null;
         if (this.isPersistenceRequired()) {
           slime.setPersistenceRequired();
@@ -182,7 +179,7 @@ public abstract class ArmoredSlimeEntity extends Slime {
         } else if (dropChance < 1 && random.nextFloat() < 0.25) {
           slime.setItemSlot(EquipmentSlot.HEAD, helmet.copy());
         }
-        slime.moveTo(this.getX() + x, this.getY() + 0.5D, this.getZ() + z, this.random.nextFloat() * 360.0F, 0.0F);
+        slime.snapTo(this.getX() + x, this.getY() + 0.5D, this.getZ() + z, this.random.nextFloat() * 360.0F, 0.0F);
         level.addFreshEntity(slime);
       }
     }
@@ -195,14 +192,14 @@ public abstract class ArmoredSlimeEntity extends Slime {
   }
 
   @Override
-  public void addAdditionalSaveData(CompoundTag tag) {
-    super.addAdditionalSaveData(tag);
-    tag.putBoolean(TAG_METAL, this.isMetal());
+  public void addAdditionalSaveData(ValueOutput output) {
+    super.addAdditionalSaveData(output);
+    output.putBoolean(TAG_METAL, this.isMetal());
   }
 
   @Override
-  public void readAdditionalSaveData(CompoundTag tag) {
-    super.readAdditionalSaveData(tag);
-    this.setMetal(tag.getBoolean(TAG_METAL));
+  public void readAdditionalSaveData(ValueInput input) {
+    super.readAdditionalSaveData(input);
+    this.setMetal(input.getBooleanOr(TAG_METAL, false));
   }
 }

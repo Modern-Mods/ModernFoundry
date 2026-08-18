@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/weeping_vine",
-  "ingredient": {
-    "item": "minecraft:weeping_vines"
-  },
+  "ingredient": "minecraft:weeping_vines",
   "material": "modernfoundry:weeping_vine",
   "needed": 1,
   "value": 1

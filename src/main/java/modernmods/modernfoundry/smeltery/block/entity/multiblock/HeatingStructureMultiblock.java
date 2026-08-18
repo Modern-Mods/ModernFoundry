@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.hilt.block.entity.HiltBlockEntity;
+import modernmods.mantle.block.entity.MantleBlockEntity;
 import modernmods.modernfoundry.common.multiblock.IMasterLogic;
 import modernmods.modernfoundry.common.multiblock.IServantLogic;
 import modernmods.modernfoundry.smeltery.block.component.SearedBlock;
@@ -25,7 +25,7 @@ import java.util.Set;
 /**
  *
  */
-public abstract class HeatingStructureMultiblock<T extends HiltBlockEntity & IMasterLogic> extends MultiblockCuboid<StructureData> {
+public abstract class HeatingStructureMultiblock<T extends MantleBlockEntity & IMasterLogic> extends MultiblockCuboid<StructureData> {
   private static final String TAG_TANKS = "tanks";
   private static final String TAG_INSIDE_CHECK = "insideCheck";
 
@@ -277,7 +277,7 @@ public abstract class HeatingStructureMultiblock<T extends HiltBlockEntity & IMa
       CompoundTag nbt = super.writeToTag(controllerPos);
       nbt.put(TAG_TANKS, writePosList(tanks, controllerPos));
       if (insideCheck != null) {
-        nbt.put(TAG_INSIDE_CHECK, NbtUtils.writeBlockPos(insideCheck.subtract(controllerPos)));
+        nbt.put(TAG_INSIDE_CHECK, modernmods.modernfoundry.library.utils.TagUtil.writeBlockPos(insideCheck.subtract(controllerPos)));
       }
       return nbt;
     }

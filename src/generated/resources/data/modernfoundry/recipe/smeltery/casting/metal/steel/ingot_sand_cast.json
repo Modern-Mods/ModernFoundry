@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/steel/ingot_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/ingot"
-  },
+  "cast": "#modernfoundry:casts/single_use/ingot",
   "cast_consumed": true,
   "cooling_time": 65,
   "fluid": {
     "amount": 90,
     "tag": "c:molten_steel"
   },
+  "id": "modernfoundry:smeltery/casting/metal/steel/ingot_sand_cast",
   "result": {
     "tag": "c:ingots/steel"
   }

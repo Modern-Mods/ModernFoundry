@@ -3,7 +3,7 @@ package modernmods.modernfoundry.tools.modifiers.slotless;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -24,7 +24,7 @@ import java.util.List;
 /** Modifier that adds a variable number of slots to a tool. Could easily be done via Tag editing, but this makes it easier */
 public class CreativeSlotModifier extends NoLevelsModifier implements VolatileDataModifierHook, ModifierRemovalHook {
   /** Key representing the slots object in the modifier */
-  public static final ResourceLocation KEY_SLOTS = TConstruct.getResource("creative");
+  public static final Identifier KEY_SLOTS = TConstruct.getResource("creative");
 
   @Override
   protected void registerHooks(Builder hookBuilder) {
@@ -41,12 +41,12 @@ public class CreativeSlotModifier extends NoLevelsModifier implements VolatileDa
   @Override
   public void addVolatileData(IToolContext context, ModifierEntry modifier, ToolDataNBT volatileData) {
     IModDataView persistentData = context.getPersistentData();
-    if (persistentData.contains(KEY_SLOTS, Tag.TAG_COMPOUND)) {
+    if (persistentData.contains(KEY_SLOTS)) {
       CompoundTag slots = persistentData.getCompound(KEY_SLOTS);
-      for (String key : slots.getAllKeys()) {
+      for (String key : slots.keySet()) {
         SlotType slotType = SlotType.getIfPresent(key);
         if (slotType != null) {
-          volatileData.addSlots(slotType, slots.getInt(key));
+          volatileData.addSlots(slotType, slots.getIntOr(key, 0));
         }
       }
     }
@@ -63,12 +63,12 @@ public class CreativeSlotModifier extends NoLevelsModifier implements VolatileDa
   public List<Component> getDescriptionList(IToolStackView tool, ModifierEntry entry) {
     List<Component> tooltip = getDescriptionList(entry.getLevel());
     IModDataView persistentData = tool.getPersistentData();
-    if (persistentData.contains(KEY_SLOTS, Tag.TAG_COMPOUND)) {
+    if (persistentData.contains(KEY_SLOTS)) {
       CompoundTag slots = persistentData.getCompound(KEY_SLOTS);
 
       // first one found has special behavior
       boolean first = true;
-      for (String key : slots.getAllKeys()) {
+      for (String key : slots.keySet()) {
         SlotType slotType = SlotType.getIfPresent(key);
         if (slotType != null) {
           if (first) {
@@ -76,7 +76,7 @@ public class CreativeSlotModifier extends NoLevelsModifier implements VolatileDa
             tooltip = new ArrayList<>(tooltip);
             first = false;
           }
-          tooltip.add(formatCount(slotType, slots.getInt(key)));
+          tooltip.add(formatCount(slotType, slots.getIntOr(key, 0)));
         }
       }
     }

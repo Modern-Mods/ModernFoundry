@@ -1,31 +1,43 @@
 package modernmods.modernfoundry.library.module;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.registration.object.IdAwareObject;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.registration.object.IdAwareObject;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.function.Function;
 
 /** Class implementing a modifier hook, used as a key for {@link ModuleHookMap )} */
-@RequiredArgsConstructor
 public class ModuleHook<T> implements IdAwareObject {
   /** Unique name of this hook, used for serialization */
-  @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   /** Filter to check if an object is valid for this hook */
   private final Class<T> filter;
   /** Logic to merge multiple instances into a single instance */
   @Nullable
   private final Function<Collection<T>,T> merger;
   /** Default instance for when a modifier does not implement this hook */
-  @Getter
   private final T defaultInstance;
 
-  public ModuleHook(ResourceLocation name, Class<T> filter, T defaultInstance) {
+  public ModuleHook(Identifier id, Class<T> filter, @Nullable Function<Collection<T>,T> merger, T defaultInstance) {
+    this.id = id;
+    this.filter = filter;
+    this.merger = merger;
+    this.defaultInstance = defaultInstance;
+  }
+
+  public ModuleHook(Identifier name, Class<T> filter, T defaultInstance) {
     this(name, filter, null, defaultInstance);
+  }
+
+  @Override
+  public Identifier getId() {
+    return id;
+  }
+
+  /** Default instance for when a modifier does not implement this hook */
+  public T getDefaultInstance() {
+    return defaultInstance;
   }
 
   /** checks if the given module can be used for this hook */

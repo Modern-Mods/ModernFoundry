@@ -15,17 +15,17 @@
   },
   {
     "name": "tanks",
-    "type": "hilt:image_text",
+    "type": "mantle:image_text",
     "data": "tools/tanks.json"
   },
   {
     "name": "tips",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "tools/tips.json"
   },
   {
     "name": "designing",
-    "type": "hilt:text",
+    "type": "mantle:text",
     "data": "tools/designing.json"
   }
 ]

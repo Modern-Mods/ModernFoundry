@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steeleaf/twilightforest_helmet",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:steeleaf_helmet"
+      "type": "neoforge:registered",
+      "value": "twilightforest:steeleaf_helmet"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steeleaf/twilightforest_helmet",
   "ingredient": {
     "item": "twilightforest:steeleaf_helmet"
   },

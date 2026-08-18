@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.library.client.book.sectiontransformer;
 
 import net.minecraft.world.item.Items;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.PageData;
-import modernmods.hilt.client.book.transformer.ContentGroupingSectionTransformer;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.PageData;
+import modernmods.mantle.client.book.transformer.ContentGroupingSectionTransformer;
 import modernmods.modernfoundry.library.client.book.content.ContentTool;
 
 /** Section transformer to generate an index with tool names */

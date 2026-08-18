@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/aluminum/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/aluminum"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/aluminum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/aluminum/plate",
+  "ingredient": "#c:plates/aluminum",
   "result": {
     "amount": 90,
     "tag": "c:molten_aluminum"

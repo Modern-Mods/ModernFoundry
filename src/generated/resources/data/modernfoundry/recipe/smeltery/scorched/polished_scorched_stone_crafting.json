@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "b": {
-      "item": "modernfoundry:scorched_stone"
-    }
+    "b": "modernfoundry:scorched_stone"
   },
   "pattern": [
     "bb",
@@ -13,6 +11,5 @@
   "result": {
     "count": 4,
     "id": "modernfoundry:polished_scorched_stone"
-  },
-  "show_notification": true
+  }
 }

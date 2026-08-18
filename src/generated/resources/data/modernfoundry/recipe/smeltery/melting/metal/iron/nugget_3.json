@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/nugget_3",
   "ingredient": [
-    {
-      "item": "minecraft:iron_bars"
-    },
-    {
-      "item": "minecraft:rail"
-    }
+    "minecraft:iron_bars",
+    "minecraft:rail"
   ],
   "result": {
     "amount": 30,

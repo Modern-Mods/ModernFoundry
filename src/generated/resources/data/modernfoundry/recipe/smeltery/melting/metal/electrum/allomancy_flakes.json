@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/electrum/allomancy_flakes",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "allomancy:electrum_flakes"
+      "type": "neoforge:registered",
+      "value": "allomancy:electrum_flakes"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/allomancy_flakes",
   "ingredient": {
     "item": "allomancy:electrum_flakes"
   },

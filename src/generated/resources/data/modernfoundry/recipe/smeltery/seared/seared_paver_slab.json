@@ -3,9 +3,7 @@
   "category": "building",
   "group": "modernfoundry:seared_paver_slab",
   "key": {
-    "B": {
-      "item": "modernfoundry:seared_paver"
-    }
+    "B": "modernfoundry:seared_paver"
   },
   "pattern": [
     "BBB"
@@ -13,6 +11,5 @@
   "result": {
     "count": 6,
     "id": "modernfoundry:seared_paver_slab"
-  },
-  "show_notification": true
+  }
 }

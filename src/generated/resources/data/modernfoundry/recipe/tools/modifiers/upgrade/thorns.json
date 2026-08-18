@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/thorns",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "minecraft:cactus"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/thorns",
+  "input": "minecraft:cactus",
   "level": {
     "max": 3
   },
@@ -15,11 +13,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/armor/worn"
-    },
-    {
-      "tag": "modernfoundry:modifiable/shields"
-    }
+    "#modernfoundry:modifiable/armor/worn",
+    "#modernfoundry:modifiable/shields"
   ]
 }

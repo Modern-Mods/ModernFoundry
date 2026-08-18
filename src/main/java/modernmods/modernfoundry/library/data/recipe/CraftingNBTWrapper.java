@@ -1,12 +1,12 @@
 package modernmods.modernfoundry.library.data.recipe;
 
 import com.google.gson.JsonObject;
-import modernmods.hilt.recipe.data.FinishedRecipe;
+import modernmods.mantle.recipe.data.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.data.loadable.common.NBTLoadable;
+import modernmods.mantle.data.loadable.common.NBTLoadable;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -21,7 +21,7 @@ public record CraftingNBTWrapper(FinishedRecipe recipe, CompoundTag nbt) impleme
   }
 
   @Override
-  public ResourceLocation getId() {
+  public Identifier getId() {
     return recipe.getId();
   }
 
@@ -38,7 +38,7 @@ public record CraftingNBTWrapper(FinishedRecipe recipe, CompoundTag nbt) impleme
 
   @Nullable
   @Override
-  public ResourceLocation getAdvancementId() {
+  public Identifier getAdvancementId() {
     return recipe.getAdvancementId();
   }
 

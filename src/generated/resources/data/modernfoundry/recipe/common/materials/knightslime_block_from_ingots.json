@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:knightslime_block",
   "key": {
-    "#": {
-      "tag": "c:ingots/knightslime"
-    },
-    "*": {
-      "item": "modernfoundry:knightslime_ingot"
-    }
+    "#": "#c:ingots/knightslime",
+    "*": "modernfoundry:knightslime_ingot"
   },
   "pattern": [
     "###",
@@ -17,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:knightslime_block"
-  },
-  "show_notification": true
+  }
 }

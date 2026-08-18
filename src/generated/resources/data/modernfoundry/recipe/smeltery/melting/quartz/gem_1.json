@@ -2,15 +2,9 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/quartz/gem_1",
   "ingredient": [
-    {
-      "item": "minecraft:observer"
-    },
-    {
-      "item": "minecraft:comparator"
-    },
-    {
-      "item": "modernfoundry:quartz_shuriken"
-    }
+    "minecraft:observer",
+    "minecraft:comparator",
+    "modernfoundry:quartz_shuriken"
   ],
   "result": {
     "amount": 100,

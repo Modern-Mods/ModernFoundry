@@ -1,16 +1,14 @@
 {
-  "type": "modernfoundry:item_part_builder",
-  "id": "modernfoundry:smeltery/casts/sand/builder_block/gears",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears"
     }
   ],
+  "type": "modernfoundry:item_part_builder",
+  "id": "modernfoundry:smeltery/casts/sand/builder_block/gears",
   "pattern": "modernfoundry:gear",
-  "pattern_item": {
-    "tag": "c:sand/colorless"
-  },
+  "pattern_item": "#c:sands/colorless",
   "result": {
     "count": 4,
     "item": "modernfoundry:gear_sand_cast"

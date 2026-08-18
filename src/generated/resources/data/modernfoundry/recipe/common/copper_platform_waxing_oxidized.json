@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:wax_copper_platform",
   "ingredients": [
-    {
-      "item": "modernfoundry:oxidized_copper_platform"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "modernfoundry:oxidized_copper_platform",
+    "minecraft:honeycomb"
   ],
   "result": {
     "id": "modernfoundry:waxed_oxidized_copper_platform"

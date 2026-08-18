@@ -1,14 +1,15 @@
 package modernmods.modernfoundry.library.recipe.modifiers.adding;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import com.google.gson.JsonSyntaxException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.recipe.modifiers.ModifierSalvage;
@@ -27,7 +28,7 @@ public abstract class AbstractMultilevelModifierRecipeBuilder<T extends Abstract
   protected final ModifierId result;
   protected final List<LevelEntry> levels = new ArrayList<>();
   protected boolean allowCrystal = true;
-  protected Ingredient tools = Ingredient.EMPTY;
+  @javax.annotation.Nullable protected Ingredient tools = null;
   protected int maxToolSize = ITinkerStationRecipe.DEFAULT_TOOL_STACK_SIZE;
   protected boolean checkTraitLevel = false;
 
@@ -67,7 +68,7 @@ public abstract class AbstractMultilevelModifierRecipeBuilder<T extends Abstract
    * @return  Builder instance
    */
   public T setTools(TagKey<Item> tag) {
-    return this.setTools(Ingredient.of(tag));
+    return this.setTools(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag));
   }
 
 
@@ -149,7 +150,7 @@ public abstract class AbstractMultilevelModifierRecipeBuilder<T extends Abstract
   /* Saving */
 
   /** Saves all salvage recipes for this recipe */
-  public T saveSalvage(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public T saveSalvage(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (levels.isEmpty()) {
       throw new IllegalStateException("Must have at least 1 level");
     }
@@ -165,6 +166,6 @@ public abstract class AbstractMultilevelModifierRecipeBuilder<T extends Abstract
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, result);
+    save(consumer, result.getIdentifier());
   }
 }

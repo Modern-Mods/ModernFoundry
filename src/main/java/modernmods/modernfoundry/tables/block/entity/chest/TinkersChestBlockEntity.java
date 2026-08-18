@@ -1,5 +1,7 @@
 package modernmods.modernfoundry.tables.block.entity.chest;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -11,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import modernmods.hilt.block.entity.HiltBlockEntity;
+import modernmods.mantle.block.entity.MantleBlockEntity;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.tables.TinkerTables;
 import modernmods.modernfoundry.tables.block.entity.inventory.IChestItemHandler;
@@ -19,7 +21,7 @@ import modernmods.modernfoundry.tables.block.entity.inventory.IChestItemHandler;
 import javax.annotation.Nullable;
 
 /**
- * Chest holding 64 slots of 64 items each
+ * Chest holding 64 slots of 16 items each
  */
 public class TinkersChestBlockEntity extends AbstractChestBlockEntity {
   /** NBT tag for colors of the chest */
@@ -51,32 +53,30 @@ public class TinkersChestBlockEntity extends AbstractChestBlockEntity {
   }
 
   @Override
-  public void saveSynced(CompoundTag tags) {
-    super.saveSynced(tags);
+  public void saveSynced(ValueOutput output) {
+    super.saveSynced(output);
     if (hasColor) {
-      tags.putInt(TAG_CHEST_COLOR, color);
+      output.putInt(TAG_CHEST_COLOR, color);
     }
   }
 
   @Override
-  public void load(CompoundTag tags) {
-    super.load(tags);
-    if (tags.contains(TAG_CHEST_COLOR, Tag.TAG_ANY_NUMERIC)) {
-      setColor(tags.getInt(TAG_CHEST_COLOR));
-    }
+  public void loadAdditional(ValueInput input) {
+    super.loadAdditional(input);
+    input.getInt(TAG_CHEST_COLOR).ifPresent(this::setColor);
   }
 
   /** Item handler for tinkers chests */
   public static class TinkersChestItemHandler extends ItemStackHandler implements IChestItemHandler {
     @Setter @Nullable
-    private HiltBlockEntity parent;
+    private MantleBlockEntity parent;
     public TinkersChestItemHandler() {
       super(64);
     }
 
     @Override
     public int getSlotLimit(int slot) {
-      return 64;
+      return 16;
     }
 
     @Override

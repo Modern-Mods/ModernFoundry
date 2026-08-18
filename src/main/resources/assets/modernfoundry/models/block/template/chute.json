@@ -1,5 +1,5 @@
 {
-  "loader": "hilt:retextured",
+  "loader": "mantle:retextured",
 	"parent": "block/block",
 	"textures": {
 		"particle": "#side"

@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.json.predicate.material;
 
-import modernmods.hilt.data.loadable.array.ArrayLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.array.ArrayLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 

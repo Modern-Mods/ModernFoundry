@@ -1,30 +1,28 @@
 {
-  "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/ironwood",
-  "allow_crystal": false,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/ironwood"
     }
   ],
+  "type": "modernfoundry:swappable_modifier",
+  "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/ironwood",
   "inputs": [
     {
-      "tag": "c:ingots/ironwood"
+      "ingredient": "#c:ingots/ironwood"
     },
     {
-      "item": "modernfoundry:pattern"
+      "ingredient": "modernfoundry:pattern"
     },
     {
-      "tag": "c:ingots/ironwood"
+      "ingredient": "#c:ingots/ironwood"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:ironwood"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/wood"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/wood",
   "variant_formatter": "modernfoundry:material"
 }

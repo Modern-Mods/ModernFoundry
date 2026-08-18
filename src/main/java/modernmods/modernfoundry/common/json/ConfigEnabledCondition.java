@@ -1,14 +1,13 @@
 package modernmods.modernfoundry.common.json;
 
 import com.google.gson.JsonSyntaxException;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import modernmods.modernfoundry.TConstruct;
@@ -22,7 +21,7 @@ import java.util.function.BooleanSupplier;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ConfigEnabledCondition implements ICondition, LootItemCondition {
-  public static final ResourceLocation ID = TConstruct.getResource("config");
+  public static final Identifier ID = TConstruct.getResource("config");
   public static final MapCodec<ConfigEnabledCondition> CODEC = Codec.STRING.fieldOf("prop").xmap(ConfigEnabledCondition::get, condition -> condition.configName);
   /* Map of config names to condition cache */
   private static final Map<String,ConfigEnabledCondition> PROPS = new HashMap<>();
@@ -30,7 +29,7 @@ public class ConfigEnabledCondition implements ICondition, LootItemCondition {
   private final String configName;
   private final BooleanSupplier supplier;
 
-  public ResourceLocation getID() {
+  public Identifier getID() {
     return ID;
   }
 
@@ -39,19 +38,15 @@ public class ConfigEnabledCondition implements ICondition, LootItemCondition {
     return supplier.getAsBoolean();
   }
 
+  /** Single codec satisfying both {@link ICondition} and {@link LootItemCondition}, as this class implements both */
   @Override
-  public MapCodec<? extends ICondition> codec() {
+  public MapCodec<ConfigEnabledCondition> codec() {
     return CODEC;
   }
 
   @Override
   public boolean test(LootContext lootContext) {
     return supplier.getAsBoolean();
-  }
-
-  @Override
-  public LootItemConditionType getType() {
-    return TinkerCommons.lootConfig.get();
   }
 
   private static ConfigEnabledCondition get(String prop) {

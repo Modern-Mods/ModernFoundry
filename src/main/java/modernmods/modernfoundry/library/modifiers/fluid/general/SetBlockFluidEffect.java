@@ -10,8 +10,8 @@ import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.common.BlockStateLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.common.BlockStateLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.fluid.EffectLevel;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffect;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffectContext;
@@ -45,7 +45,7 @@ public record SetBlockFluidEffect(BlockState block) implements FluidEffect<Fluid
     BlockPos target = context.getBlockPos();
     BlockState original = world.getBlockState(target);
     if (original != this.block && !context.breakRestricted()) {
-      if (action.execute() && !world.isClientSide) {
+      if (action.execute() && !world.isClientSide()) {
         if (world.setBlockAndUpdate(target, this.block) && !original.isAir()) {
           world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, target, Block.getId(original));
         }

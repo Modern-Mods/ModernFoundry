@@ -10,7 +10,7 @@ import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.advancements.critereon.ItemSubPredicate;
+import net.minecraft.core.component.predicates.DataComponentPredicate;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.TabVisibility;
@@ -23,23 +23,23 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.crafting.IngredientType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import modernmods.hilt.item.BlockTooltipItem;
-import modernmods.hilt.item.TooltipItem;
-import modernmods.hilt.registration.deferred.BlockEntityTypeDeferredRegister;
-import modernmods.hilt.registration.deferred.EntityTypeDeferredRegister;
-import modernmods.hilt.registration.deferred.EnumDeferredRegister;
-import modernmods.hilt.registration.deferred.MenuTypeDeferredRegister;
-import modernmods.hilt.registration.deferred.SynchronizedDeferredRegister;
-import modernmods.hilt.registration.object.BuildingBlockObject;
-import modernmods.hilt.registration.object.EnumObject;
+import modernmods.mantle.item.BlockTooltipItem;
+import modernmods.mantle.item.TooltipItem;
+import modernmods.mantle.registration.deferred.BlockEntityTypeDeferredRegister;
+import modernmods.mantle.registration.deferred.EntityTypeDeferredRegister;
+import modernmods.mantle.registration.deferred.EnumDeferredRegister;
+import modernmods.mantle.registration.deferred.MenuTypeDeferredRegister;
+import modernmods.mantle.registration.deferred.SynchronizedDeferredRegister;
+import modernmods.mantle.registration.object.BuildingBlockObject;
+import modernmods.mantle.registration.object.EnumObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.registration.BlockDeferredRegisterExtension;
 import modernmods.modernfoundry.common.registration.FluidDeferredRegisterExtension;
@@ -70,7 +70,7 @@ public abstract class TinkerModule {
   protected static final SynchronizedDeferredRegister<ParticleType<?>> PARTICLE_TYPES = SynchronizedDeferredRegister.create(Registries.PARTICLE_TYPE, TConstruct.MOD_ID);
   protected static final SynchronizedDeferredRegister<EntityDataSerializer<?>> DATA_SERIALIZERS = SynchronizedDeferredRegister.create(NeoForgeRegistries.Keys.ENTITY_DATA_SERIALIZERS, TConstruct.MOD_ID);
   protected static final SynchronizedDeferredRegister<CreativeModeTab> CREATIVE_TABS = SynchronizedDeferredRegister.create(Registries.CREATIVE_MODE_TAB, TConstruct.MOD_ID);
-  protected static final SynchronizedDeferredRegister<ItemSubPredicate.Type<?>> ITEM_SUB_PREDICATES = SynchronizedDeferredRegister.create(Registries.ITEM_SUB_PREDICATE_TYPE, TConstruct.MOD_ID);
+  protected static final SynchronizedDeferredRegister<DataComponentPredicate.Type<?>> ITEM_SUB_PREDICATES = SynchronizedDeferredRegister.create(Registries.DATA_COMPONENT_PREDICATE_TYPE, TConstruct.MOD_ID);
   // gameplay instances
   protected static final BlockEntityTypeDeferredRegister BLOCK_ENTITIES = new BlockEntityTypeDeferredRegister(TConstruct.MOD_ID);
   protected static final EntityTypeDeferredRegister ENTITIES = new EntityTypeDeferredRegister(TConstruct.MOD_ID);
@@ -80,15 +80,29 @@ public abstract class TinkerModule {
   protected static final SynchronizedDeferredRegister<IngredientType<?>> INGREDIENT_TYPES = SynchronizedDeferredRegister.create(NeoForgeRegistries.Keys.INGREDIENT_TYPES, TConstruct.MOD_ID);
   protected static final SynchronizedDeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIERS = SynchronizedDeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, TConstruct.MOD_ID);
   protected static final SynchronizedDeferredRegister<MapCodec<? extends ICondition>> CONDITION_CODECS = SynchronizedDeferredRegister.create(NeoForgeRegistries.Keys.CONDITION_CODECS, TConstruct.MOD_ID);
-  protected static final SynchronizedDeferredRegister<LootItemConditionType> LOOT_CONDITIONS = SynchronizedDeferredRegister.create(Registries.LOOT_CONDITION_TYPE, TConstruct.MOD_ID);
-  protected static final SynchronizedDeferredRegister<LootItemFunctionType<?>> LOOT_FUNCTIONS = SynchronizedDeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, TConstruct.MOD_ID);
-  protected static final SynchronizedDeferredRegister<LootPoolEntryType> LOOT_ENTRIES = SynchronizedDeferredRegister.create(Registries.LOOT_POOL_ENTRY_TYPE, TConstruct.MOD_ID);
+  protected static final SynchronizedDeferredRegister<MapCodec<? extends LootItemCondition>> LOOT_CONDITIONS = SynchronizedDeferredRegister.create(Registries.LOOT_CONDITION_TYPE, TConstruct.MOD_ID);
+  protected static final SynchronizedDeferredRegister<MapCodec<? extends LootItemFunction>> LOOT_FUNCTIONS = SynchronizedDeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, TConstruct.MOD_ID);
+  protected static final SynchronizedDeferredRegister<MapCodec<? extends LootPoolEntryContainer>> LOOT_ENTRIES = SynchronizedDeferredRegister.create(Registries.LOOT_POOL_ENTRY_TYPE, TConstruct.MOD_ID);
+
+  /**
+   * Registers a type aware recipe serializer. In 26.1 {@link RecipeSerializer} is a final record, so type aware serializers
+   * are no longer registry entries; instead we register the memoized {@link net.minecraft.world.item.crafting.RecipeSerializer}
+   * record it wraps (stable instance thanks to Mantle memoization) while returning the type aware wrapper for datagen and recipe use.
+   * @param name        Registry name
+   * @param serializer  Type aware serializer to register
+   * @return  The passed type aware serializer, for use as a static field
+   */
+  protected static <R extends net.minecraft.world.item.crafting.Recipe<?>> modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer<R> registerTyped(String name, modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer<R> serializer) {
+    RECIPE_SERIALIZERS.register(name, serializer::serializer);
+    return serializer;
+  }
 
   // base item properties
   protected static final Item.Properties ITEM_PROPS = new Item.Properties();
   protected static final Item.Properties UNSTACKABLE_PROPS = new Item.Properties().stacksTo(1);
   protected static final Function<Block,? extends BlockItem> BLOCK_ITEM = (b) -> new BlockItem(b, ITEM_PROPS);
   protected static final Function<Block,? extends BlockItem> TOOLTIP_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, ITEM_PROPS);
+  protected static final Function<Block,? extends BlockItem> RETEXTURED_BLOCK_ITEM = (b) -> new modernmods.modernfoundry.shared.item.RetexturedBlockItem(b, ITEM_PROPS);
   protected static final Function<Block,? extends BlockItem> UNSTACKABLE_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, UNSTACKABLE_PROPS);
   protected static final Supplier<Item> TOOLTIP_ITEM = () -> new TooltipItem(ITEM_PROPS);
 
@@ -181,7 +195,7 @@ public abstract class TinkerModule {
 
   /** Accepts the given item if the passed tag has items */
   protected static boolean acceptIfTag(CreativeModeTab.Output output, ItemLike item, TabVisibility visibility, TagKey<Item> tagCondition) {
-    Optional<Named<Item>> tag = BuiltInRegistries.ITEM.getTag(tagCondition);
+    Optional<Named<Item>> tag = BuiltInRegistries.ITEM.get(tagCondition);
     if (tag.isPresent() && tag.get().size() > 0) {
       output.accept(item, visibility);
       return true;

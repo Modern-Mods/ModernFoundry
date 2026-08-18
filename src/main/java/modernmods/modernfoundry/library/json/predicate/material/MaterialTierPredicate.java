@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.json.predicate.material;
 
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 

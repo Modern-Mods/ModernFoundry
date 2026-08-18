@@ -1,23 +1,21 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/shield_strap",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/shield_strap",
   "inputs": [
     {
-      "item": "modernfoundry:sky_slime_vine"
+      "ingredient": "modernfoundry:sky_slime_vine"
     },
     {
-      "tag": "c:ingots/slimesteel"
+      "ingredient": "#c:ingots/slimesteel"
     },
     {
-      "item": "modernfoundry:sky_slime_vine"
+      "ingredient": "modernfoundry:sky_slime_vine"
     }
   ],
   "result": "modernfoundry:shield_strap",
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/leggings"
-  }
+  "tools": "#modernfoundry:modifiable/armor/leggings"
 }

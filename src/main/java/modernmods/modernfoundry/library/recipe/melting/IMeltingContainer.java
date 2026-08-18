@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.recipe.melting;
 
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.recipe.container.ISingleStackContainer;
+import modernmods.mantle.recipe.container.ISingleStackContainer;
 
 /** Interface for melting inventories */
 public interface IMeltingContainer extends ISingleStackContainer {

@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/sweeping_edge",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "minecraft:chain"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/sweeping_edge",
+  "input": "minecraft:iron_chain",
   "level": {
     "max": 3
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/melee/sword"
-  }
+  "tools": "#modernfoundry:modifiable/melee/sword"
 }

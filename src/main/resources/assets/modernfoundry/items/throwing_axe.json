@@ -1,0 +1,19 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/throwing_axe",
+    "parts": [
+      {
+        "name": "shaft",
+        "index": 1
+      },
+      {
+        "name": "head",
+        "index": 0
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:throwing_axe"
+    ]
+  }
+}

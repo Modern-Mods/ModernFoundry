@@ -1,6 +1,8 @@
 package modernmods.modernfoundry.smeltery.block.entity;
 
-import net.minecraft.Util;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
@@ -12,16 +14,16 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import java.util.function.Consumer;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.fluids.capability.templates.EmptyFluidHandler;
-import modernmods.hilt.block.entity.HiltBlockEntity;
-import modernmods.hilt.util.WeakConsumerWrapper;
+import modernmods.mantle.block.entity.MantleBlockEntity;
+import modernmods.mantle.util.WeakConsumerWrapper;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
 import modernmods.modernfoundry.library.fluid.FillOnlyFluidHandler;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
@@ -40,7 +42,7 @@ import java.util.Map;
 /**
  * Logic for channel fluid transfer
  */
-public class ChannelBlockEntity extends HiltBlockEntity implements IFluidPacketReceiver, ILegacyCapabilityBlockEntity {
+public class ChannelBlockEntity extends MantleBlockEntity implements IFluidPacketReceiver, ILegacyCapabilityBlockEntity {
 	/** Channel internal tank */
 	private final ChannelTank tank = new ChannelTank(FaucetBlockEntity.MB_PER_TICK * 4, this);
 	/** Handler to return from channel top */
@@ -119,7 +121,7 @@ public class ChannelBlockEntity extends HiltBlockEntity implements IFluidPacketR
       }
     }
 
-		return modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
+		return modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
 	}
 
 	/**
@@ -132,7 +134,8 @@ public class ChannelBlockEntity extends HiltBlockEntity implements IFluidPacketR
 		// must have a TE with a fluid handler
 		BlockEntity te = level.getBlockEntity(worldPosition.relative(side));
 		if (te != null) {
-			IFluidHandler handler = level.getCapability(Capabilities.FluidHandler.BLOCK, worldPosition.relative(side), null, te, side.getOpposite());
+			var handlerRh = level.getCapability(Capabilities.Fluid.BLOCK, worldPosition.relative(side), null, te, side.getOpposite());
+			IFluidHandler handler = handlerRh == null ? null : IFluidHandler.of(handlerRh);
 			if (handler != null) {
 				return LazyOptional.of(() -> handler);
 			}
@@ -234,7 +237,7 @@ public class ChannelBlockEntity extends HiltBlockEntity implements IFluidPacketR
 		isFlowing[index] = (byte)(flowing ? 2 : 0);
 
 		// send packet to client if it changed
-		if(wasFlowing != flowing && level != null && !level.isClientSide) {
+		if(wasFlowing != flowing && level != null && !level.isClientSide()) {
 			syncFlowToClient(side, flowing);
 		}
 	}
@@ -398,7 +401,7 @@ public class ChannelBlockEntity extends HiltBlockEntity implements IFluidPacketR
 	 * Sends a fluid update to the client with the current fluid
 	 */
 	public void sendFluidUpdate() {
-		if (level != null && !level.isClientSide) {
+		if (level != null && !level.isClientSide()) {
 			TinkerNetwork.getInstance().sendToClientsAround(new FluidUpdatePacket(worldPosition, getFluid()), level, worldPosition);
 		}
 	}
@@ -414,34 +417,36 @@ public class ChannelBlockEntity extends HiltBlockEntity implements IFluidPacketR
   }
 
   @Override
-  protected void saveSynced(CompoundTag nbt) {
-    super.saveSynced(nbt);
-    nbt.putByteArray(TAG_IS_FLOWING, isFlowing);
-    nbt.put(TAG_TANK, tank.writeToNBT(new CompoundTag()));
+  protected void saveSynced(ValueOutput output) {
+    super.saveSynced(output);
+    int[] flowing = new int[isFlowing.length];
+    for (int i = 0; i < isFlowing.length; i++) {
+      flowing[i] = isFlowing[i];
+    }
+    output.putIntArray(TAG_IS_FLOWING, flowing);
+    output.store(TAG_TANK, CompoundTag.CODEC, tank.writeToNBT(new CompoundTag()));
   }
 
 	@Override
-	public void load(CompoundTag nbt) {
-		super.load(nbt);
+	public void loadAdditional(ValueInput input) {
+		super.loadAdditional(input);
 
 		// isFlowing
-		if (nbt.contains(TAG_IS_FLOWING)) {
-			byte[] nbtFlowing = nbt.getByteArray(TAG_IS_FLOWING);
+		input.getIntArray(TAG_IS_FLOWING).ifPresent(nbtFlowing -> {
 			int max = Math.min(5, nbtFlowing.length);
 			for (int i = 0; i < max; i++) {
-				byte b = nbtFlowing[i];
+				int b = nbtFlowing[i];
 				if (b > 2) {
 					isFlowing[i] = 2;
 				} else if (b < 0) {
 					isFlowing[i] = 0;
 				} else {
-					isFlowing[i] = b;
+					isFlowing[i] = (byte) b;
 				}
 			}
-		}
+		});
 
 		// tank
-		CompoundTag tankTag = nbt.getCompound(TAG_TANK);
-		tank.readFromNBT(tankTag);
+		input.read(TAG_TANK, CompoundTag.CODEC).ifPresent(tank::readFromNBT);
 	}
 }

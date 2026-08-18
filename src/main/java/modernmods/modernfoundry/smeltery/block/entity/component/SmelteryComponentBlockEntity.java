@@ -21,6 +21,17 @@ public class SmelteryComponentBlockEntity extends ServantTileEntity {
     super(type, pos, state);
   }
 
+  @Override
+  public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+    super.preRemoveSideEffects(pos, state);
+    // the component is being removed; notify the master so it can re-validate the structure (formerly Block#onRemove).
+    // Runs server-side before the block entity is removed; getBlockState returns the replacement block already set at this point.
+    // May need in-game validation that structure updates correctly on component removal.
+    if (this.level != null) {
+      notifyMasterOfChange(pos, this.level.getBlockState(pos));
+    }
+  }
+
   /**
    * Block method to update neighbors of a smeltery component when a new one is placed
    * @param world  World instance

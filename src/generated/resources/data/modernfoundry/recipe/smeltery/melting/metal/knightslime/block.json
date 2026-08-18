@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/knightslime/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/knightslime"
-  },
+  "ingredient": "#c:storage_blocks/knightslime",
   "result": {
     "amount": 810,
     "fluid": "modernfoundry:molten_knightslime"

@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.json.variable.protection;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.math.ModifierFormula;
 import modernmods.modernfoundry.library.json.math.ModifierFormula.FallbackFormula;
 import modernmods.modernfoundry.library.json.variable.VariableFormula;

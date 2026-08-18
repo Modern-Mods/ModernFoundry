@@ -1,15 +1,16 @@
 package modernmods.modernfoundry.tools.data.material;
 
+import net.neoforged.neoforge.common.conditions.NeoForgeConditions;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.FluidTags;
 import net.neoforged.neoforge.common.conditions.OrCondition;
-import modernmods.hilt.recipe.condition.TagFilledCondition;
+import modernmods.mantle.recipe.condition.TagFilledCondition;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.json.ConfigEnabledCondition;
 import modernmods.modernfoundry.library.data.material.AbstractMaterialDataProvider;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 
-import static modernmods.hilt.Hilt.commonResource;
+import static modernmods.mantle.Mantle.commonResource;
 
 public class MaterialDataProvider extends AbstractMaterialDataProvider {
   public MaterialDataProvider(PackOutput packOutput) {
@@ -18,7 +19,7 @@ public class MaterialDataProvider extends AbstractMaterialDataProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry Materials";
+    return "Tinker's Construct Materials";
   }
 
   @Override
@@ -97,8 +98,6 @@ public class MaterialDataProvider extends AbstractMaterialDataProvider {
     addMaterial(MaterialIds.magnetite, 3, ORDER_REPAIR, true);
     addMaterial(MaterialIds.kobold,    3, ORDER_REPAIR, true);
     addMaterial(MaterialIds.magma,     3, ORDER_REPAIR, true);
-    // tier 3 - misc
-    addMaterial(MaterialIds.jadeite, 3, ORDER_BINDING, true);
 
     // tier 4
     addMaterial(MaterialIds.queensSlime, 4, ORDER_GENERAL, false);
@@ -133,20 +132,20 @@ public class MaterialDataProvider extends AbstractMaterialDataProvider {
     addCompatMaterial(MaterialIds.ironwood, 2, ORDER_COMPAT + ORDER_GENERAL, true, "ingots/ironwood");
     // treated wood comes from treated wood or creosote oil
     addMaterial(MaterialIds.treatedWood, 2, ORDER_COMPAT + ORDER_GENERAL, true, false,
-      new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, tagExistsCondition("treated_wood"), new TagFilledCondition<>(FluidTags.create(commonResource("creosote")))));
+      NeoForgeConditions.or(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, tagExistsCondition("treated_wood"), new TagFilledCondition<>(FluidTags.create(commonResource("creosote")))));
     // tier 3 (mod integration)
     addCompatAlloy(MaterialIds.electrum,        3, ORDER_COMPAT + ORDER_GENERAL, "silver");
     addCompatAlloy(MaterialIds.bronze,          3, ORDER_COMPAT + ORDER_HARVEST, "tin");
     addCompatAlloy(MaterialIds.constantan,      3, ORDER_COMPAT + ORDER_HARVEST, "nickel");
     addCompatAlloy(MaterialIds.invar,           3, ORDER_COMPAT + ORDER_WEAPON,  "nickel");
     // TODO 1.21: consider making this an and condition, so we only get pewter if pewter is present or we have both
-    addCompatAlloy(MaterialIds.pewter,          3, ORDER_COMPAT + ORDER_WEAPON,  new OrCondition(tagExistsCondition("ingots/tin"), tagExistsCondition("ingots/lead")));
+    addCompatAlloy(MaterialIds.pewter,          3, ORDER_COMPAT + ORDER_WEAPON,  NeoForgeConditions.or(tagExistsCondition("ingots/tin"), tagExistsCondition("ingots/lead")));
     addCompatAlloy(MaterialIds.platedSlimewood, 3, ORDER_COMPAT + ORDER_SPECIAL, "zinc");
     addCompatMaterial(MaterialIds.necronium,       3, ORDER_COMPAT + ORDER_WEAPON, true, "ingots/uranium");
     addCompatMetalMaterial(MaterialIds.steeleaf, 3, ORDER_COMPAT + ORDER_SPECIAL);
     // tier 4 (mod integration)
     addCompatMetalMaterial(MaterialIds.fiery,           4, ORDER_COMPAT + ORDER_END);
-    addCompatAlloy(MaterialIds.nicrosil, 4, ORDER_COMPAT + ORDER_WEAPON,  new OrCondition(tagExistsCondition("ingots/tin"), tagExistsCondition("ingots/nickel"), tagExistsCondition("ingots/chromium")));
+    addCompatAlloy(MaterialIds.nicrosil, 4, ORDER_COMPAT + ORDER_WEAPON,  NeoForgeConditions.or(tagExistsCondition("ingots/tin"), tagExistsCondition("ingots/nickel"), tagExistsCondition("ingots/chromium")));
 
     // slimesuit
     addMaterial(MaterialIds.clay,  2, ORDER_REPAIR + 5, true);
@@ -162,7 +161,7 @@ public class MaterialDataProvider extends AbstractMaterialDataProvider {
     addRedirect(id("platinum"), redirect(MaterialIds.searedStone));
     addRedirect(id("tungsten"),
       conditionalRedirect(MaterialIds.lead, tagExistsCondition("ingots/lead")),
-      conditionalRedirect(MaterialIds.invar, new OrCondition(tagExistsCondition("ingots/invar"), tagExistsCondition("ingots/nickel"))),
+      conditionalRedirect(MaterialIds.invar, NeoForgeConditions.or(tagExistsCondition("ingots/invar"), tagExistsCondition("ingots/nickel"))),
       redirect(MaterialIds.iron));
   }
   /**

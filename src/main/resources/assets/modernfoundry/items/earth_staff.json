@@ -1,0 +1,25 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/earth_staff",
+    "large": true,
+    "modifier_maps": [
+      "modernfoundry:staff/earth",
+      "modernfoundry:staff"
+    ],
+    "first_modifiers": [
+      "modernfoundry:dyed",
+      "modernfoundry:embellishment"
+    ],
+    "small_modifier_roots": {
+      "small": [
+        "modernfoundry:item/tool/staff/modifiers/earth/",
+        "modernfoundry:item/tool/staff/modifiers/"
+      ],
+      "large": [
+        "modernfoundry:item/tool/staff/large_modifiers/earth/",
+        "modernfoundry:item/tool/staff/large_modifiers/"
+      ]
+    }
+  }
+}

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/nickel/leggings",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/leggings/nickel"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/leggings/nickel"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/nickel/leggings",
+  "ingredient": "#c:armors/leggings/nickel",
   "result": {
     "amount": 630,
     "tag": "c:molten_nickel",

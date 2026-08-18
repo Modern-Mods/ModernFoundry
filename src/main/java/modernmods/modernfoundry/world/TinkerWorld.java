@@ -13,7 +13,6 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters;
 import net.minecraft.world.item.CreativeModeTab.Output;
@@ -50,13 +49,13 @@ import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent.Operation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.registration.object.EntityObject;
-import modernmods.hilt.registration.object.EnumObject;
-import modernmods.hilt.registration.object.ItemObject;
-import modernmods.hilt.registration.object.WoodBlockObject;
-import modernmods.hilt.registration.object.WoodBlockObject.WoodVariant;
+import modernmods.mantle.registration.object.EntityObject;
+import modernmods.mantle.registration.object.EnumObject;
+import modernmods.mantle.registration.object.ItemObject;
+import modernmods.mantle.registration.object.WoodBlockObject;
+import modernmods.mantle.registration.object.WoodBlockObject.WoodVariant;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.TinkerModule;
@@ -212,7 +211,7 @@ public final class TinkerWorld extends TinkerModule {
       } else {
         properties.sound(SoundType.GRASS).offsetType(OffsetType.XYZ);
       }
-      return properties.replaceable().instabreak().noCollission().pushReaction(PushReaction.DESTROY);
+      return properties.replaceable().instabreak().noCollision().pushReaction(PushReaction.DESTROY);
     };
     slimeFern = BLOCKS.registerEnum(FoliageType.values(), "slime_fern", type -> new SlimeTallGrassBlock(props.apply(type), type), BLOCK_ITEM);
     slimeTallGrass = BLOCKS.registerEnum(FoliageType.values(), "slime_tall_grass", type -> new SlimeTallGrassBlock(props.apply(type), type), BLOCK_ITEM);
@@ -221,7 +220,7 @@ public final class TinkerWorld extends TinkerModule {
 
   // trees
   public static final EnumObject<FoliageType, Block> slimeSapling = Util.make(() -> {
-    Function<FoliageType,BlockBehaviour.Properties> props = type -> builder(type.getMapColor(), type.isNether() ? SoundType.FUNGUS : SoundType.GRASS).instabreak().noCollission().pushReaction(PushReaction.DESTROY);
+    Function<FoliageType,BlockBehaviour.Properties> props = type -> builder(type.getMapColor(), type.isNether() ? SoundType.FUNGUS : SoundType.GRASS).instabreak().noCollision().pushReaction(PushReaction.DESTROY);
     return new EnumObject.Builder<FoliageType,Block>(FoliageType.class)
       .putAll(BLOCKS.registerEnum(FoliageType.OVERWORLD, "slime_sapling", (type) -> new SlimeSaplingBlock(SlimeTree.create(type), type, props.apply(type).randomTicks()), TOOLTIP_BLOCK_ITEM))
       .put(FoliageType.BLOOD, BLOCKS.register("blood_slime_sapling", () -> new SlimeFungusBlock(props.apply(FoliageType.BLOOD), TinkerStructures.bloodSlimeFungus), TOOLTIP_BLOCK_ITEM))
@@ -239,7 +238,7 @@ public final class TinkerWorld extends TinkerModule {
   // slime vines
   public static final ItemObject<SlimeVineBlock> skySlimeVine, enderSlimeVine;
   static {
-    Function<SlimeType,BlockBehaviour.Properties> props = type -> builder(type.getMapColor(), SoundType.GRASS).replaceable().strength(0.75F).noCollission().randomTicks().pushReaction(PushReaction.DESTROY);
+    Function<SlimeType,BlockBehaviour.Properties> props = type -> builder(type.getMapColor(), SoundType.GRASS).replaceable().strength(0.75F).noCollision().randomTicks().pushReaction(PushReaction.DESTROY);
     skySlimeVine = BLOCKS.register("sky_slime_vine", () -> new SlimeVineBlock(props.apply(SlimeType.SKY), SlimeType.SKY), BLOCK_ITEM);
     enderSlimeVine = BLOCKS.register("ender_slime_vine", () -> new SlimeVineBlock(props.apply(SlimeType.ENDER), SlimeType.ENDER), BLOCK_ITEM);
   }
@@ -280,17 +279,17 @@ public final class TinkerWorld extends TinkerModule {
     EntityType.Builder.of(SkySlimeEntity::new, MobCategory.MONSTER)
                       .setShouldReceiveVelocityUpdates(true)
                       .setTrackingRange(20)
-                      .sized(0.52F, 0.52F), 0x47eff5, 0xacfff4);
+                      .sized(0.52F, 0.52F).eyeHeight(0.325F).spawnDimensionsScale(4.0F), 0x47eff5, 0xacfff4);
   public static final EntityObject<EnderSlimeEntity> enderSlimeEntity = ENTITIES.registerWithEgg("ender_slime", () ->
     EntityType.Builder.of(EnderSlimeEntity::new, MobCategory.MONSTER)
                       .setShouldReceiveVelocityUpdates(true)
                       .setTrackingRange(32)
-                      .sized(0.52F, 0.52F), 0x6300B0, 0xD37CFF);
+                      .sized(0.52F, 0.52F).eyeHeight(0.325F).spawnDimensionsScale(4.0F), 0x6300B0, 0xD37CFF);
   public static final EntityObject<TerracubeEntity> terracubeEntity = ENTITIES.registerWithEgg("terracube", () ->
     EntityType.Builder.of(TerracubeEntity::new, MobCategory.MONSTER)
                       .setShouldReceiveVelocityUpdates(true)
                       .setTrackingRange(8)
-                      .sized(0.52F, 0.52F), 0xAFB9D6, 0xA1A7B1);
+                      .sized(0.52F, 0.52F).eyeHeight(0.325F).spawnDimensionsScale(4.0F), 0xAFB9D6, 0xA1A7B1);
 
   public static final ResourceKey<BiomeModifier> spawnOverworldSlime = key(ForgeRegistries.Keys.BIOME_MODIFIERS, "spawn_overworld_slime");
   public static final ResourceKey<BiomeModifier> spawnTerracube = key(ForgeRegistries.Keys.BIOME_MODIFIERS, "spawn_terracube");
@@ -343,10 +342,14 @@ public final class TinkerWorld extends TinkerModule {
 
   @SubscribeEvent
   void registerSpawnPlacement(RegisterSpawnPlacementsEvent event) {
+    // vanilla slime already has a spawn placement, so OR-merge our island predicate onto it (null type/heightmap keeps
+    // vanilla's). The modded slimes are NEW entity types with no existing placement and need their OWN placement type +
+    // heightmap; RegisterSpawnPlacementsEvent only permits a non-null placementType/heightmap with Operation.REPLACE and
+    // throws IllegalStateException otherwise — using OR here silently failed their registration, so they never spawned.
     event.register(EntityType.SLIME, null, null, new SlimePlacementPredicate<>(TinkerTags.Blocks.EARTH_SLIME_SPAWN), Operation.OR);
-    event.register(skySlimeEntity.get(),   SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new SlimePlacementPredicate<>(TinkerTags.Blocks.SKY_SLIME_SPAWN), Operation.OR);
-    event.register(enderSlimeEntity.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new SlimePlacementPredicate<>(TinkerTags.Blocks.ENDER_SLIME_SPAWN), Operation.OR);
-    event.register(terracubeEntity.get(),  SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TerracubeEntity::canSpawnHere, Operation.OR);
+    event.register(skySlimeEntity.get(),   SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new SlimePlacementPredicate<>(TinkerTags.Blocks.SKY_SLIME_SPAWN), Operation.REPLACE);
+    event.register(enderSlimeEntity.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new SlimePlacementPredicate<>(TinkerTags.Blocks.ENDER_SLIME_SPAWN), Operation.REPLACE);
+    event.register(terracubeEntity.get(),  SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TerracubeEntity::canSpawnHere, Operation.REPLACE);
 
   }
 
@@ -367,13 +370,13 @@ public final class TinkerWorld extends TinkerModule {
       DispenseItemBehavior dispenseArmor = new OptionalDispenseItemBehavior() {
         @Override
         protected ItemStack execute(BlockSource source, ItemStack stack) {
-          this.setSuccess(ArmorItem.dispenseArmor(source, stack));
+          this.setSuccess(net.minecraft.core.dispenser.EquipmentDispenseItemBehavior.dispenseEquipment(source, stack));
           return stack;
         }
       };
       TinkerWorld.heads.forEach(head -> DispenserBlock.registerBehavior(head, dispenseArmor));
-      // heads in firework stars
-      TinkerWorld.heads.forEach(head -> FireworkStarRecipe.SHAPE_BY_ITEM.put(head.asItem(), FireworkExplosion.Shape.CREEPER));
+      // heads in firework stars: the runtime FireworkStarRecipe.SHAPE_BY_ITEM hook was removed in 26.1;
+      // creeper-shaped firework stars from these heads are now defined via the firework star recipe data
       // inject heads into the tile entity type
       event.enqueueWork(() -> {
         ImmutableSet.Builder<Block> builder = ImmutableSet.builder();
@@ -503,7 +506,7 @@ public final class TinkerWorld extends TinkerModule {
 
   /** Creates a skull wall block for the given head type */
   private static WallSkullBlock makeWallHead(TinkerHeadType type) {
-    BlockBehaviour.Properties props = BlockBehaviour.Properties.of().strength(1.0F).lootFrom(() -> heads.get(type));
+    BlockBehaviour.Properties props = BlockBehaviour.Properties.of().strength(1.0F).overrideLootTable(heads.get(type).getLootTable());
     if (type.isPiglin()) {
       return new PiglinWallHeadBlock(type, props);
     }
@@ -516,7 +519,7 @@ public final class TinkerWorld extends TinkerModule {
     if (type == TinkerHeadType.ENDERMAN) {
       return new EndermanHeadItem(heads.get(type), wallHeads.get(type), properties, Direction.DOWN);
     }
-    return new StandingAndWallBlockItem(heads.get(type), wallHeads.get(type), properties, Direction.DOWN);
+    return new StandingAndWallBlockItem(heads.get(type), wallHeads.get(type), Direction.DOWN, properties);
   }
 
   /** Properties for a cluster of shards. */

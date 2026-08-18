@@ -1,21 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:storage_blocks/ironwood"
+    }
+  ],
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/ironwood/block",
   "byproducts": [
     {
       "amount": 90,
       "tag": "c:molten_gold"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:storage_blocks/ironwood"
-    }
-  ],
-  "ingredient": {
-    "tag": "c:storage_blocks/ironwood"
-  },
+  "id": "modernfoundry:smeltery/melting/ironwood/block",
+  "ingredient": "#c:storage_blocks/ironwood",
   "result": {
     "amount": 810,
     "tag": "c:molten_iron"

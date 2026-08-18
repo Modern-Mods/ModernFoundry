@@ -1,0 +1,22 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/slime_leggings",
+    "parts": [
+      {
+        "name": "slime",
+        "index": 1
+      },
+      {
+        "name": "shell",
+        "index": 0
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:slime/leggings"
+    ],
+    "first_modifiers": [
+      "modernfoundry:trim"
+    ]
+  }
+}

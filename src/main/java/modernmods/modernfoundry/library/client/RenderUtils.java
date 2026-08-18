@@ -1,53 +1,19 @@
 package modernmods.modernfoundry.library.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import modernmods.hilt.client.render.FluidCuboid;
-import modernmods.hilt.client.render.FluidRenderer;
-import modernmods.hilt.client.render.HiltRenderTypes;
+import modernmods.mantle.client.render.FluidCuboid;
+import modernmods.mantle.client.render.FluidRenderer;
+import modernmods.mantle.client.render.MantleRenderTypes;
 import modernmods.modernfoundry.library.fluid.FluidTankAnimated;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RenderUtils {
-  /**
-   * Binds a texture for rendering
-   * @param texture  Texture
-   */
-  public static void bindTexture(ResourceLocation texture) {
-    RenderSystem.setShader(GameRenderer::getPositionTexShader);
-    RenderSystem.setShaderTexture(0, texture);
-  }
-
-  /**
-   * Sets up the shader for rendering
-   * @param texture  Texture
-   * @param red      Red tint
-   * @param green    Green tint
-   * @param blue     Blue tint
-   * @param alpha    Alpha tint
-   */
-  public static void setup(ResourceLocation texture, float red, float green, float blue, float alpha) {
-    bindTexture(texture);
-    RenderSystem.setShaderColor(red, green, blue, alpha);
-  }
-
-  /**
-   * Sets up the shader for rendering.
-   * @param texture  Texture
-   */
-  public static void setup(ResourceLocation texture) {
-    setup(texture, 1.0f, 1.0f, 1.0f, 1.0f);
-  }
-
   /**
    * Adds a fluid cuboid with transparency
    * @param matrices  Matrix stack instance
@@ -63,22 +29,44 @@ public final class RenderUtils {
       return;
     }
 
-    IClientFluidTypeExtensions attributes = IClientFluidTypeExtensions.of(fluid.getFluid());
-    TextureAtlasSprite still = FluidRenderer.getBlockSprite(attributes.getStillTexture(fluid));
-    TextureAtlasSprite flowing = FluidRenderer.getBlockSprite(attributes.getFlowingTexture(fluid));
+    // fetch sprites and tint color from the 26.1 fluid model system (removed client-extension texture accessors)
+    FluidRenderer.FluidTextures textures = FluidRenderer.getFluidTextures(fluid);
+    TextureAtlasSprite still = textures.still();
+    TextureAtlasSprite flowing = textures.flowing();
     FluidType fluidType = fluid.getFluid().getFluidType();
     boolean isGas = fluidType.isLighterThanAir();
     light = FluidRenderer.withBlockLight(light, fluidType.getLightLevel(fluid));
 
     // add in fluid opacity if given
-    int color = attributes.getTintColor(fluid);
+    int color = textures.color();
     if (opacity < 0xFF) {
       // alpha is top 8 bits, multiply by opacity and divide out remainder
       int alpha = ((color >> 24) & 0xFF) * opacity / 0xFF;
       // clear bits in color and or in the new alpha
       color = (color & 0xFFFFFF) | (alpha << 24);
     }
-    FluidRenderer.renderCuboid(matrices, buffer.getBuffer(TinkerRenderTypes.SMELTERY_FLUID), cube, still, flowing, cube.getFromScaled(), cube.getToScaled(), color, light, isGas);
+    FluidRenderer.renderCuboid(matrices, buffer.getBuffer(MantleRenderTypes.FLUID), cube, still, flowing, cube.getFromScaled(), cube.getToScaled(), color, light, isGas);
+  }
+
+  /**
+   * Decays a tank's render offset toward zero, returning the offset to render with this frame. This drives the fill/drain
+   * animation: {@code updateFluidTo} seeds the offset with the fluid delta, and each rendered frame eases it back to 0 so
+   * the fluid level animates smoothly (quick, but not instant) instead of snapping. Extracted from
+   * {@link #renderFluidTank} for the 26.1 submit-based block-entity renderers, which lack a passed-in partial-tick.
+   * @param tank  Animated tank whose offset is decayed in place
+   * @return  Render offset to use this frame
+   */
+  public static float decayRenderOffset(FluidTankAnimated tank) {
+    float offset = tank.getRenderOffset();
+    if (offset > 1.2f || offset < -1.2f) {
+      float partialTicks = net.minecraft.client.Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
+      offset = offset - ((offset / 12f + 0.1f) * partialTicks);
+      tank.setRenderOffset(offset);
+    } else {
+      offset = 0;
+      tank.setRenderOffset(0);
+    }
+    return offset;
   }
 
   /**
@@ -106,39 +94,10 @@ public final class RenderUtils {
       }
 
       // fetch fluid information from the model
-      FluidRenderer.renderScaledCuboid(matrices, fluidRenderBuffer(buffer), cube, liquid, offset, capacity, light, flipGas);
+      FluidRenderer.renderScaledCuboid(matrices, buffer, cube, liquid, offset, capacity, light, flipGas);
     } else {
       // clear render offet if no liquid
       tank.setRenderOffset(0);
     }
-  }
-
-  /** Remaps Hilt's hard-coded fluid buffer to Modern Foundry's shader-compatible fluid type. */
-  public static MultiBufferSource fluidRenderBuffer(MultiBufferSource buffer) {
-    return renderType -> buffer.getBuffer(renderType == HiltRenderTypes.FLUID ? TinkerRenderTypes.SMELTERY_FLUID : renderType);
-  }
-
-  public static void setColorRGBA(int color) {
-    float a = alpha(color) / 255.0F;
-    float r = red(color) / 255.0F;
-    float g = green(color) / 255.0F;
-    float b = blue(color) / 255.0F;
-    RenderSystem.setShaderColor(r, g, b, a);
-  }
-
-  public static int alpha(int c) {
-    return (c >> 24) & 0xFF;
-  }
-
-  public static int red(int c) {
-    return (c >> 16) & 0xFF;
-  }
-
-  public static int green(int c) {
-    return (c >> 8) & 0xFF;
-  }
-
-  public static int blue(int c) {
-    return (c) & 0xFF;
   }
 }

@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.world.client;
 
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import modernmods.modernfoundry.world.block.FoliageType;
 

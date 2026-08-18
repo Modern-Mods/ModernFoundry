@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.tables.block.entity.table.TinkerStationBlockEntity;
 import modernmods.modernfoundry.tables.menu.TinkerStationContainerMenu;
 

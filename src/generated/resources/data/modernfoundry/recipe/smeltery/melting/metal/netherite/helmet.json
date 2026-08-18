@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/netherite/helmet",
   "byproducts": [
     {
       "amount": 500,
@@ -8,9 +7,8 @@
       "unit_size": 25
     }
   ],
-  "ingredient": {
-    "item": "minecraft:netherite_helmet"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/netherite/helmet",
+  "ingredient": "minecraft:netherite_helmet",
   "result": {
     "amount": 90,
     "tag": "c:molten_netherite",

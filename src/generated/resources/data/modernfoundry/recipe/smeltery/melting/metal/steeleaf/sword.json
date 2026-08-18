@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steeleaf/sword",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/steeleaf/tools_costing_2"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/steeleaf/tools_costing_2"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steeleaf/sword",
+  "ingredient": "#modernfoundry:melting/steeleaf/tools_costing_2",
   "result": {
     "amount": 180,
     "fluid": "modernfoundry:molten_steeleaf",

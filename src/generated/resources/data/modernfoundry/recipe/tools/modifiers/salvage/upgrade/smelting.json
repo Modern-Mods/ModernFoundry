@@ -6,11 +6,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/interactable"
-    },
-    {
-      "tag": "modernfoundry:modifiable/armor/worn"
-    }
+    "#modernfoundry:modifiable/interactable",
+    "#modernfoundry:modifiable/armor/worn"
   ]
 }

@@ -6,7 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.library.modifiers.fluid.block.MoveBlocksFluidEffect;
 
 /** Packet handling {@link MoveBlocksFluidEffect} syncing to the client */

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "bark",
   "key": {
-    "#": {
-      "item": "modernfoundry:greenheart_log"
-    }
+    "#": "modernfoundry:greenheart_log"
   },
   "pattern": [
     "##",
@@ -14,6 +12,5 @@
   "result": {
     "count": 3,
     "id": "modernfoundry:greenheart_wood"
-  },
-  "show_notification": true
+  }
 }

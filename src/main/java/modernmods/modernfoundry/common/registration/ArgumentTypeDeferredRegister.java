@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.common.registration;
 
-/** @deprecated use {@link modernmods.hilt.registration.deferred.ArgumentTypeDeferredRegister} */
+/** @deprecated use {@link modernmods.mantle.registration.deferred.ArgumentTypeDeferredRegister} */
 @Deprecated(forRemoval = true)
-public class ArgumentTypeDeferredRegister extends modernmods.hilt.registration.deferred.ArgumentTypeDeferredRegister {
+public class ArgumentTypeDeferredRegister extends modernmods.mantle.registration.deferred.ArgumentTypeDeferredRegister {
   public ArgumentTypeDeferredRegister(String modID) {
     super(modID);
   }

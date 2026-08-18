@@ -7,7 +7,7 @@ import com.mojang.serialization.JsonOps;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.RegistryOps;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
@@ -19,15 +19,15 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.conditions.ConditionalOps;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ICondition.IContext;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.bus.api.EventPriority;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.Loadable;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.util.JsonHelper;
-import modernmods.hilt.util.typed.TypedMapBuilder;
+import modernmods.mantle.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.util.JsonHelper;
+import modernmods.mantle.util.typed.TypedMapBuilder;
 import modernmods.modernfoundry.TConstruct;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /** Loads the list of mob equipment replacements from JSON */
-public class MobEquipmentManager extends SimpleJsonResourceReloadListener {
+public class MobEquipmentManager extends SimpleJsonResourceReloadListener<JsonElement> {
   public static final String FOLDER = "tinkering/mob_equipment";
   /** Singleton instance of the manager */
   private static final MobEquipmentManager INSTANCE = new MobEquipmentManager();
@@ -53,26 +53,26 @@ public class MobEquipmentManager extends SimpleJsonResourceReloadListener {
   private RegistryAccess registryAccess = RegistryAccess.EMPTY;
 
   private MobEquipmentManager() {
-    super(JsonHelper.DEFAULT_GSON, FOLDER);
+    super(net.minecraft.util.ExtraCodecs.JSON, net.minecraft.resources.FileToIdConverter.json(FOLDER));
   }
 
   /** @apiNote no need for addons to call this */
   @Internal
   public static void init() {
-    NeoForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, AddReloadListenerEvent.class, INSTANCE::addDataPackListeners);
+    NeoForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, AddServerReloadListenersEvent.class, INSTANCE::addDataPackListeners);
     NeoForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, FinalizeSpawnEvent.class, INSTANCE::finalizeSpawn);
   }
 
   @Override
-  protected void apply(Map<ResourceLocation, JsonElement> jsons, ResourceManager manager, ProfilerFiller profiler) {
+  protected void apply(Map<Identifier, JsonElement> jsons, ResourceManager manager, ProfilerFiller profiler) {
     long time = System.nanoTime();
     int loaded = 0;
 
     // location of the objects only matters for debug, just parse each one
     Map<EntityType<?>, List<MobEquipment>> parsed = new HashMap<>();
     Function<EntityType<?>, List<MobEquipment>> ifAbsent = type -> new ArrayList<>();
-    for (Entry<ResourceLocation,JsonElement> entry : jsons.entrySet()) {
-      ResourceLocation key = entry.getKey();
+    for (Entry<Identifier,JsonElement> entry : jsons.entrySet()) {
+      Identifier key = entry.getKey();
       try {
         JsonObject json = GsonHelper.convertToJsonObject(entry.getValue(), key.toString());
         // skip if conditions fail
@@ -129,8 +129,8 @@ public class MobEquipmentManager extends SimpleJsonResourceReloadListener {
   /* Events */
 
   /** Adds the managers as datapack listeners */
-  private void addDataPackListeners(AddReloadListenerEvent event) {
-    event.addListener(this);
+  private void addDataPackListeners(AddServerReloadListenersEvent event) {
+    event.addListener(TConstruct.getResource("mob_equipment"), this);
     context = event.getConditionContext();
     registryAccess = event.getRegistryAccess();
   }

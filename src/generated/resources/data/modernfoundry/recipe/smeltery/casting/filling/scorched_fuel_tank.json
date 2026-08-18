@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:basin_filling",
-  "id": "modernfoundry:smeltery/casting/filling/scorched_fuel_tank",
   "container": "modernfoundry:scorched_fuel_tank",
   "fluid_amount": 250
 }

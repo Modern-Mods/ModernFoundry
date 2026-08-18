@@ -2,9 +2,9 @@ package modernmods.modernfoundry.library.client.book.elements;
 
 import com.google.common.collect.Lists;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import modernmods.hilt.client.book.data.element.TextData;
-import modernmods.hilt.client.screen.book.element.TextElement;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import modernmods.mantle.client.book.data.element.TextData;
+import modernmods.mantle.client.screen.book.element.TextElement;
 
 public class ListingCenteredElement extends TextElement {
 
@@ -22,7 +22,7 @@ public class ListingCenteredElement extends TextElement {
   }
 
   @Override
-  public void draw(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
+  public void draw(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
     if (this.isHovered(mouseX, mouseY)) {
       this.text[0].text = "> ";
       this.text[this.text.length - 1].text = " <";

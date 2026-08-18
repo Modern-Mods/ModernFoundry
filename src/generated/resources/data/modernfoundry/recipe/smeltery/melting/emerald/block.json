@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/emerald/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/emerald"
-  },
+  "ingredient": "#c:storage_blocks/emerald",
   "result": {
     "amount": 900,
     "fluid": "modernfoundry:molten_emerald"

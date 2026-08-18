@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/refined_obsidian/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/refined_obsidian"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/refined_obsidian"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/refined_obsidian/ingot",
+  "ingredient": "#c:ingots/refined_obsidian",
   "result": {
     "amount": 90,
     "tag": "c:molten_refined_obsidian"

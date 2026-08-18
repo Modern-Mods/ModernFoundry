@@ -8,7 +8,7 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
@@ -30,11 +30,11 @@ public class TerracubeEntity extends ArmoredSlimeEntity {
   /**
    * Checks if a slime can spawn at the given location
    */
-  public static boolean canSpawnHere(EntityType<? extends Slime> entityType, ServerLevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
+  public static boolean canSpawnHere(EntityType<? extends Slime> entityType, ServerLevelAccessor world, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
     if (world.getDifficulty() == Difficulty.PEACEFUL) {
       return false;
     }
-    if (reason == MobSpawnType.SPAWNER) {
+    if (reason == EntitySpawnReason.SPAWNER) {
       return true;
     }
     BlockPos down = pos.below();
@@ -60,7 +60,7 @@ public class TerracubeEntity extends ArmoredSlimeEntity {
   }
 
   @Override
-  protected int calculateFallDamage(float distance, float damageMultiplier) {
+  protected int calculateFallDamage(double distance, float damageMultiplier) {
     return 0;
   }
 

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/cinderslime/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/cinderslime"
-  },
+  "ingredient": "#c:nuggets/cinderslime",
   "material": "modernfoundry:cinderslime",
   "needed": 9,
   "value": 1

@@ -34,7 +34,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:tinkers_anvil"
+      "id": "modernfoundry:tinkers_anvil"
     },
     "show_toast": true,
     "title": {

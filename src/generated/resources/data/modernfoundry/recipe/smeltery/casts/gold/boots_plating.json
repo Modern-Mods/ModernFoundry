@@ -1,13 +1,10 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casts/gold/boots_plating",
   "cast": [
+    "modernfoundry:boots_plating_dummy",
     {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:boots_plating"
-    },
-    {
-      "item": "modernfoundry:boots_plating_dummy"
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:boots_plating"
     }
   ],
   "cast_consumed": true,
@@ -16,6 +13,7 @@
     "amount": 90,
     "tag": "c:molten_gold"
   },
+  "id": "modernfoundry:smeltery/casts/gold/boots_plating",
   "result": "modernfoundry:boots_plating_cast",
   "switch_slots": true
 }

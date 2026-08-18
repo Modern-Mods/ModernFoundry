@@ -5,9 +5,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.model.data.ModelData;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.util.RetexturedHelper;
+import modernmods.mantle.util.RetexturedHelper;
 import modernmods.modernfoundry.library.client.model.ModelProperties;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.entity.component.SmelteryInputOutputBlockEntity.SmelteryFluidIO;
@@ -38,7 +38,7 @@ public class DrainBlockEntity extends SmelteryFluidIO implements IDisplayFluidLi
 
   @Override
   public void notifyDisplayFluidUpdated(FluidStack fluid) {
-    if (!fluid.isFluidEqual(displayFluid)) {
+    if (!FluidStack.isSameFluidSameComponents(fluid, displayFluid)) {
       // no need to copy as the fluid was copied by the caller
       displayFluid = fluid;
       requestModelDataUpdate();
@@ -51,11 +51,13 @@ public class DrainBlockEntity extends SmelteryFluidIO implements IDisplayFluidLi
 
   /* Updating */
 
-  // override instead of writeSynced to avoid writing master to the main tag twice
+  // override instead of saveSynced to avoid writing master to the main tag twice
   @Override
-  public CompoundTag getUpdateTag() {
-    CompoundTag nbt = super.getUpdateTag();
-    writeMaster(nbt);
+  public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider registries) {
+    CompoundTag nbt = super.getUpdateTag(registries);
+    net.minecraft.world.level.storage.TagValueOutput output = net.minecraft.world.level.storage.TagValueOutput.createWithContext(net.minecraft.util.ProblemReporter.DISCARDING, registries);
+    writeMaster(output);
+    nbt.merge(output.buildResult());
     return nbt;
   }
 

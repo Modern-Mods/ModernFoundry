@@ -7,7 +7,7 @@
         "prop": "force_integration_materials"
       },
       {
-        "type": "hilt:tag_filled",
+        "type": "mantle:tag_filled",
         "tag": "c:ingots/constantan"
       },
       {
@@ -18,7 +18,7 @@
             "prop": "allow_ingotless_alloys"
           },
           {
-            "type": "hilt:tag_filled",
+            "type": "mantle:tag_filled",
             "tag": "c:ingots/nickel"
           }
         ]

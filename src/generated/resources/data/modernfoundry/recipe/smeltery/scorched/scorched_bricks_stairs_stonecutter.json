@@ -1,9 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "modernfoundry:scorched_bricks"
-  },
+  "ingredient": "modernfoundry:scorched_bricks",
   "result": {
     "id": "modernfoundry:scorched_bricks_stairs"
   }

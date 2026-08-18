@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/magnetic_armor",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/magnetic_armor",
   "inputs": [
     {
-      "item": "minecraft:compass"
+      "ingredient": "minecraft:compass"
     }
   ],
   "level": 1,
@@ -12,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/worn"
-  }
+  "tools": "#modernfoundry:modifiable/armor/worn"
 }

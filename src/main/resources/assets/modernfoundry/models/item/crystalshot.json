@@ -1,5 +1,5 @@
 {
-  "loader": "hilt:nbt_key",
+  "loader": "mantle:nbt_key",
   "parent": "neoforge:item/default",
   "textures": {
     "default":    "modernfoundry:item/arrow/crystalshot_random",

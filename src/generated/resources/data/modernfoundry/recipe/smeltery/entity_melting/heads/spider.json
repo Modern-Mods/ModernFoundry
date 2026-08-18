@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/entity_melting/heads/spider",
   "ingredient": [
-    {
-      "item": "modernfoundry:spider_head"
-    },
-    {
-      "item": "modernfoundry:cave_spider_head"
-    }
+    "modernfoundry:spider_head",
+    "modernfoundry:cave_spider_head"
   ],
   "result": {
     "amount": 500,

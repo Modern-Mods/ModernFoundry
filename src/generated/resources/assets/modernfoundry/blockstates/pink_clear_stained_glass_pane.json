@@ -2,12 +2,28 @@
   "multipart": [
     {
       "apply": {
-        "model": "modernfoundry:block/clear_glass/pink/pane_post"
+        "type": "mantle:connected",
+        "model": "modernfoundry:block/clear_glass/pink/pane_post",
+        "connection": {
+          "predicate": "pane",
+          "textures": {
+            "pane": "cornerless_full"
+          }
+        },
+        "color": -884827
       }
     },
     {
       "apply": {
-        "model": "modernfoundry:block/clear_glass/pink/pane_side"
+        "type": "mantle:connected",
+        "model": "modernfoundry:block/clear_glass/pink/pane_side",
+        "connection": {
+          "predicate": "pane",
+          "textures": {
+            "pane": "cornerless_full"
+          }
+        },
+        "color": -884827
       },
       "when": {
         "north": "true"
@@ -15,7 +31,15 @@
     },
     {
       "apply": {
-        "model": "modernfoundry:block/clear_glass/pink/pane_noside"
+        "type": "mantle:connected",
+        "model": "modernfoundry:block/clear_glass/pink/pane_noside",
+        "connection": {
+          "predicate": "pane",
+          "textures": {
+            "pane": "cornerless_full"
+          }
+        },
+        "color": -884827
       },
       "when": {
         "north": "false"
@@ -23,7 +47,15 @@
     },
     {
       "apply": {
-        "model": "modernfoundry:block/clear_glass/pink/pane_side_alt"
+        "type": "mantle:connected",
+        "model": "modernfoundry:block/clear_glass/pink/pane_side_alt",
+        "connection": {
+          "predicate": "pane",
+          "textures": {
+            "pane": "cornerless_full"
+          }
+        },
+        "color": -884827
       },
       "when": {
         "south": "true"
@@ -31,8 +63,16 @@
     },
     {
       "apply": {
+        "type": "mantle:connected",
         "model": "modernfoundry:block/clear_glass/pink/pane_noside_alt",
-        "y": 90
+        "y": 90,
+        "connection": {
+          "predicate": "pane",
+          "textures": {
+            "pane": "cornerless_full"
+          }
+        },
+        "color": -884827
       },
       "when": {
         "south": "false"
@@ -40,8 +80,16 @@
     },
     {
       "apply": {
+        "type": "mantle:connected",
         "model": "modernfoundry:block/clear_glass/pink/pane_side_alt",
-        "y": 90
+        "y": 90,
+        "connection": {
+          "predicate": "pane",
+          "textures": {
+            "pane": "cornerless_full"
+          }
+        },
+        "color": -884827
       },
       "when": {
         "west": "true"
@@ -49,8 +97,16 @@
     },
     {
       "apply": {
+        "type": "mantle:connected",
         "model": "modernfoundry:block/clear_glass/pink/pane_noside",
-        "y": 270
+        "y": 270,
+        "connection": {
+          "predicate": "pane",
+          "textures": {
+            "pane": "cornerless_full"
+          }
+        },
+        "color": -884827
       },
       "when": {
         "west": "false"
@@ -58,8 +114,16 @@
     },
     {
       "apply": {
+        "type": "mantle:connected",
         "model": "modernfoundry:block/clear_glass/pink/pane_side",
-        "y": 90
+        "y": 90,
+        "connection": {
+          "predicate": "pane",
+          "textures": {
+            "pane": "cornerless_full"
+          }
+        },
+        "color": -884827
       },
       "when": {
         "east": "true"
@@ -67,7 +131,15 @@
     },
     {
       "apply": {
-        "model": "modernfoundry:block/clear_glass/pink/pane_noside_alt"
+        "type": "mantle:connected",
+        "model": "modernfoundry:block/clear_glass/pink/pane_noside_alt",
+        "connection": {
+          "predicate": "pane",
+          "textures": {
+            "pane": "cornerless_full"
+          }
+        },
+        "color": -884827
       },
       "when": {
         "east": "false"

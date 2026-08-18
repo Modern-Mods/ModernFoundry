@@ -1,12 +1,12 @@
 package modernmods.modernfoundry.tools.modifiers.ability.tool;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import modernmods.hilt.util.OffhandCooldownTracker;
+import modernmods.mantle.util.OffhandCooldownTracker;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -26,7 +26,7 @@ import modernmods.modernfoundry.library.tools.nbt.ToolDataNBT;
 import modernmods.modernfoundry.library.tools.stat.ToolStats;
 
 public class OffhandAttackModifier extends NoLevelsModifier implements EntityInteractionModifierHook, GeneralInteractionModifierHook, VolatileDataModifierHook {
-  public static final ResourceLocation DUEL_WIELDING = TConstruct.getResource("duel_wielding");
+  public static final Identifier DUEL_WIELDING = TConstruct.getResource("duel_wielding");
 
   @Override
   protected void registerHooks(Builder hookBuilder) {

@@ -1,21 +1,19 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/fiery/ingot",
-  "cast": {
-    "tag": "c:ingots/iron"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/fiery"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#c:ingots/iron",
+  "cast_consumed": true,
   "cooling_time": 134,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:fiery_liquid"
   },
+  "id": "modernfoundry:smeltery/casting/fiery/ingot",
   "result": {
     "tag": "c:ingots/fiery"
   }

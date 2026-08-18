@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/bronze/helmet",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/helmets/bronze"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/helmets/bronze"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/bronze/helmet",
+  "ingredient": "#c:armors/helmets/bronze",
   "result": {
     "amount": 450,
     "tag": "c:molten_bronze",

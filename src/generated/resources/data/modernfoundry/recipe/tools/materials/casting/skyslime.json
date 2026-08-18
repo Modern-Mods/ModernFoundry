@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/skyslime",
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:sky_slime"
   },
+  "id": "modernfoundry:tools/materials/casting/skyslime",
   "output": "modernfoundry:skyslime",
   "temperature": 10
 }

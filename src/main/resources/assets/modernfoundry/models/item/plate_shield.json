@@ -1,32 +1,9 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/base/shield_large",
   "textures": {
-    "plating":       "modernfoundry:item/tool/armor/plate/shield/plating",
-    "core":          "modernfoundry:item/tool/armor/plate/shield/core",
+    "plating": "modernfoundry:item/tool/armor/plate/shield/plating",
+    "core": "modernfoundry:item/tool/armor/plate/shield/core",
     "large_plating": "modernfoundry:item/tool/armor/plate/shield/plating_large",
-    "large_core":    "modernfoundry:item/tool/armor/plate/shield/core_large"
-  },
-  "modifier_maps": ["modernfoundry:plate/shield"],
-  "modifier_roots": {
-    "small": [ "modernfoundry:item/tool/armor/plate/shield/modifiers/" ],
-    "large": [ "modernfoundry:item/tool/armor/plate/shield/large_modifiers/" ]
-  },
-  "first_modifiers": [ "modernfoundry:banner" ],
-  "parts": [
-    { "name": "core",    "index": 0 },
-    { "name": "plating", "index": 1 }
-  ],
-  "large": true,
-  "large_offset": [-8, 0],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/armor/plate/shield_blocking"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/armor/plate/shield_broken"
-    }
-  ]
+    "large_core": "modernfoundry:item/tool/armor/plate/shield/core_large"
+  }
 }

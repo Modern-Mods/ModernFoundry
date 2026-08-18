@@ -13,10 +13,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbility;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.behavior.ToolActionModifierHook;
@@ -84,7 +84,7 @@ public record ToolActionTransformModule(ItemAbility action, SoundEvent sound, bo
           level.levelEvent(player, eventId, pos, 0);
         }
       }
-      if (!level.isClientSide) {
+      if (!level.isClientSide()) {
         level.setBlock(pos, transformed, Block.UPDATE_ALL_IMMEDIATE);
         if (requireGround) {
           level.destroyBlock(above, true);

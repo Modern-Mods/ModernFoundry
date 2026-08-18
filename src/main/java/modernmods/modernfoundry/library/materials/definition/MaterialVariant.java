@@ -1,6 +1,5 @@
 package modernmods.modernfoundry.library.materials.definition;
 
-import lombok.Getter;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -10,11 +9,15 @@ public class MaterialVariant extends LazyMaterial {
   /** Unknown material variant, as it comes up a lot */
   public static final MaterialVariant UNKNOWN = new MaterialVariant(IMaterial.UNKNOWN, "");
 
-  @Getter
   private final MaterialVariantId variant;
   protected MaterialVariant(MaterialVariantId variant) {
     super(variant.getId());
     this.variant = variant;
+  }
+
+  /** Gets the material variant ID */
+  public MaterialVariantId getVariant() {
+    return variant;
   }
 
   protected MaterialVariant(IMaterial material, String variant) {

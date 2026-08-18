@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.tools.definition.module.interaction;
 
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.modifiers.hook.interaction.InteractionSource;
 import modernmods.modernfoundry.library.module.HookProvider;

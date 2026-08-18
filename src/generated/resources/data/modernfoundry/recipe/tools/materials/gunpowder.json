@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/gunpowder",
-  "ingredient": {
-    "tag": "c:gunpowders"
-  },
+  "ingredient": "#c:gunpowders",
   "material": "modernfoundry:gunpowder",
   "needed": 4,
   "value": 1

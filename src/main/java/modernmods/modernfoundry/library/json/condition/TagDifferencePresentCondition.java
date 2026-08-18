@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import modernmods.modernfoundry.TConstruct;
@@ -14,15 +14,15 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-/** @deprecated use {@link modernmods.hilt.recipe.condition.TagCombinationCondition#difference(TagKey, TagKey)} */
+/** @deprecated use {@link modernmods.mantle.recipe.condition.TagCombinationCondition#difference(TagKey, TagKey)} */
 @Deprecated(forRemoval = true)
 public class TagDifferencePresentCondition<T> implements ICondition {
-  private static final ResourceLocation NAME = TConstruct.getResource("tag_difference_present");
+  private static final Identifier NAME = TConstruct.getResource("tag_difference_present");
   public static final MapCodec<TagDifferencePresentCondition<?>> CODEC = RecordCodecBuilder.mapCodec(
     instance -> instance.group(
-      ResourceLocation.CODEC.fieldOf("registry").forGetter(condition -> condition.base.registry().location()),
-      ResourceLocation.CODEC.fieldOf("base").forGetter(condition -> condition.base.location()),
-      ResourceLocation.CODEC.listOf().fieldOf("subtracted").forGetter(condition -> condition.subtracted.stream().map(TagKey::location).toList())
+      Identifier.CODEC.fieldOf("registry").forGetter(condition -> condition.base.registry().identifier()),
+      Identifier.CODEC.fieldOf("base").forGetter(condition -> condition.base.location()),
+      Identifier.CODEC.listOf().fieldOf("subtracted").forGetter(condition -> condition.subtracted.stream().map(TagKey::location).toList())
     ).apply(instance, TagDifferencePresentCondition::create)
   );
 
@@ -44,12 +44,12 @@ public class TagDifferencePresentCondition<T> implements ICondition {
   }
 
   /** Creates a condition from a registry and a set of names */
-  public static <T> TagDifferencePresentCondition<T> ofNames(ResourceKey<? extends Registry<T>> registry, ResourceLocation base, ResourceLocation... subtracted) {
+  public static <T> TagDifferencePresentCondition<T> ofNames(ResourceKey<? extends Registry<T>> registry, Identifier base, Identifier... subtracted) {
     TagKey<T> baseKey = TagKey.create(registry, base);
     return new TagDifferencePresentCondition<>(baseKey, Arrays.stream(subtracted).map(name -> TagKey.create(registry, name)).toList());
   }
 
-  public ResourceLocation getID() {
+  public Identifier getID() {
     return NAME;
   }
 
@@ -86,7 +86,7 @@ public class TagDifferencePresentCondition<T> implements ICondition {
     return false;
   }
 
-  private static TagDifferencePresentCondition<?> create(ResourceLocation registryName, ResourceLocation baseName, List<ResourceLocation> subtractedNames) {
+  private static TagDifferencePresentCondition<?> create(Identifier registryName, Identifier baseName, List<Identifier> subtractedNames) {
     ResourceKey<Registry<Object>> registry = ResourceKey.createRegistryKey(registryName);
     return new TagDifferencePresentCondition<>(
       TagKey.create(registry, baseName),

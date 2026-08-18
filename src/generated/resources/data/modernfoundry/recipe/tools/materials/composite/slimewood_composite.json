@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/composite/slimewood_composite",
   "fluid": {
     "amount": 250,
     "tag": "c:slime"
   },
+  "id": "modernfoundry:tools/materials/composite/slimewood_composite",
   "input": "modernfoundry:wood",
   "output": "modernfoundry:slimewood#composite",
   "temperature": 50

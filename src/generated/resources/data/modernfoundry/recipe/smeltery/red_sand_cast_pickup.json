@@ -1,8 +1,6 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/red_sand_cast_pickup",
-  "material": {
-    "tag": "modernfoundry:casts/red_sand"
-  },
+  "material": "#modernfoundry:casts/red_sand",
   "result": "modernfoundry:blank_red_sand_cast"
 }

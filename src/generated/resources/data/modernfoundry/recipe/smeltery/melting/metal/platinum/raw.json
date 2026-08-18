@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:raw_materials/platinum"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/platinum/raw",
   "byproducts": [
     {
       "amount": 90,
@@ -8,15 +13,8 @@
       "tag": "c:molten_gold"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:raw_materials/platinum"
-    }
-  ],
-  "ingredient": {
-    "tag": "c:raw_materials/platinum"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/platinum/raw",
+  "ingredient": "#c:raw_materials/platinum",
   "rate": "metal",
   "result": {
     "amount": 90,

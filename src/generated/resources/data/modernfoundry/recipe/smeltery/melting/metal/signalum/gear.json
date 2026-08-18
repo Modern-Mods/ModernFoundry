@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/signalum/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/signalum"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/signalum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/signalum/gear",
+  "ingredient": "#c:gears/signalum",
   "result": {
     "amount": 360,
     "tag": "c:molten_signalum"

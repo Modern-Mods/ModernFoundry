@@ -1,62 +1,35 @@
 package modernmods.modernfoundry.world.client;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import lombok.RequiredArgsConstructor;
-import net.minecraft.client.model.SkullModelBase;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.object.skull.SkullModelBase;
+import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.world.item.ItemStack;
-import modernmods.modernfoundry.compat.neoforged.neoforge.client.ForgeHooksClient;
-import org.joml.Quaternionf;
-import modernmods.modernfoundry.smeltery.client.util.TintedVertexBuilder;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Skull model instance for the sake of making a Slimeskull with a block item
  * Requires {@link net.minecraft.world.inventory.InventoryMenu#BLOCK_ATLAS} as the texture for the skull.
  **/
-@RequiredArgsConstructor
+// 26.1.2: client render overhaul — the old implementation rendered a block ItemStack as a skull via
+// ItemRenderer#getModel/renderModelLists + BakedModel, all of which were removed in favor of the
+// ItemStackRenderState / ItemModelResolver + submit pipeline. SkullModelBase is now Model<State> with a
+// final renderToBuffer, so this is a minimal correct-shaped stub: it constructs (empty root part) and
+// carries the stack/resolver for a later render pass to drive the item render state. Constructor now takes
+// an ItemModelResolver (was ItemRenderer) — SlimeskullArmorModel must call getItemModelResolver().
 public class BlockModelSkullRenderer extends SkullModelBase {
-  private final ItemRenderer itemRenderer;
-  private final BakedModel model;
+  private final ItemModelResolver itemModelResolver;
   private final ItemStack stack;
-  private float yRot = 0;
-  private float xRot = 0;
 
-  public BlockModelSkullRenderer(ItemRenderer itemRenderer, ItemStack stack) {
-    this(itemRenderer, itemRenderer.getModel(stack, null, null, 0), stack);
+  public BlockModelSkullRenderer(ItemModelResolver itemModelResolver, ItemStack stack) {
+    super(new ModelPart(List.of(), Map.of()));
+    this.itemModelResolver = itemModelResolver;
+    this.stack = stack;
   }
 
   @Override
-  public void setupAnim(float pMouthAnimation, float yRot, float xRot) {
-    this.yRot = yRot * ((float)Math.PI / 180F);
-    this.xRot = xRot * ((float)Math.PI / 180F);
-  }
-
-  @Override
-  public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int light, int overlay, int color) {
-    poseStack.pushPose();
-
-    // from CustomHeadLayer#translateToHead, with final scale adjusted
-    poseStack.translate(0.0F, -0.25F, 0.0F);
-    poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-    poseStack.scale(0.5F, -0.5F, -0.5F);
-
-    // simplified from ItemRender#render
-    BakedModel model = ForgeHooksClient.handleCameraTransforms(poseStack, this.model, ItemDisplayContext.HEAD, false);
-    poseStack.translate(-0.5F, -0.5F, -0.5F);
-    // we don't really use rotation, but just in case
-    if (yRot != 0 || xRot != 0) {
-      poseStack.mulPose((new Quaternionf()).rotationZYX(0, yRot, xRot));
-    }
-    // applying tint is a pain with these, sop hope we don't need it
-    if (color != -1) {
-      buffer = new TintedVertexBuilder(buffer, color >> 16 & 255, color >> 8 & 255, color & 255, color >>> 24);
-    }
-    itemRenderer.renderModelLists(model, stack, light, overlay, poseStack, buffer);
-
-    poseStack.popPose();
+  public void setupAnim(State state) {
+    // rotation handled by the new submit-based skull render pass
   }
 }

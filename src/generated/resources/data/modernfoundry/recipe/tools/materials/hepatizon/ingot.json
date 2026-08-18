@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/hepatizon/ingot",
-  "ingredient": {
-    "tag": "c:ingots/hepatizon"
-  },
+  "ingredient": "#c:ingots/hepatizon",
   "material": "modernfoundry:hepatizon",
   "needed": 1,
   "value": 1

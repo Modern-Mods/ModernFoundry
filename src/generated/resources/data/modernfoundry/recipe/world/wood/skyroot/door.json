@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wooden_door",
   "key": {
-    "#": {
-      "item": "modernfoundry:skyroot_planks"
-    }
+    "#": "modernfoundry:skyroot_planks"
   },
   "pattern": [
     "##",
@@ -15,6 +13,5 @@
   "result": {
     "count": 3,
     "id": "modernfoundry:skyroot_door"
-  },
-  "show_notification": true
+  }
 }

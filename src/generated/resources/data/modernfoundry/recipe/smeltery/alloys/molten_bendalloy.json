@@ -1,24 +1,24 @@
 {
-  "type": "modernfoundry:alloy",
-  "id": "modernfoundry:smeltery/alloys/molten_bendalloy",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/bendalloy"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/tin"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/lead"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/cadmium"
     }
   ],
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_bendalloy",
   "inputs": [
     {
       "amount": 180,

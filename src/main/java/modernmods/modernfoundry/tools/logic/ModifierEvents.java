@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -23,14 +23,14 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.AbstractArrow.Pickup;
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow.Pickup;
+import net.minecraft.world.entity.projectile.hurtingprojectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -52,10 +52,9 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
-import modernmods.hilt.HiltEvents;
-import modernmods.hilt.util.CombatHelper;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.MantleEvents;
+import modernmods.mantle.util.CombatHelper;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
@@ -97,17 +96,17 @@ import java.util.List;
 import java.util.Optional;
 
 /** Events to implement modifier specific behaviors, such as those defined by {@link TinkerDataKeys}. General hooks will typically be in {@link ToolEvents} */
-@EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.GAME)
+@EventBusSubscriber(modid = TConstruct.MOD_ID)
 public class ModifierEvents {
   /** Multiplier for experience drops from events */
   private static final TinkerDataKey<Float> PROJECTILE_EXPERIENCE = TConstruct.createKey("projectile_experience");
   // TODO: move following to TinkerDataKeys?
   /** Volatile data float for amount of experience granted per level. Used by both projectiles and held tools. */
-  public static final ResourceLocation EXPERIENCE = TConstruct.getResource("experience");
+  public static final Identifier EXPERIENCE = TConstruct.getResource("experience");
   /** Volatile data flag making a modifier grant the tool soulbound */
-  public static final ResourceLocation SOULBOUND = TConstruct.getResource("soulbound");
+  public static final Identifier SOULBOUND = TConstruct.getResource("soulbound");
   /** Volatile data int for making a modifier on a shield grant reflecting */
-  public static final ResourceLocation REFLECTING = TConstruct.getResource("reflecting");
+  public static final Identifier REFLECTING = TConstruct.getResource("reflecting");
 
   @SuppressWarnings("removal")
   @SubscribeEvent
@@ -184,7 +183,7 @@ public class ModifierEvents {
     }
     // this is the latest we can add slot markers to the items so we can return them to slots
     LivingEntity entity = event.getEntity();
-    if (!entity.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY) && entity instanceof Player player && !(player instanceof FakePlayer)) {
+    if (entity.level() instanceof ServerLevel serverLevel && !serverLevel.getGameRules().get(GameRules.KEEP_INVENTORY) && entity instanceof Player player && !(player instanceof FakePlayer)) {
       // start with the hotbar, must be soulbound or soul belt
       boolean soulBelt = ArmorLevelModule.getLevel(player, TinkerDataKeys.SOUL_BELT) > 0;
       Inventory inventory = player.getInventory();
@@ -193,7 +192,7 @@ public class ModifierEvents {
         ItemStack stack = inventory.getItem(i);
         if (!stack.isEmpty() && (soulBelt || ModifierUtil.checkVolatileFlag(stack, SOULBOUND))) {
           CompoundTag tag = TagUtil.getOrCreateTag(stack);
-          tag.putInt(HiltEvents.SOULBOUND_SLOT, i);
+          tag.putInt(MantleEvents.SOULBOUND_SLOT, i);
           TagUtil.setTag(stack, tag);
         }
       }
@@ -204,7 +203,7 @@ public class ModifierEvents {
         ItemStack stack = inventory.getItem(i);
         if (!stack.isEmpty() && ModifierUtil.checkVolatileFlag(stack, SOULBOUND)) {
           CompoundTag tag = TagUtil.getOrCreateTag(stack);
-          tag.putInt(HiltEvents.SOULBOUND_SLOT, i);
+          tag.putInt(MantleEvents.SOULBOUND_SLOT, i);
           TagUtil.setTag(stack, tag);
         }
       }
@@ -337,8 +336,7 @@ public class ModifierEvents {
     }
     // update airborn status
     event.setDistance(0.0F);
-    if (!living.level().isClientSide) {
-      living.hasImpulse = true;
+    if (!living.level().isClientSide()) {
       event.setCanceled(true);
       living.setOnGround(false); // need to be on ground for server to process this event
     }
@@ -385,7 +383,7 @@ public class ModifierEvents {
     if (hit.getType() == Type.ENTITY && ((EntityHitResult) hit).getEntity() instanceof LivingEntity target) {
       // reflecting //
       // handle blacklist for projectiles
-      if (!level.isClientSide && !RegistryHelper.contains(TinkerTags.EntityTypes.REFLECTING_BLACKLIST, projectile.getType()) && target != projectile.getOwner() && target.isUsingItem()) {
+      if (!level.isClientSide() && !RegistryHelper.contains(TinkerTags.EntityTypes.REFLECTING_BLACKLIST, projectile.getType()) && target != projectile.getOwner() && target.isUsingItem()) {
         ItemStack stack = target.getUseItem();
         // living entity must be using one of our shields
         if (stack.is(TinkerTags.Items.SHIELDS)) {
@@ -398,7 +396,7 @@ public class ModifierEvents {
               GeneralInteractionModifierHook hook = activeModifier.getHook(ModifierHooks.GENERAL_INTERACT);
               int time = hook.getUseDuration(tool, activeModifier) - target.getUseItemRemainingTicks();
               // must be blocking, started blocking within the last 2*level seconds, and be within the block angle
-              if (hook.getUseAction(tool, activeModifier) == UseAnim.BLOCK
+              if (hook.getUseAction(tool, activeModifier) == ItemUseAnimation.BLOCK
                 && (time >= 5 && time < reflectingTime)
                 && InteractionHandler.canBlock(target, projectile.position(), tool)) {
 
@@ -426,12 +424,12 @@ public class ModifierEvents {
                 if (target.getType() == EntityType.PLAYER) {
                   TinkerNetwork.getInstance().sendVanillaPacket(new ClientboundSetEntityMotionPacket(projectile), target);
                 }
-                level.playSound(null, target.blockPosition(), SoundEvents.SHIELD_BLOCK, SoundSource.PLAYERS, 1.0F, 1.5F + level.random.nextFloat() * 0.4F);
+                level.playSound(null, target.blockPosition(), SoundEvents.SHIELD_BLOCK.value(), SoundSource.PLAYERS, 1.0F, 1.5F + level.getRandom().nextFloat() * 0.4F);
                 event.setCanceled(true);
                 // damage the shield, and stop using it if needed
                 if (ToolDamageUtil.damageAnimated(tool, 3, target, target.getUsedItemHand())) {
                   target.stopUsingItem();
-                  entity.playSound(SoundEvents.SHIELD_BREAK, 0.8F, 0.8F + entity.level().random.nextFloat() * 0.4F);
+                  entity.playSound(SoundEvents.SHIELD_BREAK.value(), 0.8F, 0.8F + entity.level().getRandom().nextFloat() * 0.4F);
                 }
               }
             }
@@ -444,7 +442,7 @@ public class ModifierEvents {
       // endermen are hardcoded to not take arrow damage, so disagree by reimplementing arrow damage right here
       // blacklist lets us not run on tridents or thrown tools. Former does not work with enderference, latter does so internally
       EntityType<?> projectileType = projectile.getType();
-      if (TinkerEffects.needsEnderferenceOverride(target) && !projectileType.is(TinkerTags.EntityTypes.ENDERFERENCE_ARROW_BLACKLIST) && projectile instanceof AbstractArrow arrow) {
+      if (TinkerEffects.needsEnderferenceOverride(target) && !projectileType.builtInRegistryHolder().is(TinkerTags.EntityTypes.ENDERFERENCE_ARROW_BLACKLIST) && projectile instanceof AbstractArrow arrow) {
         // first, give up if we reached pierce capacity, and ensure list are created
         if (arrow.getPierceLevel() > 0) {
           if (arrow.piercingIgnoreEntityIds == null) {
@@ -462,7 +460,7 @@ public class ModifierEvents {
         }
 
         // calculate damage, bonus on crit
-        int damage = Mth.ceil(Mth.clamp(arrow.getDeltaMovement().length() * arrow.getBaseDamage(), 0.0D, Integer.MAX_VALUE));
+        int damage = Mth.ceil(Mth.clamp(arrow.getDeltaMovement().length() * arrow.baseDamage, 0.0D, Integer.MAX_VALUE));
         if (arrow.isCritArrow()) {
           damage = (int) Math.min(target.getRandom().nextInt(damage / 2 + 2) + (long) damage, Integer.MAX_VALUE);
         }
@@ -482,8 +480,8 @@ public class ModifierEvents {
         }
 
         // hurt the enderman
-        if (target.hurt(damageSource, (float) damage)) {
-          if (!level.isClientSide && arrow.getPierceLevel() <= 0) {
+        if (level instanceof ServerLevel hurtLevel && target.hurtServer(hurtLevel, damageSource, (float) damage)) {
+          if (!level.isClientSide() && arrow.getPierceLevel() <= 0) {
             target.setArrowCount(target.getArrowCount() + 1);
           }
 
@@ -506,11 +504,12 @@ public class ModifierEvents {
             arrow.piercedAndKilledEntities.add(target);
           }
 
-          if (!level.isClientSide && arrow.shotFromCrossbow() && owner instanceof ServerPlayer player) {
+          // 26.1.2 dropped AbstractArrow#shotFromCrossbow(); vanilla now fires the trigger for any arrow kill
+          if (!level.isClientSide() && owner instanceof ServerPlayer player) {
             if (arrow.piercedAndKilledEntities != null) {
-              CriteriaTriggers.KILLED_BY_CROSSBOW.trigger(player, arrow.piercedAndKilledEntities);
+              CriteriaTriggers.KILLED_BY_ARROW.trigger(player, arrow.piercedAndKilledEntities, arrow.getWeaponItem());
             } else if (!target.isAlive()) {
-              CriteriaTriggers.KILLED_BY_CROSSBOW.trigger(player, List.of(target));
+              CriteriaTriggers.KILLED_BY_ARROW.trigger(player, List.of(target), arrow.getWeaponItem());
             }
           }
 
@@ -524,9 +523,9 @@ public class ModifierEvents {
           arrow.setDeltaMovement(arrow.getDeltaMovement().scale(-0.1D));
           arrow.setYRot(arrow.getYRot() + 180.0F);
           arrow.yRotO += 180.0F;
-          if (!level.isClientSide && arrow.getDeltaMovement().lengthSqr() < 1.0E-7D) {
+          if (level instanceof ServerLevel dropLevel && arrow.getDeltaMovement().lengthSqr() < 1.0E-7D) {
             if (arrow.pickup == AbstractArrow.Pickup.ALLOWED) {
-              arrow.spawnAtLocation(arrow.getPickupItem(), 0.1F);
+              arrow.spawnAtLocation(dropLevel, arrow.getPickupItem(), 0.1F);
             }
 
             ReusableProjectile.discard(projectile);

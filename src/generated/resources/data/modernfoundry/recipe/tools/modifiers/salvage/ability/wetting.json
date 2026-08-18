@@ -6,11 +6,7 @@
     "abilities": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/armor/leggings"
-    },
-    {
-      "tag": "modernfoundry:modifiable/shields"
-    }
+    "#modernfoundry:modifiable/armor/leggings",
+    "#modernfoundry:modifiable/shields"
   ]
 }

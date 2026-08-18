@@ -1,0 +1,14 @@
+{
+  "modifier_id": "modernfoundry:tilling",
+  "text": [
+    {
+      "text": "足元の大地を耕します。「広範」で効果範囲が広がります。"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "modernfoundry:modifiable/armor/boots",
+  "effects": [
+    "最大1レベル",
+    "アビリティスロットが1つ必要"
+  ]
+}

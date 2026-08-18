@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:table_filling",
-  "id": "modernfoundry:smeltery/casting/filling/scorched_lantern_pixel",
   "container": "modernfoundry:scorched_lantern",
   "fluid_amount": 10
 }

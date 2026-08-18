@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/zinc/geore/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:geore_blocks/zinc"
     }
   ],
-  "ingredient": {
-    "tag": "c:geore_blocks/zinc"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/zinc/geore/block",
+  "ingredient": "#c:geore_blocks/zinc",
   "result": {
     "amount": 360,
     "tag": "c:molten_zinc"

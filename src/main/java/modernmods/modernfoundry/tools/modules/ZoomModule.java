@@ -7,12 +7,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.UseAnim;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.mapping.SimpleRecordLoadable;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import net.minecraft.world.item.ItemUseAnimation;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.mapping.SimpleRecordLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.armor.EquipmentChangeModifierHook;
@@ -41,7 +41,7 @@ public enum ZoomModule implements ModifierModule, GeneralInteractionModifierHook
       // running on first usage tick means zoom will work if another modifier clicks as well
       if (timeLeft == useDuration) {
         living.playSound(SoundEvents.SPYGLASS_USE, 1.0F, 1.0F);
-        if (living.level().isClientSide) {
+        if (living.level().isClientSide()) {
           setZoom(modifier, living, 0.1f);
         }
       }
@@ -50,7 +50,7 @@ public enum ZoomModule implements ModifierModule, GeneralInteractionModifierHook
   SCOPE(ModifierHooks.GENERAL_INTERACT, ModifierHooks.TOOL_USING, ModifierHooks.EQUIPMENT_CHANGE) {
     @Override
     public void onUsingTick(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int useDuration, int timeLeft, ModifierEntry activeModifier) {
-      if (entity.level().isClientSide) {
+      if (entity.level().isClientSide()) {
         int useTime = useDuration - timeLeft;
         if (useTime > 0) {
           float drawTime = tool.getPersistentData().getInt(GeneralInteractionModifierHook.KEY_DRAWTIME);
@@ -90,12 +90,12 @@ public enum ZoomModule implements ModifierModule, GeneralInteractionModifierHook
 
   /** Starts spyglass style zooming */
   private static void setZoom(ModifierEntry modifier, LivingEntity living, float amount) {
-    TinkerDataCapability.getCapability(living).ifPresent(data -> data.computeIfAbsent(TinkerDataKeys.FOV_MODIFIER).set(modifier.getId(), amount));
+    TinkerDataCapability.getCapability(living).ifPresent(data -> data.computeIfAbsent(TinkerDataKeys.FOV_MODIFIER).set(modifier.getId().getIdentifier(), amount));
   }
 
   /** Stops zooming */
   private static void stopZoom(ModifierEntry modifier, LazyOptional<TinkerDataCapability.Holder> tinkerData) {
-    tinkerData.ifPresent(data -> data.computeIfAbsent(TinkerDataKeys.FOV_MODIFIER).remove(modifier.getId()));
+    tinkerData.ifPresent(data -> data.computeIfAbsent(TinkerDataKeys.FOV_MODIFIER).remove(modifier.getId().getIdentifier()));
   }
 
   /** Stops zooming */
@@ -118,7 +118,7 @@ public enum ZoomModule implements ModifierModule, GeneralInteractionModifierHook
   @Override
   public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
     player.playSound(SoundEvents.SPYGLASS_USE, 1.0F, 1.0F);
-    if (player.level().isClientSide) {
+    if (player.level().isClientSide()) {
       // TODO: consider allowing scope on helmets, is that even useful?
       setZoom(modifier, player, 0.1f);
     }
@@ -129,8 +129,8 @@ public enum ZoomModule implements ModifierModule, GeneralInteractionModifierHook
   /* Zoom properties, only used if zooming starting the interaction */
 
   @Override
-  public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-    return ModifierUtil.blockWhileCharging(tool, UseAnim.SPYGLASS);
+  public ItemUseAnimation getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    return ModifierUtil.blockWhileCharging(tool, ItemUseAnimation.SPYGLASS);
   }
 
   @Override
@@ -144,7 +144,7 @@ public enum ZoomModule implements ModifierModule, GeneralInteractionModifierHook
   @Override
   public void stopInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot) {
     player.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
-    if (player.level().isClientSide) {
+    if (player.level().isClientSide()) {
       stopZoom(modifier, player);
     }
   }
@@ -152,14 +152,14 @@ public enum ZoomModule implements ModifierModule, GeneralInteractionModifierHook
   @Override
   public void afterStopUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int useDuration, int timeLeft, ModifierEntry activeModifier) {
     entity.playSound(SoundEvents.SPYGLASS_STOP_USING, 1.0F, 1.0F);
-    if (entity.level().isClientSide) {
+    if (entity.level().isClientSide()) {
       stopZoom(modifier, entity);
     }
   }
 
   @Override
   public void onUnequip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
-    if (context.getEntity().level().isClientSide) {
+    if (context.getEntity().level().isClientSide()) {
       IToolStackView replacement = context.getReplacementTool();
       if (replacement == null || replacement.getModifierLevel(modifier.getModifier()) == 0) {
         stopZoom(modifier, context.getTinkerData());

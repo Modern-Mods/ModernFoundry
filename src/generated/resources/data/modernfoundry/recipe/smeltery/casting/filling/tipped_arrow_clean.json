@@ -1,15 +1,15 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/filling/tipped_arrow_clean",
   "cast": {
-    "type": "hilt:potion_display",
+    "neoforge:ingredient_type": "mantle:potion_display",
     "item": "minecraft:tipped_arrow"
   },
   "cast_consumed": true,
   "cooling_time": 1,
   "fluid": {
     "amount": 50,
-    "tag": "hilt:water"
+    "tag": "mantle:water"
   },
+  "id": "modernfoundry:smeltery/casting/filling/tipped_arrow_clean",
   "result": "minecraft:arrow"
 }

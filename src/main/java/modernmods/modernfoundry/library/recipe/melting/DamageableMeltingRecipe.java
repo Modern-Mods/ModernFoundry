@@ -1,17 +1,17 @@
 package modernmods.modernfoundry.library.recipe.melting;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
 import modernmods.modernfoundry.library.json.field.MergingField;
 import modernmods.modernfoundry.library.json.field.MergingField.MissingMode;
 import modernmods.modernfoundry.library.json.field.MergingListField;
@@ -33,7 +33,7 @@ public class DamageableMeltingRecipe extends MeltingRecipe {
   private final int unitSize;
   /** Sizes of byproducts */
   private final List<Integer> byproductSizes;
-  public DamageableMeltingRecipe(ResourceLocation id, String group, Ingredient input, FluidOutput output, int temperature, int time, List<FluidOutput> byproducts, int unitSize, List<Integer> byproductSizes) {
+  public DamageableMeltingRecipe(Identifier id, String group, Ingredient input, FluidOutput output, int temperature, int time, List<FluidOutput> byproducts, int unitSize, List<Integer> byproductSizes) {
     super(id, group, input, output, temperature, time, byproducts);
     this.unitSize = unitSize;
     this.byproductSizes = byproductSizes;
@@ -84,7 +84,7 @@ public class DamageableMeltingRecipe extends MeltingRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends DamageableMeltingRecipe> getSerializer() {
     return TinkerSmeltery.damagableMeltingSerializer.get();
   }
 }

@@ -14,7 +14,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +22,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 import net.neoforged.neoforge.common.crafting.IngredientType;
-import modernmods.hilt.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.Loadables;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.module.ModuleHook;
@@ -42,7 +42,7 @@ public class ToolHookIngredient implements ICustomIngredient {
   private final TagKey<Item> tag;
   private final ModuleHook<?> hook;
   @Nullable
-  private ItemStack[] items;
+  private List<Holder<Item>> items;
 
   protected ToolHookIngredient(TagKey<Item> tag, ModuleHook<?> hook) {
     this.tag = tag;
@@ -68,22 +68,22 @@ public class ToolHookIngredient implements ICustomIngredient {
   }
 
   @Override
-  public Stream<ItemStack> getItems() {
+  public Stream<Holder<Item>> items() {
     if (items == null) {
-      List<ItemStack> list = new ArrayList<>();
+      List<Holder<Item>> list = new ArrayList<>();
       for (Holder<Item> holder : BuiltInRegistries.ITEM.getTagOrEmpty(tag)) {
         if (holder.value() instanceof IModifiable modifiable && modifiable.getToolDefinition().getData().getHooks().hasHook(hook)) {
-          list.add(new ItemStack(modifiable));
+          list.add(holder);
         }
       }
+      // 26.1.2 ICustomIngredient#items() returns item holders (display stacks are built by the framework),
+      // so the former named-barrier placeholder for empty tags becomes a plain barrier holder.
       if (list.isEmpty()) {
-        ItemStack barrier = new ItemStack(Blocks.BARRIER);
-        barrier.set(DataComponents.CUSTOM_NAME, Component.literal("Empty Tag: " + tag.location()));
-        list.add(barrier);
+        list.add(net.minecraft.world.item.Items.BARRIER.builtInRegistryHolder());
       }
-      items = list.toArray(ItemStack[]::new);
+      items = list;
     }
-    return Stream.of(items);
+    return items.stream();
   }
 
   @Override
@@ -113,7 +113,7 @@ public class ToolHookIngredient implements ICustomIngredient {
   public enum Serializer {
     INSTANCE;
 
-    public static final ResourceLocation ID = TConstruct.getResource("tool_hook");
+    public static final Identifier ID = TConstruct.getResource("tool_hook");
 
     /** Parses the ingredient from the legacy JSON format */
     private static ToolHookIngredient parseJson(JsonObject json) {

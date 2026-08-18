@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:entity_melting",
-  "id": "modernfoundry:smeltery/entity_melting/swiftness",
   "damage": 2,
   "entity": {
     "types": [
@@ -14,6 +13,7 @@
       "minecraft:ocelot"
     ]
   },
+  "id": "modernfoundry:smeltery/entity_melting/swiftness",
   "result": {
     "amount": 50,
     "nbt": {

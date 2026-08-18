@@ -1,21 +1,19 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/cadmium/nugget_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/nugget"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/cadmium"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/single_use/nugget",
+  "cast_consumed": true,
   "cooling_time": 14,
   "fluid": {
     "amount": 10,
     "tag": "c:molten_cadmium"
   },
+  "id": "modernfoundry:smeltery/casting/metal/cadmium/nugget_sand_cast",
   "result": {
     "tag": "c:nuggets/cadmium"
   }

@@ -1,20 +1,18 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/dawnstone/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/dawnstone"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "registry": "minecraft:fluid",
       "tag": "c:molten_dawnstone"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/dawnstone"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/dawnstone/plate",
+  "ingredient": "#c:plates/dawnstone",
   "result": {
     "amount": 90,
     "tag": "c:molten_dawnstone"

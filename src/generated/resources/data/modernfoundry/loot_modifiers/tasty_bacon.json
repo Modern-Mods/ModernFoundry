@@ -1,5 +1,5 @@
 {
-  "type": "hilt:add_entry",
+  "type": "mantle:add_entry",
   "conditions": [
     {
       "condition": "modernfoundry:has_context_set",

@@ -2,14 +2,14 @@ package modernmods.modernfoundry.library.modifiers.fluid.entity;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.variable.StatLoadable;
 import modernmods.modernfoundry.library.modifiers.fluid.EffectLevel;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffect;
@@ -27,7 +27,7 @@ public record AwardStatFluidEffect(Stat<?> stat, int amount) implements FluidEff
     IntLoadable.ANY_SHORT.requiredField("amount", AwardStatFluidEffect::amount),
     AwardStatFluidEffect::new);
 
-  public AwardStatFluidEffect(ResourceLocation stat, int amount) {
+  public AwardStatFluidEffect(Identifier stat, int amount) {
     this(Stats.CUSTOM.get(stat), amount);
   }
 

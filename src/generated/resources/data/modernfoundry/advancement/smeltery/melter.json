@@ -109,7 +109,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:seared_melter"
+      "id": "modernfoundry:seared_melter"
     },
     "show_toast": true,
     "title": {

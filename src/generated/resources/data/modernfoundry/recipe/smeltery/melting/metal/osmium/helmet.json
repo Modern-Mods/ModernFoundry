@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/osmium/helmet",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/helmets/osmium"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/helmets/osmium"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/osmium/helmet",
+  "ingredient": "#c:armors/helmets/osmium",
   "result": {
     "amount": 450,
     "tag": "c:molten_osmium",

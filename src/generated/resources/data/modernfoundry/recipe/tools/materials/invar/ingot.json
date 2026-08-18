@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/invar/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/invar"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/invar"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/invar/ingot",
+  "ingredient": "#c:ingots/invar",
   "material": "modernfoundry:invar",
   "needed": 1,
   "value": 1

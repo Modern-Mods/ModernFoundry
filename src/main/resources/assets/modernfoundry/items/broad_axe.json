@@ -1,0 +1,40 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/broad_axe",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "head",
+        "index": 0
+      },
+      {
+        "name": "back",
+        "index": 2
+      },
+      {
+        "name": "binding",
+        "index": 3
+      }
+    ],
+    "large": true,
+    "large_offset": [
+      -2,
+      2
+    ],
+    "modifier_maps": [
+      "modernfoundry:broad_axe"
+    ],
+    "small_modifier_roots": {
+      "small": [
+        "modernfoundry:item/tool/broad_axe/modifiers/"
+      ],
+      "large": [
+        "modernfoundry:item/tool/broad_axe/large/modifiers/"
+      ]
+    }
+  }
+}

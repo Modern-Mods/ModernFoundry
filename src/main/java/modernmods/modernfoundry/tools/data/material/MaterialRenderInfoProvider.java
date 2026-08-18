@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.tools.data.material;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.DyeColor;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import modernmods.modernfoundry.library.client.data.material.AbstractMaterialRenderInfoProvider;
 import modernmods.modernfoundry.library.client.data.material.AbstractMaterialSpriteProvider;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
@@ -11,8 +11,8 @@ import modernmods.modernfoundry.library.tools.helper.ToolBuildHandler;
 import modernmods.modernfoundry.shared.block.SlimeType;
 
 public class MaterialRenderInfoProvider extends AbstractMaterialRenderInfoProvider {
-  public MaterialRenderInfoProvider(PackOutput packOutput, AbstractMaterialSpriteProvider spriteProvider, ExistingFileHelper existingFileHelper) {
-    super(packOutput, spriteProvider, existingFileHelper);
+  public MaterialRenderInfoProvider(PackOutput packOutput, AbstractMaterialSpriteProvider spriteProvider, ResourceManager resourceManager) {
+    super(packOutput, spriteProvider, resourceManager);
   }
 
   @Override
@@ -93,7 +93,6 @@ public class MaterialRenderInfoProvider extends AbstractMaterialRenderInfoProvid
     buildRenderInfo(MaterialIds.steel).color(0x959595).fallbacks("metal");
     buildRenderInfo(MaterialIds.darkthread);
     buildRenderInfo(MaterialIds.ichorskin);
-    buildRenderInfo(MaterialIds.jadeite);
 
     // tier 4
     buildRenderInfo(MaterialIds.cinderslime).luminosity(SlimeType.ICHOR.getLightLevel());
@@ -114,7 +113,7 @@ public class MaterialRenderInfoProvider extends AbstractMaterialRenderInfoProvid
     buildRenderInfo(MaterialIds.ironwood);
     buildRenderInfo(MaterialIds.silver).color(0xDAF3ED).fallbacks("metal");
     buildRenderInfo(MaterialIds.lead).color(0x696579).fallbacks("metal");
-    buildRenderInfo(MaterialIds.whitestoneComposite, MaterialIds.whitestone).color(0xE0E9EC).fallbacks("rock");
+    buildRenderInfo(MaterialIds.whitestoneComposite, MaterialIds.whitestone.getLocation('_')).color(0xE0E9EC).fallbacks("rock");
     buildRenderInfo(MaterialIds.treatedWood);
     // redirect whitestone variants to whitestone composite instead of endstone
     redirect(MaterialIds.whitestoneAluminum, MaterialIds.whitestoneComposite);
@@ -133,7 +132,7 @@ public class MaterialRenderInfoProvider extends AbstractMaterialRenderInfoProvid
     buildRenderInfo(MaterialIds.steeleaf);
 
     // tier 4 compat
-    buildRenderInfo(MaterialIds.fiery).color(0x893D14).fallbacks("metal_contrast", "contrast", "metal").luminosity(15);
+    buildRenderInfo(MaterialIds.fiery).color(0x893D14).fallbacks("metal").luminosity(15);
     buildRenderInfo(MaterialIds.nicrosil).color(0xD9E6DC);
 
     // ammo
@@ -178,6 +177,6 @@ public class MaterialRenderInfoProvider extends AbstractMaterialRenderInfoProvid
 
   @Override
   public String getName() {
-    return "Modern Foundry Material Render Info Provider";
+    return "Tinkers' Construct Material Render Info Provider";
   }
 }

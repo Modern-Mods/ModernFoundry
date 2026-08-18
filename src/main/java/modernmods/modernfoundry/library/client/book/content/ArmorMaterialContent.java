@@ -4,19 +4,19 @@ import com.google.common.collect.Lists;
 import joptsimple.internal.Strings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.client.book.HTMLUtils;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.element.TextComponentData;
-import modernmods.hilt.client.screen.book.BookScreen;
-import modernmods.hilt.client.screen.book.element.BookElement;
-import modernmods.hilt.client.screen.book.element.TextComponentElement;
-import modernmods.hilt.client.screen.book.element.TextElement;
-import modernmods.hilt.util.html.HtmlElement;
-import modernmods.hilt.util.html.HtmlGroup;
-import modernmods.hilt.util.html.HtmlSerializable;
+import modernmods.mantle.client.book.HTMLUtils;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.element.TextComponentData;
+import modernmods.mantle.client.screen.book.BookScreen;
+import modernmods.mantle.client.screen.book.element.BookElement;
+import modernmods.mantle.client.screen.book.element.TextComponentElement;
+import modernmods.mantle.client.screen.book.element.TextElement;
+import modernmods.mantle.util.html.HtmlElement;
+import modernmods.mantle.util.html.HtmlGroup;
+import modernmods.mantle.util.html.HtmlSerializable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.book.elements.TinkerItemElement;
 import modernmods.modernfoundry.library.client.materials.MaterialTooltipCache;
@@ -56,14 +56,14 @@ import static modernmods.modernfoundry.tools.stats.PlatingMaterialStats.SHIELD;
  */
 public class ArmorMaterialContent extends AbstractMaterialContent {
   /** Page ID for using this index directly */
-  public static final ResourceLocation ID = TConstruct.getResource("armor_material");
+  public static final Identifier ID = TConstruct.getResource("armor_material");
   /** Supported stat type set */
   private static final Set<MaterialStatsId> SUPPORTED = Stream.concat(
-    PlatingMaterialStats.TYPES.stream().map(MaterialStatType::getId),
+    PlatingMaterialStats.TYPES.stream().map(MaterialStatType::getStatId),
     Stream.of(StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE, StatlessMaterialStats.CUIRASS).map(IMaterialStats::getIdentifier)
   ).collect(Collectors.toSet());
   /** Plating stat types in top down order */
-  private static final List<MaterialStatsId> TOP_DOWN_STATS = List.of(HELMET.getId(), CHESTPLATE.getId(), LEGGINGS.getId(), BOOTS.getId(), SHIELD.getId());
+  private static final List<MaterialStatsId> TOP_DOWN_STATS = List.of(HELMET.getStatId(), CHESTPLATE.getStatId(), LEGGINGS.getStatId(), BOOTS.getStatId(), SHIELD.getStatId());
 
   private static final Component PLATING_LABEL = TConstruct.makeTranslation("stat", "plating").withStyle(ChatFormatting.BOLD, ChatFormatting.UNDERLINE);
   private static final Component ARMOR_PLATING_LABEL = TConstruct.makeTranslation("stat", "plating_armor").withStyle(ChatFormatting.BOLD, ChatFormatting.UNDERLINE);
@@ -75,7 +75,7 @@ public class ArmorMaterialContent extends AbstractMaterialContent {
   }
 
   @Override
-  public ResourceLocation getId() {
+  public Identifier getId() {
     return ID;
   }
 
@@ -109,7 +109,7 @@ public class ArmorMaterialContent extends AbstractMaterialContent {
 
   /** Gets the tool to display for the given stat type, just hardcoding to plate armor for simplicity */
   private static void addPlatingItem(MaterialStatsId statType, List<ItemStack> stacks, MaterialVariantId variant) {
-    for (ArmorItem.Type slotType : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
+    for (ArmorType slotType : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
       if (statType.equals(PlatingMaterialStats.TYPES.get(slotType.ordinal()).getId())) {
         stacks.add(TinkerToolParts.plating.get(slotType).withMaterialForDisplay(variant));
         return;
@@ -166,8 +166,8 @@ public class ArmorMaterialContent extends AbstractMaterialContent {
     // note we don't add separate traits for each plating type, we take a shortcut adding just helmet and shield
     // while this may be inaccurate if someone does weird stuff, we just don't have space for more
     y = Math.max(
-      this.addTraits(x - 3,          y, list, ARMOR_PLATING_LABEL, HELMET.getId()),
-      this.addTraits(x + STAT_WIDTH, y, list, SHIELD_LABEL,        SHIELD.getId()));
+      this.addTraits(x - 3,          y, list, ARMOR_PLATING_LABEL, HELMET.getStatId()),
+      this.addTraits(x + STAT_WIDTH, y, list, SHIELD_LABEL,        SHIELD.getStatId()));
     y = addAllMaterialStats(x, y, list, 2, false);
 
     // material description
@@ -242,10 +242,10 @@ public class ArmorMaterialContent extends AbstractMaterialContent {
     // add traits
     group.add(HtmlElement.div().classes("row-material-stats")
       .add(HtmlElement.div().classes("column").style("gap", 12)
-        .add(makeStatHtml(HELMET.getId(), ARMOR_PLATING_LABEL.getString(), false, false))
+        .add(makeStatHtml(HELMET.getStatId(), ARMOR_PLATING_LABEL.getString(), false, false))
         .add(makeStatHtml(StatlessMaterialStats.MAILLE.getIdentifier(), false, true))
         .add(makeStatHtml(StatlessMaterialStats.SHIELD_CORE.getIdentifier(), false, true)))
-      .add(makeStatHtml(SHIELD.getId(), SHIELD_LABEL.getString(), false, false)));
+      .add(makeStatHtml(SHIELD.getStatId(), SHIELD_LABEL.getString(), false, false)));
     return group;
   }
 }

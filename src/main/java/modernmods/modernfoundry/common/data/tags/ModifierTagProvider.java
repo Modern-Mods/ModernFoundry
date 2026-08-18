@@ -1,7 +1,6 @@
 package modernmods.modernfoundry.common.data.tags;
 
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.data.tinkering.AbstractModifierTagProvider;
 import modernmods.modernfoundry.tools.TinkerModifiers;
@@ -64,8 +63,8 @@ import static modernmods.modernfoundry.common.TinkerTags.Modifiers.TARGET_KNOCKB
 import static modernmods.modernfoundry.common.TinkerTags.Modifiers.UPGRADES;
 
 public class ModifierTagProvider extends AbstractModifierTagProvider {
-  public ModifierTagProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
-    super(packOutput, TConstruct.MOD_ID, existingFileHelper);
+  public ModifierTagProvider(PackOutput packOutput) {
+    super(packOutput, TConstruct.MOD_ID);
   }
 
   @Override
@@ -227,6 +226,6 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry Modifier Tag Provider";
+    return "Tinkers' Construct Modifier Tag Provider";
   }
 }

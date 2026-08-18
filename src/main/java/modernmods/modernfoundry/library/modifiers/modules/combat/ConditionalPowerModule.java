@@ -3,17 +3,17 @@ package modernmods.modernfoundry.library.modifiers.modules.combat;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.json.math.ModifierFormula;
@@ -59,9 +59,9 @@ public record ConditionalPowerModule(IJsonPredicate<LivingEntity> target, IJsonP
     ModifierEntry.VALID_LEVEL.defaultField("modifier_level", ConditionalPowerModule::modifierLevel),
     ConditionalPowerModule::new);
   /** Projectile persistent data key for the stat multiplier */
-  private static final ResourceLocation AMMO_MULTIPLIER = ToolStats.PROJECTILE_DAMAGE.getName().withSuffix("_ammo_multiplier");
+  private static final Identifier AMMO_MULTIPLIER = ToolStats.PROJECTILE_DAMAGE.getName().withSuffix("_ammo_multiplier");
   /** Projectile persistent data key for the stat multiplier */
-  private static final ResourceLocation BOW_MULTIPLIER = ToolStats.PROJECTILE_DAMAGE.getName().withSuffix("_bow_multiplier");
+  private static final Identifier BOW_MULTIPLIER = ToolStats.PROJECTILE_DAMAGE.getName().withSuffix("_bow_multiplier");
 
   /** @apiNote Internal constructor, use {@link #builder()} */
   @Internal
@@ -98,7 +98,7 @@ public record ConditionalPowerModule(IJsonPredicate<LivingEntity> target, IJsonP
 
   @Override
   public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
-    ResourceLocation key = modifier.getId();
+    Identifier key = modifier.getId().getIdentifier();
     // if we already boosted power from an entity, don't boost again
     // minimizes issues with projectile bounces and piercing
     if (modifierLevel.test(modifier.getLevel()) && !persistentData.getBoolean(key)) {
@@ -107,14 +107,14 @@ public record ConditionalPowerModule(IJsonPredicate<LivingEntity> target, IJsonP
       persistentData.putBoolean(key, true);
       if (TinkerPredicate.matches(this.target, target) && TinkerPredicate.matches(this.holder, attacker)) {
         float multiplier = 1;
-        if (persistentData.contains(AMMO_MULTIPLIER, Tag.TAG_ANY_NUMERIC)) {
+        if (persistentData.contains(AMMO_MULTIPLIER)) {
           multiplier *= persistentData.getFloat(AMMO_MULTIPLIER);
         }
-        if (persistentData.contains(BOW_MULTIPLIER, Tag.TAG_ANY_NUMERIC)) {
+        if (persistentData.contains(BOW_MULTIPLIER)) {
           multiplier *= persistentData.getFloat(BOW_MULTIPLIER);
         }
         if (projectile instanceof AbstractArrow arrow) {
-          arrow.setBaseDamage(formula.apply(modifiers, persistentData, modifier, projectile, hit, attacker, target, arrow.getBaseDamage(), multiplier));
+          arrow.setBaseDamage(formula.apply(modifiers, persistentData, modifier, projectile, hit, attacker, target, arrow.baseDamage, multiplier));
         } else if (projectile instanceof ProjectileWithPower withPower) {
           withPower.setPower(formula.apply(modifiers, persistentData, modifier, projectile, hit, attacker, target, withPower.getPower(), multiplier));
         }

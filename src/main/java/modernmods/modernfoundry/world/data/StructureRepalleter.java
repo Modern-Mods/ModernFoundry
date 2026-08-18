@@ -70,6 +70,6 @@ public class StructureRepalleter extends AbstractStructureRepalleter {
 
   @Override
   public String getName() {
-    return "Modern Foundry Structure Repaletter";
+    return "Tinkers' Construct Structure Repaletter";
   }
 }

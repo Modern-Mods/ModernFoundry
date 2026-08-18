@@ -10,7 +10,7 @@ Fix heart rendering
 Fix Arrow/Dagger/Bow rendering
 Comparator output for fullness of smeltery and seared tank/glass
 
-Tool Blockbreaking has been reworked. Foundry tools should not cause any problems with other mod blocks anymore.
+Tool Blockbreaking has been reworked. Tinker tools should not cause any problems with other mod blocks anymore.
 Armor Modifiers now have proper book pages.
 Frying pans in the world are now colorable
 Battlesigns can be placed

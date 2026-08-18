@@ -1,16 +1,14 @@
 {
   "type": "modernfoundry:tool_building",
-  "id": "modernfoundry:tools/building/arrow_from_vanilla",
   "extra_materials": [
     "modernfoundry:flint",
     "modernfoundry:wood",
     "modernfoundry:feather"
   ],
   "extra_requirements": [
-    {
-      "item": "minecraft:arrow"
-    }
+    "minecraft:arrow"
   ],
+  "id": "modernfoundry:tools/building/arrow_from_vanilla",
   "parts_override": [],
   "result": "modernfoundry:arrow",
   "result_count": 1,

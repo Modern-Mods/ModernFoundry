@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "": "modernfoundry:templates/faucet",
+    "facing=down": "modernfoundry:templates/faucet_up"
+  }
+}

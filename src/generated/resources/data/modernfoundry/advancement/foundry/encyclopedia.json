@@ -22,7 +22,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:encyclopedia"
+      "id": "modernfoundry:encyclopedia"
     },
     "show_toast": true,
     "title": {

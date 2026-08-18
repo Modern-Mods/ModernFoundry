@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/seared/brick_composite",
-  "cast": {
-    "item": "minecraft:flint"
-  },
+  "cast": "minecraft:flint",
   "cast_consumed": true,
   "cooling_time": 57,
   "fluid": {
     "amount": 125,
     "tag": "modernfoundry:molten_clay"
   },
+  "id": "modernfoundry:smeltery/casting/seared/brick_composite",
   "result": "modernfoundry:seared_brick"
 }

@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.materials.stats;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.utils.IdParser;
@@ -9,7 +9,7 @@ import modernmods.modernfoundry.library.utils.ResourceId;
 import javax.annotation.Nullable;
 
 /**
- * This is just a copy of ResourceLocation for type safety.
+ * This is just a copy of Identifier for type safety.
  */
 public class MaterialStatsId extends ResourceId {
   public static final IdParser<MaterialStatsId> PARSER = new IdParser<>(MaterialStatsId::new, "Material Stat Type");
@@ -22,7 +22,7 @@ public class MaterialStatsId extends ResourceId {
     super(namespaceIn, pathIn);
   }
 
-  public MaterialStatsId(ResourceLocation location) {
+  public MaterialStatsId(Identifier location) {
     super(location);
   }
 

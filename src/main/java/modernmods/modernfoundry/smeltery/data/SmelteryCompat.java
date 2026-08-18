@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.Nullable;
-import modernmods.hilt.registration.object.FluidObject;
+import modernmods.mantle.registration.object.FluidObject;
 import modernmods.modernfoundry.fluids.TinkerFluids;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
@@ -18,7 +18,7 @@ import modernmods.modernfoundry.tools.data.material.MaterialIds;
 import java.util.Locale;
 import java.util.Optional;
 
-import static modernmods.hilt.Hilt.commonResource;
+import static modernmods.mantle.Mantle.commonResource;
 
 /**
  * Enum holding all relevant smeltery compat, used in datagen and JEI.
@@ -129,7 +129,7 @@ public enum SmelteryCompat {
   /** Checks if the given tag exists */
   @SuppressWarnings("deprecation")
   private static boolean ingotPresent(String name) {
-    Optional<Named<Item>> tag = BuiltInRegistries.ITEM.getTag(ItemTags.create(commonResource("ingots/" + name)));
+    Optional<Named<Item>> tag = BuiltInRegistries.ITEM.get(ItemTags.create(commonResource("ingots/" + name)));
     return tag.isPresent() && tag.get().size() > 0;
   }
 }

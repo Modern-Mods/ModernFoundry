@@ -7,7 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -17,7 +17,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -28,13 +28,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
-import modernmods.hilt.util.JsonHelper;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
+import modernmods.mantle.util.JsonHelper;
+import modernmods.mantle.util.typed.TypedMap;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
@@ -92,11 +92,11 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
     Pattern.PARSER.defaultField("output_pattern", Patterns.RESULT, true, m -> m.output.pattern()),
     SmeltingModule::new);
 
-  /** @apiNote use {@link #SmeltingModule(RecipeType, float, InventoryModule, ResourceLocation, Pattern)} */
+  /** @apiNote use {@link #SmeltingModule(RecipeType, float, InventoryModule, Identifier, Pattern)} */
   @Internal
   public SmeltingModule {}
 
-  public SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeType, float multiplier, InventoryModule inventory, @Nullable ResourceLocation outputKey, Pattern outputPattern) {
+  public SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeType, float multiplier, InventoryModule inventory, @Nullable Identifier outputKey, Pattern outputPattern) {
     this(recipeType, multiplier, inventory, InventoryModule.builder().from(inventory).key(outputKey).pattern(outputPattern).filter(ItemPredicate.NONE).slots(inventory.slots()));
   }
 
@@ -131,7 +131,7 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
         return lastRecipe;
       }
       // if that failed, do a recipe lookup
-      AbstractCookingRecipe recipe = (AbstractCookingRecipe)level.getRecipeManager().getRecipeFor((RecipeType)recipeType, input, level).map(holder -> ((net.minecraft.world.item.crafting.RecipeHolder<?>)holder).value()).orElse(null);
+      AbstractCookingRecipe recipe = (AbstractCookingRecipe)level.getServer().getRecipeManager().getRecipeFor((RecipeType)recipeType, input, level).map(holder -> ((net.minecraft.world.item.crafting.RecipeHolder<?>)holder).value()).orElse(null);
       if (recipe != null) {
         lastRecipe = recipe;
       }
@@ -155,9 +155,9 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
     }
     // first, fetch the inventory, ensure it exists
     ModDataNBT data = tool.getPersistentData();
-    ResourceLocation key = input.getKey(modifier.getModifier());
+    Identifier key = input.getKey(modifier.getModifier());
 
-    if (data.contains(key, Tag.TAG_LIST)) {
+    if (data.contains(key)) {
       // going to cook each slot until we used up all the cooking power
       ListTag list = tool.getPersistentData().get(key, InventoryModule.GET_COMPOUND_LIST);
       float cookingPower = amount * multiplier;
@@ -166,15 +166,15 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
         AbstractCookingRecipe recipe = null;
         ItemStack stack = null;
 
-        CompoundTag entry = list.getCompound(i);
-        int time = entry.getInt(TAG_TIME);
+        CompoundTag entry = list.getCompoundOrEmpty(i);
+        int time = entry.getIntOr(TAG_TIME, 0);
         // 0 means no recipe, time for a lookup
         if (time == 0) {
           time = NO_RECIPE;
           stack = TagUtil.readItem(entry);
           recipe = findRecipe(recipeType, stack, level, modifier.getId());
           if (recipe != null) {
-            time = recipe.getCookingTime();
+            time = recipe.cookingTime();
           }
           entry.putInt(TAG_TIME, time);
         }
@@ -186,7 +186,7 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
             entry.putInt(TAG_TIME, time);
           } else {
             // locate the result and see if we might fit
-            int slot = entry.getInt(TAG_SLOT);
+            int slot = entry.getIntOr(TAG_SLOT, 0);
             ItemStack currentResult = output.getStack(tool, modifier, slot);
             int maxStackSize = 0;
             if (!currentResult.isEmpty()) {
@@ -209,7 +209,7 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
             if (recipe != null) {
               // attempt to assemble the recipe, use a try/catch in case their assemble logic is bad
               try {
-                ItemStack result = recipe.assemble(new SingleRecipeInput(stack), level.registryAccess());
+                ItemStack result = recipe.assemble(new SingleRecipeInput(stack));
 
                 // check again if we have space for the result now that we know its size
                 if (!result.isEmpty()) {
@@ -242,7 +242,7 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
                   // shrink stack
                   InventoryModule.writeStack(stack, slot, entry);
                   // update time to cook again
-                  entry.putInt(TAG_TIME, recipe.getCookingTime());
+                  entry.putInt(TAG_TIME, recipe.cookingTime());
                 }
 
                 // play sound
@@ -250,7 +250,7 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
                   level.playSound(null, holder.getX(), holder.getY(), holder.getZ(), SoundEvents.GENERIC_EXTINGUISH_FIRE, holder.getSoundSource(), 1, 1);
 
                   // grant XP
-                  float experience = recipe.getExperience();
+                  float experience = recipe.experience();
                   if (experience > 0 && level instanceof ServerLevel serverLevel) {
                     int floored = Mth.floor(experience);
                     float fraction = Mth.frac(experience);
@@ -296,7 +296,7 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
     // arrow launch cook by arrow power
     float amount;
     if (arrow != null) {
-      amount = (float) arrow.getBaseDamage();
+      amount = (float) arrow.baseDamage;
     } else if (projectile instanceof ProjectileWithPower withPower) {
       amount = withPower.getPower();
     } else {
@@ -330,7 +330,7 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
   }
 
   /** Custom field instance for the output key field, allows defaulting to the context key. */
-  private enum OutputKeyField implements LoadableField<ResourceLocation,SmeltingModule> {
+  private enum OutputKeyField implements LoadableField<Identifier,SmeltingModule> {
     INSTANCE;
 
     @Override
@@ -339,12 +339,12 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
     }
 
     @Override
-    public ResourceLocation get(JsonObject json, String key, TypedMap context) {
+    public Identifier get(JsonObject json, String key, TypedMap context) {
       if (json.has(key)) {
         return JsonHelper.getResourceLocation(json, key);
       }
       // default to modifier name with an output suffix
-      ResourceLocation id = context.get(ContextKey.ID);
+      Identifier id = context.get(ContextKey.ID);
       if (id != null) {
         return id.withSuffix("_output");
       }
@@ -353,20 +353,20 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
 
     @Override
     public void serialize(SmeltingModule module, JsonObject json) {
-      ResourceLocation key = module.output.key();
+      Identifier key = module.output.key();
       if (key != null) {
         json.addProperty(key(), key.toString());
       }
     }
 
     @Override
-    public ResourceLocation decode(FriendlyByteBuf buffer, TypedMap context) {
-      return buffer.readResourceLocation();
+    public Identifier decode(FriendlyByteBuf buffer, TypedMap context) {
+      return buffer.readIdentifier();
     }
 
     @Override
     public void encode(FriendlyByteBuf buffer, SmeltingModule module) {
-      buffer.writeResourceLocation(Objects.requireNonNull(module.output.key()));
+      buffer.writeIdentifier(Objects.requireNonNull(module.output.key()));
     }
   }
 }

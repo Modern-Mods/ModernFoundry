@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "modernfoundry:fluid_container",
+    "base_model": "modernfoundry:item/molten_constantan_bucket",
+    "flip_gas": false
+  }
+}

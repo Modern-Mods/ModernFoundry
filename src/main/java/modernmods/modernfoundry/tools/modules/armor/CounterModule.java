@@ -1,4 +1,5 @@
 package modernmods.modernfoundry.tools.modules.armor;
+import modernmods.modernfoundry.tools.TinkerToolActions;
 
 import com.mojang.datafixers.util.Function5;
 import com.mojang.datafixers.util.Function7;
@@ -11,11 +12,11 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlot.Type;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.common.ItemAbilities;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.json.predicate.TinkerPredicate;
@@ -126,7 +127,7 @@ public interface CounterModule extends ModifierModule, OnAttackedModifierHook, C
     // holder must be using an item with shield block in the same hand as the slot
     return slotType.getType() == Type.HAND && holder.isUsingItem()
       && Util.getSlotType(holder.getUsedItemHand()) == slotType
-      && ModifierUtil.canPerformAction(tool, ItemAbilities.SHIELD_BLOCK)
+      && ModifierUtil.canPerformAction(tool, TinkerToolActions.SHIELD_BLOCK)
       // not sure whether its a modifier or a bow blocking, so we do end up creating a second tool stack to check use duration; luckily needs no modifier list parse
       && holder.getItemBySlot(slotType).getUseDuration(holder) - holder.getUseItemRemainingTicks() >= 5;
   }

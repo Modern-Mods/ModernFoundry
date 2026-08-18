@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/emerald/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/emerald"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/emerald"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/emerald/gear",
+  "ingredient": "#c:gears/emerald",
   "result": {
     "amount": 400,
     "fluid": "modernfoundry:molten_emerald"

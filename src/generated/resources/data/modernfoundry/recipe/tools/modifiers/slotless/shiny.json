@@ -1,22 +1,16 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/shiny",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/slotless/shiny",
   "inputs": [
     {
       "ingredient": [
-        {
-          "item": "minecraft:enchanted_golden_apple"
-        },
-        {
-          "item": "minecraft:nether_star"
-        }
+        "minecraft:enchanted_golden_apple",
+        "minecraft:nether_star"
       ]
     }
   ],
   "level": 1,
   "result": "modernfoundry:shiny",
-  "tools": {
-    "tag": "modernfoundry:modifiable"
-  }
+  "tools": "#modernfoundry:modifiable"
 }

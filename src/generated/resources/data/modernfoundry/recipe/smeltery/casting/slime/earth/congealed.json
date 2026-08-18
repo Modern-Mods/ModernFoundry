@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/slime/earth/congealed",
   "cooling_time": 103,
   "fluid": {
     "amount": 1000,
     "tag": "c:slime"
   },
+  "id": "modernfoundry:smeltery/casting/slime/earth/congealed",
   "result": "modernfoundry:earth_congealed_slime"
 }

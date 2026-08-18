@@ -1,20 +1,20 @@
 package modernmods.modernfoundry.tools.recipe.severing;
 
 import com.google.common.collect.Maps;
-import net.minecraft.Util;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Util;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.helper.ItemOutput;
-import modernmods.hilt.recipe.ingredient.EntityIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.helper.ItemOutput;
+import modernmods.mantle.recipe.ingredient.EntityIngredient;
 import modernmods.modernfoundry.library.recipe.modifiers.severing.SeveringRecipe;
 import modernmods.modernfoundry.tools.TinkerModifiers;
 
@@ -41,12 +41,12 @@ public class SheepShearingRecipe extends SeveringRecipe {
   });
   public static final RecordLoadable<SheepShearingRecipe> LOADER = RecordLoadable.create(ContextKey.ID.requiredField(), BASE_CHANCE_FIELD, LOOTING_BONUS_FIELD, SheepShearingRecipe::new);
 
-  public SheepShearingRecipe(ResourceLocation id, float baseChance, float lootingBonus) {
+  public SheepShearingRecipe(Identifier id, float baseChance, float lootingBonus) {
     super(id, EntityIngredient.of(EntityType.SHEEP), ItemOutput.fromItem(Blocks.WHITE_WOOL, 2), baseChance, lootingBonus);
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends SheepShearingRecipe> getSerializer() {
     return TinkerModifiers.sheepShearing.get();
   }
 

@@ -48,6 +48,17 @@ public interface IMaterialItem extends ItemLike {
     return setMaterialForced(new ItemStack(this), material);
   }
 
+  /**
+   * Returns a deferred item output for this item with the given material, without constructing an ItemStack. As of 26.1
+   * an ItemStack cannot be built until item data components are bound, which is not the case at datagen time; the
+   * material is serialized as CUSTOM_DATA NBT and applied when the output stack is resolved at runtime.
+   */
+  default modernmods.mantle.recipe.helper.ItemOutput withMaterialForDisplayOutput(MaterialVariantId material) {
+    net.minecraft.nbt.CompoundTag tag = new net.minecraft.nbt.CompoundTag();
+    tag.putString(MATERIAL_TAG, material.toString());
+    return modernmods.mantle.recipe.helper.ItemOutput.fromItem(this.asItem(), 1, tag);
+  }
+
   /** Returns the item with the given material, validating it */
   default ItemStack withMaterial(MaterialVariantId material) {
     return setMaterial(new ItemStack(this), material);

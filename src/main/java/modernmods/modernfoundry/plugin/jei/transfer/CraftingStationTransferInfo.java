@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.plugin.jei.transfer;
 
 import mezz.jei.api.constants.RecipeTypes;
-import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.types.IRecipeType;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
@@ -9,7 +9,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.crafting.IShapedRecipe;
-import modernmods.hilt.client.SafeClientAccess;
+import modernmods.mantle.client.SafeClientAccess;
 import modernmods.modernfoundry.tables.TinkerTables;
 import modernmods.modernfoundry.tables.menu.CraftingStationContainerMenu;
 
@@ -32,7 +32,7 @@ public class CraftingStationTransferInfo implements IRecipeTransferInfo<Crafting
   }
 
   @Override
-  public RecipeType<RecipeHolder<CraftingRecipe>> getRecipeType() {
+  public IRecipeType<RecipeHolder<CraftingRecipe>> getRecipeType() {
     return RecipeTypes.CRAFTING;
   }
 
@@ -78,6 +78,6 @@ public class CraftingStationTransferInfo implements IRecipeTransferInfo<Crafting
     if (recipe.value() instanceof IShapedRecipe<?> shaped) {
       return shaped.getRecipeWidth() <= 3 && shaped.getRecipeHeight() <= 3;
     }
-    return recipe.value().getIngredients().size() <= 9;
+    return recipe.value().placementInfo().ingredients().size() <= 9;
   }
 }

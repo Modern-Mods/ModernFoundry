@@ -2,8 +2,8 @@ package modernmods.modernfoundry.library.modifiers.modules.behavior;
 
 import com.google.common.collect.ImmutableSet;
 import net.neoforged.neoforge.common.ItemAbility;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.behavior.ToolActionModifierHook;

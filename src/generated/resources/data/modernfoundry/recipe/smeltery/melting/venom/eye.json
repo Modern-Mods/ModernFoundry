@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/venom/eye",
-  "ingredient": {
-    "item": "minecraft:spider_eye"
-  },
+  "ingredient": "minecraft:spider_eye",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:venom"

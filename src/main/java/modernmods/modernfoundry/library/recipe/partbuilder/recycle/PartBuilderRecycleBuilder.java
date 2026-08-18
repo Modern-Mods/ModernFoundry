@@ -3,15 +3,15 @@ package modernmods.modernfoundry.library.recipe.partbuilder.recycle;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.helper.ItemOutput;
 import modernmods.modernfoundry.fluids.TinkerFluids;
 import modernmods.modernfoundry.library.recipe.partbuilder.Pattern;
 
@@ -57,12 +57,12 @@ public class PartBuilderRecycleBuilder extends AbstractRecipeBuilder<PartBuilder
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, Loadables.ITEM.getKey(tool.getItems()[0].getItem()));
+    save(consumer, Loadables.ITEM.getKey(tool.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)[0].getItem()));
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "parts");
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
+    Identifier advancementId = buildOptionalAdvancement(id, "parts");
     consumer.accept(new LoadableFinishedRecipe<>(id, new PartBuilderRecycle(id, tool, pattern, results), PartBuilderRecycle.LOADER, advancementId));
   }
 }

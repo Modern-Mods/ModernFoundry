@@ -1,0 +1,20 @@
+{
+  "values": [
+    "modernfoundry:white_clear_stained_glass_pane",
+    "modernfoundry:orange_clear_stained_glass_pane",
+    "modernfoundry:magenta_clear_stained_glass_pane",
+    "modernfoundry:light_blue_clear_stained_glass_pane",
+    "modernfoundry:yellow_clear_stained_glass_pane",
+    "modernfoundry:lime_clear_stained_glass_pane",
+    "modernfoundry:pink_clear_stained_glass_pane",
+    "modernfoundry:gray_clear_stained_glass_pane",
+    "modernfoundry:light_gray_clear_stained_glass_pane",
+    "modernfoundry:cyan_clear_stained_glass_pane",
+    "modernfoundry:purple_clear_stained_glass_pane",
+    "modernfoundry:blue_clear_stained_glass_pane",
+    "modernfoundry:brown_clear_stained_glass_pane",
+    "modernfoundry:green_clear_stained_glass_pane",
+    "modernfoundry:red_clear_stained_glass_pane",
+    "modernfoundry:black_clear_stained_glass_pane"
+  ]
+}

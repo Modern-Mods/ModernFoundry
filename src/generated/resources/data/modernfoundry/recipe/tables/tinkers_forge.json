@@ -1,16 +1,10 @@
 {
-  "type": "hilt:crafting_shaped_retextured",
+  "type": "mantle:crafting_shaped_retextured",
   "category": "misc",
   "key": {
-    "m": {
-      "tag": "modernfoundry:anvil_metal"
-    },
-    "s": {
-      "tag": "modernfoundry:seared_blocks"
-    },
-    "t": {
-      "item": "modernfoundry:tinker_station"
-    }
+    "m": "#modernfoundry:anvil_metal",
+    "s": "#modernfoundry:seared_blocks",
+    "t": "modernfoundry:tinker_station"
   },
   "match_all": true,
   "pattern": [
@@ -19,13 +13,12 @@
     "m m"
   ],
   "result": {
+    "id": "modernfoundry:tinkers_anvil",
     "nbt": {
       "display": {
         "Name": "{\"translate\":\"block.modernfoundry.tool_forge\"}"
       }
-    },
-    "id": "modernfoundry:tinkers_anvil"
+    }
   },
-  "show_notification": true,
   "texture": "m"
 }

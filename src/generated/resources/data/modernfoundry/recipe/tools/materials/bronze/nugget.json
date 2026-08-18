@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/bronze/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/bronze"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/bronze"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/bronze/nugget",
+  "ingredient": "#c:nuggets/bronze",
   "material": "modernfoundry:bronze",
   "needed": 9,
   "value": 1

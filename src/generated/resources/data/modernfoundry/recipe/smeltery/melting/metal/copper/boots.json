@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/copper/boots",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/boots/copper"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/boots/copper"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/copper/boots",
+  "ingredient": "#c:armors/boots/copper",
   "result": {
     "amount": 360,
     "tag": "c:molten_copper",

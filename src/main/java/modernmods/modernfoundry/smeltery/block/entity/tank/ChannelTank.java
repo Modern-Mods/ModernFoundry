@@ -68,14 +68,18 @@ public class ChannelTank extends FluidTank {
 		return stack;
 	}
 
+	// 26.1.2 FluidTank switched to ValueIO serialization and no longer exposes readFromNBT/writeToNBT(CompoundTag),
+	// so serialize the fluid directly under the "Fluid" key (matching FluidTank#serialize) here.
 	public FluidTank readFromNBT(CompoundTag nbt) {
-		this.locked = nbt.getInt(TAG_LOCKED);
-		super.readFromNBT(TagUtil.BUILTIN_LOOKUP, nbt);
+		this.locked = nbt.getIntOr(TAG_LOCKED, 0);
+		setFluid(TagUtil.readFluid(nbt.getCompoundOrEmpty("Fluid")));
 		return this;
 	}
 
 	public CompoundTag writeToNBT(CompoundTag nbt) {
-		nbt = super.writeToNBT(TagUtil.BUILTIN_LOOKUP, nbt);
+		if (!getFluid().isEmpty()) {
+			nbt.put("Fluid", TagUtil.writeFluid(getFluid()));
+		}
 		nbt.putInt(TAG_LOCKED, locked);
 		return nbt;
 	}

@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/netherite/debris_nugget_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/nugget"
-  },
+  "cast": "#modernfoundry:casts/single_use/nugget",
   "cast_consumed": true,
   "cooling_time": 24,
   "fluid": {
     "amount": 10,
     "tag": "modernfoundry:molten_debris"
   },
+  "id": "modernfoundry:smeltery/casting/metal/netherite/debris_nugget_sand_cast",
   "result": {
     "tag": "c:nuggets/netherite_scrap"
   }

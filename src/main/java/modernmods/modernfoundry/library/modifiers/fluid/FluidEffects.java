@@ -1,14 +1,14 @@
 package modernmods.modernfoundry.library.modifiers.fluid;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffectContext.Block;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffectContext.Entity;
 
@@ -115,7 +115,7 @@ public record FluidEffects(FluidIngredient ingredient, List<FluidEffect<? super 
   }
 
   /** Entry for storage in the manager */
-  public record Entry(ResourceLocation name, FluidEffects effects) {
+  public record Entry(Identifier name, FluidEffects effects) {
     public static final RecordLoadable<Entry> LOADABLE = RecordLoadable.create(
       Loadables.RESOURCE_LOCATION.requiredField("name", Entry::name),
       FluidEffects.LOADABLE.requiredField("effects", Entry::effects),

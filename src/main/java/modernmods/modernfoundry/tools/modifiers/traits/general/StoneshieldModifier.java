@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.tools.modifiers.traits.general;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.Ingredient;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.LevelingInt;
@@ -18,7 +19,7 @@ public class StoneshieldModifier extends Modifier {
     super.registerHooks(hookBuilder);
     hookBuilder.addModule(new CapacityBarModule(LevelingInt.eachLevel(100), ToolStats.DURABILITY));
     hookBuilder.addModule(new DurabilityShieldModule(0x7F7F7F));
-    hookBuilder.addModule(LootToCapacityModule.consume(Ingredient.of(TinkerTags.Items.STONESHIELDS)).amount(3).eachLevel(0.2f));
+    hookBuilder.addModule(LootToCapacityModule.consume(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(TinkerTags.Items.STONESHIELDS)).amount(3).eachLevel(0.2f));
   }
 
   @Override

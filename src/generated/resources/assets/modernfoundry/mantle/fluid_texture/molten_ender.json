@@ -1,0 +1,13 @@
+{
+  "camera": "modernfoundry:fluid/molten/stone/camera",
+  "camera_opacity": 0.1,
+  "color": "FF105E51",
+  "flowing": "modernfoundry:fluid/molten/stone/flowing",
+  "fog": {
+    "calculate_color": true,
+    "end": 2.0,
+    "shape": "sphere",
+    "start": 0.25
+  },
+  "still": "modernfoundry:fluid/molten/stone/still"
+}

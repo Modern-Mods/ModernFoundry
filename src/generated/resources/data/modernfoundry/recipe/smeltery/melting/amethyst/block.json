@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/amethyst/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/amethyst"
-  },
+  "ingredient": "#c:storage_blocks/amethyst",
   "result": {
     "amount": 400,
     "fluid": "modernfoundry:molten_amethyst"

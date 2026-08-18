@@ -7,7 +7,7 @@ import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
@@ -19,22 +19,23 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.ForgeI18n;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.crafting.IShapedRecipe;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
-import modernmods.hilt.client.book.HTMLUtils;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.content.PageContent;
-import modernmods.hilt.client.book.data.element.ImageData;
-import modernmods.hilt.client.book.data.element.TextData;
-import modernmods.hilt.client.screen.book.BookScreen;
-import modernmods.hilt.client.screen.book.element.BookElement;
-import modernmods.hilt.client.screen.book.element.ImageElement;
-import modernmods.hilt.client.screen.book.element.TextElement;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.recipe.helper.RecipeHelper;
-import modernmods.hilt.util.ItemStackList;
-import modernmods.hilt.util.html.HtmlElement;
-import modernmods.hilt.util.html.HtmlGroup;
-import modernmods.hilt.util.html.HtmlSerializable;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.client.book.HTMLUtils;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.content.PageContent;
+import modernmods.mantle.client.book.data.element.ImageData;
+import modernmods.mantle.client.book.data.element.TextData;
+import modernmods.mantle.client.screen.book.BookScreen;
+import modernmods.mantle.client.screen.book.element.BookElement;
+import modernmods.mantle.client.screen.book.element.ImageElement;
+import modernmods.mantle.client.screen.book.element.TextElement;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.recipe.helper.RecipeHelper;
+import modernmods.mantle.recipe.sync.ClientRecipeCache;
+import modernmods.mantle.util.ItemStackList;
+import modernmods.mantle.util.html.HtmlElement;
+import modernmods.mantle.util.html.HtmlGroup;
+import modernmods.mantle.util.html.HtmlSerializable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.book.elements.TinkerItemElement;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
@@ -54,7 +55,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ContentTool extends PageContent {
-  public static final ResourceLocation ID = TConstruct.getResource("tool");
+  public static final Identifier ID = TConstruct.getResource("tool");
   private static final String KEY_PROPERTIES = TConstruct.makeTranslationKey("book", "tool.properties");
 
   /* Slot backgrounds */
@@ -132,7 +133,7 @@ public class ContentTool extends PageContent {
       if (this.toolName == null) {
         this.toolName = this.parent.name;
       }
-      Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(this.toolName));
+      Item item = ForgeRegistries.ITEMS.getValue(Identifier.tryParse(this.toolName));
       if (item instanceof IModifiableDisplay tool) {
         this.tool = tool;
       } else {
@@ -158,38 +159,26 @@ public class ContentTool extends PageContent {
       IModifiableDisplay tool = getTool();
       List<IToolPart> required = ToolPartsHook.parts(tool.getToolDefinition());
 
-      // get the stacks for the first crafting table recipe, prefer this option over parts as it may not be craftable with said parts
-      Recipe<?> recipe = Optional.ofNullable(Minecraft.getInstance().level)
-                                 .flatMap(world -> {
-                                   RegistryAccess access = world.registryAccess();
-                                   return RecipeHelper.getRecipes(world.getRecipeManager(), RecipeType.CRAFTING).stream()
-                                               .filter(r -> r.getResultItem(access).getItem() == tool.asItem())
-                                               .findFirst();
-                                 })
-                                 .orElse(null);
-      if (recipe != null) {
-        // parts is just the items in the recipe
-        this.parts = recipe.getIngredients().stream().map(ingredient -> ItemStackList.of(ingredient.getItems())).collect(Collectors.toList());
-
-        // if we have a shaped recipe, display slots in order
-        if (recipe instanceof IShapedRecipe<?> shaped) {
-          int width = Mth.clamp(shaped.getRecipeWidth() - 1, 0, 2);
-          this.imgSlots = IMG_SLOTS_SHAPED[Mth.clamp(shaped.getRecipeHeight() - 1, 0, 2)][width];
-          this.slotPos = SLOTS_WIDTH[width];
-        }
-      } else {
+      // We would prefer to display the layout of a crafting-table recipe that outputs this tool (it may differ from the
+      // raw part list). However, vanilla crafting recipes are NOT available on the client in 26.1: there is no client
+      // RecipeManager, and by design Tinkers does not sync vanilla crafting to the client. The client recipe-book
+      // property sets expose only usable-item sets, not the shaped ingredient layout this page needs, so the
+      // crafting-table recipe cannot be resolved here. Every tool still renders through the part-derived layout below,
+      // which is the general case and covers all tools.
+      // In-game validation: confirm book "tool" pages show the correct part slots for all tools.
+      {
         ImmutableList.Builder<ItemStackList> partBuilder = ImmutableList.builder();
         for (int i = 0; i < required.size(); i++) {
           partBuilder.add(ItemStackList.of(ToolBuildHandler.getDisplayPart(required.get(i), i)));
         }
         // fetch the tool building recipe for extra ingredients
         List<Ingredient> extraRequirements = Optional.ofNullable(Minecraft.getInstance().level)
-                                                     .flatMap(world -> RecipeHelper.getRecipes(world.getRecipeManager(), TinkerRecipeTypes.TINKER_STATION.get()).stream()
+                                                     .flatMap(world -> RecipeHelper.getRecipes(ClientRecipeCache.getRecipeMap(), TinkerRecipeTypes.TINKER_STATION.get()).stream()
                                                                             .filter(r -> r instanceof ToolBuildingRecipe toolRecipe && toolRecipe.getOutput() == tool)
                                                                             .map(r -> ((ToolBuildingRecipe)r).getExtraRequirements())
                                                                             .findFirst()).orElse(List.of());
         for (Ingredient ingredient : extraRequirements) {
-          partBuilder.add(ItemStackList.of(ingredient.getItems()));
+          partBuilder.add(ItemStackList.of(ingredient.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)));
         }
         this.parts = partBuilder.build();
       }

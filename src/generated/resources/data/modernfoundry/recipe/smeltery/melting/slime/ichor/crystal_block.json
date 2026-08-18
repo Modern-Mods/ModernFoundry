@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/slime/ichor/crystal_block",
   "byproducts": [
     {
       "amount": 800,
       "fluid": "modernfoundry:ichor"
     }
   ],
-  "ingredient": {
-    "item": "modernfoundry:ichor_slime_crystal_block"
-  },
+  "id": "modernfoundry:smeltery/melting/slime/ichor/crystal_block",
+  "ingredient": "modernfoundry:ichor_slime_crystal_block",
   "result": {
     "amount": 40,
     "fluid": "modernfoundry:blazing_blood"

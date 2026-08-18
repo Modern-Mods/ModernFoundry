@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/seared/cobble/slab",
-  "cast": {
-    "item": "minecraft:cobblestone_slab"
-  },
+  "cast": "minecraft:cobblestone_slab",
   "cast_consumed": true,
   "cooling_time": 80,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:molten_clay"
   },
+  "id": "modernfoundry:smeltery/casting/seared/cobble/slab",
   "result": "modernfoundry:seared_cobble_slab"
 }

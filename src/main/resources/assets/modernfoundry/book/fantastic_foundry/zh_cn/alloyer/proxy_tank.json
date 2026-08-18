@@ -1,9 +1,9 @@
 {
-  "title": "Modern Foundry储罐",
+  "title": "工匠储罐",
   "item": "modernfoundry:scorched_proxy_tank",
   "text": [
     {
-      "text": "Modern Foundry储罐可以装填或倒空不同数量的流体，比如工具内部储罐，并且效果十分不错。只需要把工具放在储罐当中，用浇注口、浇注道或是盛有流体的物品装填即可。",
+      "text": "工匠储罐可以装填或倒空不同数量的流体，比如工具内部储罐，并且效果十分不错。只需要把工具放在储罐当中，用浇注口、浇注道或是盛有流体的物品装填即可。",
       "paragraph": true
     },
     {

@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.json.variable.tool;
 
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.library.json.predicate.tool.ToolContextPredicate;
 import modernmods.modernfoundry.library.json.variable.ConditionalVariable;
 import modernmods.modernfoundry.library.tools.nbt.IToolContext;

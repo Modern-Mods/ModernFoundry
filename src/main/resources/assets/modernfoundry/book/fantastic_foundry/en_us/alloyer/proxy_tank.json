@@ -1,9 +1,9 @@
 {
-  "title": "Modern Foundry Tank",
+  "title": "Tinker Tank",
   "item": "modernfoundry:scorched_proxy_tank",
   "text": [
     {
-      "text": "The Modern Foundry tank is great for filling or emptying variable size fluid items, such as tools with tanks. Simply place the tool in the tank, then fill it using fluid items, faucets, or channels.",
+      "text": "The tinker tank is great for filling or emptying variable size fluid items, such as tools with tanks. Simply place the tool in the tank, then fill it using fluid items, faucets, or channels.",
       "paragraph": true
     },
     {

@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/amethyst_bronze/ingot_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/ingot"
-  },
+  "cast": "#modernfoundry:casts/multi_use/ingot",
   "cooling_time": 61,
   "fluid": {
     "amount": 90,
     "tag": "c:molten_amethyst_bronze"
   },
+  "id": "modernfoundry:smeltery/casting/metal/amethyst_bronze/ingot_gold_cast",
   "result": {
     "tag": "c:ingots/amethyst_bronze"
   }

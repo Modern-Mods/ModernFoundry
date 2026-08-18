@@ -1,5 +1,5 @@
 {
-  "_comment": "Modern Foundry Common",
+  "_comment": "Tinkers Common",
 
   "block.modernfoundry.sky_slime": "Skyslime Block",
   "block.modernfoundry.sky_slime.tooltip": "Sticks to both slime and honey",
@@ -182,10 +182,10 @@
 
   "item.modernfoundry.materials_and_you": "Materials and You",
   "item.modernfoundry.materials_and_you.tooltip": "The introduction book into tools and materials\nby Selena",
-  "item.modernfoundry.encyclopedia": "Encyclopedia of crafting",
-  "item.modernfoundry.encyclopedia.tooltip": "The reference book every Modern Foundry needs\nby Selena",
+  "item.modernfoundry.encyclopedia": "Encyclopedia of Tinkering",
+  "item.modernfoundry.encyclopedia.tooltip": "The reference book every tinker needs\nby Selena",
 
-  "item.modernfoundry.tinkers_gadgetry": "Modern Foundry's Gadgetry",
+  "item.modernfoundry.tinkers_gadgetry": "Tinker's Gadgetry",
   "item.modernfoundry.tinkers_gadgetry.tooltip": "Book of uses of slime in everyday tasks\nby Melvin",
 
   "item.modernfoundry.puny_smelting": "Puny Smelting",
@@ -297,7 +297,7 @@
   "item.modernfoundry.copper_can.contents": "%s: 1 ingot",
 
 
-  "_comment": "Modern Foundry Patterns",
+  "_comment": "Tinkers Patterns",
 
   "pattern.modernfoundry.ingot": "Ingot",
   "pattern.modernfoundry.nugget": "Nugget",
@@ -361,7 +361,7 @@
   "pattern.modernfoundry.laces": "Laces",
 
 
-  "_comment": "Modern Foundry Gold Casts",
+  "_comment": "Tinkers Gold Casts",
 
   "item.modernfoundry.cast.cost": "Material cost: %d",
 
@@ -414,7 +414,7 @@
   "item.modernfoundry.maille_cast": "Maille Gold Cast",
 
 
-  "_comment": "Modern Foundry Sand Casts",
+  "_comment": "Tinkers Sand Casts",
 
   "item.modernfoundry.blank_sand_cast": "Blank Sand Cast",
   "item.modernfoundry.ingot_sand_cast": "Ingot Sand Cast",
@@ -464,7 +464,7 @@
   "item.modernfoundry.maille_sand_cast": "Maille Sand Cast",
 
 
-  "_comment": "Modern Foundry Red Sand Casts",
+  "_comment": "Tinkers Red Sand Casts",
 
   "item.modernfoundry.blank_red_sand_cast": "Blank Red Sand Cast",
   "item.modernfoundry.ingot_red_sand_cast": "Ingot Red Sand Cast",
@@ -514,7 +514,7 @@
   "item.modernfoundry.maille_red_sand_cast": "Maille Red Sand Cast",
 
 
-  "_comment": "Modern Foundry Fluids",
+  "_comment": "Tinkers Fluids",
 
   "block.modernfoundry.blazing_blood_fluid": "Blazing Blood",
   "fluid.modernfoundry.blazing_blood": "Blazing Blood",
@@ -1035,7 +1035,7 @@
   "fluid_effect.modernfoundry.explosion": "Power %s explosion",
 
 
-  "_comment": "Modern Foundry Gadgets",
+  "_comment": "Tinkers Gadgets",
 
   "block.modernfoundry.punji": "Punji Sticks",
   "block.modernfoundry.punji.tooltip": "Pointy! Also sticks to walls.",
@@ -1087,13 +1087,13 @@
   "block.modernfoundry.necronium_head":        "Necronium Skull",
 
 
-  "_comment": "Modern Foundry Tables",
+  "_comment": "Tinkers Tables",
 
   "block.modernfoundry.crafting_station": "Crafting Station",
 
-  "block.modernfoundry.tinker_station": "Modern Foundry Station",
-  "block.modernfoundry.tinkers_anvil": "Modern Foundry's Anvil",
-  "block.modernfoundry.scorched_anvil": "Modern Foundry's Anvil",
+  "block.modernfoundry.tinker_station": "Tinker Station",
+  "block.modernfoundry.tinkers_anvil": "Tinker's Anvil",
+  "block.modernfoundry.scorched_anvil": "Tinker's Anvil",
   "block.modernfoundry.tool_forge": "Tool Forge",
 
   "block.modernfoundry.part_builder": "Part Builder",
@@ -1102,7 +1102,7 @@
   "block.modernfoundry.part_chest": "Part Chest",
   "block.modernfoundry.part_chest.tooltip": "Holds up to 256 different tool parts",
 
-  "block.modernfoundry.tinkers_chest": "Modern Foundry's Chest",
+  "block.modernfoundry.tinkers_chest": "Tinker's Chest",
   "block.modernfoundry.tinkers_chest.tooltip": "Holds up to 64 stacks of 16 items",
 
   "block.modernfoundry.cast_chest": "Cast Chest",
@@ -1110,7 +1110,7 @@
 
   "item.modernfoundry.pattern": "Pattern",
 
-  "_comment": "Modern Foundry Tools",
+  "_comment": "Tinkers Tools",
 
   "_comment_on_format_": "These format allows you to have more control over separators in material names. By default we separate with space. You can use %1$s and %2$s if you wish to change the order.",
   "item.modernfoundry.tool.format": "%s %s",
@@ -1215,7 +1215,7 @@
   "item.modernfoundry.crystalshot": "Crystalshot",
   "entity.modernfoundry.crystalshot": "Crystalshot",
 
-  "_comment": "Modern Foundry Tool Parts",
+  "_comment": "Tinkers Tool Parts",
 
   "item.modernfoundry.dummy_tool_part.tooltip": "Used to create casts, cannot be used to create tools.",
 
@@ -1381,7 +1381,7 @@
   "multiblock.modernfoundry.tiny.no_fuel_tank": "Must be placed above a fuel tank or a heater to function",
 
 
-  "_comment": "Modern Foundry Smeltery",
+  "_comment": "Tinkers Smeltery",
 
   "block.modernfoundry.grout": "Grout",
   "block.modernfoundry.grout.tooltip": "I am Grout!",
@@ -1487,7 +1487,7 @@
   "block.modernfoundry.seared_casting_tank": "Casting Tank",
   "block.modernfoundry.seared_casting_tank.tooltip": "Automatically empties or fills inserted items.\nRetains liquid when broken.",
 
-  "_comment": "Modern Foundry Foundry",
+  "_comment": "Tinkers Foundry",
 
   "block.modernfoundry.nether_grout": "Nether Grout",
   "block.modernfoundry.nether_grout.tooltip": "We are Grout!",
@@ -1545,7 +1545,7 @@
   "block.modernfoundry.scorched_basin.tooltip": "Cast items using molten metals from a Foundry, requires a cast or gold platform to cast",
   "block.modernfoundry.scorched_table": "Scorched Casting Table",
   "block.modernfoundry.scorched_table.tooltip": "Cast items using molten metals from a Foundry, requires a cast or gold bars to cast",
-  "block.modernfoundry.scorched_proxy_tank": "Scorched Modern Foundry Tank",
+  "block.modernfoundry.scorched_proxy_tank": "Scorched Tinker Tank",
   "block.modernfoundry.scorched_proxy_tank.tooltip": "Tank block that fills or empties the item tank inside instead of an internal tank",
 
   "block.modernfoundry.scorched_channel": "Scorched Channel",
@@ -1587,7 +1587,7 @@
   "gui.modernfoundry.fluid.hold_shift": "Hold §e§oShift§r§7 for buckets",
 
 
-  "_comment": "Modern Foundry World",
+  "_comment": "Tinkers World",
 
   "entity.modernfoundry.earth_slime": "Earthslime",
   "item.modernfoundry.earth_slime_spawn_egg": "Earthslime Spawn Egg",
@@ -1849,7 +1849,7 @@
   "material.modernfoundry.flint": "Flint",
   "material.modernfoundry.flint.basalt": "Basalt",
   "material.modernfoundry.flint.deepslate": "Deepslate",
-  "material.modernfoundry.flint.flavor": "This will spark the flames of a Modern Foundry's heart!",
+  "material.modernfoundry.flint.flavor": "This will spark the flames of a Tinker's heart!",
   "material.modernfoundry.flint.encyclopedia": "Increases melee damage by 0.5% per level times the square root of lost durability. Tool durability multiplier will divide the lost durability.",
   "material.modernfoundry.flint.ammo": "Allows casting potion on the ammo to tip it. Tipped ammo will apply a potion effect in addition to its damage.",
 
@@ -1882,7 +1882,7 @@
 
   "material.modernfoundry.string": "String",
   "material.modernfoundry.string.flavor": "Theoretically the best material.",
-  "material.modernfoundry.string.encyclopedia": "Allows the tool to be repaired using string in the Modern Foundry station or crafting table",
+  "material.modernfoundry.string.encyclopedia": "Allows the tool to be repaired using string in the tinker station or crafting table",
   "material.modernfoundry.string.skull": "Spider",
   "material.modernfoundry.string.skull_flavor": "Spiders are a master of potions, maybe their secret can help me enhance potions...",
   "material.modernfoundry.string.skull_encyclopedia": "Causes positive potion effects to last 25% longer",
@@ -2138,7 +2138,7 @@
   "material.modernfoundry.shulker.ammo": "Allows collecting projectiles that hit entities instead of just blocks, making them infinitely reusable. Item will additionally not despawn.",
 
   "material.modernfoundry.manyullyn": "Manyullyn",
-  "material.modernfoundry.manyullyn.flavor": "The metal that most Modern Foundry will never pronounce right. Also known as a star cutting material.",
+  "material.modernfoundry.manyullyn.flavor": "The metal that most Tinkers will never pronounce right. Also known as a star cutting material.",
   "material.modernfoundry.manyullyn.encyclopedia": "Grants +1 damage per level when at full health, and +0.6 damage per level when the target is at full health",
   "material.modernfoundry.manyullyn.ranged": "Projectiles gain +0.5 power per level when at full health, and +0.25 power per level when the target is at full health",
   "material.modernfoundry.manyullyn.armor": "When at full health, take 1 less damage per level after armor and enchantments, down to a minimum of 1",
@@ -2374,7 +2374,7 @@
 
   "_comment": "Modifiers",
 
-  "key.categories.modernfoundry": "Modern Foundry",
+  "key.category.modernfoundry.modernfoundry": "Modern Foundry",
   "key.modernfoundry.helmet_interact": "Helmet Interaction",
   "key.modernfoundry.leggings_interact": "Leggings Interaction",
 
@@ -3809,30 +3809,30 @@
 
   "_comment": "GUIs",
 
-  "itemGroup.modernfoundry.general": "Modern Foundry General Items",
-  "itemGroup.modernfoundry.tables": "Modern Foundry Tables",
-  "itemGroup.modernfoundry.tools": "Modern Foundry Tools",
-  "itemGroup.modernfoundry.tool_parts": "Modern Foundry Parts",
-  "itemGroup.modernfoundry.smeltery": "Modern Foundry Smeltery",
-  "itemGroup.modernfoundry.fluids": "Modern Foundry Fluids",
-  "itemGroup.modernfoundry.world": "Modern Foundry World",
+  "itemGroup.modernfoundry.general": "Foundry General Items",
+  "itemGroup.modernfoundry.tables": "Foundry Tables",
+  "itemGroup.modernfoundry.tools": "Foundry Tools",
+  "itemGroup.modernfoundry.tool_parts": "Foundry Parts",
+  "itemGroup.modernfoundry.smeltery": "Foundry Smeltery",
+  "itemGroup.modernfoundry.fluids": "Foundry Fluids",
+  "itemGroup.modernfoundry.world": "Foundry World",
 
   "gui.modernfoundry.crafting_station": "Crafting Station",
   "gui.modernfoundry.crafting_station.uncraftable": "This item is not currently craftable by the player",
 
   "gui.modernfoundry.part_builder": "Part Builder",
-  "gui.modernfoundry.part_builder.info": "Here you can craft tool parts to fulfill your crafting fantasies.\n\nTo craft a part simply put a blank pattern into the left slot and select the part you want. The remaining slot holds the material you want to craft your part out of.",
+  "gui.modernfoundry.part_builder.info": "Here you can craft tool parts to fulfill your tinkering fantasies.\n\nTo craft a part simply put a blank pattern into the left slot and select the part you want. The remaining slot holds the material you want to craft your part out of.",
   "gui.modernfoundry.part_builder.material_value": "Material value: %s",
   "gui.modernfoundry.part_builder.cost": "Pattern cost: %s",
   "gui.modernfoundry.part_builder.trait": "Trait",
   "gui.modernfoundry.part_builder.uncraftable": "Cannot shape",
   "gui.modernfoundry.part_builder.uncraftable.tooltip": "Material cannot be shaped in the part builder. Other methods such as casting are required.",
 
-  "gui.modernfoundry.tinkers_chest": "Modern Foundry's Chest",
+  "gui.modernfoundry.tinkers_chest": "Tinker's Chest",
   "gui.modernfoundry.cast_chest": "Cast Chest",
   "gui.modernfoundry.part_chest": "Part Chest",
 
-  "gui.modernfoundry.tinker_station": "Modern Foundry Station",
+  "gui.modernfoundry.tinker_station": "Tinker Station",
   "gui.modernfoundry.tinker_station.repair_limited": "Repair & Modify",
   "gui.modernfoundry.tinker_station.repair_limited.description": "Allows creating all basic tools and applying most modifiers. Select a layout from the buttons on the left to get started.",
   "gui.modernfoundry.tinker_station.repair": "Repair & Modify",
@@ -4115,7 +4115,7 @@
   "jei.modernfoundry.severing.title": "Severing",
 
   "jei.modernfoundry.tinkering.tool_building": "Tool Building",
-  "jei.modernfoundry.tinkering.tool_building.anvil": "Broad tools require the Modern Foundry's Anvil to be created or swap parts",
+  "jei.modernfoundry.tinkering.tool_building.anvil": "Broad tools require the Tinker's Anvil to be created or swap parts",
 
   "jei.modernfoundry.part_builder.title": "Part Builder",
   "jei.modernfoundry.part_builder.cost": "Cost: %s",
@@ -4125,20 +4125,20 @@
 
 
   "_comment": "Tool Advancements",
-  "advancements.modernfoundry.tools.materials_and_you.title": "Modern Foundry In Training",
+  "advancements.modernfoundry.tools.materials_and_you.title": "Tinker In Training",
   "advancements.modernfoundry.tools.materials_and_you.description": "Craft Materials and You, the introduction book into Modern Foundry",
   "advancements.modernfoundry.tools.part_builder.title": "Part Builder",
   "advancements.modernfoundry.tools.part_builder.description": "Create a part builder, your first step to making tools",
   "advancements.modernfoundry.tools.make_part.title": "Tool Parts",
   "advancements.modernfoundry.tools.make_part.description": "Create your first tool part using a pattern and some material in the part builder",
-  "advancements.modernfoundry.tools.tinker_station.title": "Modern Foundry Station",
-  "advancements.modernfoundry.tools.tinker_station.description": "Create a Modern Foundry station to combine parts into tools",
-  "advancements.modernfoundry.tools.tinker_tool.title": "Novice Modern Foundry",
-  "advancements.modernfoundry.tools.tinker_tool.description": "Create a your first Modern Foundry tool",
+  "advancements.modernfoundry.tools.tinker_station.title": "Tinker Station",
+  "advancements.modernfoundry.tools.tinker_station.description": "Create a tinker station to combine parts into tools",
+  "advancements.modernfoundry.tools.tinker_tool.title": "Novice Tinker",
+  "advancements.modernfoundry.tools.tinker_tool.description": "Create a your first tinker tool",
   "advancements.modernfoundry.tools.travelers_gear.title": "Traveler",
   "advancements.modernfoundry.tools.travelers_gear.description": "Craft a full set of traveler's gear",
   "advancements.modernfoundry.tools.modified.title": "Modification",
-  "advancements.modernfoundry.tools.modified.description": "Apply a modifier to a Modern Foundry tool",
+  "advancements.modernfoundry.tools.modified.description": "Apply a modifier to a tinker tool",
   "advancements.modernfoundry.tools.upgrade_slots.title": "All the Upgrades",
   "advancements.modernfoundry.tools.upgrade_slots.description": "Give a tool 6 more upgrade slots using writable, recapitated, harmonious, forecast, and gilded",
   "advancements.modernfoundry.tools.glass_cannon.title": "Glass Cannon",
@@ -4170,7 +4170,7 @@
   "advancements.modernfoundry.smeltery.structure.title": "The Mighty Smeltery",
   "advancements.modernfoundry.smeltery.structure.description": "Craft a smeltery controller from casting molten copper, build a smeltery, and open the smeltery UI",
   "advancements.modernfoundry.smeltery.tinkers_anvil.title": "Advanced Tool Making",
-  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Craft a Modern Foundry's Anvil using alloys from the smeltery!",
+  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Craft a Tinker's Anvil using alloys from the smeltery!",
   "advancements.modernfoundry.smeltery.tool_forge.title": "Tool Forge",
   "advancements.modernfoundry.smeltery.tool_forge.description": "Forge one of every broad tool in the anvil",
   "advancements.modernfoundry.smeltery.abilities.title": "Ability Master",
@@ -4193,8 +4193,8 @@
   "advancements.modernfoundry.foundry.encyclopedia.description": "Craft the encyclopedia of materials with your knowledge from all the books",
 
   "_comment": "Gadget Advancements",
-  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Modern Foundry's Gadgetry",
-  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Craft Modern Foundry's Gadgetry to begin exploring the world",
+  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Tinker's Gadgetry",
+  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Craft Tinker's Gadgetry to begin exploring the world",
   "advancements.modernfoundry.world.earth_island.title": "Earthslime Island",
   "advancements.modernfoundry.world.earth_island.description": "Locate an earthslime island in the ocean",
   "advancements.modernfoundry.world.sky_island.title": "Skyslime Island",

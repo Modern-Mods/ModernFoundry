@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/netherite/sword",
   "byproducts": [
     {
       "amount": 200,
@@ -8,9 +7,8 @@
       "unit_size": 25
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/netherite/tools_costing_2"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/netherite/sword",
+  "ingredient": "#modernfoundry:melting/netherite/tools_costing_2",
   "result": {
     "amount": 90,
     "tag": "c:molten_netherite",

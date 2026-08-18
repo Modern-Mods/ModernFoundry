@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.tables.recipe;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
@@ -28,14 +28,18 @@ import javax.annotation.Nullable;
 
 /** Recipe using repair kits in the crafting table */
 public class CraftingTableRepairKitRecipe extends CustomRecipe {
-  private final ResourceLocation id;
+  private final Identifier id;
 
-  public CraftingTableRepairKitRecipe(ResourceLocation id) {
-    super(CraftingBookCategory.EQUIPMENT);
+  public CraftingTableRepairKitRecipe(Identifier id) {
     this.id = id;
   }
 
-  public ResourceLocation getId() {
+  @Override
+  public CraftingBookCategory category() {
+    return CraftingBookCategory.EQUIPMENT;
+  }
+
+  public Identifier getId() {
     return id;
   }
 
@@ -111,7 +115,7 @@ public class CraftingTableRepairKitRecipe extends CustomRecipe {
   }
 
   @Override
-  public ItemStack assemble(CraftingInput inv, HolderLookup.Provider access) {
+  public ItemStack assemble(CraftingInput inv) {
     ToolRepair inputs = getRelevantInputs(inv);
     if (inputs == null) {
       TConstruct.LOG.error("Recipe repair on {} failed to find items after matching", getId());
@@ -146,12 +150,7 @@ public class CraftingTableRepairKitRecipe extends CustomRecipe {
   }
 
   @Override
-  public boolean canCraftInDimensions(int width, int height) {
-    return width * height >= 2;
-  }
-
-  @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends CraftingTableRepairKitRecipe> getSerializer() {
     return TinkerTables.craftingTableRepairSerializer.get();
   }
 }

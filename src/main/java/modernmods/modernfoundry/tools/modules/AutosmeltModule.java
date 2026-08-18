@@ -12,10 +12,10 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.array.ArrayLoadable;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.array.ArrayLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -87,7 +87,7 @@ public class AutosmeltModule implements ModifierModule, ProcessLootModifierHook 
     // try each recipe type to see if we have a recipe for any of them
     Optional<? extends AbstractCookingRecipe> recipe = Optional.empty();
     for (RecipeType<? extends AbstractCookingRecipe> recipeType : recipeTypes) {
-      Optional<? extends RecipeHolder<? extends AbstractCookingRecipe>> holder = world.getRecipeManager().getRecipeFor((RecipeType)recipeType, input, world);
+      Optional<? extends RecipeHolder<? extends AbstractCookingRecipe>> holder = world.getServer().getRecipeManager().getRecipeFor((RecipeType)recipeType, input, world);
       if (holder.isPresent()) {
         recipe = holder.map(RecipeHolder::value);
         break;
@@ -129,7 +129,7 @@ public class AutosmeltModule implements ModifierModule, ProcessLootModifierHook 
     AbstractCookingRecipe recipe = findCachedRecipe(stack, world);
     if (recipe != null) {
       // fetch recipe result, may be input sensitive
-      ItemStack output = recipe.assemble(new SingleRecipeInput(stack), world.registryAccess());
+      ItemStack output = recipe.assemble(new SingleRecipeInput(stack));
       // scale the stack size based on the input size
       if (stack.getCount() > 1) {
         // recipe output is a copy, safe to modify

@@ -15,9 +15,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -38,14 +37,11 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent.LivingVisibilityEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock.Action;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
-import modernmods.hilt.data.predicate.damage.DamageSourcePredicate;
+import modernmods.mantle.data.predicate.damage.DamageSourcePredicate;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerEffect;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -77,9 +73,6 @@ import modernmods.modernfoundry.library.tools.helper.ArmorUtil;
 import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
 import modernmods.modernfoundry.library.tools.helper.ToolAttackUtil;
 import modernmods.modernfoundry.library.tools.helper.ToolDamageUtil;
-import modernmods.modernfoundry.library.tools.helper.ToolHarvestLogic;
-import modernmods.modernfoundry.library.tools.item.ModifiableItem;
-import modernmods.modernfoundry.library.tools.item.ranged.ModifiableLauncherItem;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 import modernmods.modernfoundry.library.tools.nbt.ModDataNBT;
 import modernmods.modernfoundry.library.tools.nbt.ModifierNBT;
@@ -96,36 +89,8 @@ import java.util.Objects;
 /**
  * Event subscriber for tool events
  */
-@EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.GAME)
+@EventBusSubscriber(modid = TConstruct.MOD_ID)
 public class ToolEvents {
-  /** Replaces Forge's removed item-level block-start-break hook on NeoForge. */
-  @SubscribeEvent(priority = EventPriority.LOWEST)
-  static void onLeftClickBlock(LeftClickBlock event) {
-    if (event.getAction() != Action.START && event.getAction() != Action.STOP) {
-      return;
-    }
-    ItemStack stack = event.getItemStack();
-    boolean modifiableItem = stack.getItem() instanceof ModifiableItem;
-    boolean modifiableLauncher = stack.getItem() instanceof ModifiableLauncherItem;
-    if (!modifiableItem && !modifiableLauncher) {
-      return;
-    }
-    // Match ModifiableItem#onBlockStartBreak: stacked tools are not breakable.
-    if (modifiableItem && stack.getCount() > 1) {
-      if (event.getAction() == Action.START) {
-        event.setCanceled(true);
-      }
-      return;
-    }
-    // START precedes vanilla mining progress; STOP is the completed-break hook.
-    if (event.getAction() != Action.STOP || event.isCanceled() || event.getLevel().isClientSide()) {
-      return;
-    }
-    if (ToolHarvestLogic.handleBlockBreak(stack, event.getPos(), event.getEntity(), event.getFace())) {
-      event.setCanceled(true);
-    }
-  }
-
   @SuppressWarnings("removal")
   @SubscribeEvent
   static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
@@ -196,9 +161,9 @@ public class ToolEvents {
         pos.getZ() + 0.5D + facing.getStepZ() * 0.65D,
         new ItemStack(Items.PUMPKIN_SEEDS, 4));
       itemEntity.setDeltaMovement(
-        0.05D * facing.getStepX() + world.random.nextDouble() * 0.02D,
+        0.05D * facing.getStepX() + world.getRandom().nextDouble() * 0.02D,
         0.05D,
-        0.05D * facing.getStepZ() + world.random.nextDouble() * 0.02D);
+        0.05D * facing.getStepZ() + world.getRandom().nextDouble() * 0.02D);
       world.addFreshEntity(itemEntity);
       event.setResult(Result.ALLOW);
     }
@@ -236,7 +201,7 @@ public class ToolEvents {
     }
     // I cannot think of a reason to run when invulnerable
     DamageSource source = event.getSource();
-    if (entity.isInvulnerableTo(source)) {
+    if (entity.isInvulnerableTo((net.minecraft.server.level.ServerLevel) entity.level(), source)) {
       return;
     }
 
@@ -313,7 +278,7 @@ public class ToolEvents {
     Entity attacker = source.getEntity();
     if (attacker instanceof LivingEntity living) {
       // boost damage based on monster's melee weapon
-      if (Config.COMMON.allowMonsterMeleeModifiers.get() && source.is(TinkerTags.DamageTypes.MODIFIER_WHITELIST) && !living.getType().is(TinkerTags.EntityTypes.DAMAGE_MODIFIER_BLACKLIST)) {
+      if (Config.COMMON.allowMonsterMeleeModifiers.get() && source.is(TinkerTags.DamageTypes.MODIFIER_WHITELIST) && !living.getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.DAMAGE_MODIFIER_BLACKLIST)) {
         ItemStack weapon = living.getMainHandItem();
         if (!weapon.isEmpty() && weapon.is(TinkerTags.Items.MELEE_WEAPON)) {
           IToolStackView tool = ToolStack.from(weapon);
@@ -378,10 +343,10 @@ public class ToolEvents {
       }
 
       // give slimes a 4x armor boost
-      if (entity.getType().is(TinkerTags.EntityTypes.SMALL_ARMOR)) {
+      if (entity.getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.SMALL_ARMOR)) {
         modifierValue *= 4;
       }
-    } else if (DamageSourcePredicate.CAN_PROTECT.matches(source) && entity.getType().is(TinkerTags.EntityTypes.SMALL_ARMOR)) {
+    } else if (DamageSourcePredicate.CAN_PROTECT.matches(source) && entity.getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.SMALL_ARMOR)) {
       vanillaModifier = entity.level() instanceof ServerLevel serverLevel ? EnchantmentHelper.getDamageProtection(serverLevel, entity, source) : 0f;
       modifierValue = vanillaModifier * 4;
     }
@@ -420,7 +385,8 @@ public class ToolEvents {
               ToolDamageUtil.damageAnimated(tool, damageMissed, entity, slotType, ARMOR_DAMAGE);
             } else {
               // if not our armor, damage using vanilla like logic
-              if (!armorStack.isEmpty() && (!source.is(DamageTypeTags.IS_FIRE) || armorStack.canBeHurtBy(source)) && armorStack.getItem() instanceof ArmorItem) {
+              net.minecraft.world.item.equipment.Equippable equippable = armorStack.get(net.minecraft.core.component.DataComponents.EQUIPPABLE);
+              if (!armorStack.isEmpty() && (!source.is(DamageTypeTags.IS_FIRE) || armorStack.canBeHurtBy(source)) && equippable != null && equippable.slot().isArmor()) {
                 armorStack.hurtAndBreak(damageMissed, entity, slotType);
               }
             }
@@ -452,7 +418,7 @@ public class ToolEvents {
     // apply post hit modifier effects. Done regardless of damage dealt - don't care if absorption took it all
     if (Config.COMMON.allowMonsterMeleeModifiers.get() && source.is(TinkerTags.DamageTypes.MODIFIER_WHITELIST)) {
       Entity attacker = event.getSource().getEntity();
-      if (attacker != null && !attacker.getType().is(TinkerTags.EntityTypes.DAMAGE_MODIFIER_BLACKLIST) && attacker instanceof LivingEntity living) {
+      if (attacker != null && !attacker.getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.DAMAGE_MODIFIER_BLACKLIST) && attacker instanceof LivingEntity living) {
         ItemStack weapon = living.getMainHandItem();
         if (!weapon.isEmpty() && weapon.is(TinkerTags.Items.MELEE_WEAPON)) {
           // already know we are not a player
@@ -469,7 +435,7 @@ public class ToolEvents {
     if (amount > 0 && Config.COMMON.dropDragonScales.get() && entity.getType() == EntityType.ENDER_DRAGON && event.getNewDamage() > 0
         && source.is(DamageTypeTags.IS_EXPLOSION) && source.getEntity() != null && source.getEntity().getType() == EntityType.PLAYER) {
       // drops 1 - 8 scales
-      ModifierUtil.dropItem(entity, new ItemStack(TinkerModifiers.dragonScale, 1 + entity.level().random.nextInt(8)));
+      ModifierUtil.dropItem(entity, new ItemStack(TinkerModifiers.dragonScale, 1 + entity.level().getRandom().nextInt(8)));
     }
   }
 
@@ -536,7 +502,7 @@ public class ToolEvents {
       HitResult.Type type = hit.getType();
       // extract a firing entity as that is a common need
       LivingEntity attacker = projectile.getOwner() instanceof LivingEntity l ? l : null;
-      ModuleHook<ProjectileHitModifierHook> hook = projectile.level().isClientSide ? ModifierHooks.PROJECTILE_HIT_CLIENT : ModifierHooks.PROJECTILE_HIT;
+      ModuleHook<ProjectileHitModifierHook> hook = projectile.level().isClientSide() ? ModifierHooks.PROJECTILE_HIT_CLIENT : ModifierHooks.PROJECTILE_HIT;
       switch(type) {
         case ENTITY -> {
           EntityHitResult entityHit = (EntityHitResult)hit;

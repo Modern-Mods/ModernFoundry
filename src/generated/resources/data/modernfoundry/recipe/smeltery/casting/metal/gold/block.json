@@ -1,11 +1,11 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/metal/gold/block",
   "cooling_time": 171,
   "fluid": {
     "amount": 810,
     "tag": "c:molten_gold"
   },
+  "id": "modernfoundry:smeltery/casting/metal/gold/block",
   "result": {
     "tag": "c:storage_blocks/gold"
   }

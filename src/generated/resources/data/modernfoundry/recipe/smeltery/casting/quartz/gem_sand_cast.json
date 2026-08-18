@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/quartz/gem_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/gem"
-  },
+  "cast": "#modernfoundry:casts/single_use/gem",
   "cast_consumed": true,
   "cooling_time": 58,
   "fluid": {
     "amount": 100,
     "tag": "modernfoundry:molten_quartz"
   },
+  "id": "modernfoundry:smeltery/casting/quartz/gem_sand_cast",
   "result": {
     "tag": "c:gems/quartz"
   }

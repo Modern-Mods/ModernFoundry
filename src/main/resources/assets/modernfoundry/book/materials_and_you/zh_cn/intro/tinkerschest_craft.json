@@ -1,7 +1,7 @@
 {
-  "title": "合成Modern Foundry箱",
+  "title": "合成工匠箱",
   "recipe": "modernfoundry:tables/tinkers_chest",
   "description": [
-    { "text": "合成Modern Foundry箱之后，你可以使用染料将它染成你想要的颜色。" }
+    { "text": "合成工匠箱之后，你可以使用染料将它染成你想要的颜色。" }
   ]
 }

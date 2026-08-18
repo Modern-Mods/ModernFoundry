@@ -1,11 +1,11 @@
 {
   "type": "modernfoundry:ageable_severing",
-  "id": "modernfoundry:tools/severing/turtle_shell",
   "adult_result": "minecraft:turtle_helmet",
   "child_result": "minecraft:turtle_scute",
   "entity": {
     "type": "minecraft:turtle"
   },
+  "id": "modernfoundry:tools/severing/turtle_shell",
   "looting_bonus": 0.01,
   "per_level_chance": 0.05
 }

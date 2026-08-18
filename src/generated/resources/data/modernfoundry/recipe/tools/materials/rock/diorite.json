@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/rock/diorite",
-  "ingredient": {
-    "tag": "c:diorite"
-  },
+  "ingredient": "#c:diorite",
   "material": "modernfoundry:rock#diorite",
   "needed": 1,
   "value": 1

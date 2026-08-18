@@ -1,16 +1,16 @@
 {
-  "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/aluminum",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/aluminum"
     }
   ],
+  "type": "modernfoundry:material_fluid",
   "fluid": {
     "amount": 90,
     "tag": "c:molten_aluminum"
   },
+  "id": "modernfoundry:tools/materials/casting/aluminum",
   "output": "modernfoundry:aluminum",
   "temperature": 425
 }

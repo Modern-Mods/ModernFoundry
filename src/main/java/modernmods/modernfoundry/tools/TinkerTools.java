@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.tools;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
@@ -7,23 +8,23 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.neoforged.neoforge.common.crafting.IngredientType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.registration.object.EnumObject;
-import modernmods.hilt.registration.object.ItemObject;
+import modernmods.mantle.registration.object.EnumObject;
+import modernmods.mantle.registration.object.ItemObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerModule;
 import modernmods.modernfoundry.common.config.Config;
@@ -157,7 +158,7 @@ public final class TinkerTools extends TinkerModule {
                                   .build());
 
   /** Loot function type for tool add data */
-  public static final DeferredHolder<LootItemFunctionType<?>, ? extends LootItemFunctionType<?>> lootAddToolData = LOOT_FUNCTIONS.register("add_tool_data", () -> new LootItemFunctionType<>(AddToolDataFunction.CODEC));
+  public static final DeferredHolder<MapCodec<? extends LootItemFunction>, ? extends MapCodec<? extends LootItemFunction>> lootAddToolData = LOOT_FUNCTIONS.register("add_tool_data", () -> AddToolDataFunction.CODEC);
   public static final DeferredHolder<? super IngredientType<ToolHookIngredient>, IngredientType<ToolHookIngredient>> toolHookIngredient = INGREDIENT_TYPES.register("tool_hook", () -> new IngredientType<>(ToolHookIngredient.Serializer.INSTANCE.codec(), ToolHookIngredient.Serializer.INSTANCE.streamCodec()));
 
   /*
@@ -179,7 +180,7 @@ public final class TinkerTools extends TinkerModule {
 
   // setting durability to -1 makes sure its not 0 for the defaultDurability call in the TieredItem constructor, but is still less than 0 for the stacksTo call to work
   // problem is setting the durability sets the max stack size, and we don't want that. And we need TieredItem to work with piglins
-  public static final ItemObject<ModifiableItem> dagger = ITEMS.register("dagger", () -> new ModifiableSwordItem(new Item.Properties().durability(-1).stacksTo(2), ToolDefinitions.DAGGER, 2));
+  public static final ItemObject<ModifiableItem> dagger = ITEMS.register("dagger", () -> new ModifiableSwordItem(new Item.Properties().stacksTo(2), ToolDefinitions.DAGGER, 2));
   public static final ItemObject<ModifiableItem> sword = ITEMS.register("sword", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.SWORD));
   public static final ItemObject<ModifiableItem> cleaver = ITEMS.register("cleaver", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.CLEAVER));
 
@@ -215,15 +216,15 @@ public final class TinkerTools extends TinkerModule {
   }
 
   // armor
-  public static final EnumObject<ArmorItem.Type,ModifiableArmorItem> travelersGear = ITEMS.registerEnum("travelers", ModifiableArmorMaterial.ARMOR_TYPES, type -> new MultilayerArmorItem(ArmorDefinitions.TRAVELERS, type, UNSTACKABLE_PROPS));
-  public static final EnumObject<ArmorItem.Type,ModifiableArmorItem> plateArmor = ITEMS.registerEnum("plate", ModifiableArmorMaterial.ARMOR_TYPES, type -> new MultilayerArmorItem(ArmorDefinitions.PLATE, type, UNSTACKABLE_PROPS));
-  public static final EnumObject<ArmorItem.Type,ModifiableArmorItem> slimesuit = new EnumObject.Builder<ArmorItem.Type,ModifiableArmorItem>(ArmorItem.Type.class)
-    .put(ArmorItem.Type.HELMET, ITEMS.register("slime_helmet", () -> new SlimeskullItem(ArmorDefinitions.SLIMESUIT, SlimeskullItem.MODEL_LOCATION, UNSTACKABLE_PROPS)))
+  public static final EnumObject<ArmorType,ModifiableArmorItem> travelersGear = ITEMS.registerEnum("travelers", ModifiableArmorMaterial.ARMOR_TYPES, type -> new MultilayerArmorItem(ArmorDefinitions.TRAVELERS, type, UNSTACKABLE_PROPS));
+  public static final EnumObject<ArmorType,ModifiableArmorItem> plateArmor = ITEMS.registerEnum("plate", ModifiableArmorMaterial.ARMOR_TYPES, type -> new MultilayerArmorItem(ArmorDefinitions.PLATE, type, UNSTACKABLE_PROPS));
+  public static final EnumObject<ArmorType,ModifiableArmorItem> slimesuit = new EnumObject.Builder<ArmorType,ModifiableArmorItem>(ArmorType.class)
+    .put(ArmorType.HELMET, ITEMS.register("slime_helmet", () -> new SlimeskullItem(ArmorDefinitions.SLIMESUIT, SlimeskullItem.MODEL_LOCATION, UNSTACKABLE_PROPS)))
     // TODO 1.21: rename to slime chestplate as we no longer need the migration
-    .put(ArmorItem.Type.CHESTPLATE, ITEMS.register("slimy_chestplate", () -> new MultilayerArmorItem(ArmorDefinitions.SLIMESUIT, ArmorItem.Type.CHESTPLATE, UNSTACKABLE_PROPS)))
-    .putAll(ITEMS.registerEnum("slime", new ArmorItem.Type[] {ArmorItem.Type.LEGGINGS, ArmorItem.Type.BOOTS}, type -> new MultilayerArmorItem(ArmorDefinitions.SLIMESUIT, type, UNSTACKABLE_PROPS)))
+    .put(ArmorType.CHESTPLATE, ITEMS.register("slimy_chestplate", () -> new MultilayerArmorItem(ArmorDefinitions.SLIMESUIT, ArmorType.CHESTPLATE, UNSTACKABLE_PROPS)))
+    .putAll(ITEMS.registerEnum("slime", new ArmorType[] {ArmorType.LEGGINGS, ArmorType.BOOTS}, type -> new MultilayerArmorItem(ArmorDefinitions.SLIMESUIT, type, UNSTACKABLE_PROPS)))
     .build();
-  public static final ItemObject<MultilayerArmorItem> slimeWings = ITEMS.register("slime_wings", () -> new MultilayerArmorItem(ArmorDefinitions.SLIMESUIT, ArmorItem.Type.CHESTPLATE, UNSTACKABLE_PROPS, ArmorDefinitions.SLIME_WINGS, TinkerTools.slimeWings.getId()));
+  public static final ItemObject<MultilayerArmorItem> slimeWings = ITEMS.register("slime_wings", () -> new MultilayerArmorItem(ArmorDefinitions.SLIMESUIT, ArmorType.CHESTPLATE, UNSTACKABLE_PROPS, ArmorDefinitions.SLIME_WINGS, TinkerTools.slimeWings.getId()));
 
   // shields
   public static final ItemObject<ModifiableItem> travelersShield = ITEMS.register("travelers_shield", () -> new ModifiableItem(UNSTACKABLE_PROPS, ArmorDefinitions.TRAVELERS_SHIELD));
@@ -281,7 +282,12 @@ public final class TinkerTools extends TinkerModule {
       DispenserBlock.registerBehavior(TinkerTools.throwingAxe.get(), ModifiableShurikenDispenserBehavior.INSTANCE);
       ModifierUtil.registerShieldDisabler(entity -> {
         if (entity instanceof Player player && player.isBlocking()) {
-          player.disableShield();
+          // 26.1.2 removed Player#disableShield(); mimic it by stopping the block and putting the shield on cooldown
+          net.minecraft.world.item.ItemStack useItem = player.getUseItem();
+          player.stopUsingItem();
+          if (!useItem.isEmpty()) {
+            player.getCooldowns().addCooldown(useItem, 100);
+          }
         }
       }, EntityType.PLAYER);
     });

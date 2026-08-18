@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/red_sand/molding/small_blade",
-  "material": {
-    "tag": "modernfoundry:casts/red_sand"
-  },
+  "material": "#modernfoundry:casts/red_sand",
   "pattern": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:small_blade"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:small_blade"
   },
   "result": "modernfoundry:small_blade_red_sand_cast"
 }

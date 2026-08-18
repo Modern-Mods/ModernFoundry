@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "wooden_fence",
   "key": {
-    "#": {
-      "tag": "c:rods/wooden"
-    },
-    "W": {
-      "item": "modernfoundry:greenheart_planks"
-    }
+    "#": "#c:rods/wooden",
+    "W": "modernfoundry:greenheart_planks"
   },
   "pattern": [
     "W#W",
@@ -17,6 +13,5 @@
   "result": {
     "count": 3,
     "id": "modernfoundry:greenheart_fence"
-  },
-  "show_notification": true
+  }
 }

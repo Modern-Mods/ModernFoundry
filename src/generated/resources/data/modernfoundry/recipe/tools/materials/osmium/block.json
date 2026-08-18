@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/osmium/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/osmium"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/osmium"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/osmium/block",
+  "ingredient": "#c:storage_blocks/osmium",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/osmium"

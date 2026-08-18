@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/slime/ender/block",
-  "cast": {
-    "item": "modernfoundry:ender_congealed_slime"
-  },
+  "cast": "modernfoundry:ender_congealed_slime",
   "cast_consumed": true,
   "cooling_time": 119,
   "fluid": {
     "amount": 1250,
     "tag": "modernfoundry:ender_slime"
   },
+  "id": "modernfoundry:smeltery/casting/slime/ender/block",
   "result": "modernfoundry:ender_slime"
 }

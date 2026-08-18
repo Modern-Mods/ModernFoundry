@@ -5,19 +5,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.LegacyLoadable;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.LegacyLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -96,7 +96,7 @@ public record ArmorStatModule(TinkerDataKey<Float> key, LevelingValue amount, bo
   }
 
   /** Adds the given stat tooltip */
-  public static void addStatTooltip(ModifierEntry modifier, ResourceLocation key, float value, TooltipStyle tooltipStyle, List<Component> tooltip) {
+  public static void addStatTooltip(ModifierEntry modifier, Identifier key, float value, TooltipStyle tooltipStyle, List<Component> tooltip) {
     if (value != 0) {
       Component name = Component.translatable(Util.makeTranslationKey("armor_stat", key));
       switch (tooltipStyle) {

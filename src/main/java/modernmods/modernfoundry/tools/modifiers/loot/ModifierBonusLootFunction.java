@@ -4,17 +4,15 @@ import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
-import modernmods.modernfoundry.tools.TinkerModifiers;
 
 import java.util.List;
 import java.util.Set;
@@ -23,7 +21,7 @@ import java.util.Set;
 public class ModifierBonusLootFunction extends LootItemConditionalFunction {
   public static final MapCodec<ModifierBonusLootFunction> CODEC = RecordCodecBuilder.mapCodec(
     instance -> commonFields(instance).and(instance.group(
-      ResourceLocation.CODEC.xmap(ModifierId::new, id -> id).fieldOf("modifier").forGetter(loot -> loot.modifier),
+      Identifier.CODEC.xmap(ModifierId::new, ModifierId::getIdentifier).fieldOf("modifier").forGetter(loot -> loot.modifier),
       BonusFormula.CODEC.forGetter(loot -> loot.formula),
       Codec.BOOL.optionalFieldOf("include_base", true).forGetter(loot -> loot.includeBase)
     )).apply(instance, ModifierBonusLootFunction::new)
@@ -64,18 +62,18 @@ public class ModifierBonusLootFunction extends LootItemConditionalFunction {
   }
 
   @Override
-  public LootItemFunctionType getType() {
-    return TinkerModifiers.modifierBonusFunction.get();
+  public MapCodec<? extends LootItemConditionalFunction> codec() {
+    return CODEC;
   }
 
   @Override
-  public Set<LootContextParam<?>> getReferencedContextParams() {
+  public Set<ContextKey<?>> getReferencedContextParams() {
     return ImmutableSet.of(LootContextParams.TOOL);
   }
 
   @Override
   protected ItemStack run(ItemStack stack, LootContext context) {
-    int level = ModifierUtil.getModifierLevel(context.getParam(LootContextParams.TOOL), modifier);
+    int level = ModifierUtil.getModifierLevel((ItemStack) context.getParameter(LootContextParams.TOOL), modifier);
     if (!includeBase) {
       level--;
     }

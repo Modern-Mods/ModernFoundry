@@ -1,11 +1,7 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/red_sand/molding/nuggets",
-  "material": {
-    "tag": "modernfoundry:casts/red_sand"
-  },
-  "pattern": {
-    "tag": "c:nuggets"
-  },
+  "material": "#modernfoundry:casts/red_sand",
+  "pattern": "#c:nuggets",
   "result": "modernfoundry:nugget_red_sand_cast"
 }

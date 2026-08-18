@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/netherite/lodestone",
-  "ingredient": {
-    "item": "minecraft:lodestone"
-  },
+  "ingredient": "minecraft:lodestone",
   "result": {
     "amount": 90,
     "tag": "c:molten_netherite"

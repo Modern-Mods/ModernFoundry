@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wood/planks/warped",
-  "ingredient": {
-    "item": "minecraft:warped_planks"
-  },
+  "ingredient": "minecraft:warped_planks",
   "material": "modernfoundry:wood#warped",
   "needed": 1,
   "value": 1

@@ -1,16 +1,12 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/red_sand/molding/chestplate_plating",
-  "material": {
-    "tag": "modernfoundry:casts/red_sand"
-  },
+  "material": "#modernfoundry:casts/red_sand",
   "pattern": [
+    "modernfoundry:chestplate_plating_dummy",
     {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:chestplate_plating"
-    },
-    {
-      "item": "modernfoundry:chestplate_plating_dummy"
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:chestplate_plating"
     }
   ],
   "result": "modernfoundry:chestplate_plating_red_sand_cast"

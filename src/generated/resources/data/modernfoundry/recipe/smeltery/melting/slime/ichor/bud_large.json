@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/slime/ichor/bud_large",
   "byproducts": [
     {
       "amount": 600,
       "fluid": "modernfoundry:ichor"
     }
   ],
-  "ingredient": {
-    "item": "modernfoundry:large_ichor_slime_crystal_bud"
-  },
+  "id": "modernfoundry:smeltery/melting/slime/ichor/bud_large",
+  "ingredient": "modernfoundry:large_ichor_slime_crystal_bud",
   "rate": "gem",
   "result": {
     "amount": 30,

@@ -1,12 +1,12 @@
 package modernmods.modernfoundry.library.client;
 
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.client.screen.ElementScreen;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.client.screen.ElementScreen;
 import modernmods.modernfoundry.TConstruct;
 
 /** TODO: consider using {@link modernmods.modernfoundry.library.recipe.partbuilder.Pattern} instead. */
 public interface Icons {
-  ResourceLocation ICONS = TConstruct.getResource("textures/gui/icons.png");
+  Identifier ICONS = TConstruct.getResource("textures/gui/icons.png");
 
   //ElementScreen ANVIL = new ElementScreen(18 * 3, 0, 18, 18, 256, 256);
   ElementScreen PATTERN = new ElementScreen(ICONS, 0, 18 * 12, 18, 18, 256, 256);

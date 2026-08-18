@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/quartz/geore/shard",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:geore_shards/quartz"
     }
   ],
-  "ingredient": {
-    "tag": "c:geore_shards/quartz"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/quartz/geore/shard",
+  "ingredient": "#c:geore_shards/quartz",
   "result": {
     "amount": 100,
     "fluid": "modernfoundry:molten_quartz"

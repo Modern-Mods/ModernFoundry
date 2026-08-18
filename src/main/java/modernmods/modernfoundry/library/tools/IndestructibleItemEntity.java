@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.tools;
 
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,13 +21,16 @@ import javax.annotation.Nullable;
 /** Item entity that will never die */
 public class IndestructibleItemEntity extends ItemEntity {
   /** Modifier key to make a tool spawn an indestructable entity */
-  public static final ResourceLocation INDESTRUCTIBLE_ENTITY = TConstruct.getResource("indestructible");
+  public static final Identifier INDESTRUCTIBLE_ENTITY = TConstruct.getResource("indestructible");
 
   public IndestructibleItemEntity(EntityType<? extends IndestructibleItemEntity> entityType, Level world) {
     super(entityType, world);
     // using setUnlimitedLifetime() makes the item no longer spin, dumb design
     // since age is a short, this value should never be reachable so the item will never despawn
     this.lifespan = Integer.MAX_VALUE;
+    // 26.1.2 made ItemEntity#hurtServer final and removed the overridable isInvulnerableTo(DamageSource);
+    // the invulnerable flag makes isInvulnerableToBase block all non-BYPASSES_INVULNERABILITY damage, matching the old behavior
+    this.setInvulnerable(true);
   }
 
   public IndestructibleItemEntity(Level worldIn, double x, double y, double z, ItemStack stack) {
@@ -58,12 +61,6 @@ public class IndestructibleItemEntity extends ItemEntity {
   @Override
   public boolean fireImmune() {
     return true;
-  }
-
-  @Override
-  public boolean isInvulnerableTo(DamageSource pSource) {
-    // prevent any damage besides out of world
-    return !pSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY);
   }
 
   /** Checks if the given stack has a custom entity */

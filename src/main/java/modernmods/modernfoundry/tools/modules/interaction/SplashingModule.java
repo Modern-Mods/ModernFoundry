@@ -16,7 +16,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -82,9 +82,9 @@ public record SplashingModule(LevelingValue strength) implements ModifierModule,
 
           // cooldown based on attack speed/draw speed. both are on the same scale and default to 1, we don't care which one the tool uses
           // applied before we do the effect to block recursive calls, notably ender might cause that
-          player.getCooldowns().addCooldown(tool.getItem(), (int)(20 / ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.DRAW_SPEED)));
+          player.getCooldowns().addCooldown(new ItemStack(tool.getItem()), (int)(20 / ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.DRAW_SPEED)));
 
-          if (!world.isClientSide) {
+          if (!world.isClientSide()) {
             // for the main target, consume fluids
             float level = this.strength.compute(modifier);
             int numTargets = 0;
@@ -154,10 +154,10 @@ public record SplashingModule(LevelingValue strength) implements ModifierModule,
           // cooldown based on draw speed, works similarly enough to attack speed
           // applied before we do the effect to block recursive calls, notably ender might cause that
           if (player != null) {
-            player.getCooldowns().addCooldown(tool.getItem(), (int)(20 / ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.DRAW_SPEED)));
+            player.getCooldowns().addCooldown(new ItemStack(tool.getItem()), (int)(20 / ConditionalStatModifierHook.getModifiedStat(tool, player, ToolStats.DRAW_SPEED)));
           }
 
-          if (!world.isClientSide) {
+          if (!world.isClientSide()) {
             float level = strength.compute(modifier);
             int numTargets = 0;
             BlockHitResult hit = context.getHitResult();

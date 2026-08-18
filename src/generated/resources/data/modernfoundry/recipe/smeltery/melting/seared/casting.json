@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/seared/casting",
   "ingredient": [
-    {
-      "item": "modernfoundry:seared_basin"
-    },
-    {
-      "item": "modernfoundry:seared_table"
-    }
+    "modernfoundry:seared_basin",
+    "modernfoundry:seared_table"
   ],
   "result": {
     "amount": 1750,

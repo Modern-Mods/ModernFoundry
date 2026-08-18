@@ -20,7 +20,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:pick_head",
+      "id": "modernfoundry:pick_head",
       "nbt": "{Material:\"modernfoundry:wood\"}"
     },
     "show_toast": true,

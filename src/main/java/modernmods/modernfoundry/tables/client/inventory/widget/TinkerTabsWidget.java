@@ -1,18 +1,18 @@
 package modernmods.modernfoundry.tables.client.inventory.widget;
 
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.ItemStack;
@@ -20,8 +20,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.apache.commons.lang3.tuple.Pair;
-import modernmods.hilt.client.screen.ElementScreen;
-import modernmods.hilt.client.screen.TabsWidget;
+import modernmods.mantle.client.screen.ElementScreen;
+import modernmods.mantle.client.screen.TabsWidget;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
 import modernmods.modernfoundry.tables.block.ITabbedBlock;
@@ -32,7 +32,7 @@ import modernmods.modernfoundry.tables.network.StationTabPacket;
 import java.util.List;
 
 public class TinkerTabsWidget implements Renderable, GuiEventListener, NarratableEntry {
-  private static final ResourceLocation TAB_IMAGE = TConstruct.getResource("textures/gui/icons.png");
+  private static final Identifier TAB_IMAGE = TConstruct.getResource("textures/gui/icons.png");
   protected static final ElementScreen TAB_ELEMENT = new ElementScreen(TAB_IMAGE, 0, 18, 26, 30, 256, 256);
   protected static final ElementScreen ACTIVE_TAB_L_ELEMENT = new ElementScreen(TAB_IMAGE, 26, 18, 26, 30, 256, 256);
   protected static final ElementScreen ACTIVE_TAB_C_ELEMENT = new ElementScreen(TAB_IMAGE, 52, 18, 26, 30, 256, 256);
@@ -80,7 +80,7 @@ public class TinkerTabsWidget implements Renderable, GuiEventListener, Narratabl
       for (Pair<BlockPos, BlockState> pair : menu.stationBlocks) {
         BlockState state = pair.getRight();
         BlockPos blockPos = pair.getLeft();
-        ItemStack stack = state.getBlock().getCloneItemStack(state, null, level, blockPos, minecraft.player);
+        ItemStack stack = state.getCloneItemStack(level, blockPos, false);
         tabs.add(Pair.of(stack, blockPos));
       }
     }
@@ -126,9 +126,10 @@ public class TinkerTabsWidget implements Renderable, GuiEventListener, Narratabl
   }
 
   @Override
-  public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+  public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+    double mouseX = event.x(), mouseY = event.y();
     if (isMouseOver(mouseX, mouseY)) {
-      this.tabs.handleMouseClicked((int) mouseX, (int) mouseY, mouseButton);
+      this.tabs.handleMouseClicked((int) mouseX, (int) mouseY, event.button());
       return true;
     }
 
@@ -136,7 +137,7 @@ public class TinkerTabsWidget implements Renderable, GuiEventListener, Narratabl
   }
 
   @Override
-  public boolean mouseReleased(double mouseX, double mouseY, int mouseButton) {
+  public boolean mouseReleased(MouseButtonEvent event) {
     this.tabs.handleMouseReleased();
 
     return true;
@@ -155,8 +156,7 @@ public class TinkerTabsWidget implements Renderable, GuiEventListener, Narratabl
   }
 
   @Override
-  public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+  public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
     int sel = this.tabs.selected;
     this.tabs.update(mouseX, mouseY);
     this.tabs.draw(graphics);
@@ -170,7 +170,7 @@ public class TinkerTabsWidget implements Renderable, GuiEventListener, Narratabl
     renterTooltip(graphics, mouseX, mouseY);
   }
 
-  protected void renterTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+  protected void renterTooltip(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
     // highlighted tooltip
     Level world = parent.getMinecraft().level;
     if (this.tabs.highlighted > -1 && world != null) {
@@ -183,8 +183,7 @@ public class TinkerTabsWidget implements Renderable, GuiEventListener, Narratabl
         title = world.getBlockState(pos).getBlock().getName();
       }
 
-      // TODO: renderComponentTooltip->renderTooltip
-      graphics.renderComponentTooltip(parent.getMinecraft().font, Lists.newArrayList(title), mouseX, mouseY);
+      graphics.setComponentTooltipForNextFrame(parent.getMinecraft().font, Lists.newArrayList(title), mouseX, mouseY);
     }
   }
 

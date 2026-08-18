@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/chromium/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/chromium"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/chromium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/chromium/dust",
+  "ingredient": "#c:dusts/chromium",
   "result": {
     "amount": 90,
     "tag": "c:molten_chromium"

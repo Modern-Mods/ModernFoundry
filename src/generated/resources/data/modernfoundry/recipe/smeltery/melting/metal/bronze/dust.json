@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/bronze/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/bronze"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/bronze"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/bronze/dust",
+  "ingredient": "#c:dusts/bronze",
   "result": {
     "amount": 90,
     "tag": "c:molten_bronze"

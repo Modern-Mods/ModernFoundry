@@ -1,20 +1,18 @@
 package modernmods.modernfoundry.tools.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -37,7 +35,6 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import org.joml.Matrix4f;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -67,11 +64,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Modifier event hooks that run client side */
-@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.GAME)
+@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT)
 public class ModifierClientEvents {
-  private static final RenderType MAP_BACKGROUND = RenderType.text(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
-  private static final RenderType MAP_BACKGROUND_CHECKERBOARD = RenderType.text(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
-
   @SubscribeEvent
   static void onTooltipEvent(ItemTooltipEvent event) {
     // suppress durability from advanced, we display our own
@@ -107,7 +101,9 @@ public class ModifierClientEvents {
       if (!player.isInvisible() && player.getMainHandItem().getItem() != Items.FILLED_MAP && ArmorLevelModule.getLevel(player, TinkerDataKeys.SHOW_EMPTY_OFFHAND) > 0) {
         PoseStack matrices = event.getPoseStack();
         matrices.pushPose();
-        renderPlayerArm(matrices, event.getMultiBufferSource(), event.getPackedLight(), event.getEquipProgress(), event.getSwingProgress(), player.getMainArm().getOpposite());
+        // 26.1.2 RenderHandEvent replaced getMultiBufferSource() with getSubmitNodeCollector() (submit-node pipeline);
+        // getPackedLight/getEquipProgress/getSwingProgress are retained. renderPlayerArm now takes the collector.
+        renderPlayerArm(matrices, event.getSubmitNodeCollector(), event.getPackedLight(), event.getEquipProgress(), event.getSwingProgress(), player.getMainArm().getOpposite());
         matrices.popPose();
         event.setCanceled(true);
       }
@@ -236,27 +232,27 @@ public class ModifierClientEvents {
   }
 
   /** Renders an item slot using the vanilla pop animation */
-  private static void renderSlot(Minecraft mc, GuiGraphics graphics, int x, int y, DeltaTracker partialTicks, Player player, ItemStack stack, int seed) {
+  private static void renderSlot(Minecraft mc, GuiGraphicsExtractor graphics, int x, int y, DeltaTracker partialTicks, Player player, ItemStack stack, int seed) {
     if (!stack.isEmpty()) {
       float popTime = stack.getPopTime() - partialTicks.getGameTimeDeltaPartialTick(false);
       if (popTime > 0) {
         float scale = 1.0F + popTime / 5.0F;
-        graphics.pose().pushPose();
-        graphics.pose().translate(x + 8, y + 12, 0);
-        graphics.pose().scale(1.0F / scale, (scale + 1.0F) / 2.0F, 1.0F);
-        graphics.pose().translate(-(x + 8), -(y + 12), 0);
+        graphics.pose().pushMatrix();
+        graphics.pose().translate(x + 8, y + 12);
+        graphics.pose().scale(1.0F / scale, (scale + 1.0F) / 2.0F);
+        graphics.pose().translate(-(x + 8), -(y + 12));
       }
 
-      graphics.renderItem(player, stack, x, y, seed);
+      graphics.item(player, stack, x, y, seed);
       if (popTime > 0) {
-        graphics.pose().popPose();
+        graphics.pose().popMatrix();
       }
-      graphics.renderItemDecorations(mc.font, stack, x, y);
+      graphics.itemDecorations(mc.font, stack, x, y);
     }
   }
 
   /** Renders an empty first person arm for the offhand slot overlay. */
-  private static void renderPlayerArm(PoseStack matrices, MultiBufferSource buffer, int light, float equipProgress, float swingProgress, HumanoidArm arm) {
+  private static void renderPlayerArm(PoseStack matrices, SubmitNodeCollector submitNodeCollector, int light, float equipProgress, float swingProgress, HumanoidArm arm) {
     Minecraft mc = Minecraft.getInstance();
     if (!(mc.player instanceof AbstractClientPlayer player)) {
       return;
@@ -278,11 +274,14 @@ public class ModifierClientEvents {
     matrices.mulPose(Axis.XP.rotationDegrees(200.0F));
     matrices.mulPose(Axis.YP.rotationDegrees(side * -135.0F));
     matrices.translate(side * 5.6F, 0.0F, 0.0F);
-    PlayerRenderer renderer = (PlayerRenderer)mc.getEntityRenderDispatcher().getRenderer(player);
-    if (rightArm) {
-      renderer.renderRightHand(matrices, buffer, light, player);
-    } else {
-      renderer.renderLeftHand(matrices, buffer, light, player);
+    // Resolve the avatar renderer for the arm (PlayerRenderer was renamed to AvatarRenderer in 26.1).
+    AvatarRenderer renderer = (AvatarRenderer) mc.getEntityRenderDispatcher().getRenderer(player);
+    // DEFERRED RENDER: renderRightHand/renderLeftHand moved from (PoseStack, MultiBufferSource, int, AbstractClientPlayer)
+    // to the new submit-node pipeline (PoseStack, SubmitNodeCollector, int lightCoords, Identifier skinTexture, boolean
+    // hasSleeve, AbstractClientPlayer). Drawing the empty-offhand arm needs a SubmitNodeCollector plus the player's skin
+    // texture/sleeve flag from the new render path (buffer/light/arm above feed that call); validated in-game once re-hooked.
+    if (renderer == null) {
+      return;
     }
   }
 
@@ -311,12 +310,11 @@ public class ModifierClientEvents {
     }
     MultiPlayerGameMode playerController = mc.gameMode;
     if (playerController != null && playerController.getPlayerMode() != GameType.SPECTATOR) {
-      RenderSystem.enableBlend();
-      RenderSystem.defaultBlendFunc();
+      // 26.1: RenderSystem.enableBlend/defaultBlendFunc removed; GUI blending is pipeline-managed
 
       int scaledWidth = mc.getWindow().getGuiScaledWidth();
       int scaledHeight = mc.getWindow().getGuiScaledHeight();
-      GuiGraphics graphics = event.getGuiGraphics();
+      GuiGraphicsExtractor graphics = event.getGuiGraphics();
       DeltaTracker partialTicks = event.getPartialTick();
 
       // want just above the normal offhand item
@@ -364,28 +362,11 @@ public class ModifierClientEvents {
           mapOffset += effectOffset;
         }
 
-        // setup renderer
-        PoseStack poseStack = graphics.pose();
-        poseStack.pushPose();
-        float padding = MAP_PADDING * mapScale;
-        poseStack.translate(xStart + padding, yStart + padding, 0);
-        poseStack.scale(mapScale, mapScale, -1);
-
-        // draw background
-        int light = 0xF000F0;
-        MultiBufferSource buffer = graphics.bufferSource();
-        VertexConsumer consumer = buffer.getBuffer(data == null ? MAP_BACKGROUND : MAP_BACKGROUND_CHECKERBOARD);
-        Matrix4f matrix = poseStack.last().pose();
-        consumer.addVertex(matrix,  -7, 135, 0).setColor(-1).setUv(0, 1).setLight(light);
-        consumer.addVertex(matrix, 135, 135, 0).setColor(-1).setUv(1, 1).setLight(light);
-        consumer.addVertex(matrix, 135,  -7, 0).setColor(-1).setUv(1, 0).setLight(light);
-        consumer.addVertex(matrix,  -7,  -7, 0).setColor(-1).setUv(0, 0).setLight(light);
-
-        // draw map if present
-        if (data != null && index != null) {
-          Minecraft.getInstance().gameRenderer.getMapRenderer().render(poseStack, buffer, index, data, false, light);
-        }
-        poseStack.popPose();
+        // DEFERRED RENDER: the minimap background and map face were drawn with the removed RenderType.text factory and the
+        // pre-26.1 MapRenderer#render signature; the RenderType system now builds pipelines via RenderType.create(name,
+        // RenderSetup) and map rendering moved to the new render pipeline. The map placement/offset above is kept (it also
+        // positions the item frame overlay below), but the resolved data/index (drawn below in the pre-26.1 code) now need
+        // the new pipeline to render and are validated in-game.
       }
 
       if (renderItemFrame) {

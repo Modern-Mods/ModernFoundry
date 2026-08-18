@@ -9,7 +9,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock.Action;
-import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.bus.api.EventPriority;
 
 import java.util.HashMap;
@@ -50,7 +50,7 @@ public class BlockSideHitListener {
   }
 
   /** Called on block break to store the last break XP */
-  private static void breakBlock(BlockEvent.BreakEvent event) {
+  private static void breakBlock(BreakBlockEvent event) {
     LAST_XP.put(event.getPlayer().getUUID(), event.getState().getExpDrop(
       event.getLevel(), event.getPos(), event.getLevel().getBlockEntity(event.getPos()), event.getPlayer(), event.getPlayer().getMainHandItem()
     ));

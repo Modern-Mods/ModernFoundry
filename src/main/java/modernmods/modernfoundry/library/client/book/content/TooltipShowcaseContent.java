@@ -1,20 +1,20 @@
 package modernmods.modernfoundry.library.client.book.content;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.content.ContentShowcase;
-import modernmods.hilt.client.screen.book.BookScreen;
-import modernmods.hilt.client.screen.book.element.BookElement;
-import modernmods.hilt.client.screen.book.element.ItemElement;
-import modernmods.hilt.client.screen.book.element.TextElement;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.content.ContentShowcase;
+import modernmods.mantle.client.screen.book.BookScreen;
+import modernmods.mantle.client.screen.book.element.BookElement;
+import modernmods.mantle.client.screen.book.element.ItemElement;
+import modernmods.mantle.client.screen.book.element.TextElement;
 import modernmods.modernfoundry.TConstruct;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TooltipShowcaseContent extends ContentShowcase {
-  public static final transient ResourceLocation ID = TConstruct.getResource("showcase");
+  public static final transient Identifier ID = TConstruct.getResource("showcase");
 
   public List<Component> tooltip = null;
 

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:knightmetal_block",
   "key": {
-    "#": {
-      "tag": "c:ingots/knightmetal"
-    },
-    "*": {
-      "item": "modernfoundry:knightmetal_ingot"
-    }
+    "#": "#c:ingots/knightmetal",
+    "*": "modernfoundry:knightmetal_ingot"
   },
   "pattern": [
     "###",
@@ -17,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:knightmetal_block"
-  },
-  "show_notification": true
+  }
 }

@@ -1,6 +1,14 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "c:ores/diamond",
+        "c:ore_rates/dense"
+      ]
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/diamond/ore_dense",
   "byproducts": [
     {
       "amount": 270,
@@ -8,24 +16,12 @@
       "rate": "metal"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_combination_filled",
-      "match": [
-        "c:ores/diamond",
-        "c:ore_rates/dense"
-      ]
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/diamond/ore_dense",
   "ingredient": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "c:ores/diamond"
-      },
-      {
-        "tag": "c:ore_rates/dense"
-      }
+      "#c:ores/diamond",
+      "#c:ore_rates/dense"
     ]
   },
   "rate": "gem",

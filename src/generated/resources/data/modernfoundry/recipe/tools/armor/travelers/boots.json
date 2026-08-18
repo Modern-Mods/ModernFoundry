@@ -1,44 +1,44 @@
 {
   "type": "modernfoundry:crafting_shaped_materials",
-  "id": "modernfoundry:tools/armor/travelers/boots",
   "category": "equipment",
   "extra_materials": [
     "modernfoundry:leather"
   ],
   "key": {
-    "c": [
-      {
-        "type": "modernfoundry:material_value",
-        "material": {
-          "type": "hilt:and",
-          "predicates": [
-            {
-              "type": "hilt:or",
-              "predicates": [
-                "modernfoundry:castable",
-                "modernfoundry:composite"
-              ]
-            },
-            {
-              "type": "modernfoundry:stat_type",
-              "stat_type": "modernfoundry:plating_boots"
-            }
-          ]
+    "c": {
+      "neoforge:ingredient_type": "neoforge:compound",
+      "children": [
+        {
+          "neoforge:ingredient_type": "modernfoundry:material_value",
+          "material": {
+            "type": "mantle:and",
+            "predicates": [
+              {
+                "type": "mantle:or",
+                "predicates": [
+                  "modernfoundry:castable",
+                  "modernfoundry:composite"
+                ]
+              },
+              {
+                "type": "modernfoundry:stat_type",
+                "stat_type": "modernfoundry:plating_boots"
+              }
+            ]
+          },
+          "value": 1
         },
-        "value": 1
-      },
-      {
-        "type": "modernfoundry:material",
-        "item": "modernfoundry:fake_ingot",
-        "material": {
-          "type": "modernfoundry:stat_type",
-          "stat_type": "modernfoundry:plating_boots"
+        {
+          "neoforge:ingredient_type": "modernfoundry:material",
+          "match": "modernfoundry:fake_ingot",
+          "material": {
+            "type": "modernfoundry:stat_type",
+            "stat_type": "modernfoundry:plating_boots"
+          }
         }
-      }
-    ],
-    "l": {
-      "tag": "c:leather"
-    }
+      ]
+    },
+    "l": "#c:leathers"
   },
   "parts": "c",
   "pattern": [
@@ -46,7 +46,6 @@
     "l l"
   ],
   "result": {
-    "item": "modernfoundry:travelers_boots"
-  },
-  "show_notification": true
+    "id": "modernfoundry:travelers_boots"
+  }
 }

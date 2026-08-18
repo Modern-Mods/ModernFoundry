@@ -67,7 +67,7 @@
   {
     "name": "ammo_materials",
     "data": "no-load",
-    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ammo", "predicate": { "type":  "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/basic_ammo" }}},
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ammo", "predicate": { "type":  "mantle:inverted", "inverted_type": "mantle:tag", "tag": "modernfoundry:book/basic_ammo" }}},
     "icon": {
       "item": {
         "type": "forge:nbt",

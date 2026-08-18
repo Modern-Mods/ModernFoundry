@@ -21,20 +21,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.model.data.ModelData;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
-import modernmods.hilt.fluid.FluidTransferHelper;
-import modernmods.hilt.fluid.transfer.FluidContainerTransferManager;
-import modernmods.hilt.fluid.transfer.IFluidContainerTransfer;
-import modernmods.hilt.fluid.transfer.IFluidContainerTransfer.TransferResult;
+import modernmods.mantle.fluid.FluidTransferHelper;
+import modernmods.mantle.fluid.transfer.FluidContainerTransferManager;
+import modernmods.mantle.fluid.transfer.IFluidContainerTransfer;
+import modernmods.mantle.fluid.transfer.IFluidContainerTransfer.TransferResult;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.library.client.model.ModelProperties;
@@ -114,7 +114,7 @@ public class CastingTankBlockEntity extends TableBlockEntity implements ITankBlo
    */
   public void interact(Player player, InteractionHand hand, boolean clickedTank) {
     // skip client side
-    if (level == null || level.isClientSide) {
+    if (level == null || level.isClientSide()) {
       return;
     }
 
@@ -131,11 +131,11 @@ public class CastingTankBlockEntity extends TableBlockEntity implements ITankBlo
       // if there is an item in the output slot, take it
       if (!output.isEmpty()) {
         setItem(OUTPUT, ItemStack.EMPTY);
-        ItemHandlerHelper.giveItemToPlayer(player, output, player.getInventory().selected);
+        ItemHandlerHelper.giveItemToPlayer(player, output, player.getInventory().getSelectedSlot());
         // next try to take the item from the input slot
       } else if (!input.isEmpty()) {
         setItem(INPUT, ItemStack.EMPTY);
-        ItemHandlerHelper.giveItemToPlayer(player, input, player.getInventory().selected);
+        ItemHandlerHelper.giveItemToPlayer(player, input, player.getInventory().getSelectedSlot());
         // if no item in the tank, try to place a held item in the input
       } else if (!held.isEmpty() && canPlaceItem(INPUT, held)) {
         setItem(INPUT, held.split(1));
@@ -163,7 +163,7 @@ public class CastingTankBlockEntity extends TableBlockEntity implements ITankBlo
       return getItem(INPUT).isEmpty() && getItem(OUTPUT).isEmpty() && !pStack.isEmpty() && (
         // check the various options for some sort of fluid-containing stack
         FluidContainerTransferManager.INSTANCE.mayHaveTransfer(pStack)
-          || pStack.getCapability(Capabilities.FluidHandler.ITEM) != null
+          || net.neoforged.neoforge.capabilities.Capabilities.Fluid.ITEM.getCapability(pStack, net.neoforged.neoforge.transfer.access.ItemAccess.forStack(pStack)) != null
       );
     }
     return false;
@@ -244,7 +244,7 @@ public class CastingTankBlockEntity extends TableBlockEntity implements ITankBlo
     if (capability == ForgeCapabilities.FLUID_HANDLER) {
       return fluidHolder.cast();
     }
-    return modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
+    return modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional.empty(); // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent
   }
 
   public void invalidateCaps() {
@@ -296,35 +296,41 @@ public class CastingTankBlockEntity extends TableBlockEntity implements ITankBlo
   private void updateTank(CompoundTag nbt, HolderLookup.Provider registries) {
     if (nbt.isEmpty()) {
       tank.setFluid(FluidStack.EMPTY);
-    } else if (nbt.contains("FluidName", Tag.TAG_STRING)) {
+    } else if (nbt.contains("FluidName")) {
       tank.setFluid(TankItem.readFluid(nbt));
       TankBlockEntity.updateLight(this, tank);
     } else {
-      tank.readFromNBT(registries, nbt);
+      tank.deserialize(net.minecraft.world.level.storage.TagValueInput.create(net.minecraft.util.ProblemReporter.DISCARDING, registries, nbt));
       TankBlockEntity.updateLight(this, tank);
     }
   }
 
   @Override
-  public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+  public void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
     tank.setCapacity(getCapacity(getBlockState().getBlock()));
-    updateTank(tag.getCompound(NBTTags.TANK), registries);
-    lastRedstone = tag.getBoolean(TAG_REDSTONE);
-    super.loadAdditional(tag, registries);
+    java.util.Optional<net.minecraft.world.level.storage.ValueInput> tankInput = input.child(NBTTags.TANK);
+    if (tankInput.isPresent()) {
+      tank.deserialize(tankInput.get());
+      TankBlockEntity.updateLight(this, tank);
+    } else {
+      tank.setFluid(FluidStack.EMPTY);
+    }
+    lastRedstone = input.getBooleanOr(TAG_REDSTONE, false);
+    super.loadAdditional(input);
   }
 
   @Override
-  public void saveAdditional(CompoundTag tags, HolderLookup.Provider registries) {
-    super.saveAdditional(tags, registries);
-    tags.putBoolean(TAG_REDSTONE, lastRedstone);
+  public void saveAdditional(net.minecraft.world.level.storage.ValueOutput output) {
+    super.saveAdditional(output);
+    output.putBoolean(TAG_REDSTONE, lastRedstone);
   }
 
   @Override
-  public void saveSynced(CompoundTag tag, HolderLookup.Provider registries) {
-    super.saveSynced(tag, registries);
+  public void saveSynced(net.minecraft.world.level.storage.ValueOutput output) {
+    super.saveSynced(output);
     // want tank on the client on world load
     if (!tank.isEmpty()) {
-      tag.put(NBTTags.TANK, tank.writeToNBT(registries, new CompoundTag()));
+      tank.serialize(output.child(NBTTags.TANK));
     }
   }
 

@@ -26,10 +26,10 @@ import net.minecraft.world.level.storage.loot.LootParams.Builder;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.fluid.EffectLevel;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffect;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffectContext;
@@ -89,7 +89,7 @@ public record BreakBlockFluidEffect(float hardness, Map<Enchantment,Integer> enc
         ItemStack fakeTool = ItemStack.EMPTY;
         if (!enchantments.isEmpty()) {
           fakeTool = new ItemStack(Items.STICK);
-          Registry<Enchantment> registry = server.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+          Registry<Enchantment> registry = server.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
           ItemEnchantments.Mutable mutable = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
           enchantments.forEach((enchantment, enchantmentLevel) -> mutable.set(registry.wrapAsHolder(enchantment), enchantmentLevel));
           EnchantmentHelper.setEnchantments(fakeTool, mutable.toImmutable());
@@ -103,7 +103,7 @@ public record BreakBlockFluidEffect(float hardness, Map<Enchantment,Integer> enc
         Player player = context.getPlayer();
         boolean removed;
         if (player != null) {
-          removed = state.onDestroyedByPlayer(world, pos, player, true, world.getFluidState(pos));
+          removed = state.onDestroyedByPlayer(world, pos, player, player.getMainHandItem(), true, world.getFluidState(pos));
           if (removed) {
             player.awardStat(Stats.BLOCK_MINED.get(block));
           }

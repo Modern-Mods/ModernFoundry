@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/electrum/coin",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/electrum"
     }
   ],
-  "ingredient": {
-    "tag": "c:coins/electrum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/coin",
+  "ingredient": "#c:coins/electrum",
   "result": {
     "amount": 30,
     "tag": "c:molten_electrum"

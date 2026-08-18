@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.json.variable.tool;
 
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.library.json.predicate.modifier.ModifierPredicate;
 import modernmods.modernfoundry.library.json.predicate.modifier.SingleModifierPredicate;
 import modernmods.modernfoundry.library.json.predicate.tool.HasModifierPredicate.ModifierCheck;

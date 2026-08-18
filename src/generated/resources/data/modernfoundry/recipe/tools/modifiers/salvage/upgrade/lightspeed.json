@@ -6,11 +6,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/harvest"
-    },
-    {
-      "tag": "modernfoundry:modifiable/armor/boots"
-    }
+    "#modernfoundry:modifiable/harvest",
+    "#modernfoundry:modifiable/armor/boots"
   ]
 }

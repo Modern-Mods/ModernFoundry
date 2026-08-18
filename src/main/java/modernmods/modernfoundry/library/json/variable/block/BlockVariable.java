@@ -1,13 +1,13 @@
 package modernmods.modernfoundry.library.json.variable.block;
 
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.registry.GenericLoaderRegistry;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.registry.GenericLoaderRegistry;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
 import modernmods.modernfoundry.library.json.variable.ToFloatFunction;
 import modernmods.modernfoundry.library.json.variable.VariableLoaderRegistry;
 
-import static modernmods.hilt.data.loadable.record.SingletonLoader.singleton;
+import static modernmods.mantle.data.loadable.record.SingletonLoader.singleton;
 
 /** Variable that fetches a property from a block state */
 public interface BlockVariable extends IHaveLoader {

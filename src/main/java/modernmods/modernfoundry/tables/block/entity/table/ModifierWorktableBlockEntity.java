@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import modernmods.modernfoundry.compat.neoforged.neoforge.event.ForgeEventFactory;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import modernmods.modernfoundry.TConstruct;
@@ -118,7 +118,7 @@ public class ModifierWorktableBlockEntity extends RetexturedTableBlockEntity imp
     recipeValid = true;
     currentMessage = lastRecipe.getDescription(inventoryWrapper);
     buttons = recipe.getModifierOptions(inventoryWrapper);
-    //        if (!level.isClientSide) {
+    //        if (!level.isClientSide()) {
     //          syncToRelevantPlayers(this::syncScreen);
     //        }
 
@@ -138,15 +138,21 @@ public class ModifierWorktableBlockEntity extends RetexturedTableBlockEntity imp
       if (lastRecipe != null && lastRecipe.matches(inventoryWrapper, level)) {
         return updateRecipe(lastRecipe);
       }
-      // look for a new recipe, if it matches cache it
-      Optional<IModifierWorktableRecipe> recipe = level.getRecipeManager().getRecipeFor(TinkerRecipeTypes.MODIFIER_WORKTABLE.get(), inventoryWrapper, level).map(holder -> holder.value());
-      if (recipe.isPresent()) {
-        return updateRecipe(recipe.get());
+      // 26.1: recipe matching needs the server-side RecipeManager, which the client no longer has (level.getServer() is
+      // null on the client). Guarding this prevents an NPE crash when the worktable screen renders; recipe resolution
+      // stays server-side and the client relies on synced state.
+      net.minecraft.server.MinecraftServer server = level.getServer();
+      if (server != null) {
+        // look for a new recipe, if it matches cache it
+        Optional<IModifierWorktableRecipe> recipe = server.getRecipeManager().getRecipeFor(TinkerRecipeTypes.MODIFIER_WORKTABLE.get(), inventoryWrapper, level).map(holder -> holder.value());
+        if (recipe.isPresent()) {
+          return updateRecipe(recipe.get());
+        }
+        recipeValid = false;
+        currentMessage = Component.empty();
+        buttons = Collections.emptyList();
+        selectModifier(-1);
       }
-      recipeValid = false;
-      currentMessage = Component.empty();
-      buttons = Collections.emptyList();
-      selectModifier(-1);
     }
     // level null or no recipe found
     return null;
@@ -209,14 +215,14 @@ public class ModifierWorktableBlockEntity extends RetexturedTableBlockEntity imp
     }
 
     // we are definitely crafting at this point
-    resultItem.onCraftedBy(this.level, player, amount);
+    resultItem.onCraftedBy(player, amount);
     ForgeEventFactory.firePlayerCraftingEvent(player, resultItem, this.inventoryWrapper);
     this.playCraftSound(player);
 
     // run the recipe, will shrink inputs
     // run both sides for the sake of shift clicking
     this.inventoryWrapper.setPlayer(player);
-    this.lastRecipe.updateInputs(result, inventoryWrapper, getCurrentButtons().get(selectedModifierIndex), !level.isClientSide);
+    this.lastRecipe.updateInputs(result, inventoryWrapper, getCurrentButtons().get(selectedModifierIndex), !level.isClientSide());
     this.inventoryWrapper.setPlayer(null);
 
     ItemStack tinkerable = this.getItem(TINKER_SLOT);

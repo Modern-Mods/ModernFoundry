@@ -5,10 +5,8 @@
     "modernfoundry:large_plate",
     "modernfoundry:repair_kit"
   ],
-  "pattern": {
-    "item": "modernfoundry:venom_bottle"
-  },
+  "pattern": "modernfoundry:venom_bottle",
   "tools": {
-    "item": "modernfoundry:battlesign"
+    "ingredient": "modernfoundry:battlesign"
   }
 }

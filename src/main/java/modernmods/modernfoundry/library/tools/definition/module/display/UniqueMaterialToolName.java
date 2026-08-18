@@ -2,8 +2,8 @@ package modernmods.modernfoundry.library.tools.definition.module.display;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.client.materials.MaterialTooltipCache;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;

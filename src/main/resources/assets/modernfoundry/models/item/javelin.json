@@ -1,42 +1,13 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/base/tall",
   "textures": {
-    "head":   "modernfoundry:item/tool/javelin/head",
-    "guard":  "modernfoundry:item/tool/javelin/guard",
+    "head": "modernfoundry:item/tool/javelin/head",
+    "guard": "modernfoundry:item/tool/javelin/guard",
     "handle": "modernfoundry:item/tool/javelin/handle",
-    "grip":   "modernfoundry:item/tool/javelin/grip",
-
-    "large_head":   "modernfoundry:item/tool/javelin/large/head",
-    "large_guard":  "modernfoundry:item/tool/javelin/large/guard",
+    "grip": "modernfoundry:item/tool/javelin/grip",
+    "large_head": "modernfoundry:item/tool/javelin/large/head",
+    "large_guard": "modernfoundry:item/tool/javelin/large/guard",
     "large_handle": "modernfoundry:item/tool/javelin/large/handle",
-    "large_grip":   "modernfoundry:item/tool/javelin/large/grip"
-  },
-  "modifier_maps": ["modernfoundry:javelin"],
-  "modifier_roots": {
-    "small": [ "modernfoundry:item/tool/javelin/modifiers/" ],
-    "large": [ "modernfoundry:item/tool/javelin/large/modifiers/" ]
-  },
-  "large": true,
-  "large_offset": [-2, 2],
-  "parts": [
-    { "name": "handle", "index": 1 },
-    { "name": "grip",   "index": 3 },
-    { "name": "head",   "index": 0 },
-    { "name": "guard",  "index": 2 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 1.75 },
-      "model": "modernfoundry:item/tool/javelin/throwing"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/javelin/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/javelin/broken"
-    }
-  ]
+    "large_grip": "modernfoundry:item/tool/javelin/large/grip"
+  }
 }

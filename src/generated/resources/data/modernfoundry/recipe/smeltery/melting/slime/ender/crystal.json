@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/ender/crystal",
-  "ingredient": {
-    "item": "modernfoundry:ender_slime_crystal"
-  },
+  "ingredient": "modernfoundry:ender_slime_crystal",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:ender_slime"

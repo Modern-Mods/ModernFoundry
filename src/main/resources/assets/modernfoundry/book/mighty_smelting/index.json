@@ -23,7 +23,7 @@
   {
     "name": "melee_harvest_materials",
     "data": "no-load",
-    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:melee_harvest", "tier": 3, "predicate": { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" }}},
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:melee_harvest", "tier": 3, "predicate": { "type": "mantle:inverted", "inverted_type": "mantle:tag", "tag": "modernfoundry:book/distant" }}},
     "icon": {
       "item": {
         "type": "forge:nbt",
@@ -35,7 +35,7 @@
   {
     "name": "ranged_materials",
     "data": "no-load",
-    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ranged", "tier": 3, "predicate": { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" }}},
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:ranged", "tier": 3, "predicate": { "type": "mantle:inverted", "inverted_type": "mantle:tag", "tag": "modernfoundry:book/distant" }}},
     "icon": {
       "item": {
         "type": "forge:nbt",
@@ -47,7 +47,7 @@
   {
     "name": "armor_materials",
     "data": "no-load",
-    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:armor", "tier": 3, "predicate": { "type": "hilt:inverted", "inverted_type": "hilt:tag", "tag": "modernfoundry:book/distant" }}},
+    "extraData": { "modernfoundry:material_tier": { "type": "modernfoundry:armor", "tier": 3, "predicate": { "type": "mantle:inverted", "inverted_type": "mantle:tag", "tag": "modernfoundry:book/distant" }}},
     "icon": {
       "item": {
         "type": "forge:nbt",

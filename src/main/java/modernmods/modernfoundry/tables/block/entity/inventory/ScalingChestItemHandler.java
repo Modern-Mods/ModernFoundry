@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import modernmods.hilt.block.entity.HiltBlockEntity;
+import modernmods.mantle.block.entity.MantleBlockEntity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -18,7 +18,7 @@ public abstract class ScalingChestItemHandler extends ItemStackHandler implement
   private int visualSize = 1;
   /** TE owning this inventory */
   @Setter @Nullable
-  private HiltBlockEntity parent;
+  private MantleBlockEntity parent;
 
   public ScalingChestItemHandler(int size) {
     super(size);

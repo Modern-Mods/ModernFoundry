@@ -1,5 +1,5 @@
 {
-  "__comment": "This file just exists to silence missing model warnings, it does not serve any functional purpose. See 'assets/modernfoundry/hilt//fluid_textures' for the files controlling fluid textures",
+  "__comment": "This file just exists to silence missing model warnings, it does not serve any functional purpose. See 'assets/modernfoundry/mantle//fluid_textures' for the files controlling fluid textures",
   "textures": {
     "particle": "modernfoundry:fluid/liquid/still"
   }

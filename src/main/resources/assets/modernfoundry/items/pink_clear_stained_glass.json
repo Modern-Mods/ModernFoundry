@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "modernfoundry:item/pink_clear_stained_glass",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 15892389
+      }
+    ]
+  }
+}

@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/scorched/faucet",
   "ingredient": [
-    {
-      "item": "modernfoundry:scorched_faucet"
-    },
-    {
-      "item": "modernfoundry:scorched_channel"
-    }
+    "modernfoundry:scorched_faucet",
+    "modernfoundry:scorched_channel"
   ],
   "result": {
     "amount": 250,

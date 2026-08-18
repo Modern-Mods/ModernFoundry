@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.tools.definition.module.display;
 
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.materials.stats.MaterialStatsId;
 import modernmods.modernfoundry.library.module.HookProvider;

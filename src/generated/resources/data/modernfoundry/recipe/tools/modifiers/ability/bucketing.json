@@ -1,36 +1,28 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/bucketing",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/bucketing",
   "inputs": [
     {
       "ingredient": [
-        {
-          "item": "modernfoundry:seared_faucet"
-        },
-        {
-          "item": "modernfoundry:scorched_faucet"
-        }
+        "modernfoundry:seared_faucet",
+        "modernfoundry:scorched_faucet"
       ]
     },
     {
-      "item": "minecraft:bucket"
+      "ingredient": "minecraft:bucket"
     },
     {
       "ingredient": [
-        {
-          "item": "modernfoundry:seared_faucet"
-        },
-        {
-          "item": "modernfoundry:scorched_faucet"
-        }
+        "modernfoundry:seared_faucet",
+        "modernfoundry:scorched_faucet"
       ]
     },
     {
-      "tag": "c:ingots/steel"
+      "ingredient": "#c:ingots/steel"
     },
     {
-      "tag": "c:ingots/steel"
+      "ingredient": "#c:ingots/steel"
     }
   ],
   "level": 1,
@@ -38,7 +30,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/interactable"
-  }
+  "tools": "#modernfoundry:modifiable/interactable"
 }

@@ -3,9 +3,10 @@ package modernmods.modernfoundry.smeltery.menu;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.hilt.inventory.SmartItemHandlerSlot;
+import modernmods.modernfoundry.smeltery.block.entity.ILegacyCapabilityBlockEntity;
+import modernmods.mantle.inventory.SmartItemHandlerSlot;
 import modernmods.modernfoundry.shared.inventory.TriggeringBaseContainerMenu;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 
@@ -18,8 +19,10 @@ public class SingleItemContainerMenu extends TriggeringBaseContainerMenu<BlockEn
   public SingleItemContainerMenu(int id, @Nullable Inventory inv, @Nullable BlockEntity te) {
     super(TinkerSmeltery.singleItemContainer.get(), id, inv, te);
     if (te != null) {
-      if (te.getLevel() != null) {
-        var handler = te.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, te.getBlockPos(), te.getBlockState(), te, null);
+      // read the inventory via the legacy IItemHandler capability directly; the new Capabilities.Item.BLOCK provider is
+      // deferred (returns null) because the block entity's handler cannot yet be exposed as a ResourceHandler
+      if (te instanceof ILegacyCapabilityBlockEntity legacy) {
+        IItemHandler handler = legacy.getCapability(ForgeCapabilities.ITEM_HANDLER, null).orElse(null);
         if (handler != null) {
           this.addSlot(new SmartItemHandlerSlot(handler, 0, 80, 20));
         }

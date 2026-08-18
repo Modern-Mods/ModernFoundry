@@ -6,11 +6,7 @@
     "abilities": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/armor/helmets"
-    },
-    {
-      "tag": "modernfoundry:modifiable/interactable/charge"
-    }
+    "#modernfoundry:modifiable/armor/helmets",
+    "#modernfoundry:modifiable/interactable/charge"
   ]
 }

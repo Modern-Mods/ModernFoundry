@@ -12,7 +12,7 @@
             }
           }
         ],
-        "item": {
+        "id": {
           "items": [
             "modernfoundry:piggy_backpack"
           ]
@@ -29,7 +29,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:piggy_backpack"
+      "id": "modernfoundry:piggy_backpack"
     },
     "show_toast": true,
     "title": {

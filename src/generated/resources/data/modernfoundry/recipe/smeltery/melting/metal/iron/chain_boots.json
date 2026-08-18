@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/chain_boots",
   "byproducts": [
     {
       "amount": 120,
@@ -8,9 +7,8 @@
       "unit_size": 10
     }
   ],
-  "ingredient": {
-    "item": "minecraft:chainmail_boots"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/iron/chain_boots",
+  "ingredient": "minecraft:chainmail_boots",
   "result": {
     "amount": 240,
     "tag": "c:molten_iron",

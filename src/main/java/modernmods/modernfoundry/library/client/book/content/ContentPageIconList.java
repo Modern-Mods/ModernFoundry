@@ -3,21 +3,21 @@ package modernmods.modernfoundry.library.client.book.content;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import net.minecraft.network.chat.Component;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.PageData;
-import modernmods.hilt.client.book.data.SectionData;
-import modernmods.hilt.client.book.data.content.ContentPadding.ContentRightPadding;
-import modernmods.hilt.client.book.data.content.PageContent;
-import modernmods.hilt.client.screen.book.BookScreen;
-import modernmods.hilt.client.screen.book.element.BookElement;
-import modernmods.hilt.client.screen.book.element.ItemElement;
-import modernmods.hilt.client.screen.book.element.SizedBookElement;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.PageData;
+import modernmods.mantle.client.book.data.SectionData;
+import modernmods.mantle.client.book.data.content.ContentPadding.ContentRightPadding;
+import modernmods.mantle.client.book.data.content.PageContent;
+import modernmods.mantle.client.screen.book.BookScreen;
+import modernmods.mantle.client.screen.book.element.BookElement;
+import modernmods.mantle.client.screen.book.element.ItemElement;
+import modernmods.mantle.client.screen.book.element.SizedBookElement;
 import modernmods.modernfoundry.library.client.book.elements.PageIconLinkElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/** @deprecated use {@link modernmods.hilt.client.book.data.content.ContentPageIconList} */
+/** @deprecated use {@link modernmods.mantle.client.book.data.content.ContentPageIconList} */
 @SuppressWarnings("removal")
 @Deprecated(forRemoval = true)
 public class ContentPageIconList extends PageContent {
@@ -66,7 +66,7 @@ public class ContentPageIconList extends PageContent {
       totalHeight -= getTitleHeight();
     }
     if (subText != null) {
-      totalHeight -= 16 + this.parent.parent.parent.fontRenderer.wordWrapHeight(subText, BookScreen.PAGE_WIDTH) * 12 / 9;
+      totalHeight -= 16 + this.parent.parent.parent.fontRenderer.wordWrapHeight(net.minecraft.network.chat.Component.literal(subText), BookScreen.PAGE_WIDTH) * 12 / 9;
     }
     return totalHeight / this.height;
   }
@@ -134,7 +134,7 @@ public class ContentPageIconList extends PageContent {
     }
   }
 
-  /** @deprecated use {@link modernmods.hilt.client.book.data.content.ContentPageIconList#getPagesNeededForItemCount(int, SectionData, String, String)} */
+  /** @deprecated use {@link modernmods.mantle.client.book.data.content.ContentPageIconList#getPagesNeededForItemCount(int, SectionData, String, String)} */
   @Deprecated(forRemoval = true)
   public static List<ContentPageIconList> getPagesNeededForItemCount(int count, SectionData data, String title, String subText) {
     List<ContentPageIconList> listPages = new ArrayList<>();

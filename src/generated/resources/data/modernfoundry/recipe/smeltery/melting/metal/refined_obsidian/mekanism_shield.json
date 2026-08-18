@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/refined_obsidian/mekanism_shield",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "mekanism:refined_obsidian_shield"
+      "type": "neoforge:registered",
+      "value": "mekanism:refined_obsidian_shield"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/refined_obsidian/mekanism_shield",
   "ingredient": {
     "item": "mekanism:refined_obsidian_shield"
   },

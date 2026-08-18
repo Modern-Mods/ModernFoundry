@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/cinderslime",
   "fluid": {
     "amount": 90,
     "tag": "modernfoundry:molten_cinderslime"
   },
+  "id": "modernfoundry:tools/materials/casting/cinderslime",
   "output": "modernfoundry:cinderslime",
   "temperature": 1050
 }

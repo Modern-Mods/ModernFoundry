@@ -40,7 +40,7 @@ public class PiglinWallHeadBlock extends WallSkullBlock {
   @Override
   @Nullable
   public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-    if (pLevel.isClientSide) {
+    if (pLevel.isClientSide()) {
       return createTickerHelper(pBlockEntityType, BlockEntityType.SKULL, SkullBlockEntity::animation);
     }
     return null;

@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/honey/block",
   "cooling_time": 94,
   "fluid": {
     "amount": 1000,
     "tag": "c:honey"
   },
+  "id": "modernfoundry:smeltery/casting/honey/block",
   "result": "minecraft:honey_block"
 }

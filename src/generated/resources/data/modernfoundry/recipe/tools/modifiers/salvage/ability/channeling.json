@@ -6,11 +6,7 @@
     "abilities": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/melee/weapon"
-    },
-    {
-      "tag": "modernfoundry:modifiable/fishing_rods"
-    }
+    "#modernfoundry:modifiable/melee/weapon",
+    "#modernfoundry:modifiable/fishing_rods"
   ]
 }

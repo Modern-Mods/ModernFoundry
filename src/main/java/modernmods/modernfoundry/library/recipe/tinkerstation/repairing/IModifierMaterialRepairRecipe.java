@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.recipe.tinkerstation.repairing;
 
-import modernmods.hilt.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.field.LoadableField;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.materials.stats.MaterialStatsId;
 import modernmods.modernfoundry.library.modifiers.ModifierId;

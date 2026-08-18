@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/silver/helmet",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/helmets/silver"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/helmets/silver"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/silver/helmet",
+  "ingredient": "#c:armors/helmets/silver",
   "result": {
     "amount": 450,
     "tag": "c:molten_silver",

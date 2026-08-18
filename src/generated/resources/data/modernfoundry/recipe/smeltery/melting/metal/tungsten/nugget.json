@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/tungsten/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/tungsten"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/tungsten"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/tungsten/nugget",
+  "ingredient": "#c:nuggets/tungsten",
   "result": {
     "amount": 10,
     "tag": "c:molten_tungsten"

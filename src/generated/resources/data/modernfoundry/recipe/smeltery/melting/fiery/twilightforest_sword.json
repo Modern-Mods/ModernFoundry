@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "value": "twilightforest:fiery_sword"
+    }
+  ],
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/fiery/twilightforest_sword",
   "byproducts": [
     {
       "amount": 180,
@@ -8,12 +13,7 @@
       "unit_size": 10
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:fiery_sword"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/fiery/twilightforest_sword",
   "ingredient": {
     "item": "twilightforest:fiery_sword"
   },

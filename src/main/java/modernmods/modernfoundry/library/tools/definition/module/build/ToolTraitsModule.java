@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.tools.definition.module.build;
 
 import com.google.common.collect.ImmutableList;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.modifiers.util.LazyModifier;

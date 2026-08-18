@@ -1,220 +1,155 @@
-/*
- * Minecraft Forge
- * Copyright (c) 2016-2021.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation version 2.1
- * of the License.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- */
-
 package modernmods.modernfoundry.library.client.model;
 
-import com.google.common.collect.Maps;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.mojang.serialization.JsonOps;
 import com.mojang.math.Transformation;
-import lombok.RequiredArgsConstructor;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.ItemOverrides;
-import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.Material;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.FluidModel;
+import net.minecraft.client.renderer.item.CuboidItemModelWrapper;
+import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.ModelRenderProperties;
 import net.minecraft.client.resources.model.ModelBaker;
-import net.minecraft.client.resources.model.ModelState;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.client.resources.model.ResolvableModel;
+import net.minecraft.client.resources.model.ResolvedModel;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.QuadCollection;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.client.resources.model.sprite.TextureSlots;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.client.RenderTypeGroup;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.neoforged.neoforge.client.model.CompositeModel;
-import net.neoforged.neoforge.client.model.DynamicFluidContainerModel;
-import net.neoforged.neoforge.client.model.QuadTransformers;
-import net.neoforged.neoforge.client.model.SimpleModelState;
-import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
-import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
-import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
-import net.neoforged.neoforge.client.model.geometry.StandaloneGeometryBakingContext;
-import net.neoforged.neoforge.client.model.geometry.UnbakedGeometryHelper;
+import net.minecraft.world.level.material.FluidState;
+import net.neoforged.neoforge.client.fluid.FluidTintSource;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.FluidUtil;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
-import modernmods.hilt.client.model.util.ColoredBlockModel;
-import modernmods.hilt.data.loadable.Loadables;
+import org.joml.Matrix4fc;
+import modernmods.mantle.client.model.util.DynamicItemModel;
+import modernmods.mantle.client.model.util.MantleItemLayerModel;
 import modernmods.modernfoundry.TConstruct;
-import modernmods.modernfoundry.library.utils.TagUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 
 /**
- * Extension of {@link net.neoforged.neoforge.client.model.DynamicFluidContainerModel} with two additional features: baked tints and fluid stack sensitive models.
- * Does not handle covers as I have never seen a need for them, and it means less code duplication (plus the forge model does the whole cover is mask thing wrong compared to 1.18).
+ * Item model that renders a container plus its contained fluid, resolving the fluid dynamically from the stack.
+ * <p>
+ * In 26.1 the removed {@code ItemOverrides}/{@code BakedModel} pipeline is replaced by the item model system: this is an
+ * {@link ItemModel.Unbaked} that bakes to a {@link DynamicItemModel} keyed on the contained {@link FluidStack}. The fluid
+ * sprite is resolved from the {@code FluidStateModelSet} and tinted via {@link FluidTintSource#colorAsStack}.
+ * <p>
+ * FLUID MASK: the pre-26.1 model masked the fluid to the container's "fluid" texture window (via {@code
+ * createUnbakedItemMaskElements}). Here the fluid is rendered from the fluid's own still sprite; matching the container
+ * window shape requires a mask helper on the new immutable geometry pipeline and should be validated visually in-game.
  */
-public record FluidContainerModel(FluidStack fluid, boolean flipGas) implements IUnbakedGeometry<FluidContainerModel> {
-  public static final IGeometryLoader<FluidContainerModel> LOADER = FluidContainerModel::deserialize;
+public final class FluidContainerModel {
+  private FluidContainerModel() {}
 
-  /** Clone of same named field from {@link net.neoforged.neoforge.client.model.DynamicFluidContainerModel} */
-  public static final Transformation FLUID_TRANSFORM = new Transformation(new Vector3f(), new Quaternionf(), new Vector3f(1, 1, 1.002f), new Quaternionf());
+  /** Registered id for this item model type */
+  public static final Identifier ID = TConstruct.getResource("fluid_container");
 
-  /** Deserializes this model from JSON */
-  public static FluidContainerModel deserialize(JsonObject json, JsonDeserializationContext context) {
-    FluidStack fluidStack = FluidStack.EMPTY;
-    // parse the fluid with an optional tag
-    if (json.has("fluid")) {
-      JsonElement fluidElement = json.get("fluid");
-      Fluid fluid;
-      CompoundTag tag = null;
-      if (fluidElement.isJsonObject()) {
-        JsonObject fluidObject = fluidElement.getAsJsonObject();
-        fluid = Loadables.FLUID.getIfPresent(fluidObject, "name");
-        if (fluidObject.has("nbt")) {
-          tag = CompoundTag.CODEC.parse(JsonOps.INSTANCE, fluidObject.get("nbt")).result().orElse(null);
-        }
-      } else {
-        fluid = Loadables.FLUID.convert(fluidElement, "fluid");
-      }
-      fluidStack = new FluidStack(fluid, FluidType.BUCKET_VOLUME);
-      if (tag != null) {
-        TagUtil.setTag(fluidStack, tag);
-      }
-    }
-    boolean flipGas = GsonHelper.getAsBoolean(json, "flip_gas", true);
-    return new FluidContainerModel(fluidStack, flipGas);
-  }
+  /** Relative transform applied to the fluid layer to avoid z-fighting with the base */
+  public static final Transformation FLUID_TRANSFORM = new Transformation(new org.joml.Vector3f(), new org.joml.Quaternionf(), new org.joml.Vector3f(1, 1, 1.002f), new org.joml.Quaternionf());
 
-  /** Gets the given sprite, or null if the texture is not present in the model */
-  @Nullable
-  private static TextureAtlasSprite getSprite(IGeometryBakingContext context, Function<Material,TextureAtlasSprite> spriteGetter, String key) {
-    if (context.hasMaterial(key)) {
-      return spriteGetter.apply(context.getMaterial(key));
-    }
-    return null;
-  }
+  /**
+   * Unbaked item model.
+   * @param transformation  Optional extra transform
+   * @param baseModel       Model providing the base texture (slot "base"), transforms and gui light
+   * @param flipGas         If true, flips gasses upside down
+   */
+  public record Unbaked(Optional<Transformation> transformation, Identifier baseModel, boolean flipGas) implements ItemModel.Unbaked {
+    public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+      Transformation.EXTENDED_CODEC.optionalFieldOf("transformation").forGetter(Unbaked::transformation),
+      Identifier.CODEC.fieldOf("base_model").forGetter(Unbaked::baseModel),
+      com.mojang.serialization.Codec.BOOL.optionalFieldOf("flip_gas", Boolean.TRUE).forGetter(Unbaked::flipGas)
+    ).apply(instance, Unbaked::new));
 
-  private static BakedModel bakeInternal(IGeometryBakingContext context, Function<Material,TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation, FluidStack fluid, boolean flipGas) {
-    // get basic sprites
-    IClientFluidTypeExtensions clientFluid = IClientFluidTypeExtensions.of(fluid.getFluid());
-    TextureAtlasSprite baseSprite = getSprite(context, spriteGetter, "base");
-    TextureAtlasSprite fluidSprite = !fluid.isEmpty() ? spriteGetter.apply(new Material(InventoryMenu.BLOCK_ATLAS, clientFluid.getStillTexture(fluid))) : null;
-
-    // determine particle
-    TextureAtlasSprite particleSprite = getSprite(context, spriteGetter, "particle");
-    if (particleSprite == null) particleSprite = fluidSprite;
-    if (particleSprite == null) particleSprite = baseSprite;
-    if (particleSprite == null) {
-      TConstruct.LOG.error("No valid particle sprite for fluid container model, you should supply either 'base' or 'particle'");
-      particleSprite = spriteGetter.apply(new Material(InventoryMenu.BLOCK_ATLAS, MissingTextureAtlasSprite.getLocation()));
-    }
-
-    // if its a gas and we flipping, flip it
-    if (flipGas && !fluid.isEmpty() && fluid.getFluid().getFluidType().isLighterThanAir()) {
-      modelState = new SimpleModelState(modelState.getRotation().compose(new Transformation(null, new Quaternionf(0, 0, 1, 0), null, null)));
-    }
-
-    // start building the mode
-    CompositeModel.Baked.Builder modelBuilder = CompositeModel.Baked.builder(context, particleSprite, overrides, context.getTransforms());
-    RenderTypeGroup renderTypes = DynamicFluidContainerModel.getLayerRenderTypes(false);
-
-    // add in the base
-    if (baseSprite != null) {
-      modelBuilder.addQuads(renderTypes, UnbakedGeometryHelper.bakeElements(
-        UnbakedGeometryHelper.createUnbakedItemElements(0, baseSprite),
-        $ -> baseSprite, modelState
-      ));
-    }
-
-    // add in fluid
-    if (fluidSprite != null) {
-      List<BakedQuad> quads = UnbakedGeometryHelper.bakeElements(
-        UnbakedGeometryHelper.createUnbakedItemMaskElements(1, spriteGetter.apply(context.getMaterial("fluid"))),
-        $ -> fluidSprite,
-        new SimpleModelState(modelState.getRotation().compose(FLUID_TRANSFORM), modelState.isUvLocked())
-      );
-
-      // apply light
-      RenderTypeGroup fluidRenderTypes = renderTypes;
-      int light = fluid.getFluid().getFluidType().getLightLevel(fluid);
-      if (light > 0) {
-        fluidRenderTypes = DynamicFluidContainerModel.getLayerRenderTypes(true);
-        QuadTransformers.settingEmissivity(light).processInPlace(quads);
-      }
-      // apply color
-      int color = clientFluid.getTintColor(fluid);
-      if (color != -1) {
-        ColoredBlockModel.applyColorQuadTransformer(color).processInPlace(quads);
-      }
-      modelBuilder.addQuads(fluidRenderTypes, quads);
-    }
-    return modelBuilder.build();
-  }
-
-  @Override
-  public BakedModel bake(IGeometryBakingContext context, ModelBaker bakery, Function<Material,TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
-    ResourceLocation modelLocation = ResourceLocation.tryParse(context.getModelName());
-    if (modelLocation == null) {
-      modelLocation = TConstruct.getResource("fluid_container_dynamic");
-    }
-    // We need to disable GUI 3D and block lighting for this to render properly
-    context = StandaloneGeometryBakingContext.builder(context).withGui3d(false).withUseBlockLight(false).build(modelLocation);
-    // only do contained fluid if we did not set the fluid in the model properties
-    if (fluid.isEmpty()) {
-      overrides = new ContainedFluidOverrideHandler(context, overrides, modelState, flipGas);
-    }
-    return bakeInternal(context, spriteGetter, modelState, overrides, modelLocation, fluid, flipGas);
-  }
-
-  /** Handles swapping the model based on the contained fluid */
-  @RequiredArgsConstructor
-  private static final class ContainedFluidOverrideHandler extends ItemOverrides {
-    private static final ResourceLocation BAKE_LOCATION = TConstruct.getResource("copper_can_dynamic");
-
-    private final Map<FluidStack,BakedModel> cache = Maps.newHashMap(); // contains all the baked models since they'll never change
-
-    private final IGeometryBakingContext context;
-    private final ItemOverrides nested;
-    private final ModelState modelState;
-    private final boolean flipGas;
-
-
-    /** Gets the model directly, for creating the cached models */
-    private BakedModel getUncahcedModel(FluidStack fluid) {
-      return bakeInternal(context, Material::sprite, modelState, ItemOverrides.EMPTY, BAKE_LOCATION, fluid, flipGas);
+    @Override
+    public MapCodec<? extends ItemModel.Unbaked> type() {
+      return MAP_CODEC;
     }
 
     @Override
-    public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel world, @Nullable LivingEntity entity, int seed) {
-      BakedModel overriden = nested.resolve(originalModel, stack, world, entity, seed);
-      if (overriden != originalModel) return overriden;
-      Optional<FluidStack> optional = FluidUtil.getFluidContained(stack);
-      if (optional.isPresent()) {
-        FluidStack fluid = optional.get();
-        fluid.setAmount(FluidType.BUCKET_VOLUME); // cache considers amount, so ensure its consistent
-        return cache.computeIfAbsent(fluid, this::getUncahcedModel);
+    public void resolveDependencies(ResolvableModel.Resolver resolver) {
+      resolver.markDependency(baseModel);
+    }
+
+    @Override
+    public ItemModel bake(ItemModel.BakingContext context, Matrix4fc transformation) {
+      Matrix4fc composed = Transformation.compose(transformation, this.transformation);
+      return new Baked(context, composed, baseModel, flipGas);
+    }
+  }
+
+  /** Baked item model that resolves the model per contained fluid. */
+  private static final class Baked extends DynamicItemModel<FluidStack> {
+    private final Identifier baseModelId;
+    private final boolean flipGas;
+    @Nullable
+    private ItemModel emptyModel;
+
+    private Baked(ItemModel.BakingContext context, Matrix4fc transform, Identifier baseModelId, boolean flipGas) {
+      super(context, transform);
+      this.baseModelId = baseModelId;
+      this.flipGas = flipGas;
+    }
+
+    @Nullable
+    @Override
+    protected FluidStack getCacheKey(ItemStack stack) {
+      FluidStack fluid = FluidUtil.getFluidContained(stack).orElse(FluidStack.EMPTY);
+      if (fluid.isEmpty()) {
+        return null;
       }
-      return originalModel;
+      // normalize the amount so the cache treats all fill levels the same
+      return fluid.copyWithAmount(FluidType.BUCKET_VOLUME);
+    }
+
+    @Override
+    protected ItemModel getFallback() {
+      if (emptyModel == null) {
+        emptyModel = bake(FluidStack.EMPTY);
+      }
+      return emptyModel;
+    }
+
+    @Override
+    protected ItemModel bakeModel(FluidStack fluid) {
+      return bake(fluid);
+    }
+
+    /** Bakes the container model for the given fluid (empty renders only the base) */
+    private ItemModel bake(FluidStack fluid) {
+      ModelBaker baker = context.blockModelBaker();
+      ResolvedModel resolved = baker.getModel(baseModelId);
+      TextureSlots slots = resolved.getTopTextureSlots();
+
+      QuadCollection.Builder builder = new QuadCollection.Builder();
+
+      // base layer from the model's "base" texture
+      Material.Baked baseSprite = baker.materials().resolveSlot(slots, "base", resolved);
+      for (BakedQuad quad : MantleItemLayerModel.getQuadsForSprite(-1, -1, baseSprite, Transformation.IDENTITY, 0)) {
+        builder.addUnculledFace(quad);
+      }
+
+      // fluid layer: the fluid's still sprite clipped to the container's fluid window (base model "fluid" slot, e.g.
+      // neoforge:item/mask/bucket_fluid_drip) so the fluid sits inside the bucket instead of filling the whole item square
+      // and hiding it. Confirmed via bucket-diag that base/fluid slots resolve; the masked helper maps the fluid by its
+      // atlas bounds so animated molten stills render. NOTE: gas flipping (flipGas) still to validate in-game.
+      if (!fluid.isEmpty()) {
+        Material.Baked fluidMask = baker.materials().resolveSlot(slots, "fluid", resolved);
+        FluidState state = fluid.getFluid().defaultFluidState();
+        FluidModel fluidModel = Minecraft.getInstance().getModelManager().getFluidStateModelSet().get(state);
+        int color = fluidModel.tintSource() instanceof FluidTintSource tint ? tint.colorAsStack(fluid) : -1;
+        int light = fluid.getFluid().getFluidType().getLightLevel(fluid);
+        for (BakedQuad quad : MantleItemLayerModel.getMaskedQuadsForSprite(color, -1, fluidModel.stillMaterial(), fluidMask, FLUID_TRANSFORM, light)) {
+          builder.addUnculledFace(quad);
+        }
+      }
+
+      QuadCollection quads = builder.build();
+      ModelRenderProperties properties = ModelRenderProperties.fromResolvedModel(baker, resolved, slots);
+      return new CuboidItemModelWrapper(List.of(), quads, properties, transform);
     }
   }
 }

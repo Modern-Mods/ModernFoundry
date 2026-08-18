@@ -64,14 +64,8 @@
       ]
     },
     {
-      "type": "modernfoundry:tool_actions",
-      "tool_actions": [
-        "sword_dig"
-      ]
-    },
-    {
       "type": "modernfoundry:is_effective",
-      "predicate_type": "hilt:tag",
+      "predicate_type": "mantle:tag",
       "tag": "c:mineable/sword"
     },
     {
@@ -80,7 +74,7 @@
         "minecraft:cobweb"
       ],
       "modifier": 7.5,
-      "predicate_type": "hilt:set"
+      "predicate_type": "mantle:set"
     },
     {
       "type": "modernfoundry:sweep_melee",

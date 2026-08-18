@@ -7,10 +7,10 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
-                  "type": "hilt:tag",
+                  "type": "mantle:tag",
                   "tag": "modernfoundry:modifiable/ranged/bows"
                 },
                 {
@@ -35,7 +35,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "minecraft:target"
+      "id": "minecraft:target"
     },
     "show_toast": true,
     "title": {

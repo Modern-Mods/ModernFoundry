@@ -1,0 +1,37 @@
+{
+  "values": [
+    "modernfoundry:pickaxe",
+    "modernfoundry:sledge_hammer",
+    "modernfoundry:vein_hammer",
+    "modernfoundry:mattock",
+    "modernfoundry:pickadze",
+    "modernfoundry:excavator",
+    "modernfoundry:hand_axe",
+    "modernfoundry:broad_axe",
+    "modernfoundry:kama",
+    "modernfoundry:scythe",
+    "modernfoundry:dagger",
+    "modernfoundry:sword",
+    "modernfoundry:cleaver",
+    "modernfoundry:crossbow",
+    "modernfoundry:longbow",
+    "modernfoundry:fishing_rod",
+    "modernfoundry:javelin",
+    "modernfoundry:arrow",
+    "modernfoundry:shuriken",
+    "modernfoundry:throwing_axe",
+    "modernfoundry:melting_pan",
+    "modernfoundry:war_pick",
+    "modernfoundry:battlesign",
+    "modernfoundry:swasher",
+    {
+      "id": "modernfoundry:minotaur_axe",
+      "required": false
+    },
+    "modernfoundry:plate_helmet",
+    "modernfoundry:plate_chestplate",
+    "modernfoundry:plate_leggings",
+    "modernfoundry:plate_boots",
+    "#modernfoundry:modifiable/multipart/single"
+  ]
+}

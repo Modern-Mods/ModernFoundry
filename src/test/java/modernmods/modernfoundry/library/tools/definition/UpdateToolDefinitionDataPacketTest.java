@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.ItemAbilities;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import modernmods.hilt.data.predicate.block.BlockPredicate;
+import modernmods.mantle.data.predicate.block.BlockPredicate;
 import modernmods.modernfoundry.fixture.MaterialItemFixture;
 import modernmods.modernfoundry.fixture.RegistrationFixture;
 import modernmods.modernfoundry.library.json.LevelingValue;

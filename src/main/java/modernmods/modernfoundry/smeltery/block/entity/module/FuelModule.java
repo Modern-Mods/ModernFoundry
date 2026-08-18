@@ -9,13 +9,13 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import java.util.function.Consumer;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.block.entity.HiltBlockEntity;
-import modernmods.hilt.util.WeakConsumerWrapper;
+import modernmods.mantle.block.entity.MantleBlockEntity;
+import modernmods.mantle.util.WeakConsumerWrapper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.recipe.fuel.MeltingFuel;
 import modernmods.modernfoundry.library.recipe.fuel.MeltingFuelLookup;
@@ -33,7 +33,7 @@ public abstract class FuelModule implements ContainerData {
   protected final Consumer<LazyOptional<IFluidHandler>> fluidListener = new WeakConsumerWrapper<>(this, FuelModule::resetHandler);
 
   /** Parent TE */
-  protected final HiltBlockEntity parent;
+  protected final MantleBlockEntity parent;
 
   /** Last fuel recipe used */
   @Nullable
@@ -155,6 +155,8 @@ public abstract class FuelModule implements ContainerData {
   public abstract int findFuel(boolean consume);
 
   /* NBT */
+  /** Key used to nest this module's data as a compound when bridging into ValueInput/ValueOutput */
+  public static final String NBT_KEY = "fuel_module";
   private static final String TAG_FUEL = "fuel";
   private static final String TAG_TEMPERATURE = "temperature";
   private static final String TAG_RATE = "rate";
@@ -164,12 +166,12 @@ public abstract class FuelModule implements ContainerData {
    * @param nbt  Tag to read from
    */
   public void readFromTag(CompoundTag nbt) {
-    if (nbt.contains(TAG_FUEL, Tag.TAG_ANY_NUMERIC)) {
-      fuel = nbt.getInt(TAG_FUEL);
+    if (nbt.contains(TAG_FUEL)) {
+      fuel = nbt.getIntOr(TAG_FUEL, 0);
     }
-    if (nbt.contains(TAG_TEMPERATURE, Tag.TAG_ANY_NUMERIC)) {
-      temperature = nbt.getInt(TAG_TEMPERATURE);
-      rate = nbt.getInt(TAG_RATE);
+    if (nbt.contains(TAG_TEMPERATURE)) {
+      temperature = nbt.getIntOr(TAG_TEMPERATURE, 0);
+      rate = nbt.getIntOr(TAG_RATE, 0);
     }
   }
 

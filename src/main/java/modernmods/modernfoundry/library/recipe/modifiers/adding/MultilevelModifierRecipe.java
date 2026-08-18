@@ -3,13 +3,13 @@ package modernmods.modernfoundry.library.recipe.modifiers.adding;
 import com.google.common.collect.Streams;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
@@ -44,7 +44,7 @@ public class MultilevelModifierRecipe extends ModifierRecipe implements IMultiRe
   });
 
   private final List<LevelEntry> levels;
-  protected MultilevelModifierRecipe(ResourceLocation id, List<SizedIngredient> inputs, Ingredient toolRequirement, int maxToolSize, ModifierId result, boolean allowCrystal, List<LevelEntry> levels, boolean checkTraitLevel) {
+  protected MultilevelModifierRecipe(Identifier id, List<SizedIngredient> inputs, Ingredient toolRequirement, int maxToolSize, ModifierId result, boolean allowCrystal, List<LevelEntry> levels, boolean checkTraitLevel) {
     super(id, inputs, toolRequirement, maxToolSize, result, levels.get(0).level, levels.get(0).slots, allowCrystal, checkTraitLevel);
     this.levels = levels;
   }
@@ -96,7 +96,7 @@ public class MultilevelModifierRecipe extends ModifierRecipe implements IMultiRe
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends MultilevelModifierRecipe> getSerializer() {
     return TinkerModifiers.multilevelModifierSerializer.get();
   }
 

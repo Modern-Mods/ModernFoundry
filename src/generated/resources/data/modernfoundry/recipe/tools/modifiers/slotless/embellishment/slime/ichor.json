@@ -1,24 +1,22 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/ichor",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/ichor",
   "inputs": [
     {
-      "item": "modernfoundry:ichor_congealed_slime"
+      "ingredient": "modernfoundry:ichor_congealed_slime"
     },
     {
-      "item": "modernfoundry:ichor_slime_ball"
+      "ingredient": "modernfoundry:ichor_slime_ball"
     },
     {
-      "item": "modernfoundry:ichor_congealed_slime"
+      "ingredient": "modernfoundry:ichor_congealed_slime"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:ichor"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/slime"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/slime",
   "variant_formatter": "modernfoundry:material"
 }

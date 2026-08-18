@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:compat/ceramics/porcelain/bricks_1",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "ceramics"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:compat/ceramics/porcelain/bricks_1",
   "ingredient": {
     "item": "ceramics:porcelain_brick"
   },

@@ -3,12 +3,12 @@ package modernmods.modernfoundry.tables.network;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
-import modernmods.hilt.recipe.helper.RecipeHelper;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.network.packet.IThreadsafePacket;
+import modernmods.mantle.recipe.helper.RecipeHelper;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.library.recipe.tinkerstation.ITinkerStationRecipe;
 import modernmods.modernfoundry.tables.client.inventory.TinkerStationScreen;
 import modernmods.modernfoundry.tables.block.entity.table.TinkerStationBlockEntity;
@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 public class UpdateTinkerStationRecipePacket implements IThreadsafePacket {
   private final BlockPos pos;
-  private final ResourceLocation recipe;
+  private final Identifier recipe;
   public UpdateTinkerStationRecipePacket(BlockPos pos, ITinkerStationRecipe recipe) {
     this.pos = pos;
     this.recipe = recipe.getId();
@@ -28,13 +28,13 @@ public class UpdateTinkerStationRecipePacket implements IThreadsafePacket {
 
   public UpdateTinkerStationRecipePacket(FriendlyByteBuf buffer) {
     this.pos = buffer.readBlockPos();
-    this.recipe = buffer.readResourceLocation();
+    this.recipe = buffer.readIdentifier();
   }
 
   @Override
   public void encode(FriendlyByteBuf buffer) {
     buffer.writeBlockPos(pos);
-    buffer.writeResourceLocation(recipe);
+    buffer.writeIdentifier(recipe);
   }
 
   @Override
@@ -47,21 +47,15 @@ public class UpdateTinkerStationRecipePacket implements IThreadsafePacket {
     private static void handle(UpdateTinkerStationRecipePacket packet) {
       Level world = Minecraft.getInstance().level;
       if (world != null) {
-        Optional<ITinkerStationRecipe> recipe = RecipeHelper.getRecipe(world.getRecipeManager(), packet.recipe, ITinkerStationRecipe.class);
-
-        // if the screen is open, use that to get the TE and update the screen
-        boolean handled = false;
+        // 26.1: the full RecipeManager is no longer synced to the client (only a limited RecipeAccess), so the recipe
+        // cannot be resolved here as it was pre-26.1 (the old world.getServer().getRecipeManager() NPE'd on the client).
+        // The result is now synced straight into the result slot via the container (LazyResultContainer.setItem); this
+        // packet just refreshes the open station screen so it re-reads that synced result.
         if (Minecraft.getInstance().screen instanceof TinkerStationScreen stationScreen) {
           TinkerStationBlockEntity te = stationScreen.getTileEntity();
           if (te.getBlockPos().equals(packet.pos)) {
-            recipe.ifPresent(te::updateRecipe);
             stationScreen.updateDisplay();
-            handled = true;
           }
-        }
-        // if the wrong screen is open or no screen, use the tile directly
-        if (!handled) {
-          recipe.ifPresent(r -> BlockEntityHelper.get(TinkerStationBlockEntity.class, world, packet.pos).ifPresent(te -> te.updateRecipe(r)));
         }
       }
     }

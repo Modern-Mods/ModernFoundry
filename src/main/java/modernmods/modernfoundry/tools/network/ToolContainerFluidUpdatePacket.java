@@ -5,8 +5,8 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.client.SafeClientAccess;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.client.SafeClientAccess;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.tools.menu.ToolContainerMenu;
 
 /** Packet used when a fluid is changed inside a tool container menu */

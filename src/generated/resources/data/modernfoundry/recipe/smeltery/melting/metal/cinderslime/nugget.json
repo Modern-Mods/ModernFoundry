@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/cinderslime/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/cinderslime"
-  },
+  "ingredient": "#c:nuggets/cinderslime",
   "result": {
     "amount": 10,
     "fluid": "modernfoundry:molten_cinderslime"

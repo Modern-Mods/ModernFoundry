@@ -1,6 +1,5 @@
 package modernmods.modernfoundry.tools.network;
 
-import lombok.RequiredArgsConstructor;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -8,12 +7,11 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.tools.logic.InteractionHandler;
 
 /** Packet sent client to server when an empty hand interaction */
-@RequiredArgsConstructor
 public enum InteractWithAirPacket implements IThreadsafePacket {
   /** Right click with an empty main hand and a chestplate */
   MAINHAND(InteractionHand.MAIN_HAND),
@@ -23,6 +21,10 @@ public enum InteractWithAirPacket implements IThreadsafePacket {
   LEFT_CLICK(InteractionHand.MAIN_HAND);
 
   private final InteractionHand hand;
+
+  InteractWithAirPacket(InteractionHand hand) {
+    this.hand = hand;
+  }
 
   /** Gets the packet for the given hand */
   public static InteractWithAirPacket fromChestplate(InteractionHand hand) {
@@ -47,7 +49,7 @@ public enum InteractWithAirPacket implements IThreadsafePacket {
         ItemStack held = player.getItemInHand(hand);
         if (held.is(TinkerTags.Items.INTERACTABLE_LEFT)) {
           InteractionResult result = InteractionHandler.onLeftClickInteraction(player, held, hand);
-          if (result.shouldSwing()) {
+          if (result instanceof InteractionResult.Success success && success.swingSource() != InteractionResult.SwingSource.NONE) {
             player.swing(hand, true);
           }
         }
@@ -55,7 +57,7 @@ public enum InteractWithAirPacket implements IThreadsafePacket {
         ItemStack chestplate = player.getItemBySlot(EquipmentSlot.CHEST);
         if (chestplate.is(TinkerTags.Items.INTERACTABLE_ARMOR) && player.getItemInHand(hand).isEmpty()) {
           InteractionResult result = InteractionHandler.onChestplateUse(player, chestplate, hand);
-          if (result.shouldSwing()) {
+          if (result instanceof InteractionResult.Success success && success.swingSource() != InteractionResult.SwingSource.NONE) {
             player.swing(hand, true);
           }
         }

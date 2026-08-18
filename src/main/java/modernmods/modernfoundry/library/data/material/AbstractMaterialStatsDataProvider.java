@@ -5,9 +5,9 @@ import com.google.gson.JsonObject;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
-import modernmods.hilt.data.GenericDataProvider;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.equipment.ArmorType;
+import modernmods.mantle.data.GenericDataProvider;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.materials.json.MaterialStatJson;
 import modernmods.modernfoundry.library.materials.stats.IMaterialStats;
@@ -52,7 +52,7 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
     }
     // does not ensure we have materials for all stats, we may be adding stats for another mod
     // generate finally
-    return allOf(allMaterialStats.entrySet().stream().map(entry -> saveJson(cache, entry.getKey(), entry.getValue().serialize())));
+    return allOf(allMaterialStats.entrySet().stream().map(entry -> saveJson(cache, entry.getKey().getIdentifier(), entry.getValue().serialize())));
   }
 
 
@@ -90,7 +90,7 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
    */
   protected void addArmorStats(MaterialId location, ArmorModuleBuilder<? extends IMaterialStats> statBuilder, IMaterialStats... otherStats) {
     IMaterialStats[] stats = new IMaterialStats[4];
-    for (ArmorItem.Type slotType : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
+    for (ArmorType slotType : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
       stats[slotType.ordinal()] = statBuilder.build(slotType);
     }
     addMaterialStats(location, stats);
@@ -124,14 +124,14 @@ public abstract class AbstractMaterialStatsDataProvider extends GenericDataProvi
 
     /** Serializes this to JSON */
     public MaterialStatJson serialize() {
-      Map<ResourceLocation,JsonElement> map = new HashMap<>();
+      Map<Identifier,JsonElement> map = new HashMap<>();
       for (IMaterialStats stat : required) {
-        map.put(stat.getIdentifier(), encodeStats(stat, stat.getType()));
+        map.put(stat.getIdentifier().getIdentifier(), encodeStats(stat, stat.getType()));
       }
       for (IMaterialStats stat : optional) {
         JsonObject encoded = encodeStats(stat, stat.getType());
         encoded.addProperty("optional", true);
-        map.put(stat.getIdentifier(), encoded);
+        map.put(stat.getIdentifier().getIdentifier(), encoded);
       }
       return new MaterialStatJson(map);
     }

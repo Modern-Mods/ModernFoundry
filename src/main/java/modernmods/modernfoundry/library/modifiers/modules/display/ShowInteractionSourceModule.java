@@ -2,8 +2,8 @@ package modernmods.modernfoundry.library.modifiers.modules.display;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.hook.display.DisplayNameModifierHook;

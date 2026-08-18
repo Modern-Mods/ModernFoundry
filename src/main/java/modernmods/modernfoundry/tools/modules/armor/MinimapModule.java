@@ -3,7 +3,7 @@ package modernmods.modernfoundry.tools.modules.armor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -15,10 +15,10 @@ import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.maps.MapId;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
-import modernmods.hilt.util.LogicHelper;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
+import modernmods.mantle.util.LogicHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -48,7 +48,7 @@ public enum MinimapModule implements ModifierModule, EquipmentChangeModifierHook
   /** Data key for the active map on the player */
   public static final TinkerDataKey<ItemStack> MAP = TConstruct.createKey("current_map");
   /** Key for the currently selected map */
-  private static final ResourceLocation SELECTED_SLOT = TConstruct.getResource("minimap_selected");
+  private static final Identifier SELECTED_SLOT = TConstruct.getResource("minimap_selected");
   /** Message when disabling the minimap */
   private static final Component DISABLED = TConstruct.makeTranslation("modifier", "minimap.disabled");
   /** Message to display selected slot */
@@ -97,7 +97,7 @@ public enum MinimapModule implements ModifierModule, EquipmentChangeModifierHook
 
   @Override
   public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
-    if (isCorrectSlot && !world.isClientSide) {
+    if (isCorrectSlot && !world.isClientSide()) {
       TinkerDataCapability.Holder data = TinkerDataCapability.getData(holder);
       if (data != null) {
         ItemStack map = data.get(MAP, ItemStack.EMPTY);
@@ -106,7 +106,7 @@ public enum MinimapModule implements ModifierModule, EquipmentChangeModifierHook
           // hack: map logic requires the map to be in the selected slot to tick properly, so put it in the invnetory temporarily
           ItemStack held = holder.getOffhandItem();
           holder.setItemInHand(InteractionHand.OFF_HAND, map);
-          map.inventoryTick(world, holder, Inventory.SLOT_OFFHAND, true);
+          map.inventoryTick(world, holder, net.minecraft.world.entity.EquipmentSlot.OFFHAND);
           holder.setItemInHand(InteractionHand.OFF_HAND, held);
           if (holder instanceof ServerPlayer player) {
             MapItemSavedData mapData = MapItem.getSavedData(map, world);
@@ -125,13 +125,13 @@ public enum MinimapModule implements ModifierModule, EquipmentChangeModifierHook
 
   @Override
   public void onDisableSelection(IToolStackView tool, ModifierEntry modifier, Player player) {
-    player.displayClientMessage(DISABLED, true);
+    player.sendOverlayMessage(DISABLED);
   }
 
   @Override
   public void onInventorySelect(IToolStackView tool, ModifierEntry modifier, Player player, int newIndex, ItemStack stack) {
     MapId id = stack.get(DataComponents.MAP_ID);
-    player.displayClientMessage(Component.translatable(SELECTED, stack.getHoverName(), id == null ? -1 : id.id(), newIndex + 1), true);
+    player.sendOverlayMessage(Component.translatable(SELECTED, stack.getHoverName(), id == null ? -1 : id.id(), newIndex + 1));
   }
 
   @Override

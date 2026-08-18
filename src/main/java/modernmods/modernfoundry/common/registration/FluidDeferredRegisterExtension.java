@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.common.registration;
 
-import modernmods.hilt.registration.deferred.FluidDeferredRegister;
+import modernmods.mantle.registration.deferred.FluidDeferredRegister;
 
 /** Extension of the fluid register to add a few common tinkers fluid behaviors. */
 public class FluidDeferredRegisterExtension extends FluidDeferredRegister {

@@ -17,6 +17,7 @@ import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.utils.TagUtil;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -82,15 +83,13 @@ public class MaterialIdNBT {
       return EMPTY;
     }
     ListTag listNBT = (ListTag) nbt;
-    if (listNBT.getElementType() != Tag.TAG_STRING) {
-      return EMPTY;
+    List<MaterialVariantId> materials = new ArrayList<>();
+    for (int i = 0; i < listNBT.size(); i++) {
+      MaterialVariantId id = MaterialVariantId.tryParse(listNBT.getStringOr(i, ""));
+      if (id != null) {
+        materials.add(id);
+      }
     }
-
-    List<MaterialVariantId> materials = listNBT.stream()
-      .map(Tag::getAsString)
-      .map(MaterialVariantId::tryParse)
-      .filter(Objects::nonNull)
-      .collect(Collectors.toList());
     return new MaterialIdNBT(materials);
   }
 
@@ -113,7 +112,7 @@ public class MaterialIdNBT {
   public static MaterialIdNBT from(ItemStack stack) {
     CompoundTag nbt = TagUtil.getTag(stack);
     if (nbt != null) {
-      return readFromNBT(nbt.getList(ToolStack.TAG_MATERIALS, Tag.TAG_STRING));
+      return readFromNBT(nbt.getListOrEmpty(ToolStack.TAG_MATERIALS));
     }
     return EMPTY;
   }

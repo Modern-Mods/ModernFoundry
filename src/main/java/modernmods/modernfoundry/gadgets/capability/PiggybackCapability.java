@@ -1,13 +1,13 @@
 package modernmods.modernfoundry.gadgets.capability;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.CapabilityManager;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.CapabilityToken;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.bus.api.EventPriority;
 import modernmods.modernfoundry.TConstruct;
 
@@ -16,7 +16,7 @@ import java.util.WeakHashMap;
 
 /** Capability logic */
 public class PiggybackCapability {
-  private static final ResourceLocation ID = TConstruct.getResource("piggyback");
+  private static final Identifier ID = TConstruct.getResource("piggyback");
   public static final Capability<PiggybackHandler> PIGGYBACK = CapabilityManager.get(new CapabilityToken<>() {});
   private static final Map<Player, PiggybackHandler> DATA = new WeakHashMap<>();
 

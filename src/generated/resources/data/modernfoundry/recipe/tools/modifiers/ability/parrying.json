@@ -1,17 +1,17 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/parrying",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/parrying",
   "inputs": [
     {
-      "tag": "minecraft:planks"
+      "ingredient": "#minecraft:planks"
     },
     {
-      "tag": "c:ingots/steel"
+      "ingredient": "#c:ingots/steel"
     },
     {
-      "tag": "minecraft:planks"
+      "ingredient": "#minecraft:planks"
     }
   ],
   "level": 1,
@@ -19,7 +19,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/melee/parry"
-  }
+  "tools": "#modernfoundry:modifiable/melee/parry"
 }

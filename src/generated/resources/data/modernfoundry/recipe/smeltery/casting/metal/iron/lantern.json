@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/iron/lantern",
-  "cast": {
-    "item": "minecraft:torch"
-  },
+  "cast": "minecraft:torch",
   "cast_consumed": true,
   "cooling_time": 57,
   "fluid": {
     "amount": 80,
     "tag": "c:molten_iron"
   },
+  "id": "modernfoundry:smeltery/casting/metal/iron/lantern",
   "result": "minecraft:lantern"
 }

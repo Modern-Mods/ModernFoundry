@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.recipe.casting;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public final class DisplayCastingRecipe implements IDisplayableCastingRecipe {
   @Nullable
-  private final ResourceLocation recipeId;
+  private final Identifier recipeId;
   private final RecipeType<?> type;
   private final List<ItemStack> castItems;
   private final List<FluidStack> fluids;
@@ -25,11 +25,11 @@ public final class DisplayCastingRecipe implements IDisplayableCastingRecipe {
   private final int coolingTime;
   private final boolean consumed;
 
-  public DisplayCastingRecipe(@Nullable ResourceLocation recipeId, RecipeType<?> type, List<ItemStack> castItems, List<FluidStack> fluids, ItemStack output, int coolingTime, boolean consumed) {
+  public DisplayCastingRecipe(@Nullable Identifier recipeId, RecipeType<?> type, List<ItemStack> castItems, List<FluidStack> fluids, ItemStack output, int coolingTime, boolean consumed) {
     this(recipeId, type, castItems, fluids, List.of(output), coolingTime, consumed);
   }
 
-  /** @deprecated use {@link #DisplayCastingRecipe(ResourceLocation,RecipeType,List,List,ItemStack,int,boolean)} */
+  /** @deprecated use {@link #DisplayCastingRecipe(Identifier,RecipeType,List,List,ItemStack,int,boolean)} */
   @Deprecated
   public DisplayCastingRecipe(RecipeType<?> type, List<ItemStack> castItems, List<FluidStack> fluids, ItemStack output, int coolingTime, boolean consumed) {
     this(null, type, castItems, fluids, output, coolingTime, consumed);

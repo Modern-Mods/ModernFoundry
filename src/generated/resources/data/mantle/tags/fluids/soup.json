@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#modernfoundry:meat_soup",
+    {
+      "id": "#modernfoundry:tooltips/soup",
+      "required": false
+    }
+  ]
+}

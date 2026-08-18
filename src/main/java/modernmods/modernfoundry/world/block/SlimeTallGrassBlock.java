@@ -32,9 +32,11 @@ public class SlimeTallGrassBlock extends BushBlock implements IForgeShearable {
     this.foliageType = foliageType;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  protected MapCodec<? extends SlimeTallGrassBlock> codec() {
-    return CODEC;
+  public MapCodec<net.minecraft.world.level.block.BushBlock> codec() {
+    // 26.1.2: BushBlock#codec() is typed invariantly as MapCodec<BushBlock>; cast our concrete codec to satisfy the override
+    return (MapCodec<net.minecraft.world.level.block.BushBlock>)(MapCodec<?>) CODEC;
   }
 
   @Deprecated

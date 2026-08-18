@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/diamond/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/diamond"
-  },
+  "ingredient": "#c:storage_blocks/diamond",
   "result": {
     "amount": 900,
     "fluid": "modernfoundry:molten_diamond"

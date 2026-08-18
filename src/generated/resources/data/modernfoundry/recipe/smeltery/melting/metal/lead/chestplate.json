@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/lead/chestplate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/chestplates/lead"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/chestplates/lead"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/lead/chestplate",
+  "ingredient": "#c:armors/chestplates/lead",
   "result": {
     "amount": 720,
     "tag": "c:molten_lead",

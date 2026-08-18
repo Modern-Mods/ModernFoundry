@@ -3,9 +3,7 @@
   "category": "building",
   "group": "modernfoundry:seared_bricks_stairs",
   "key": {
-    "B": {
-      "item": "modernfoundry:seared_bricks"
-    }
+    "B": "modernfoundry:seared_bricks"
   },
   "pattern": [
     "B  ",
@@ -15,6 +13,5 @@
   "result": {
     "count": 4,
     "id": "modernfoundry:seared_bricks_stairs"
-  },
-  "show_notification": true
+  }
 }

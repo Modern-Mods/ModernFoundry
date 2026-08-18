@@ -2,9 +2,7 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/red_sand/builder_block/broad_axe_head",
   "pattern": "modernfoundry:broad_axe_head",
-  "pattern_item": {
-    "tag": "c:sand/red"
-  },
+  "pattern_item": "#c:sands/red",
   "result": {
     "count": 4,
     "item": "modernfoundry:broad_axe_head_red_sand_cast"

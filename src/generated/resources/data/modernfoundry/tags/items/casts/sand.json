@@ -1,0 +1,33 @@
+{
+  "values": [
+    "modernfoundry:blank_sand_cast",
+    "modernfoundry:ingot_sand_cast",
+    "modernfoundry:nugget_sand_cast",
+    "modernfoundry:gem_sand_cast",
+    "modernfoundry:rod_sand_cast",
+    "modernfoundry:repair_kit_sand_cast",
+    "modernfoundry:plate_sand_cast",
+    "modernfoundry:gear_sand_cast",
+    "modernfoundry:coin_sand_cast",
+    "modernfoundry:wire_sand_cast",
+    "modernfoundry:pick_head_sand_cast",
+    "modernfoundry:small_axe_head_sand_cast",
+    "modernfoundry:small_blade_sand_cast",
+    "modernfoundry:adze_head_sand_cast",
+    "modernfoundry:hammer_head_sand_cast",
+    "modernfoundry:broad_axe_head_sand_cast",
+    "modernfoundry:broad_blade_sand_cast",
+    "modernfoundry:large_plate_sand_cast",
+    "modernfoundry:tool_binding_sand_cast",
+    "modernfoundry:tough_binding_sand_cast",
+    "modernfoundry:tool_handle_sand_cast",
+    "modernfoundry:tough_handle_sand_cast",
+    "modernfoundry:bow_limb_sand_cast",
+    "modernfoundry:bow_grip_sand_cast",
+    "modernfoundry:helmet_plating_sand_cast",
+    "modernfoundry:chestplate_plating_sand_cast",
+    "modernfoundry:leggings_plating_sand_cast",
+    "modernfoundry:boots_plating_sand_cast",
+    "modernfoundry:maille_sand_cast"
+  ]
+}

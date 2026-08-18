@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/gold/geore/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:geore_blocks/gold"
     }
   ],
-  "ingredient": {
-    "tag": "c:geore_blocks/gold"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/gold/geore/block",
+  "ingredient": "#c:geore_blocks/gold",
   "result": {
     "amount": 360,
     "tag": "c:molten_gold"

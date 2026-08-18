@@ -3,7 +3,7 @@ package modernmods.modernfoundry.fixture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.ItemAbilities;
-import modernmods.hilt.data.predicate.block.BlockPredicate;
+import modernmods.mantle.data.predicate.block.BlockPredicate;
 import modernmods.modernfoundry.library.tools.definition.ToolDefinition;
 import modernmods.modernfoundry.library.tools.definition.ToolDefinitionDataBuilder;
 import modernmods.modernfoundry.library.tools.definition.module.build.ToolActionsModule;

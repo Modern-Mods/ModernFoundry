@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.library.tools.capability;
 
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.CapabilityManager;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.CapabilityToken;
 import modernmods.modernfoundry.TConstruct;
@@ -37,7 +37,7 @@ public class EntityModifierCapability {
   private static final List<Predicate<Entity>> ENTITY_PREDICATES = new ArrayList<>();
 
   /** Capability ID */
-  private static final ResourceLocation ID = TConstruct.getResource("modifiers");
+  private static final Identifier ID = TConstruct.getResource("modifiers");
   /** Capability type */
   public static final Capability<EntityModifiers> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
 
@@ -75,7 +75,7 @@ public class EntityModifierCapability {
 
     @Override
     public ModifierNBT getModifiers() {
-      return ModifierNBT.readFromNBT(entity.getPersistentData().getList(KEY, Tag.TAG_COMPOUND));
+      return ModifierNBT.readFromNBT(entity.getPersistentData().getListOrEmpty(KEY));
     }
 
     @Override

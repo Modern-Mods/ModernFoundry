@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
 import modernmods.modernfoundry.library.recipe.modifiers.severing.SeveringRecipe;
 
 import javax.annotation.Nullable;
@@ -44,13 +44,13 @@ public class SpecialSeveringRecipeBuilder extends AbstractRecipeBuilder<SpecialS
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     consumer.accept(new Finished(id, null));
   }
 
   /** Finished recipe instance */
   private class Finished extends AbstractFinishedRecipe {
-    public Finished(ResourceLocation id, @Nullable ResourceLocation advancementId) {
+    public Finished(Identifier id, @Nullable Identifier advancementId) {
       super(id, advancementId);
     }
 

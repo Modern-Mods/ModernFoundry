@@ -2,12 +2,13 @@ package modernmods.modernfoundry.tables.client.inventory;
 
 import com.google.common.collect.Lists;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -36,7 +37,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
   private static final Component TRAIT_TITLE = TConstruct.makeTranslation("gui", "part_builder.trait").withStyle(ChatFormatting.UNDERLINE);
   private static final MutableComponent UNCRAFTABLE_MATERIAL = TConstruct.makeTranslation("gui", "part_builder.uncraftable").withStyle(ChatFormatting.RED);
   private static final MutableComponent UNCRAFTABLE_MATERIAL_TOOLTIP = TConstruct.makeTranslation("gui", "part_builder.uncraftable.tooltip");
-  private static final ResourceLocation BACKGROUND = TConstruct.getResource("textures/gui/part_builder.png");
+  private static final Identifier BACKGROUND = TConstruct.getResource("textures/gui/part_builder.png");
   // locations
   // slider
   /** Texture U for the handle texture */
@@ -96,11 +97,11 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
   }
 
   @Override
-  protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+  public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
     this.drawBackground(graphics, BACKGROUND);
 
     // draw scrollbar
-    graphics.blit(BACKGROUND, this.cornerX + SLIDER_LEFT, this.cornerY + SLIDER_TOP + (int) (SROLLABLE_AREA * this.sliderProgress), canScroll() ? HANDLE_U : HANDLE_U_DISABLE, 0, SLIDER_WIDTH, HANDLE_HEIGHT);
+    graphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, this.cornerX + SLIDER_LEFT, this.cornerY + SLIDER_TOP + (int) (SROLLABLE_AREA * this.sliderProgress), (float)(canScroll() ? HANDLE_U : HANDLE_U_DISABLE), 0f, SLIDER_WIDTH, HANDLE_HEIGHT, 256, 256);
     this.drawRecipesBackground(graphics, mouseX, mouseY, this.cornerX + PATTERN_LEFT, this.cornerY + PATTERN_TOP);
 
     // draw slot icons
@@ -108,7 +109,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
     this.drawIconEmpty(graphics, this.getMenu().getInputSlot(), Icons.INGOT);
     this.drawRecipesItems(graphics, this.cornerX + PATTERN_LEFT, this.cornerY + PATTERN_TOP);
 
-    super.renderBg(graphics, partialTicks, mouseX, mouseY);
+    super.extractBackground(graphics, mouseX, mouseY, partialTicks);
   }
 
   /**
@@ -138,8 +139,8 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
   }
 
   @Override
-  protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
-    super.renderTooltip(graphics, mouseX, mouseY);
+  protected void extractTooltip(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
+    super.extractTooltip(graphics, mouseX, mouseY);
 
     // determime which button we are hovering
     if (tile != null) {
@@ -147,14 +148,14 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
       if (!buttons.isEmpty()) {
         int index = getButtonAt(mouseX, mouseY);
         if (index >= 0) {
-          graphics.renderTooltip(this.font, buttons.get(index).getDisplayName(), mouseX, mouseY);
+          graphics.setTooltipForNextFrame(this.font, buttons.get(index).getDisplayName(), mouseX, mouseY);
         }
       }
     }
   }
 
   /** Draw backgrounds for all patterns */
-  private void drawRecipesBackground(GuiGraphics graphics, int mouseX, int mouseY, int left, int top) {
+  private void drawRecipesBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, int left, int top) {
     if (tile == null) {
       return;
     }
@@ -169,16 +170,15 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
       } else if (mouseX >= x && mouseY >= y && mouseX < x + PATTERN_SIZE && mouseY < y + PATTERN_SIZE) {
         v += 2 * PATTERN_SIZE;
       }
-      graphics.blit(BACKGROUND, x, y, PATTERN_U, v, PATTERN_SIZE, PATTERN_SIZE);
+      graphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, x, y, (float)PATTERN_U, (float)v, PATTERN_SIZE, PATTERN_SIZE, 256, 256);
     }
   }
 
   /** Draw slot icons for all patterns */
-  private void drawRecipesItems(GuiGraphics graphics, int left, int top) {
+  private void drawRecipesItems(GuiGraphicsExtractor graphics, int left, int top) {
     // use block texture list
     assert this.minecraft != null;
     assert this.tile != null;
-    Function<ResourceLocation, TextureAtlasSprite> spriteGetter = this.minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS);
     // iterate all recipes
     List<Pattern> list = this.tile.getSortedButtons();
     int max = Math.min(this.recipeIndexOffset + MAX_PATTERN, this.getPartRecipeCount());
@@ -188,7 +188,7 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
       int y = top + (relative / 4) * PATTERN_SIZE + 1;
       // get the sprite for the pattern and draw
       Pattern pattern = list.get(i);
-      graphics.blit(x, y, 100, 16, 16, spriteGetter.apply(pattern.getTexture()));
+      graphics.blitSprite(RenderPipelines.GUI_TEXTURED, modernmods.mantle.client.render.FluidRenderer.getBlockSprite(pattern.getTexture()), x, y, 16, 16);
     }
   }
 
@@ -316,7 +316,8 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
   /* Scrollbar logic */
 
   @Override
-  public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent event, boolean doubleClick) {
+    double mouseX = event.x(); double mouseY = event.y(); int mouseButton = event.button();
     this.clickedOnScrollBar = false;
 
     if (this.infoPanelScreen.handleMouseClicked(mouseX, mouseY, mouseButton) || this.tile == null) {
@@ -343,11 +344,12 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
       }
     }
 
-    return super.mouseClicked(mouseX, mouseY, mouseButton);
+    return super.mouseClicked(event, doubleClick);
   }
 
   @Override
-  public boolean mouseDragged(double mouseX, double mouseY, int clickedMouseButton, double timeSinceLastClick, double unknown) {
+  public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent event, double timeSinceLastClick, double unknown) {
+    double mouseX = event.x(); double mouseY = event.y(); int clickedMouseButton = event.button();
     if (this.infoPanelScreen.handleMouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick)) {
       return false;
     }
@@ -359,11 +361,13 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
       this.recipeIndexOffset = Math.round(this.sliderProgress * this.getHiddenRows()) * 4;
       return true;
     } else {
-      return super.mouseDragged(mouseX, mouseY, clickedMouseButton, timeSinceLastClick, unknown);
+      return super.mouseDragged(event, timeSinceLastClick, unknown);
     }
   }
 
   @Override
+  // NOTE(26.1 port): this 3-arg mouseScrolled overrides Mantle's MultiModuleScreen helper, not vanilla's 4-arg entry point.
+  // Validate the pattern-list mouse-wheel scroll in-game (may need routing via the 4-arg mouseScrolled override).
   public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
     //if (this.infoPanelScreen.handleMouseScrolled(mouseX, mouseY, delta)) {
     //  return false;
@@ -382,12 +386,13 @@ public class PartBuilderScreen extends BaseTabbedScreen<PartBuilderBlockEntity,P
   }
 
   @Override
-  public boolean mouseReleased(double mouseX, double mouseY, int state) {
+  public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent event) {
+    double mouseX = event.x(); double mouseY = event.y(); int state = event.button();
     if (this.infoPanelScreen.handleMouseReleased(mouseX, mouseY, state)) {
       return false;
     }
 
-    return super.mouseReleased(mouseX, mouseY, state);
+    return super.mouseReleased(event);
   }
 
 

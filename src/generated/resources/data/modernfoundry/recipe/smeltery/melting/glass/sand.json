@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/glass/sand",
-  "ingredient": {
-    "tag": "minecraft:smelts_to_glass"
-  },
+  "ingredient": "#minecraft:smelts_to_glass",
   "result": {
     "amount": 1000,
     "fluid": "modernfoundry:molten_glass"

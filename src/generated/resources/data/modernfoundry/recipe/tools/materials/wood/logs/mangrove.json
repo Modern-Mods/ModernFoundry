@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wood/logs/mangrove",
-  "ingredient": {
-    "tag": "minecraft:mangrove_logs"
-  },
+  "ingredient": "#minecraft:mangrove_logs",
   "leftover": "minecraft:mangrove_planks",
   "material": "modernfoundry:wood",
   "needed": 1,

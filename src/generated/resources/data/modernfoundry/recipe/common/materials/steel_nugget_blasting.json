@@ -3,9 +3,7 @@
   "category": "misc",
   "cookingtime": 25,
   "experience": 0.2,
-  "ingredient": {
-    "item": "modernfoundry:steel_shard"
-  },
+  "ingredient": "modernfoundry:steel_shard",
   "result": {
     "id": "modernfoundry:steel_nugget"
   }

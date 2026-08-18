@@ -1,0 +1,40 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/javelin",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "grip",
+        "index": 3
+      },
+      {
+        "name": "head",
+        "index": 0
+      },
+      {
+        "name": "guard",
+        "index": 2
+      }
+    ],
+    "large": true,
+    "large_offset": [
+      -2,
+      2
+    ],
+    "modifier_maps": [
+      "modernfoundry:javelin"
+    ],
+    "small_modifier_roots": {
+      "small": [
+        "modernfoundry:item/tool/javelin/modifiers/"
+      ],
+      "large": [
+        "modernfoundry:item/tool/javelin/large/modifiers/"
+      ]
+    }
+  }
+}

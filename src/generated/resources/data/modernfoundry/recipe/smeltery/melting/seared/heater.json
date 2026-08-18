@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/seared/heater",
-  "ingredient": {
-    "item": "modernfoundry:seared_heater"
-  },
+  "ingredient": "modernfoundry:seared_heater",
   "result": {
     "amount": 2000,
     "fluid": "modernfoundry:seared_stone"

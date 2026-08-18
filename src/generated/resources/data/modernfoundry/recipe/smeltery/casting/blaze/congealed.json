@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/blaze/congealed",
-  "cast": {
-    "tag": "modernfoundry:congealed_slime"
-  },
+  "cast": "#modernfoundry:congealed_slime",
   "cast_consumed": true,
   "cooling_time": 120,
   "fluid": {
     "amount": 200,
     "tag": "modernfoundry:blazing_blood"
   },
+  "id": "modernfoundry:smeltery/casting/blaze/congealed",
   "result": "minecraft:magma_block"
 }

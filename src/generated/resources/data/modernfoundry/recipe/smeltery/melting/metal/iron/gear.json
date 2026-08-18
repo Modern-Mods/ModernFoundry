@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/iron"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/iron"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/iron/gear",
+  "ingredient": "#c:gears/iron",
   "result": {
     "amount": 360,
     "tag": "c:molten_iron"

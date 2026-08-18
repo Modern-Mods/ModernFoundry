@@ -1,13 +1,13 @@
 package modernmods.modernfoundry.tables.client.inventory.widget;
 
 import lombok.Getter;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.renderer.Rect2i;
 import org.apache.commons.compress.utils.Lists;
-import modernmods.hilt.client.screen.MultiModuleScreen;
+import modernmods.mantle.client.screen.MultiModuleScreen;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public class SideButtonsWidget<T extends Button> implements Renderable, GuiEvent
   public boolean handleMouseClicked(double mouseX, double mouseY, int mouseButton) {
     if (mouseButton == 0) {
       for (T button : this.buttons) {
-        if (button.mouseClicked(mouseX, mouseY, mouseButton)) {
+        if (button.mouseClicked(new net.minecraft.client.input.MouseButtonEvent(mouseX, mouseY, new net.minecraft.client.input.MouseButtonInfo(mouseButton, 0)), false)) {
           this.clickedButton = button;
           return true;
         }
@@ -81,7 +81,7 @@ public class SideButtonsWidget<T extends Button> implements Renderable, GuiEvent
 
   public boolean handleMouseReleased(double mouseX, double mouseY, int state) {
     if (clickedButton != null) {
-      clickedButton.mouseReleased(mouseX, mouseY, state);
+      clickedButton.mouseReleased(new net.minecraft.client.input.MouseButtonEvent(mouseX, mouseY, new net.minecraft.client.input.MouseButtonInfo(state, 0)));
       clickedButton = null;
       return true;
     }
@@ -90,9 +90,9 @@ public class SideButtonsWidget<T extends Button> implements Renderable, GuiEvent
   }
 
   @Override
-  public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+  public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
     for (T button : this.buttons) {
-      button.render(graphics, mouseX, mouseY, partialTicks);
+      button.extractRenderState(graphics, mouseX, mouseY, partialTicks);
     }
   }
 

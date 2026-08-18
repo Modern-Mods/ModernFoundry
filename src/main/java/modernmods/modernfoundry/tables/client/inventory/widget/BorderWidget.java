@@ -1,10 +1,10 @@
 package modernmods.modernfoundry.tables.client.inventory.widget;
 
-import net.minecraft.client.gui.GuiGraphics;
-import modernmods.hilt.client.screen.ElementScreen;
-import modernmods.hilt.client.screen.ModuleScreen;
-import modernmods.hilt.client.screen.ScalableElementScreen;
-import modernmods.hilt.client.screen.Widget;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import modernmods.mantle.client.screen.ElementScreen;
+import modernmods.mantle.client.screen.ModuleScreen;
+import modernmods.mantle.client.screen.ScalableElementScreen;
+import modernmods.mantle.client.screen.Widget;
 import modernmods.modernfoundry.tables.client.inventory.module.GenericScreen;
 
 public class BorderWidget extends Widget {
@@ -48,7 +48,7 @@ public class BorderWidget extends Widget {
   }
 
   @Override
-  public void draw(GuiGraphics graphics) {
+  public void draw(GuiGraphicsExtractor graphics) {
     int x = this.xPos;
     int y = this.yPos;
     int midW = this.width - this.borderLeft.w - this.borderRight.w;
@@ -75,7 +75,7 @@ public class BorderWidget extends Widget {
   }
 
   /** Draws an element ans returns its width */
-  private int drawX(ElementScreen element, GuiGraphics graphics, int x, int y) {
+  private int drawX(ElementScreen element, GuiGraphicsExtractor graphics, int x, int y) {
     element.draw(graphics, x, y);
     return element.w;
   }

@@ -2,8 +2,6 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/red_sand/builder_cast/helmet_plating",
   "pattern": "modernfoundry:helmet_plating",
-  "pattern_item": {
-    "tag": "modernfoundry:casts/red_sand"
-  },
+  "pattern_item": "#modernfoundry:casts/red_sand",
   "result": "modernfoundry:helmet_plating_red_sand_cast"
 }

@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/soup/meat",
-  "cast": {
-    "item": "minecraft:bowl"
-  },
+  "cast": "minecraft:bowl",
   "cast_consumed": true,
   "cooling_time": 1,
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:meat_soup"
   },
+  "id": "modernfoundry:smeltery/casting/soup/meat",
   "result": "modernfoundry:meat_soup"
 }

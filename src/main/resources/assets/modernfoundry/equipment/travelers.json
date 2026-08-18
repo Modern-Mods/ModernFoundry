@@ -1,0 +1,13 @@
+{
+  "layers": {
+    "humanoid": [
+      { "texture": "modernfoundry:travelers/base" },
+      { "texture": "modernfoundry:travelers/cuirass" },
+      { "texture": "modernfoundry:travelers/metal" }
+    ],
+    "humanoid_leggings": [
+      { "texture": "modernfoundry:travelers/cuirass" },
+      { "texture": "modernfoundry:travelers/metal" }
+    ]
+  }
+}

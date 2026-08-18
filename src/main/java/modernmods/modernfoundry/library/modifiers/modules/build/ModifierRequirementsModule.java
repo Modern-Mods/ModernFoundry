@@ -6,9 +6,9 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.json.predicate.modifier.ModifierPredicate;
 import modernmods.modernfoundry.library.json.predicate.tool.HasModifierPredicate;
@@ -113,13 +113,13 @@ public class ModifierRequirementsModule implements ValidateModifierHook, Modifie
 
     /** Sets the translation key from a modifier ID */
     public Builder modifierKey(ModifierId id) {
-      this.translationKey = Util.makeTranslationKey("modifier", id) + ".requirements";
+      this.translationKey = Util.makeTranslationKey("modifier", id.getIdentifier()) + ".requirements";
       return this;
     }
 
     /** Sets the translation key from a modifier ID */
     public Builder modifierKey(LazyModifier id) {
-      this.translationKey = Util.makeTranslationKey("modifier", id.getId()) + ".requirements";
+      this.translationKey = Util.makeTranslationKey("modifier", id.getId().getIdentifier()) + ".requirements";
       return this;
     }
 

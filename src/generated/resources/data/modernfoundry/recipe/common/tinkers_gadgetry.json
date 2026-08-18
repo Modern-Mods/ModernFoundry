@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:book"
-    },
-    {
-      "tag": "c:slimeball/sky"
-    }
+    "minecraft:book",
+    "#c:slimeball/sky"
   ],
   "result": {
     "id": "modernfoundry:tinkers_gadgetry"

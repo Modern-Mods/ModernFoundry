@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/constantan/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/constantan"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/constantan"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/constantan/nugget",
+  "ingredient": "#c:nuggets/constantan",
   "material": "modernfoundry:constantan",
   "needed": 9,
   "value": 1

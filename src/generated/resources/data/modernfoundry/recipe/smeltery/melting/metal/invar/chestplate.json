@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/invar/chestplate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/chestplates/invar"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/chestplates/invar"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/invar/chestplate",
+  "ingredient": "#c:armors/chestplates/invar",
   "result": {
     "amount": 720,
     "tag": "c:molten_invar",

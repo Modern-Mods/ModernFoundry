@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/signalum/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/signalum"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/signalum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/signalum/dust",
+  "ingredient": "#c:dusts/signalum",
   "result": {
     "amount": 90,
     "tag": "c:molten_signalum"

@@ -1,5 +1,5 @@
 {
-  "_comment": "Modern Foundry Common",
+  "_comment": "Tinkers Common",
   
   "block.modernfoundry.sky_slime": "Himmelslemsblock",
   "block.modernfoundry.sky_slime.tooltip": "Kletar fast sig till både slem och honung",
@@ -171,10 +171,10 @@
   
   "item.modernfoundry.materials_and_you": "Materialen och dig",
   "item.modernfoundry.materials_and_you.tooltip": "Introduktion för verktyg och material\nav Selena",
-  "item.modernfoundry.encyclopedia": "Modern Foundry",
-  "item.modernfoundry.encyclopedia.tooltip": "Referensguiden som alla Modern Foundry-spelare behöver\nav Selena",
+  "item.modernfoundry.encyclopedia": "Tinkersencyklopedin",
+  "item.modernfoundry.encyclopedia.tooltip": "Referensguiden som alla Tinkers-spelare behöver\nav Selena",
   
-  "item.modernfoundry.tinkers_gadgetry": "Modern Foundry manicker",
+  "item.modernfoundry.tinkers_gadgetry": "Tinkers manicker",
   "item.modernfoundry.tinkers_gadgetry.tooltip": "Hur man använder slem i vardagliga sysslor\nav Melvin",
   
   "item.modernfoundry.puny_smelting": "Pjunkig smältning",
@@ -264,7 +264,7 @@
   "item.modernfoundry.copper_can.contents": "Innehåller: 1 tacka %s",
   
   
-  "_comment": "Modern Foundry Patterns",
+  "_comment": "Tinkers Patterns",
   
   "pattern.modernfoundry.repair_kit": "Reparationssats",
   
@@ -294,7 +294,7 @@
   "pattern.modernfoundry.tough_handle": "Robust handtag",
   
   
-  "_comment": "Modern Foundry Gold Casts",
+  "_comment": "Tinkers Gold Casts",
   
   "item.modernfoundry.blank_cast": "Blank guldavgjutning",
   "item.modernfoundry.ingot_cast": "Guldavgjutning för tacka",
@@ -335,7 +335,7 @@
   "item.modernfoundry.tough_handle_cast": "Guldavgjutning för robust handtag",
   
   
-  "_comment": "Modern Foundry Sand Casts",
+  "_comment": "Tinkers Sand Casts",
   
   "item.modernfoundry.blank_sand_cast": "Blank sandavgjutning",
   "item.modernfoundry.ingot_sand_cast": "Sandavgjutning för tacka",
@@ -376,7 +376,7 @@
   "item.modernfoundry.tough_handle_sand_cast": "Sandavgjutning för robust handtag",
   
   
-  "_comment": "Modern Foundry Red Sand Casts",
+  "_comment": "Tinkers Red Sand Casts",
   
   "item.modernfoundry.blank_red_sand_cast": "Blank rödsandsavgjutning",
   "item.modernfoundry.ingot_red_sand_cast": "Rödsandsavgjutning för tacka",
@@ -417,7 +417,7 @@
   "item.modernfoundry.tough_handle_red_sand_cast": "Rödsandsavgjutning för robust handtag",
   
   
-  "_comment": "Modern Foundry Fluids",
+  "_comment": "Tinkers Fluids",
   
   "block.modernfoundry.blazing_blood_fluid": "Brännarblod",
   "fluid.modernfoundry.blazing_blood": "Brännarblod",
@@ -718,7 +718,7 @@
   "item.modernfoundry.molten_refined_obsidian_bucket": "Hink med nedsmält raffinerad obsidian",
   
   
-  "_comment": "Modern Foundry Gadgets",
+  "_comment": "Tinkers Gadgets",
   
   "block.modernfoundry.punji": "Punjipinnar",
   "block.modernfoundry.punji.tooltip": "Vassa! Kan även fästas på väggar.",
@@ -772,20 +772,20 @@
   "block.modernfoundry.zombified_piglin_head": "Zombifierad piglin-huvud",
   
   
-  "_comment": "Modern Foundry Tables",
+  "_comment": "Tinkers Tables",
   
   "block.modernfoundry.crafting_station": "Tillverkningsstation",
   
-  "block.modernfoundry.tinker_station": "Modern Foundry",
-  "block.modernfoundry.tinkers_anvil": "Modern Foundry",
-  "block.modernfoundry.scorched_anvil": "Modern Foundry",
+  "block.modernfoundry.tinker_station": "Tinkersstation",
+  "block.modernfoundry.tinkers_anvil": "Tinkersstäd",
+  "block.modernfoundry.scorched_anvil": "Tinkersstäd",
   
   "block.modernfoundry.part_builder": "Delbyggare",
   
   "block.modernfoundry.part_chest": "Delkista",
   "block.modernfoundry.part_chest.tooltip": "Håller upp till 256 olika verktygsdelar",
   
-  "block.modernfoundry.tinkers_chest": "Modern Foundry",
+  "block.modernfoundry.tinkers_chest": "Tinkerskista",
   "block.modernfoundry.tinkers_chest.tooltip": "Håller upp till 64 föremålsgrupper med 16 föremål",
   
   "block.modernfoundry.cast_chest": "Avgjutningskista",
@@ -793,7 +793,7 @@
   
   "item.modernfoundry.pattern": "Mönster",
   
-  "_comment": "Modern Foundry Tools",
+  "_comment": "Tinkers Tools",
   
   "item.modernfoundry.pickaxe": "Hacka",
   "item.modernfoundry.sledge_hammer": "Slägga",
@@ -844,7 +844,7 @@
   "item.modernfoundry.slime_helmet.material.modernfoundry.pig_iron": "Slemskalle av zombifierad piglin",
   
   
-  "_comment": "Modern Foundry Tool Parts",
+  "_comment": "Tinkers Tool Parts",
   
   "item.modernfoundry.repair_kit": "Reparationssats",
   
@@ -936,7 +936,7 @@
   "multiblock.modernfoundry.tiny.no_fuel_tank": "Måste placeras ovanför en bränsletank eller en uppvärmningsanordning för att fungera",
   
   
-  "_comment": "Modern Foundry Smeltery",
+  "_comment": "Tinkers Smeltery",
   
   "block.modernfoundry.grout": "Grout",
   "block.modernfoundry.grout.tooltip": "Jag är Grout!",
@@ -1023,7 +1023,7 @@
   "block.modernfoundry.seared_chute.tooltip": "Matar in och ut föremål ur smältverk",
   
   
-  "_comment": "Modern Foundry Foundry",
+  "_comment": "Tinkers Foundry",
   
   "block.modernfoundry.nether_grout": "Nethergrout",
   "block.modernfoundry.nether_grout.tooltip": "Vi är Grout!",
@@ -1109,7 +1109,7 @@
   "gui.modernfoundry.fluid.hold_shift": "Håll ned §e§oShift§r§7 för hinkmängd",
   
   
-  "_comment": "Modern Foundry World",
+  "_comment": "Tinkers World",
   
   "entity.modernfoundry.earth_slime": "Slemkub",
   "entity.modernfoundry.sky_slime": "Himmelslem",
@@ -1312,7 +1312,7 @@
   "material.modernfoundry.flint": "Flinta",
   "material.modernfoundry.flint.basalt": "Basalt",
   "material.modernfoundry.flint.format": "%s av flinta",
-  "material.modernfoundry.flint.flavor": "Detta tänder gnistan hos varje Modern Foundry-spelare!",
+  "material.modernfoundry.flint.flavor": "Detta tänder gnistan hos varje Tinkers-spelare!",
   "material.modernfoundry.flint.encyclopedia": "Ökar skada med en fjärdedel av roten ur den förlorade hållbarheten",
   
   "material.modernfoundry.bone": "Ben",
@@ -1332,7 +1332,7 @@
   "material.modernfoundry.string": "Tråd",
   "material.modernfoundry.string.format": "%s av tråd",
   "material.modernfoundry.string.flavor": "Teoretiskt sett det bästa materialet.",
-  "material.modernfoundry.string.encyclopedia": "Låter verktyget att repareras med tråd i Modern Foundry eller arbetsbänken",
+  "material.modernfoundry.string.encyclopedia": "Låter verktyget att repareras med tråd i tinkerstationen eller arbetsbänken",
   
   "material.modernfoundry.leather": "Läder",
   "material.modernfoundry.leather.format": "%s av läder",
@@ -1441,7 +1441,7 @@
   
   "material.modernfoundry.manyullyn": "Manyullyn",
   "material.modernfoundry.manyullyn.format": "%s av manyullyn",
-  "material.modernfoundry.manyullyn.flavor": "Metallen som de flesta Modern Foundry-spelarna aldrig kommer uttala rätt. Även känt som ett utmärkt material för att skära saker och ting.",
+  "material.modernfoundry.manyullyn.flavor": "Metallen som de flesta Tinkers-spelarna aldrig kommer uttala rätt. Även känt som ett utmärkt material för att skära saker och ting.",
   "material.modernfoundry.manyullyn.encyclopedia": "Ger +2 skada per nivå efter 8 kontinuerliga träffar",
   
   "material.modernfoundry.hepatizon": "Hepatizon",
@@ -1574,7 +1574,7 @@
   "material.modernfoundry.steel.encyclopedia": "Ger +4 % hållbarhet, skada och hastighet per nivå",
 
   "material.modernfoundry.bronze": "Brons",
-  "material.modernfoundry.bronze.format": "%s av Modern Foundry",
+  "material.modernfoundry.bronze.format": "%s av tinkersbrons",
   "material.modernfoundry.bronze.flavor": "Inte att förväxlas med brons.",
   "material.modernfoundry.bronze.encyclopedia": "Ger +6 grävhastighet per nivå vid full hållbarhet, där under 50 % hållbarhet ger ingenting",
 
@@ -1606,7 +1606,7 @@
   
   "_comment": "Modifiers",
   
-  "key.categories.modernfoundry": "Modern Foundry",
+  "key.category.modernfoundry.modernfoundry": "Modern Foundry",
   "key.modernfoundry.helmet_interact": "Hjälminteraktion",
   "key.modernfoundry.leggings_interact": "Byxinteraktion",
   
@@ -2378,12 +2378,12 @@
   
   "_comment": "GUIs",
   
-  "itemGroup.modernfoundry.general": "Modern Foundry allmänna föremål",
-  "itemGroup.modernfoundry.tools": "Modern Foundry verktyg",
-  "itemGroup.modernfoundry.tool_parts": "Modern Foundry verktygsdelar",
-  "itemGroup.modernfoundry.smeltery": "Modern Foundry smältning",
-  "itemGroup.modernfoundry.world": "Modern Foundry värld",
-  "itemGroup.modernfoundry.gadgets": "Modern Foundry manicker",
+  "itemGroup.modernfoundry.general": "Tinkers allmänna föremål",
+  "itemGroup.modernfoundry.tools": "Tinkers verktyg",
+  "itemGroup.modernfoundry.tool_parts": "Tinkers verktygsdelar",
+  "itemGroup.modernfoundry.smeltery": "Tinkers smältning",
+  "itemGroup.modernfoundry.world": "Tinkers värld",
+  "itemGroup.modernfoundry.gadgets": "Tinkers manicker",
   
   "gui.modernfoundry.crafting_station": "Tillverkningsstation",
   "gui.modernfoundry.crafting_station.uncraftable": "Detta föremål kan för tillfället inte tillverkas av spelaren",
@@ -2396,11 +2396,11 @@
   "gui.modernfoundry.part_builder.uncraftable": "Kan inte formas",
   "gui.modernfoundry.part_builder.uncraftable.tooltip": "Materialet kan inte formas i delbyggaren. Andra metoder, t.ex. avgjutning, krävs.",
   
-  "gui.modernfoundry.tinkers_chest": "Modern Foundry",
+  "gui.modernfoundry.tinkers_chest": "Tinkerkista",
   "gui.modernfoundry.cast_chest": "Avgjutningskista",
   "gui.modernfoundry.part_chest": "Delkista",
   
-  "gui.modernfoundry.tinker_station": "Modern Foundry",
+  "gui.modernfoundry.tinker_station": "Tinkerstation",
   "gui.modernfoundry.tinker_station.repair_limited": "Reparera och modifiera",
   "gui.modernfoundry.tinker_station.repair_limited.description": "Låter dig skapa alla grundläggande verktyg och tillämpa de flesta modifierarna. Välj en layout bland knapparna till vänster för att komma igång.",
   "gui.modernfoundry.tinker_station.repair": "Reparera och modifiera",
@@ -2571,20 +2571,20 @@
   
   
   "_comment": "Tool Advancements",
-  "advancements.modernfoundry.tools.materials_and_you.title": "Modern Foundry",
+  "advancements.modernfoundry.tools.materials_and_you.title": "Tinkerslärling",
   "advancements.modernfoundry.tools.materials_and_you.description": "Tillverka \"Materialen och dig\", introduktionsboken för Modern Foundry",
   "advancements.modernfoundry.tools.part_builder.title": "Delbyggare",
   "advancements.modernfoundry.tools.part_builder.description": "Skapa en delbyggare, ditt första steg till att skapa verktyg",
   "advancements.modernfoundry.tools.make_part.title": "Verktygsdelar",
   "advancements.modernfoundry.tools.make_part.description": "Skapa din första verktygsdel med ett mönster och lite material i delbyggare",
-  "advancements.modernfoundry.tools.tinker_station.title": "Modern Foundry",
-  "advancements.modernfoundry.tools.tinker_station.description": "Skapa en Modern Foundry för att kombinera delar till verktyg",
-  "advancements.modernfoundry.tools.tinker_tool.title": "Modern Foundry-novis",
-  "advancements.modernfoundry.tools.tinker_tool.description": "Skapa ditt första Modern Foundry",
+  "advancements.modernfoundry.tools.tinker_station.title": "Tinkerstation",
+  "advancements.modernfoundry.tools.tinker_station.description": "Skapa en tinkerstation för att kombinera delar till verktyg",
+  "advancements.modernfoundry.tools.tinker_tool.title": "Tinkers-novis",
+  "advancements.modernfoundry.tools.tinker_tool.description": "Skapa ditt första tinkersverktyg",
   "advancements.modernfoundry.tools.travelers_gear.title": "Resenär",
   "advancements.modernfoundry.tools.travelers_gear.description": "Tillverka en fullständig uppsättning av resenärsutrustning",
   "advancements.modernfoundry.tools.modified.title": "Modifikation",
-  "advancements.modernfoundry.tools.modified.description": "Tillämpa en modifierare på ett Modern Foundry",
+  "advancements.modernfoundry.tools.modified.description": "Tillämpa en modifierare på ett tinkersverktyg",
   "advancements.modernfoundry.tools.upgrade_slots.title": "Alla uppgraderingar",
   "advancements.modernfoundry.tools.upgrade_slots.description": "Ge ett verktyg 6 fler uppgraderingsplatser med \"Skrivbar\", \"rekonstruerad\", \"Harmonisk\", \"Återupplivad\" och \"Förgylld\"",
   "advancements.modernfoundry.tools.glass_cannon.title": "Glaskanon",
@@ -2610,7 +2610,7 @@
   "advancements.modernfoundry.smeltery.structure.title": "Mäktiga smältverket",
   "advancements.modernfoundry.smeltery.structure.description": "Tillverka en smältverkskontroll från avgjuten nedsmält koppar, bygg ett smältverk och öppna smältverkets gränssnitt",
   "advancements.modernfoundry.smeltery.tinkers_anvil.title": "Avancerad verktygtillverkning",
-  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Tillverka ett Modern Foundry med legeringar från smältverket!",
+  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Tillverka ett Tinkersstäd med legeringar från smältverket!",
   "advancements.modernfoundry.smeltery.tool_forge.title": "Verktygssmedja",
   "advancements.modernfoundry.smeltery.tool_forge.description": "Smid ett av varje bredverktyg i städet",
   "advancements.modernfoundry.smeltery.abilities.title": "Mästare över förmågor",
@@ -2630,11 +2630,11 @@
   "advancements.modernfoundry.foundry.manyullyn_lanterns.title": "Rik belysning",
   "advancements.modernfoundry.foundry.manyullyn_lanterns.description": "Skapa en hel föremålsgrupp med brända eller eldade lyktor som är fyllda med nedsmält manyullyn",
   "advancements.modernfoundry.foundry.encyclopedia.title": "Encyklopedin",
-  "advancements.modernfoundry.foundry.encyclopedia.description": "Tillverka Modern Foundry med din kunskap från alla böcker",
+  "advancements.modernfoundry.foundry.encyclopedia.description": "Tillverka Tinkersencyklopedin med din kunskap från alla böcker",
   
   "_comment": "Gadget Advancements",
-  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Modern Foundry manicker",
-  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Tillverka \"Modern Foundry manicker\" för att börja utforska världen",
+  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Tinkers manicker",
+  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Tillverka \"Tinkers manicker\" för att börja utforska världen",
   "advancements.modernfoundry.world.earth_island.title": "Jordslemsön",
   "advancements.modernfoundry.world.earth_island.description": "Hitta en ö av jordslem i havet",
   "advancements.modernfoundry.world.sky_island.title": "Himmelslemsön",

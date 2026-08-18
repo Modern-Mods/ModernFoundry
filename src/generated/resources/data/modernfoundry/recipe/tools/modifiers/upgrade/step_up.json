@@ -1,22 +1,22 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/step_up",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/step_up",
   "inputs": [
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     },
     {
-      "item": "minecraft:golden_carrot"
+      "ingredient": "minecraft:golden_carrot"
     },
     {
-      "item": "minecraft:leather"
+      "ingredient": "minecraft:leather"
     },
     {
-      "item": "minecraft:scaffolding"
+      "ingredient": "minecraft:scaffolding"
     },
     {
-      "item": "minecraft:scaffolding"
+      "ingredient": "minecraft:scaffolding"
     }
   ],
   "level": {
@@ -26,7 +26,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/leggings"
-  }
+  "tools": "#modernfoundry:modifiable/armor/leggings"
 }

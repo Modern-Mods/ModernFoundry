@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/seared/grout",
-  "ingredient": {
-    "item": "modernfoundry:grout"
-  },
+  "ingredient": "modernfoundry:grout",
   "result": {
     "amount": 500,
     "fluid": "modernfoundry:seared_stone"

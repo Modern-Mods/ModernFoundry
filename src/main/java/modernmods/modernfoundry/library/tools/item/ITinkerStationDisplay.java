@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.library.tools.helper.TooltipUtil;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 

@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.modifiers.modules.capacity;
 
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierManager;
@@ -25,7 +25,7 @@ public class CapacityBarModule extends CapacityBarHook.PersistentDataCapacityBar
   private final LevelingInt capacity;
   @Nullable
   private final INumericToolStat<?> multiplier;
-  public CapacityBarModule(ResourceLocation key, LevelingInt capacity, @Nullable INumericToolStat<?> multiplier) {
+  public CapacityBarModule(Identifier key, LevelingInt capacity, @Nullable INumericToolStat<?> multiplier) {
     super(key);
     this.capacity = capacity;
     this.multiplier = multiplier;
@@ -33,7 +33,7 @@ public class CapacityBarModule extends CapacityBarHook.PersistentDataCapacityBar
 
   /** Constructor for datagen */
   public CapacityBarModule(LevelingInt capacity, @Nullable INumericToolStat<?> multiplier) {
-    this(ModifierManager.EMPTY, capacity, multiplier);
+    this(ModifierManager.EMPTY.getIdentifier(), capacity, multiplier);
   }
 
   @Override

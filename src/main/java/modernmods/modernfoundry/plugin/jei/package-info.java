@@ -2,6 +2,6 @@
 @MethodsReturnNonnullByDefault
 package modernmods.modernfoundry.plugin.jei;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
+import modernmods.modernfoundry.compat.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

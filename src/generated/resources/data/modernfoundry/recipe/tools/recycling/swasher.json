@@ -6,10 +6,8 @@
     "modernfoundry:tool_handle",
     "modernfoundry:bow_grip"
   ],
-  "pattern": {
-    "item": "modernfoundry:venom_bottle"
-  },
+  "pattern": "modernfoundry:venom_bottle",
   "tools": {
-    "item": "modernfoundry:swasher"
+    "ingredient": "modernfoundry:swasher"
   }
 }

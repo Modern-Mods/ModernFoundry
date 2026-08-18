@@ -1,25 +1,25 @@
 {
-  "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/bronze",
   "neoforge:conditions": [
     {
       "type": "neoforge:or",
       "values": [
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/bronze"
         },
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/tin"
         }
       ]
     }
   ],
+  "type": "modernfoundry:material_fluid",
   "fluid": {
     "amount": 90,
     "tag": "c:molten_bronze"
   },
+  "id": "modernfoundry:tools/materials/casting/bronze",
   "output": "modernfoundry:bronze",
   "temperature": 700
 }

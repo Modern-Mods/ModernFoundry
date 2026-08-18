@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "b": {
-      "item": "modernfoundry:seared_stone"
-    }
+    "b": "modernfoundry:seared_stone"
   },
   "pattern": [
     "bb",
@@ -13,6 +11,5 @@
   "result": {
     "count": 4,
     "id": "modernfoundry:seared_bricks"
-  },
-  "show_notification": true
+  }
 }

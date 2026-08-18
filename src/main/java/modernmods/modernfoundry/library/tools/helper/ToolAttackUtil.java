@@ -29,8 +29,8 @@ import net.minecraft.world.level.Level;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.ForgeHooks;
 import net.neoforged.neoforge.entity.PartEntity;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
-import modernmods.hilt.util.CombatHelper;
-import modernmods.hilt.util.OffhandCooldownTracker;
+import modernmods.mantle.util.CombatHelper;
+import modernmods.mantle.util.OffhandCooldownTracker;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -74,7 +74,7 @@ public class ToolAttackUtil {
       return (float) holder.getAttributeBaseValue(attribute);
     }
 
-    // Hilt optimizes this method by skipping if the mainhand and offhand have no attributes
+    // Mantle optimizes this method by skipping if the mainhand and offhand have no attributes
     // for our case though, we wish to merge in the tool value so always have something
     // plus, its more efficient in the attribute builder if we can directly modify the final map
 
@@ -160,7 +160,7 @@ public class ToolAttackUtil {
 
   /** Checks if this tool can be used to attack */
   public static boolean isAttackable(LivingEntity attacker, Entity target) {
-    return !attacker.level().isClientSide && target.isAttackable() && !target.skipAttackInteraction(attacker);
+    return !attacker.level().isClientSide() && target.isAttackable() && !target.skipAttackInteraction(attacker);
   }
 
   /**
@@ -241,7 +241,7 @@ public class ToolAttackUtil {
     // removed: sword special attack check and logic, replaced by this
     Entity targetEntity = context.getTarget();
     DamageSource damageSource = context.makeDamageSource();
-    boolean didHit = targetEntity.hurt(damageSource, damage);
+    boolean didHit = targetEntity.hurtOrSimulate(damageSource, damage);
 
     // reset hand to make sure we don't mess with vanilla tools
     ModifierLootingHandler.setLootingSlot(attackerLiving, EquipmentSlot.MAINHAND);
@@ -334,7 +334,7 @@ public class ToolAttackUtil {
     // final attack hooks
     if (attackerPlayer != null) {
       if (targetLiving != null) {
-        if (!level.isClientSide && !isExtraAttack) {
+        if (!level.isClientSide() && !isExtraAttack) {
           ItemStack held = attackerLiving.getItemBySlot(sourceSlot);
           if (!held.isEmpty()) {
             held.hurtEnemy(targetLiving, attackerPlayer);
@@ -388,6 +388,18 @@ public class ToolAttackUtil {
   }
 
   /**
+   * Spawns the sweep attack particle in front of the player, replicating the visual portion of the vanilla sweep attack.
+   * Vanilla no longer exposes {@code Player#sweepAttack()}; the sweep damage is handled internally by the tool AOE logic, so this covers just the particle effect.
+   */
+  public static void sweepAttack(Player player) {
+    if (player.level() instanceof ServerLevel server) {
+      double xd = -Mth.sin(player.getYRot() * (float) (Math.PI / 180.0));
+      double zd =  Mth.cos(player.getYRot() * (float) (Math.PI / 180.0));
+      server.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + xd, player.getY(0.5), player.getZ() + zd, 0, xd, 0.0, zd, 0.0D);
+    }
+  }
+
+  /**
    * Disables knockback on the given entity.
    * @return Attribute instance to enable knockback later with {@link #enableKnockback(AttributeInstance)}, or null if no knockback was disabled.
    */
@@ -423,7 +435,7 @@ public class ToolAttackUtil {
     // set hurt resistance time to 0 because we always want to deal damage in traits
     int lastInvulnerableTime = target.invulnerableTime;
     target.invulnerableTime = 0;
-    boolean hit = target.hurt(source, damage);
+    boolean hit = target.hurtOrSimulate(source, damage);
     // reset to the old time so bows work right
     target.invulnerableTime = lastInvulnerableTime;
     return hit;
@@ -513,7 +525,7 @@ public class ToolAttackUtil {
    */
   @Deprecated(forRemoval = true)
   public static float getAttributeAttackDamage(IToolStackView tool, LivingEntity holder, EquipmentSlot slotType) {
-    if (holder.level().isClientSide) {
+    if (holder.level().isClientSide()) {
       return (float) holder.getAttributeValue(Attributes.ATTACK_DAMAGE);
     }
     // TODO 1.21: consider inlining this method as its only used once
@@ -524,9 +536,9 @@ public class ToolAttackUtil {
   @Deprecated(forRemoval = true)
   public static boolean dealDefaultDamage(LivingEntity attacker, Entity target, float damage) {
     if (attacker instanceof Player player) {
-      return target.hurt(attacker.damageSources().playerAttack(player), damage);
+      return target.hurtOrSimulate(attacker.damageSources().playerAttack(player), damage);
     }
-    return target.hurt(attacker.damageSources().mobAttack(attacker), damage);
+    return target.hurtOrSimulate(attacker.damageSources().mobAttack(attacker), damage);
   }
 
   /** @deprecated use {@link #performAttack(IToolStackView, ToolAttackContext)} */

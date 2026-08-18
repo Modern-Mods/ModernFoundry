@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/blasting",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "tag": "c:gunpowders"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/blasting",
+  "input": "#c:gunpowders",
   "level": {
     "max": 5
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/harvest/stone"
-  }
+  "tools": "#modernfoundry:modifiable/harvest/stone"
 }

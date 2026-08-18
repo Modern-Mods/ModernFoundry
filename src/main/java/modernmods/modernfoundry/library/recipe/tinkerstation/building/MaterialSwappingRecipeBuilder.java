@@ -1,17 +1,18 @@
 package modernmods.modernfoundry.library.recipe.tinkerstation.building;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.tools.part.IToolPart;
@@ -53,7 +54,7 @@ public class MaterialSwappingRecipeBuilder extends AbstractRecipeBuilder<Materia
 
   /** Creates a builder for the given tool */
   public static MaterialSwappingRecipeBuilder tools(TagKey<Item> tag) {
-    return tools(Ingredient.of(tag));
+    return tools(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tag));
   }
 
   /** Adds the given index to the recipe */
@@ -92,11 +93,11 @@ public class MaterialSwappingRecipeBuilder extends AbstractRecipeBuilder<Materia
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, Loadables.ITEM.getKey(tools.getItems()[0].getItem()));
+    save(consumer, Loadables.ITEM.getKey(tools.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)[0].getItem()));
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     int[] indices = this.indices.stream().toArray();
     if (indices.length == 0) {
       throw new IllegalStateException("Must set index");

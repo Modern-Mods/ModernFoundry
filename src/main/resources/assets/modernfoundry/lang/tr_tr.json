@@ -1,5 +1,5 @@
 {
-  "_comment": "Modern Foundry Ortak ",
+  "_comment": "Onarıcı Ortak ",
 
   "block.modernfoundry.sky_slime": "Gökbalçığı Bloğu",
   "block.modernfoundry.sky_slime.tooltip": "Hem balçığa hem de bala yapışır",
@@ -173,10 +173,10 @@
 
   "item.modernfoundry.materials_and_you": "Malzemeler ve Sen",
   "item.modernfoundry.materials_and_you.tooltip": "Araçların ve malzemelerin tanıtım kitabı\nSelena tarafından",
-  "item.modernfoundry.encyclopedia": "Modern Foundry Bilgiliği",
-  "item.modernfoundry.encyclopedia.tooltip": "Her Modern Foundry gerekecek kaynak kitabı\nSelena tarafından",
+  "item.modernfoundry.encyclopedia": "Onarıcılığın Bilgiliği",
+  "item.modernfoundry.encyclopedia.tooltip": "Her onarıcıya gerekecek kaynak kitabı\nSelena tarafından",
 
-  "item.modernfoundry.tinkers_gadgetry": "Modern Foundry Ivır Zıvırlığı",
+  "item.modernfoundry.tinkers_gadgetry": "Onarıcının Ivır Zıvırlığı",
   "item.modernfoundry.tinkers_gadgetry.tooltip": "Günlük görevler için balçık kullanımı kitabı\nMelvin tarafından",
 
   "item.modernfoundry.puny_smelting": "Cılız Kallama",
@@ -274,7 +274,7 @@
   "item.modernfoundry.copper_can.contents": "İçindeki: 1 külçe %s",
 
 
-  "_comment": "Modern Foundry Taslakları",
+  "_comment": "Onarıcının Taslakları",
 
   "pattern.modernfoundry.repair_kit": "Onarım Takımı",
 
@@ -306,7 +306,7 @@
   "pattern.modernfoundry.bow_grip": "Yay Tutamacı",
 
 
-  "_comment": "Modern Foundry Altın Kalıpları",
+  "_comment": "Onarıcının Altın Kalıpları",
 
   "item.modernfoundry.blank_cast": "Düz Altın Kalıp",
   "item.modernfoundry.ingot_cast": "Külçe Altın Kalıbı",
@@ -348,7 +348,7 @@
   "item.modernfoundry.tough_handle_cast": "Sert Sap Altın Kalıbı",
 
 
-  "_comment": "Modern Foundry Kum Kalıpları",
+  "_comment": "Onarıcının Kum Kalıpları",
 
   "item.modernfoundry.blank_sand_cast": "Düz Kum Kalıp",
   "item.modernfoundry.ingot_sand_cast": "Külçe Kum Kalıbı",
@@ -390,7 +390,7 @@
   "item.modernfoundry.tough_handle_sand_cast": "Sert Sap Kum Kalıbı",
 
 
-  "_comment": "Modern Foundry Kırmızı Kum Kalıpları",
+  "_comment": "Onarıcının Kırmızı Kum Kalıpları",
 
   "item.modernfoundry.blank_red_sand_cast": "Düz Kırmızı Kum Kalıp",
   "item.modernfoundry.ingot_red_sand_cast": "Külçe Kırmızı Kum Kalıbı",
@@ -432,7 +432,7 @@
   "item.modernfoundry.tough_handle_red_sand_cast": "Sert Sap Kırmızı Kum Kalıbı",
 
 
-  "_comment": "Modern Foundry Sıvıları",
+  "_comment": "Onarıcının Sıvıları",
 
   "block.modernfoundry.blazing_blood_fluid": "Alazlı Kan",
   "fluid.modernfoundry.blazing_blood": "Alazlı Kan",
@@ -778,7 +778,7 @@
   "item.modernfoundry.molten_refined_obsidian_bucket": "Ergimiş İşlenmiş Obsidiyen Kovası",
 
 
-  "_comment": "Modern Foundry Ivır Zıvırları",
+  "_comment": "Onarıcının Ivır Zıvırları",
 
   "block.modernfoundry.punji": "Punji Kazığı",
   "block.modernfoundry.punji.tooltip": "Sivri! Ayrıca duvarlara da yapışır.",
@@ -832,13 +832,13 @@
   "block.modernfoundry.zombified_piglin_head": "Zombileşmiş Piglin Kafası",
 
 
-  "_comment": "Modern Foundry Masaları",
+  "_comment": "Onarıcının Masaları",
 
   "block.modernfoundry.crafting_station": "Çalışma İstasyonu",
 
-  "block.modernfoundry.tinker_station": "Modern Foundry İstasyonu",
-  "block.modernfoundry.tinkers_anvil": "Modern Foundry Örsü",
-  "block.modernfoundry.scorched_anvil": "Modern Foundry Örsü",
+  "block.modernfoundry.tinker_station": "Onarıcı İstasyonu",
+  "block.modernfoundry.tinkers_anvil": "Onarıcının Örsü",
+  "block.modernfoundry.scorched_anvil": "Onarıcının Örsü",
 
   "block.modernfoundry.part_builder": "Parça Yapıcı",
   "block.modernfoundry.modifier_worktable": "Değiştirici Çalışma Masası",
@@ -846,7 +846,7 @@
   "block.modernfoundry.part_chest": "Parça Sandığı",
   "block.modernfoundry.part_chest.tooltip": "256'ya kadar farklı araç parçasını tutabilir",
 
-  "block.modernfoundry.tinkers_chest": "Modern Foundry Sandığı",
+  "block.modernfoundry.tinkers_chest": "Onarıcının Sandığı",
   "block.modernfoundry.tinkers_chest.tooltip": "16 eşyadan oluşan 64 yığına kadar tutabilir",
 
   "block.modernfoundry.cast_chest": "Kalıp Sandığı",
@@ -854,7 +854,7 @@
 
   "item.modernfoundry.pattern": "Taslak",
 
-  "_comment": "Modern Foundry Araçları",
+  "_comment": "Onarıcının Araçları",
 
   "_comment_on_format_": "Bu biçimler senin malzeme adlarını ayırmada daha fazla denetim sağlar. Varsayılan olarak boşlukla ayrılıyor. Düzeni değiştirmek istiyorsanız %1$s ve %2$s kullanabilirsiniz.",
   "item.modernfoundry.tool.format": "%s %s",
@@ -922,7 +922,7 @@
   "item.modernfoundry.crystalshot": "Kristal Atış",
   "entity.modernfoundry.crystalshot": "Kristal Atış",
 
-  "_comment": "Modern Foundry Araç Parçaları",
+  "_comment": "Onarıcının Araç Parçaları",
 
   "item.modernfoundry.repair_kit": "Onarım Takımı",
 
@@ -1021,7 +1021,7 @@
   "multiblock.modernfoundry.tiny.no_fuel_tank": "Çalışabilmesi için üstüne yakıt tankı ya da ısıtıcı konulması gerekiyor",
 
 
-  "_comment": "Modern Foundry Kallama Ocağı",
+  "_comment": "Onarıcının Kallama Ocağı",
 
   "block.modernfoundry.grout": "Harç",
   "block.modernfoundry.grout.tooltip": "Ben Harcım(Grout)!",
@@ -1114,7 +1114,7 @@
   "block.modernfoundry.seared_chute.tooltip": "Kallama Ocağı eşya girişi ve çıkışı",
 
 
-  "_comment": "Modern Foundry Dökümevi",
+  "_comment": "Onarıcının Dökümevi",
 
   "block.modernfoundry.nether_grout": "Nether Harcı",
   "block.modernfoundry.nether_grout.tooltip": "Biz harcız(Grout)!",
@@ -1208,7 +1208,7 @@
   "gui.modernfoundry.fluid.hold_shift": "Kova birimi (kk, mk...) için §e§oShift§r§7 basın",
 
 
-  "_comment": "Modern Foundry Dünyası",
+  "_comment": "Onarıcının Dünyası",
 
   "entity.modernfoundry.earth_slime": "Karabalçığı",
   "item.modernfoundry.earth_slime_spawn_egg": "Karabalçığı Çağırma Yumurtası",
@@ -1425,7 +1425,7 @@
 
   "material.modernfoundry.flint": "Çakmak Taşı",
   "material.modernfoundry.flint.basalt": "Bazalt",
-  "material.modernfoundry.flint.flavor": "Modern Foundry kalbindeki alevin kıvılcımını yakacak!",
+  "material.modernfoundry.flint.flavor": "Onarıcının kalbindeki alevin kıvılcımını yakacak!",
   "material.modernfoundry.flint.encyclopedia": "Hasarı, kaybedilmiş dayanıklılık kez nitelik seviyesinin karekökünün çeyreği kadar artırır",
 
   "material.modernfoundry.bone": "Kemik",
@@ -1551,7 +1551,7 @@
   "material.modernfoundry.cobalt.ranged": "Seviye başına çekme hızını ve ok hızını %5 artırır",
 
   "material.modernfoundry.manyullyn": "Menyullen",
-  "material.modernfoundry.manyullyn.flavor": "Çoğu Modern Foundry doğru söyleyemeyeceği metal. Aynı zamanda yıldız kesen malzeme.",
+  "material.modernfoundry.manyullyn.flavor": "Çoğu Onarıcının doğru söyleyemeyeceği metal. Aynı zamanda yıldız kesen malzeme.",
   "material.modernfoundry.manyullyn.encyclopedia": "Ardışık olarak 8 vuruş yapınca seviye başına 2 hasar verir",
   "material.modernfoundry.manyullyn.ranged": "Oklar ardışık olarak 8 ok vuruşu yapınca seviye başına 1 hasar (ok hızı öncesi) verir",
 
@@ -1694,7 +1694,7 @@
 
   "_comment": "Değiştirici",
 
-  "key.categories.modernfoundry": "Modern Foundry Yapımı",
+  "key.category.modernfoundry.modernfoundry": "Onarıcının Yapımı",
   "key.modernfoundry.helmet_interact": "Kask Etkileşimi",
   "key.modernfoundry.leggings_interact": "Pantolon Etkileşimi",
 
@@ -2630,29 +2630,29 @@
 
   "_comment": "Grafiksel Kullanıcı Arayüzü",
 
-  "itemGroup.modernfoundry.general": "Modern Foundry Genel Eşyaları",
-  "itemGroup.modernfoundry.tools": "Modern Foundry Araçları",
-  "itemGroup.modernfoundry.tool_parts": "Modern Foundry Araç Parçaları",
-  "itemGroup.modernfoundry.smeltery": "Modern Foundry Kallama Ocağı",
-  "itemGroup.modernfoundry.world": "Modern Foundry Dünyası",
-  "itemGroup.modernfoundry.gadgets": "Modern Foundry Ivır Zıvırları",
+  "itemGroup.modernfoundry.general": "Onarıcının Genel Eşyaları",
+  "itemGroup.modernfoundry.tools": "Onarıcının Araçları",
+  "itemGroup.modernfoundry.tool_parts": "Onarıcının Araç Parçaları",
+  "itemGroup.modernfoundry.smeltery": "Onarıcının Kallama Ocağı",
+  "itemGroup.modernfoundry.world": "Onarıcının Dünyası",
+  "itemGroup.modernfoundry.gadgets": "Onarıcının Ivır Zıvırları",
 
   "gui.modernfoundry.crafting_station": "Çalışma İstasyonu",
   "gui.modernfoundry.crafting_station.uncraftable": "Bu eşya şu anda oyuncu tarafından üretilebilir değildir",
 
   "gui.modernfoundry.part_builder": "Parça Yapıcı",
-  "gui.modernfoundry.part_builder.info": "Burada kendi Modern Foundry düşkülerini bitirmek için aracının parçalarını üretebilirsin.\n\nParça üretmek için düz taslağı sol yuvaya koyun ve istediğin parçayı seçin. Geriye kalan yuva parçayı üretmek için kullanılan malzemeyi tutar.",
+  "gui.modernfoundry.part_builder.info": "Burada kendi onarıcı düşkülerini bitirmek için aracının parçalarını üretebilirsin.\n\nParça üretmek için düz taslağı sol yuvaya koyun ve istediğin parçayı seçin. Geriye kalan yuva parçayı üretmek için kullanılan malzemeyi tutar.",
   "gui.modernfoundry.part_builder.material_value": "Malzeme değeri: %s",
   "gui.modernfoundry.part_builder.cost": "Taslak gideri: %s",
   "gui.modernfoundry.part_builder.trait": "Nitelik",
   "gui.modernfoundry.part_builder.uncraftable": "Biçimlendirilemez",
   "gui.modernfoundry.part_builder.uncraftable.tooltip": "Malzeme parça yapıcıda biçimlendirilemez. Dökümleme gibi öbür yöntemler gereklidir.",
 
-  "gui.modernfoundry.tinkers_chest": "Modern Foundry Sandığı",
+  "gui.modernfoundry.tinkers_chest": "Onarıcının Sandığı",
   "gui.modernfoundry.cast_chest": "Kalıp Sandığı",
   "gui.modernfoundry.part_chest": "Parça Sandığı",
 
-  "gui.modernfoundry.tinker_station": "Modern Foundry İstasyonu",
+  "gui.modernfoundry.tinker_station": "Onarıcının İstasyonu",
   "gui.modernfoundry.tinker_station.repair_limited": "Onar ve Değiştir",
   "gui.modernfoundry.tinker_station.repair_limited.description": "Bütün sıradan araçların yapılmasına ve çoğu değiştiricinin eklenmesine olanak sağlar. Başlamak için soldaki düğmelerden bir düzen seçin.",
   "gui.modernfoundry.tinker_station.repair": "Onar ve Değiştir",
@@ -2876,20 +2876,20 @@
 
 
   "_comment": "Araç Başarımları",
-  "advancements.modernfoundry.tools.materials_and_you.title": "Modern Foundry Eğitimde",
-  "advancements.modernfoundry.tools.materials_and_you.description": "Malzemeler ve Sen'i üret, Modern Foundry Yapımı'nın tanıtım kitabı",
+  "advancements.modernfoundry.tools.materials_and_you.title": "Onarıcı Eğitimde",
+  "advancements.modernfoundry.tools.materials_and_you.description": "Malzemeler ve Sen'i üret, Onarıcının Yapımı'nın tanıtım kitabı",
   "advancements.modernfoundry.tools.part_builder.title": "Parça Yapıcı",
   "advancements.modernfoundry.tools.part_builder.description": "Parça yapıcıyı yap, araç yapımındaki ilk adımların",
   "advancements.modernfoundry.tools.make_part.title": "Araç Parçaları",
   "advancements.modernfoundry.tools.make_part.description": "Parça yapıcıda ilk araç parçalarını taslak kullanarak yap",
-  "advancements.modernfoundry.tools.tinker_station.title": "Modern Foundry İstasyonu",
-  "advancements.modernfoundry.tools.tinker_station.description": "Parçaları araç olarak birleştirmek için Modern Foundry istasyonu yap",
-  "advancements.modernfoundry.tools.tinker_tool.title": "Çömez Modern Foundry",
-  "advancements.modernfoundry.tools.tinker_tool.description": "İlk Modern Foundry aracını yap",
+  "advancements.modernfoundry.tools.tinker_station.title": "Onarıcı İstasyonu",
+  "advancements.modernfoundry.tools.tinker_station.description": "Parçaları araç olarak birleştirmek için onarıcı istasyonu yap",
+  "advancements.modernfoundry.tools.tinker_tool.title": "Çömez Onarıcı",
+  "advancements.modernfoundry.tools.tinker_tool.description": "İlk onarıcı aracını yap",
   "advancements.modernfoundry.tools.travelers_gear.title": "Gezgin",
   "advancements.modernfoundry.tools.travelers_gear.description": "Bütün gezginin donanımını üret",
   "advancements.modernfoundry.tools.modified.title": "Değiştirilme",
-  "advancements.modernfoundry.tools.modified.description": "Modern Foundry aracına değiştirici uygula",
+  "advancements.modernfoundry.tools.modified.description": "Onarıcı aracına değiştirici uygula",
   "advancements.modernfoundry.tools.upgrade_slots.title": "Tüm Yükseltmeler",
   "advancements.modernfoundry.tools.upgrade_slots.description": "Araca fazladan 6 yükseltme yuvasını yazılabilir, başlanmak, uyumlu, diriltilmiş ve yaldızlı kullanarak verin",
   "advancements.modernfoundry.tools.glass_cannon.title": "Cam Topu",
@@ -2921,7 +2921,7 @@
   "advancements.modernfoundry.smeltery.structure.title": "Yavuz Kallama Ocağı",
   "advancements.modernfoundry.smeltery.structure.description": "Ergimiş bakırı dökümleyerek kallama ocağı denetimcisini üret, kallama ocağını yap ve kallama ocağınınn kullanıcı arayüzünü aç",
   "advancements.modernfoundry.smeltery.tinkers_anvil.title": "İleri Araç Yapımı",
-  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Modern Foundry Örsünü kallama ocağından alaşımlarla üret!",
+  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Onarıcının Örsünü kallama ocağından alaşımlarla üret!",
   "advancements.modernfoundry.smeltery.tool_forge.title": "Araç Dövmek",
   "advancements.modernfoundry.smeltery.tool_forge.description": "Örste bütün koca araçları döv",
   "advancements.modernfoundry.smeltery.abilities.title": "Yetenek Ustası",
@@ -2944,8 +2944,8 @@
   "advancements.modernfoundry.foundry.encyclopedia.description": "Bütün kitaplardan bilginle malzemelerin bilgiliğini üret",
 
   "_comment": "Ivır Zıvır Başarımları",
-  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Modern Foundry Ivır Zıvırlığı",
-  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Dünyayı keşfetmeye başlamak için Modern Foundry Ivır Zıvırlığı'nı üret",
+  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Onarıcının Ivır Zıvırlığı",
+  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Dünyayı keşfetmeye başlamak için Onarıcının Ivır Zıvırlığı'nı üret",
   "advancements.modernfoundry.world.earth_island.title": "Karabalçığı Adası",
   "advancements.modernfoundry.world.earth_island.description": "Okyanusta karabalçığı adasını bul",
   "advancements.modernfoundry.world.sky_island.title": "Gökbalçığı Adası",

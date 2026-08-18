@@ -35,9 +35,9 @@ public class EnderSlimeEntity extends TravelersPlateSlimeEntity {
   }
 
   @Override
-  protected void actuallyHurt(DamageSource damageSrc, float damageAmount) {
+  protected void actuallyHurt(net.minecraft.server.level.ServerLevel level, DamageSource damageSrc, float damageAmount) {
     float oldHealth = getHealth();
-    super.actuallyHurt(damageSrc, damageAmount);
+    super.actuallyHurt(level, damageSrc, damageAmount);
     if (isAlive() && getHealth() < oldHealth) {
       TeleportHelper.randomNearbyTeleport(this, teleportPredicate);
     }

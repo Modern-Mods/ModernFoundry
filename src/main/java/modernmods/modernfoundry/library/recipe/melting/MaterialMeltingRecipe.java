@@ -2,18 +2,18 @@ package modernmods.modernfoundry.library.recipe.melting;
 
 import lombok.Getter;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.recipe.helper.FluidOutput;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.recipe.helper.FluidOutput;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.recipe.casting.material.MaterialCastingLookup;
@@ -37,13 +37,13 @@ public class MaterialMeltingRecipe implements IMeltingRecipe, IMultiRecipe<Melti
     MaterialMeltingRecipe::new);
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   private final MaterialVariant input;
   private final int temperature;
   private final FluidOutput result;
   private final List<FluidOutput> byproducts;
 
-  public MaterialMeltingRecipe(ResourceLocation id, MaterialVariantId input, int temperature, FluidOutput result, List<FluidOutput> byproducts) {
+  public MaterialMeltingRecipe(Identifier id, MaterialVariantId input, int temperature, FluidOutput result, List<FluidOutput> byproducts) {
     this.id = id;
     this.input = MaterialVariant.of(input);
     this.temperature = temperature;
@@ -51,9 +51,9 @@ public class MaterialMeltingRecipe implements IMeltingRecipe, IMultiRecipe<Melti
     this.byproducts = byproducts;
   }
 
-  /** @deprecated use {@link #MaterialMeltingRecipe(ResourceLocation,MaterialVariantId,int,FluidOutput,List)} */
+  /** @deprecated use {@link #MaterialMeltingRecipe(Identifier,MaterialVariantId,int,FluidOutput,List)} */
   @Deprecated(forRemoval = true)
-  public MaterialMeltingRecipe(ResourceLocation id, MaterialVariantId input, int temperature, FluidOutput result) {
+  public MaterialMeltingRecipe(Identifier id, MaterialVariantId input, int temperature, FluidOutput result) {
     this(id, input, temperature, result, List.of());
   }
 
@@ -97,7 +97,7 @@ public class MaterialMeltingRecipe implements IMeltingRecipe, IMultiRecipe<Melti
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends MaterialMeltingRecipe> getSerializer() {
     return TinkerSmeltery.materialMeltingSerializer.get();
   }
 

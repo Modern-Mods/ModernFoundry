@@ -1,65 +1,7 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/base/staff",
   "textures": {
-    "tool":       "modernfoundry:item/tool/staff/ichor",
+    "tool": "modernfoundry:item/tool/staff/ichor",
     "large_tool": "modernfoundry:item/tool/staff/ichor_large"
-  },
-  "large": true,
-  "modifier_maps": ["modernfoundry:staff/ichor", "modernfoundry:staff"],
-  "modifier_roots": {
-    "small": [ "modernfoundry:item/tool/staff/modifiers/ichor/", "modernfoundry:item/tool/staff/modifiers/" ],
-    "large": [ "modernfoundry:item/tool/staff/large_modifiers/ichor/", "modernfoundry:item/tool/staff/large_modifiers/" ]
-  },
-  "first_modifiers": [ "modernfoundry:dyed", "modernfoundry:embellishment" ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 1 },
-      "model": "modernfoundry:item/tool/staff/ichor/charging_1"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.4 },
-      "model": "modernfoundry:item/tool/staff/ichor/charging_2"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.7 },
-      "model": "modernfoundry:item/tool/staff/ichor/charging_3"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.9 },
-      "model": "modernfoundry:item/tool/staff/ichor/charging_4"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 1.0 },
-      "model": "modernfoundry:item/tool/staff/ichor/charging_5"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/staff/ichor/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.05 },
-      "model": "modernfoundry:item/tool/staff/ichor/blocking_1"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.4 },
-      "model": "modernfoundry:item/tool/staff/ichor/blocking_2"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.7 },
-      "model": "modernfoundry:item/tool/staff/ichor/blocking_3"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.9 },
-      "model": "modernfoundry:item/tool/staff/ichor/blocking_4"
-    },
-    {
-      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 1.0 },
-      "model": "modernfoundry:item/tool/staff/ichor/blocking_5"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/staff/ichor/broken"
-    }
-  ]
+  }
 }

@@ -13,8 +13,8 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -26,12 +26,11 @@ import java.util.Objects;
 
 public class GlowBlock extends Block {
 
-  public static final DirectionProperty FACING = BlockStateProperties.FACING;
+  public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
   public GlowBlock(Properties properties) {
-    super(properties);
+    super(properties.noLootTable());
     this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.DOWN));
-    this.drops = BuiltInLootTables.EMPTY;
   }
 
   private static final Map<Direction, VoxelShape> BOUNDS = new EnumMap<>(Direction.class);
@@ -100,12 +99,12 @@ public class GlowBlock extends Block {
 
   @SuppressWarnings("deprecation")
   @Override
-  public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_) {
+  public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, Orientation orientation, boolean p_220069_6_) {
     if (!this.canSurvive(state, worldIn, pos)) {
       worldIn.removeBlock(pos, false);
     }
 
-    super.neighborChanged(state, worldIn, pos, blockIn, fromPos, p_220069_6_);
+    super.neighborChanged(state, worldIn, pos, blockIn, orientation, p_220069_6_);
   }
 
   @SuppressWarnings("deprecation")
@@ -114,7 +113,7 @@ public class GlowBlock extends Block {
     Direction facing = state.getValue(FACING);
     BlockPos placedOn = pos.relative(facing);
 
-    boolean isSolidSide = Block.isFaceFull(level.getBlockState(placedOn).getOcclusionShape(level, pos), facing.getOpposite());
+    boolean isSolidSide = Block.isFaceFull(level.getBlockState(placedOn).getOcclusionShape(), facing.getOpposite());
     boolean isLiquid = level.getBlockState(pos).getBlock() instanceof LiquidBlock;
 
     return !isLiquid && isSolidSide;
@@ -134,7 +133,7 @@ public class GlowBlock extends Block {
     if (state.getBlock() != this && state.canBeReplaced()) {
       // if the location is valid, place the block directly
       if (this.canSurvive(newState, world, pos)) {
-        if (!world.isClientSide) {
+        if (!world.isClientSide()) {
           world.setBlockAndUpdate(pos, newState);
         }
         return true;
@@ -142,7 +141,7 @@ public class GlowBlock extends Block {
         for (Direction direction1 : Direction.values()) {
           newState = this.defaultBlockState().setValue(FACING, direction1);
           if (this.canSurvive(newState, world, pos)) {
-            if (!world.isClientSide) {
+            if (!world.isClientSide()) {
               world.setBlockAndUpdate(pos, newState);
             }
             return true;

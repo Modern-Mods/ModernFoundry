@@ -1,8 +1,9 @@
 package modernmods.modernfoundry.library.recipe;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
-import modernmods.hilt.recipe.container.IRecipeContainer;
+import modernmods.mantle.recipe.container.IRecipeContainer;
 import modernmods.modernfoundry.library.tools.nbt.ToolStack;
 
 /** Container that contains a tinkerable stack and a number of inputs after */
@@ -122,7 +123,8 @@ public interface ITinkerableContainer extends IRecipeContainer {
     default void shrinkInput(int slot, int amount) {
       ItemStack stack = getInput(slot);
       if (!stack.isEmpty()) {
-        ItemStack container = stack.getCraftingRemainingItem();
+        ItemStackTemplate remainderTemplate = stack.getItem().getCraftingRemainder(stack);
+        ItemStack container = remainderTemplate != null ? remainderTemplate.create() : ItemStack.EMPTY;
         if (container.isEmpty() && stack.getItem() == Items.POTION) {
           container = new ItemStack(Items.GLASS_BOTTLE);
         }

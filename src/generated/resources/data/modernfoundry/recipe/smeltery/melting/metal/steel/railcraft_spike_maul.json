@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steel/railcraft_spike_maul",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "railcraft:steel_spike_maul"
+      "type": "neoforge:registered",
+      "value": "railcraft:steel_spike_maul"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steel/railcraft_spike_maul",
   "ingredient": {
     "item": "railcraft:steel_spike_maul"
   },

@@ -1,22 +1,22 @@
 package modernmods.modernfoundry.library.tools.item.ranged;
 
 import com.google.common.collect.ImmutableMultimap;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.component.TooltipDisplay;
 import com.google.common.collect.Multimap;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup.RegistryLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlot.Type;
-import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.SlotAccess;
@@ -27,12 +27,12 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.TooltipContext;
+import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
@@ -40,7 +40,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.common.ItemAbility;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ICapabilityProvider;
-import modernmods.hilt.client.SafeClientAccess;
+import modernmods.mantle.client.SafeClientAccess;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.item.ModifiableItemClientExtension;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -69,7 +69,6 @@ import modernmods.modernfoundry.library.tools.item.ModifiableItem;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 import modernmods.modernfoundry.library.tools.nbt.ModDataNBT;
 import modernmods.modernfoundry.library.tools.nbt.ToolStack;
-import modernmods.modernfoundry.tools.TinkerToolActions;
 import modernmods.modernfoundry.library.utils.TagUtil;
 
 import javax.annotation.Nullable;
@@ -81,7 +80,7 @@ import static modernmods.modernfoundry.library.modifiers.hook.interaction.Genera
 /** Base class for any items that launch projectiles */
 public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implements IModifiableDisplay {
   /** Persistent data key for the ammo being used on drawing back the bow. */
-  public static final ResourceLocation KEY_DRAWBACK_AMMO = TConstruct.getResource("drawback_ammo");
+  public static final Identifier KEY_DRAWBACK_AMMO = TConstruct.getResource("drawback_ammo");
 
   /** Tool definition for the given tool */
   @Getter
@@ -112,28 +111,13 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   /* Enchanting */
 
   @Override
-  public boolean isEnchantable(ItemStack stack) {
-    return false;
-  }
-
-  @Override
-  public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-    return false;
-  }
-
-  @Override
   public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
     return enchantment.is(EnchantmentTags.CURSE) && super.supportsEnchantment(stack, enchantment);
   }
 
   @Override
-  public int getEnchantmentValue() {
-    return 0;
-  }
-
-  @Override
-  public int getEnchantmentLevel(ItemStack stack, Holder<Enchantment> enchantment) {
-    return EnchantmentModifierHook.getEnchantmentLevel(stack, enchantment);
+  public int getEnchantmentLevel(ItemInstance stack, Holder<Enchantment> enchantment) {
+    return stack instanceof ItemStack itemStack ? EnchantmentModifierHook.getEnchantmentLevel(itemStack, enchantment) : 0;
   }
 
   @Override
@@ -154,7 +138,7 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   }
 
   @Override
-  public void onCraftedBy(ItemStack stack, Level worldIn, Player playerIn) {
+  public void onCraftedBy(ItemStack stack, Player playerIn) {
     ToolStack.ensureInitialized(stack, getToolDefinition());
   }
 
@@ -190,8 +174,8 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   /* Damage/Durability */
 
   @Override
-  public boolean isRepairable(ItemStack stack) {
-    // handle in the tinker station
+  public boolean isCombineRepairable(ItemStack stack) {
+    // handle in the tinker station, not the anvil or grindstone
     return false;
   }
 
@@ -252,8 +236,8 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   /* Modifier interactions */
 
   @Override
-  public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    InventoryTickModifierHook.heldInventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+  public void inventoryTick(ItemStack stack, ServerLevel worldIn, Entity entityIn, @javax.annotation.Nullable net.minecraft.world.entity.EquipmentSlot slot) {
+    InventoryTickModifierHook.heldInventoryTick(stack, worldIn, entityIn, slot != null ? slot.getIndex() : 0, slot == net.minecraft.world.entity.EquipmentSlot.MAINHAND);
   }
 
   @Override
@@ -275,8 +259,8 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   }
 
   @Override
-  public boolean canPerformAction(ItemStack stack, ItemAbility toolAction) {
-    return ModifierUtil.canPerformAction(ToolStack.from(stack), toolAction);
+  public boolean canPerformAction(ItemInstance stack, ItemAbility toolAction) {
+    return stack instanceof ItemStack itemStack && ModifierUtil.canPerformAction(ToolStack.from(itemStack), toolAction);
   }
 
   @Override
@@ -291,19 +275,8 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
     return getAttributeModifiers(ToolStack.from(stack), slot);
   }
 
-  @Override
-  public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
-    ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
-    getAttributeModifiers(EquipmentSlot.MAINHAND, stack).forEach((attribute, modifier) -> builder.add(BuiltInRegistries.ATTRIBUTE.wrapAsHolder(attribute), modifier, EquipmentSlotGroup.MAINHAND));
-    getAttributeModifiers(EquipmentSlot.OFFHAND, stack).forEach((attribute, modifier) -> builder.add(BuiltInRegistries.ATTRIBUTE.wrapAsHolder(attribute), modifier, EquipmentSlotGroup.OFFHAND));
-    return builder.build();
-  }
-
-  @Override
-  public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
-    return canPerformAction(stack, TinkerToolActions.SHIELD_DISABLE);
-  }
-
+  // Note: NeoForge's canDisableShield hook was removed in 26.1; shield disabling is now driven by the
+  // weapon data component (disable_blocking_for_seconds).
 
   /* Arrow logic */
 
@@ -313,7 +286,7 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   }
 
   @Override
-  public abstract UseAnim getUseAnimation(ItemStack pStack);
+  public abstract ItemUseAnimation getUseAnimation(ItemStack pStack);
 
   @Override
   public ItemStack finishUsingItem(ItemStack stack, Level pLevel, LivingEntity living) {
@@ -342,7 +315,7 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   public void onUseTick(Level level, LivingEntity living, ItemStack bow, int chargeRemaining) {
     // play the sound at the end of loading as an indicator its loaded, texture is another indicator
     int duration = getUseDuration(bow, living);
-    if (!level.isClientSide) {
+    if (!level.isClientSide()) {
       if (duration - chargeRemaining == ModifierUtil.getPersistentInt(bow, KEY_DRAWTIME, -1)) {
         level.playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.CROSSBOW_LOADING_MIDDLE, SoundSource.PLAYERS, 0.75F, 1.0F);
       }
@@ -362,8 +335,11 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flag) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     TooltipUtil.addInformation(this, stack, context.level(), tooltip, SafeClientAccess.getTooltipKey(), flag);
+  
+    tooltip.forEach(tooltipConsumer);
   }
 
   public int getDefaultTooltipHideFlags(ItemStack stack) {
@@ -381,7 +357,7 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
     return toolForRendering;
   }
 
-  @Override
+  // initializeClient removed from Item/MobEffect/FluidType in 26.1; registered via RegisterClientExtensionsEvent
   public void initializeClient(Consumer<IClientItemExtensions> consumer) {
     consumer.accept(ModifiableItemClientExtension.INSTANCE);
   }
@@ -391,7 +367,12 @@ public abstract class ModifiableLauncherItem extends ProjectileWeaponItem implem
 
   @Override
   public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack) {
-    return ModifiableItem.shouldCauseReequip(oldStack, newStack, false);
+    return shouldCauseReequipAnimation(oldStack, newStack, false);
+  }
+
+  @Override
+  public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+    return ModifiableItem.shouldCauseReequip(oldStack, newStack, slotChanged);
   }
 
 

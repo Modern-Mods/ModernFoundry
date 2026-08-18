@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/minotaur_axe",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 2
+      },
+      {
+        "name": "front",
+        "index": 0
+      },
+      {
+        "name": "back",
+        "index": 1
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:minotaur_axe"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/minotaur_axe/modifiers/"
+    ]
+  }
+}

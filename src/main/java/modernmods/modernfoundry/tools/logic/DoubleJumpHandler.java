@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.tools.logic;
 
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,7 +11,6 @@ import net.neoforged.neoforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.library.tools.capability.PersistentDataCapability;
@@ -19,9 +18,9 @@ import modernmods.modernfoundry.library.tools.nbt.ModDataNBT;
 import modernmods.modernfoundry.shared.TinkerAttributes;
 
 /** Logic to run the double jump attribute */
-@EventBusSubscriber(modid = TConstruct.MOD_ID, bus = Bus.GAME)
+@EventBusSubscriber(modid = TConstruct.MOD_ID)
 public class DoubleJumpHandler {
-  private static final ResourceLocation JUMPS = TConstruct.getResource("jumps");
+  private static final Identifier JUMPS = TConstruct.getResource("jumps");
 
   private DoubleJumpHandler() {}
 
@@ -47,7 +46,7 @@ public class DoubleJumpHandler {
    */
   public static boolean extraJump(Player entity) {
     // validate preconditions, no using when swimming, elytra, or on the ground
-    if (!entity.onGround() && !entity.onClimbable() && !entity.isInWaterOrBubble()) {
+    if (!entity.onGround() && !entity.onClimbable() && !entity.isInWater()) {
       // determine max jumps
       int extraJumps = Mth.floor(entity.getAttributeValue(TinkerAttributes.JUMP_COUNT)) - 1;
       if (extraJumps > 0) {
@@ -57,9 +56,9 @@ public class DoubleJumpHandler {
         if (jumps < extraJumps) {
           // actually jump, this method is nice enough to work in air
           entity.jumpFromGround();
-          RandomSource random = entity.getCommandSenderWorld().getRandom();
+          RandomSource random = entity.level().getRandom();
           for (int i = 0; i < 4; i++) {
-            entity.getCommandSenderWorld().addParticle(ParticleTypes.HAPPY_VILLAGER, entity.getX() - 0.25f + random.nextFloat() * 0.5f, entity.getY(), entity.getZ() - 0.25f + random.nextFloat() * 0.5f, 0, 0, 0);
+            entity.level().addParticle(ParticleTypes.HAPPY_VILLAGER, entity.getX() - 0.25f + random.nextFloat() * 0.5f, entity.getY(), entity.getZ() - 0.25f + random.nextFloat() * 0.5f, 0, 0, 0);
           }
           entity.playSound(Sounds.EXTRA_JUMP.getSound(), 0.5f, 0.5f);
           data.putInt(JUMPS, jumps + 1);

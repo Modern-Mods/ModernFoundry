@@ -26,7 +26,7 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "minecraft:clay_ball"
+      "id": "minecraft:clay_ball"
     },
     "show_toast": true,
     "title": {

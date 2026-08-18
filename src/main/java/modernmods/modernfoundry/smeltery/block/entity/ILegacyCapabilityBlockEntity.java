@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.smeltery.block.entity;
 
 import net.minecraft.core.Direction;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 
 import javax.annotation.Nullable;
 

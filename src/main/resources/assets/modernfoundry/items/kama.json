@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/kama",
+    "parts": [
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "head",
+        "index": 0
+      },
+      {
+        "name": "binding",
+        "index": 2
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:kama"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/kama/modifiers/"
+    ]
+  }
+}

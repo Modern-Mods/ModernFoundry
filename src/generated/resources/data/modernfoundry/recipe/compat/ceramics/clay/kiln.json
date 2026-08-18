@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:compat/ceramics/clay/kiln",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "ceramics"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:compat/ceramics/clay/kiln",
   "ingredient": {
     "item": "ceramics:kiln"
   },

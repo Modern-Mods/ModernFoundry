@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/pewter/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/pewter"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/pewter"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/pewter/ingot",
+  "ingredient": "#c:ingots/pewter",
   "result": {
     "amount": 90,
     "tag": "c:molten_pewter"

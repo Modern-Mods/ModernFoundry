@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/rose_gold/ingot",
-  "ingredient": {
-    "tag": "c:ingots/rose_gold"
-  },
+  "ingredient": "#c:ingots/rose_gold",
   "material": "modernfoundry:rose_gold",
   "needed": 1,
   "value": 1

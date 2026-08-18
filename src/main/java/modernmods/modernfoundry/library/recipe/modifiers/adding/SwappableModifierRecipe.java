@@ -3,16 +3,16 @@ package modernmods.modernfoundry.library.recipe.modifiers.adding;
 import lombok.Getter;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.registry.NamedComponentRegistry;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.registry.NamedComponentRegistry;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.materials.MaterialTooltipCache;
 import modernmods.modernfoundry.library.json.IntRange;
@@ -63,7 +63,7 @@ public class SwappableModifierRecipe extends ModifierRecipe {
   @Getter
   private final Component variant;
 
-  public SwappableModifierRecipe(ResourceLocation id, List<SizedIngredient> inputs, Ingredient toolRequirement, int maxToolSize, ModifierId result, String value, VariantFormatter variantFormatter, @Nullable SlotCount slots, boolean allowCrystal) {
+  public SwappableModifierRecipe(Identifier id, List<SizedIngredient> inputs, Ingredient toolRequirement, int maxToolSize, ModifierId result, String value, VariantFormatter variantFormatter, @Nullable SlotCount slots, boolean allowCrystal) {
     super(id, inputs, toolRequirement, maxToolSize, result, new IntRange(1, 1), slots, allowCrystal, false);
     this.value = value;
     this.variantFormatter = variantFormatter;
@@ -90,7 +90,7 @@ public class SwappableModifierRecipe extends ModifierRecipe {
     }
 
     // do not allow adding the modifier if this variant is already present
-    if (level > 0 && tool.getPersistentData().getString(modifier).equals(value)) {
+    if (level > 0 && tool.getPersistentData().getString(modifier.getIdentifier()).equals(value)) {
       return RecipeResult.failure(ALREADY_PRESENT, result.get().getDisplayName(), variant);
     }
 
@@ -105,7 +105,7 @@ public class SwappableModifierRecipe extends ModifierRecipe {
     }
 
     // set the new value to the modifier
-    persistentData.putString(modifier, value);
+    persistentData.putString(modifier.getIdentifier(), value);
 
     // add modifier if needed
     if (needsModifier) {
@@ -123,7 +123,7 @@ public class SwappableModifierRecipe extends ModifierRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends SwappableModifierRecipe> getSerializer() {
     return TinkerModifiers.swappableModifierSerializer.get();
   }
 
@@ -133,7 +133,7 @@ public class SwappableModifierRecipe extends ModifierRecipe {
   @Override
   public List<ItemStack> getToolWithModifier() {
     if (toolWithModifier == null) {
-      ResourceLocation id = result.getId();
+      Identifier id = result.getId().getIdentifier();
       ModifierEntry result = getDisplayResult();
       toolWithModifier = getToolInputs().stream().map(stack -> withModifiers(stack, maxToolSize, modifiersForResult(result, result), data -> data.putString(id, value))).collect(Collectors.toList());
     }
@@ -143,7 +143,7 @@ public class SwappableModifierRecipe extends ModifierRecipe {
   @Override
   public List<SlotCount> getResultSlots() {
     if (resultSlots == null) {
-      ItemStack[] tools = toolRequirement.getItems();
+      ItemStack[] tools = toolRequirement.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new);
       resultSlots = getResultSlots(getDisplayResult(), tools.length > 0 ? tools[0].getItem() : Items.AIR, value);
     }
     return resultSlots;
@@ -161,10 +161,10 @@ public class SwappableModifierRecipe extends ModifierRecipe {
 
     /* Formatters */
     /** Formats using the modifier ID as a base translation key */
-    VariantFormatter DEFAULT = LOADER.register(getResource("default"), (modifier, variant) -> Component.translatable(Util.makeTranslationKey("modifier", modifier) + "." + variant));
+    VariantFormatter DEFAULT = LOADER.register(getResource("default"), (modifier, variant) -> Component.translatable(Util.makeTranslationKey("modifier", modifier.getIdentifier()) + "." + variant));
     /** Formats using the material translation key */
     VariantFormatter MATERIAL = LOADER.register(getResource("material"), (modifier, variant) -> MaterialTooltipCache.getDisplayName(Objects.requireNonNullElse(MaterialVariantId.tryParse(variant), IMaterial.UNKNOWN_ID)));
     /** Formats using the modifier ID as the base with the variant as a parameter */
-    VariantFormatter PARAMETER = LOADER.register(getResource("parameter"), (modifier, variant) -> Component.translatable(Util.makeTranslationKey("modifier", modifier) + ".variant", variant));
+    VariantFormatter PARAMETER = LOADER.register(getResource("parameter"), (modifier, variant) -> Component.translatable(Util.makeTranslationKey("modifier", modifier.getIdentifier()) + ".variant", variant));
   }
 }

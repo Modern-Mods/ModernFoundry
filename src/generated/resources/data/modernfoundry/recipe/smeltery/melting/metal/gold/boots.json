@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:damagable_melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/boots",
-  "ingredient": {
-    "tag": "modernfoundry:melting/gold/tools_costing_4"
-  },
+  "ingredient": "#modernfoundry:melting/gold/tools_costing_4",
   "result": {
     "amount": 360,
     "tag": "c:molten_gold",

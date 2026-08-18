@@ -79,8 +79,6 @@ public final class MaterialIds {
   public static final MaterialId glowstone = id("glowstone");
   public static final MaterialId ichor = id("ichor");
   public static final MaterialId magma = id("magma");
-  // tier 3 - misc
-  public static final MaterialId jadeite = id("jadeite");
   // tier 4
   public static final MaterialId manyullyn = id("manyullyn");
   public static final MaterialId hepatizon = id("hepatizon");

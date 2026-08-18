@@ -5,27 +5,28 @@ import com.google.gson.annotations.SerializedName;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.ForgeI18n;
-import modernmods.hilt.client.book.HTMLUtils;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.content.PageContent;
-import modernmods.hilt.client.book.data.element.ImageData;
-import modernmods.hilt.client.book.data.element.TextData;
-import modernmods.hilt.client.screen.book.ArrowButton;
-import modernmods.hilt.client.screen.book.BookScreen;
-import modernmods.hilt.client.screen.book.element.BookElement;
-import modernmods.hilt.client.screen.book.element.ImageElement;
-import modernmods.hilt.client.screen.book.element.TextElement;
-import modernmods.hilt.recipe.helper.RecipeHelper;
-import modernmods.hilt.util.ItemStackList;
-import modernmods.hilt.util.html.HtmlElement;
-import modernmods.hilt.util.html.HtmlGroup;
-import modernmods.hilt.util.html.HtmlSerializable;
+import modernmods.mantle.client.book.HTMLUtils;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.content.PageContent;
+import modernmods.mantle.client.book.data.element.ImageData;
+import modernmods.mantle.client.book.data.element.TextData;
+import modernmods.mantle.client.screen.book.ArrowButton;
+import modernmods.mantle.client.screen.book.BookScreen;
+import modernmods.mantle.client.screen.book.element.BookElement;
+import modernmods.mantle.client.screen.book.element.ImageElement;
+import modernmods.mantle.client.screen.book.element.TextElement;
+import modernmods.mantle.recipe.helper.RecipeHelper;
+import modernmods.mantle.recipe.sync.ClientRecipeCache;
+import modernmods.mantle.util.ItemStackList;
+import modernmods.mantle.util.html.HtmlElement;
+import modernmods.mantle.util.html.HtmlGroup;
+import modernmods.mantle.util.html.HtmlSerializable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.book.elements.CycleRecipeElement;
 import modernmods.modernfoundry.library.client.book.elements.TinkerItemElement;
@@ -43,9 +44,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class ContentModifier extends PageContent {
-  public static final ResourceLocation ID = TConstruct.getResource("modifier");
+  public static final Identifier ID = TConstruct.getResource("modifier");
   public static final int TEX_SIZE = 256;
-  public static final ResourceLocation BOOK_MODIFY = TConstruct.getResource("textures/gui/book/modify.png");
+  public static final Identifier BOOK_MODIFY = TConstruct.getResource("textures/gui/book/modify.png");
   private static final String KEY_EFFECTS = TConstruct.makeTranslationKey("book", "modifiers.effect");
 
   public static final ImageData IMG_SLOT_1 = new ImageData(BOOK_MODIFY, 0, 75, 22, 22, TEX_SIZE, TEX_SIZE);
@@ -82,7 +83,7 @@ public class ContentModifier extends PageContent {
   public String modifierID;
   /** Tag filter to limit tools that display on a page */
   @SerializedName("tool_filter")
-  public ResourceLocation toolFilter = null;
+  public Identifier toolFilter = null;
 
   /** Default constructor for page loader */
   public ContentModifier() {}
@@ -136,7 +137,7 @@ public class ContentModifier extends PageContent {
         assert level != null;
         TagKey<Item> filter = getToolFilterTag();
         // TODO: feel we can speed this up by not fetching the whole recipes list for every page
-        this.recipes = RecipeHelper.getJEIRecipes(level.registryAccess(), level.getRecipeManager(), TinkerRecipeTypes.TINKER_STATION.get(), IDisplayModifierRecipe.class).stream()
+        this.recipes = RecipeHelper.getJEIRecipes(level.registryAccess(), ClientRecipeCache.getRecipeMap(), TinkerRecipeTypes.TINKER_STATION.get(), IDisplayModifierRecipe.class).stream()
           // must output this modifier, and must have at least 1 tool that matches the filter
           .filter(recipe -> recipe.getDisplayResult().matches(modifier) && (filter == null || recipe.getToolWithoutModifier().stream().anyMatch(tool -> tool.is(filter))))
           .toList();

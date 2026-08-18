@@ -3,7 +3,8 @@ package modernmods.modernfoundry.smeltery.client.util;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 
@@ -39,10 +40,24 @@ public class CastingItemRenderTypeBuffer implements MultiBufferSource {
 
   @Override
   public VertexConsumer getBuffer(RenderType type) {
-    if (alpha < 255 && MAKE_TRANSPARENT.contains(type.name)) {
-      type = RenderType.entityTranslucentCull(InventoryMenu.BLOCK_ATLAS);
+    if (alpha < 255 && isTransparentTarget(type)) {
+      type = RenderTypes.entityTranslucentCullItemTarget(net.minecraft.client.renderer.texture.TextureAtlas.LOCATION_BLOCKS);
     }
 
     return new TintedVertexBuilder(inner.getBuffer(type), red, green, blue, alpha);
+  }
+
+  /**
+   * Checks whether the render type is one of the entity item layers to fade out. In 26.1 {@code RenderType#name} is
+   * package-private, so match on the formatted {@link RenderType#toString()} ({@code RenderType[<name>:<state>]}).
+   */
+  private static boolean isTransparentTarget(RenderType type) {
+    String desc = type.toString();
+    for (String name : MAKE_TRANSPARENT) {
+      if (desc.startsWith("RenderType[" + name + ":")) {
+        return true;
+      }
+    }
+    return false;
   }
 }

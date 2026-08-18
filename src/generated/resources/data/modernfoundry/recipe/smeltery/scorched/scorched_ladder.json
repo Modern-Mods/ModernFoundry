@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {
-      "tag": "modernfoundry:scorched_blocks"
-    },
-    "b": {
-      "item": "modernfoundry:scorched_brick"
-    }
+    "B": "#modernfoundry:scorched_blocks",
+    "b": "modernfoundry:scorched_brick"
   },
   "pattern": [
     "b b",
@@ -17,6 +13,5 @@
   "result": {
     "count": 4,
     "id": "modernfoundry:scorched_ladder"
-  },
-  "show_notification": true
+  }
 }

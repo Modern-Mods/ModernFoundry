@@ -1,7 +1,7 @@
 {
   "type": "modernfoundry:table_casting_composite",
-  "id": "modernfoundry:tools/parts/casting/shield_core_composite",
   "casting_stat_conflict": "modernfoundry:plating_shield",
+  "id": "modernfoundry:tools/parts/casting/shield_core_composite",
   "item_cost": 4,
   "result": "modernfoundry:shield_core"
 }

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/osmium/leggings",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/osmium/tools_costing_7"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/osmium/tools_costing_7"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/osmium/leggings",
+  "ingredient": "#modernfoundry:melting/osmium/tools_costing_7",
   "result": {
     "amount": 630,
     "tag": "c:molten_osmium",

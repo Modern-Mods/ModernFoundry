@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/lead/wire",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:wires/lead"
     }
   ],
-  "ingredient": {
-    "tag": "c:wires/lead"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/lead/wire",
+  "ingredient": "#c:wires/lead",
   "result": {
     "amount": 45,
     "tag": "c:molten_lead"

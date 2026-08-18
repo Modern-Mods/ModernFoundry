@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/gold"
-  },
+  "ingredient": "#c:nuggets/gold",
   "result": {
     "amount": 10,
     "tag": "c:molten_gold"

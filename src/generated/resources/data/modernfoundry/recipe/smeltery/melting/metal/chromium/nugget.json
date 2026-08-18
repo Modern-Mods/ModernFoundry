@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/chromium/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/chromium"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/chromium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/chromium/nugget",
+  "ingredient": "#c:nuggets/chromium",
   "result": {
     "amount": 10,
     "tag": "c:molten_chromium"

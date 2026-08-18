@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/composite/blazewood",
   "fluid": {
     "amount": 200,
     "tag": "modernfoundry:blazing_blood"
   },
+  "id": "modernfoundry:tools/materials/composite/blazewood",
   "input": "modernfoundry:slimewood#bloodshroom",
   "output": "modernfoundry:blazewood",
   "temperature": 1500

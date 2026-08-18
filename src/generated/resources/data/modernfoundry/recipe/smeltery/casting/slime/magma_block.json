@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/slime/magma_block",
   "cooling_time": 141,
   "fluid": {
     "amount": 1000,
     "tag": "c:magma"
   },
+  "id": "modernfoundry:smeltery/casting/slime/magma_block",
   "result": "minecraft:magma_block"
 }

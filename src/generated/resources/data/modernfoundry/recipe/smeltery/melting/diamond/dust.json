@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/diamond/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/diamond"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/diamond"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/diamond/dust",
+  "ingredient": "#c:dusts/diamond",
   "result": {
     "amount": 100,
     "fluid": "modernfoundry:molten_diamond"

@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "slime_blocks",
   "key": {
-    "#": {
-      "tag": "c:slimeball/ender"
-    }
+    "#": "#c:slimeball/ender"
   },
   "pattern": [
     "###",
@@ -14,6 +12,5 @@
   ],
   "result": {
     "id": "modernfoundry:ender_slime"
-  },
-  "show_notification": true
+  }
 }

@@ -1,0 +1,22 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/slime_helmet",
+    "parts": [
+      {
+        "name": "skull",
+        "index": 0
+      },
+      {
+        "name": "slime",
+        "index": 1
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:slime/helmet"
+    ],
+    "first_modifiers": [
+      "modernfoundry:trim"
+    ]
+  }
+}

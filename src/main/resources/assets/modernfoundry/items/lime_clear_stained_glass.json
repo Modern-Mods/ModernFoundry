@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "modernfoundry:item/lime_clear_stained_glass",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 8375321
+      }
+    ]
+  }
+}

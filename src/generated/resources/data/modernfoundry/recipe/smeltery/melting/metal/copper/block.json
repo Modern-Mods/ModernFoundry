@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/copper/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/copper"
-  },
+  "ingredient": "#c:storage_blocks/copper",
   "result": {
     "amount": 810,
     "tag": "c:molten_copper"

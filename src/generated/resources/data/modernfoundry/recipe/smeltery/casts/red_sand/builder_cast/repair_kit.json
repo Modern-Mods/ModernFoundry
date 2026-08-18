@@ -2,8 +2,6 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/red_sand/builder_cast/repair_kit",
   "pattern": "modernfoundry:repair_kit",
-  "pattern_item": {
-    "tag": "modernfoundry:casts/red_sand"
-  },
+  "pattern_item": "#modernfoundry:casts/red_sand",
   "result": "modernfoundry:repair_kit_red_sand_cast"
 }

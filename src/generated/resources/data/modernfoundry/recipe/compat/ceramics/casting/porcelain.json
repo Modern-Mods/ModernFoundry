@@ -1,16 +1,16 @@
 {
-  "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:compat/ceramics/casting/porcelain",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "ceramics"
     }
   ],
+  "type": "modernfoundry:casting_basin",
   "cooling_time": 190,
   "fluid": {
     "amount": 1000,
     "tag": "modernfoundry:molten_porcelain"
   },
+  "id": "modernfoundry:compat/ceramics/casting/porcelain",
   "result": "ceramics:white_porcelain"
 }

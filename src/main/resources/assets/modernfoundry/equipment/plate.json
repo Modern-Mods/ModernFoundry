@@ -1,0 +1,12 @@
+{
+  "layers": {
+    "humanoid": [
+      { "texture": "modernfoundry:plate/plating" },
+      { "texture": "modernfoundry:plate/maille" }
+    ],
+    "humanoid_leggings": [
+      { "texture": "modernfoundry:plate/plating" },
+      { "texture": "modernfoundry:plate/maille" }
+    ]
+  }
+}

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/copper/platform",
-  "ingredient": {
-    "tag": "modernfoundry:copper_platforms"
-  },
+  "ingredient": "#modernfoundry:copper_platforms",
   "result": {
     "amount": 100,
     "tag": "c:molten_copper"

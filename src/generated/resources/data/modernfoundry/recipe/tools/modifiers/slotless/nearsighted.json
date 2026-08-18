@@ -1,19 +1,13 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/nearsighted",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "minecraft:ink_sac"
-  },
+  "id": "modernfoundry:tools/modifiers/slotless/nearsighted",
+  "input": "minecraft:ink_sac",
   "needed_per_level": 45,
   "result": "modernfoundry:nearsighted",
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/held"
-    },
-    {
-      "tag": "modernfoundry:modifiable/armor"
-    }
+    "#modernfoundry:modifiable/held",
+    "#modernfoundry:modifiable/armor"
   ]
 }

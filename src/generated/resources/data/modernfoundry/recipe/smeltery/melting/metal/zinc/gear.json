@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/zinc/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/zinc"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/zinc"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/zinc/gear",
+  "ingredient": "#c:gears/zinc",
   "result": {
     "amount": 360,
     "tag": "c:molten_zinc"

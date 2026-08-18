@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/blaze/rod_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/rod"
-  },
+  "cast": "#modernfoundry:casts/single_use/rod",
   "cast_consumed": true,
   "cooling_time": 85,
   "fluid": {
     "amount": 100,
     "tag": "modernfoundry:blazing_blood"
   },
+  "id": "modernfoundry:smeltery/casting/blaze/rod_sand_cast",
   "result": "minecraft:blaze_rod"
 }

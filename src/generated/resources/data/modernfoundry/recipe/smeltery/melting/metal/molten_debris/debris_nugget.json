@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/molten_debris/debris_nugget",
-  "ingredient": {
-    "tag": "c:nuggets/netherite_scrap"
-  },
+  "ingredient": "#c:nuggets/netherite_scrap",
   "result": {
     "amount": 10,
     "fluid": "modernfoundry:molten_debris"

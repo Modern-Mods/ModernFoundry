@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.tools.definition.module.display;
 
-import modernmods.hilt.data.loadable.mapping.SimpleRecordLoadable;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.mapping.SimpleRecordLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.materials.stats.MaterialStatsId;

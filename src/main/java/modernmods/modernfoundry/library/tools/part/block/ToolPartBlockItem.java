@@ -21,7 +21,9 @@ public class ToolPartBlockItem extends MaterialBlockItem implements IToolPart {
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<net.minecraft.network.chat.Component> tooltip, TooltipFlag flag) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<net.minecraft.network.chat.Component> tooltipConsumer, TooltipFlag flag) {
+    List<net.minecraft.network.chat.Component> tooltip = new java.util.ArrayList<>();
     ToolPartItem.appendHoverText(this, stack, tooltip, flag);
+    tooltip.forEach(tooltipConsumer);
   }
 }

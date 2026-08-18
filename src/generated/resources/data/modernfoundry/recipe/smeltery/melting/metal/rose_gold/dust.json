@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/rose_gold/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/rose_gold"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/rose_gold"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/rose_gold/dust",
+  "ingredient": "#c:dusts/rose_gold",
   "result": {
     "amount": 90,
     "tag": "c:molten_rose_gold"

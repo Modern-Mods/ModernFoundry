@@ -64,29 +64,22 @@
       ]
     },
     {
-      "type": "modernfoundry:tool_actions",
-      "tool_actions": [
-        "axe_dig",
-        "shovel_dig"
-      ]
-    },
-    {
       "type": "modernfoundry:is_effective",
-      "predicate_type": "hilt:tag",
+      "predicate_type": "mantle:tag",
       "tag": "modernfoundry:mineable/mattock"
     },
     {
       "type": "modernfoundry:mining_speed_modifier",
       "modifier": 2.0,
-      "predicate_type": "hilt:and",
+      "predicate_type": "mantle:and",
       "predicates": [
         {
-          "type": "hilt:tag",
+          "type": "mantle:tag",
           "tag": "minecraft:mineable/axe"
         },
         {
-          "type": "hilt:inverted",
-          "inverted_type": "hilt:tag",
+          "type": "mantle:inverted",
+          "inverted_type": "mantle:tag",
           "tag": "modernfoundry:mineable/mattock"
         }
       ]

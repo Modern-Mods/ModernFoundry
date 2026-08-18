@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/bone",
-  "ingredient": {
-    "tag": "modernfoundry:bones"
-  },
+  "ingredient": "#modernfoundry:bones",
   "material": "modernfoundry:bone",
   "needed": 1,
   "value": 1

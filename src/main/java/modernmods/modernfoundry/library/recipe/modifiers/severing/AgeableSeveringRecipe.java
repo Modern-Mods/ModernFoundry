@@ -1,14 +1,14 @@
 package modernmods.modernfoundry.library.recipe.modifiers.severing;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.helper.ItemOutput;
-import modernmods.hilt.recipe.ingredient.EntityIngredient;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.helper.ItemOutput;
+import modernmods.mantle.recipe.ingredient.EntityIngredient;
 import modernmods.modernfoundry.tools.TinkerModifiers;
 
 public class AgeableSeveringRecipe extends SeveringRecipe {
@@ -21,14 +21,14 @@ public class AgeableSeveringRecipe extends SeveringRecipe {
     AgeableSeveringRecipe::new);
 
   private final ItemOutput childOutput;
-  public AgeableSeveringRecipe(ResourceLocation id, EntityIngredient ingredient, ItemOutput adultOutput, ItemOutput childOutput, float baseChance, float lootingBonus) {
+  public AgeableSeveringRecipe(Identifier id, EntityIngredient ingredient, ItemOutput adultOutput, ItemOutput childOutput, float baseChance, float lootingBonus) {
     super(id, ingredient, adultOutput, baseChance, lootingBonus);
     this.childOutput = childOutput;
   }
 
-  /** @deprecated use {@link #AgeableSeveringRecipe(ResourceLocation, EntityIngredient, ItemOutput, ItemOutput, float, float)} */
+  /** @deprecated use {@link #AgeableSeveringRecipe(Identifier, EntityIngredient, ItemOutput, ItemOutput, float, float)} */
   @Deprecated(forRemoval = true)
-  public AgeableSeveringRecipe(ResourceLocation id, EntityIngredient ingredient, ItemOutput adultOutput, ItemOutput childOutput) {
+  public AgeableSeveringRecipe(Identifier id, EntityIngredient ingredient, ItemOutput adultOutput, ItemOutput childOutput) {
     this(id, ingredient, adultOutput, childOutput, 0.05f, 0.01f);
   }
 
@@ -41,7 +41,7 @@ public class AgeableSeveringRecipe extends SeveringRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends AgeableSeveringRecipe> getSerializer() {
     return TinkerModifiers.ageableSeveringSerializer.get();
   }
 }

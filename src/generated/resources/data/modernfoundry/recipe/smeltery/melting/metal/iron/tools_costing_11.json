@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/tools_costing_11",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/iron/tools_costing_11"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/iron/tools_costing_11"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/iron/tools_costing_11",
+  "ingredient": "#modernfoundry:melting/iron/tools_costing_11",
   "result": {
     "amount": 990,
     "tag": "c:molten_iron",

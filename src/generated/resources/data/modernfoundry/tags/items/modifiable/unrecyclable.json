@@ -1,0 +1,12 @@
+{
+  "values": [
+    "modernfoundry:slime_helmet",
+    "modernfoundry:slimy_chestplate",
+    "modernfoundry:slime_leggings",
+    "modernfoundry:slime_boots",
+    "modernfoundry:travelers_shield",
+    "modernfoundry:plate_shield",
+    "#modernfoundry:modifiable/unsalvageable",
+    "#modernfoundry:modifiable/ancient"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "modernfoundry:material",
+    "base_model": "modernfoundry:item/broad_blade",
+    "offset": [
+      -1,
+      1
+    ]
+  }
+}

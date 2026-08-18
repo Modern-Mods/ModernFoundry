@@ -1,0 +1,9 @@
+{
+  "values": [
+    "modernfoundry:knightmetal_shard",
+    {
+      "id": "twilightforest:armor_shard",
+      "required": false
+    }
+  ]
+}

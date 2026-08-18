@@ -3,7 +3,5 @@
   "id": "modernfoundry:tools/armor/travelers/pants_leather",
   "index": 1,
   "item_cost": 5,
-  "tools": {
-    "item": "modernfoundry:travelers_leggings"
-  }
+  "tools": "modernfoundry:travelers_leggings"
 }

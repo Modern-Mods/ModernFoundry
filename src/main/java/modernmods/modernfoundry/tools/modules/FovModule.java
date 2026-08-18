@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.tools.modules;
 
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.LogicHelper;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.LogicHelper;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -37,7 +37,7 @@ public record FovModule(LevelingValue value, FovAction action) implements Modifi
   }
 
   /** Gets the key for the given context */
-  private static ResourceLocation getKey(ModifierEntry modifier, EquipmentChangeContext context) {
+  private static Identifier getKey(ModifierEntry modifier, EquipmentChangeContext context) {
     return modifier.getId().withSuffix('_' + context.getChangedSlot().getName());
   }
 

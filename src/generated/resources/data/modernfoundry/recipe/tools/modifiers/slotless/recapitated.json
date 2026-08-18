@@ -1,27 +1,19 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/recapitated",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/slotless/recapitated",
   "inputs": [
     {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "c:heads"
-      },
-      "subtracted": {
-        "item": "minecraft:dragon_head"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#minecraft:skulls",
+      "subtracted": "minecraft:dragon_head"
     }
   ],
   "level": 1,
   "result": "modernfoundry:recapitated",
   "tools": {
-    "type": "neoforge:difference",
-    "base": {
-      "tag": "modernfoundry:modifiable/bonus_slots"
-    },
-    "subtracted": {
-      "tag": "modernfoundry:modifiable/skulls"
-    }
+    "neoforge:ingredient_type": "neoforge:difference",
+    "base": "#modernfoundry:modifiable/bonus_slots",
+    "subtracted": "#modernfoundry:modifiable/skulls"
   }
 }

@@ -6,14 +6,8 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/melee"
-    },
-    {
-      "tag": "modernfoundry:modifiable/ranged/bows"
-    },
-    {
-      "tag": "modernfoundry:modifiable/fishing_rods"
-    }
+    "#modernfoundry:modifiable/melee",
+    "#modernfoundry:modifiable/ranged/bows",
+    "#modernfoundry:modifiable/fishing_rods"
   ]
 }

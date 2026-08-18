@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/ender/ball",
-  "ingredient": {
-    "tag": "c:slimeball/ender"
-  },
+  "ingredient": "#c:slimeball/ender",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:ender_slime"

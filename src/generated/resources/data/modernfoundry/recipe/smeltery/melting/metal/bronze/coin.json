@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/bronze/coin",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/bronze"
     }
   ],
-  "ingredient": {
-    "tag": "c:coins/bronze"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/bronze/coin",
+  "ingredient": "#c:coins/bronze",
   "result": {
     "amount": 30,
     "tag": "c:molten_bronze"

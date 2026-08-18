@@ -3,9 +3,9 @@ package modernmods.modernfoundry.tools.recipe;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.predicate.modifier.ModifierPredicate;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
@@ -37,11 +37,11 @@ public class EnchantmentConvertingRecipeBuilder extends AbstractSizedIngredientR
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (inputs.isEmpty()) {
       throw new IllegalStateException("Must have at least one input");
     }
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "modifiers");
+    Identifier advancementId = buildOptionalAdvancement(id, "modifiers");
     consumer.accept(new LoadableFinishedRecipe<>(id, new EnchantmentConvertingRecipe(id, name, inputs, matchBook, returnInput, modifierPredicate), EnchantmentConvertingRecipe.LOADER, advancementId));
   }
 }

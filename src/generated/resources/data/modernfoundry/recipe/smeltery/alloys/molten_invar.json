@@ -1,9 +1,7 @@
 {
-  "type": "modernfoundry:alloy",
-  "id": "modernfoundry:smeltery/alloys/molten_invar",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/nickel"
     },
     {
@@ -14,12 +12,14 @@
           "prop": "allow_ingotless_alloys"
         },
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/invar"
         }
       ]
     }
   ],
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_invar",
   "inputs": [
     {
       "amount": 180,

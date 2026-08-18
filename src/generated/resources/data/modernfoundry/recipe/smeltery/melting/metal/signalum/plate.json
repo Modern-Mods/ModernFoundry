@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/signalum/plate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:plates/signalum"
     }
   ],
-  "ingredient": {
-    "tag": "c:plates/signalum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/signalum/plate",
+  "ingredient": "#c:plates/signalum",
   "result": {
     "amount": 90,
     "tag": "c:molten_signalum"

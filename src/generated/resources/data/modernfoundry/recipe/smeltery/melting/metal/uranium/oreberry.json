@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/uranium/oreberry",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "oreberriesreplanted:uranium_oreberry"
+      "type": "neoforge:registered",
+      "value": "oreberriesreplanted:uranium_oreberry"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/uranium/oreberry",
   "ingredient": {
     "item": "oreberriesreplanted:uranium_oreberry"
   },

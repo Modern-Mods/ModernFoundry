@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
 import modernmods.modernfoundry.library.tools.part.IMaterialItem;
 
 import java.util.function.Consumer;
@@ -23,7 +23,7 @@ public class PartRecipeBuilder extends AbstractRecipeBuilder<PartRecipeBuilder> 
   @Setter
   private int cost = 1;
   @Setter
-  private ResourceLocation pattern = null;
+  private Identifier pattern = null;
   @Setter
   private Ingredient patternItem = IPartBuilderRecipe.DEFAULT_PATTERNS;
   @Setter
@@ -44,7 +44,7 @@ public class PartRecipeBuilder extends AbstractRecipeBuilder<PartRecipeBuilder> 
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumerIn, Identifier id) {
     if (this.outputAmount <= 0) {
       throw new IllegalStateException("recipe " + id + " must output at least 1");
     }
@@ -54,7 +54,7 @@ public class PartRecipeBuilder extends AbstractRecipeBuilder<PartRecipeBuilder> 
     if (this.pattern == null) {
       throw new IllegalStateException("recipe " + id + " has no pattern associated with it");
     }
-    ResourceLocation advancementId = this.buildOptionalAdvancement(id, "parts");
+    Identifier advancementId = this.buildOptionalAdvancement(id, "parts");
     consumerIn.accept(new LoadableFinishedRecipe<>(id, new PartRecipe(id, group, new Pattern(pattern), patternItem, cost, allowUncraftable, output, outputAmount), PartRecipe.LOADER, advancementId));
   }
 }

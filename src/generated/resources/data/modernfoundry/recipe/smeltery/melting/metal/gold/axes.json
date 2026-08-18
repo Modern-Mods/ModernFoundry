@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:damagable_melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/axes",
-  "ingredient": {
-    "tag": "modernfoundry:melting/gold/tools_costing_3"
-  },
+  "ingredient": "#modernfoundry:melting/gold/tools_costing_3",
   "result": {
     "amount": 270,
     "tag": "c:molten_gold",

@@ -2,11 +2,11 @@ package modernmods.modernfoundry.tools.modules.ranged.ammo;
 
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.LevelingInt;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -62,7 +62,7 @@ public record ProjectileFuseModule(SimpleParticleType particle, LevelingInt time
         entry.getHook(ModifierHooks.PROJECTILE_FUSE).onProjectileFuseFinish(modifiers, persistentData, entry, ammo, projectile, arrow);
       }
 
-      if (!projectile.level().isClientSide) {
+      if (!projectile.level().isClientSide()) {
         // fuse animation
         Vec3 position = projectile.position();
         if (projectile.level() instanceof ServerLevel level) {

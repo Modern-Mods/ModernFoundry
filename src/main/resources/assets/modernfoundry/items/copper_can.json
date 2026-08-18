@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "modernfoundry:fluid_container",
+    "base_model": "modernfoundry:item/copper_can"
+  }
+}

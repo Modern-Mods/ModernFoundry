@@ -1036,7 +1036,7 @@
     "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:silky_cloth"
+      "id": "modernfoundry:silky_cloth"
     },
     "show_toast": true,
     "title": {

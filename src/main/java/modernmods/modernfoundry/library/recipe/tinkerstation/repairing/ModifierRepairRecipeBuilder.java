@@ -1,10 +1,10 @@
 package modernmods.modernfoundry.library.recipe.tinkerstation.repairing;
 
 import lombok.RequiredArgsConstructor;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.modifiers.util.LazyModifier;
 
@@ -23,19 +23,19 @@ public class ModifierRepairRecipeBuilder extends AbstractRecipeBuilder<ModifierR
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, modifier);
+    save(consumer, modifier.getIdentifier());
   }
 
   /** Builds the recipe for the crafting table using a repair kit */
-  public ModifierRepairRecipeBuilder buildCraftingTable(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "tinker_station");
+  public ModifierRepairRecipeBuilder buildCraftingTable(Consumer<FinishedRecipe> consumer, Identifier id) {
+    Identifier advancementId = buildOptionalAdvancement(id, "tinker_station");
     consumer.accept(new LoadableFinishedRecipe<>(id, new ModifierRepairCraftingRecipe(id, modifier, ingredient, repairAmount), ModifierRepairCraftingRecipe.LOADER, advancementId));
     return this;
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-    ResourceLocation advancementId = buildOptionalAdvancement(id, "tinker_station");
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
+    Identifier advancementId = buildOptionalAdvancement(id, "tinker_station");
     consumer.accept(new LoadableFinishedRecipe<>(id, new ModifierRepairTinkerStationRecipe(id, modifier, ingredient, repairAmount), ModifierRepairTinkerStationRecipe.LOADER, advancementId));
   }
 }

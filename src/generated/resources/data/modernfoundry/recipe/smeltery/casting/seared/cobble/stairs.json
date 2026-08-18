@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/seared/cobble/stairs",
-  "cast": {
-    "item": "minecraft:cobblestone_stairs"
-  },
+  "cast": "minecraft:cobblestone_stairs",
   "cast_consumed": true,
   "cooling_time": 113,
   "fluid": {
     "amount": 500,
     "tag": "modernfoundry:molten_clay"
   },
+  "id": "modernfoundry:smeltery/casting/seared/cobble/stairs",
   "result": "modernfoundry:seared_cobble_stairs"
 }

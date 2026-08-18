@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wood/bamboo/stick",
-  "ingredient": {
-    "item": "minecraft:bamboo"
-  },
+  "ingredient": "minecraft:bamboo",
   "material": "modernfoundry:bamboo",
   "needed": 9,
   "value": 1

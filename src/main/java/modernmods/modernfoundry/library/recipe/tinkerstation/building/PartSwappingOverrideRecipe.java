@@ -1,17 +1,17 @@
 package modernmods.modernfoundry.library.recipe.tinkerstation.building;
 
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.array.ArrayLoadable;
-import modernmods.hilt.data.loadable.array.IntArrayLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.array.ArrayLoadable;
+import modernmods.mantle.data.loadable.array.IntArrayLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.definition.IMaterial;
@@ -45,7 +45,7 @@ public class PartSwappingOverrideRecipe extends MaterialSwappingRecipe {
   /** Options of indexes to set the material */
   private final int[] indices;
 
-  protected PartSwappingOverrideRecipe(ResourceLocation id, Ingredient tools, int maxStackSize, IToolPart part, int[] indices, List<SizedIngredient> extraRequirements) {
+  protected PartSwappingOverrideRecipe(Identifier id, Ingredient tools, int maxStackSize, IToolPart part, int[] indices, List<SizedIngredient> extraRequirements) {
     super(id, tools, maxStackSize, extraRequirements);
     this.part = part;
     this.indices = indices;
@@ -134,7 +134,8 @@ public class PartSwappingOverrideRecipe extends MaterialSwappingRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
-    return TinkerTables.fixedMaterialSwapping.get();
+  @SuppressWarnings("unchecked")
+  public RecipeSerializer<? extends PartSwappingOverrideRecipe> getSerializer() {
+    return (RecipeSerializer<? extends PartSwappingOverrideRecipe>)(RecipeSerializer<?>) TinkerTables.fixedMaterialSwapping.get();
   }
 }

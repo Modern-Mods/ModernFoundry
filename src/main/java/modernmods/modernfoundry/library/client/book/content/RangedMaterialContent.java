@@ -1,10 +1,10 @@
 package modernmods.modernfoundry.library.client.book.content;
 
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.screen.book.element.ItemElement;
-import modernmods.hilt.util.html.HtmlElement;
-import modernmods.hilt.util.html.HtmlSerializable;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.screen.book.element.ItemElement;
+import modernmods.mantle.util.html.HtmlElement;
+import modernmods.mantle.util.html.HtmlSerializable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
@@ -24,14 +24,14 @@ import static modernmods.modernfoundry.TConstruct.getResource;
 
 public class RangedMaterialContent extends AbstractMaterialContent {
   /** Page ID for using this index directly */
-  public static final ResourceLocation ID = TConstruct.getResource("ranged_material");
+  public static final Identifier ID = TConstruct.getResource("ranged_material");
 
   public RangedMaterialContent(MaterialVariantId materialVariant, boolean detailed) {
     super(materialVariant, detailed);
   }
 
   @Override
-  public ResourceLocation getId() {
+  public Identifier getId() {
     return ID;
   }
 

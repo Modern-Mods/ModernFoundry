@@ -1,17 +1,5 @@
 {
   "parent": "modernfoundry:block/template/pane/post",
-  "colors": [
-    {
-      "color": "FF7FCC19"
-    }
-  ],
-  "connection": {
-    "predicate": "pane",
-    "textures": {
-      "pane": "cornerless_full"
-    }
-  },
-  "loader": "hilt:connected",
   "render_type": "minecraft:translucent",
   "textures": {
     "edge": "modernfoundry:block/clear_stained_glass_top",

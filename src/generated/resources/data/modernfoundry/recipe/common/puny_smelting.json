@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:book"
-    },
-    {
-      "item": "modernfoundry:grout"
-    }
+    "minecraft:book",
+    "modernfoundry:grout"
   ],
   "result": {
     "id": "modernfoundry:puny_smelting"

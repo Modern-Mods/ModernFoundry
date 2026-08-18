@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.modifiers.modules.util;
 
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
 
 /** Predicate to condition a melee projectile on being a projectile. */
 public enum ProjectilePredicate {

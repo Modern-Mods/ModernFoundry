@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.library.client.book.elements;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import modernmods.hilt.client.screen.book.element.ItemElement;
+import modernmods.mantle.client.screen.book.element.ItemElement;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
@@ -50,7 +50,7 @@ public class TinkerItemElement extends ItemElement {
   }
 
   @Override
-  public void drawOverlay(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
+  public void drawOverlay(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks, Font fontRenderer) {
     if (this.noTooltip) {
       return;
     }

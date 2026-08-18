@@ -56,7 +56,7 @@ public class ToolStatArgument<T extends IToolStat> implements ArgumentType<T> {
 
   @Override
   public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
-    return TinkerSuggestionProvider.suggestResource(TConstruct.MOD_ID, ToolStats.getAllStats().stream().filter(filter::isInstance), builder, IToolStat::getName, IToolStat::getPrefix);
+    return TinkerSuggestionProvider.suggestResource(TConstruct.MOD_ID, ToolStats.getAllStats().stream().filter(filter::isInstance), builder, stat -> stat.getName().getIdentifier(), IToolStat::getPrefix);
   }
 
   @Override

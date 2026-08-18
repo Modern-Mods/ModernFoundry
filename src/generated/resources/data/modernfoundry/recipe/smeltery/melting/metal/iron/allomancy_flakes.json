@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/allomancy_flakes",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "allomancy:iron_flakes"
+      "type": "neoforge:registered",
+      "value": "allomancy:iron_flakes"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/iron/allomancy_flakes",
   "ingredient": {
     "item": "allomancy:iron_flakes"
   },

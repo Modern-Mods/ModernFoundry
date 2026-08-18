@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "modernfoundry:fluid_container",
+    "base_model": "modernfoundry:item/ender_slime_bucket",
+    "flip_gas": false
+  }
+}

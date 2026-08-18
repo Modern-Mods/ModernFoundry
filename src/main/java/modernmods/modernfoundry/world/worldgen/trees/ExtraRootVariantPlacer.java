@@ -16,6 +16,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -25,7 +26,7 @@ import net.minecraft.world.level.levelgen.feature.rootplacers.MangroveRootPlacer
 import net.minecraft.world.level.levelgen.feature.rootplacers.RootPlacer;
 import net.minecraft.world.level.levelgen.feature.rootplacers.RootPlacerType;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import modernmods.hilt.registration.object.EnumObject;
+import modernmods.mantle.registration.object.EnumObject;
 import modernmods.modernfoundry.shared.block.SlimeType;
 import modernmods.modernfoundry.world.TinkerStructures;
 import modernmods.modernfoundry.world.TinkerWorld;
@@ -56,10 +57,10 @@ public class ExtraRootVariantPlacer extends MangroveRootPlacer {
   }
 
   @Override
-  protected void placeRoot(LevelSimulatedReader level, BiConsumer<BlockPos,BlockState> placer, RandomSource pRandom, BlockPos pos, TreeConfiguration pTreeConfig) {
+  protected void placeRoot(WorldGenLevel level, BiConsumer<BlockPos,BlockState> placer, RandomSource pRandom, BlockPos pos, TreeConfiguration pTreeConfig) {
     for (RootVariant variant : rootVariants) {
       if (level.isStateAtPosition(pos, variant)) {
-        placer.accept(pos, this.getPotentiallyWaterloggedState(level, pos, variant.state.getState(pRandom, pos)));
+        placer.accept(pos, this.getPotentiallyWaterloggedState(level, pos, variant.state.getState(level, pRandom, pos)));
         return;
       }
     }
@@ -145,7 +146,7 @@ public class ExtraRootVariantPlacer extends MangroveRootPlacer {
     @SuppressWarnings("deprecation")
     @CanIgnoreReturnValue
     public Builder canGrowThroughTag(TagKey<Block> tag) {
-      return canGrowThrough(BuiltInRegistries.BLOCK.getOrCreateTag(tag));
+      return canGrowThrough(BuiltInRegistries.BLOCK.getOrThrow(tag));
     }
 
     /** Builds the final placer */

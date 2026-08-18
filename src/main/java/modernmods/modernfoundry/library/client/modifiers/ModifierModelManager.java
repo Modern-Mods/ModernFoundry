@@ -7,16 +7,16 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.bus.api.Event;
 import net.neoforged.fml.event.IModBusEvent;
-import modernmods.hilt.data.listener.IEarlySafeManagerReloadListener;
-import modernmods.hilt.util.JsonHelper;
+import modernmods.mantle.data.listener.IEarlySafeManagerReloadListener;
+import modernmods.mantle.util.JsonHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.config.Config;
 import modernmods.modernfoundry.library.client.model.DynamicTextureLoader;
@@ -50,7 +50,7 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
   private static boolean eventFired = false;
 
   /** Model overrides, if not in this map the default is used */
-  private static final Map<ResourceLocation,IUnbakedModifierModel> MODIFIER_MODEL_OPTIONS = new HashMap<>();
+  private static final Map<Identifier,IUnbakedModifierModel> MODIFIER_MODEL_OPTIONS = new HashMap<>();
 
   /** Map of models for each modifier */
   private static Map<ModifierId,IUnbakedModifierModel> modifierModels = Collections.emptyMap();
@@ -59,8 +59,8 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
    * Initializes this manager, registering it with the resource manager
    * @param manager  Manager
    */
-  public static void init(RegisterClientReloadListenersEvent manager) {
-    manager.registerReloadListener(INSTANCE);
+  public static void init(AddClientReloadListenersEvent manager) {
+    manager.addListener(TConstruct.getResource("modifier_models"), INSTANCE);
   }
 
   /**
@@ -72,7 +72,7 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
   @Nullable
   private static IUnbakedModifierModel getLoader(String key, String name) {
     // find a model name
-    ResourceLocation loader = ResourceLocation.tryParse(name);
+    Identifier loader = Identifier.tryParse(name);
     if (loader == null) {
       log.error("Skipping modifier " + key + " as " + name + " is an invalid loader name");
     } else {
@@ -149,8 +149,8 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
    * @return  Path to the modifier
    */
   @SuppressWarnings("removal")
-  private static Material getModifierTexture(ResourceLocation modifierRoot, ResourceLocation modifierId, String suffix) {
-    return new Material(InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(modifierRoot.getNamespace(), modifierRoot.getPath() + modifierId.getNamespace() + "_" + modifierId.getPath() + suffix));
+  private static Material getModifierTexture(Identifier modifierRoot, Identifier modifierId, String suffix) {
+    return new Material(Identifier.fromNamespaceAndPath(modifierRoot.getNamespace(), modifierRoot.getPath() + modifierId.getNamespace() + "_" + modifierId.getPath() + suffix));
   }
 
   /**
@@ -162,13 +162,13 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
    * @return  Texture, or null if missing
    */
   @Nullable
-  private static Material getTexture(List<ResourceLocation> modifierRoots, Predicate<Material> textureAdder, ResourceLocation modifier, String suffix) {
+  private static Material getTexture(List<Identifier> modifierRoots, Predicate<Material> textureAdder, Identifier modifier, String suffix) {
     if (modifierModels.isEmpty()) {
       return null;
     }
 
     // try the non-logging ones first
-    for (ResourceLocation root : modifierRoots) {
+    for (Identifier root : modifierRoots) {
       Material texture = getModifierTexture(root, modifier, suffix);
       if (textureAdder.test(texture)) {
         return texture;
@@ -185,7 +185,7 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
    * @param largeModifierRoots  List of modifier roots for large tools, null if the tool is not large
    * @return  Map of models
    */
-  public static Map<ModifierId,IBakedModifierModel> getModelsForTool(Function<Material,TextureAtlasSprite> spriteGetter, List<ResourceLocation> smallModifierRoots, List<ResourceLocation> largeModifierRoots) {
+  public static Map<ModifierId,IBakedModifierModel> getModelsForTool(Function<Material,TextureAtlasSprite> spriteGetter, List<Identifier> smallModifierRoots, List<Identifier> largeModifierRoots) {
     return getModelsForTool(spriteGetter, smallModifierRoots, largeModifierRoots, Set.of(), Set.of());
   }
 
@@ -198,7 +198,7 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
    * @param blacklist          Models in this blacklist are skipped when parsing. Used to suppress problematic models in legacy parsing.
    * @return Map of models
    */
-  public static Map<ModifierId,IBakedModifierModel> getModelsForTool(Function<Material,TextureAtlasSprite> spriteGetter, List<ResourceLocation> smallModifierRoots, List<ResourceLocation> largeModifierRoots, Collection<ModifierId> skip, Set<IUnbakedModifierModel> blacklist) {
+  public static Map<ModifierId,IBakedModifierModel> getModelsForTool(Function<Material,TextureAtlasSprite> spriteGetter, List<Identifier> smallModifierRoots, List<Identifier> largeModifierRoots, Collection<ModifierId> skip, Set<IUnbakedModifierModel> blacklist) {
     // if we have no modifier models, or both lists of modifier roots are empty, nothing to do
     if (modifierModels.isEmpty() || (smallModifierRoots.isEmpty() && largeModifierRoots.isEmpty())) {
       return Collections.emptyMap();
@@ -216,8 +216,8 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
       IUnbakedModifierModel model = entry.getValue();
       if (!skip.contains(id) && !blacklist.contains(model)) {
         IBakedModifierModel toolModel = model.forTool(
-          name -> getTexture(smallModifierRoots, validator, id, name),
-          name -> getTexture(largeModifierRoots, validator, id, name));
+          name -> getTexture(smallModifierRoots, validator, id.getIdentifier(), name),
+          name -> getTexture(largeModifierRoots, validator, id.getIdentifier(), name));
         if (toolModel != null) {
           modelMap.put(id, toolModel);
         }
@@ -235,7 +235,7 @@ public class ModifierModelManager implements IEarlySafeManagerReloadListener {
      * @param name   Modifier model name
      * @param model  Model instance
      */
-    public void registerModel(ResourceLocation name, IUnbakedModifierModel model) {
+    public void registerModel(Identifier name, IUnbakedModifierModel model) {
       MODIFIER_MODEL_OPTIONS.put(name, model);
     }
   }

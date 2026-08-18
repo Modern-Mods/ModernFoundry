@@ -2,7 +2,7 @@ package modernmods.modernfoundry.fluids.data;
 
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.fluids.FluidType;
-import modernmods.hilt.fluid.tooltip.AbstractFluidTooltipProvider;
+import modernmods.mantle.fluid.tooltip.AbstractFluidTooltipProvider;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.recipe.FluidValues;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
@@ -51,19 +51,19 @@ public class FluidTooltipProvider extends AbstractFluidTooltipProvider {
     add("slime", SLIME_TOOLTIPS)
       .addUnit("block", FluidValues.SLIME_BLOCK)
       .addUnit("slimeball", FluidValues.SLIMEBALL)
-      .addUnit("drop", "hilt", FluidValues.SLIME_DROP);
+      .addUnit("drop", "mantle", FluidValues.SLIME_DROP);
     add("glass", GLASS_TOOLTIPS)
       .addUnit("block", FluidValues.GLASS_BLOCK)
       .addUnit("pane", FluidValues.GLASS_PANE);
 
     add("bottle", BOTTLE_TOOLTIPS)
-      .addUnit("bucket", "hilt", FluidType.BUCKET_VOLUME)
-      .addUnit("bottle", "hilt", FluidValues.BOTTLE)
-      .addUnit("drop",   "hilt", FluidValues.SIP);
+      .addUnit("bucket", "mantle", FluidType.BUCKET_VOLUME)
+      .addUnit("bottle", "mantle", FluidValues.BOTTLE)
+      .addUnit("drop",   "mantle", FluidValues.SIP);
   }
 
   @Override
   public String getName() {
-    return "Modern Foundry Fluid Tooltip Provider";
+    return "Tinkers' Construct Fluid Tooltip Provider";
   }
 }

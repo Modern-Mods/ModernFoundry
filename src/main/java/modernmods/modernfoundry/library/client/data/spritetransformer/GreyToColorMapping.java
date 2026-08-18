@@ -10,9 +10,9 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
-import modernmods.hilt.data.loadable.common.ColorLoadable;
+import modernmods.mantle.data.loadable.common.ColorLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.utils.Util;
 
@@ -21,16 +21,16 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
-import static net.minecraft.util.FastColor.ABGR32.alpha;
-import static net.minecraft.util.FastColor.ABGR32.blue;
-import static net.minecraft.util.FastColor.ABGR32.color;
-import static net.minecraft.util.FastColor.ABGR32.green;
-import static net.minecraft.util.FastColor.ABGR32.red;
+import static modernmods.modernfoundry.library.utils.ABGR.alpha;
+import static modernmods.modernfoundry.library.utils.ABGR.blue;
+import static modernmods.modernfoundry.library.utils.ABGR.color;
+import static modernmods.modernfoundry.library.utils.ABGR.green;
+import static modernmods.modernfoundry.library.utils.ABGR.red;
 
 /** Color mcom.mojang.blaze3d.platform.NativeImager each value */
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class GreyToColorMapping implements IColorMapping {
-  public static final ResourceLocation NAME = TConstruct.getResource("grey_to_color");
+  public static final Identifier NAME = TConstruct.getResource("grey_to_color");
   public static final Deserializer DESERIALIZER = new Deserializer();
 
   private final List<ColorMapping> mappings;

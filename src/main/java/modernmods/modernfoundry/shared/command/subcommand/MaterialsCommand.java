@@ -14,7 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.command.HiltCommand;
+import modernmods.mantle.command.MantleCommand;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.materials.MaterialTooltipCache;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
@@ -49,7 +49,7 @@ public class MaterialsCommand {
    * @param subCommand  Command builder
    */
   public static void register(LiteralArgumentBuilder<CommandSourceStack> subCommand) {
-    subCommand.requires(sender -> sender.hasPermission(HiltCommand.PERMISSION_GAME_COMMANDS))
+    subCommand.requires(sender -> MantleCommand.hasPermission(sender, MantleCommand.PERMISSION_GAME_COMMANDS))
       // materials set <target> <index> <material>
       .then(Commands.literal("set")
         .then(Commands.argument("targets", EntityArgument.entities())
@@ -136,7 +136,7 @@ public class MaterialsCommand {
   private static int stats(CommandContext<CommandSourceStack> context, float scale) throws CommandSyntaxException {
     MaterialId material = MaterialArgument.getMaterial(context, "material").getIdentifier();
     MaterialStatType<?> statType = MaterialStatsArgument.getStat(context, "stat_type");
-    Optional<IMaterialStats> stats = MaterialRegistry.getInstance().getMaterialStats(material, statType.getId());
+    Optional<IMaterialStats> stats = MaterialRegistry.getInstance().getMaterialStats(material, statType.getStatId());
     if (stats.isPresent()) {
       context.getSource().sendSuccess(() -> {
         MutableComponent output = TConstruct.makeTranslation("command", "materials.success.stats.material", stats.get().getLocalizedName(), MaterialTooltipCache.getDisplayName(material), scale);
@@ -165,7 +165,7 @@ public class MaterialsCommand {
       traits = MaterialRegistry.getInstance().getDefaultTraits(material);
       output = TConstruct.makeTranslation("command", "materials.success.traits.default", MaterialTooltipCache.getDisplayName(material));
     } else {
-      traits = MaterialRegistry.getInstance().getTraits(material, statType.getId());
+      traits = MaterialRegistry.getInstance().getTraits(material, statType.getStatId());
       output = TConstruct.makeTranslation("command", "materials.success.traits.stat", statType.getDefaultStats().getLocalizedName(), MaterialTooltipCache.getDisplayName(material));
     }
     // if no traits, add special empty string

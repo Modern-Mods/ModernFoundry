@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wood/logs/acacia",
-  "ingredient": {
-    "tag": "minecraft:acacia_logs"
-  },
+  "ingredient": "#minecraft:acacia_logs",
   "leftover": "minecraft:acacia_planks",
   "material": "modernfoundry:wood",
   "needed": 1,

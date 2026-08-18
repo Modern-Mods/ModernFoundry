@@ -1,27 +1,21 @@
 package modernmods.modernfoundry.tools.client;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.model.PiglinHeadModel;
-import net.minecraft.client.model.SkullModel;
-import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.util.FastColor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.model.object.skull.PiglinHeadModel;
+import net.minecraft.client.model.object.skull.SkullModel;
+import net.minecraft.client.model.object.skull.SkullModelBase;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.WalkAnimationState;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
-import org.joml.Quaternionf;
-import modernmods.hilt.data.listener.ISafeManagerReloadListener;
+import modernmods.mantle.data.listener.ISafeManagerReloadListener;
 import modernmods.modernfoundry.library.client.armor.ArmorModelManager.ArmorModel;
 import modernmods.modernfoundry.library.client.armor.MultilayerArmorModel;
 import modernmods.modernfoundry.library.client.materials.MaterialRenderInfo;
@@ -39,7 +33,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 
-/** Model to render a slimeskull helmet with both the helmet and skull */
+/**
+ * Model to render a slimeskull helmet with both the helmet and skull.
+ * Minimal placeholder shape pending the armor Model render-system rewrite (Model#renderToBuffer is now final); the combined helmet/skull submission is deferred while head model registration and setup state are retained.
+ */
 public class SlimeskullArmorModel extends MultilayerArmorModel {
   /** Singleton model instance, all data is passed in via setters */
   public static final SlimeskullArmorModel INSTANCE = new SlimeskullArmorModel();
@@ -56,7 +53,7 @@ public class SlimeskullArmorModel extends MultilayerArmorModel {
 
   /** Head to render under the helmet */
   @Nullable
-  private ResourceLocation headTexture;
+  private Identifier headTexture;
   /** Tint color for the head */
   private int headColor = -1;
   /** Texture for the head */
@@ -73,7 +70,7 @@ public class SlimeskullArmorModel extends MultilayerArmorModel {
     MaterialId materialId = MaterialIdNBT.from(stack).getMaterial(0).getId();
     if (!materialId.equals(IMaterial.UNKNOWN_ID)) {
       SkullModelBase skull = getHeadModel(materialId);
-      ResourceLocation texture = HEAD_TEXTURES.get(materialId);
+      Identifier texture = HEAD_TEXTURES.get(materialId);
       if (skull != null && texture != null) {
         headModel = skull;
         headTexture = texture;
@@ -98,66 +95,31 @@ public class SlimeskullArmorModel extends MultilayerArmorModel {
     return this;
   }
 
-  @Override
-  public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer vertexBuilder, int packedLightIn, int packedOverlayIn, int color) {
-    if (base != null && buffer != null) {
-      if (model != ArmorModel.EMPTY) {
-        matrixStackIn.pushPose();
-        // TODO: this offset messes with the rotation of the skull slightly, though it is barely noticable
-        matrixStackIn.translate(0.0D, base.young ? -0.015D : -0.02D, 0.0D);
-        matrixStackIn.scale(1.01f, 1.1f, 1.01f);
-        super.renderToBuffer(matrixStackIn, vertexBuilder, packedLightIn, packedOverlayIn, color);
-        matrixStackIn.popPose();
-      }
-      if (headModel != null && headTexture != null) {
-        VertexConsumer heaadBuffer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.entityCutoutNoCullZOffset(headTexture), hasGlint);
-        matrixStackIn.pushPose();
-        if (base.crouching) {
-          matrixStackIn.translate(0, base.head.y / 16.0F, 0);
-        }
-        if (base.young) {
-          matrixStackIn.scale(0.85F, 0.85F, 0.85F);
-          matrixStackIn.translate(0.0D, 1.0D, 0.0D);
-        } else {
-          matrixStackIn.scale(1.115f, 1.115f, 1.115f);
-        }
-        matrixStackIn.mulPose((new Quaternionf()).rotationZYX(0, base.head.yRot, base.head.xRot));
-        headModel.setupAnim(walkAnimation, 0, 0);
-        float alpha = FastColor.ARGB32.alpha(color) / 255.0F;
-        float red = FastColor.ARGB32.red(color) / 255.0F;
-        float green = FastColor.ARGB32.green(color) / 255.0F;
-        float blue = FastColor.ARGB32.blue(color) / 255.0F;
-        renderColored(headModel, matrixStackIn, heaadBuffer, packedLightIn, packedOverlayIn, headColor, red, green, blue, alpha);
-        matrixStackIn.popPose();
-      }
-    }
-  }
-
 
   /* Head models */
 
   /** Map of all skull factories */
   private static final Map<MaterialId,Function<EntityModelSet,? extends SkullModelBase>> HEAD_MODEL_FACTORIES = new HashMap<>();
   /** Map of texture for the skull textures */
-  private static final Map<MaterialId,ResourceLocation> HEAD_TEXTURES = new HashMap<>();
+  private static final Map<MaterialId,Identifier> HEAD_TEXTURES = new HashMap<>();
 
   /** Registers a head model and texture, using the default skull model */
-  public static void registerHeadModel(MaterialId materialId, ModelLayerLocation headModel, ResourceLocation texture) {
+  public static void registerHeadModel(MaterialId materialId, ModelLayerLocation headModel, Identifier texture) {
     registerHeadModel(materialId, modelSet -> new SkullModel(modelSet.bakeLayer(headModel)), texture);
   }
 
   /** Registers a head model and texture, using the piglin skull model */
-  public static void registerPiglinHeadModel(MaterialId materialId, ModelLayerLocation headModel, ResourceLocation texture) {
+  public static void registerPiglinHeadModel(MaterialId materialId, ModelLayerLocation headModel, Identifier texture) {
     registerHeadModel(materialId, modelSet -> new PiglinHeadModel(modelSet.bakeLayer(headModel)), texture);
   }
 
   /** Registers a skull model using an item as the model */
   public static void registerBlockModel(MaterialId materialId, ItemStack stack) {
-    registerHeadModel(materialId, modelSet -> new BlockModelSkullRenderer(Minecraft.getInstance().getItemRenderer(), stack), InventoryMenu.BLOCK_ATLAS);
+    registerHeadModel(materialId, modelSet -> new BlockModelSkullRenderer(Minecraft.getInstance().getItemModelResolver(), stack), net.minecraft.client.renderer.texture.TextureAtlas.LOCATION_BLOCKS);
   }
 
   /** Registers a head model and texture, using a custom skull model */
-  public static void registerHeadModel(MaterialId materialId, Function<EntityModelSet,? extends SkullModelBase> headFunction, ResourceLocation texture) {
+  public static void registerHeadModel(MaterialId materialId, Function<EntityModelSet,? extends SkullModelBase> headFunction, Identifier texture) {
     if (HEAD_MODEL_FACTORIES.containsKey(materialId)) {
       throw new IllegalArgumentException("Duplicate head model " + materialId);
     }

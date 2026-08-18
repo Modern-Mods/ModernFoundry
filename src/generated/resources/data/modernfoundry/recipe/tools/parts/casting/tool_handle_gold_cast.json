@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:table_casting_material",
+  "cast": "#modernfoundry:casts/multi_use/tool_handle",
   "id": "modernfoundry:tools/parts/casting/tool_handle_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/tool_handle"
-  },
   "item_cost": 1,
   "result": "modernfoundry:tool_handle"
 }

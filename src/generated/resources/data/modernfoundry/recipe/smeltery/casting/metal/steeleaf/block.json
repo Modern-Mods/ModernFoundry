@@ -1,17 +1,17 @@
 {
-  "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/metal/steeleaf/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/steeleaf"
     }
   ],
+  "type": "modernfoundry:casting_basin",
   "cooling_time": 193,
   "fluid": {
     "amount": 810,
     "tag": "modernfoundry:molten_steeleaf"
   },
+  "id": "modernfoundry:smeltery/casting/metal/steeleaf/block",
   "result": {
     "tag": "c:storage_blocks/steeleaf"
   }

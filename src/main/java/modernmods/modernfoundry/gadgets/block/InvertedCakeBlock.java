@@ -2,10 +2,11 @@ package modernmods.modernfoundry.gadgets.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,8 +25,8 @@ public class InvertedCakeBlock extends FoodCakeBlock {
     Block.box(13, 8, 1, 15, 16, 15)
   };
 
-  public InvertedCakeBlock(Properties properties, FoodProperties food, EffectCombination combination) {
-    super(properties, food, combination);
+  public InvertedCakeBlock(Properties properties, FoodProperties food, net.minecraft.world.item.component.Consumable consumable, EffectCombination combination) {
+    super(properties, food, consumable, combination);
   }
 
   @Override
@@ -34,8 +35,8 @@ public class InvertedCakeBlock extends FoodCakeBlock {
   }
 
   @Override
-  public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos) {
-    if (facing == Direction.UP && !state.canSurvive(level, pos)) {
+  protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random) {
+    if (directionToNeighbour == Direction.UP && !state.canSurvive(level, pos)) {
       return Blocks.AIR.defaultBlockState();
     }
     return state;

@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.json.variable.entity;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 
 import java.util.List;

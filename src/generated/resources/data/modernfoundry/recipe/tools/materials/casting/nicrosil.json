@@ -1,33 +1,33 @@
 {
-  "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/nicrosil",
   "neoforge:conditions": [
     {
       "type": "neoforge:or",
       "values": [
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/nicrosil"
         },
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/tin"
         },
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/nickel"
         },
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/chromium"
         }
       ]
     }
   ],
+  "type": "modernfoundry:material_fluid",
   "fluid": {
     "amount": 90,
     "tag": "c:molten_nicrosil"
   },
+  "id": "modernfoundry:tools/materials/casting/nicrosil",
   "output": "modernfoundry:nicrosil",
   "temperature": 1100
 }

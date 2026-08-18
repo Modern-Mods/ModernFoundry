@@ -4,7 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import modernmods.modernfoundry.compat.minecraft.world.item.alchemy.PotionUtils;
@@ -12,15 +12,15 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.recipe.modifiers.adding.IDisplayModifierRecipe;
@@ -42,7 +42,7 @@ public class TippingCastingRecipe extends PotionCastingRecipe {
     TippingCastingRecipe::new);
 
   private final ModifierId modifier;
-  public TippingCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient tool, FluidIngredient fluid, int coolingTime, ModifierId modifier) {
+  public TippingCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, Ingredient tool, FluidIngredient fluid, int coolingTime, ModifierId modifier) {
     super(serializer, id, group, tool, fluid, Items.AIR, coolingTime);
     this.modifier = modifier;
   }
@@ -55,8 +55,8 @@ public class TippingCastingRecipe extends PotionCastingRecipe {
       // must also have a specific potion, it's what we are going to copy
       // but it can't match what is already on the stack
       CompoundTag fluidTag = inv.getFluidTag();
-      return fluidTag != null && fluidTag.contains(PotionUtils.TAG_POTION, Tag.TAG_STRING)
-        && !ModifierUtil.getPersistentString(stack, modifier).equals(fluidTag.getString(PotionUtils.TAG_POTION));
+      return fluidTag != null && fluidTag.contains(PotionUtils.TAG_POTION)
+        && !ModifierUtil.getPersistentString(stack, modifier.getIdentifier()).equals(fluidTag.getString(PotionUtils.TAG_POTION));
     }
     return false;
   }
@@ -66,7 +66,7 @@ public class TippingCastingRecipe extends PotionCastingRecipe {
     ItemStack result = inv.getStack().copy();
     CompoundTag tag = inv.getFluidTag();
     if (tag != null) {
-      ToolStack.from(result).getPersistentData().putString(modifier, tag.getString(PotionUtils.TAG_POTION));
+      ToolStack.from(result).getPersistentData().putString(modifier.getIdentifier(), tag.getStringOr(PotionUtils.TAG_POTION, ""));
     }
     return result;
   }
@@ -78,7 +78,7 @@ public class TippingCastingRecipe extends PotionCastingRecipe {
   public List<DisplayCastingRecipe> getRecipes(RegistryAccess access) {
     if (displayRecipes == null) {
       // create a list of tools with the modifier
-      List<ItemStack> tools = Arrays.stream(bottle.getItems())
+      List<ItemStack> tools = Arrays.stream(bottle.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new))
         .map(stack -> IDisplayModifierRecipe.withModifiers(IModifiableDisplay.getDisplayStack(stack), List.of(new ModifierEntry(modifier, 1))))
         .toList();
       displayRecipes = ForgeRegistries.POTIONS.getValues().stream()
@@ -88,7 +88,7 @@ public class TippingCastingRecipe extends PotionCastingRecipe {
           String id = Loadables.POTION.getString(potion);
           List<ItemStack> results = tools.stream().map(stack -> {
             ToolStack tool = ToolStack.copyFrom(stack);
-            tool.getPersistentData().putString(modifier, id);
+            tool.getPersistentData().putString(modifier.getIdentifier(), id);
             return tool.copyStack(stack);
           }).toList();
           // add the potion to the fluid

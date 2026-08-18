@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/steeleaf/twilightforest_chestplate",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:steeleaf_chestplate"
+      "type": "neoforge:registered",
+      "value": "twilightforest:steeleaf_chestplate"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/steeleaf/twilightforest_chestplate",
   "ingredient": {
     "item": "twilightforest:steeleaf_chestplate"
   },

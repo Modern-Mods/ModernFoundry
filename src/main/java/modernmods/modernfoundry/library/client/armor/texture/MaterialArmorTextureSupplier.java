@@ -1,16 +1,16 @@
 package modernmods.modernfoundry.library.client.armor.texture;
 
 import lombok.RequiredArgsConstructor;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.client.materials.MaterialRenderInfo;
 import modernmods.modernfoundry.library.client.materials.MaterialRenderInfoLoader;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
@@ -25,11 +25,11 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public abstract class MaterialArmorTextureSupplier implements ArmorTextureSupplier {
   /** Field for parsing the variant from JSON */
-  private static final LoadableField<ResourceLocation,MaterialArmorTextureSupplier> PREFIX_FIELD = Loadables.RESOURCE_LOCATION.requiredField("prefix", m -> m.prefix);
+  private static final LoadableField<Identifier,MaterialArmorTextureSupplier> PREFIX_FIELD = Loadables.RESOURCE_LOCATION.requiredField("prefix", m -> m.prefix);
 
   /** Makes a texture for the given variant and material, returns null if its missing */
-  private static ArmorTexture tryTexture(ResourceLocation name, int color, int luminosity, String material) {
-    ResourceLocation texture = name.withSuffix(material);
+  private static ArmorTexture tryTexture(Identifier name, int color, int luminosity, String material) {
+    Identifier texture = name.withSuffix(material);
     if (TEXTURE_VALIDATOR.test(texture)) {
       return new TintedArmorTexture(ArmorTextureSupplier.getTexturePath(texture), color, luminosity);
     }
@@ -37,7 +37,7 @@ public abstract class MaterialArmorTextureSupplier implements ArmorTextureSuppli
   }
 
   /** Makes a material getter for the given base and type */
-  public static Function<String,ArmorTexture> materialGetter(ResourceLocation name) {
+  public static Function<String,ArmorTexture> materialGetter(Identifier name) {
     // if the base texture does not exist, means we decided to skip this piece. Notably used for skipping some layers of wings
     if (!TEXTURE_VALIDATOR.test(name)) {
       return material -> ArmorTexture.EMPTY;
@@ -52,7 +52,7 @@ public abstract class MaterialArmorTextureSupplier implements ArmorTextureSuppli
           Optional<MaterialRenderInfo> infoOptional = MaterialRenderInfoLoader.INSTANCE.getRenderInfo(material);
           if (infoOptional.isPresent()) {
             MaterialRenderInfo info = infoOptional.get();
-            ResourceLocation untinted = info.texture();
+            Identifier untinted = info.texture();
             luminosity = info.luminosity();
             if (untinted != null) {
               ArmorTexture texture = tryTexture(name, -1, luminosity, '_' + untinted.getNamespace() + '_' + untinted.getPath());
@@ -76,10 +76,10 @@ public abstract class MaterialArmorTextureSupplier implements ArmorTextureSuppli
     });
   }
 
-  private final ResourceLocation prefix;
+  private final Identifier prefix;
   private final Function<String, ArmorTexture>[] textures;
   @SuppressWarnings("unchecked")
-  public MaterialArmorTextureSupplier(ResourceLocation prefix) {
+  public MaterialArmorTextureSupplier(Identifier prefix) {
     this.prefix = prefix;
       this.textures = new Function[] {
       materialGetter(prefix.withSuffix("armor")),
@@ -107,14 +107,14 @@ public abstract class MaterialArmorTextureSupplier implements ArmorTextureSuppli
       Loadables.RESOURCE_LOCATION.requiredField("material_key", d -> d.key),
       PersistentData::new);
 
-    private final ResourceLocation key;
+    private final Identifier key;
 
-    public PersistentData(ResourceLocation prefix, ResourceLocation key) {
+    public PersistentData(Identifier prefix, Identifier key) {
       super(prefix);
       this.key = key;
     }
 
-    public PersistentData(ResourceLocation base, String suffix, ResourceLocation key) {
+    public PersistentData(Identifier base, String suffix, Identifier key) {
       this(base.withSuffix(suffix), key);
     }
 
@@ -137,20 +137,20 @@ public abstract class MaterialArmorTextureSupplier implements ArmorTextureSuppli
       Material::new);
 
     private final int index;
-    public Material(ResourceLocation prefix, int index) {
+    public Material(Identifier prefix, int index) {
       super(prefix);
       this.index = index;
     }
 
-    public Material(ResourceLocation base, String variant, int index) {
+    public Material(Identifier base, String variant, int index) {
       this(base.withSuffix(variant), index);
     }
 
     @Override
     protected String getMaterial(ItemStack stack) {
       CompoundTag tag = TagUtil.getTag(stack);
-      if (tag != null && tag.contains(ToolStack.TAG_MATERIALS, Tag.TAG_LIST)) {
-        return tag.getList(ToolStack.TAG_MATERIALS, Tag.TAG_STRING).getString(index);
+      if (tag != null && tag.contains(ToolStack.TAG_MATERIALS)) {
+        return tag.getListOrEmpty(ToolStack.TAG_MATERIALS).getString(index).orElse("");
       }
       return "";
     }

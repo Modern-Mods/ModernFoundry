@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.modifiers.fluid.general;
 
 import lombok.RequiredArgsConstructor;
-import modernmods.hilt.data.loadable.Loadable;
+import modernmods.mantle.data.loadable.Loadable;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffect;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffectContext;
 

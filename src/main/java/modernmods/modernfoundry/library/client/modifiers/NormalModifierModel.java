@@ -2,18 +2,15 @@ package modernmods.modernfoundry.library.client.modifiers;
 
 import com.google.gson.JsonObject;
 import com.mojang.math.Transformation;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.Accessors;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
-import modernmods.hilt.client.model.util.HiltItemLayerModel;
-import modernmods.hilt.data.loadable.common.ColorLoadable;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.ItemLayerPixels;
+import net.minecraft.client.resources.model.sprite.Material;
+import modernmods.mantle.client.model.util.MantleItemLayerModel;
+import modernmods.mantle.data.loadable.common.ColorLoadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.ItemLayerPixels;
 import modernmods.modernfoundry.library.client.modifiers.model.SimpleModifierModel;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
@@ -27,13 +24,10 @@ import java.util.function.Function;
  * Default modifier model loader, loads a single texture from the standard path.
  * TODO 1.21: move to {@link modernmods.modernfoundry.library.modifiers.modules}
  */
-@Getter
-@Accessors(fluent = true)
-@RequiredArgsConstructor
 public class NormalModifierModel implements SimpleModifierModel {
   protected static final LoadableField<Integer, NormalModifierModel> COLOR_FIELD = ColorLoadable.ALPHA.defaultField("color", false, m -> m.color);
   protected static final LoadableField<Integer, NormalModifierModel> LUMINOSITY_FIELD = IntLoadable.range(0, 15).defaultField("luminosity", 0, false, m -> m.luminosity);
-  public static final RecordLoadable<NormalModifierModel> LOADER = RecordLoadable.create(TEXTURE_FIELD, LARGE_TEXTURE_FIELD, COLOR_FIELD, LUMINOSITY_FIELD, NormalModifierModel::new);
+  public static final RecordLoadable<NormalModifierModel> LOADER = RecordLoadable.<Material,Material,Integer,Integer,NormalModifierModel>create(TEXTURE_FIELD, LARGE_TEXTURE_FIELD, COLOR_FIELD, LUMINOSITY_FIELD, NormalModifierModel::new);
   /** @deprecated legacy system, use {@link #LOADER */
   @Deprecated
   public static final IUnbakedModifierModel UNBAKED_INSTANCE = new Unbaked(-1, 0);
@@ -48,8 +42,27 @@ public class NormalModifierModel implements SimpleModifierModel {
   /** Luminosity to apply to the texture */
   private final int luminosity;
 
+  public NormalModifierModel(@Nullable Material small, @Nullable Material large, int color, int luminosity) {
+    this.small = small;
+    this.large = large;
+    this.color = color;
+    this.luminosity = luminosity;
+  }
+
   public NormalModifierModel(@Nullable Material smallTexture, @Nullable Material largeTexture) {
     this(smallTexture, largeTexture, -1, 0);
+  }
+
+  @Nullable
+  @Override
+  public Material small() {
+    return small;
+  }
+
+  @Nullable
+  @Override
+  public Material large() {
+    return large;
   }
 
   @Override
@@ -71,7 +84,7 @@ public class NormalModifierModel implements SimpleModifierModel {
   public void addQuads(IToolStackView tool, ModifierEntry entry, Function<Material,TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
     Material spriteName = isLarge ? large : small;
     if (spriteName != null) {
-      quadConsumer.accept(HiltItemLayerModel.getQuadsForSprite(color, -1, spriteGetter.apply(spriteName), transforms, luminosity, pixels));
+      quadConsumer.accept(MantleItemLayerModel.getQuadsForSprite(color, -1, new Material.Baked(spriteGetter.apply(spriteName), false), transforms, luminosity, pixels));
     }
   }
 

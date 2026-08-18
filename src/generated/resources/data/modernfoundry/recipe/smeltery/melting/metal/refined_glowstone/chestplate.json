@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/refined_glowstone/chestplate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/chestplates/refined_glowstone"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/chestplates/refined_glowstone"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/refined_glowstone/chestplate",
+  "ingredient": "#c:armors/chestplates/refined_glowstone",
   "result": {
     "amount": 720,
     "tag": "c:molten_refined_glowstone",

@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:geore_medium_buds/quartz"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/quartz/geore/bud_medium",
   "byproducts": [
     {
       "amount": 180,
@@ -8,15 +13,8 @@
       "tag": "c:molten_iron"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:geore_medium_buds/quartz"
-    }
-  ],
-  "ingredient": {
-    "tag": "c:geore_medium_buds/quartz"
-  },
+  "id": "modernfoundry:smeltery/melting/quartz/geore/bud_medium",
+  "ingredient": "#c:geore_medium_buds/quartz",
   "rate": "gem",
   "result": {
     "amount": 200,

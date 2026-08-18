@@ -1,5 +1,5 @@
 {
-  "_comment": "Objetos comunes del Modern Foundry",
+  "_comment": "Objetos comunes del Tinker",
 
   "block.modernfoundry.sky_slime": "Bloque de Slime Celestial",
   "block.modernfoundry.sky_slime.tooltip": "Se pega a la miel y el slime",
@@ -182,10 +182,10 @@
 
   "item.modernfoundry.materials_and_you": "Materiales y tú",
   "item.modernfoundry.materials_and_you.tooltip": "El libro de introducción hacia los materiales y herramientas\nPor Selena",
-  "item.modernfoundry.encyclopedia": "Enciclopedia del Modern Foundry",
-  "item.modernfoundry.encyclopedia.tooltip": "El libro referencial para las necesidades de cualquier Modern Foundry\nPor Selena",
+  "item.modernfoundry.encyclopedia": "Enciclopedia del Tinkereo",
+  "item.modernfoundry.encyclopedia.tooltip": "El libro referencial para las necesidades de cualquier Tinker\nPor Selena",
 
-  "item.modernfoundry.tinkers_gadgetry": "Artilugios del Modern Foundry",
+  "item.modernfoundry.tinkers_gadgetry": "Artilugios del Tinker",
   "item.modernfoundry.tinkers_gadgetry.tooltip": "El libro sobre usos del Slime en el día a día\nPor Melvin",
 
   "item.modernfoundry.puny_smelting": "Forja menor",
@@ -299,7 +299,7 @@
   "item.modernfoundry.copper_can.contents": "%s: 1 lingote",
 
 
-  "_comment": "Patrones del Modern Foundry",
+  "_comment": "Patrones del Tinker",
 
   "pattern.modernfoundry.ingot": "Lingote",
   "pattern.modernfoundry.nugget": "Pepita",
@@ -357,7 +357,7 @@
   "pattern.modernfoundry.arrow_part": "Cabeza o cuerpo de flecha",
 
 
-  "_comment": "Moldes de oro del Modern Foundry",
+  "_comment": "Moldes de oro del Tinker",
 
   "item.modernfoundry.cast.cost": "Coste de material: %d",
 
@@ -410,7 +410,7 @@
   "item.modernfoundry.maille_cast": "Molde de oro de Cota de malla",
 
 
-  "_comment": "Moldes de arena del Modern Foundry",
+  "_comment": "Moldes de arena del Tinker",
 
   "item.modernfoundry.blank_sand_cast": "Molde de arena en blanco",
   "item.modernfoundry.ingot_sand_cast": "Molde de arena de Lingote",
@@ -460,7 +460,7 @@
   "item.modernfoundry.maille_sand_cast": "Molde de arena de cota de malla",
 
 
-  "_comment": "Moldes de arena roja del Modern Foundry",
+  "_comment": "Moldes de arena roja del Tinker",
 
   "item.modernfoundry.blank_red_sand_cast": "Molde de arena roja en blanco",
   "item.modernfoundry.ingot_red_sand_cast": "Molde de arena roja de Lingote",
@@ -510,7 +510,7 @@
   "item.modernfoundry.maille_red_sand_cast": "Molde de arena roja de cota de malla",
 
 
-  "_comment": "Fluidos del Modern Foundry",
+  "_comment": "Fluidos del tinker",
 
   "block.modernfoundry.blazing_blood_fluid": "Sangre de Blaze",
   "fluid.modernfoundry.blazing_blood": "Sangre de Blaze",
@@ -1028,7 +1028,7 @@
   "fluid_effect.modernfoundry.explosion": " Explosión de poder %s",
 
 
-  "_comment": "Artilugios del Modern Foundry",
+  "_comment": "Artilugios del tinker",
 
   "block.modernfoundry.punji": "Estacas punji",
   "block.modernfoundry.punji.tooltip": "¡Puntiagúdo! También se pega a las paredes.",
@@ -1077,13 +1077,13 @@
   "block.modernfoundry.zombified_piglin_head": "Cabeza de Piglin Zombificado",
 
 
-  "_comment": "Mesas del Modern Foundry",
+  "_comment": "Mesas del Tinker",
 
   "block.modernfoundry.crafting_station": "Estación de crafteo",
 
-  "block.modernfoundry.tinker_station": "Estación del Modern Foundry",
-  "block.modernfoundry.tinkers_anvil": "Yunque del Modern Foundry Abrasado",
-  "block.modernfoundry.scorched_anvil": "Yunque del Modern Foundry Chamuscado",
+  "block.modernfoundry.tinker_station": "Estación del Tinker",
+  "block.modernfoundry.tinkers_anvil": "Yunque del Tinker Abrasado",
+  "block.modernfoundry.scorched_anvil": "Yunque del Tinker Chamuscado",
   "block.modernfoundry.tool_forge": "Forja de Herramientas",
 
   "block.modernfoundry.part_builder": "Constructor de Partes",
@@ -1092,7 +1092,7 @@
   "block.modernfoundry.part_chest": "Cofre de Partes",
   "block.modernfoundry.part_chest.tooltip": "Contiene hasta 256 partes de herramientas",
 
-  "block.modernfoundry.tinkers_chest": "Cofre del Modern Foundry",
+  "block.modernfoundry.tinkers_chest": "Cofre del Tinker",
   "block.modernfoundry.tinkers_chest.tooltip": "Contiene hasta 64 stacks de 16 Items",
 
   "block.modernfoundry.cast_chest": "Cofre de Moldes",
@@ -1100,7 +1100,7 @@
 
   "item.modernfoundry.pattern": "Plantilla",
 
-  "_comment": "Herramientas del Modern Foundry",
+  "_comment": "Herramientas del Tinker",
 
   "_comment_on_format_": "These format allows you to have more control over separators in material names. By default we separate with space. You can use %1$s and %2$s if you wish to change the order.",
   "item.modernfoundry.tool.format": "%2$s de %1$s",
@@ -1138,7 +1138,7 @@
   "item.modernfoundry.shuriken": "Shuriken",
   "item.modernfoundry.throwing_axe": "Hacha Arrojadiza",
 
-  "item.modernfoundry.flint_and_brick": "Encendedor del Modern Foundry",
+  "item.modernfoundry.flint_and_brick": "Encendedor del Tinker",
   "item.modernfoundry.sky_staff": "Cetro de Slime Celestial",
   "item.modernfoundry.earth_staff": "Cetro de Slime Terrestre",
   "item.modernfoundry.ichor_staff": "Cetro de Ícor",
@@ -1185,7 +1185,7 @@
   "item.modernfoundry.crystalshot": "Disparo de cristal",
   "entity.modernfoundry.crystalshot": "Disparo de cristal",
 
-  "_comment": "Partes de Herramientas del Modern Foundry",
+  "_comment": "Partes de Herramientas del Tinker",
 
   "item.modernfoundry.dummy_tool_part.tooltip": "Usada solo para crear moldes, No puede usarse para crear herramientas.",
 
@@ -1346,7 +1346,7 @@
   "multiblock.modernfoundry.tiny.no_fuel_tank": "Debe ser colocado arriba de un tanque de combustible o un calentador para funcionar",
 
 
-  "_comment": "La forja del Modern Foundry",
+  "_comment": "La forja del Tinker",
 
   "block.modernfoundry.grout": "Masilla",
   "block.modernfoundry.grout.tooltip": "¡No sirvo para hacer pan!",
@@ -1450,7 +1450,7 @@
   "block.modernfoundry.seared_casting_tank": "Tanque de Moldes",
   "block.modernfoundry.seared_casting_tank.tooltip": "Automáticamente llena o vacía items dentro de él.\nRetiene líquidos al romperse.",
 
-  "_comment": "La fundación del Modern Foundry",
+  "_comment": "La fundación del tinker",
 
   "block.modernfoundry.nether_grout": "Masilla del Nether",
   "block.modernfoundry.nether_grout.tooltip": "¡Yo tampoco sirvo para hacer pan!",
@@ -1508,7 +1508,7 @@
   "block.modernfoundry.scorched_basin.tooltip": "Moldea items usando metales fundidos de una Fundación, requiere un molde o una plataforma de oro para moldear",
   "block.modernfoundry.scorched_table": "Mesa de moldes chamuscada",
   "block.modernfoundry.scorched_table.tooltip": "Moldea items usando metales fundidos de una Fundación, requiere un molde o barrotes de oro para moldear",
-  "block.modernfoundry.scorched_proxy_tank": "Tanque del Modern Foundry Chamuscado",
+  "block.modernfoundry.scorched_proxy_tank": "Tanque del Tinker Chamuscado",
   "block.modernfoundry.scorched_proxy_tank.tooltip": "Bloque de tanque que llena o vacía el tanque del item dentro en lugar de en un tanque interno",
 
   "block.modernfoundry.scorched_channel": "Canal Chamuscado",
@@ -1550,7 +1550,7 @@
   "gui.modernfoundry.fluid.hold_shift": "Mantén §e§oShift§r§7 para ver en baldes",
 
 
-  "_comment": "Mundo de Modern Foundry",
+  "_comment": "Mundo de tinkers",
 
   "entity.modernfoundry.earth_slime": "Slime Terrestre",
   "item.modernfoundry.earth_slime_spawn_egg": "Generar Slime Terrestre",
@@ -1840,7 +1840,7 @@
 
   "material.modernfoundry.string": "Hilo",
   "material.modernfoundry.string.flavor": "Teóricamente el mejor materiall.",
-  "material.modernfoundry.string.encyclopedia": "Permite a las herramientas repararse usando hilo en una Estación del Modern Foundry o mesa de fabricación",
+  "material.modernfoundry.string.encyclopedia": "Permite a las herramientas repararse usando hilo en una Estación del Tinker o mesa de fabricación",
   "material.modernfoundry.string.skull_flavor": "Las arañas son expertas en pociones, Quizás sus secretos me ayuden a mejorar las mías...",
   "material.modernfoundry.string.skull_encyclopedia": "Causa que los efectos de poción positivos duren un 25% más",
 
@@ -2072,7 +2072,7 @@
   "material.modernfoundry.shulker.ammo": "Hace que los proyectiles no se destruyan al impactar contra un objetivo, haciéndolos infinitamente reciclables. Adicionalmente, el item no se despawneará.",
 
   "material.modernfoundry.manyullyn": "Manyullyn",
-  "material.modernfoundry.manyullyn.flavor": "El metal que la mayoría de Modern Foundry no sabe pronunciar. También conocido como el metal corta-estrellas.",
+  "material.modernfoundry.manyullyn.flavor": "El metal que la mayoría de Tinkers no sabe pronunciar. También conocido como el metal corta-estrellas.",
   "material.modernfoundry.manyullyn.encyclopedia": "Otorga hasta +2.5 de daño cada nivel, con el daño aumentando en +0.5 por golpe en 5 golpes consecutivos",
   "material.modernfoundry.manyullyn.ranged": "Los proyectiles ganan hasta +1.25 de poder cada nivel, con el daño aumentando por +0.25 cada nivel por golpe 5 golpes consecutivos",
   "material.modernfoundry.manyullyn.armor": "Temporalmente aumenta el daño cuerpo a cuerpo en 1 luego de tomar daño, limitandose al nivel total en toda la armadura",
@@ -2283,7 +2283,7 @@
 
   "_comment": "Modificadores",
 
-  "key.categories.modernfoundry": "Modern Foundry",
+  "key.category.modernfoundry.modernfoundry": "Modern Foundry",
   "key.modernfoundry.helmet_interact": "Interacción de casco",
   "key.modernfoundry.leggings_interact": "Interacción de pantalones",
 
@@ -3606,30 +3606,30 @@
 
   "_comment": "Interfáz",
 
-  "itemGroup.modernfoundry.general": "Items generales del Modern Foundry",
-  "itemGroup.modernfoundry.tables": "Mesas del Modern Foundry",
-  "itemGroup.modernfoundry.tools": "Herramientas del Modern Foundry",
-  "itemGroup.modernfoundry.tool_parts": "Partes del Modern Foundry",
-  "itemGroup.modernfoundry.smeltery": "Forja del Modern Foundry",
-  "itemGroup.modernfoundry.fluids": "Fluidos del Modern Foundry",
-  "itemGroup.modernfoundry.world": "Mundo del Modern Foundry",
+  "itemGroup.modernfoundry.general": "Items generales del Tinker",
+  "itemGroup.modernfoundry.tables": "Mesas del Tinker",
+  "itemGroup.modernfoundry.tools": "Herramientas del Tinker",
+  "itemGroup.modernfoundry.tool_parts": "Partes del Tinker",
+  "itemGroup.modernfoundry.smeltery": "Forja del Tinker",
+  "itemGroup.modernfoundry.fluids": "Fluidos del Tinker",
+  "itemGroup.modernfoundry.world": "Mundo del Tinker",
 
   "gui.modernfoundry.crafting_station": "Estación de crafteo",
   "gui.modernfoundry.crafting_station.uncraftable": "Este item no se puede craftear actualmente por el jugador",
 
   "gui.modernfoundry.part_builder": "Constructor de partes",
-  "gui.modernfoundry.part_builder.info": "Aquí puedes craftear partes de herramientas para cumplir tus fantasías Modern Foundry.\n\nPara craftear, simplemente pon una plantilla en el slot izquierdo y selecciona la parte que quieras. El slot restante es para el material del que quieras hacer tu parte.",
+  "gui.modernfoundry.part_builder.info": "Aquí puedes craftear partes de herramientas para cumplir tus fantasías tinkerescas.\n\nPara craftear, simplemente pon una plantilla en el slot izquierdo y selecciona la parte que quieras. El slot restante es para el material del que quieras hacer tu parte.",
   "gui.modernfoundry.part_builder.material_value": "Costo de material: %s",
   "gui.modernfoundry.part_builder.cost": "Costo de plantillas: %s",
   "gui.modernfoundry.part_builder.trait": "Rasgp",
   "gui.modernfoundry.part_builder.uncraftable": "No se puede moldear",
   "gui.modernfoundry.part_builder.uncraftable.tooltip": "El material no se puede moldear en el constructor de partes. Otros métodos como el moldeo de forja son requeridos.",
 
-  "gui.modernfoundry.tinkers_chest": "Cofre del Modern Foundry",
+  "gui.modernfoundry.tinkers_chest": "Cofre del tinker",
   "gui.modernfoundry.cast_chest": "Cofre de moldes",
   "gui.modernfoundry.part_chest": "Cofre de partes",
 
-  "gui.modernfoundry.tinker_station": "Estación del Modern Foundry",
+  "gui.modernfoundry.tinker_station": "Estación del Tinker",
   "gui.modernfoundry.tinker_station.repair_limited": "Repara y modifica",
   "gui.modernfoundry.tinker_station.repair_limited.description": "Te permite crear las herramientas básicas y aplicar la mayoría de modificadores. Selecciona un plan de los botones a la izquierda para empezar.",
   "gui.modernfoundry.tinker_station.repair": "Repara y modifica",
@@ -3901,7 +3901,7 @@
   "jei.modernfoundry.severing.title": "Desmembramiento",
 
   "jei.modernfoundry.tinkering.tool_building": "Construir herramientas",
-  "jei.modernfoundry.tinkering.tool_building.anvil": "Herramientas brutas requieren un yunque del Modern Foundry para ser creadas o cambiar partes",
+  "jei.modernfoundry.tinkering.tool_building.anvil": "Herramientas brutas requieren un yunque del tinker para ser creadas o cambiar partes",
 
   "jei.modernfoundry.part_builder.title": "Constructor de partes",
   "jei.modernfoundry.part_builder.cost": "Coste: %s",
@@ -3911,20 +3911,20 @@
 
 
   "_comment": "Progresos de herramientas",
-  "advancements.modernfoundry.tools.materials_and_you.title": "Modern Foundry en entrenamiento",
+  "advancements.modernfoundry.tools.materials_and_you.title": "Tinker en entrenamiento",
   "advancements.modernfoundry.tools.materials_and_you.description": "Craftea Materiales y tú, el libro de introducción a Modern Foundry",
   "advancements.modernfoundry.tools.part_builder.title": "Constructor de Partes",
   "advancements.modernfoundry.tools.part_builder.description": "Crea un Constructor de Partes, el primer paso para hacer herramientas",
   "advancements.modernfoundry.tools.make_part.title": "Partes de herramientas",
   "advancements.modernfoundry.tools.make_part.description": "Crea tu primera parte de herramienta usando una plantilla y algo de material en el constructor de partes",
-  "advancements.modernfoundry.tools.tinker_station.title": "Estación del Modern Foundry",
-  "advancements.modernfoundry.tools.tinker_station.description": "Crea una estación del Modern Foundry para combinar partes y hacer herramientas",
-  "advancements.modernfoundry.tools.tinker_tool.title": "Modern Foundry Novato",
-  "advancements.modernfoundry.tools.tinker_tool.description": "Crea tu primera herramienta Modern Foundry",
+  "advancements.modernfoundry.tools.tinker_station.title": "Estación del Tinker",
+  "advancements.modernfoundry.tools.tinker_station.description": "Crea una estación del tinker para combinar partes y hacer herramientas",
+  "advancements.modernfoundry.tools.tinker_tool.title": "Tinker Novato",
+  "advancements.modernfoundry.tools.tinker_tool.description": "Crea tu primera herramienta tinker",
   "advancements.modernfoundry.tools.travelers_gear.title": "Viajero",
   "advancements.modernfoundry.tools.travelers_gear.description": "Crea un set completo de armadura del viajero",
   "advancements.modernfoundry.tools.modified.title": "Modificación",
-  "advancements.modernfoundry.tools.modified.description": "Aplica un modificador a una herramienta Modern Foundry",
+  "advancements.modernfoundry.tools.modified.description": "Aplica un modificador a una herramienta tinker",
   "advancements.modernfoundry.tools.upgrade_slots.title": "Todas las mejoras",
   "advancements.modernfoundry.tools.upgrade_slots.description": "Dale a una herramienta otros 6 slots de mejora usando escribible, recapitado, harmonioso, e incrustado",
   "advancements.modernfoundry.tools.glass_cannon.title": "Cañón de vidrio",
@@ -3956,7 +3956,7 @@
   "advancements.modernfoundry.smeltery.structure.title": "La gran forja",
   "advancements.modernfoundry.smeltery.structure.description": "Craftea un controlador de la forja moldeando cobre fundido, construye una forja, y abre la interfáz de ella",
   "advancements.modernfoundry.smeltery.tinkers_anvil.title": "Creación de herramientas avanzada",
-  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "¡Craftea un Yunque del Modern Foundry usando aleaciones de la forja!",
+  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "¡Craftea un Yunque del Tinker usando aleaciones de la forja!",
   "advancements.modernfoundry.smeltery.tool_forge.title": "Forja de herramientas",
   "advancements.modernfoundry.smeltery.tool_forge.description": "Forja una de cada herramienta bruta en el yunque",
   "advancements.modernfoundry.smeltery.abilities.title": "Maestro de habilidades",
@@ -3979,8 +3979,8 @@
   "advancements.modernfoundry.foundry.encyclopedia.description": "Craftea la enciclopedia de materiales usando tu conocimiento de todos los libros",
 
   "_comment": "Progresos de Artilugios",
-  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Artilugios del Modern Foundry",
-  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Craftea el libro Artilugios del Modern Foundry para empezar a explorar el mundo",
+  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Artilugios del Tinker",
+  "advancements.modernfoundry.world.tinkers_gadgetry.description": "Craftea el libro Artilugios del tinker para empezar a explorar el mundo",
   "advancements.modernfoundry.world.earth_island.title": "Isla de Slime Terrestre",
   "advancements.modernfoundry.world.earth_island.description": "Localiza Islas de Slime Terrestre en el océano",
   "advancements.modernfoundry.world.sky_island.title": "Isla de Slime Celestial",

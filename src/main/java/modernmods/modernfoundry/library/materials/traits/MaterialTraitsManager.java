@@ -7,9 +7,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import lombok.extern.log4j.Log4j2;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.gson.ResourceLocationSerializer;
 import net.minecraft.server.packs.resources.ResourceManager;
-import modernmods.hilt.data.listener.MergingJsonDataLoader;
+import modernmods.mantle.data.listener.MergingJsonDataLoader;
 import modernmods.modernfoundry.library.exception.TinkerAPIMaterialException;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.materials.json.MaterialTraitsJson;
@@ -44,7 +45,7 @@ import java.util.stream.Collectors;
 public class MaterialTraitsManager extends MergingJsonDataLoader<MaterialTraits.Builder> {
   public static final String FOLDER = "tinkering/materials/traits";
   public static final Gson GSON = (new GsonBuilder())
-    .registerTypeAdapter(ResourceLocation.class, new ResourceLocation.Serializer())
+    .registerTypeAdapter(Identifier.class, ResourceLocationSerializer.resourceLocation("minecraft"))
     .registerTypeAdapter(ModifierEntry.class, ModifierEntry.OPTIONAL_LOADABLE)
     .setPrettyPrinting()
     .disableHtmlEscaping()
@@ -76,7 +77,7 @@ public class MaterialTraitsManager extends MergingJsonDataLoader<MaterialTraits.
    */
   public <T extends IMaterialStats> void registerStatTypeFallback(MaterialStatsId statType, MaterialStatsId fallback) {
     if (statTypeFallbacks.containsKey(statType)) {
-      throw TinkerAPIMaterialException.materialStatsTypeRegisteredTwice(statType);
+      throw TinkerAPIMaterialException.materialStatsTypeRegisteredTwice(statType.getIdentifier());
     }
     statTypeFallbacks.put(statType, fallback);
   }
@@ -131,7 +132,7 @@ public class MaterialTraitsManager extends MergingJsonDataLoader<MaterialTraits.
   }
 
   @Override
-  protected void parse(MaterialTraits.Builder builder, ResourceLocation id, JsonElement element) throws JsonSyntaxException {
+  protected void parse(MaterialTraits.Builder builder, Identifier id, JsonElement element) throws JsonSyntaxException {
     MaterialTraitsJson json = GSON.fromJson(element, MaterialTraitsJson.class);
     builder.setDefaultTraits(json.getDefaultTraits());
     for (Entry<MaterialStatsId,List<ModifierEntry>> entry : json.getPerStat().entrySet()) {
@@ -140,7 +141,7 @@ public class MaterialTraitsManager extends MergingJsonDataLoader<MaterialTraits.
   }
 
   @Override
-  protected void finishLoad(Map<ResourceLocation,MaterialTraits.Builder> map, ResourceManager manager) {
+  protected void finishLoad(Map<Identifier,MaterialTraits.Builder> map, ResourceManager manager) {
     ImmutableMap.Builder<MaterialId,MaterialTraits> builder = ImmutableMap.builder();
     map.entrySet().stream().sorted(Entry.comparingByKey()).forEach(entry -> {
       MaterialTraits traits = entry.getValue().build(statTypeFallbacks);

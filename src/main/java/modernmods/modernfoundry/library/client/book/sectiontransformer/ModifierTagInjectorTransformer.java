@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.client.book.sectiontransformer;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.client.book.data.content.PageContent;
+import modernmods.mantle.client.book.data.content.PageContent;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.book.content.ContentModifier;
 import modernmods.modernfoundry.library.modifiers.Modifier;
@@ -24,8 +24,8 @@ public class ModifierTagInjectorTransformer extends AbstractTagInjectingTransfor
   }
 
   @Override
-  protected ResourceLocation getId(Modifier modifier) {
-    return modifier.getId();
+  protected Identifier getId(Modifier modifier) {
+    return modifier.getId().getIdentifier();
   }
 
   @Override

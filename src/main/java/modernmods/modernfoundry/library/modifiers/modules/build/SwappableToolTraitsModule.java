@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -46,12 +46,12 @@ public class SwappableToolTraitsModule implements ModifierModule, ModifierTraitH
 
   @Nullable
   @Getter @Accessors(fluent = true)
-  private final ResourceLocation key;
+  private final Identifier key;
   private final String match;
   private final ModuleHook<ToolTraitHook> hook;
   private final Component component;
 
-  public SwappableToolTraitsModule(@Nullable ResourceLocation key, String match, ModuleHook<ToolTraitHook> hook) {
+  public SwappableToolTraitsModule(@Nullable Identifier key, String match, ModuleHook<ToolTraitHook> hook) {
     this.key = key;
     this.match = match;
     this.hook = hook;

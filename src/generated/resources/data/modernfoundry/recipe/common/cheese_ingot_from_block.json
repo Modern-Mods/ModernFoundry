@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "modernfoundry:cheese_block"
-    }
+    "modernfoundry:cheese_block"
   ],
   "result": {
     "count": 4,

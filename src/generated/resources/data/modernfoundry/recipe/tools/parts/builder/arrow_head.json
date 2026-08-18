@@ -1,16 +1,12 @@
 {
   "type": "modernfoundry:part_builder",
-  "id": "modernfoundry:tools/parts/builder/arrow_head",
   "allow_uncraftable": true,
   "cost": 1,
+  "id": "modernfoundry:tools/parts/builder/arrow_head",
   "pattern": "modernfoundry:arrow_head",
   "pattern_item": [
-    {
-      "tag": "modernfoundry:patterns/default"
-    },
-    {
-      "item": "modernfoundry:arrow_cast"
-    }
+    "#modernfoundry:patterns/default",
+    "modernfoundry:arrow_cast"
   ],
   "result": {
     "item": "modernfoundry:arrow_head"

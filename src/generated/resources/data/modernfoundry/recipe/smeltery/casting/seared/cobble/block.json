@@ -1,13 +1,8 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/seared/cobble/block",
   "cast": [
-    {
-      "tag": "c:cobblestone"
-    },
-    {
-      "item": "minecraft:gravel"
-    }
+    "#c:cobblestones",
+    "minecraft:gravel"
   ],
   "cast_consumed": true,
   "cooling_time": 113,
@@ -15,5 +10,6 @@
     "amount": 500,
     "tag": "modernfoundry:molten_clay"
   },
+  "id": "modernfoundry:smeltery/casting/seared/cobble/block",
   "result": "modernfoundry:seared_cobble"
 }

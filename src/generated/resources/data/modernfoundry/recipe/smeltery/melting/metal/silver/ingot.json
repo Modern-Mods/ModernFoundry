@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/silver/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/silver"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/silver"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/silver/ingot",
+  "ingredient": "#c:ingots/silver",
   "result": {
     "amount": 90,
     "tag": "c:molten_silver"

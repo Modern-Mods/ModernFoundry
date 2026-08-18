@@ -5,7 +5,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -24,8 +24,8 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.fluid.FluidTransferHelper;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.fluid.FluidTransferHelper;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.library.recipe.FluidValues;
 import modernmods.modernfoundry.library.utils.NBTTags;
 import modernmods.modernfoundry.smeltery.block.entity.ITankBlockEntity;
@@ -82,11 +82,22 @@ public class SearedTankBlock extends SearedBlock implements ITankBlock, EntityBl
     return new TankBlockEntity(pPos, pState, this);
   }
 
+  @Override
+  @Nullable
+  public <T extends BlockEntity> net.minecraft.world.level.block.entity.BlockEntityTicker<T> getTicker(Level level, BlockState state, net.minecraft.world.level.block.entity.BlockEntityType<T> type) {
+    // server-side gravity flow so a stack of standalone tanks behaves like one reservoir (fills bottom-up, drains top-down)
+    if (level.isClientSide() || type != modernmods.modernfoundry.smeltery.TinkerSmeltery.tank.get()) {
+      return null;
+    }
+    return (lvl, pos, st, be) -> TankBlockEntity.serverTick(lvl, pos, st, (TankBlockEntity) be);
+  }
+
   @Deprecated
   @Override
-  protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-    if (FluidTransferHelper.interactWithTank(world, pos, player, hand, hit)) {
-      return ItemInteractionResult.sidedSuccess(world.isClientSide);
+  protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    boolean transferred = FluidTransferHelper.interactWithTank(world, pos, player, hand, hit);
+    if (transferred) {
+      return InteractionResult.SUCCESS;
     }
     return super.useItemOn(stack, state, world, pos, player, hand, hit);
   }
@@ -111,7 +122,7 @@ public class SearedTankBlock extends SearedBlock implements ITankBlock, EntityBl
   public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
     CompoundTag nbt = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
     if (!nbt.isEmpty() && world.getBlockEntity(pos) instanceof TankBlockEntity tank) {
-      tank.updateTank(nbt.getCompound(NBTTags.TANK));
+      tank.updateTank(nbt.getCompoundOrEmpty(NBTTags.TANK));
     }
     super.setPlacedBy(world, pos, state, placer, stack);
   }
@@ -124,12 +135,12 @@ public class SearedTankBlock extends SearedBlock implements ITankBlock, EntityBl
 
   @Deprecated
   @Override
-  public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
+  public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos, net.minecraft.core.Direction direction) {
     return ITankBlockEntity.getComparatorInputOverride(worldIn, pos);
   }
 
   @Override
-  public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+  public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
     ItemStack stack = new ItemStack(this);
     BlockEntityHelper.get(TankBlockEntity.class, world, pos).ifPresent(te -> te.setTankTag(stack));
     return stack;

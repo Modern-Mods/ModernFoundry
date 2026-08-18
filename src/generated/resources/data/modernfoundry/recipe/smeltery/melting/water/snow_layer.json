@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/water/snow_layer",
-  "ingredient": {
-    "item": "minecraft:snow"
-  },
+  "ingredient": "minecraft:snow",
   "result": {
     "amount": 125,
     "fluid": "minecraft:water"

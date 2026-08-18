@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/queens_slime/nugget_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/nugget"
-  },
+  "cast": "#modernfoundry:casts/single_use/nugget",
   "cast_consumed": true,
   "cooling_time": 24,
   "fluid": {
     "amount": 10,
     "tag": "modernfoundry:molten_queens_slime"
   },
+  "id": "modernfoundry:smeltery/casting/metal/queens_slime/nugget_sand_cast",
   "result": {
     "tag": "c:nuggets/queens_slime"
   }

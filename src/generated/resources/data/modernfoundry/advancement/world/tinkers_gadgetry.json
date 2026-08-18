@@ -22,7 +22,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:tinkers_gadgetry"
+      "id": "modernfoundry:tinkers_gadgetry"
     },
     "show_toast": true,
     "title": {

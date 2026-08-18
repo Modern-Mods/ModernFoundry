@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/quartz/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/quartz"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/quartz"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/quartz/dust",
+  "ingredient": "#c:dusts/quartz",
   "result": {
     "amount": 100,
     "fluid": "modernfoundry:molten_quartz"

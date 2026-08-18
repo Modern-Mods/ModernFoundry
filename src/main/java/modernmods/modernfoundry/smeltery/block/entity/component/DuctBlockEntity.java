@@ -1,5 +1,7 @@
 package modernmods.modernfoundry.smeltery.block.entity.component;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,13 +14,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import net.neoforged.neoforge.model.data.ModelData;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
-import modernmods.hilt.util.RetexturedHelper;
+import modernmods.mantle.util.RetexturedHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.model.ModelProperties;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
@@ -109,24 +111,22 @@ public class DuctBlockEntity extends SmelteryFluidIO implements MenuProvider {
   }
 
   @Override
-  public void load(CompoundTag tags) {
-    super.load(tags);
-    if (tags.contains(TAG_ITEM, Tag.TAG_COMPOUND)) {
-      itemHandler.readFromNBT(tags.getCompound(TAG_ITEM));
-    }
+  public void loadAdditional(ValueInput input) {
+    super.loadAdditional(input);
+    input.read(TAG_ITEM, CompoundTag.CODEC).ifPresent(itemHandler::readFromNBT);
   }
 
   @Override
-  public void handleUpdateTag(CompoundTag tag) {
-    super.handleUpdateTag(tag);
-    if (level != null && level.isClientSide) {
+  public void handleUpdateTag(ValueInput input) {
+    super.handleUpdateTag(input);
+    if (level != null && level.isClientSide()) {
       updateFluid();
     }
   }
 
   @Override
-  public void saveSynced(CompoundTag tags) {
-    super.saveSynced(tags);
-    tags.put(TAG_ITEM, itemHandler.writeToNBT());
+  public void saveSynced(ValueOutput output) {
+    super.saveSynced(output);
+    output.store(TAG_ITEM, CompoundTag.CODEC, itemHandler.writeToNBT());
   }
 }

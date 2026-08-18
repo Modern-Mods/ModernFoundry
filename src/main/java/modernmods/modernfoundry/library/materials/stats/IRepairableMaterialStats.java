@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.materials.stats;
 
 import net.minecraft.network.chat.Component;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
 
 import java.util.List;
 

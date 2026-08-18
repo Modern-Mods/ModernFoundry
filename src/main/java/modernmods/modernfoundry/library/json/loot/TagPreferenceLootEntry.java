@@ -7,18 +7,17 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import modernmods.hilt.recipe.helper.TagPreference;
+import modernmods.mantle.recipe.helper.TagPreference;
 import modernmods.modernfoundry.TConstruct;
-import modernmods.modernfoundry.shared.TinkerCommons;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-/** @deprecated use {@link modernmods.hilt.loot.entry.TagPreferenceLootEntry} */
+/** @deprecated use {@link modernmods.mantle.loot.entry.TagPreferenceLootEntry} */
 @Deprecated(forRemoval = true)
 public class TagPreferenceLootEntry extends LootPoolSingletonContainer {
   public static final MapCodec<TagPreferenceLootEntry> CODEC = RecordCodecBuilder.mapCodec(
@@ -32,10 +31,9 @@ public class TagPreferenceLootEntry extends LootPoolSingletonContainer {
     this.tag = tag;
   }
 
-  @SuppressWarnings("removal")
   @Override
-  public LootPoolEntryType getType() {
-    return TinkerCommons.lootTagPreference.get();
+  public MapCodec<? extends LootPoolSingletonContainer> codec() {
+    return CODEC;
   }
 
   @Override
@@ -43,14 +41,14 @@ public class TagPreferenceLootEntry extends LootPoolSingletonContainer {
     TagPreference.getPreference(tag).ifPresent(item -> consumer.accept(new ItemStack(item)));
   }
 
-  /** @deprecated use {@link modernmods.hilt.loot.entry.TagPreferenceLootEntry#tagPreference(TagKey)} */
+  /** @deprecated use {@link modernmods.mantle.loot.entry.TagPreferenceLootEntry#tagPreference(TagKey)} */
   @Deprecated(forRemoval = true)
   public static LootPoolSingletonContainer.Builder<?> tagPreference(TagKey<Item> tag) {
-    return modernmods.hilt.loot.entry.TagPreferenceLootEntry.tagPreference(tag);
+    return modernmods.mantle.loot.entry.TagPreferenceLootEntry.tagPreference(tag);
   }
 
   private static TagPreferenceLootEntry newDeprecated(TagKey<Item> tag, int weight, int quality, List<LootItemCondition> conditions, List<LootItemFunction> functions) {
-    TConstruct.LOG.warn("Using deprecated tag preference loot entry 'modernfoundry:tag_preference', use 'hilt:tag_preference' instead");
+    TConstruct.LOG.warn("Using deprecated tag preference loot entry 'modernfoundry:tag_preference', use 'mantle:tag_preference' instead");
     return new TagPreferenceLootEntry(tag, weight, quality, conditions, functions);
   }
 }

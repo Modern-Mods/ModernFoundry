@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/osmium/mekanism_shield",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "mekanism:osmium_shield"
+      "type": "neoforge:registered",
+      "value": "mekanism:osmium_shield"
     }
   ],
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/osmium/mekanism_shield",
   "ingredient": {
     "item": "mekanism:osmium_shield"
   },

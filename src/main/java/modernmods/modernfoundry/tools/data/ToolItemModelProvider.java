@@ -87,6 +87,6 @@ public class ToolItemModelProvider extends AbstractToolItemModelProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry Tool Item Model Provider";
+    return "Tinkers Construct Tool Item Model Provider";
   }
 }

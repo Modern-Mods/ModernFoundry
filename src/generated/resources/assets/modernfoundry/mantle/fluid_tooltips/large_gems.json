@@ -1,0 +1,17 @@
+{
+  "tag": "modernfoundry:tooltips/gem_large",
+  "units": [
+    {
+      "key": "gui.modernfoundry.fluid.block",
+      "needed": 900
+    },
+    {
+      "key": "gui.modernfoundry.fluid.gem",
+      "needed": 100
+    },
+    {
+      "key": "gui.modernfoundry.fluid.shard",
+      "needed": 25
+    }
+  ]
+}

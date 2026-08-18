@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.recipe.molding;
 
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.recipe.container.IRecipeContainer;
+import modernmods.mantle.recipe.container.IRecipeContainer;
 
 /**
  * Inventory for molding recipes

@@ -1,27 +1,27 @@
 [
   {
     "name": "index",
-    "type": "hilt:index",
+    "type": "mantle:index",
     "data": "blazing_blood/index.json"
   },
   {
     "name": "intro",
-    "type": "hilt:image_text",
+    "type": "mantle:image_text",
     "data": "blazing_blood/intro.json"
   },
   {
     "name": "carry",
-    "type": "hilt:image_text",
+    "type": "mantle:image_text",
     "data": "blazing_blood/carry.json"
   },
   {
     "name": "foundry",
-    "type": "hilt:image_text",
+    "type": "mantle:image_text",
     "data": "blazing_blood/foundry.json"
   },
   {
     "name": "head",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "blazing_blood/head.json"
   },
   {
@@ -31,12 +31,12 @@
   },
   {
     "name": "piglin_bartering",
-    "type": "hilt:image_text",
+    "type": "mantle:image_text",
     "data": "blazing_blood/piglin_bartering.json"
   },
   {
     "name": "ichor",
-    "type": "hilt:showcase",
+    "type": "mantle:showcase",
     "data": "blazing_blood/ichor.json"
   }
 ]

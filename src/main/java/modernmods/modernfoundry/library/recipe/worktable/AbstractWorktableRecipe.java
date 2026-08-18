@@ -1,14 +1,15 @@
 package modernmods.modernfoundry.library.recipe.worktable;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.recipe.ITinkerableContainer;
@@ -27,12 +28,12 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 public abstract class AbstractWorktableRecipe implements IModifierWorktableRecipe {
-  public static final Ingredient DEFAULT_TOOLS = Ingredient.of(TinkerTags.Items.MODIFIABLE);
+  public static final Ingredient DEFAULT_TOOLS = modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(TinkerTags.Items.MODIFIABLE);
   protected static final LoadableField<Ingredient,AbstractWorktableRecipe> TOOL_FIELD = IngredientLoadable.DISALLOW_EMPTY.defaultField("tools", DEFAULT_TOOLS, true, r -> r.toolRequirement);
   protected static final LoadableField<List<SizedIngredient>,AbstractWorktableRecipe> INPUTS_FIELD = SizedIngredient.LOADABLE.list(1).requiredField("inputs", r -> r.inputs);
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   protected final Ingredient toolRequirement;
   protected final List<SizedIngredient> inputs;
 
@@ -40,8 +41,8 @@ public abstract class AbstractWorktableRecipe implements IModifierWorktableRecip
   @Nullable
   protected List<ItemStack> tools;
 
-  public AbstractWorktableRecipe(ResourceLocation id, List<SizedIngredient> inputs) {
-    this(id, Ingredient.of(TinkerTags.Items.MODIFIABLE), inputs);
+  public AbstractWorktableRecipe(Identifier id, List<SizedIngredient> inputs) {
+    this(id, modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(TinkerTags.Items.MODIFIABLE), inputs);
   }
 
   @Override
@@ -72,7 +73,7 @@ public abstract class AbstractWorktableRecipe implements IModifierWorktableRecip
   @Override
   public List<ItemStack> getInputTools() {
     if (tools == null) {
-      tools = Arrays.stream(toolRequirement.getItems()).map(stack -> IModifiableDisplay.getDisplayStack(stack.getItem())).toList();
+      tools = Arrays.stream(toolRequirement.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)).map(stack -> IModifiableDisplay.getDisplayStack(stack.getItem())).toList();
     }
     return tools;
   }

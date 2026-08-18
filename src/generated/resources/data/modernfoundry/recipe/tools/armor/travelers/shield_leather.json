@@ -3,7 +3,5 @@
   "id": "modernfoundry:tools/armor/travelers/shield_leather",
   "index": 1,
   "item_cost": 2,
-  "tools": {
-    "item": "modernfoundry:travelers_shield"
-  }
+  "tools": "modernfoundry:travelers_shield"
 }

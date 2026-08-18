@@ -97,7 +97,7 @@ public interface HarvestEnchantmentsModifierHook {
       if (enchantments != null) {
         // we allow 0 values for enchantments in the hook
         enchantments.values().removeIf(EnchantmentModifierHook.VALUE_REMOVER);
-        Registry<Enchantment> registry = context.getWorld().registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+        Registry<Enchantment> registry = context.getWorld().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
         ItemEnchantments.Mutable mutable = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
         enchantments.forEach((enchantment, level) -> mutable.set(registry.wrapAsHolder(enchantment), level));
         EnchantmentHelper.setEnchantments(stack, mutable.toImmutable());

@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/amethyst_bronze",
   "fluid": {
     "amount": 90,
     "tag": "c:molten_amethyst_bronze"
   },
+  "id": "modernfoundry:tools/materials/casting/amethyst_bronze",
   "output": "modernfoundry:amethyst_bronze",
   "temperature": 820
 }

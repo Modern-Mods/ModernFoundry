@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/slimewood/skyroot_planks",
-  "ingredient": {
-    "item": "modernfoundry:skyroot_planks"
-  },
+  "ingredient": "modernfoundry:skyroot_planks",
   "material": "modernfoundry:slimewood#skyroot",
   "needed": 1,
   "value": 1

@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/slime/magma_bottle",
-  "cast": {
-    "item": "minecraft:glass_bottle"
-  },
+  "cast": "minecraft:glass_bottle",
   "cast_consumed": true,
   "cooling_time": 1,
   "fluid": {
     "amount": 250,
     "tag": "c:magma"
   },
+  "id": "modernfoundry:smeltery/casting/slime/magma_bottle",
   "result": "modernfoundry:magma_bottle"
 }

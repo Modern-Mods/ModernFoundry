@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/nickel/helmet",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/helmets/nickel"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/helmets/nickel"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/nickel/helmet",
+  "ingredient": "#c:armors/helmets/nickel",
   "result": {
     "amount": 450,
     "tag": "c:molten_nickel",

@@ -2,17 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "p": {
-      "item": "modernfoundry:pattern"
-    },
+    "p": "modernfoundry:pattern",
     "w": {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "c:workbenches"
-      },
-      "subtracted": {
-        "item": "modernfoundry:crafting_station"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#c:workbenches",
+      "subtracted": "modernfoundry:crafting_station"
     }
   },
   "pattern": [
@@ -21,6 +15,5 @@
   ],
   "result": {
     "id": "modernfoundry:crafting_station"
-  },
-  "show_notification": true
+  }
 }

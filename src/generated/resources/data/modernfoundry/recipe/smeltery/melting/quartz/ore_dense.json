@@ -1,6 +1,14 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "match": [
+        "c:ores/quartz",
+        "c:ore_rates/dense"
+      ]
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/quartz/ore_dense",
   "byproducts": [
     {
       "amount": 270,
@@ -8,24 +16,12 @@
       "tag": "c:molten_iron"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_combination_filled",
-      "match": [
-        "c:ores/quartz",
-        "c:ore_rates/dense"
-      ]
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/quartz/ore_dense",
   "ingredient": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "c:ores/quartz"
-      },
-      {
-        "tag": "c:ore_rates/dense"
-      }
+      "#c:ores/quartz",
+      "#c:ore_rates/dense"
     ]
   },
   "rate": "gem",

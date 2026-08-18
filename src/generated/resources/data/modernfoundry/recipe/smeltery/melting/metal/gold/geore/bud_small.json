@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:geore_small_buds/gold"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/gold/geore/bud_small",
   "byproducts": [
     {
       "amount": 90,
@@ -8,15 +13,8 @@
       "tag": "c:molten_cobalt"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:geore_small_buds/gold"
-    }
-  ],
-  "ingredient": {
-    "tag": "c:geore_small_buds/gold"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/gold/geore/bud_small",
+  "ingredient": "#c:geore_small_buds/gold",
   "rate": "metal",
   "result": {
     "amount": 90,

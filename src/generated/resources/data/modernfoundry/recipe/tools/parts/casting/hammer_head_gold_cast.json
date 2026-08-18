@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:table_casting_material",
+  "cast": "#modernfoundry:casts/multi_use/hammer_head",
   "id": "modernfoundry:tools/parts/casting/hammer_head_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/hammer_head"
-  },
   "item_cost": 8,
   "result": "modernfoundry:hammer_head"
 }

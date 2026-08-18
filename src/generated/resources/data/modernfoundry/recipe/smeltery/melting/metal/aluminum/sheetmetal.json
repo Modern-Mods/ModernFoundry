@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/aluminum/sheetmetal",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:sheetmetals/aluminum"
     }
   ],
-  "ingredient": {
-    "tag": "c:sheetmetals/aluminum"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/aluminum/sheetmetal",
+  "ingredient": "#c:sheetmetals/aluminum",
   "result": {
     "amount": 90,
     "tag": "c:molten_aluminum"

@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/amethyst_bronze/dust",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:dusts/amethyst_bronze"
     }
   ],
-  "ingredient": {
-    "tag": "c:dusts/amethyst_bronze"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/amethyst_bronze/dust",
+  "ingredient": "#c:dusts/amethyst_bronze",
   "result": {
     "amount": 90,
     "tag": "c:molten_amethyst_bronze"

@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/quick_charge",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "minecraft:magma_cream"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/quick_charge",
+  "input": "minecraft:magma_cream",
   "level": {
     "max": 4
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/ranged/quick_charge"
-  }
+  "tools": "#modernfoundry:modifiable/ranged/quick_charge"
 }

@@ -1,0 +1,12 @@
+{
+  "values": [
+    "modernfoundry:copper_platform",
+    "modernfoundry:exposed_copper_platform",
+    "modernfoundry:weathered_copper_platform",
+    "modernfoundry:oxidized_copper_platform",
+    "modernfoundry:waxed_copper_platform",
+    "modernfoundry:waxed_exposed_copper_platform",
+    "modernfoundry:waxed_weathered_copper_platform",
+    "modernfoundry:waxed_oxidized_copper_platform"
+  ]
+}

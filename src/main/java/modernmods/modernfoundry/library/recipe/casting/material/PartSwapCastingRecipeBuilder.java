@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Ingredient;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
@@ -36,7 +36,7 @@ public class PartSwapCastingRecipeBuilder extends AbstractRecipeBuilder<PartSwap
    * @return  Builder instance
    */
   public static PartSwapCastingRecipeBuilder basinRecipe(Ingredient tools, int itemCost) {
-    return castingRecipe(tools, itemCost, TinkerSmeltery.basinPartSwappingSerializer.get());
+    return castingRecipe(tools, itemCost, TinkerSmeltery.basinPartSwappingSerializer);
   }
 
   /**
@@ -45,17 +45,17 @@ public class PartSwapCastingRecipeBuilder extends AbstractRecipeBuilder<PartSwap
    * @return  Builder instance
    */
   public static PartSwapCastingRecipeBuilder tableRecipe(Ingredient tools, int itemCost) {
-    return castingRecipe(tools, itemCost, TinkerSmeltery.tablePartSwappingSerializer.get());
+    return castingRecipe(tools, itemCost, TinkerSmeltery.tablePartSwappingSerializer);
   }
 
   @SuppressWarnings("deprecation")
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, BuiltInRegistries.ITEM.getKey(tools.getItems()[0].getItem()));
+    save(consumer, BuiltInRegistries.ITEM.getKey(tools.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)[0].getItem()));
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     consumer.accept(new LoadableFinishedRecipe<>(id, new PartSwapCastingRecipe(recipeSerializer, id, group, tools, itemCost, index, allowedMaterials), PartSwapCastingRecipe.LOADER, this.buildOptionalAdvancement(id, "materials")));
   }
 }

@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/honey/bottle",
-  "cast": {
-    "item": "minecraft:glass_bottle"
-  },
+  "cast": "minecraft:glass_bottle",
   "cast_consumed": true,
   "cooling_time": 1,
   "fluid": {
     "amount": 250,
     "tag": "c:honey"
   },
+  "id": "modernfoundry:smeltery/casting/honey/bottle",
   "result": "minecraft:honey_bottle"
 }

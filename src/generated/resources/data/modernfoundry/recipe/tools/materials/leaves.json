@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/leaves",
-  "ingredient": {
-    "tag": "minecraft:leaves"
-  },
+  "ingredient": "#minecraft:leaves",
   "material": "modernfoundry:leaves",
   "needed": 1,
   "value": 1

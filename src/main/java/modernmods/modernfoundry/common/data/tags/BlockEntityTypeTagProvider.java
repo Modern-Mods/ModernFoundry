@@ -1,48 +1,48 @@
 package modernmods.modernfoundry.common.data.tags;
 
+import net.minecraft.tags.TagEntry;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.data.tags.TagAppender;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import modernmods.hilt.datagen.HiltTags;
+import modernmods.mantle.datagen.MantleTags;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("removal")
 public class BlockEntityTypeTagProvider extends IntrinsicHolderTagsProvider<BlockEntityType<?>> {
   @SuppressWarnings("deprecation")
-  public BlockEntityTypeTagProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+  public BlockEntityTypeTagProvider(PackOutput packOutput, CompletableFuture<Provider> lookupProvider) {
     super(packOutput, Registries.BLOCK_ENTITY_TYPE, lookupProvider,
           // not sure why fetching the resource key from the object is such a pain
-          type -> BuiltInRegistries.BLOCK_ENTITY_TYPE.getHolder(BuiltInRegistries.BLOCK_ENTITY_TYPE.getId(type)).orElseThrow().key(),
-          TConstruct.MOD_ID, existingFileHelper);
+          type -> BuiltInRegistries.BLOCK_ENTITY_TYPE.getResourceKey(type).orElseThrow(),
+          TConstruct.MOD_ID);
   }
 
   /** Creates a RL for iron chests */
-  private static void ironchest(IntrinsicTagAppender<BlockEntityType<?>> appender, String name) {
-    ResourceLocation chest = ResourceLocation.fromNamespaceAndPath("ironchest", name + "_chest");
-    appender.addOptional(chest).addOptional(chest.withPrefix("trapped_"));
+  private static void ironchest(TagAppender<BlockEntityType<?>, BlockEntityType<?>> appender, String name) {
+    Identifier chest = Identifier.fromNamespaceAndPath("ironchest", name + "_chest");
+    appender.add(TagEntry.optionalElement(chest)).add(TagEntry.optionalElement(chest.withPrefix("trapped_")));
     if (!"dirt".equals(name)) {
-      appender.addOptional(ResourceLocation.fromNamespaceAndPath("ironshulkerbox", name + "_shulker_box"));
+      appender.add(TagEntry.optionalElement(Identifier.fromNamespaceAndPath("ironshulkerbox", name + "_shulker_box")));
     }
   }
 
   @Override
   protected void addTags(Provider provider) {
-    IntrinsicTagAppender<BlockEntityType<?>> sideInventories = tag(TinkerTags.TileEntityTypes.SIDE_INVENTORIES);
+    TagAppender<BlockEntityType<?>, BlockEntityType<?>> sideInventories = tag(TinkerTags.TileEntityTypes.SIDE_INVENTORIES);
     sideInventories.add(
       BlockEntityType.CHEST, BlockEntityType.TRAPPED_CHEST, BlockEntityType.BARREL, BlockEntityType.SHULKER_BOX,
       BlockEntityType.DISPENSER, BlockEntityType.DROPPER, BlockEntityType.HOPPER);
     // TODO 1.21: verify if BlockEntityType.CHISELED_BOOKSHELF has fixed the bug where setItem(ItemStack.EMPTY) doesn't work so it can be whitelisted.
-    sideInventories.addOptional(ResourceLocation.fromNamespaceAndPath("immersiveengineering", "woodencrate"));
+    sideInventories.add(TagEntry.optionalElement(Identifier.fromNamespaceAndPath("immersiveengineering", "woodencrate")));
     ironchest(sideInventories, "iron");
     ironchest(sideInventories, "gold");
     ironchest(sideInventories, "diamond");
@@ -52,11 +52,11 @@ public class BlockEntityTypeTagProvider extends IntrinsicHolderTagsProvider<Bloc
     ironchest(sideInventories, "dirt");
 
     // these block entities don't fully sync the fluid to client, so show simplified information
-    tag(HiltTags.BlockEntities.HIDES_GAUGE_AMOUNT).add(TinkerSmeltery.faucet.get(), TinkerSmeltery.channel.get());
+    tag(MantleTags.BlockEntities.HIDES_GAUGE_AMOUNT).add(TinkerSmeltery.faucet.get(), TinkerSmeltery.channel.get());
   }
 
   @Override
   public String getName() {
-    return "Modern Foundry Block Entity Type Tags";
+    return "Tinkers' Construct Block Entity Type Tags";
   }
 }

@@ -7,8 +7,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.network.packet.IThreadsafePacket;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.smeltery.block.entity.tank.ISmelteryTankHandler;
 
 import java.util.ArrayList;

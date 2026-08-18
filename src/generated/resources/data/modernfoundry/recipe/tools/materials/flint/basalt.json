@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/flint/basalt",
-  "ingredient": {
-    "tag": "c:basalt"
-  },
+  "ingredient": "#c:basalt",
   "material": "modernfoundry:flint#basalt",
   "needed": 1,
   "value": 1

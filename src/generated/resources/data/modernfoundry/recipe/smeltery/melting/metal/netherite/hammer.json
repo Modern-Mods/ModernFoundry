@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "value": "tools_complement:netherite_hammer"
+    }
+  ],
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/netherite/hammer",
   "byproducts": [
     {
       "amount": 1300,
@@ -8,12 +13,7 @@
       "unit_size": 25
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:item_exists",
-      "item": "tools_complement:netherite_hammer"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/metal/netherite/hammer",
   "ingredient": {
     "item": "tools_complement:netherite_hammer"
   },

@@ -2,9 +2,9 @@ package modernmods.modernfoundry.library.client.book.sectiontransformer;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
-import modernmods.hilt.client.book.data.content.PageContent;
+import modernmods.mantle.client.book.data.content.PageContent;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.book.content.ContentTool;
 
@@ -17,7 +17,7 @@ public class ToolTagInjectorTransformer extends AbstractTagInjectingTransformer<
   }
 
   @Override
-  protected ResourceLocation getId(Item item) {
+  protected Identifier getId(Item item) {
     return BuiltInRegistries.ITEM.getKey(item);
   }
 

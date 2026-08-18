@@ -4,13 +4,13 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
-import modernmods.hilt.data.loadable.IAmLoadable;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.mapping.EitherLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.equipment.ArmorType;
+import modernmods.mantle.data.loadable.IAmLoadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.mapping.EitherLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.materials.MaterialRegistry;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
@@ -29,12 +29,11 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /** Module for repairing a tool using a non-tool part material */
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MaterialRepairModule implements MaterialRepairToolHook, ToolModule, IAmLoadable.Record {
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<MaterialRepairModule>defaultHooks(ToolHooks.MATERIAL_REPAIR);
   private static final LoadableField<MaterialId,MaterialRepairModule> MATERIAL_FIELD = MaterialId.PARSER.requiredField("material", m -> m.material);
-  private static final RecordLoadable<MaterialRepairModule> CONSTANT = RecordLoadable.create(MATERIAL_FIELD, IntLoadable.FROM_ONE.requiredField("durability", MaterialRepairModule::getRepairAmount), MaterialRepairModule::new);
-  private static final RecordLoadable<StatType> STAT_TYPE = RecordLoadable.create(MATERIAL_FIELD, MaterialStatsId.PARSER.requiredField("stat_type", m -> m.statType), MaterialRepairModule::of);
+  private static final RecordLoadable<MaterialRepairModule> CONSTANT = RecordLoadable.create(MATERIAL_FIELD, IntLoadable.FROM_ONE.requiredField("durability", (MaterialRepairModule m) -> m.repairAmount), MaterialRepairModule::new);
+  private static final RecordLoadable<StatType> STAT_TYPE = RecordLoadable.create(MATERIAL_FIELD, MaterialStatsId.PARSER.requiredField("stat_type", (StatType m) -> m.statType), MaterialRepairModule::of);
   public static final RecordLoadable<MaterialRepairModule> LOADER = EitherLoadable.<MaterialRepairModule>record().key("durability", CONSTANT).key("stat_type", STAT_TYPE).build(CONSTANT);
 
   /** Material used for repairing */
@@ -43,13 +42,18 @@ public class MaterialRepairModule implements MaterialRepairToolHook, ToolModule,
   @Getter(AccessLevel.PROTECTED)
   protected int repairAmount;
 
+  protected MaterialRepairModule(MaterialId material, int repairAmount) {
+    this.material = material;
+    this.repairAmount = repairAmount;
+  }
+
   /** Creates a new module using a constant durability */
   public static MaterialRepairModule of(MaterialId material, int repairAmount) {
     return new MaterialRepairModule(material, repairAmount);
   }
 
   /** Creates a new module using a constant durability */
-  public static MaterialRepairModule of(MaterialId material, ArmorItem.Type slot, float durabilityFactor) {
+  public static MaterialRepairModule of(MaterialId material, ArmorType slot, float durabilityFactor) {
     return new MaterialRepairModule(material, (int)(ArmorModuleBuilder.MAX_DAMAGE_ARRAY[slot.ordinal()] * durabilityFactor));
   }
 
@@ -110,7 +114,7 @@ public class MaterialRepairModule implements MaterialRepairToolHook, ToolModule,
     }
 
     /** Gets and caches the repair amount for this module */
-    private int getRepairAmount(@Nullable ResourceLocation toolId) {
+    private int getRepairAmount(@Nullable Identifier toolId) {
       if (repairAmount == -1) {
         repairAmount = getDurability(toolId, material, statType);
       }
@@ -124,7 +128,7 @@ public class MaterialRepairModule implements MaterialRepairToolHook, ToolModule,
   }
 
   /** Gets the durability for the given stat type */
-  public static int getDurability(@Nullable ResourceLocation toolId, MaterialId material, MaterialStatsId statType) {
+  public static int getDurability(@Nullable Identifier toolId, MaterialId material, MaterialStatsId statType) {
     IMaterialStats stats = MaterialRegistry.getInstance().getMaterialStats(material, statType).orElse(null);
     if (stats instanceof IRepairableMaterialStats repairable) {
       return repairable.durability();
@@ -145,7 +149,7 @@ public class MaterialRepairModule implements MaterialRepairToolHook, ToolModule,
 
     /** Sets the durability for the piece based on the given factor */
     public ArmorBuilder durabilityFactor(float maxDamageFactor) {
-      for (ArmorItem.Type slotType : ModifiableArmorMaterial.ARMOR_TYPES) {
+      for (ArmorType slotType : ModifiableArmorMaterial.ARMOR_TYPES) {
         int index = slotType.ordinal();
         durability[index] = (int)(ArmorModuleBuilder.MAX_DAMAGE_ARRAY[index] * maxDamageFactor);
       }
@@ -153,7 +157,7 @@ public class MaterialRepairModule implements MaterialRepairToolHook, ToolModule,
     }
 
     @Override
-    public MaterialRepairModule build(ArmorItem.Type slot) {
+    public MaterialRepairModule build(ArmorType slot) {
       return new MaterialRepairModule(material, durability[slot.ordinal()]);
     }
   }

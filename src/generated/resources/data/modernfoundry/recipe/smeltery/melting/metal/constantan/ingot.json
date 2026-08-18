@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/constantan/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/constantan"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/constantan"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/constantan/ingot",
+  "ingredient": "#c:ingots/constantan",
   "result": {
     "amount": 90,
     "tag": "c:molten_constantan"

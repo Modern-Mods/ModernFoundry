@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.json.variable.melee;
 
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.math.ModifierFormula;
 import modernmods.modernfoundry.library.json.variable.VariableFormula;
 import modernmods.modernfoundry.library.json.variable.VariableFormulaLoadable;

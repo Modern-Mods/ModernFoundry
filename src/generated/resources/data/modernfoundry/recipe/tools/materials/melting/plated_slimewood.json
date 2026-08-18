@@ -1,21 +1,21 @@
 {
-  "type": "modernfoundry:material_melting",
-  "id": "modernfoundry:tools/materials/melting/plated_slimewood",
   "neoforge:conditions": [
     {
       "type": "neoforge:or",
       "values": [
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/brass"
         },
         {
-          "type": "hilt:tag_filled",
+          "type": "mantle:tag_filled",
           "tag": "c:ingots/zinc"
         }
       ]
     }
   ],
+  "type": "modernfoundry:material_melting",
+  "id": "modernfoundry:tools/materials/melting/plated_slimewood",
   "input": "modernfoundry:plated_slimewood",
   "result": {
     "amount": 90,

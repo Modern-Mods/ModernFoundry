@@ -2,124 +2,37 @@ package modernmods.modernfoundry.library.client.data.material;
 
 import com.google.gson.JsonObject;
 import com.mojang.blaze3d.platform.NativeImage;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import modernmods.modernfoundry.library.client.data.GenericTextureGenerator;
 import modernmods.modernfoundry.library.client.data.material.AbstractMaterialSpriteProvider.MaterialSpriteInfo;
 import modernmods.modernfoundry.library.client.data.material.AbstractPartSpriteProvider.PartSpriteInfo;
-import modernmods.modernfoundry.library.client.data.material.GeneratorPartTextureJsonGenerator.StatOverride;
 import modernmods.modernfoundry.library.client.data.spritetransformer.ISpriteTransformer;
 import modernmods.modernfoundry.library.client.data.util.AbstractSpriteReader;
-import modernmods.modernfoundry.library.client.data.util.DataGenSpriteReader;
-import modernmods.modernfoundry.library.materials.stats.MaterialStatsId;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 /**
- * Texture generator to generate textures for materials, supports adding a set of sprites to recolor, alongside a set of materials
- *
- * Note this only supports generating the crossproduct of materials and textures. If your addon adds both materials and tools, the best setup is having two generators:
- * <ul>
- *   <li>A generator adding all TiC and custom materials for your new sprites</li>
- *   <li>A generator adding all custom materials for TiC sprites</li>
- * </ul>
- * In case you need to divide into more than those two, it will be most efficient if each sprite is handled by only a single generator, so always split over sets of materials.
+ * Helpers for generating material part textures, shared with the in-game part texture regeneration command.
+ * <p>
+ * The datagen provider flow (a {@code GenericTextureGenerator} that read existing sprites through the removed
+ * {@code net.neoforged.neoforge.common.data.ExistingFileHelper} / {@code DataGenSpriteReader}) was dropped in the 26.1
+ * port. Only the static generation utilities used at runtime remain here; the {@code ResourceManager}-based path
+ * (see {@code ClientGeneratePartTexturesCommand}) is unaffected. Restore the provider instance flow when datagen is
+ * re-enabled on 26.1.
  */
-public class MaterialPartTextureGenerator extends GenericTextureGenerator {
+public class MaterialPartTextureGenerator {
+  private MaterialPartTextureGenerator() {}
+
   /** Path to textures outputted by this generator */
   public static final String FOLDER = "textures";
-  private final DataGenSpriteReader spriteReader;
-  private final ExistingFileHelper existingFileHelper;
-  /** Sprite provider */
-  private final AbstractPartSpriteProvider partProvider;
-  /** Materials to provide */
-  private final AbstractMaterialSpriteProvider[] materialProviders;
-  private final StatOverride overrides;
-
-  public MaterialPartTextureGenerator(PackOutput packOutput, ExistingFileHelper existingFileHelper, AbstractPartSpriteProvider spriteProvider, AbstractMaterialSpriteProvider... materialProviders) {
-    this(packOutput, existingFileHelper, spriteProvider, StatOverride.EMPTY, materialProviders);
-  }
-
-  public MaterialPartTextureGenerator(PackOutput packOutput, ExistingFileHelper existingFileHelper, AbstractPartSpriteProvider spriteProvider, StatOverride overrides, AbstractMaterialSpriteProvider... materialProviders) {
-    super(packOutput, FOLDER);
-    this.spriteReader = new DataGenSpriteReader(existingFileHelper, FOLDER);
-    this.existingFileHelper = existingFileHelper;
-    this.partProvider = spriteProvider;
-    this.overrides = overrides;
-    this.materialProviders = materialProviders;
-  }
-
-  @Override
-  public String getName() {
-    StringBuilder name = new StringBuilder();
-    name.append("Material Part Generator - ");
-    name.append(partProvider.getName());
-    name.append(" - ");
-    name.append(materialProviders[0].getName());
-    for (int i = 1; i < materialProviders.length; i++) {
-      name.append(", ").append(materialProviders[i].getName());
-    }
-    return name.toString();
-  }
-
-
-  @Override
-  public CompletableFuture<?> run(CachedOutput cache) {
-    runCallbacks(existingFileHelper, null);
-    
-    // ensure we have parts
-    List<PartSpriteInfo> parts = partProvider.getSprites();
-    if (parts.isEmpty()) {
-      throw new IllegalStateException(partProvider.getName() + " has no parts, must have at least one part to generate");
-    }
-
-    // for each material list, generate sprites
-    List<CompletableFuture<?>> tasks = new ArrayList<>();
-    BiConsumer<ResourceLocation, NativeImage> saver = (path, image) -> tasks.add(saveImage(cache, path, image));
-    BiConsumer<ResourceLocation, JsonObject> metaSaver = (path, meta) -> tasks.add(saveMetadata(cache, path, meta));
-    for (AbstractMaterialSpriteProvider materialProvider : materialProviders) {
-      Collection<MaterialSpriteInfo> materials = materialProvider.getMaterials().values();
-      if (materials.isEmpty()) {
-        throw new IllegalStateException(materialProvider.getName() + " has no materials, must have at least one material to generate");
-      }
-      // want cross product of textures
-      for (MaterialSpriteInfo material : materials) {
-        for (PartSpriteInfo part : parts) {
-          // if the part skips variants and the material is a variant, skip
-          if (!material.isVariant() || !part.isSkipVariants()) {
-            // if any stat type matches, generate it
-            for (MaterialStatsId statType : part.getStatTypes()) {
-              if (material.supportStatType(statType) || overrides.hasOverride(statType, material.getTexture())) {
-                ResourceLocation spritePath = outputPath(part, material);
-                if (!spriteReader.exists(spritePath)) {
-                  generateSprite(spriteReader, material, part, spritePath, saver, metaSaver);
-                }
-                break;
-              }
-            }
-          }
-        }
-      }
-    }
-    return allOf(tasks).thenRunAsync(() -> {
-      spriteReader.closeAll();
-      partProvider.cleanCache();
-      runCallbacks(null, null);
-    });
-  }
 
   /** Gets the output path for a given sprite */
-  public static ResourceLocation outputPath(PartSpriteInfo part, MaterialSpriteInfo material) {
+  public static Identifier outputPath(PartSpriteInfo part, MaterialSpriteInfo material) {
     // path format: pNamespace:pPath_mNamespace_mPath
-    ResourceLocation materialTexture = material.getTexture();
+    Identifier materialTexture = material.getTexture();
     return part.getPath().withSuffix("_" + materialTexture.getNamespace() + "_" + materialTexture.getPath());
   }
 
@@ -131,7 +44,7 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
    * @param saver           Function to save the images
    * @param metaSaver       Function to save the animation metadata
    */
-  public static void generateSprite(AbstractSpriteReader spriteReader, MaterialSpriteInfo material, PartSpriteInfo part, ResourceLocation spritePath, BiConsumer<ResourceLocation, NativeImage> saver, BiConsumer<ResourceLocation,JsonObject> metaSaver) {
+  public static void generateSprite(AbstractSpriteReader spriteReader, MaterialSpriteInfo material, PartSpriteInfo part, Identifier spritePath, BiConsumer<Identifier, NativeImage> saver, BiConsumer<Identifier,JsonObject> metaSaver) {
     // image does not exist? first step is to find a base image
     NativeImage base = null;
     for (String fallback : material.getFallbacks()) {
@@ -171,19 +84,18 @@ public class MaterialPartTextureGenerator extends GenericTextureGenerator {
     TEXTURE_CALLBACKS.add(callback);
   }
 
-  /** Runs all callbacks */
-  public static void runCallbacks(@Nullable ExistingFileHelper existingFileHelper, @Nullable ResourceManager manager) {
+  /** Runs all callbacks. A nonnull manager means generation is starting; null means it is ending. */
+  public static void runCallbacks(@Nullable ResourceManager manager) {
     for (IPartTextureCallback callback : TEXTURE_CALLBACKS) {
-      callback.accept(existingFileHelper, manager);
+      callback.accept(manager);
     }
   }
 
   public interface IPartTextureCallback {
     /**
-     * Tells the given callback that texture generating is either starting or ending. Both parameters being null means texture generating is ending
-     * @param existingFileHelper  If nonnull, datagenerators are starting
-     * @param manager             If nonnull, command is starting
+     * Tells the given callback that texture generating is either starting or ending.
+     * @param manager  If nonnull, generation is starting (from the in-game command); null means generation is ending
      */
-    void accept(@Nullable ExistingFileHelper existingFileHelper, @Nullable ResourceManager manager);
+    void accept(@Nullable ResourceManager manager);
   }
 }

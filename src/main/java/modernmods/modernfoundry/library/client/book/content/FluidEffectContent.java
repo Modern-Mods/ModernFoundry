@@ -6,23 +6,23 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.ForgeI18n;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.client.book.HTMLUtils;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.book.data.content.PageContent;
-import modernmods.hilt.client.book.data.element.TextComponentData;
-import modernmods.hilt.client.book.data.element.TextData;
-import modernmods.hilt.client.screen.book.BookScreen;
-import modernmods.hilt.client.screen.book.element.BookElement;
-import modernmods.hilt.client.screen.book.element.TextComponentElement;
-import modernmods.hilt.client.screen.book.element.TextElement;
-import modernmods.hilt.util.html.HtmlElement;
-import modernmods.hilt.util.html.HtmlGroup;
-import modernmods.hilt.util.html.HtmlSerializable;
+import modernmods.mantle.client.book.HTMLUtils;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.book.data.content.PageContent;
+import modernmods.mantle.client.book.data.element.TextComponentData;
+import modernmods.mantle.client.book.data.element.TextData;
+import modernmods.mantle.client.screen.book.BookScreen;
+import modernmods.mantle.client.screen.book.element.BookElement;
+import modernmods.mantle.client.screen.book.element.TextComponentElement;
+import modernmods.mantle.client.screen.book.element.TextElement;
+import modernmods.mantle.util.html.HtmlElement;
+import modernmods.mantle.util.html.HtmlGroup;
+import modernmods.mantle.util.html.HtmlSerializable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.book.elements.FluidItemElement;
 import modernmods.modernfoundry.library.modifiers.fluid.FluidEffects;
@@ -35,7 +35,7 @@ import java.util.List;
 
 /** Page type to display a fluid effect in the encyclopedia */
 public class FluidEffectContent extends PageContent {
-  public static final transient ResourceLocation ID = TConstruct.getResource("fluid_effect");
+  public static final transient Identifier ID = TConstruct.getResource("fluid_effect");
   private static final transient String KEY_BLOCK_EFFECTS = TConstruct.makeTranslationKey("book", "fluid_effects.block");
   private static final transient String KEY_ENTITY_EFFECTS = TConstruct.makeTranslationKey("book", "fluid_effects.entity");
 
@@ -57,7 +57,7 @@ public class FluidEffectContent extends PageContent {
   private transient List<ItemStack> fluidItems = List.of();
 
   /** Updates the fluids from the page info */
-  public void loadEffectData(ResourceLocation name, FluidEffects effects, List<FluidStack> fluids, List<ItemStack> fluidItems) {
+  public void loadEffectData(Identifier name, FluidEffects effects, List<FluidStack> fluids, List<ItemStack> fluidItems) {
     // set ingredient data
     this.fluids = fluids;
     this.fluidItems = fluidItems;

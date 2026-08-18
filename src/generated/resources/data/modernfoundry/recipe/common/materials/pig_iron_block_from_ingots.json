@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:pig_iron_block",
   "key": {
-    "#": {
-      "tag": "c:ingots/pig_iron"
-    },
-    "*": {
-      "item": "modernfoundry:pig_iron_ingot"
-    }
+    "#": "#c:ingots/pig_iron",
+    "*": "modernfoundry:pig_iron_ingot"
   },
   "pattern": [
     "###",
@@ -17,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:pig_iron_block"
-  },
-  "show_notification": true
+  }
 }

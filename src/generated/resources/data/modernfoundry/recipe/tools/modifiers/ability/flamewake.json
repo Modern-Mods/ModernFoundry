@@ -1,22 +1,22 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/flamewake",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/ability/flamewake",
   "inputs": [
     {
-      "item": "minecraft:flint"
+      "ingredient": "minecraft:flint"
     },
     {
-      "tag": "c:ingots/netherite_scrap"
+      "ingredient": "#c:ingots/netherite_scrap"
     },
     {
-      "item": "minecraft:flint"
+      "ingredient": "minecraft:flint"
     },
     {
-      "item": "minecraft:flint"
+      "ingredient": "minecraft:flint"
     },
     {
-      "item": "minecraft:flint"
+      "ingredient": "minecraft:flint"
     }
   ],
   "level": 1,
@@ -25,14 +25,10 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/armor/boots"
-      },
-      {
-        "tag": "modernfoundry:modifiable/durability"
-      }
+      "#modernfoundry:modifiable/armor/boots",
+      "#modernfoundry:modifiable/durability"
     ]
   }
 }

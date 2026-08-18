@@ -29,6 +29,16 @@ public enum TinkerHeadType implements Type, StringRepresentable {
   BLAZING_BONE(() -> EntityType.WITHER_SKELETON),
   NECRONIUM(() -> EntityType.WITHER_SKELETON);
 
+  static {
+    // 26.1.2: the skull item's `minecraft:head` special model resolves its `kind` via SkullBlock.Type.CODEC, which is a
+    // string resolver over the global SkullBlock.Type.TYPES map. Vanilla enum types self-register there; our modded types
+    // never did (block placement uses the SkullBlock instance's type directly, so it worked without the map), so the item
+    // model failed to resolve. Register each head type under its serialized name so `kind` in the item JSON resolves.
+    for (TinkerHeadType headType : values()) {
+      Type.TYPES.put(headType.getSerializedName(), headType);
+    }
+  }
+
   private final Supplier<EntityType<?>> type;
 
   /** Gets the associated entity type */

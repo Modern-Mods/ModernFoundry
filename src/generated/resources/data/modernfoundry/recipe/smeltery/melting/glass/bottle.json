@@ -2,15 +2,9 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/glass/bottle",
   "ingredient": [
-    {
-      "item": "minecraft:glass_bottle"
-    },
-    {
-      "tag": "c:bottles/splash"
-    },
-    {
-      "tag": "c:bottles/lingering"
-    }
+    "minecraft:glass_bottle",
+    "#c:bottles/splash",
+    "#c:bottles/lingering"
   ],
   "result": {
     "amount": 1000,

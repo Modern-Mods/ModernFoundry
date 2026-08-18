@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/lead/coin",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/lead"
     }
   ],
-  "ingredient": {
-    "tag": "c:coins/lead"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/lead/coin",
+  "ingredient": "#c:coins/lead",
   "result": {
     "amount": 30,
     "tag": "c:molten_lead"

@@ -1,5 +1,5 @@
 {
-  "title": "Atelier du Modern Foundry",
+  "title": "Atelier du Bricoleur",
   "image": {
     "file": "modernfoundry:book/images/tinkerstation.png",
     "width": 135,
@@ -7,7 +7,7 @@
   },
   "text": [
     {
-      "text": "Mets ça ici, ça là, oh mince c’est à l’envers. Il vaut mieux continuer à Modern Foundry.",
+      "text": "Mets ça ici, ça là, oh mince c’est à l’envers. Il vaut mieux continuer à bricoler.",
       "paragraph": true
     }
   ]

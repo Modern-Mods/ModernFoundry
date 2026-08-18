@@ -1,13 +1,13 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/bounce",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/bounce",
   "inputs": [
     {
-      "item": "minecraft:piston"
+      "ingredient": "minecraft:piston"
     },
     {
-      "item": "modernfoundry:ichor_slime"
+      "ingredient": "modernfoundry:ichor_slime"
     }
   ],
   "level": {
@@ -17,7 +17,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/ranged/bounce"
-  }
+  "tools": "#modernfoundry:modifiable/ranged/bounce"
 }

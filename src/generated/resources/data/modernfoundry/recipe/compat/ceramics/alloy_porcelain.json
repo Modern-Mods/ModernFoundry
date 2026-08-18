@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:alloy",
-  "id": "modernfoundry:compat/ceramics/alloy_porcelain",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "ceramics"
     }
   ],
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:compat/ceramics/alloy_porcelain",
   "inputs": [
     {
       "amount": 750,

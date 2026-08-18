@@ -1,16 +1,15 @@
 package modernmods.modernfoundry.library.client.modifiers.model;
 
 import com.mojang.math.Transformation;
-import lombok.RequiredArgsConstructor;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.ItemLayerPixels;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.ItemLayerPixels;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.tools.capability.fluid.ToolTankHelper;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
@@ -22,14 +21,13 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /** Model for a tank showing its fluid on the tool */
-@RequiredArgsConstructor
 public class TankModifierModel implements ModifierModel {
   public static final RecordLoadable<TankModifierModel> LOADER = RecordLoadable.create(
-    ModifierModel.MATERIAL_LOADABLE.nullableField("partial", m -> m.smallPartial),
-    ModifierModel.MATERIAL_LOADABLE.nullableField("full", m -> m.smallFull),
-    ModifierModel.MATERIAL_LOADABLE.nullableField("partial_large", m -> m.largePartial),
-    ModifierModel.MATERIAL_LOADABLE.nullableField("full_large", m -> m.largeFull),
-    IntLoadable.FROM_ZERO.defaultField("tolerance", 0, false, m -> m.tolerance),
+    ModifierModel.MATERIAL_LOADABLE.nullableField("partial", (TankModifierModel m) -> m.smallPartial),
+    ModifierModel.MATERIAL_LOADABLE.nullableField("full", (TankModifierModel m) -> m.smallFull),
+    ModifierModel.MATERIAL_LOADABLE.nullableField("partial_large", (TankModifierModel m) -> m.largePartial),
+    ModifierModel.MATERIAL_LOADABLE.nullableField("full_large", (TankModifierModel m) -> m.largeFull),
+    IntLoadable.FROM_ZERO.defaultField("tolerance", 0, false, (TankModifierModel m) -> m.tolerance),
     TankModifierModel::new);
 
   @Nullable
@@ -41,6 +39,14 @@ public class TankModifierModel implements ModifierModel {
   @Nullable
   private final Material largeFull;
   private final int tolerance;
+
+  public TankModifierModel(@Nullable Material smallPartial, @Nullable Material smallFull, @Nullable Material largePartial, @Nullable Material largeFull, int tolerance) {
+    this.smallPartial = smallPartial;
+    this.smallFull = smallFull;
+    this.largePartial = largePartial;
+    this.largeFull = largeFull;
+    this.tolerance = tolerance;
+  }
 
   @Override
   public RecordLoadable<? extends TankModifierModel> getLoader() {

@@ -2,18 +2,10 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/seared/slab",
   "ingredient": [
-    {
-      "item": "modernfoundry:seared_cobble_slab"
-    },
-    {
-      "item": "modernfoundry:seared_stone_slab"
-    },
-    {
-      "item": "modernfoundry:seared_bricks_slab"
-    },
-    {
-      "item": "modernfoundry:seared_paver_slab"
-    }
+    "modernfoundry:seared_cobble_slab",
+    "modernfoundry:seared_stone_slab",
+    "modernfoundry:seared_bricks_slab",
+    "modernfoundry:seared_paver_slab"
   ],
   "result": {
     "amount": 500,

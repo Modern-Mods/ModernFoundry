@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/slimesteel/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/slimesteel"
-  },
+  "ingredient": "#c:nuggets/slimesteel",
   "result": {
     "amount": 10,
     "fluid": "modernfoundry:molten_slimesteel"

@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/amethyst_bronze/nugget_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/nugget"
-  },
+  "cast": "#modernfoundry:casts/multi_use/nugget",
   "cooling_time": 20,
   "fluid": {
     "amount": 10,
     "tag": "c:molten_amethyst_bronze"
   },
+  "id": "modernfoundry:smeltery/casting/metal/amethyst_bronze/nugget_gold_cast",
   "result": {
     "tag": "c:nuggets/amethyst_bronze"
   }

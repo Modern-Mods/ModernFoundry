@@ -7,8 +7,8 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -48,7 +48,7 @@ public record PlaceGlowModule(int damage) implements ModifierModule, BlockIntera
   public InteractionResult afterBlockUse(IToolStackView tool, ModifierEntry modifier, UseOnContext context, InteractionSource source) {
     if (!tool.isBroken() && tool.getHook(ToolHooks.INTERACTION).canInteract(tool, modifier.getId(), source)) {
       Player player = context.getPlayer();
-      if (!context.getLevel().isClientSide) {
+      if (!context.getLevel().isClientSide()) {
         Level world = context.getLevel();
         Direction face = context.getClickedFace();
         BlockPos pos = context.getClickedPos().relative(face);
@@ -60,7 +60,7 @@ public record PlaceGlowModule(int damage) implements ModifierModule, BlockIntera
           world.playSound(null, pos, world.getBlockState(pos).getSoundType(world, pos, player).getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
         }
       }
-      return InteractionResult.sidedSuccess(context.getLevel().isClientSide);
+      return InteractionResult.SUCCESS;
     }
     return InteractionResult.PASS;
   }

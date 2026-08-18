@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/water/blue_ice",
-  "ingredient": {
-    "item": "minecraft:blue_ice"
-  },
+  "ingredient": "minecraft:blue_ice",
   "result": {
     "amount": 81000,
     "fluid": "minecraft:water"

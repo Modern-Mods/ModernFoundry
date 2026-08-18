@@ -3,25 +3,25 @@ package modernmods.modernfoundry.library.client.modifiers.model;
 import com.mojang.math.Transformation;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.armortrim.TrimMaterial;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.client.model.util.HiltItemLayerModel;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.common.ColorLoadable;
-import modernmods.hilt.data.loadable.mapping.SimpleRecordLoadable;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.ItemLayerPixels;
+import modernmods.mantle.client.model.util.MantleItemLayerModel;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.common.ColorLoadable;
+import modernmods.mantle.data.loadable.mapping.SimpleRecordLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.ItemLayerPixels;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
@@ -58,7 +58,7 @@ public interface TrimModifierModel extends ModifierModel {
   Map<String, TrimTexture> getCache(boolean isLarge);
 
   /** Gets the root texture for the given tool */
-  ResourceLocation getRoot(boolean isLarge);
+  Identifier getRoot(boolean isLarge);
 
   /** If true, missing textures warn. If false, missing textures log to debug. */
   boolean warnOnMissingTexture();
@@ -78,12 +78,17 @@ public interface TrimModifierModel extends ModifierModel {
           Level level = Minecraft.getInstance().level;
           if (level != null) {
             // find the material, if missing we use the base texture
-            TrimMaterial material = level.registryAccess().registryOrThrow(Registries.TRIM_MATERIAL).get(ResourceLocation.tryParse(materialId));
+            Identifier materialLoc = Identifier.tryParse(materialId);
+            TrimMaterial material = materialLoc == null ? null : level.registryAccess()
+              .lookupOrThrow(Registries.TRIM_MATERIAL)
+              .get(ResourceKey.create(Registries.TRIM_MATERIAL, materialLoc))
+              .map(Holder::value).orElse(null);
             if (material != null) {
               // base location is based on the armor type
-              ResourceLocation root = getRoot(isLarge);
-              // specific location based on the material
-              ResourceLocation path = root.withSuffix("_" + material.assetName());
+              Identifier root = getRoot(isLarge);
+              // specific location based on the material. 26.1 removed TrimMaterial#assetName(); the per-material
+              // sprite suffix matches the material's registry id path (vanilla and Tinker datagen convention)
+              Identifier path = root.withSuffix("_" + materialLoc.getPath());
 
               // ensure the material sprite exists, if not we will tint the base sprite
               TextureAtlasSprite sprite = spriteGetter.apply(ModifierModel.blockAtlas(path));
@@ -91,7 +96,7 @@ public interface TrimModifierModel extends ModifierModel {
               if (MissingTextureAtlasSprite.getLocation().equals(sprite.contents().name())) {
                 // if the sprite doesn't exist, will tint the base sprite, assuming we have a component color
                 // helps for mods that don't properly provide all sprites
-                sprite = spriteGetter.apply(new Material(InventoryMenu.BLOCK_ATLAS, root));
+                sprite = spriteGetter.apply(ModifierModel.blockAtlas(root));
                 TextColor textColor = material.description().getStyle().getColor();
                 if (textColor != null) {
                   color = textColor.getValue() | 0xFF000000;
@@ -107,25 +112,26 @@ public interface TrimModifierModel extends ModifierModel {
         }
         // no texture here mean the material is unknown, otherwise add it
         if (texture.sprite != null) {
-          quadConsumer.accept(HiltItemLayerModel.getQuadsForSprite(texture.color, -1, texture.sprite, transforms, 0, pixels));
+          quadConsumer.accept(MantleItemLayerModel.getQuadsForSprite(texture.color, -1, new Material.Baked(texture.sprite, false), transforms, 0, pixels));
         }
       }
     }
   }
 
   enum Armor implements TrimModifierModel {
-    HELMET(ArmorItem.Type.HELMET),
-    CHESTPLATE(ArmorItem.Type.CHESTPLATE),
-    LEGGINGS(ArmorItem.Type.LEGGINGS),
-    BOOTS(ArmorItem.Type.BOOTS);
+    // 26.1 removed ArmorItem.Type; the trim texture path uses the vanilla armor slot name directly
+    HELMET("helmet"),
+    CHESTPLATE("chestplate"),
+    LEGGINGS("leggings"),
+    BOOTS("boots");
 
     public static final RecordLoadable<Armor> LOADER = new SimpleRecordLoadable<>(new EnumLoadable<>(Armor.class), "slot", null, false);
 
     @Getter
-    private final ResourceLocation root;
+    private final Identifier root;
     private final Map<String, TrimTexture> cache;
-    Armor(ArmorItem.Type type) {
-      root = ResourceLocation.withDefaultNamespace("trims/items/" + type.getName() + "_trim");
+    Armor(String typeName) {
+      root = Identifier.withDefaultNamespace("trims/items/" + typeName + "_trim");
       cache = new HashMap<>();
     }
 
@@ -148,7 +154,7 @@ public interface TrimModifierModel extends ModifierModel {
     }
 
     @Override
-    public ResourceLocation getRoot(boolean isLarge) {
+    public Identifier getRoot(boolean isLarge) {
       return root;
     }
 
@@ -173,12 +179,12 @@ public interface TrimModifierModel extends ModifierModel {
 
     /** Base texture for this model */
     @Nonnull
-    private final ResourceLocation smallRoot, largeRoot;
+    private final Identifier smallRoot, largeRoot;
     /** Cache of textures for each material. */
     private final Map<String, TrimTexture> smallCache, largeCache ;
 
     /** Creates a model using the given custom texture and a unique cache. */
-    public Custom(ResourceLocation smallRoot, @Nullable ResourceLocation largeRoot) {
+    public Custom(Identifier smallRoot, @Nullable Identifier largeRoot) {
       this.smallRoot = smallRoot;
       this.smallCache = new HashMap<>();
       // if we have a large root, create a cache for it
@@ -204,7 +210,7 @@ public interface TrimModifierModel extends ModifierModel {
     }
 
     @Override
-    public ResourceLocation getRoot(boolean isLarge) {
+    public Identifier getRoot(boolean isLarge) {
       return isLarge ? largeRoot : smallRoot;
     }
 

@@ -1,13 +1,9 @@
 {
-  "type": "hilt:crafting_shaped_retextured",
+  "type": "mantle:crafting_shaped_retextured",
   "category": "redstone",
   "key": {
-    "#": {
-      "tag": "modernfoundry:foundry_bricks"
-    },
-    "C": {
-      "item": "modernfoundry:obsidian_pane"
-    }
+    "#": "#modernfoundry:foundry_bricks",
+    "C": "modernfoundry:obsidian_pane"
   },
   "match_all": false,
   "pattern": [
@@ -16,6 +12,5 @@
   "result": {
     "id": "modernfoundry:scorched_drain"
   },
-  "show_notification": true,
   "texture": "#"
 }

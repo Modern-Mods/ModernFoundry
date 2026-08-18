@@ -8,10 +8,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import modernmods.hilt.block.entity.InventoryBlockEntity;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
+import modernmods.mantle.block.entity.InventoryBlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 
 public class InventorySlotSyncPacket implements IThreadsafePacket {
 
@@ -55,9 +57,20 @@ public class InventorySlotSyncPacket implements IThreadsafePacket {
             Minecraft.getInstance().levelRenderer.blockChanged(world, packet.pos, te.getBlockState(), te.getBlockState(), 0);
             return;
           }
-          var cap = world.getCapability(Capabilities.ItemHandler.BLOCK, packet.pos, te.getBlockState(), te, null);
-          if (cap instanceof IItemHandlerModifiable itemHandler) {
-            itemHandler.setStackInSlot(packet.slot, packet.itemStack);
+          ResourceHandler<ItemResource> cap = world.getCapability(Capabilities.Item.BLOCK, packet.pos, te.getBlockState(), te, null);
+          // client-side display sync: force the slot to match the server contents by replacing it within a single transaction
+          if (cap != null && packet.slot >= 0 && packet.slot < cap.size()) {
+            try (Transaction tx = Transaction.openRoot()) {
+              ItemResource existing = cap.getResource(packet.slot);
+              int existingAmount = cap.getAmountAsInt(packet.slot);
+              if (!existing.isEmpty() && existingAmount > 0) {
+                cap.extract(packet.slot, existing, existingAmount, tx);
+              }
+              if (!packet.itemStack.isEmpty()) {
+                cap.insert(packet.slot, ItemResource.of(packet.itemStack), packet.itemStack.getCount(), tx);
+              }
+              tx.commit();
+            }
             Minecraft.getInstance().levelRenderer.blockChanged(world, packet.pos, te.getBlockState(), te.getBlockState(), 0);
           }
         }

@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/glowstone/block",
-  "ingredient": {
-    "item": "minecraft:glowstone"
-  },
+  "ingredient": "minecraft:glowstone",
   "material": "modernfoundry:glowstone",
   "needed": 1,
   "value": 1

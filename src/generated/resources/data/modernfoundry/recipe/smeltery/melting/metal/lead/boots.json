@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/lead/boots",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/boots/lead"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/boots/lead"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/lead/boots",
+  "ingredient": "#c:armors/boots/lead",
   "result": {
     "amount": 360,
     "tag": "c:molten_lead",

@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.recipe.tinkerstation.repairing;
 import lombok.Getter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
@@ -11,8 +11,8 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -37,17 +37,16 @@ public class ModifierRepairCraftingRecipe extends CustomRecipe implements IModif
   private final Ingredient ingredient;
   @Getter
   private final int repairAmount;
-  private final ResourceLocation id;
+  private final Identifier id;
 
-  public ModifierRepairCraftingRecipe(ResourceLocation idIn, ModifierId modifier, Ingredient ingredient, int repairAmount) {
-    super(CraftingBookCategory.EQUIPMENT);
+  public ModifierRepairCraftingRecipe(Identifier idIn, ModifierId modifier, Ingredient ingredient, int repairAmount) {
     this.id = idIn;
     this.modifier = modifier;
     this.ingredient = ingredient;
     this.repairAmount = repairAmount;
   }
 
-  public ResourceLocation getId() {
+  public Identifier getId() {
     return id;
   }
 
@@ -63,7 +62,7 @@ public class ModifierRepairCraftingRecipe extends CustomRecipe implements IModif
   }
 
   @Override
-  public ItemStack assemble(CraftingInput inv, HolderLookup.Provider access) {
+  public ItemStack assemble(CraftingInput inv) {
     ToolFound inputs = OverslimeCraftingTableRecipe.findTool(inv, TOOLS, ingredient);
     if (inputs == null) {
       TConstruct.LOG.error("Recipe repair on {} failed to find items after matching", getId());
@@ -114,12 +113,12 @@ public class ModifierRepairCraftingRecipe extends CustomRecipe implements IModif
   }
 
   @Override
-  public boolean canCraftInDimensions(int width, int height) {
-    return (width * height) >= 2;
+  public CraftingBookCategory category() {
+    return CraftingBookCategory.EQUIPMENT;
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends ModifierRepairCraftingRecipe> getSerializer() {
     return TinkerModifiers.craftingModifierRepair.get();
   }
 }

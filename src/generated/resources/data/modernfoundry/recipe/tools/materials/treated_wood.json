@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/treated_wood",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:treated_wood"
     }
   ],
-  "ingredient": {
-    "tag": "c:treated_wood"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/treated_wood",
+  "ingredient": "#c:treated_wood",
   "material": "modernfoundry:treated_wood",
   "needed": 1,
   "value": 1

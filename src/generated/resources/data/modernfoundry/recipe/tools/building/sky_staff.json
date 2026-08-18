@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "modernfoundry:sky_slime_crystal"
-    },
-    "I": {
-      "tag": "c:ingots/rose_gold"
-    },
-    "W": {
-      "tag": "modernfoundry:skyroot_logs"
-    }
+    "C": "modernfoundry:sky_slime_crystal",
+    "I": "#c:ingots/rose_gold",
+    "W": "#modernfoundry:skyroot_logs"
   },
   "pattern": [
     "CWC",
@@ -19,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:sky_staff"
-  },
-  "show_notification": true
+  }
 }

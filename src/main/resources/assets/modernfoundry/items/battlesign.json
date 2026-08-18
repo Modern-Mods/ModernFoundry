@@ -1,0 +1,22 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/battlesign",
+    "parts": [
+      {
+        "name": "head",
+        "index": 0
+      },
+      {
+        "name": "handle",
+        "index": 1
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:battlesign"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/battlesign/modifiers/"
+    ]
+  }
+}

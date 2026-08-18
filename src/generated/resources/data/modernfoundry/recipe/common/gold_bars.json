@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "c:ingots/gold"
-    }
+    "#": "#c:ingots/gold"
   },
   "pattern": [
     "###",
@@ -13,6 +11,5 @@
   "result": {
     "count": 16,
     "id": "modernfoundry:gold_bars"
-  },
-  "show_notification": true
+  }
 }

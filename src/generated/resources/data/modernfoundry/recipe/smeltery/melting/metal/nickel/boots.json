@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/nickel/boots",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/boots/nickel"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/boots/nickel"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/nickel/boots",
+  "ingredient": "#c:armors/boots/nickel",
   "result": {
     "amount": 360,
     "tag": "c:molten_nickel",

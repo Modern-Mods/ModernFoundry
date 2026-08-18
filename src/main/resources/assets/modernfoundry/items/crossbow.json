@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/crossbow",
+    "parts": [
+      {
+        "name": "limb",
+        "index": 0
+      },
+      {
+        "name": "body",
+        "index": 1
+      },
+      {
+        "name": "bowstring",
+        "index": 2
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:crossbow"
+    ],
+    "small_modifier_roots": [
+      "modernfoundry:item/tool/crossbow/modifiers/"
+    ]
+  }
+}

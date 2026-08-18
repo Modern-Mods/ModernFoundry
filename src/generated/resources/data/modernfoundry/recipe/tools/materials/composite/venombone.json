@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/composite/venombone",
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:venom"
   },
+  "id": "modernfoundry:tools/materials/composite/venombone",
   "input": "modernfoundry:bone",
   "output": "modernfoundry:venombone",
   "temperature": 10

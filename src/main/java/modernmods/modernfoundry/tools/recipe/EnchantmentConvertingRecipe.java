@@ -7,8 +7,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.EnchantedBookItem;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,13 +17,13 @@ import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.CommonHooks;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.predicate.modifier.ModifierPredicate;
 import modernmods.modernfoundry.library.modifiers.Modifier;
@@ -80,7 +79,7 @@ public class EnchantmentConvertingRecipe extends AbstractWorktableRecipe {
 
   private List<ModifierEntry> displayModifiers;
 
-  public EnchantmentConvertingRecipe(ResourceLocation id, String name, List<SizedIngredient> inputs, boolean matchBook, boolean returnInput, IJsonPredicate<ModifierId> modifierPredicate) {
+  public EnchantmentConvertingRecipe(Identifier id, String name, List<SizedIngredient> inputs, boolean matchBook, boolean returnInput, IJsonPredicate<ModifierId> modifierPredicate) {
     super(id, inputs);
     this.name = name;
     this.title = Component.translatable(ExtractModifierRecipe.BASE_KEY + "." + name);
@@ -142,7 +141,7 @@ public class EnchantmentConvertingRecipe extends AbstractWorktableRecipe {
       }
       // call the method directly on item as the method on itemstack conisiders if its current enchanted
       // we want to match even unenchanted items, better error
-    } else if (!tool.getItem().isEnchantable(tool)) {
+    } else if (!tool.isEnchantable()) {
       return false;
     }
     return ModifierRecipe.checkMatch(inv, inputs);
@@ -258,7 +257,7 @@ public class EnchantmentConvertingRecipe extends AbstractWorktableRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends EnchantmentConvertingRecipe> getSerializer() {
     return TinkerModifiers.enchantmentConvertingSerializer.get();
   }
 
@@ -294,7 +293,7 @@ public class EnchantmentConvertingRecipe extends AbstractWorktableRecipe {
         .flatMap(enchantment -> IntStream.rangeClosed(1, enchantment.getMaxLevel())
           .mapToObj(level -> {
             Holder<Enchantment> holder = getEnchantmentHolder(enchantment);
-            return holder == null ? ItemStack.EMPTY : EnchantedBookItem.createForEnchantment(new EnchantmentInstance(holder, level));
+            return holder == null ? ItemStack.EMPTY : EnchantmentHelper.createBook(new EnchantmentInstance(holder, level));
           }))
         .filter(stack -> !stack.isEmpty())
         .toList();

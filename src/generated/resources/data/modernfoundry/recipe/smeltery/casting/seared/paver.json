@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/seared/paver",
-  "cast": {
-    "item": "minecraft:smooth_stone"
-  },
+  "cast": "minecraft:smooth_stone",
   "cast_consumed": true,
   "cooling_time": 113,
   "fluid": {
     "amount": 500,
     "tag": "modernfoundry:molten_clay"
   },
+  "id": "modernfoundry:smeltery/casting/seared/paver",
   "result": "modernfoundry:seared_paver"
 }

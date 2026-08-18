@@ -1,17 +1,17 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/drill_attack",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/drill_attack",
   "inputs": [
     {
-      "item": "modernfoundry:blazing_bone"
+      "ingredient": "modernfoundry:blazing_bone"
     },
     {
-      "item": "minecraft:pointed_dripstone"
+      "ingredient": "minecraft:pointed_dripstone"
     },
     {
-      "item": "modernfoundry:blazing_bone"
+      "ingredient": "modernfoundry:blazing_bone"
     }
   ],
   "level": 1,
@@ -20,11 +20,7 @@
     "abilities": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/interactable/charge"
-    },
-    {
-      "tag": "modernfoundry:modifiable/fishing_rods"
-    }
+    "#modernfoundry:modifiable/interactable/charge",
+    "#modernfoundry:modifiable/fishing_rods"
   ]
 }

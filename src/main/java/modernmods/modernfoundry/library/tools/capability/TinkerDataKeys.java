@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.tools.capability;
 
-import modernmods.hilt.data.registry.IdAwareComponentRegistry;
+import modernmods.mantle.data.registry.IdAwareComponentRegistry;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.data.FloatMultiplier;
 import modernmods.modernfoundry.library.tools.capability.TinkerDataCapability.ComputableDataKey;

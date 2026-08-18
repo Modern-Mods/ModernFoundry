@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": "modernfoundry:templates/fluid_cannon",
+    "facing=down": "modernfoundry:templates/fluid_cannon_down",
+    "facing=up": "modernfoundry:templates/fluid_cannon_up"
+  }
+}

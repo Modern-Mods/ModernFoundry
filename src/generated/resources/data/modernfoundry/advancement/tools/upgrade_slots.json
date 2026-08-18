@@ -7,7 +7,7 @@
           {
             "type": "modernfoundry:tool_stack",
             "predicate": {
-              "type": "hilt:and",
+              "type": "mantle:and",
               "predicates": [
                 {
                   "type": "modernfoundry:has_modifier",
@@ -65,7 +65,7 @@
     "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "minecraft:writable_book"
+      "id": "minecraft:writable_book"
     },
     "show_toast": true,
     "title": {

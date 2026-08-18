@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.recipe.tinkerstation.repairing;
 
 import net.minecraft.world.item.crafting.Ingredient;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 
 /**

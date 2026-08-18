@@ -1,24 +1,22 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/cactus",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/wood/cactus",
   "inputs": [
     {
-      "item": "minecraft:cactus"
+      "ingredient": "minecraft:cactus"
     },
     {
-      "item": "modernfoundry:pattern"
+      "ingredient": "modernfoundry:pattern"
     },
     {
-      "item": "minecraft:cactus"
+      "ingredient": "minecraft:cactus"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:cactus"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/wood"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/wood",
   "variant_formatter": "modernfoundry:material"
 }

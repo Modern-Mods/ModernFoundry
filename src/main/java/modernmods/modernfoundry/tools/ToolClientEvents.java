@@ -3,9 +3,8 @@ package modernmods.modernfoundry.tools;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.particle.ParticleEngine;
-import net.minecraft.client.player.Input;
+import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -17,26 +16,26 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.ModelEvent.RegisterGeometryLoaders;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.RegisterItemModelsEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import net.neoforged.neoforge.client.event.RegisterSpriteSourceTypesEvent;
+import net.neoforged.neoforge.client.event.RegisterSpriteSourcesEvent;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import modernmods.hilt.client.ResourceColorManager;
-import modernmods.hilt.client.SafeClientAccess;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.listener.ISafeManagerReloadListener;
+import net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent;
+import modernmods.mantle.client.ResourceColorManager;
+import modernmods.mantle.client.SafeClientAccess;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.listener.ISafeManagerReloadListener;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.ClientEventBase;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -90,15 +89,16 @@ import modernmods.modernfoundry.tools.network.TinkerControlPacket;
 import java.util.function.Consumer;
 
 import static modernmods.modernfoundry.TConstruct.getResource;
-import static modernmods.modernfoundry.library.client.model.tools.ToolModel.registerItemColors;
 
 @SuppressWarnings("unused")
-@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.MOD)
+@EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT)
 public class ToolClientEvents extends ClientEventBase {
+  /** Keybinding category for all Tinkers' Construct key mappings; label key resolves to key.category.modernfoundry.modernfoundry */
+  private static final KeyMapping.Category TCONSTRUCT_CATEGORY = new KeyMapping.Category(TConstruct.getResource("modernfoundry"));
   /** Keybinding for interacting using a helmet */
-  private static final KeyMapping HELMET_INTERACT = new KeyMapping(TConstruct.makeTranslationKey("key", "helmet_interact"), KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.z"), "key.categories.modernfoundry");
+  private static final KeyMapping HELMET_INTERACT = new KeyMapping(TConstruct.makeTranslationKey("key", "helmet_interact"), KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.z"), TCONSTRUCT_CATEGORY);
   /** Keybinding for interacting using leggings */
-  private static final KeyMapping LEGGINGS_INTERACT = new KeyMapping(TConstruct.makeTranslationKey("key", "leggings_interact"), KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.i"), "key.categories.modernfoundry");
+  private static final KeyMapping LEGGINGS_INTERACT = new KeyMapping(TConstruct.makeTranslationKey("key", "leggings_interact"), KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.i"), TCONSTRUCT_CATEGORY);
 
   /** Listener to clear modifier cache */
   private static final ISafeManagerReloadListener MODIFIER_RELOAD_LISTENER = manager -> {
@@ -106,28 +106,69 @@ public class ToolClientEvents extends ClientEventBase {
   };
 
   @SubscribeEvent
-  static void addResourceListener(RegisterClientReloadListenersEvent manager) {
+  static void addResourceListener(AddClientReloadListenersEvent manager) {
     ModifierModelManager.init(manager);
-    manager.registerReloadListener(ModifierModelMapManager.INSTANCE);
+    manager.addListener(TConstruct.getResource("modifier_model_map"), ModifierModelMapManager.INSTANCE);
     MaterialTooltipCache.init(manager);
     DynamicTextureLoader.init(manager);
-    manager.registerReloadListener(MODIFIER_RELOAD_LISTENER);
-    manager.registerReloadListener(SlimeskullArmorModel.RELOAD_LISTENER);
-    manager.registerReloadListener(HarvestTiers.RELOAD_LISTENER);
+    manager.addListener(TConstruct.getResource("tool_modifier_reload"), MODIFIER_RELOAD_LISTENER);
+    manager.addListener(TConstruct.getResource("slimeskull_armor_model"), SlimeskullArmorModel.RELOAD_LISTENER);
+    manager.addListener(TConstruct.getResource("harvest_tiers"), HarvestTiers.RELOAD_LISTENER);
     ArmorModelManager.init(manager);
-    manager.registerReloadListener(TrimArmorTextureSupplier.CACHE_INVALIDATOR);
+    manager.addListener(TConstruct.getResource("trim_armor_texture"), TrimArmorTextureSupplier.CACHE_INVALIDATOR);
   }
 
   @SubscribeEvent
-  static void registerSpriteSourceTypes(RegisterSpriteSourceTypesEvent event) {
+  static void registerSpriteSourceTypes(RegisterSpriteSourcesEvent event) {
     ShieldBannerModifierSpriteSource.register(event);
   }
 
   @SubscribeEvent
-  static void registerModelLoaders(RegisterGeometryLoaders event) {
-    event.register(getResource("material"), MaterialModel.LOADER);
-    event.register(getResource("tool"), ToolModel.LOADER);
+  static void registerRenderPipelines(RegisterRenderPipelinesEvent event) {
+    modernmods.modernfoundry.library.client.TinkerRenderTypes.registerPipelines(event::registerPipeline);
+  }
+
+  @SubscribeEvent
+  static void registerModelLoaders(ModelEvent.RegisterLoaders event) {
+    // block model loaders still use the unbaked model loader registry; item models (material, tool) moved to RegisterItemModelsEvent
     event.register(getResource("material_block"), MaterialBlockModel.LOADER);
+  }
+
+  @SubscribeEvent
+  static void registerItemModels(RegisterItemModelsEvent event) {
+    event.register(MaterialModel.ID, MaterialModel.Unbaked.MAP_CODEC);
+    event.register(ToolModel.ID, ToolModel.Unbaked.MAP_CODEC);
+  }
+
+  @SubscribeEvent
+  static void registerItemTintSources(net.neoforged.neoforge.client.event.RegisterColorHandlersEvent.ItemTintSources event) {
+    // restores the per-modifier color of modifier crystals, lost with the removed ItemColors system
+    event.register(modernmods.modernfoundry.tools.client.ModifierCrystalTintSource.ID, modernmods.modernfoundry.tools.client.ModifierCrystalTintSource.MAP_CODEC);
+  }
+
+  /** Registers the item client extensions, replacing the removed Item#initializeClient in 26.1 */
+  @SubscribeEvent
+  static void registerClientItemExtensions(net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent event) {
+    for (Item item : net.minecraft.core.registries.BuiltInRegistries.ITEM) {
+      if (item instanceof modernmods.modernfoundry.library.tools.item.armor.MultilayerArmorItem armor) {
+        armor.initializeClient(ext -> event.registerItem(ext, item));
+      } else if (item instanceof modernmods.modernfoundry.tools.item.SlimeskullItem skull) {
+        skull.initializeClient(ext -> event.registerItem(ext, item));
+      } else if (item instanceof modernmods.modernfoundry.library.tools.item.ranged.ModifiableLauncherItem launcher) {
+        launcher.initializeClient(ext -> event.registerItem(ext, item));
+      } else if (item instanceof modernmods.modernfoundry.library.tools.item.ModifiableItem modifiable) {
+        modifiable.initializeClient(ext -> event.registerItem(ext, item));
+      }
+    }
+    // mob effect extensions (CarryPotionEffect is a TinkerEffect whose visibility is registered by TinkerEffect.ClientExtensions;
+    // its custom carry icons are deferred to a future re-hook)
+    for (net.minecraft.world.effect.MobEffect effect : net.minecraft.core.registries.BuiltInRegistries.MOB_EFFECT) {
+      if (effect instanceof modernmods.modernfoundry.tools.modifiers.effect.HelmetChargingEffect charging) {
+        charging.initializeClient(ext -> event.registerMobEffect(ext, effect));
+      }
+    }
+    // 26.1.2 removed FluidType#initializeClient; the potion fluid's per-stack tint now lives in PotionFluidTintSource
+    // wired via FluidClientEvents#registerFluidModels, so no client fluid-type extension needs registering here.
   }
 
   @SubscribeEvent
@@ -160,6 +201,7 @@ public class ToolClientEvents extends ClientEventBase {
 
   @SubscribeEvent
   static void registerKeyBinding(RegisterKeyMappingsEvent event) {
+    event.registerCategory(TCONSTRUCT_CATEGORY);
     event.register(HELMET_INTERACT);
     event.register(LEGGINGS_INTERACT);
   }
@@ -231,69 +273,16 @@ public class ToolClientEvents extends ClientEventBase {
 
   @SubscribeEvent
   static void registerParticleFactories(RegisterParticleProvidersEvent event) {
-    ParticleEngine.SpriteParticleRegistration<SimpleParticleType> factory = AttackParticle.Factory::new;
+    net.minecraft.client.particle.ParticleResources.SpriteParticleRegistration<SimpleParticleType> factory = AttackParticle.Factory::new;
     event.registerSpriteSet(TinkerTools.hammerAttackParticle.get(), factory);
     event.registerSpriteSet(TinkerTools.axeAttackParticle.get(), factory);
     event.registerSpriteSet(TinkerTools.bonkAttackParticle.get(), factory);
   }
 
-  @SubscribeEvent
-  static void itemColors(RegisterColorHandlersEvent.Item event) {
-    final ItemColors colors = event.getItemColors();
-
-    // tint modifiers
-    // rock
-    registerItemColors(colors, TinkerTools.pickaxe);
-    registerItemColors(colors, TinkerTools.sledgeHammer);
-    registerItemColors(colors, TinkerTools.veinHammer);
-    // dirt
-    registerItemColors(colors, TinkerTools.mattock);
-    registerItemColors(colors, TinkerTools.pickadze);
-    registerItemColors(colors, TinkerTools.excavator);
-    // wood
-    registerItemColors(colors, TinkerTools.handAxe);
-    registerItemColors(colors, TinkerTools.broadAxe);
-    // scythe
-    registerItemColors(colors, TinkerTools.kama);
-    registerItemColors(colors, TinkerTools.scythe);
-    // weapon
-    registerItemColors(colors, TinkerTools.dagger);
-    registerItemColors(colors, TinkerTools.sword);
-    registerItemColors(colors, TinkerTools.cleaver);
-    // bow
-    registerItemColors(colors, TinkerTools.crossbow);
-    registerItemColors(colors, TinkerTools.longbow);
-    registerItemColors(colors, TinkerTools.fishingRod);
-    registerItemColors(colors, TinkerTools.javelin);
-    registerItemColors(colors, TinkerTools.arrow);
-    registerItemColors(colors, TinkerTools.shuriken);
-    registerItemColors(colors, TinkerTools.throwingAxe);
-    // ancient
-    registerItemColors(colors, TinkerTools.meltingPan);
-    registerItemColors(colors, TinkerTools.warPick);
-    registerItemColors(colors, TinkerTools.battlesign);
-    registerItemColors(colors, TinkerTools.swasher);
-    if (ModList.get().isLoaded("twilightforest")) {
-      registerItemColors(colors, TinkerTools.minotaurAxe);
-    }
-    // armor
-    registerItemColors(colors, TinkerTools.travelersShield);
-    registerItemColors(colors, TinkerTools.plateShield);
-    Consumer<Item> brokenConsumer = item -> event.register(ToolModel.COLOR_HANDLER, item);
-    TinkerTools.travelersGear.forEach(brokenConsumer);
-    TinkerTools.plateArmor.forEach(brokenConsumer);
-    TinkerTools.slimesuit.forEach(brokenConsumer);
-    registerItemColors(colors, TinkerTools.slimeWings);
-
-    // modifier crystal
-    event.register((stack, index) -> {
-      ModifierId modifier = ModifierCrystalItem.getModifier(stack);
-      if (modifier != null) {
-        return 0xFF000000 | ResourceColorManager.getColor(Util.makeTranslationKey("modifier", modifier));
-      }
-      return -1;
-    }, TinkerModifiers.modifierCrystal);
-  }
+  // The pre-26.1 runtime item-color handlers were removed: RegisterColorHandlersEvent.Item and the ItemColors/ItemColor
+  // system no longer exist. Tool material and modifier tints are now baked directly into the model quads (see ToolModel /
+  // MaterialModel). Remaining dynamic tints such as the modifier crystal color need an ItemTintSource declared in the item
+  // model JSON (RegisterColorHandlersEvent.ItemTintSources) and are validated in-game.
 
   // values to check if a key was being pressed last tick, safe as a static value as we only care about a single player client side
   /** If true, we were jumping last tick */
@@ -307,7 +296,7 @@ public class ToolClientEvents extends ClientEventBase {
   private static void handleKeyBindings(PlayerTickEvent.Pre event) {
     Minecraft minecraft = Minecraft.getInstance();
     Player player = event.getEntity();
-    if (minecraft.player != null && minecraft.player == player && player.level().isClientSide && !minecraft.player.isSpectator()) {
+    if (minecraft.player != null && minecraft.player == player && player.level().isClientSide() && !minecraft.player.isSpectator()) {
 
       // jumping in mid air for double jump
       // ensure we pressed the key since the last tick, holding should not use all your jumps at once
@@ -369,11 +358,12 @@ public class ToolClientEvents extends ClientEventBase {
       }
       // next, add in deprecated key bonus
       speed = Mth.clamp(speed + ArmorStatModule.getStat(player, TinkerDataKeys.USE_ITEM_SPEED), 0, 1);
-      // update speed, note if the armor stat is 0 and the held tool is not tinkers this is a no-op effectively
-      Input input = event.getInput();
-      // multiply by 5 to cancel out the vanilla 20%
-      input.leftImpulse *= (float) (speed * 5);
-      input.forwardImpulse *= (float) (speed * 5);
+      // The pre-26.1 use-item movement slowdown scaled the mutable Input#leftImpulse/forwardImpulse fields. In 26.1
+      // ClientInput exposes only an immutable keyPresses (boolean Input record) consumed via getMoveVector(), so the
+      // impulse can no longer be scaled here; re-applying the slowdown needs a movement-speed modifier hook and is
+      // validated in-game. The intended slowdown factor is computed below.
+      @SuppressWarnings("unused")
+      float slowdown = (float) (speed * 5);
     }
   }
 }

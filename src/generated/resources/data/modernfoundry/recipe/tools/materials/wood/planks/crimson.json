@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wood/planks/crimson",
-  "ingredient": {
-    "item": "minecraft:crimson_planks"
-  },
+  "ingredient": "minecraft:crimson_planks",
   "material": "modernfoundry:wood#crimson",
   "needed": 1,
   "value": 1

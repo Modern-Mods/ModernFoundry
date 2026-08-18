@@ -3,16 +3,16 @@ package modernmods.modernfoundry.library.recipe.modifiers.adding;
 import lombok.Getter;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.ApiStatus.NonExtendable;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -68,7 +68,7 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
 
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
   /** Ingredient representing the required tool, typically a tag */
   protected final Ingredient toolRequirement;
   /** Max size of the tool for this modifier. If the tool size is smaller, the stack will reduce by less */
@@ -87,7 +87,7 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
   /** If true, validates the level against the trait level. False validates against recipe modifiers only. */
   protected final boolean checkTraitLevel;
 
-  protected AbstractModifierRecipe(ResourceLocation id, Ingredient toolRequirement, int maxToolSize,
+  protected AbstractModifierRecipe(Identifier id, Ingredient toolRequirement, int maxToolSize,
                                    ModifierId result, IntRange level, @Nullable SlotCount slots, boolean allowCrystal, boolean checkTraitLevel) {
     this.id = id;
     this.toolRequirement = toolRequirement;
@@ -117,14 +117,14 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
   protected List<SlotCount> resultSlots = null;
 
   @Override
-  public ResourceLocation getRecipeId() {
+  public Identifier getRecipeId() {
     return getId();
   }
 
   /** Gets or builds the list of tool inputs */
   protected List<ItemStack> getToolInputs() {
     if (toolInputs == null) {
-      toolInputs = Arrays.stream(this.toolRequirement.getItems()).map(MAP_TOOL_STACK_FOR_RENDERING).collect(Collectors.toList());
+      toolInputs = Arrays.stream(this.toolRequirement.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new)).map(MAP_TOOL_STACK_FOR_RENDERING).collect(Collectors.toList());
     }
     return toolInputs;
   }
@@ -178,7 +178,7 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
     // add variant info for the sake of rebalanced
     ModDataNBT persistentData = new ModDataNBT();
     if (!variant.isEmpty()) {
-      persistentData.putString(result.getId(), variant);
+      persistentData.putString(result.getId().getIdentifier(), variant);
     }
     // build volatile data, will read that for slot info
     ToolDataNBT volatileData = new ToolDataNBT();
@@ -197,7 +197,7 @@ public abstract class AbstractModifierRecipe implements ITinkerStationRecipe, ID
     if (resultSlots == null) {
       // we need to decide a tool for the dummy stack. Could just use air, but might as well use a tool that shows up
       // on the odd chance the behavior differs per tool this might be wrong, but practically that just affects ancient tools on input right now
-      ItemStack[] tools = toolRequirement.getItems();
+      ItemStack[] tools = toolRequirement.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new);
       resultSlots = getResultSlots(getDisplayResult(), tools.length > 0 ? tools[0].getItem() : Items.AIR, "");
     }
     return resultSlots;

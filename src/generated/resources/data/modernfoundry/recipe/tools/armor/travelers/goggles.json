@@ -1,47 +1,45 @@
 {
   "type": "modernfoundry:crafting_shaped_materials",
-  "id": "modernfoundry:tools/armor/travelers/goggles",
   "category": "equipment",
   "extra_materials": [
     "modernfoundry:leather"
   ],
   "key": {
-    "c": [
-      {
-        "type": "modernfoundry:material_value",
-        "material": {
-          "type": "hilt:and",
-          "predicates": [
-            {
-              "type": "hilt:or",
-              "predicates": [
-                "modernfoundry:castable",
-                "modernfoundry:composite"
-              ]
-            },
-            {
-              "type": "modernfoundry:stat_type",
-              "stat_type": "modernfoundry:plating_helmet"
-            }
-          ]
+    "c": {
+      "neoforge:ingredient_type": "neoforge:compound",
+      "children": [
+        {
+          "neoforge:ingredient_type": "modernfoundry:material_value",
+          "material": {
+            "type": "mantle:and",
+            "predicates": [
+              {
+                "type": "mantle:or",
+                "predicates": [
+                  "modernfoundry:castable",
+                  "modernfoundry:composite"
+                ]
+              },
+              {
+                "type": "modernfoundry:stat_type",
+                "stat_type": "modernfoundry:plating_helmet"
+              }
+            ]
+          },
+          "value": 1
         },
-        "value": 1
-      },
-      {
-        "type": "modernfoundry:material",
-        "item": "modernfoundry:fake_ingot",
-        "material": {
-          "type": "modernfoundry:stat_type",
-          "stat_type": "modernfoundry:plating_helmet"
+        {
+          "neoforge:ingredient_type": "modernfoundry:material",
+          "match": "modernfoundry:fake_ingot",
+          "material": {
+            "type": "modernfoundry:stat_type",
+            "stat_type": "modernfoundry:plating_helmet"
+          }
         }
-      }
-    ],
-    "g": {
-      "tag": "c:glass_panes/colorless"
+      ]
     },
-    "l": {
-      "tag": "c:leather"
-    }
+    "g": "#c:glass_panes/colorless",
+    "l": "#c:leathers"
   },
   "parts": "c",
   "pattern": [
@@ -50,7 +48,6 @@
     "c c"
   ],
   "result": {
-    "item": "modernfoundry:travelers_helmet"
-  },
-  "show_notification": true
+    "id": "modernfoundry:travelers_helmet"
+  }
 }

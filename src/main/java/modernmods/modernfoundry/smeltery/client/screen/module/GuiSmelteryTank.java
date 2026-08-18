@@ -1,14 +1,14 @@
 package modernmods.modernfoundry.smeltery.client.screen.module;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.fluid.tooltip.FluidTooltipHandler;
+import modernmods.mantle.fluid.tooltip.FluidTooltipHandler;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
 import modernmods.modernfoundry.library.client.GuiUtil;
@@ -37,7 +37,7 @@ public class GuiSmelteryTank implements IScreenWithFluidTank {
 
   private int[] liquidHeights;
 
-  public GuiSmelteryTank(AbstractContainerScreen<?> parent, SmelteryTank<?> tank, int x, int y, int width, int height, ResourceLocation tooltipId) {
+  public GuiSmelteryTank(AbstractContainerScreen<?> parent, SmelteryTank<?> tank, int x, int y, int width, int height, Identifier tooltipId) {
     this.parent = parent;
     this.tank = tank;
     this.x = x;
@@ -74,7 +74,7 @@ public class GuiSmelteryTank implements IScreenWithFluidTank {
    * Renders the smeltery tank
    * @param matrices  Matrix stack instance
    */
-  public void renderFluids(GuiGraphics graphics) {
+  public void renderFluids(GuiGraphicsExtractor graphics) {
     // draw liquids
     if (tank.getContained() > 0) {
       int[] heights = calcLiquidHeights(true);
@@ -120,11 +120,11 @@ public class GuiSmelteryTank implements IScreenWithFluidTank {
 
   /**
    * Renders a highlight on the hovered fluid
-   * @param graphics  GuiGraphics instance
+   * @param graphics  GuiGraphicsExtractor instance
    * @param mouseX    Mouse X
    * @param mouseY    Mouse Y
    */
-  public void renderHighlight(GuiGraphics graphics, int mouseX, int mouseY) {
+  public void renderHighlight(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
     int checkX = mouseX - parent.getGuiLeft();
     int checkY = mouseY - parent.getGuiTop();
     if (withinTank(checkX, checkY)) {
@@ -147,11 +147,11 @@ public class GuiSmelteryTank implements IScreenWithFluidTank {
 
   /**
    * Gets the tooltip for the tank based on the given mouse position
-   * @param graphics  GuiGraphics instance
+   * @param graphics  GuiGraphicsExtractor instance
    * @param mouseX    Mouse X
    * @param mouseY    Mouse Y
    */
-  public void drawTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+  public void drawTooltip(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
     // Liquids
     int checkX = mouseX - parent.getGuiLeft();
     int checkY = mouseY - parent.getGuiTop();
@@ -159,7 +159,7 @@ public class GuiSmelteryTank implements IScreenWithFluidTank {
       int hovered = tank.getContained() == 0 ? -1 : getFluidFromMouse(calcLiquidHeights(false), checkY);
       List<Component> tooltip;
       if (hovered == -1) {
-        BiConsumer<Integer, List<Component>> formatter = Screen.hasShiftDown() ? FluidTooltipHandler.BUCKET_FORMATTER : this.formatter;
+        BiConsumer<Integer, List<Component>> formatter = modernmods.modernfoundry.library.client.ScreenUtil.hasShiftDown() ? FluidTooltipHandler.BUCKET_FORMATTER : this.formatter;
 
         tooltip = new ArrayList<>();
         tooltip.add(TOOLTIP_CAPACITY);
@@ -180,7 +180,7 @@ public class GuiSmelteryTank implements IScreenWithFluidTank {
       else {
         tooltip = FluidTooltipHandler.getFluidTooltip(tank.getFluidInTank(hovered));
       }
-      graphics.renderComponentTooltip(parent.getMinecraft().font, tooltip, mouseX, mouseY);
+      graphics.setComponentTooltipForNextFrame(parent.getMinecraft().font, tooltip, mouseX, mouseY);
     }
   }
 

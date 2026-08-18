@@ -1,6 +1,12 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_combination_filled",
+      "ignore": "modernfoundry:non_singular_ore_rates",
+      "match": "c:ores/emerald"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/emerald/ore_singular",
   "byproducts": [
     {
       "amount": 100,
@@ -8,21 +14,11 @@
       "rate": "gem"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_combination_filled",
-      "ignore": "modernfoundry:non_singular_ore_rates",
-      "match": "c:ores/emerald"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/emerald/ore_singular",
   "ingredient": {
-    "type": "neoforge:difference",
-    "base": {
-      "tag": "c:ores/emerald"
-    },
-    "subtracted": {
-      "tag": "modernfoundry:non_singular_ore_rates"
-    }
+    "neoforge:ingredient_type": "neoforge:difference",
+    "base": "#c:ores/emerald",
+    "subtracted": "#modernfoundry:non_singular_ore_rates"
   },
   "rate": "gem",
   "result": {

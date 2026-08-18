@@ -12,7 +12,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -24,7 +23,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -32,7 +31,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.joml.Vector3f;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.entity.FaucetBlockEntity;
 
@@ -41,7 +40,7 @@ import java.util.EnumMap;
 import java.util.Optional;
 
 public class FaucetBlock extends Block implements EntityBlock {
-  public static final DirectionProperty FACING = BlockStateProperties.FACING_HOPPER;
+  public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING_HOPPER;
   private static final EnumMap<Direction,VoxelShape> SHAPES = Maps.newEnumMap(ImmutableMap.of(
     Direction.DOWN,  Shapes.join(box( 4, 10,  4, 12, 16, 12), box( 6, 10,  6, 10, 16, 10), BooleanOp.ONLY_FIRST),
     Direction.NORTH, Shapes.join(box( 4,  4, 10, 12, 10, 16), box( 6,  6, 10, 10, 10, 16), BooleanOp.ONLY_FIRST),
@@ -99,12 +98,12 @@ public class FaucetBlock extends Block implements EntityBlock {
   }
 
   @Override
-  protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+  protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
     if (player.isShiftKeyDown()) {
-      return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+      return InteractionResult.PASS;
     }
     getFaucet(worldIn, pos).ifPresent(FaucetBlockEntity::activate);
-    return ItemInteractionResult.SUCCESS;
+    return InteractionResult.SUCCESS;
   }
 
   @Override
@@ -118,10 +117,12 @@ public class FaucetBlock extends Block implements EntityBlock {
 
   @SuppressWarnings("deprecation")
   @Override
-  public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+  public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, @org.jetbrains.annotations.Nullable net.minecraft.world.level.redstone.Orientation orientation, boolean isMoving) {
     if (worldIn.isClientSide()) {
       return;
     }
+    // 26.1.2 replaced fromPos with an Orientation; reconstruct the neighbor position from the update direction
+    BlockPos fromPos = orientation != null ? pos.relative(orientation.getFront()) : pos;
     getFaucet(worldIn, pos).ifPresent(faucet -> {
       faucet.neighborChanged(fromPos);
       faucet.handleRedstone(worldIn.hasNeighborSignal(pos));
@@ -146,7 +147,8 @@ public class FaucetBlock extends Block implements EntityBlock {
 
   /* Display */
 
-  private static final Vector3f RED = new Vector3f(1.0F, 0.0F, 0.0F);
+  // 26.1.2 DustParticleOptions now takes a packed RGB int instead of a Vector3f
+  private static final int RED = 0xFF0000;
 
   /**
    * Adds particles to the faucet

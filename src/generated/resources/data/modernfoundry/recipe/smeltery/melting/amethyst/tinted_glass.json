@@ -1,19 +1,15 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/amethyst/tinted_glass",
   "byproducts": [
     {
       "amount": 500,
       "fluid": "modernfoundry:molten_glass"
     }
   ],
+  "id": "modernfoundry:smeltery/melting/amethyst/tinted_glass",
   "ingredient": [
-    {
-      "item": "minecraft:tinted_glass"
-    },
-    {
-      "item": "modernfoundry:clear_tinted_glass"
-    }
+    "minecraft:tinted_glass",
+    "modernfoundry:clear_tinted_glass"
   ],
   "result": {
     "amount": 200,

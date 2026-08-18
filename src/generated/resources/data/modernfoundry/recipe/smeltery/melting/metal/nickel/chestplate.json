@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/nickel/chestplate",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/chestplates/nickel"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/chestplates/nickel"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/nickel/chestplate",
+  "ingredient": "#c:armors/chestplates/nickel",
   "result": {
     "amount": 720,
     "tag": "c:molten_nickel",

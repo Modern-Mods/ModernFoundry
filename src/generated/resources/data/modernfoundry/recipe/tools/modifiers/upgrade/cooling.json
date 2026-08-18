@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/cooling",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "minecraft:prismarine_crystals"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/cooling",
+  "input": "minecraft:prismarine_crystals",
   "level": {
     "max": 5
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/melee"
-  }
+  "tools": "#modernfoundry:modifiable/melee"
 }

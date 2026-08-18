@@ -1,4 +1,5 @@
 package modernmods.modernfoundry.tools.modules.interaction;
+import modernmods.modernfoundry.library.tools.helper.ToolAttackUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -15,8 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.events.TinkerToolEvent.Result;
 import modernmods.modernfoundry.library.events.TinkerToolEvent.ToolHarvestEvent;
@@ -261,10 +262,10 @@ public enum HarvestModule implements ModifierModule, BlockInteractionModifierHoo
         // animations
         if (player != null) {
           if (didHarvest) {
-            player.sweepAttack();
+            ToolAttackUtil.sweepAttack(player);
           }
           if (broken) {
-            player.onEquippedItemBroken(stack.getItem(), Player.getSlotForHand(context.getHand()));
+            player.onEquippedItemBroken(stack.getItem(), context.getHand().asEquipmentSlot());
           }
         }
       }

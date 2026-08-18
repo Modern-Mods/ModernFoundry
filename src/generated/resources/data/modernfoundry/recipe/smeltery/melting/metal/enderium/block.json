@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/enderium/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/enderium"
     }
   ],
-  "ingredient": {
-    "tag": "c:storage_blocks/enderium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/enderium/block",
+  "ingredient": "#c:storage_blocks/enderium",
   "result": {
     "amount": 810,
     "tag": "c:molten_enderium"

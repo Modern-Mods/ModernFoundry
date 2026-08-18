@@ -1,25 +1,21 @@
 {
   "type": "modernfoundry:modifier_set_worktable",
-  "id": "modernfoundry:tools/modifiers/worktable/invisible_ink_removing",
   "add_to_set": false,
   "allow_traits": false,
   "data_key": "modernfoundry:invisible_modifiers",
+  "id": "modernfoundry:tools/modifiers/worktable/invisible_ink_removing",
   "inputs": [
     {
-      "type": "hilt:fluid_container",
+      "neoforge:ingredient_type": "mantle:fluid_container",
       "amount": 1000,
-      "display": {
-        "item": "minecraft:milk_bucket"
-      },
+      "display": "minecraft:milk_bucket",
       "tag": "c:milk"
     }
   ],
   "modifier_predicate": {
-    "type": "hilt:inverted",
+    "type": "mantle:inverted",
     "inverted_type": "modernfoundry:tag",
     "tag": "modernfoundry:invisible_ink_blacklist"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable"
-  }
+  "tools": "#modernfoundry:modifiable"
 }

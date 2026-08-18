@@ -1,11 +1,11 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/emerald/block",
   "cooling_time": 203,
   "fluid": {
     "amount": 900,
     "tag": "modernfoundry:molten_emerald"
   },
+  "id": "modernfoundry:smeltery/casting/emerald/block",
   "result": {
     "tag": "c:storage_blocks/emerald"
   }

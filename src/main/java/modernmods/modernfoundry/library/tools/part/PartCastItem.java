@@ -1,6 +1,8 @@
 package modernmods.modernfoundry.library.tools.part;
 
 import net.minecraft.ChatFormatting;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.TooltipContext;
@@ -23,10 +25,13 @@ public class PartCastItem extends Item {
   }
 
   @Override
-  public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipConsumer, TooltipFlag flag) {
+    List<Component> tooltip = new java.util.ArrayList<>();
     int cost = MaterialCastingLookup.getItemCost(part.get());
     if (cost > 0) {
       tooltip.add(Component.translatable(COST_KEY, cost).withStyle(ChatFormatting.GRAY));
     }
+  
+    tooltip.forEach(tooltipConsumer);
   }
 }

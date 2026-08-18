@@ -1,15 +1,11 @@
 {
   "type": "modernfoundry:part_builder",
-  "id": "modernfoundry:tools/parts/builder/tough_binding",
   "cost": 3,
+  "id": "modernfoundry:tools/parts/builder/tough_binding",
   "pattern": "modernfoundry:tough_binding",
   "pattern_item": [
-    {
-      "tag": "modernfoundry:patterns/default"
-    },
-    {
-      "item": "modernfoundry:tough_binding_cast"
-    }
+    "#modernfoundry:patterns/default",
+    "modernfoundry:tough_binding_cast"
   ],
   "result": {
     "item": "modernfoundry:tough_binding"

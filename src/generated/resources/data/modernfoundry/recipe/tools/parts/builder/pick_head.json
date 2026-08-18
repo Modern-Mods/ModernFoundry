@@ -1,15 +1,11 @@
 {
   "type": "modernfoundry:part_builder",
-  "id": "modernfoundry:tools/parts/builder/pick_head",
   "cost": 2,
+  "id": "modernfoundry:tools/parts/builder/pick_head",
   "pattern": "modernfoundry:pick_head",
   "pattern_item": [
-    {
-      "tag": "modernfoundry:patterns/default"
-    },
-    {
-      "item": "modernfoundry:pick_head_cast"
-    }
+    "#modernfoundry:patterns/default",
+    "modernfoundry:pick_head_cast"
   ],
   "result": {
     "item": "modernfoundry:pick_head"

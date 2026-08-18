@@ -2,7 +2,7 @@ package modernmods.modernfoundry.plugin.jei.modifiers;
 
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.TooltipFlag;
 import modernmods.modernfoundry.library.client.modifiers.ModifierIconManager;
@@ -19,7 +19,7 @@ public enum ModifierBookmarkIngredientRenderer implements IIngredientRenderer<Mo
   private static final String WRAPPER_KEY = "jei.modernfoundry.modifier_ingredient";
 
   @Override
-  public void render(GuiGraphics graphics, @Nullable ModifierEntry entry) {
+  public void render(GuiGraphicsExtractor graphics, @Nullable ModifierEntry entry) {
     if (entry != null) {
       ModifierIconManager.renderIcon(graphics, entry.getModifier(), 0, 0, 100, 16);
     }

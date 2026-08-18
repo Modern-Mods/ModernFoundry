@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:tools/modifiers/emerald_reinforcement",
-  "cast": {
-    "item": "modernfoundry:obsidian_pane"
-  },
+  "cast": "modernfoundry:obsidian_pane",
   "cast_consumed": true,
   "cooling_time": 34,
   "fluid": {
     "amount": 25,
     "tag": "modernfoundry:molten_emerald"
   },
+  "id": "modernfoundry:tools/modifiers/emerald_reinforcement",
   "result": "modernfoundry:emerald_reinforcement"
 }

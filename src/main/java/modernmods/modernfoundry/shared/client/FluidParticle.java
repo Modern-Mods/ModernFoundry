@@ -1,29 +1,31 @@
 package modernmods.modernfoundry.shared.client;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.TextureSheetParticle;
-import net.minecraft.world.inventory.InventoryMenu;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraft.client.particle.SingleQuadParticle;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.RandomSource;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.client.render.FluidRenderer;
+import modernmods.mantle.client.render.FluidRenderer;
 import modernmods.modernfoundry.shared.particle.FluidParticleData;
 
 /** Particle type that renders a fluid still texture */
-public class FluidParticle extends TextureSheetParticle {
+public class FluidParticle extends SingleQuadParticle {
   private final FluidStack fluid;
   private final float uCoord;
   private final float vCoord;
+
+  /** Resolves the fluid still sprite, needed up-front as SingleQuadParticle takes the sprite in its constructor */
+  private static TextureAtlasSprite stillSprite(FluidStack fluid) {
+    return FluidRenderer.getFluidTextures(fluid).still();
+  }
+
   protected FluidParticle(ClientLevel world, double x, double y, double z, double motionX, double motionY, double motionZ, FluidStack fluid) {
-    super(world, x, y, z, motionX, motionY, motionZ);
+    super(world, x, y, z, motionX, motionY, motionZ, stillSprite(fluid));
     this.fluid = fluid;
-    IClientFluidTypeExtensions attributes = IClientFluidTypeExtensions.of(fluid.getFluid());
-    this.setSprite(Minecraft.getInstance().getModelManager().getAtlas(InventoryMenu.BLOCK_ATLAS).getSprite(attributes.getStillTexture(fluid)));
     this.gravity = 1.0F;
-    int color = attributes.getTintColor(fluid);
+    int color = FluidRenderer.getFluidTextures(fluid).color();
     this.alpha = ((color >> 24) & 0xFF) / 255f;
     this.rCol   = ((color >> 16) & 0xFF) / 255f;
     this.gCol = ((color >>  8) & 0xFF) / 255f;
@@ -34,8 +36,9 @@ public class FluidParticle extends TextureSheetParticle {
   }
 
   @Override
-  public ParticleRenderType getRenderType() {
-    return ParticleRenderType.TERRAIN_SHEET;
+  public SingleQuadParticle.Layer getLayer() {
+    // fluid still texture lives on the block atlas; translucent to honor the fluid tint alpha
+    return SingleQuadParticle.Layer.TRANSLUCENT_TERRAIN;
   }
 
   @Override
@@ -59,14 +62,14 @@ public class FluidParticle extends TextureSheetParticle {
   }
 
   @Override
-  public int getLightColor(float partialTick) {
-    return FluidRenderer.withBlockLight(super.getLightColor(partialTick), fluid.getFluid().getFluidType().getLightLevel(fluid));
+  public int getLightCoords(float partialTick) {
+    return FluidRenderer.withBlockLight(super.getLightCoords(partialTick), fluid.getFluid().getFluidType().getLightLevel(fluid));
   }
 
   /** Factory to create a fluid particle */
   public static class Factory implements ParticleProvider<FluidParticleData> {
     @Override
-    public Particle createParticle(FluidParticleData data, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+    public Particle createParticle(FluidParticleData data, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, RandomSource random) {
       FluidStack fluid = data.getFluid();
       return !fluid.isEmpty() ? new FluidParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, fluid) : null;
     }

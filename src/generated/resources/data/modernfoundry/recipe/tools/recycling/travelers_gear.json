@@ -5,23 +5,13 @@
     "modernfoundry:repair_kit",
     "modernfoundry:maille"
   ],
-  "pattern": {
-    "item": "modernfoundry:venom_bottle"
-  },
+  "pattern": "modernfoundry:venom_bottle",
   "tools": {
     "ingredient": [
-      {
-        "item": "modernfoundry:travelers_helmet"
-      },
-      {
-        "item": "modernfoundry:travelers_chestplate"
-      },
-      {
-        "item": "modernfoundry:travelers_leggings"
-      },
-      {
-        "item": "modernfoundry:travelers_boots"
-      }
+      "modernfoundry:travelers_helmet",
+      "modernfoundry:travelers_chestplate",
+      "modernfoundry:travelers_leggings",
+      "modernfoundry:travelers_boots"
     ]
   }
 }

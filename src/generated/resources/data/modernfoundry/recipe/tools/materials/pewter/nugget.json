@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:material",
-  "id": "modernfoundry:tools/materials/pewter/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/pewter"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/pewter"
-  },
+  "type": "modernfoundry:material",
+  "id": "modernfoundry:tools/materials/pewter/nugget",
+  "ingredient": "#c:nuggets/pewter",
   "material": "modernfoundry:pewter",
   "needed": 9,
   "value": 1

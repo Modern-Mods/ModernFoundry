@@ -1,23 +1,23 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/springing",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/springing",
   "inputs": [
     {
-      "item": "modernfoundry:sky_slime_vine"
+      "ingredient": "modernfoundry:sky_slime_vine"
     },
     {
-      "item": "modernfoundry:sky_slime_crystal"
+      "ingredient": "modernfoundry:sky_slime_crystal"
     },
     {
-      "item": "modernfoundry:sky_slime_vine"
+      "ingredient": "modernfoundry:sky_slime_vine"
     },
     {
-      "item": "modernfoundry:sky_congealed_slime"
+      "ingredient": "modernfoundry:sky_congealed_slime"
     },
     {
-      "item": "modernfoundry:sky_congealed_slime"
+      "ingredient": "modernfoundry:sky_congealed_slime"
     }
   ],
   "level": 1,
@@ -26,14 +26,10 @@
     "abilities": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/durability"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable/charge"
-      }
+      "#modernfoundry:modifiable/durability",
+      "#modernfoundry:modifiable/interactable/charge"
     ]
   }
 }

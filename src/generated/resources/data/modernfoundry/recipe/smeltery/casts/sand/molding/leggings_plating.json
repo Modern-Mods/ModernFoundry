@@ -1,16 +1,12 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/sand/molding/leggings_plating",
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "material": "#modernfoundry:casts/sand",
   "pattern": [
+    "modernfoundry:leggings_plating_dummy",
     {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:leggings_plating"
-    },
-    {
-      "item": "modernfoundry:leggings_plating_dummy"
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:leggings_plating"
     }
   ],
   "result": "modernfoundry:leggings_plating_sand_cast"

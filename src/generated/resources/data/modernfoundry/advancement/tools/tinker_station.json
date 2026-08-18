@@ -22,7 +22,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "modernfoundry:tinker_station"
+      "id": "modernfoundry:tinker_station"
     },
     "show_toast": true,
     "title": {

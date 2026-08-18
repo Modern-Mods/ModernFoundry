@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/lumium/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/lumium"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/lumium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/lumium/gear",
+  "ingredient": "#c:gears/lumium",
   "result": {
     "amount": 360,
     "tag": "c:molten_lumium"

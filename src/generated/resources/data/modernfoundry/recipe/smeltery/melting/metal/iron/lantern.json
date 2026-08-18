@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/lantern",
   "ingredient": [
-    {
-      "item": "minecraft:lantern"
-    },
-    {
-      "item": "minecraft:soul_lantern"
-    }
+    "minecraft:lantern",
+    "minecraft:soul_lantern"
   ],
   "result": {
     "amount": 80,

@@ -1,0 +1,129 @@
+{
+  "parent": "modernfoundry:tools/tinker_tool",
+  "criteria": {
+    "dagger": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:dagger"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "hand_axe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:hand_axe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "kama": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:kama"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "mattock": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:mattock"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pickadze": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:pickadze"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:pickaxe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:sword"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.modernfoundry.tools.tool_smith.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:pickaxe",
+      "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.tools.tool_smith.title"
+    }
+  },
+  "requirements": [
+    [
+      "pickaxe"
+    ],
+    [
+      "mattock"
+    ],
+    [
+      "pickadze"
+    ],
+    [
+      "hand_axe"
+    ],
+    [
+      "kama"
+    ],
+    [
+      "dagger"
+    ],
+    [
+      "sword"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

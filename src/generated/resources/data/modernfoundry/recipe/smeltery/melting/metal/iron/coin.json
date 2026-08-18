@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/iron/coin",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/iron"
     }
   ],
-  "ingredient": {
-    "tag": "c:coins/iron"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/iron/coin",
+  "ingredient": "#c:coins/iron",
   "result": {
     "amount": 30,
     "tag": "c:molten_iron"

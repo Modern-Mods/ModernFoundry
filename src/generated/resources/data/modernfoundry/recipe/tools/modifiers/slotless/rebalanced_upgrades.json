@@ -1,29 +1,27 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/rebalanced_upgrades",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/rebalanced_upgrades",
   "inputs": [
     {
-      "tag": "c:nuggets/rose_gold"
+      "ingredient": "#c:nuggets/rose_gold"
     },
     {
-      "item": "minecraft:end_crystal"
+      "ingredient": "minecraft:end_crystal"
     },
     {
-      "tag": "c:nuggets/rose_gold"
+      "ingredient": "#c:nuggets/rose_gold"
     },
     {
-      "item": "modernfoundry:sky_slime_crystal_block"
+      "ingredient": "modernfoundry:sky_slime_crystal_block"
     },
     {
-      "item": "modernfoundry:sky_slime_crystal_block"
+      "ingredient": "modernfoundry:sky_slime_crystal_block"
     }
   ],
   "result": {
     "name": "modernfoundry:rebalanced",
     "value": "upgrades"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/bonus_slots"
-  }
+  "tools": "#modernfoundry:modifiable/bonus_slots"
 }

@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.library.client.modifiers.model;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import net.minecraft.client.resources.model.sprite.Material;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 
 import javax.annotation.Nullable;
 import java.util.function.BiFunction;

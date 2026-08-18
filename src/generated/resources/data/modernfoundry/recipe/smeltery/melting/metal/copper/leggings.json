@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/copper/leggings",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/leggings/copper"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/leggings/copper"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/copper/leggings",
+  "ingredient": "#c:armors/leggings/copper",
   "result": {
     "amount": 630,
     "tag": "c:molten_copper",

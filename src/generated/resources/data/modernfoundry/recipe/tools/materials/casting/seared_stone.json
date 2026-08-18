@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/seared_stone",
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:seared_stone"
   },
+  "id": "modernfoundry:tools/materials/casting/seared_stone",
   "output": "modernfoundry:seared_stone",
   "temperature": 600
 }

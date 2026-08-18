@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/soulbound_ammo",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/slotless/soulbound_ammo",
   "inputs": [
     {
-      "item": "minecraft:sculk_vein"
+      "ingredient": "minecraft:sculk_vein"
     }
   ],
   "level": 1,
   "result": "modernfoundry:soulbound",
-  "tools": {
-    "tag": "modernfoundry:modifiable/single_use"
-  }
+  "tools": "#modernfoundry:modifiable/single_use"
 }

@@ -1,5 +1,5 @@
 {
-  "_comment": "Modern Foundry Common",
+  "_comment": "Tinkers Common",
 
   "block.modernfoundry.sky_slime": "碧空史萊姆塊",
   "block.modernfoundry.sky_slime.tooltip": "可與史萊姆塊和蜂蜜塊相黏",
@@ -171,12 +171,12 @@
   "item.modernfoundry.knightslime_ingot.tooltip": "黏糊糊的，還有金屬光澤，但卻像石頭似的？還真是魅力無限！",
   "item.modernfoundry.knightslime_nugget": "騎士史萊姆粒",
 
-  "item.modernfoundry.materials_and_you": "Modern Foundry寶典：材料與你",
+  "item.modernfoundry.materials_and_you": "匠魂寶典：材料與你",
   "item.modernfoundry.materials_and_you.tooltip": "深析工具與材料的指南手冊\nSelena著",
-  "item.modernfoundry.encyclopedia": "Modern Foundry大百科",
-  "item.modernfoundry.encyclopedia.tooltip": "每位Modern Foundry人手一本的參考資料\nSelena著",
+  "item.modernfoundry.encyclopedia": "工匠大百科",
+  "item.modernfoundry.encyclopedia.tooltip": "每位工匠人手一本的參考資料\nSelena著",
 
-  "item.modernfoundry.tinkers_gadgetry": "Modern Foundry裝置寶典",
+  "item.modernfoundry.tinkers_gadgetry": "工匠裝置寶典",
   "item.modernfoundry.tinkers_gadgetry.tooltip": "在本書中探索史萊姆在日常事務中的妙用\nMelvin著",
 
   "item.modernfoundry.puny_smelting": "入門熔煉術",
@@ -274,7 +274,7 @@
   "item.modernfoundry.copper_can.contents": "存有：%s（1錠）",
 
 
-  "_comment": "Modern Foundry Patterns",
+  "_comment": "Tinkers Patterns",
 
   "pattern.modernfoundry.repair_kit": "修補件",
 
@@ -306,7 +306,7 @@
   "pattern.modernfoundry.bow_grip": "弓把",
 
 
-  "_comment": "Modern Foundry Gold Casts",
+  "_comment": "Tinkers Gold Casts",
 
   "item.modernfoundry.blank_cast": "空白金鑄模",
   "item.modernfoundry.ingot_cast": "錠金鑄模",
@@ -348,7 +348,7 @@
   "item.modernfoundry.tough_handle_cast": "堅韌手柄金鑄模",
 
 
-  "_comment": "Modern Foundry Sand Casts",
+  "_comment": "Tinkers Sand Casts",
 
   "item.modernfoundry.blank_sand_cast": "空白沙鑄模",
   "item.modernfoundry.ingot_sand_cast": "錠沙鑄模",
@@ -390,7 +390,7 @@
   "item.modernfoundry.tough_handle_sand_cast": "堅韌手柄沙鑄模",
 
 
-  "_comment": "Modern Foundry Red Sand Casts",
+  "_comment": "Tinkers Red Sand Casts",
 
   "item.modernfoundry.blank_red_sand_cast": "空白紅沙鑄模",
   "item.modernfoundry.ingot_red_sand_cast": "錠紅沙鑄模",
@@ -432,7 +432,7 @@
   "item.modernfoundry.tough_handle_red_sand_cast": "堅韌手柄紅沙鑄模",
 
 
-  "_comment": "Modern Foundry Fluids",
+  "_comment": "Tinkers Fluids",
 
   "block.modernfoundry.blazing_blood_fluid": "烈焰血",
   "fluid.modernfoundry.blazing_blood": "烈焰血",
@@ -778,7 +778,7 @@
   "item.modernfoundry.molten_refined_obsidian_bucket": "熔融強化黑曜石桶",
 
 
-  "_comment": "Modern Foundry Gadgets",
+  "_comment": "Tinkers Gadgets",
 
   "block.modernfoundry.punji": "尖竹釘",
   "block.modernfoundry.punji.tooltip": "很尖銳！還能釘在牆上。",
@@ -832,13 +832,13 @@
   "block.modernfoundry.zombified_piglin_head": "殭屍化豬布林頭顱",
 
 
-  "_comment": "Modern Foundry Tables",
+  "_comment": "Tinkers Tables",
 
   "block.modernfoundry.crafting_station": "合成工作站",
 
-  "block.modernfoundry.tinker_station": "Modern Foundry站",
-  "block.modernfoundry.tinkers_anvil": "Modern Foundry砧",
-  "block.modernfoundry.scorched_anvil": "Modern Foundry砧",
+  "block.modernfoundry.tinker_station": "工匠站",
+  "block.modernfoundry.tinkers_anvil": "工匠砧",
+  "block.modernfoundry.scorched_anvil": "工匠砧",
 
   "block.modernfoundry.part_builder": "部件製造台",
   "block.modernfoundry.modifier_worktable": "強化調配台",
@@ -846,7 +846,7 @@
   "block.modernfoundry.part_chest": "部件箱",
   "block.modernfoundry.part_chest.tooltip": "可容納256個不同的工具部件",
 
-  "block.modernfoundry.tinkers_chest": "Modern Foundry箱",
+  "block.modernfoundry.tinkers_chest": "工匠箱",
   "block.modernfoundry.tinkers_chest.tooltip": "可容納64組物品，每組16個",
 
   "block.modernfoundry.cast_chest": "鑄模箱",
@@ -854,7 +854,7 @@
 
   "item.modernfoundry.pattern": "模具",
 
-  "_comment": "Modern Foundry Tools",
+  "_comment": "Tinkers Tools",
 
   "_comment_on_format_": "These format allows you to have more control over separators in material names. By default we separate with space. You can use %1$s and %2$s if you wish to change the order.",
   "item.modernfoundry.tool.format": "%s%s",
@@ -922,7 +922,7 @@
   "item.modernfoundry.crystalshot": "水晶簇",
   "entity.modernfoundry.crystalshot": "水晶簇",
 
-  "_comment": "Modern Foundry Tool Parts",
+  "_comment": "Tinkers Tool Parts",
 
   "item.modernfoundry.repair_kit": "修補件",
 
@@ -1021,7 +1021,7 @@
   "multiblock.modernfoundry.tiny.no_fuel_tank": "必須放置於燃料儲罐或加熱器之上才可以正常運作",
 
 
-  "_comment": "Modern Foundry Smeltery",
+  "_comment": "Tinkers Smeltery",
 
   "block.modernfoundry.grout": "水泥",
   "block.modernfoundry.grout.tooltip": "偶素水泥",
@@ -1114,7 +1114,7 @@
   "block.modernfoundry.seared_chute.tooltip": "冶煉爐輸入輸出物品的埠",
 
 
-  "_comment": "Modern Foundry Foundry",
+  "_comment": "Tinkers Foundry",
 
   "block.modernfoundry.nether_grout": "地獄水泥",
   "block.modernfoundry.nether_grout.tooltip": "偶也素水泥！只是來自地獄！",
@@ -1208,7 +1208,7 @@
   "gui.modernfoundry.fluid.hold_shift": "按住§e§oShift§r§7以桶為單位顯示流體",
 
 
-  "_comment": "Modern Foundry World",
+  "_comment": "Tinkers World",
 
   "entity.modernfoundry.earth_slime": "大地史萊姆",
   "item.modernfoundry.earth_slime_spawn_egg": "大地史萊姆生怪蛋",
@@ -1425,7 +1425,7 @@
 
   "material.modernfoundry.flint": "燧石",
   "material.modernfoundry.flint.basalt": "玄武岩",
-  "material.modernfoundry.flint.flavor": "點燃你滾燙的Modern Foundry之心！",
+  "material.modernfoundry.flint.flavor": "點燃你滾燙的工匠之心！",
   "material.modernfoundry.flint.encyclopedia": "按已消耗耐久度和材料特性等級的積的平方根的四分之一增加工具的傷害。",
 
   "material.modernfoundry.bone": "骨頭",
@@ -1449,7 +1449,7 @@
 
   "material.modernfoundry.string": "線",
   "material.modernfoundry.string.flavor": "理論上的最佳材料",
-  "material.modernfoundry.string.encyclopedia": "可以在Modern Foundry站和工作台上使用線修復工具。",
+  "material.modernfoundry.string.encyclopedia": "可以在工匠站和工作台上使用線修復工具。",
   "material.modernfoundry.string.skull_flavor": "蜘蛛是藥水大師，也許它們的秘密可以幫助我增強藥水……",
   "material.modernfoundry.string.skull_encyclopedia": "使正面藥水效果的持續時間延長25%。",
 
@@ -1551,7 +1551,7 @@
   "material.modernfoundry.cobalt.ranged": "每級的拉弓速度和初速度+5%。",
 
   "material.modernfoundry.manyullyn": "瑪玉靈",
-  "material.modernfoundry.manyullyn.flavor": "沒幾個Modern Foundry能叫對這材料的名字。他們說這個材料能夠斬斷星辰",
+  "material.modernfoundry.manyullyn.flavor": "沒幾個工匠能叫對這材料的名字。他們說這個材料能夠斬斷星辰",
   "material.modernfoundry.manyullyn.encyclopedia": "8次連擊後，每級傷害+2。",
   "material.modernfoundry.manyullyn.ranged": "8次連續發射後，每級箭矢傷害+1（先於初速度計算）。",
 
@@ -1694,7 +1694,7 @@
 
   "_comment": "Modifiers",
 
-  "key.categories.modernfoundry": "Modern Foundry",
+  "key.category.modernfoundry.modernfoundry": "匠魂",
   "key.modernfoundry.helmet_interact": "頭盔互動",
   "key.modernfoundry.leggings_interact": "護腿互動",
 
@@ -2630,29 +2630,29 @@
 
   "_comment": "GUIs",
 
-  "itemGroup.modernfoundry.general": "Modern Foundry丨常規物品",
-  "itemGroup.modernfoundry.tools": "Modern Foundry丨工具",
-  "itemGroup.modernfoundry.tool_parts": "Modern Foundry丨部件",
-  "itemGroup.modernfoundry.smeltery": "Modern Foundry丨冶煉",
-  "itemGroup.modernfoundry.world": "Modern Foundry丨世界",
-  "itemGroup.modernfoundry.gadgets": "Modern Foundry丨器物",
+  "itemGroup.modernfoundry.general": "匠魂丨常規物品",
+  "itemGroup.modernfoundry.tools": "匠魂丨工具",
+  "itemGroup.modernfoundry.tool_parts": "匠魂丨部件",
+  "itemGroup.modernfoundry.smeltery": "匠魂丨冶煉",
+  "itemGroup.modernfoundry.world": "匠魂丨世界",
+  "itemGroup.modernfoundry.gadgets": "匠魂丨器物",
 
   "gui.modernfoundry.crafting_station": "合成工作站",
   "gui.modernfoundry.crafting_station.uncraftable": "玩家尚無法制作該物品",
 
   "gui.modernfoundry.part_builder": "部件製造台",
-  "gui.modernfoundry.part_builder.info": "在這裡你能製作工具部件，從而實現你的Modern Foundry之夢。\n\n要製作一個工具部件，你需要將模具放入左側的空槽，並選擇目標部件類別。接著在右側的槽中放入材料，即可製成對應材料的對應部件。",
+  "gui.modernfoundry.part_builder.info": "在這裡你能製作工具部件，從而實現你的工匠之夢。\n\n要製作一個工具部件，你需要將模具放入左側的空槽，並選擇目標部件類別。接著在右側的槽中放入材料，即可製成對應材料的對應部件。",
   "gui.modernfoundry.part_builder.material_value": "材料值：%s",
   "gui.modernfoundry.part_builder.cost": "模具消耗：%s",
   "gui.modernfoundry.part_builder.trait": "特性",
   "gui.modernfoundry.part_builder.uncraftable": "無法打造",
   "gui.modernfoundry.part_builder.uncraftable.tooltip": "部件製造台無法打造該材料。需使用澆注等方式進行部件成型。",
 
-  "gui.modernfoundry.tinkers_chest": "Modern Foundry箱",
+  "gui.modernfoundry.tinkers_chest": "工匠箱",
   "gui.modernfoundry.cast_chest": "鑄模箱",
   "gui.modernfoundry.part_chest": "部件箱",
 
-  "gui.modernfoundry.tinker_station": "Modern Foundry站",
+  "gui.modernfoundry.tinker_station": "工匠站",
   "gui.modernfoundry.tinker_station.repair_limited": "修復與強化",
   "gui.modernfoundry.tinker_station.repair_limited.description": "可以製作基本工具，或者應用大多數強化。在左側點選一個按鈕來開始製作吧。",
   "gui.modernfoundry.tinker_station.repair": "修復與強化",
@@ -2876,20 +2876,20 @@
 
   
   "_comment": "Tool Advancements",
-  "advancements.modernfoundry.tools.materials_and_you.title": "Modern Foundry練手",
-  "advancements.modernfoundry.tools.materials_and_you.description": "取得一本《材料與你》，它將為你打開Modern Foundry的大門",
+  "advancements.modernfoundry.tools.materials_and_you.title": "工匠練手",
+  "advancements.modernfoundry.tools.materials_and_you.description": "取得一本《材料與你》，它將為你打開匠魂的大門",
   "advancements.modernfoundry.tools.part_builder.title": "部件製造台",
   "advancements.modernfoundry.tools.part_builder.description": "製造一個部件製造台，邁出工具製作的第一步",
   "advancements.modernfoundry.tools.make_part.title": "工具部件",
   "advancements.modernfoundry.tools.make_part.description": "在部件製造台中按一定的樣式來排布材料，並打造出你的第一個工具部件",
-  "advancements.modernfoundry.tools.tinker_station.title": "Modern Foundry站",
-  "advancements.modernfoundry.tools.tinker_station.description": "製造一個Modern Foundry站，將部件組裝成工具",
-  "advancements.modernfoundry.tools.tinker_tool.title": "Modern Foundry學徒",
-  "advancements.modernfoundry.tools.tinker_tool.description": "打造你的第一件Modern Foundry工具",
+  "advancements.modernfoundry.tools.tinker_station.title": "工匠站",
+  "advancements.modernfoundry.tools.tinker_station.description": "製造一個工匠站，將部件組裝成工具",
+  "advancements.modernfoundry.tools.tinker_tool.title": "工匠學徒",
+  "advancements.modernfoundry.tools.tinker_tool.description": "打造你的第一件匠魂工具",
   "advancements.modernfoundry.tools.travelers_gear.title": "旅行者",
   "advancements.modernfoundry.tools.travelers_gear.description": "製作出全套的旅行者套裝",
   "advancements.modernfoundry.tools.modified.title": "修繕強化",
-  "advancements.modernfoundry.tools.modified.description": "為Modern Foundry工具附加一個強化",
+  "advancements.modernfoundry.tools.modified.description": "為匠魂工具附加一個強化",
   "advancements.modernfoundry.tools.upgrade_slots.title": "升級大全",
   "advancements.modernfoundry.tools.upgrade_slots.description": "使用「銘刻」「鑲金」「重置」「和睦」與「復生」強化為工具附加6個額外的升級槽",
   "advancements.modernfoundry.tools.glass_cannon.title": "玻璃大炮",
@@ -2921,9 +2921,9 @@
   "advancements.modernfoundry.smeltery.structure.title": "全能熔煉",
   "advancements.modernfoundry.smeltery.structure.description": "將熔融銅處理成型，並打造一台冶煉爐控制器，在完成冶煉爐的搭建後打開其界面",
   "advancements.modernfoundry.smeltery.tinkers_anvil.title": "進階工具製作",
-  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "使用在冶煉爐中處理出的合金打造一個Modern Foundry砧！",
+  "advancements.modernfoundry.smeltery.tinkers_anvil.description": "使用在冶煉爐中處理出的合金打造一個工匠砧！",
   "advancements.modernfoundry.smeltery.tool_forge.title": "工具鍛造",
-  "advancements.modernfoundry.smeltery.tool_forge.description": "在Modern Foundry砧中鍛造出任意一件寬型工具",
+  "advancements.modernfoundry.smeltery.tool_forge.description": "在工匠砧中鍛造出任意一件寬型工具",
   "advancements.modernfoundry.smeltery.abilities.title": "能力熟手",
   "advancements.modernfoundry.smeltery.abilities.description": "將每個預設的能力強化至少附加於工具一次",
 
@@ -2941,11 +2941,11 @@
   "advancements.modernfoundry.foundry.manyullyn_lanterns.title": "飽和光照",
   "advancements.modernfoundry.foundry.manyullyn_lanterns.description": "製作一整組裝滿熔融瑪玉靈的焦黑或焦褐燈籠",
   "advancements.modernfoundry.foundry.encyclopedia.title": "百科全書",
-  "advancements.modernfoundry.foundry.encyclopedia.description": "將你從書中得來的所有知識凝練成一本《Modern Foundry大百科》",
+  "advancements.modernfoundry.foundry.encyclopedia.description": "將你從書中得來的所有知識凝練成一本《工匠大百科》",
 
   "_comment": "Gadget Advancements",
-  "advancements.modernfoundry.world.tinkers_gadgetry.title": "Modern Foundry裝置",
-  "advancements.modernfoundry.world.tinkers_gadgetry.description": "合成一本《Modern Foundry裝置寶典》，開始探索世界",
+  "advancements.modernfoundry.world.tinkers_gadgetry.title": "工匠裝置",
+  "advancements.modernfoundry.world.tinkers_gadgetry.description": "合成一本《工匠裝置寶典》，開始探索世界",
   "advancements.modernfoundry.world.earth_island.title": "大地史萊姆島",
   "advancements.modernfoundry.world.earth_island.description": "在海洋中找到一座大地史萊姆島",
   "advancements.modernfoundry.world.sky_island.title": "碧空史萊姆島",

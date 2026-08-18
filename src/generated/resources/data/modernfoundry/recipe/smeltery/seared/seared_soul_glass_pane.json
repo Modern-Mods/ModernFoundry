@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "modernfoundry:seared_soul_glass"
-    }
+    "#": "modernfoundry:seared_soul_glass"
   },
   "pattern": [
     "###",
@@ -13,6 +11,5 @@
   "result": {
     "count": 16,
     "id": "modernfoundry:seared_soul_glass_pane"
-  },
-  "show_notification": true
+  }
 }

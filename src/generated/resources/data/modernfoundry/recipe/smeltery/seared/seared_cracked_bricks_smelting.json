@@ -1,11 +1,9 @@
 {
   "type": "minecraft:smelting",
-  "category": "blocks",
+  "category": "misc",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "modernfoundry:seared_bricks"
-  },
+  "ingredient": "modernfoundry:seared_bricks",
   "result": {
     "id": "modernfoundry:seared_cracked_bricks"
   }

@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:entity_melting",
-  "id": "modernfoundry:smeltery/entity_melting/spider",
   "damage": 2,
   "entity": {
     "types": [
@@ -8,6 +7,7 @@
       "minecraft:cave_spider"
     ]
   },
+  "id": "modernfoundry:smeltery/entity_melting/spider",
   "result": {
     "amount": 25,
     "fluid": "modernfoundry:venom"

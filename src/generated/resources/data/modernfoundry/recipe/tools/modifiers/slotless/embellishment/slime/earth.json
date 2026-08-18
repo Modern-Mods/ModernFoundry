@@ -1,24 +1,22 @@
 {
   "type": "modernfoundry:swappable_modifier",
-  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/earth",
   "allow_crystal": false,
+  "id": "modernfoundry:tools/modifiers/slotless/embellishment/slime/earth",
   "inputs": [
     {
-      "item": "modernfoundry:earth_congealed_slime"
+      "ingredient": "modernfoundry:earth_congealed_slime"
     },
     {
-      "item": "minecraft:slime_ball"
+      "ingredient": "minecraft:slime_ball"
     },
     {
-      "item": "modernfoundry:earth_congealed_slime"
+      "ingredient": "modernfoundry:earth_congealed_slime"
     }
   ],
   "result": {
     "name": "modernfoundry:embellishment",
     "value": "modernfoundry:earthslime"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/embellishment/slime"
-  },
+  "tools": "#modernfoundry:modifiable/embellishment/slime",
   "variant_formatter": "modernfoundry:material"
 }

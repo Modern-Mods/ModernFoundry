@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "s": {
-      "item": "modernfoundry:scorched_bricks_slab"
-    }
+    "s": "modernfoundry:scorched_bricks_slab"
   },
   "pattern": [
     "s",
@@ -12,6 +10,5 @@
   ],
   "result": {
     "id": "modernfoundry:chiseled_scorched_bricks"
-  },
-  "show_notification": true
+  }
 }

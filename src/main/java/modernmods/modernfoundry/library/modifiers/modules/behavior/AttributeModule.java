@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -15,10 +15,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.Nullable;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.json.math.ModifierFormula;
 import modernmods.modernfoundry.library.json.math.ModifierFormula.FallbackFormula;
@@ -50,7 +50,7 @@ import java.util.function.BiConsumer;
 /**
  * Module to add an attribute to a tool.
  */
-public record AttributeModule(String unique, Attribute attribute, Operation operation, ToolFormula formula, ResourceLocation[] slotIds, TooltipStyle tooltipStyle, ModifierCondition<IToolStackView> condition) implements AttributesModifierHook, ModifierModule, EquipmentChangeModifierHook, TooltipModifierHook, ConditionalModule<IToolStackView> {
+public record AttributeModule(String unique, Attribute attribute, Operation operation, ToolFormula formula, Identifier[] slotIds, TooltipStyle tooltipStyle, ModifierCondition<IToolStackView> condition) implements AttributesModifierHook, ModifierModule, EquipmentChangeModifierHook, TooltipModifierHook, ConditionalModule<IToolStackView> {
   /** Number of vanilla equipment filter slots, including the 1.21 body slot. */
   private static final int SLOT_COUNT = EquipmentSlot.values().length;
   /** Default variables */
@@ -73,25 +73,25 @@ public record AttributeModule(String unique, Attribute attribute, Operation oper
     (unique, attribute, operation, amount, slots, tooltipStyle, condition) -> new AttributeModule(unique, attribute, operation, amount, slotsToIds(unique, slots), tooltipStyle, condition));
 
   /** Gets the attribute modifier ID from a name */
-  public static ResourceLocation getId(String name, EquipmentSlot slot) {
+  public static Identifier getId(String name, EquipmentSlot slot) {
     String path = name.isEmpty() ? "attribute" : name.replace(':', '.');
-    return ResourceLocation.fromNamespaceAndPath("modernfoundry", path + "." + slot.getName());
+    return Identifier.fromNamespaceAndPath("modernfoundry", path + "." + slot.getName());
   }
 
   /** Converts a list of slots to an array of modifier IDs at each index */
-  public static ResourceLocation[] slotsToIds(String name, Collection<EquipmentSlot> slots) {
-    ResourceLocation[] slotIds = new ResourceLocation[SLOT_COUNT];
+  public static Identifier[] slotsToIds(String name, Collection<EquipmentSlot> slots) {
+    Identifier[] slotIds = new Identifier[SLOT_COUNT];
     for (EquipmentSlot slot : slots) {
-      slotIds[slot.getFilterFlag()] = getId(name, slot);
+      slotIds[slot.getId()] = getId(name, slot);
     }
     return slotIds;
   }
 
   /** Maps the modifier ID array to a set for serializing */
-  public static Set<EquipmentSlot> idsToSlots(ResourceLocation[] ids) {
+  public static Set<EquipmentSlot> idsToSlots(Identifier[] ids) {
     Set<EquipmentSlot> set = EnumSet.noneOf(EquipmentSlot.class);
     for (EquipmentSlot slot : EquipmentSlot.values()) {
-      int index = slot.getFilterFlag();
+      int index = slot.getId();
       if (index < ids.length && ids[index] != null) {
         set.add(slot);
       }
@@ -110,15 +110,15 @@ public record AttributeModule(String unique, Attribute attribute, Operation oper
 
   /** Gets the modifier ID for this slot */
   @Nullable
-  private ResourceLocation getId(EquipmentSlot slot) {
-    int index = slot.getFilterFlag();
+  private Identifier getId(EquipmentSlot slot) {
+    int index = slot.getId();
     return index < slotIds.length ? slotIds[index] : null;
   }
 
   /** Creates an attribute for the given slot */
   @Nullable
   private AttributeModifier createModifier(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot) {
-    ResourceLocation id = getId(slot);
+    Identifier id = getId(slot);
     if (id != null) {
       return new AttributeModifier(id, formula.apply(tool, modifier), operation);
     }
@@ -155,7 +155,7 @@ public record AttributeModule(String unique, Attribute attribute, Operation oper
   @Override
   public void onUnequip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
     if (condition.matches(tool, modifier)) {
-      ResourceLocation id = getId(context.getChangedSlot());
+      Identifier id = getId(context.getChangedSlot());
       if (id != null) {
         AttributeInstance instance = context.getEntity().getAttribute(holder());
         if (instance != null) {
@@ -166,7 +166,7 @@ public record AttributeModule(String unique, Attribute attribute, Operation oper
   }
 
   /** Adds the tooltip for the given attribute */
-  public static void addTooltip(Modifier modifier, Attribute attribute, Operation operation, TooltipStyle tooltipStyle, float amount, @Nullable ResourceLocation id, @Nullable Player player, List<Component> tooltip) {
+  public static void addTooltip(Modifier modifier, Attribute attribute, Operation operation, TooltipStyle tooltipStyle, float amount, @Nullable Identifier id, @Nullable Player player, List<Component> tooltip) {
     switch (tooltipStyle) {
       case ATTRIBUTE -> TooltipUtil.addAttribute(attribute, operation, amount, id, player, tooltip);
       case BOOST -> TooltipModifierHook.addFlatBoost(modifier, Component.translatable(attribute.getDescriptionId()), amount, tooltip);
@@ -243,7 +243,7 @@ public record AttributeModule(String unique, Attribute attribute, Operation oper
     /**
      * Sets the unique string using a resource location
      */
-    public Builder uniqueFrom(ResourceLocation id) {
+    public Builder uniqueFrom(Identifier id) {
       return unique(id.getNamespace() + ".modifier." + id.getPath());
     }
 

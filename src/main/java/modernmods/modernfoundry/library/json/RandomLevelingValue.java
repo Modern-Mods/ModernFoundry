@@ -2,8 +2,8 @@ package modernmods.modernfoundry.library.json;
 
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.TConstruct;
 
 /**
@@ -30,7 +30,7 @@ public record RandomLevelingValue(float flat, float perLevel, float randomBonus)
     return value;
   }
 
-  /** @deprecated use {@link #LOADABLE} with {@link modernmods.hilt.data.loadable.Loadable#serialize(Object)} or {@link RecordLoadable#serialize(Object)} */
+  /** @deprecated use {@link #LOADABLE} with {@link modernmods.mantle.data.loadable.Loadable#serialize(Object)} or {@link RecordLoadable#serialize(Object)} */
   @Deprecated(forRemoval = true)
   public JsonObject serialize() {
     JsonObject json = new JsonObject();
@@ -44,19 +44,19 @@ public record RandomLevelingValue(float flat, float perLevel, float randomBonus)
     return LOADABLE.deserialize(json);
   }
 
-  /** @deprecated use {@link #LOADABLE} with {@link modernmods.hilt.data.loadable.Loadable#getIfPresent(JsonObject, String)} */
+  /** @deprecated use {@link #LOADABLE} with {@link modernmods.mantle.data.loadable.Loadable#getIfPresent(JsonObject, String)} */
   @Deprecated(forRemoval = true)
   public static RandomLevelingValue get(JsonObject parent, String key) {
     return LOADABLE.getIfPresent(parent, key);
   }
 
-  /** @deprecated use {@link #LOADABLE} with {@link modernmods.hilt.data.loadable.Loadable#encode(FriendlyByteBuf, Object)} */
+  /** @deprecated use {@link #LOADABLE} with {@link modernmods.mantle.data.loadable.Loadable#encode(FriendlyByteBuf, Object)} */
   @Deprecated(forRemoval = true)
   public void toNetwork(FriendlyByteBuf buffer) {
     LOADABLE.encode(buffer, this);
   }
 
-  /** @deprecated use {@link #LOADABLE} with {@link modernmods.hilt.data.loadable.Loadable#decode(FriendlyByteBuf)} */
+  /** @deprecated use {@link #LOADABLE} with {@link modernmods.mantle.data.loadable.Loadable#decode(FriendlyByteBuf)} */
   @Deprecated(forRemoval = true)
   public static RandomLevelingValue fromNetwork(FriendlyByteBuf buffer) {
     return LOADABLE.decode(buffer);

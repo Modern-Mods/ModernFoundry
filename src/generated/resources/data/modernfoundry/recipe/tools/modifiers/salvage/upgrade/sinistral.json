@@ -6,14 +6,10 @@
     "upgrades": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
+    "neoforge:ingredient_type": "neoforge:intersection",
     "children": [
-      {
-        "tag": "modernfoundry:modifiable/ranged/crossbows"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable/left"
-      }
+      "#modernfoundry:modifiable/ranged/crossbows",
+      "#modernfoundry:modifiable/interactable/left"
     ]
   }
 }

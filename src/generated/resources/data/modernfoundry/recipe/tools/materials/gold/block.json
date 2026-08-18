@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/gold/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/gold"
-  },
+  "ingredient": "#c:storage_blocks/gold",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/gold"

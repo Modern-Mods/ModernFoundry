@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#modernfoundry:patterns/default",
+    "#modernfoundry:patterns/reusable",
+    "#modernfoundry:casts/sand",
+    "#modernfoundry:casts/red_sand",
+    "minecraft:sand",
+    "minecraft:red_sand",
+    "modernfoundry:venom_bottle"
+  ]
+}

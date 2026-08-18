@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/casting/scorched_stone",
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:scorched_stone"
   },
+  "id": "modernfoundry:tools/materials/casting/scorched_stone",
   "output": "modernfoundry:scorched_stone",
   "temperature": 500
 }

@@ -8,8 +8,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -49,14 +49,14 @@ public record ToolBeltModule(Set<TooltipKey> keys) implements ModifierModule, Ke
   public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot equipmentSlot, TooltipKey keyModifier) {
     if (keys.contains(keyModifier)) {
       Level level = player.level();
-      if (level.isClientSide) {
+      if (level.isClientSide()) {
         return true;
       }
 
       // swap non-blacklisted items
       InventoryModifierHook belt = modifier.getHook(ToolInventoryCapability.HOOK);
       Inventory inventory = player.getInventory();
-      int slots = Math.min(inventory.items.size(), belt.getSlots(tool, modifier));
+      int slots = Math.min(inventory.getNonEquipmentItems().size(), belt.getSlots(tool, modifier));
       boolean didChange = false;
       for (int slot = 0; slot < slots; slot++) {
         ItemStack original = inventory.getItem(slot);

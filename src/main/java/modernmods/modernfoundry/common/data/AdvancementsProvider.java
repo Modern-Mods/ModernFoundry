@@ -10,15 +10,15 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.AdvancementRequirements.Strategy;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
-import net.minecraft.advancements.critereon.LocationPredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.advancements.critereon.PlayerInteractTrigger;
-import net.minecraft.advancements.critereon.PlayerTrigger;
+import net.minecraft.advancements.criterion.ContextAwarePredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.ItemUsedOnLocationTrigger;
+import net.minecraft.advancements.criterion.LocationPredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.advancements.criterion.PlayerInteractTrigger;
+import net.minecraft.advancements.criterion.PlayerTrigger;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
@@ -27,14 +27,14 @@ import net.minecraft.data.PackOutput.Target;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
@@ -44,8 +44,8 @@ import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-import modernmods.hilt.data.GenericDataProvider;
-import modernmods.hilt.registration.object.ItemObject;
+import modernmods.mantle.data.GenericDataProvider;
+import modernmods.mantle.registration.object.ItemObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.json.ConfigEnabledCondition;
@@ -95,11 +95,14 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class AdvancementsProvider extends GenericDataProvider {
+  /** 26.1: ItemPredicate/EntityPredicate builders and recipe builders now require a HolderGetter; the built-in registry lookup suffices during datagen. */
+  private static final net.minecraft.core.HolderGetter<net.minecraft.world.item.Item> ITEMS = net.minecraft.core.registries.BuiltInRegistries.ITEM;
+  private static final net.minecraft.core.HolderGetter<net.minecraft.world.entity.EntityType<?>> ENTITIES = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE;
 
   /** Advancment consumer instance */
   protected Consumer<AdvancementHolder> advancementConsumer;
   /** Advancment consumer instance */
-  protected BiConsumer<ResourceLocation, ConditionalAdvancement.Builder> conditionalConsumer;
+  protected BiConsumer<Identifier, ConditionalAdvancement.Builder> conditionalConsumer;
 
   public AdvancementsProvider(PackOutput output) {
     super(output, Target.DATA_PACK, "advancements");
@@ -107,7 +110,7 @@ public class AdvancementsProvider extends GenericDataProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry Advancements";
+    return "Tinkers' Construct Advancements";
   }
 
   /** Generates the advancements */
@@ -124,7 +127,7 @@ public class AdvancementsProvider extends GenericDataProvider {
     AdvancementHolder tinkerTool = builder(TinkerTools.pickaxe.get().getRenderTool(), resource("tools/tinker_tool"), tinkerStation, AdvancementType.TASK, builder ->
       builder.addCriterion("crafted_tool", hasTag(TinkerTags.Items.MULTIPART_TOOL)));
     AdvancementHolder harvestLevel = builder(Items.NETHERITE_INGOT, resource("tools/netherite_tier"), tinkerTool, AdvancementType.GOAL, builder ->
-      builder.addCriterion("harvest_level", InventoryChangeTrigger.TriggerInstance.hasItems(ToolStackItemPredicate.ofTool(new StatInSetPredicate<>(ToolStats.HARVEST_TIER, Tiers.NETHERITE)))));
+      builder.addCriterion("harvest_level", InventoryChangeTrigger.TriggerInstance.hasItems(ToolStackItemPredicate.ofTool(new StatInSetPredicate<>(ToolStats.HARVEST_TIER, ToolMaterial.NETHERITE)))));
     builder(Items.TARGET, resource("tools/perfect_aim"), tinkerTool, AdvancementType.GOAL, builder ->
       builder.addCriterion("accuracy", InventoryChangeTrigger.TriggerInstance.hasItems(ToolStackItemPredicate.ofTool(ToolStackPredicate.and(
         ToolStackPredicate.tag(TinkerTags.Items.BOWS),
@@ -178,7 +181,7 @@ public class AdvancementsProvider extends GenericDataProvider {
       with.accept(MaterialIds.knightslime);
       with.accept(MaterialIds.enderslimeVine);
     });
-    builder(TinkerTools.travelersGear.get(ArmorItem.Type.HELMET).getRenderTool(), resource("tools/travelers_gear"), tinkerStation, AdvancementType.TASK, builder ->
+    builder(TinkerTools.travelersGear.get(ArmorType.HELMET).getRenderTool(), resource("tools/travelers_gear"), tinkerStation, AdvancementType.TASK, builder ->
       TinkerTools.travelersGear.forEach((type, armor) -> builder.addCriterion("crafted_" + type.getName(), hasItem(armor))));
     builder(TinkerTools.pickaxe.get().getRenderTool(), resource("tools/tool_smith"), tinkerTool, AdvancementType.CHALLENGE, builder -> {
       Consumer<Item> with = item -> builder.addCriterion(BuiltInRegistries.ITEM.getKey(item).getPath(), hasItem(item));
@@ -384,7 +387,7 @@ public class AdvancementsProvider extends GenericDataProvider {
       TinkerSmeltery.searedTank.forEach(with);
       TinkerSmeltery.scorchedTank.forEach(with);
     });
-    builder(TinkerTools.plateArmor.get(ArmorItem.Type.CHESTPLATE).getRenderTool(), resource("foundry/plate_armor"), blazingBlood, AdvancementType.GOAL, builder ->
+    builder(TinkerTools.plateArmor.get(ArmorType.CHESTPLATE).getRenderTool(), resource("foundry/plate_armor"), blazingBlood, AdvancementType.GOAL, builder ->
       TinkerTools.plateArmor.forEach((type, armor) -> builder.addCriterion("crafted_" + type.getName(), hasItem(armor))));
     builder(TankItem.setTank(new ItemStack(TinkerSmeltery.scorchedLantern), getTankWith(TinkerFluids.moltenManyullyn.get(), TinkerSmeltery.scorchedLantern.get().getCapacity())),
             resource("foundry/manyullyn_lanterns"), foundry, AdvancementType.CHALLENGE, builder -> {
@@ -416,12 +419,12 @@ public class AdvancementsProvider extends GenericDataProvider {
       builder.addCriterion("magma_cream", hasItem(Items.MAGMA_CREAM));
     });
     builder(TinkerGadgets.piggyBackpack, resource("world/piggybackpack"), tinkersGadgetry, AdvancementType.GOAL, builder ->
-      builder.addCriterion("used_pack", PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(ItemPredicate.Builder.item().of(TinkerGadgets.piggyBackpack), EntityPredicate.wrap(EntityPredicate.Builder.entity().of(EntityType.PIG).build()))));
-    AdvancementHolder slimesuit = builder(new MaterialIdNBT(List.of(MaterialIds.bone, MaterialIds.skyslime)).updateStack(new ItemStack(TinkerTools.slimesuit.get(ArmorItem.Type.CHESTPLATE))), resource("world/slimesuit"), skyslimeIsland, AdvancementType.GOAL, builder ->
+      builder.addCriterion("used_pack", PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(ItemPredicate.Builder.item().of(ITEMS, TinkerGadgets.piggyBackpack), java.util.Optional.of(EntityPredicate.wrap(EntityPredicate.Builder.entity().of(ENTITIES, EntityType.PIG).build())))));
+    AdvancementHolder slimesuit = builder(new MaterialIdNBT(List.of(MaterialIds.bone, MaterialIds.skyslime)).updateStack(new ItemStack(TinkerTools.slimesuit.get(ArmorType.CHESTPLATE))), resource("world/slimesuit"), skyslimeIsland, AdvancementType.GOAL, builder ->
       TinkerTools.slimesuit.forEach((type, armor) -> builder.addCriterion("crafted_" + type.getName(), hasItem(armor))));
-    builder(new MaterialIdNBT(List.of(MaterialIds.glass, MaterialIds.enderslime)).updateStack(new ItemStack(TinkerTools.slimesuit.get(ArmorItem.Type.HELMET))),
+    builder(new MaterialIdNBT(List.of(MaterialIds.glass, MaterialIds.enderslime)).updateStack(new ItemStack(TinkerTools.slimesuit.get(ArmorType.HELMET))),
             resource("world/slimeskull"), slimesuit, AdvancementType.CHALLENGE, builder -> {
-      Item helmet = TinkerTools.slimesuit.get(ArmorItem.Type.HELMET);
+      Item helmet = TinkerTools.slimesuit.get(ArmorType.HELMET);
       Consumer<MaterialId> with = mat -> builder.addCriterion(mat.getPath(), InventoryChangeTrigger.TriggerInstance.hasItems(ToolStackItemPredicate.ofContext(
         ToolContextPredicate.and(ToolContextPredicate.set(helmet), new HasMaterialPredicate(mat, 0)))));
       with.accept(MaterialIds.glass);
@@ -475,20 +478,20 @@ public class AdvancementsProvider extends GenericDataProvider {
    * Creates an item predicate for a tag
    */
   private Criterion<?> hasTag(TagKey<Item> tag) {
-    return InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(tag).build());
+    return InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(ITEMS, tag).build());
   }
 
   /**
    * Creates an item predicate for an item
    */
   private Criterion<?> hasItem(ItemLike item) {
-    return InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(item).build());
+    return InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(ITEMS, item).build());
   }
 
   @Override
   public CompletableFuture<?> run(CachedOutput cache) {
-    Set<ResourceLocation> set = Sets.newHashSet();
-    record Conditional(ResourceLocation id, ConditionalAdvancement.Builder builder) {}
+    Set<Identifier> set = Sets.newHashSet();
+    record Conditional(Identifier id, ConditionalAdvancement.Builder builder) {}
     List<AdvancementHolder> advancements = new ArrayList<>();
     List<Conditional> conditionals = new ArrayList<>();
     this.advancementConsumer = advancement -> {
@@ -516,7 +519,7 @@ public class AdvancementsProvider extends GenericDataProvider {
   /* Helpers */
 
   /** Gets a tinkers resource location */
-  protected ResourceLocation resource(String name) {
+  protected Identifier resource(String name) {
     return TConstruct.getResource(name);
   }
 
@@ -528,7 +531,7 @@ public class AdvancementsProvider extends GenericDataProvider {
    * @param frame        Frame type
    * @return  Builder
    */
-  protected AdvancementHolder builder(ItemLike display, ResourceLocation name, AdvancementHolder parent, AdvancementType frame, Consumer<Advancement.Builder> consumer) {
+  protected AdvancementHolder builder(ItemLike display, Identifier name, AdvancementHolder parent, AdvancementType frame, Consumer<Advancement.Builder> consumer) {
     return builder(new ItemStack(display), name, parent, frame, consumer);
   }
 
@@ -540,8 +543,8 @@ public class AdvancementsProvider extends GenericDataProvider {
    * @param frame        Frame type
    * @return  Builder
    */
-  protected AdvancementHolder builder(ItemStack display, ResourceLocation name, AdvancementHolder parent, AdvancementType frame, Consumer<Advancement.Builder> consumer) {
-    return builder(display, name, (ResourceLocation)null, frame, builder -> {
+  protected AdvancementHolder builder(ItemStack display, Identifier name, AdvancementHolder parent, AdvancementType frame, Consumer<Advancement.Builder> consumer) {
+    return builder(display, name, (Identifier)null, frame, builder -> {
       builder.parent(parent);
       consumer.accept(builder);
     });
@@ -555,12 +558,12 @@ public class AdvancementsProvider extends GenericDataProvider {
    * @param frame        Frame type
    * @return  Builder
    */
-  protected AdvancementHolder builder(ItemLike display, ResourceLocation name, @Nullable ResourceLocation background, AdvancementType frame, Consumer<Advancement.Builder> consumer) {
+  protected AdvancementHolder builder(ItemLike display, Identifier name, @Nullable Identifier background, AdvancementType frame, Consumer<Advancement.Builder> consumer) {
     return builder(new ItemStack(display), name, background, frame, consumer);
   }
 
   /** Makes an advancement translation key from the given ID */
-  private static String makeTranslationKey(ResourceLocation advancement) {
+  private static String makeTranslationKey(Identifier advancement) {
     return "advancements." + advancement.getNamespace() + "." + advancement.getPath().replace('/', '.');
   }
 
@@ -572,9 +575,9 @@ public class AdvancementsProvider extends GenericDataProvider {
    * @param frame        Frame type
    * @return  Builder
    */
-  protected AdvancementHolder builder(ItemStack display, ResourceLocation name, @Nullable ResourceLocation background, AdvancementType frame, Consumer<Advancement.Builder> consumer) {
+  protected AdvancementHolder builder(ItemStack display, Identifier name, @Nullable Identifier background, AdvancementType frame, Consumer<Advancement.Builder> consumer) {
     Advancement.Builder builder = Advancement.Builder
-      .advancement().display(display,
+      .advancement().display(new net.minecraft.world.item.ItemStackTemplate(display.typeHolder(), display.getCount(), display.getComponentsPatch()),
                              Component.translatable(makeTranslationKey(name) + ".title"),
                              Component.translatable(makeTranslationKey(name) + ".description"),
                              background, frame, true, frame != AdvancementType.TASK, false);
@@ -587,7 +590,7 @@ public class AdvancementsProvider extends GenericDataProvider {
    * @param name         AdvancementHolder name
    */
   @SuppressWarnings("SameParameterValue")
-  protected void hiddenBuilder(ResourceLocation name, ICondition condition, Consumer<Advancement.Builder> consumer) {
+  protected void hiddenBuilder(Identifier name, ICondition condition, Consumer<Advancement.Builder> consumer) {
     Advancement.Builder builder = Advancement.Builder.advancement();
     consumer.accept(builder);
     ConditionalAdvancement.Builder conditionalBuilder = new ConditionalAdvancement.Builder();

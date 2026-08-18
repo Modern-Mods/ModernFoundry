@@ -1,40 +1,52 @@
 package modernmods.modernfoundry.library.client;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
-import net.minecraft.client.renderer.RenderType;
+import com.mojang.blaze3d.pipeline.DepthStencilState;
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.CompareOp;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.rendertype.LayeringTransform;
+import net.minecraft.client.renderer.rendertype.OutputTarget;
+import net.minecraft.client.renderer.rendertype.RenderSetup;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import modernmods.mantle.client.render.MantleRenderTypes;
 import modernmods.modernfoundry.TConstruct;
 
-import java.util.OptionalDouble;
+import java.util.function.Consumer;
 
-public class TinkerRenderTypes extends RenderType {
-  public TinkerRenderTypes(String name, VertexFormat format, Mode mode, int bufferSize, boolean affectsCrumbling, boolean sort, Runnable setupState, Runnable clearState) {
-    super(name, format, mode, bufferSize, affectsCrumbling, sort, setupState, clearState);
+/**
+ * Render types defined by Tinkers' Construct.
+ * <p>
+ * The 1.21.4+ engine rewrite replaced {@code CompositeState}/{@code ShaderInstance} with {@link RenderPipeline}s built
+ * through {@link RenderPipelines} and {@link RenderType#create(String, RenderSetup)}. Custom pipelines are registered
+ * via {@code RegisterRenderPipelinesEvent} (see {@link #registerPipelines(Consumer)}).
+ */
+public class TinkerRenderTypes {
+  private TinkerRenderTypes() {}
+
+  /**
+   * Pipeline for the error block outline: reuses the vanilla lines shader ({@link RenderPipelines#LINES_SNIPPET}) but
+   * disables backface culling and the depth test, so the outline is seen through surrounding blocks.
+   */
+  public static final RenderPipeline ERROR_BLOCK_PIPELINE = RenderPipeline.builder(RenderPipelines.LINES_SNIPPET)
+    .withLocation(TConstruct.getResource("pipeline/error_block"))
+    .withCull(false)
+    .withDepthStencilState(new DepthStencilState(CompareOp.ALWAYS_PASS, false))
+    .build();
+
+  /** Render type for the error block that is seen through everything, based on the vanilla lines type. */
+  public static final RenderType ERROR_BLOCK = RenderType.create("modernfoundry:error_block", RenderSetup.builder(ERROR_BLOCK_PIPELINE)
+    .setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+    .setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+    .createRenderSetup());
+
+  /**
+   * Render type for smeltery fluids. Mantle's {@link MantleRenderTypes#FLUID} is already a no-cull translucent block
+   * type in 26.1, so both faces of the fluid render; reuse it directly.
+   */
+  public static final RenderType SMELTERY_FLUID = MantleRenderTypes.FLUID;
+
+  /** Registers Tinkers' custom render pipelines so their shaders are compiled. Call from {@code RegisterRenderPipelinesEvent}. */
+  public static void registerPipelines(Consumer<RenderPipeline> registrar) {
+    registrar.accept(ERROR_BLOCK_PIPELINE);
   }
-
-  /** Render type for the error block that is seen through everything, mostly based on {@link RenderType#LINES} */
-  public static final RenderType ERROR_BLOCK = RenderType.create(
-    TConstruct.resourceString("lines"), DefaultVertexFormat.POSITION_COLOR_NORMAL, VertexFormat.Mode.LINES, 256, false, false,
-    RenderType.CompositeState.builder()
-                             .setShaderState(RENDERTYPE_LINES_SHADER)
-                             .setLineState(new LineStateShard(OptionalDouble.empty()))
-                             .setLayeringState(VIEW_OFFSET_Z_LAYERING)
-                             .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                             .setOutputState(ITEM_ENTITY_TARGET)
-                             .setWriteMaskState(COLOR_DEPTH_WRITE)
-                             .setCullState(NO_CULL)
-                             .setDepthTestState(NO_DEPTH_TEST)
-                             .createCompositeState(false));
-
-  /** Render type for fluids using vanilla's shader-compatible position/color/texture/lightmap shader. */
-  public static final RenderType SMELTERY_FLUID = RenderType.create(
-    TConstruct.resourceString("smeltery_fluid"), DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS, 256, false, true,
-    CompositeState.builder()
-                  .setLightmapState(LIGHTMAP)
-                  .setShaderState(POSITION_COLOR_TEX_LIGHTMAP_SHADER)
-                  .setTextureState(BLOCK_SHEET_MIPPED)
-                  .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                  .setCullState(NO_CULL)
-                  .createCompositeState(false));
 }

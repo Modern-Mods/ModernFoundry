@@ -1,0 +1,40 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/scythe",
+    "parts": [
+      {
+        "name": "accessory",
+        "index": 3
+      },
+      {
+        "name": "handle",
+        "index": 1
+      },
+      {
+        "name": "head",
+        "index": 0
+      },
+      {
+        "name": "binding",
+        "index": 2
+      }
+    ],
+    "large": true,
+    "large_offset": [
+      -2,
+      2
+    ],
+    "modifier_maps": [
+      "modernfoundry:scythe"
+    ],
+    "small_modifier_roots": {
+      "small": [
+        "modernfoundry:item/tool/scythe/modifiers/"
+      ],
+      "large": [
+        "modernfoundry:item/tool/scythe/large/modifiers/"
+      ]
+    }
+  }
+}

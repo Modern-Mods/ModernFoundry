@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/glass/block",
-  "ingredient": {
-    "tag": "c:glass/silica"
-  },
+  "ingredient": "#c:glass_blocks/cheap",
   "result": {
     "amount": 1000,
     "fluid": "modernfoundry:molten_glass"

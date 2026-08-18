@@ -1,9 +1,9 @@
 {
   "type": "modernfoundry:severing",
-  "id": "modernfoundry:tools/severing/magma_cream",
   "entity": {
     "type": "minecraft:magma_cube"
   },
+  "id": "modernfoundry:tools/severing/magma_cream",
   "looting_bonus": 0.01,
   "per_level_chance": 0.05,
   "result": "minecraft:magma_cream"

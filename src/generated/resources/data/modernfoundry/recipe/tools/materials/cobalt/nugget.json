@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/cobalt/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/cobalt"
-  },
+  "ingredient": "#c:nuggets/cobalt",
   "material": "modernfoundry:cobalt",
   "needed": 9,
   "value": 1

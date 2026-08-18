@@ -1,5 +1,5 @@
 {
-    "_comment": "Modern Foundry Common",
+    "_comment": "Tinkers Common",
 
     "block.modernfoundry.sky_slime": "Blok  podniebnego szlamu",
     "block.modernfoundry.sky_slime.tooltip": "Przykleja się zarówno do bloków szlamu, jak i miodu",
@@ -160,10 +160,10 @@
 
     "item.modernfoundry.materials_and_you": "Materiały i Ty",
     "item.modernfoundry.materials_and_you.tooltip": "Wstęp to narzędzi i materiałów autor: Selena",
-    "item.modernfoundry.encyclopedia": "Encyklopedia Modern Foundry",
-    "item.modernfoundry.encyclopedia.tooltip": "Źródło wiedzy dla każdego Modern Foundry autor: Selena",
+    "item.modernfoundry.encyclopedia": "Encyklopedia majsterkowania",
+    "item.modernfoundry.encyclopedia.tooltip": "Źródło wiedzy dla każdego majsterkowicza autor: Selena",
 
-    "item.modernfoundry.tinkers_gadgetry": "Gadżety Modern Foundry",
+    "item.modernfoundry.tinkers_gadgetry": "Gadżety majsterkowicza",
     "item.modernfoundry.tinkers_gadgetry.tooltip": "Lista zastosować dla szlamu w codziennych zadaniach autor: Melvin",
 
     "item.modernfoundry.puny_smelting": "Drobne przetapianie",
@@ -218,7 +218,7 @@
     "item.modernfoundry.copper_can.contents": "Zawiera: %s",
 
 
-    "_comment": "Modern Foundry Patterns",
+    "_comment": "Tinkers Patterns",
 
     "pattern.modernfoundry.repair_kit": "Zestaw naprawczy",
 
@@ -247,7 +247,7 @@
     "pattern.modernfoundry.tough_handle": "Masywny trzonek",
 
 
-    "_comment": "Modern Foundry Gold Casts",
+    "_comment": "Tinkers Gold Casts",
 
     "item.modernfoundry.blank_cast": "Pusta złota forma",
     "item.modernfoundry.ingot_cast": "Złota forma sztabki",
@@ -286,7 +286,7 @@
     "item.modernfoundry.tough_handle_cast": "Złota forma masywnego trzonka",
 
 
-    "_comment": "Modern Foundry Sand Casts",
+    "_comment": "Tinkers Sand Casts",
 
     "item.modernfoundry.blank_sand_cast": "Pusta piaskowa forma",
     "item.modernfoundry.ingot_sand_cast": "Piaskowa forma sztabki",
@@ -325,7 +325,7 @@
     "item.modernfoundry.tough_handle_sand_cast": "Piaskowa forma masywnego trzonka",
 
 
-    "_comment": "Modern Foundry Red Sand Casts",
+    "_comment": "Tinkers Red Sand Casts",
 
     "item.modernfoundry.blank_red_sand_cast": "Pusta Czerwona piaskowa forma",
     "item.modernfoundry.ingot_red_sand_cast": "Czerwona piaskowa forma sztabki",
@@ -364,7 +364,7 @@
     "item.modernfoundry.tough_handle_red_sand_cast": "Czerwona piaskowa forma masywnego trzonka",
 
 
-    "_comment": "Modern Foundry Fluids",
+    "_comment": "Tinkers Fluids",
 
     "block.modernfoundry.blazing_blood_fluid": "Płomienna krew",
     "fluid.modernfoundry.blazing_blood": "Płomienna krew",
@@ -631,7 +631,7 @@
     "item.modernfoundry.molten_steel_bucket": "Wiadro stopionej stali",
 
 
-    "_comment": "Modern Foundry Gadgets",
+    "_comment": "Tinkers Gadgets",
 
     "block.modernfoundry.punji": "Kije Punji",
     "block.modernfoundry.punji.tooltip": "Ostre! Można stawiać również na ścianach.",
@@ -693,20 +693,20 @@
     "block.modernfoundry.cave_spider_head": "Głowa pająka jaskiniowego",
 
 
-    "_comment": "Modern Foundry Tables",
+    "_comment": "Tinkers Tables",
 
     "block.modernfoundry.crafting_station": "Stacja konstruowania",
 
-    "block.modernfoundry.tinker_station": "Stacja Modern Foundry",
-    "block.modernfoundry.tinkers_anvil": "Kowadło Modern Foundry",
-    "block.modernfoundry.scorched_anvil": "Kowadło Modern Foundry",
+    "block.modernfoundry.tinker_station": "Stacja majsterkowania",
+    "block.modernfoundry.tinkers_anvil": "Kowadło majsterkowicza",
+    "block.modernfoundry.scorched_anvil": "Kowadło majsterkowicza",
 
     "block.modernfoundry.part_builder": "Konstruktor części",
 
     "block.modernfoundry.part_chest": "Skrzynia na części",
     "block.modernfoundry.part_chest.tooltip": "Przechowuje do 256 różnych części narzędzi",
 
-    "block.modernfoundry.tinkers_chest": "Skrzynia Modern Foundry",
+    "block.modernfoundry.tinkers_chest": "Skrzynia majsterkowicza",
     "block.modernfoundry.tinkers_chest.tooltip": "Przechowuje do 64 stosów po 16 przedmiotów",
 
     "block.modernfoundry.cast_chest": "Skrzynia na formy",
@@ -714,7 +714,7 @@
 
     "item.modernfoundry.pattern": "Szablon",
 
-    "_comment": "Modern Foundry Tools",
+    "_comment": "Tinkers Tools",
 
     "item.modernfoundry.pickaxe": "Kilof",
     "item.modernfoundry.sledge_hammer": "Młot dwuręczny",
@@ -736,7 +736,7 @@
     "item.modernfoundry.flint_and_bronze": "Krzesiwo z brązu",
 
 
-    "_comment": "Modern Foundry Tool Parts",
+    "_comment": "Tinkers Tool Parts",
 
     "item.modernfoundry.repair_kit": "Zestaw naprawczy",
 
@@ -822,7 +822,7 @@
     "multiblock.modernfoundry.tiny.no_fuel_tank": "Musi być ustawiony nad zbiornikiem paliwowym lub nagrzewnicą, aby  funkcjonować",
 
 
-    "_comment": "Modern Foundry Smeltery",
+    "_comment": "Tinkers Smeltery",
 
     "block.modernfoundry.grout": "Zaprawa",
     "block.modernfoundry.grout.tooltip": "Zaprawiona w boju!",
@@ -909,7 +909,7 @@
     "block.modernfoundry.seared_chute.tooltip": "Wejście i wyjście dla przedmiotów w piecu metalurgicznym",
 
 
-    "_comment": "Modern Foundry Foundry",
+    "_comment": "Tinkers Foundry",
 
     "block.modernfoundry.nether_grout": "Netherowa zaprawa",
     "block.modernfoundry.nether_grout.tooltip": "Zaprawiona w boju!",
@@ -992,7 +992,7 @@
     "gui.modernfoundry.fluid.hold_shift": "Przytrzymaj §e§oShift§r§7 aby pokazać wiaderka",
 
 
-    "_comment": "Modern Foundry World",
+    "_comment": "Tinkers World",
 
     "entity.modernfoundry.earth_slime": "Szlam",
     "entity.modernfoundry.sky_slime": "Podniebny szlam",
@@ -1723,29 +1723,29 @@
 
     "_comment": "GUIs",
 
-    "itemGroup.modernfoundry.general": "Ogólne przedmioty Modern Foundrya",
-    "itemGroup.modernfoundry.tools": "Narzędzia Modern Foundrya",
-    "itemGroup.modernfoundry.tool_parts": "Części Modern Foundrya",
-    "itemGroup.modernfoundry.smeltery": "Piece Modern Foundrya",
-    "itemGroup.modernfoundry.world": "Świat Modern Foundrya",
-    "itemGroup.modernfoundry.gadgets": "Gadżety Modern Foundrya",
+    "itemGroup.modernfoundry.general": "Ogólne przedmioty Foundrya",
+    "itemGroup.modernfoundry.tools": "Narzędzia Foundrya",
+    "itemGroup.modernfoundry.tool_parts": "Części Foundrya",
+    "itemGroup.modernfoundry.smeltery": "Piece Foundrya",
+    "itemGroup.modernfoundry.world": "Świat Foundrya",
+    "itemGroup.modernfoundry.gadgets": "Gadżety Foundrya",
 
     "gui.modernfoundry.crafting_station": "Stacja konstruowania",
     "gui.modernfoundry.crafting_station.uncraftable": "Ten przedmiot nie jest możliwy do wytworzenia przez gracza",
 
     "gui.modernfoundry.part_builder": "Konstruktor części",
-    "gui.modernfoundry.part_builder.info": "Tutaj możesz wytwarzać części narzędzi dla zaspokojenia swoich Modern Foundry fantazji. Aby wytworzyć część po prostu umieść pusty szablon do slotu po lewej i wybierz część, jakiej potrzebujesz. Drugi slot przechowuje materiał, z którego ma być wykonana część.",
+    "gui.modernfoundry.part_builder.info": "Tutaj możesz wytwarzać części narzędzi dla zaspokojenia swoich majsterkowiczowskich fantazji. Aby wytworzyć część po prostu umieść pusty szablon do slotu po lewej i wybierz część, jakiej potrzebujesz. Drugi slot przechowuje materiał, z którego ma być wykonana część.",
     "gui.modernfoundry.part_builder.material_value": "Ilość materiału: %s",
     "gui.modernfoundry.part_builder.cost": "Koszt szablonu: %s",
     "gui.modernfoundry.part_builder.trait": "Cecha",
     "gui.modernfoundry.part_builder.uncraftable": "Nie można uformować",
     "gui.modernfoundry.part_builder.uncraftable.tooltip": "Materiał nie może być formowany w konstruktorze części. Inne metody, takie jak odlewanie, muszą być użyte.",
 
-    "gui.modernfoundry.tinkers_chest": "Skrzynia Modern Foundry",
+    "gui.modernfoundry.tinkers_chest": "Skrzynia majsterkowicza",
     "gui.modernfoundry.cast_chest": "Skrzynia na formy",
     "gui.modernfoundry.part_chest": "Skrzynia na części",
 
-    "gui.modernfoundry.tinker_station": "Stacja Modern Foundry",
+    "gui.modernfoundry.tinker_station": "Stacja majsterkowania",
     "gui.modernfoundry.tinker_station.repair": "Napraw i modyfikuj",
     "gui.modernfoundry.tinker_station.modifiers": "Modyfikacje",
     "gui.modernfoundry.tinker_station.upgrades": "Ulepszenia i umiejętności",
@@ -1832,15 +1832,15 @@
 
 
     "_comment": "Tool Advancements",
-    "advancements.modernfoundry.tools.materials_and_you.title": "Początkujący Modern Foundry",
+    "advancements.modernfoundry.tools.materials_and_you.title": "Początkujący majsterkowicz",
     "advancements.modernfoundry.tools.materials_and_you.description": "Wytwórz \"Materiały i Ty\", czyli wstęp do Modern Foundry",
     "advancements.modernfoundry.tools.part_builder.title": "Konstruktor części",
     "advancements.modernfoundry.tools.part_builder.description": "Wytwórz konstruktor części, twój pierwszy krok do składania narzędzi",
     "advancements.modernfoundry.tools.make_part.title": "Części narzędzi",
     "advancements.modernfoundry.tools.make_part.description": "Wytwórz swoją pierwszą część z pomocą szablonu i odrobiny materiału w konstruktorze części",
-    "advancements.modernfoundry.tools.tinker_station.title": "Stacja Modern Foundry",
-    "advancements.modernfoundry.tools.tinker_station.description": "Wytwórz stację Modern Foundry aby połączyć części w jedną całość",
-    "advancements.modernfoundry.tools.tinker_tool.title": "Modern Foundry-nowicjusz",
+    "advancements.modernfoundry.tools.tinker_station.title": "Stacja majsterkowania",
+    "advancements.modernfoundry.tools.tinker_station.description": "Wytwórz stację majsterkowania aby połączyć części w jedną całość",
+    "advancements.modernfoundry.tools.tinker_tool.title": "Majsterkowiec-nowicjusz",
     "advancements.modernfoundry.tools.tinker_tool.description": "Złóż swoje pierwsze narzędzie",
     "advancements.modernfoundry.tools.modified.title": "Modyfikacje",
     "advancements.modernfoundry.tools.modified.description": "Nałóż jakąś modyfikację na swoje narzędzie",
@@ -1869,8 +1869,8 @@
     "advancements.modernfoundry.smeltery.structure.title": "Zaawansowane przetapianie",
     "advancements.modernfoundry.smeltery.structure.description": "Wytwórz kontroler pieca metalurgicznego odlewając go z miedzi, zbuduj piec metalurgiczny i otwórz jego interfejs",
     "advancements.modernfoundry.smeltery.tinkers_anvil.title": "Zaawansowane wytwarzanie narzędzi",
-    "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Wytwórz kowadło Modern Foundry ze stopów pochodzących z pieca metalurgicznego",
-    "advancements.modernfoundry.smeltery.tool_forge.title": "Mistrz Modern Foundry",
+    "advancements.modernfoundry.smeltery.tinkers_anvil.description": "Wytwórz kowadło majsterkowicza ze stopów pochodzących z pieca metalurgicznego",
+    "advancements.modernfoundry.smeltery.tool_forge.title": "Mistrz majsterkowania",
     "advancements.modernfoundry.smeltery.tool_forge.description": "Odlej po jednym z każdego dużego narzędzia",
     "advancements.modernfoundry.smeltery.abilities.title": "Mistrz umiejętności",
     "advancements.modernfoundry.smeltery.abilities.description": "Zastosuj każdą dostępną umiejętność przynajmniej raz",
@@ -1890,8 +1890,8 @@
     "advancements.modernfoundry.foundry.encyclopedia.description": "Wytwórz encyklopedię materiałów - książkę zbierającą całą dostępną wiedzę",
 
     "_comment": "Gadget Advancements",
-    "advancements.modernfoundry.world.tinkers_gadgetry.title": "Gadżety Modern Foundry",
-    "advancements.modernfoundry.world.tinkers_gadgetry.description": "Wytwórz \"Gadżety Modern Foundry\" i rozpocznij zwiedzanie świata",
+    "advancements.modernfoundry.world.tinkers_gadgetry.title": "Gadżety majsterkowicza",
+    "advancements.modernfoundry.world.tinkers_gadgetry.description": "Wytwórz \"Gadżety majsterkowicza\" i rozpocznij zwiedzanie świata",
     "advancements.modernfoundry.world.earth_island.title": "Szlamowa wyspa",
     "advancements.modernfoundry.world.earth_island.description": "Zlokalizuj szlamową wyspę na oceanie",
     "advancements.modernfoundry.world.sky_island.title": "Podniebna szlamowa wyspa",

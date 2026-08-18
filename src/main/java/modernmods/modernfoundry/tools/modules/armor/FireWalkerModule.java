@@ -9,7 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.modules.ModifierModule;
@@ -35,7 +35,7 @@ public record FireWalkerModule(LevelingValue radius) implements ModifierModule, 
   @Override
   public boolean walkOn(IToolStackView tool, ModifierEntry entry, LivingEntity living, Level world, BlockPos target, MutableBlockPos mutable, Void context) {
     if (BaseFireBlock.canBePlacedAt(world, target, living.getDirection())) {
-      world.playSound(null, target, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, living.level().random.nextFloat() * 0.4F + 0.8F);
+      world.playSound(null, target, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, living.level().getRandom().nextFloat() * 0.4F + 0.8F);
       world.setBlock(target, BaseFireBlock.getState(world, target), Block.UPDATE_ALL_IMMEDIATE);
       ToolDamageUtil.damageAnimated(tool, 1, living, EquipmentSlot.FEET, entry.getId());
     }

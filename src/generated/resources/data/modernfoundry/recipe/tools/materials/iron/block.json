@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/iron/block",
-  "ingredient": {
-    "tag": "c:storage_blocks/iron"
-  },
+  "ingredient": "#c:storage_blocks/iron",
   "leftover": {
     "count": 1,
     "tag": "c:ingots/iron"

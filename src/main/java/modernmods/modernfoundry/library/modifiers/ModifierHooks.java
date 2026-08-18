@@ -2,17 +2,17 @@ package modernmods.modernfoundry.library.modifiers;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.BreakSpeed;
-import modernmods.hilt.data.registry.IdAwareComponentRegistry;
+import modernmods.mantle.data.registry.IdAwareComponentRegistry;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
 import modernmods.modernfoundry.library.modifiers.hook.armor.ArmorWalkModifierHook;
@@ -422,12 +422,12 @@ public class ModifierHooks {
   /* Registration */
 
   /** Registers a new modifier hook */
-  public static <T> ModuleHook<T> register(ResourceLocation name, Class<T> filter, @Nullable Function<Collection<T>,T> merger, T defaultInstance) {
+  public static <T> ModuleHook<T> register(Identifier name, Class<T> filter, @Nullable Function<Collection<T>,T> merger, T defaultInstance) {
     return LOADER.register(new ModuleHook<>(name, filter, merger, defaultInstance));
   }
 
   /** Registers a new unmergable modifier hook */
-  public static <T> ModuleHook<T> register(ResourceLocation name, Class<T> filter, T defaultInstance) {
+  public static <T> ModuleHook<T> register(Identifier name, Class<T> filter, T defaultInstance) {
     return register(name, filter, null, defaultInstance);
   }
 

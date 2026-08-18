@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/slimeskin/composite/ichor",
   "fluid": {
     "amount": 250,
     "tag": "modernfoundry:ichor"
   },
+  "id": "modernfoundry:tools/materials/slimeskin/composite/ichor",
   "input": "modernfoundry:leather",
   "output": "modernfoundry:ichorskin",
   "temperature": 700

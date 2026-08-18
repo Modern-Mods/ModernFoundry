@@ -9,8 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.DyeColor;
@@ -26,7 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
-import modernmods.hilt.util.DataLoadedConditionContext;
+import modernmods.mantle.util.DataLoadedConditionContext;
 import modernmods.modernfoundry.TConstruct;
 
 import javax.annotation.Nullable;
@@ -83,18 +82,18 @@ public class Util {
    * @param name  Object name
    * @return  Translation key
    */
-  public static String makeTranslationKey(String base, @Nullable ResourceLocation name) {
-    return net.minecraft.Util.makeDescriptionId(base, name);
+  public static String makeTranslationKey(String base, @Nullable Identifier name) {
+    return net.minecraft.util.Util.makeDescriptionId(base, name);
   }
 
   /**
-   * Makes a translatable component for the given name, using {@link #makeTranslationKey(String, ResourceLocation)}.
+   * Makes a translatable component for the given name, using {@link #makeTranslationKey(String, Identifier)}.
    * @param base       Base name, such as "block" or "gui"
    * @param name       Object name
    * @param arguments  Arguments for translated component
    * @return  Translated component
    */
-  public static Component makeTranslation(String base, @Nullable ResourceLocation name, Object... arguments) {
+  public static Component makeTranslation(String base, @Nullable Identifier name, Object... arguments) {
     return Component.translatable(makeTranslationKey(base, name), arguments);
   }
 
@@ -161,7 +160,7 @@ public class Util {
   public static Direction directionFromOffset(BlockPos pos, BlockPos neighbor) {
     BlockPos offset = neighbor.subtract(pos);
     for (Direction direction : Direction.values()) {
-      if (direction.getNormal().equals(offset)) {
+      if (direction.getUnitVec3i().equals(offset)) {
         return direction;
       }
     }

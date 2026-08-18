@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/scorched/pane_soul",
   "byproducts": [
     {
       "amount": 250,
       "fluid": "modernfoundry:liquid_soul"
     }
   ],
-  "ingredient": {
-    "item": "modernfoundry:scorched_soul_glass_pane"
-  },
+  "id": "modernfoundry:smeltery/melting/scorched/pane_soul",
+  "ingredient": "modernfoundry:scorched_soul_glass_pane",
   "result": {
     "amount": 250,
     "fluid": "modernfoundry:scorched_stone"

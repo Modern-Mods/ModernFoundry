@@ -1,21 +1,19 @@
 {
-  "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/fiery/block",
-  "cast": {
-    "tag": "c:storage_blocks/iron"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/fiery"
     }
   ],
+  "type": "modernfoundry:casting_basin",
+  "cast": "#c:storage_blocks/iron",
+  "cast_consumed": true,
   "cooling_time": 401,
   "fluid": {
     "amount": 2250,
     "tag": "modernfoundry:fiery_liquid"
   },
+  "id": "modernfoundry:smeltery/casting/fiery/block",
   "result": {
     "tag": "c:storage_blocks/fiery"
   }

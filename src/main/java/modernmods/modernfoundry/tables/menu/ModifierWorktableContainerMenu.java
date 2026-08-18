@@ -7,9 +7,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.util.sync.LambdaDataSlot;
+import modernmods.mantle.util.sync.LambdaDataSlot;
 import modernmods.modernfoundry.tables.TinkerTables;
 import modernmods.modernfoundry.tables.block.entity.table.ModifierWorktableBlockEntity;
 import modernmods.modernfoundry.tables.menu.slot.ArmorSlot;
@@ -57,10 +57,10 @@ public class ModifierWorktableContainerMenu extends TabbedContainerMenu<Modifier
     }
 
     // add armor and offhand slots, for convenience
-    for (ArmorItem.Type slotType : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
+    for (ArmorType slotType : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
       this.addSlot(new ArmorSlot(inv, slotType.getSlot(), 152, 16 + slotType.ordinal() * 18));
     }
-    this.addSlot(new Slot(inv, 40, 132, 70).setBackground(InventoryMenu.BLOCK_ATLAS, InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD));
+    this.addSlot(new Slot(inv, 40, 132, 70).setBackground(InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD));
 
     // other inventories
     this.addChestSideInventory();

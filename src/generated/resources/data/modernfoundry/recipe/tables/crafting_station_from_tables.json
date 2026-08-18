@@ -1,18 +1,12 @@
 {
-  "type": "hilt:crafting_shaped_retextured",
+  "type": "mantle:crafting_shaped_retextured",
   "category": "misc",
   "key": {
-    "p": {
-      "item": "modernfoundry:pattern"
-    },
+    "p": "modernfoundry:pattern",
     "w": {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "modernfoundry:tables"
-      },
-      "subtracted": {
-        "item": "modernfoundry:crafting_station"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#modernfoundry:tables",
+      "subtracted": "modernfoundry:crafting_station"
     }
   },
   "match_all": false,
@@ -23,6 +17,5 @@
   "result": {
     "id": "modernfoundry:crafting_station"
   },
-  "show_notification": true,
   "texture": "w"
 }

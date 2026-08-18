@@ -12,9 +12,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.fluid.FluidTransferHelper;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.fluid.FluidTransferHelper;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -61,13 +63,15 @@ public record TankInteractionModule(@Nullable InteractionSource source) implemen
       return InteractionResult.PASS;
     }
     Direction face = context.getClickedFace();
-    IFluidHandler cap = world.getCapability(Capabilities.FluidHandler.BLOCK, target, world.getBlockState(target), te, face);
-    if (cap == null) {
+    ResourceHandler<FluidResource> capHandler = world.getCapability(Capabilities.Fluid.BLOCK, target, world.getBlockState(target), te, face);
+    if (capHandler == null) {
       return InteractionResult.PASS;
     }
+    // adapt to the legacy fill/drain interface so the existing transfer flow below is preserved
+    IFluidHandler cap = IFluidHandler.of(capHandler);
 
     // only the server needs to deal with actually handling stuff
-    if (!world.isClientSide) {
+    if (!world.isClientSide()) {
       Player player = context.getPlayer();
       boolean sneaking = player != null && player.isShiftKeyDown();
       FluidStack fluidStack = TANK_HELPER.getFluid(tool);
@@ -93,7 +97,7 @@ public record TankInteractionModule(@Nullable InteractionSource source) implemen
       } else {
         // filter drained to be the same as the current fluid
         FluidStack drained = cap.drain(fluidStack.copyWithAmount(TANK_HELPER.getCapacity(tool) - fluidStack.getAmount()), FluidAction.EXECUTE);
-        if (!drained.isEmpty() && drained.isFluidEqual(fluidStack)) {
+        if (!drained.isEmpty() && FluidStack.isSameFluidSameComponents(drained, fluidStack)) {
           fluidStack.grow(drained.getAmount());
           TANK_HELPER.setFluid(tool, fluidStack);
           sound = FluidTransferHelper.getFillSound(fluidStack);
@@ -103,6 +107,6 @@ public record TankInteractionModule(@Nullable InteractionSource source) implemen
         world.playSound(null, target, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
       }
     }
-    return InteractionResult.sidedSuccess(world.isClientSide);
+    return InteractionResult.SUCCESS;
   }
 }

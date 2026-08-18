@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.tools.modules;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.client.TooltipKey;
+import modernmods.mantle.client.TooltipKey;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.hook.interaction.InteractionSource;
 import modernmods.modernfoundry.library.tools.capability.inventory.ToolInventoryCapability;
@@ -25,7 +25,7 @@ public interface InventorySelectionModule {
    * Helper to call in {@link modernmods.modernfoundry.library.modifiers.hook.interaction.GeneralInteractionModifierHook#onToolUse(IToolStackView, ModifierEntry, Player, InteractionHand, InteractionSource)}
    * or {@link modernmods.modernfoundry.library.modifiers.hook.interaction.KeybindInteractModifierHook#startInteract(IToolStackView, ModifierEntry, Player, EquipmentSlot, TooltipKey)}
    */
-  default boolean selectNext(IToolStackView tool, ModifierEntry modifier, Player player, ResourceLocation selectedSlot) {
+  default boolean selectNext(IToolStackView tool, ModifierEntry modifier, Player player, Identifier selectedSlot) {
     // first, find the new number
     ModDataNBT data = tool.getPersistentData();
     InventoryModifierHook inventory = modifier.getHook(ToolInventoryCapability.HOOK);
@@ -40,7 +40,7 @@ public interface InventorySelectionModule {
 
     // display a message about what is now selected
     if (newSelected != current) {
-      if (!player.level().isClientSide) {
+      if (!player.level().isClientSide()) {
         data.putInt(selectedSlot, newSelected);
         if (newSelected == totalSlots) {
           onDisableSelection(tool, modifier, player);

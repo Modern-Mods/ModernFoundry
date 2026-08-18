@@ -1,25 +1,25 @@
 {
-  "type": "modernfoundry:alloy",
-  "id": "modernfoundry:smeltery/alloys/molten_signalum",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/signalum"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/copper"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/silver"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "registry": "minecraft:fluid",
       "tag": "c:redstone"
     }
   ],
+  "type": "modernfoundry:alloy",
+  "id": "modernfoundry:smeltery/alloys/molten_signalum",
   "inputs": [
     {
       "amount": 270,

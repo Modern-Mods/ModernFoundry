@@ -1,13 +1,13 @@
 package modernmods.modernfoundry.library.json.variable.stat;
 
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent.BreakSpeed;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.registry.GenericLoaderRegistry;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.registry.GenericLoaderRegistry;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
 import modernmods.modernfoundry.library.json.variable.VariableLoaderRegistry;
 import modernmods.modernfoundry.library.json.variable.mining.MiningSpeedVariable;
 import modernmods.modernfoundry.library.modifiers.hook.mining.BreakSpeedContext;
@@ -42,7 +42,7 @@ public interface ConditionalStatVariable extends IHaveLoader, MiningSpeedVariabl
 
 
   /** Registers a variable with conditional stat and mining speed */
-  static void register(ResourceLocation name, RecordLoadable<? extends ConditionalStatVariable> loader) {
+  static void register(Identifier name, RecordLoadable<? extends ConditionalStatVariable> loader) {
     LOADER.register(name, loader);
     MiningSpeedVariable.LOADER.register(name, loader);
   }

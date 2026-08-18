@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wood/bamboo/block",
-  "ingredient": {
-    "tag": "minecraft:bamboo_blocks"
-  },
+  "ingredient": "#minecraft:bamboo_blocks",
   "material": "modernfoundry:bamboo",
   "needed": 1,
   "value": 1

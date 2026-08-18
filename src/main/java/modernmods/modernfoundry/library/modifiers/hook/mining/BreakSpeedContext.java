@@ -68,7 +68,7 @@ public sealed interface BreakSpeedContext {
       modifier *= 1.0F + (MobEffectUtil.getDigSpeedAmplification(entity) + 1) * 0.2f;
     }
     // mining fatigue
-    MobEffectInstance miningFatigue = entity.getEffect(MobEffects.DIG_SLOWDOWN);
+    MobEffectInstance miningFatigue = entity.getEffect(MobEffects.MINING_FATIGUE);
     if (miningFatigue != null) {
       switch (miningFatigue.getAmplifier()) {
         case 0 -> modifier *= 0.3F;
@@ -89,7 +89,7 @@ public sealed interface BreakSpeedContext {
 
   /** Checks for aqua affinity on the entity helmet. */
   private static boolean hasAquaAffinity(LivingEntity entity) {
-    Holder<Enchantment> aquaAffinity = entity.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.AQUA_AFFINITY);
+    Holder<Enchantment> aquaAffinity = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.AQUA_AFFINITY);
     return entity.getItemBySlot(EquipmentSlot.HEAD).getEnchantmentLevel(aquaAffinity) > 0;
   }
 

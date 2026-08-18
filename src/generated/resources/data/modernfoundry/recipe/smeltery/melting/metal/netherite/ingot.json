@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/netherite/ingot",
-  "ingredient": {
-    "tag": "c:ingots/netherite"
-  },
+  "ingredient": "#c:ingots/netherite",
   "result": {
     "amount": 90,
     "tag": "c:molten_netherite"

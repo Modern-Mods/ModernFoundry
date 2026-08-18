@@ -1,21 +1,19 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/rose_gold/coin_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/coin"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:coins/rose_gold"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#modernfoundry:casts/single_use/coin",
+  "cast_consumed": true,
   "cooling_time": 30,
   "fluid": {
     "amount": 30,
     "tag": "c:molten_rose_gold"
   },
+  "id": "modernfoundry:smeltery/casting/metal/rose_gold/coin_sand_cast",
   "result": {
     "tag": "c:coins/rose_gold"
   }

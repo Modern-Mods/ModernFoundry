@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.json.variable.tool;
 
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
 import modernmods.modernfoundry.library.tools.nbt.IModDataView;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 

@@ -1,23 +1,23 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/slimeball",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/slimeball",
   "inputs": [
     {
-      "item": "modernfoundry:sky_slime_vine"
+      "ingredient": "modernfoundry:sky_slime_vine"
     },
     {
-      "tag": "c:ingots/slimesteel"
+      "ingredient": "#c:ingots/slimesteel"
     },
     {
-      "item": "modernfoundry:sky_slime_vine"
+      "ingredient": "modernfoundry:sky_slime_vine"
     },
     {
-      "tag": "modernfoundry:slimy_logs"
+      "ingredient": "#modernfoundry:slimy_logs"
     },
     {
-      "tag": "modernfoundry:slimy_logs"
+      "ingredient": "#modernfoundry:slimy_logs"
     }
   ],
   "level": 1,
@@ -25,7 +25,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/staffs"
-  }
+  "tools": "#modernfoundry:modifiable/staffs"
 }

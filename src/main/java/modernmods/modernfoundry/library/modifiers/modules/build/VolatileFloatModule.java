@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.library.modifiers.modules.build;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -29,14 +29,14 @@ import java.util.List;
  * @see VolatileFlagModule
  * @see VolatileIntModule
  */
-public record VolatileFloatModule(ResourceLocation flag, LevelingValue value, ModifierCondition<IToolContext> condition) implements VolatileDataModifierHook, ProjectileLaunchModifierHook, ModifierModule, ConditionalModule<IToolContext> {
+public record VolatileFloatModule(Identifier flag, LevelingValue value, ModifierCondition<IToolContext> condition) implements VolatileDataModifierHook, ProjectileLaunchModifierHook, ModifierModule, ConditionalModule<IToolContext> {
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<VolatileFloatModule>defaultHooks(ModifierHooks.VOLATILE_DATA);
   public static final RecordLoadable<VolatileFloatModule> LOADER = RecordLoadable.create(
     Loadables.RESOURCE_LOCATION.requiredField("flag", VolatileFloatModule::flag),
     LevelingValue.LOADABLE.directField(VolatileFloatModule::value),
     ModifierCondition.CONTEXT_FIELD, VolatileFloatModule::new);
 
-  public VolatileFloatModule(ResourceLocation flag, LevelingValue value) {
+  public VolatileFloatModule(Identifier flag, LevelingValue value) {
     this(flag, value, ModifierCondition.ANY_CONTEXT);
   }
 

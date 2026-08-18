@@ -1,11 +1,11 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/metal/slimesteel/block",
   "cooling_time": 190,
   "fluid": {
     "amount": 810,
     "tag": "modernfoundry:molten_slimesteel"
   },
+  "id": "modernfoundry:smeltery/casting/metal/slimesteel/block",
   "result": {
     "tag": "c:storage_blocks/slimesteel"
   }

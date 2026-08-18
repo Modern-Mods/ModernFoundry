@@ -1,16 +1,15 @@
 package modernmods.modernfoundry.tables.client.inventory;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import modernmods.hilt.client.screen.ElementScreen;
-import modernmods.hilt.client.screen.MultiModuleScreen;
+import modernmods.mantle.client.screen.ElementScreen;
+import modernmods.mantle.client.screen.MultiModuleScreen;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.GuiUtil;
 import modernmods.modernfoundry.library.client.Icons;
@@ -28,8 +27,8 @@ public class BaseTabbedScreen<TILE extends BlockEntity, CONTAINER extends Tabbed
   protected static final Component COMPONENT_WARNING = TConstruct.makeTranslation("gui", "warning");
   protected static final Component COMPONENT_ERROR = TConstruct.makeTranslation("gui", "error");
 
-  public static final ResourceLocation BLANK_BACK = TConstruct.getResource("textures/gui/blank.png");
-  public static final ResourceLocation BLANK_BACK_PLUS_1 = TConstruct.getResource("textures/gui/blank_extra_row.png");
+  public static final Identifier BLANK_BACK = TConstruct.getResource("textures/gui/blank.png");
+  public static final Identifier BLANK_BACK_PLUS_1 = TConstruct.getResource("textures/gui/blank_extra_row.png");
 
   @Nullable
   protected final TILE tile;
@@ -39,6 +38,10 @@ public class BaseTabbedScreen<TILE extends BlockEntity, CONTAINER extends Tabbed
     super(container, playerInventory, title);
     this.tile = container.getTile();
   }
+
+  /** Tinkers panels are opaque; do not darken them with the in-world screen overlay. */
+  @Override
+  public void extractTransparentBackground(GuiGraphicsExtractor graphics) {}
 
   @Override
   protected void init() {
@@ -52,12 +55,12 @@ public class BaseTabbedScreen<TILE extends BlockEntity, CONTAINER extends Tabbed
     return this.tile;
   }
 
-  protected void drawIcon(GuiGraphics graphics, Slot slot, ElementScreen element) {
-    RenderSystem.setShaderTexture(0, Icons.ICONS);
+  protected void drawIcon(GuiGraphicsExtractor graphics, Slot slot, ElementScreen element) {
+    // 26.1: ElementScreen.draw binds its own texture; RenderSystem.setShaderTexture removed
     element.draw(graphics, slot.x + this.cornerX - 1, slot.y + this.cornerY - 1);
   }
 
-  protected void drawIconEmpty(GuiGraphics graphics, Slot slot, ElementScreen element) {
+  protected void drawIconEmpty(GuiGraphicsExtractor graphics, Slot slot, ElementScreen element) {
     if (slot.hasItem()) {
       return;
     }
@@ -65,7 +68,7 @@ public class BaseTabbedScreen<TILE extends BlockEntity, CONTAINER extends Tabbed
     this.drawIcon(graphics, slot, element);
   }
 
-  protected void drawIconEmpty(GuiGraphics graphics, Slot slot, Pattern pattern) {
+  protected void drawIconEmpty(GuiGraphicsExtractor graphics, Slot slot, Pattern pattern) {
     if (!slot.hasItem()) {
       GuiUtil.renderPattern(graphics, pattern, slot.x + this.cornerX, slot.y + this.cornerY);
     }
@@ -109,8 +112,8 @@ public class BaseTabbedScreen<TILE extends BlockEntity, CONTAINER extends Tabbed
   }
 
   @Override
-  protected boolean hasClickedOutside(double mouseX, double mouseY, int guiLeft, int guiTop, int mouseButton) {
-    return super.hasClickedOutside(mouseX, mouseY, guiLeft, guiTop, mouseButton)
+  protected boolean hasClickedOutside(double mouseX, double mouseY, int guiLeft, int guiTop) {
+    return super.hasClickedOutside(mouseX, mouseY, guiLeft, guiTop)
       && !tabsScreen.isMouseOver(mouseX, mouseY);
   }
 }

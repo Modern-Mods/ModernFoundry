@@ -43,7 +43,7 @@ public class MaterialBlock extends Block implements EntityBlock {
   }
 
   @Override
-  public ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state) {
+  public ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
     ItemStack stack = new ItemStack(state.getBlock());
     if (level.getBlockEntity(pos) instanceof MaterialBlockEntity be) {
       stack = IMaterialItem.withMaterial(stack, be.getMaterial());

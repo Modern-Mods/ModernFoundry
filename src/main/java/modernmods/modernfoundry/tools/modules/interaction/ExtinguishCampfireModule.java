@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.hook.interaction.InteractionSource;
 import modernmods.modernfoundry.library.modifiers.modules.behavior.BlockTransformModule;
@@ -52,7 +52,7 @@ public record ExtinguishCampfireModule(ModifierCondition<IToolStackView> conditi
     if (original.getBlock() instanceof CampfireBlock && original.getValue(CampfireBlock.LIT)) {
       Level level = context.getLevel();
       BlockPos pos = context.getClickedPos();
-      if (!level.isClientSide) {
+      if (!level.isClientSide()) {
         if (playSound) {
           level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0F, 1.0F);
         }

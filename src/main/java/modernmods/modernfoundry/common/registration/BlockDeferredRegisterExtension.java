@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.registration.deferred.BlockDeferredRegister;
+import modernmods.mantle.registration.deferred.BlockDeferredRegister;
 import modernmods.modernfoundry.common.registration.GeodeItemObject.BudSize;
 
 import java.util.Map;

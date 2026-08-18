@@ -1,15 +1,12 @@
 package modernmods.modernfoundry.library.client.modifiers;
 
 import com.mojang.math.Transformation;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.Accessors;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.ItemLayerPixels;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.ItemLayerPixels;
 import modernmods.modernfoundry.common.config.Config;
 import modernmods.modernfoundry.library.client.materials.MaterialRenderInfo;
 import modernmods.modernfoundry.library.client.materials.MaterialRenderInfoLoader;
@@ -31,9 +28,6 @@ import java.util.function.Function;
  * Model for a modifier that has variants based on a material
  * TODO 1.21: move to {@link modernmods.modernfoundry.library.modifiers.modules}
  */
-@Getter
-@Accessors(fluent = true)
-@RequiredArgsConstructor
 public class MaterialModifierModel implements SimpleModifierModel {
   public static final RecordLoadable<MaterialModifierModel> LOADER = SimpleModifierModel.loader(MaterialModifierModel::new);
   /** Fetches relevant material textures after checking if the texture exists */
@@ -42,7 +36,7 @@ public class MaterialModifierModel implements SimpleModifierModel {
     Material baseTexture = textureGetter.apply("");
     if (baseTexture != null) {
       for (MaterialRenderInfo info : MaterialRenderInfoLoader.INSTANCE.getAllRenderInfos()) {
-        ResourceLocation texture = info.texture();
+        Identifier texture = info.texture();
         if (texture != null) {
           textureGetter.apply("_" + MaterialRenderInfo.getSuffix(texture));
         }
@@ -70,6 +64,23 @@ public class MaterialModifierModel implements SimpleModifierModel {
   @Nullable
   private final Material large;
 
+  public MaterialModifierModel(@Nullable Material small, @Nullable Material large) {
+    this.small = small;
+    this.large = large;
+  }
+
+  @Nullable
+  @Override
+  public Material small() {
+    return small;
+  }
+
+  @Nullable
+  @Override
+  public Material large() {
+    return large;
+  }
+
   @Override
   public RecordLoadable<? extends ModifierModel> getLoader() {
     return LOADER;
@@ -90,12 +101,12 @@ public class MaterialModifierModel implements SimpleModifierModel {
   @Override
   public Object getCacheKey(IToolStackView tool, ModifierEntry entry) {
     ModifierId modifier = entry.getId();
-    return new CacheKey(modifier, tool.getPersistentData().getString(modifier));
+    return new CacheKey(modifier, tool.getPersistentData().getString(modifier.getIdentifier()));
   }
 
   @Nullable
   private static MaterialVariantId getMaterial(IToolStackView tool, Modifier modifier) {
-    String material = tool.getPersistentData().getString(modifier.getId());
+    String material = tool.getPersistentData().getString(modifier.getId().getIdentifier());
     if (!material.isEmpty()) {
       return MaterialVariantId.tryParse(material);
     }

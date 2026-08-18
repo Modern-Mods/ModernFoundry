@@ -1,5 +1,5 @@
 {
-	"loader": "hilt:item_layer",
+	"loader": "mantle:item_layer",
   "parent": "neoforge:item/default",
     "textures": {
         "layer0": "modernfoundry:item/materials/queens_slime_ingot"

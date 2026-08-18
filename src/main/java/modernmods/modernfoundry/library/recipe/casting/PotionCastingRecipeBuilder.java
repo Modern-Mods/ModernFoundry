@@ -5,17 +5,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 
@@ -32,7 +32,7 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
   @Nullable
   private final ModifierId modifier;
   private final TypeAwareRecipeSerializer<? extends PotionCastingRecipe> recipeSerializer;
-  private Ingredient bottle = Ingredient.EMPTY;
+  @javax.annotation.Nullable private Ingredient bottle = null;
   private FluidIngredient fluid = FluidIngredient.EMPTY;
   @Setter @Accessors(chain = true)
   private int coolingTime = 5;
@@ -50,7 +50,7 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
    * @return  Builder instance
    */
   public static PotionCastingRecipeBuilder basinRecipe(ItemLike result) {
-    return castingRecipe(result, TinkerSmeltery.basinPotionRecipeSerializer.get());
+    return castingRecipe(result, TinkerSmeltery.basinPotionRecipeSerializer);
   }
 
   /**
@@ -59,7 +59,7 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
    * @return  Builder instance
    */
   public static PotionCastingRecipeBuilder tableRecipe(ItemLike result) {
-    return castingRecipe(result, TinkerSmeltery.tablePotionRecipeSerializer.get());
+    return castingRecipe(result, TinkerSmeltery.tablePotionRecipeSerializer);
   }
 
 
@@ -76,7 +76,7 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
    * @return  Builder instance
    */
   public static PotionCastingRecipeBuilder basinTipping(ModifierId modifier) {
-    return tippingRecipe(modifier, TinkerSmeltery.basinTippingRecipeSerializer.get());
+    return tippingRecipe(modifier, TinkerSmeltery.basinTippingRecipeSerializer);
   }
 
   /**
@@ -85,7 +85,7 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
    * @return  Builder instance
    */
   public static PotionCastingRecipeBuilder tableTipping(ModifierId modifier) {
-    return tippingRecipe(modifier, TinkerSmeltery.tableTippingRecipeSerializer.get());
+    return tippingRecipe(modifier, TinkerSmeltery.tableTippingRecipeSerializer);
   }
 
   /**
@@ -94,7 +94,7 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
    * @return  Builder instance
    */
   public static PotionCastingRecipeBuilder basinClearing(ModifierId modifier) {
-    return tippingRecipe(modifier, TinkerSmeltery.basinTipClearingRecipeSerializer.get());
+    return tippingRecipe(modifier, TinkerSmeltery.basinTipClearingRecipeSerializer);
   }
 
   /**
@@ -103,7 +103,7 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
    * @return  Builder instance
    */
   public static PotionCastingRecipeBuilder tableClearing(ModifierId modifier) {
-    return tippingRecipe(modifier, TinkerSmeltery.tableTipClearingRecipeSerializer.get());
+    return tippingRecipe(modifier, TinkerSmeltery.tableTipClearingRecipeSerializer);
   }
 
 
@@ -138,7 +138,7 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
    * @return  Builder instance
    */
   public PotionCastingRecipeBuilder setBottle(TagKey<Item> tagIn) {
-    return this.setBottle(Ingredient.of(tagIn));
+    return this.setBottle(modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(tagIn));
   }
 
   /**
@@ -170,14 +170,14 @@ public class PotionCastingRecipeBuilder extends AbstractRecipeBuilder<PotionCast
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (this.fluid == FluidIngredient.EMPTY) {
       throw new IllegalStateException("Casting recipes require a fluid input");
     }
     if (this.coolingTime < 0) {
       throw new IllegalStateException("Cooling time is too low, must be at least 0");
     }
-    ResourceLocation advancementId = this.buildOptionalAdvancement(id, "casting");
+    Identifier advancementId = this.buildOptionalAdvancement(id, "casting");
     if (modifier != null) {
       consumer.accept(new LoadableFinishedRecipe<>(id, new TippingCastingRecipe(recipeSerializer, id, group, bottle, fluid, coolingTime, modifier), TippingCastingRecipe.LOADER, advancementId));
     } else {

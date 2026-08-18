@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/wood/logs/oak",
-  "ingredient": {
-    "tag": "minecraft:oak_logs"
-  },
+  "ingredient": "#minecraft:oak_logs",
   "leftover": "minecraft:oak_planks",
   "material": "modernfoundry:wood",
   "needed": 1,

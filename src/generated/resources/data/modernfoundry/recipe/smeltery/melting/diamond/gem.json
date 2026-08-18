@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/diamond/gem",
-  "ingredient": {
-    "tag": "c:gems/diamond"
-  },
+  "ingredient": "#c:gems/diamond",
   "result": {
     "amount": 100,
     "fluid": "modernfoundry:molten_diamond"

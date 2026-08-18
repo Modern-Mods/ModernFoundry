@@ -5,12 +5,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.AbstractArrow.Pickup;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow.Pickup;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -21,11 +21,11 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
-import modernmods.hilt.util.TranslationHelper;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
+import modernmods.mantle.util.TranslationHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -65,15 +65,15 @@ public enum SmashingModule implements ModifierModule, FluidModifierHook, Project
   INSTANCE;
 
   /** Key storing current fluid */
-  private static final ResourceLocation KEY_FLUID = TConstruct.getResource("smashing_fluid");
+  private static final Identifier KEY_FLUID = TConstruct.getResource("smashing_fluid");
   /** Key storing current fluid tag, if present */
-  private static final ResourceLocation KEY_FLUID_TAG = TConstruct.getResource("smashing_fluid_tag");
+  private static final Identifier KEY_FLUID_TAG = TConstruct.getResource("smashing_fluid_tag");
   /** Key storing amount, only used on projectile data */
-  private static final ResourceLocation KEY_AMOUNT = TConstruct.getResource("smashing_amount");
+  private static final Identifier KEY_AMOUNT = TConstruct.getResource("smashing_amount");
   /** Key storing validation constant, ensures part swapping doesn't cause issues. Used only on the tool. */
-  private static final ResourceLocation KEY_VALIDATE = TConstruct.getResource("smashing_validate");
+  private static final Identifier KEY_VALIDATE = TConstruct.getResource("smashing_validate");
   /** Projectile boolean marking that a fluid effect happened */
-  private static final ResourceLocation KEY_USED = TConstruct.getResource("smashing_used");
+  private static final Identifier KEY_USED = TConstruct.getResource("smashing_used");
   private static final String FORMAT = TConstruct.makeTranslationKey("modifier", "smashing.format");
   private static final Component EMPTY_TO_SWAP = TConstruct.makeTranslation("modifier", "smashing.empty_to_swap");
   private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<SmashingModule>defaultHooks(ToolFluidCapability.HOOK, ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.PROJECTILE_SHOT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.PROJECTILE_FUSE, ModifierHooks.VOLATILE_DATA, ModifierHooks.VALIDATE, ModifierHooks.REMOVE, ModifierHooks.DISPLAY_NAME, ModifierHooks.TOOLTIP);
@@ -111,10 +111,10 @@ public enum SmashingModule implements ModifierModule, FluidModifierHook, Project
 
   /** Gets the fluid from the given mod data */
   private static Fluid getFluid(IModDataView data) {
-    if (data.contains(KEY_FLUID, Tag.TAG_STRING)) {
-      ResourceLocation id = ResourceLocation.tryParse(data.getString(KEY_FLUID));
+    if (data.contains(KEY_FLUID)) {
+      Identifier id = Identifier.tryParse(data.getString(KEY_FLUID));
       if (id != null) {
-        return BuiltInRegistries.FLUID.get(id);
+        return BuiltInRegistries.FLUID.getValue(id);
       }
     }
     return Fluids.EMPTY;
@@ -123,7 +123,7 @@ public enum SmashingModule implements ModifierModule, FluidModifierHook, Project
   /** Gets the current fluid NBT */
   @Nullable
   private static CompoundTag getFluidTag(IModDataView data) {
-    if (data.contains(KEY_FLUID_TAG, Tag.TAG_COMPOUND)) {
+    if (data.contains(KEY_FLUID_TAG)) {
       return data.getCompound(KEY_FLUID_TAG);
     }
     return null;
@@ -155,7 +155,7 @@ public enum SmashingModule implements ModifierModule, FluidModifierHook, Project
     }
     ModDataNBT data = tool.getPersistentData();
     // already has fluid? can't fill
-    if (data.contains(KEY_FLUID, Tag.TAG_STRING)) {
+    if (data.contains(KEY_FLUID)) {
       return 0;
     }
     int amount = getAmount(modifier, resource.getFluid());
@@ -274,7 +274,7 @@ public enum SmashingModule implements ModifierModule, FluidModifierHook, Project
   @Override
   public Component validate(IToolStackView tool, ModifierEntry modifier) {
     ModDataNBT data = tool.getPersistentData();
-    if (data.contains(KEY_FLUID, Tag.TAG_STRING)) {
+    if (data.contains(KEY_FLUID)) {
       // if our new level is larger, error to prevent a fluid dupe
       float level = getValidationAmount(tool, modifier);
       if (data.getInt(KEY_VALIDATE) < level) {
@@ -308,7 +308,7 @@ public enum SmashingModule implements ModifierModule, FluidModifierHook, Project
         if (amount > 0) {
           persistentData.putString(KEY_FLUID, toolData.getString(KEY_FLUID));
           persistentData.putInt(KEY_AMOUNT, amount);
-          if (toolData.contains(KEY_FLUID_TAG, Tag.TAG_COMPOUND)) {
+          if (toolData.contains(KEY_FLUID_TAG)) {
             persistentData.put(KEY_FLUID_TAG, toolData.getCompound(KEY_FLUID_TAG));
           }
         }
@@ -443,7 +443,7 @@ public enum SmashingModule implements ModifierModule, FluidModifierHook, Project
     if (fluid != Fluids.EMPTY) {
       // formats as <name> <level> (<fluid>)
       return Component.translatable(FORMAT, name,
-        TagUtil.createFluidStack(fluid, FluidValues.BOTTLE, getFluidTag(data)).getDisplayName()
+        TagUtil.createFluidStack(fluid, FluidValues.BOTTLE, getFluidTag(data)).getHoverName()
       ).withStyle(name.getStyle());
     }
     return name;
@@ -457,7 +457,7 @@ public enum SmashingModule implements ModifierModule, FluidModifierHook, Project
       int amount = getAmount(modifier, fluid);
       if (amount > 0) {
         // formats as <fluid>: <amount> mb
-        tooltip.add(modifier.getModifier().applyStyle(TagUtil.createFluidStack(fluid, amount, getFluidTag(data)).getDisplayName().copy()
+        tooltip.add(modifier.getModifier().applyStyle(TagUtil.createFluidStack(fluid, amount, getFluidTag(data)).getHoverName().copy()
           .append(": ").append(Component.translatable(ToolTankHelper.MB_FORMAT, TranslationHelper.COMMA_FORMAT.format(amount)))));
       }
     }

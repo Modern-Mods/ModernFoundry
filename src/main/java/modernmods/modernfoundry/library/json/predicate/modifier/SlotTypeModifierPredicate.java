@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.json.predicate.modifier;
 
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.recipe.modifiers.ModifierRecipeLookup;
 import modernmods.modernfoundry.library.tools.SlotType;

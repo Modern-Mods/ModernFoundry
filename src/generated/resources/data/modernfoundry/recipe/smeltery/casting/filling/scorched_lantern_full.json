@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:basin_filling",
-  "id": "modernfoundry:smeltery/casting/filling/scorched_lantern_full",
   "container": "modernfoundry:scorched_lantern",
   "fluid_amount": 50
 }

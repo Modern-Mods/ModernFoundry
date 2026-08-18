@@ -1,22 +1,17 @@
 {
   "type": "modernfoundry:crafting_shaped_materials",
-  "id": "modernfoundry:tables/seared_forge_material",
   "category": "misc",
   "key": {
     "m": {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:fake_storage_block",
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:fake_storage_block",
       "material": {
-        "type": "hilt:tag",
+        "type": "mantle:tag",
         "tag": "modernfoundry:compatibility_metals/alloys"
       }
     },
-    "s": {
-      "tag": "modernfoundry:seared_blocks"
-    },
-    "t": {
-      "item": "modernfoundry:tinker_station"
-    }
+    "s": "#modernfoundry:seared_blocks",
+    "t": "modernfoundry:tinker_station"
   },
   "parts": "m",
   "pattern": [
@@ -25,12 +20,11 @@
     "m m"
   ],
   "result": {
-    "item": "modernfoundry:tinkers_anvil",
+    "id": "modernfoundry:tinkers_anvil",
     "nbt": {
       "display": {
         "Name": "{\"translate\":\"block.modernfoundry.tool_forge\"}"
       }
     }
-  },
-  "show_notification": true
+  }
 }

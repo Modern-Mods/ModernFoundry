@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/queens_slime/ingot_sand_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/single_use/ingot"
-  },
+  "cast": "#modernfoundry:casts/single_use/ingot",
   "cast_consumed": true,
   "cooling_time": 71,
   "fluid": {
     "amount": 90,
     "tag": "modernfoundry:molten_queens_slime"
   },
+  "id": "modernfoundry:smeltery/casting/metal/queens_slime/ingot_sand_cast",
   "result": {
     "tag": "c:ingots/queens_slime"
   }

@@ -1,25 +1,21 @@
 {
   "type": "modernfoundry:modifier_set_worktable",
-  "id": "modernfoundry:tools/modifiers/worktable/invisible_ink_adding",
   "add_to_set": true,
   "allow_traits": false,
   "data_key": "modernfoundry:invisible_modifiers",
+  "id": "modernfoundry:tools/modifiers/worktable/invisible_ink_adding",
   "inputs": [
     {
-      "type": "hilt:fluid_container",
+      "neoforge:ingredient_type": "mantle:fluid_container",
       "amount": 250,
-      "display": {
-        "item": "modernfoundry:sky_slime_bottle"
-      },
+      "display": "modernfoundry:sky_slime_bottle",
       "tag": "modernfoundry:sky_slime"
     }
   ],
   "modifier_predicate": {
-    "type": "hilt:inverted",
+    "type": "mantle:inverted",
     "inverted_type": "modernfoundry:tag",
     "tag": "modernfoundry:invisible_ink_blacklist"
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable"
-  }
+  "tools": "#modernfoundry:modifiable"
 }

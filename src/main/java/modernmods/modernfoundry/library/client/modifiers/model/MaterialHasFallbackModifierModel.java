@@ -2,15 +2,14 @@ package modernmods.modernfoundry.library.client.modifiers.model;
 
 import com.google.common.collect.ImmutableSet;
 import com.mojang.math.Transformation;
-import lombok.RequiredArgsConstructor;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
-import modernmods.hilt.data.loadable.array.ArrayLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.ItemLayerPixels;
+import net.minecraft.client.resources.model.sprite.Material;
+import modernmods.mantle.data.loadable.array.ArrayLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.ItemLayerPixels;
 import modernmods.modernfoundry.library.client.materials.MaterialRenderInfoLoader;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
@@ -25,13 +24,12 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /** Modifier model that swaps variant based on the material at the given index having the given fallback. */
-@RequiredArgsConstructor
 public final class MaterialHasFallbackModifierModel implements ModifierModel, Function<MaterialVariantId, Boolean> {
   public static final RecordLoadable<MaterialHasFallbackModifierModel> LOADER = RecordLoadable.create(
-    IntLoadable.FROM_ZERO.requiredField("index", m -> m.index),
-    StringLoadable.DEFAULT.set(ArrayLoadable.COMPACT).requiredField("fallback", m -> m.fallback),
-    ModifierModel.LOADER.requiredField("if_true", m -> m.ifTrue),
-    ModifierModel.LOADER.requiredField("if_false", m -> m.ifFalse),
+    IntLoadable.FROM_ZERO.requiredField("index", (MaterialHasFallbackModifierModel m) -> m.index),
+    StringLoadable.DEFAULT.set(ArrayLoadable.COMPACT).requiredField("fallback", (MaterialHasFallbackModifierModel m) -> m.fallback),
+    ModifierModel.LOADER.requiredField("if_true", (MaterialHasFallbackModifierModel m) -> m.ifTrue),
+    ModifierModel.LOADER.requiredField("if_false", (MaterialHasFallbackModifierModel m) -> m.ifFalse),
     MaterialHasFallbackModifierModel::new);
 
   private final int index;
@@ -40,6 +38,13 @@ public final class MaterialHasFallbackModifierModel implements ModifierModel, Fu
   private final ModifierModel ifFalse;
   /** Cache of the predicate for each seen material */
   private final Map<MaterialVariantId,Boolean> cache = new HashMap<>();
+
+  public MaterialHasFallbackModifierModel(int index, Set<String> fallback, ModifierModel ifTrue, ModifierModel ifFalse) {
+    this.index = index;
+    this.fallback = fallback;
+    this.ifTrue = ifTrue;
+    this.ifFalse = ifFalse;
+  }
 
   public MaterialHasFallbackModifierModel(int index, ModifierModel ifTrue, ModifierModel ifFalse, String... fallback) {
     this(index, ImmutableSet.copyOf(fallback), ifTrue, ifFalse);

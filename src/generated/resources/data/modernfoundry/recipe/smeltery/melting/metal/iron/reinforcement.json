@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/reinforcement",
-  "ingredient": {
-    "item": "modernfoundry:iron_reinforcement"
-  },
+  "ingredient": "modernfoundry:iron_reinforcement",
   "result": {
     "amount": 90,
     "tag": "c:molten_iron"

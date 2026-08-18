@@ -1,19 +1,16 @@
 package modernmods.modernfoundry.library.client.modifiers;
 
 import com.mojang.math.Transformation;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.Accessors;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import modernmods.modernfoundry.compat.minecraft.world.item.alchemy.PotionUtils;
-import modernmods.hilt.client.model.util.HiltItemLayerModel;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.ItemLayerPixels;
+import modernmods.mantle.client.model.util.MantleItemLayerModel;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.ItemLayerPixels;
 import modernmods.modernfoundry.library.client.modifiers.model.SimpleModifierModel;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
@@ -29,9 +26,6 @@ import java.util.function.Function;
  * Modifier model that renders the textured tinted based on the active potion color.
  * TODO 1.21: move to {@link modernmods.modernfoundry.library.modifiers.modules}
  */
-@Getter
-@Accessors(fluent = true)
-@RequiredArgsConstructor
 public class PotionModifierModel implements SimpleModifierModel {
   public static final RecordLoadable<PotionModifierModel> LOADER = SimpleModifierModel.loader(PotionModifierModel::new);
   /** @deprecated legacy system, use {@link #LOADER} */
@@ -51,6 +45,23 @@ public class PotionModifierModel implements SimpleModifierModel {
   @Nullable
   private final Material large;
 
+  public PotionModifierModel(@Nullable Material small, @Nullable Material large) {
+    this.small = small;
+    this.large = large;
+  }
+
+  @Nullable
+  @Override
+  public Material small() {
+    return small;
+  }
+
+  @Nullable
+  @Override
+  public Material large() {
+    return large;
+  }
+
   @Override
   public RecordLoadable<? extends PotionModifierModel> getLoader() {
     return LOADER;
@@ -60,20 +71,20 @@ public class PotionModifierModel implements SimpleModifierModel {
   @Override
   public Object getCacheKey(IToolStackView tool, ModifierEntry entry) {
     ModifierId modifier = entry.getId();
-    return new CacheKey(modifier, tool.getPersistentData().getString(modifier));
+    return new CacheKey(modifier, tool.getPersistentData().getString(modifier.getIdentifier()));
   }
 
   @Override
   public void addQuads(IToolStackView tool, ModifierEntry modifier, Function<Material,TextureAtlasSprite> spriteGetter, Transformation transforms, boolean isLarge, int startTintIndex, Consumer<Collection<BakedQuad>> quadConsumer, @Nullable ItemLayerPixels pixels) {
     Material texture = isLarge ? large : small;
     if (texture != null) {
-      ResourceLocation key = modifier.getId();
+      Identifier key = modifier.getId().getIdentifier();
       IModDataView toolData = tool.getPersistentData();
-      if (toolData.contains(key, Tag.TAG_STRING)) {
-        ResourceLocation id = ResourceLocation.tryParse(toolData.getString(key));
+      if (toolData.contains(key)) {
+        Identifier id = Identifier.tryParse(toolData.getString(key));
         if (id != null) {
-          BuiltInRegistries.POTION.getHolder(id).ifPresent(potion ->
-            quadConsumer.accept(HiltItemLayerModel.getQuadsForSprite(0xFF000000 | PotionUtils.getColor(potion), -1, spriteGetter.apply(texture), transforms, 0, pixels)));
+          BuiltInRegistries.POTION.get(id).ifPresent(holder ->
+            quadConsumer.accept(MantleItemLayerModel.getQuadsForSprite(0xFF000000 | PotionUtils.getColor(holder), -1, new Material.Baked(spriteGetter.apply(texture), false), transforms, 0, pixels)));
         }
       }
     }

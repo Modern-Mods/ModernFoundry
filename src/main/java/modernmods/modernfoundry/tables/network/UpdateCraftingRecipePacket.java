@@ -3,13 +3,13 @@ package modernmods.modernfoundry.tables.network;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.network.packet.IThreadsafePacket;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.tables.block.entity.table.CraftingStationBlockEntity;
 
 /**
@@ -17,21 +17,21 @@ import modernmods.modernfoundry.tables.block.entity.table.CraftingStationBlockEn
  */
 public class UpdateCraftingRecipePacket implements IThreadsafePacket {
   private final BlockPos pos;
-  private final ResourceLocation recipe;
+  private final Identifier recipe;
   public UpdateCraftingRecipePacket(BlockPos pos, RecipeHolder<CraftingRecipe> recipe) {
     this.pos = pos;
-    this.recipe = recipe.id();
+    this.recipe = recipe.id().identifier();
   }
 
   public UpdateCraftingRecipePacket(FriendlyByteBuf buffer) {
     this.pos = buffer.readBlockPos();
-    this.recipe = buffer.readResourceLocation();
+    this.recipe = buffer.readIdentifier();
   }
 
   @Override
   public void encode(FriendlyByteBuf buffer) {
     buffer.writeBlockPos(pos);
-    buffer.writeResourceLocation(recipe);
+    buffer.writeIdentifier(recipe);
   }
 
   @Override
@@ -44,8 +44,9 @@ public class UpdateCraftingRecipePacket implements IThreadsafePacket {
     private static void handle(UpdateCraftingRecipePacket packet) {
       Level world = Minecraft.getInstance().level;
       if (world != null) {
-        BlockEntityHelper.get(CraftingStationBlockEntity.class, world, packet.pos).ifPresent(te ->
-          world.getRecipeManager().byKey(packet.recipe).filter(recipe -> recipe.value() instanceof CraftingRecipe).map(recipe -> (RecipeHolder<CraftingRecipe>)(RecipeHolder<?>)recipe).ifPresent(te::updateRecipe));
+        // 26.1: the full RecipeManager is no longer synced to the client, so the recipe cannot be resolved by key here
+        // (the old world.getServer().getRecipeManager() NPE'd on the client). The crafting station's visible result comes
+        // from its real synced ResultContainer, so nothing further is needed here for the result to display.
       }
     }
   }

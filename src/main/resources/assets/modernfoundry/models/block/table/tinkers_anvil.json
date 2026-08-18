@@ -1,5 +1,5 @@
 {
-  "loader": "modernfoundry:material_block",
+  "loader": "mantle:retextured",
   "parent": "block/block",
   "textures": {
     "particle": "modernfoundry:block/storage/fallback",

@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.tools.data.client;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.equipment.ArmorType;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.modifiers.DyedModifierModel;
 import modernmods.modernfoundry.library.client.modifiers.model.MaterialHasFallbackModifierModel;
@@ -230,7 +230,7 @@ public class ModifierModelMapProvider extends AbstractModifierModelMapProvider {
 
     // plate armor
     ModifierId dyed = TinkerModifiers.dyed.getId();
-    for (ArmorItem.Type type : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
+    for (ArmorType type : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
       String root = "armor/plate/" + type.getName() + "/maille";
       String item = "plate/" + type.getName();
       tool(item).modifier(dyed, new MaterialHasFallbackModifierModel(1,
@@ -249,14 +249,14 @@ public class ModifierModelMapProvider extends AbstractModifierModelMapProvider {
 
     // travelers
     travelers("goggles", null);
-    travelers("vest", ArmorItem.Type.CHESTPLATE);
-    travelers("pants", ArmorItem.Type.LEGGINGS);
-    travelers("boots", ArmorItem.Type.BOOTS);
+    travelers("vest", ArmorType.CHESTPLATE);
+    travelers("pants", ArmorType.LEGGINGS);
+    travelers("boots", ArmorType.BOOTS);
     travelers("shield", null);
     tool("travelers/goggles").customTrim("armor/travelers/goggles", null);
 
     // slimesuit
-    for (ArmorItem.Type type : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
+    for (ArmorType type : modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial.ARMOR_TYPES) {
       tool("slime/" + type.getName()).trim(type);
     }
     tool("slime/wings").modifier(TinkerModifiers.trim.getId(), new TrimModifierModel.Custom(toolMaterial("armor/slime/wings/trim").texture(), null));
@@ -290,11 +290,11 @@ public class ModifierModelMapProvider extends AbstractModifierModelMapProvider {
 
   @Override
   public String getName() {
-    return "Modern Foundry Modifier Model Map Provider";
+    return "Tinkers' Construct Modifier Model Map Provider";
   }
 
   /** Adds dyed textures for travelers gear */
-  private void travelers(String name, @Nullable ArmorItem.Type type) {
+  private void travelers(String name, @Nullable ArmorType type) {
     String root = "armor/travelers/" + name + "/modifiers/";
     ModifierId dyed = TinkerModifiers.dyed.getId();
     String item = "travelers/" + name;

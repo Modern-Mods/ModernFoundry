@@ -2,9 +2,9 @@ package modernmods.modernfoundry.shared.command.argument;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
-import modernmods.hilt.command.argument.TagSource;
+import modernmods.mantle.command.argument.TagSource;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 import modernmods.modernfoundry.library.modifiers.ModifierManager;
@@ -55,12 +55,12 @@ public enum ModifierTagSource implements TagSource<Modifier> {
 
   @Nullable
   @Override
-  public List<ResourceLocation> keysInTag(TagKey<Modifier> tag) {
+  public List<Identifier> keysInTag(TagKey<Modifier> tag) {
     List<Modifier> entries = ModifierManager.getTagOrNull(tag);
     if (entries == null) {
       return null;
     }
-    return entries.stream().map(Modifier::getId).collect(Collectors.toList());
+    return entries.stream().map(m -> m.getId().getIdentifier()).collect(Collectors.toList());
   }
 
 
@@ -68,7 +68,7 @@ public enum ModifierTagSource implements TagSource<Modifier> {
 
   @Nullable
   @Override
-  public Modifier getValue(ResourceLocation key) {
+  public Modifier getValue(Identifier key) {
     ModifierId id = new ModifierId(key);
     if (ModifierManager.INSTANCE.contains(id)) {
       return ModifierManager.INSTANCE.get(id);
@@ -82,7 +82,7 @@ public enum ModifierTagSource implements TagSource<Modifier> {
   }
 
   @Override
-  public Stream<ResourceLocation> valueKeys() {
+  public Stream<Identifier> valueKeys() {
     return ModifierManager.INSTANCE.getAllLocations();
   }
 }

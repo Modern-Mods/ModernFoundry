@@ -2,13 +2,13 @@ package modernmods.modernfoundry.library.recipe.melting;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.registration.object.FluidObject;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.registration.object.FluidObject;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 
 import java.util.ArrayList;
@@ -52,7 +52,8 @@ public class MaterialMeltingRecipeBuilder extends AbstractRecipeBuilder<Material
 
   /** Creates a recipe using the fluids temperature */
   public static MaterialMeltingRecipeBuilder material(MaterialVariantId materialId, Fluid result, int amount) {
-    return material(materialId, new FluidStack(result, amount));
+    // defer FluidStack construction (components not bound at datagen); temperature comes from the fluid directly
+    return material(materialId, getTemperature(result), FluidOutput.fromFluid(result, amount));
   }
 
   /**
@@ -76,12 +77,12 @@ public class MaterialMeltingRecipeBuilder extends AbstractRecipeBuilder<Material
 
   @Override
   public void save(Consumer<FinishedRecipe> consumer) {
-    save(consumer, inputId.getId());
+    save(consumer, inputId.getId().getIdentifier());
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-    ResourceLocation advancementID = this.buildOptionalAdvancement(id, "melting");
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
+    Identifier advancementID = this.buildOptionalAdvancement(id, "melting");
     consumer.accept(new LoadableFinishedRecipe<>(id, new MaterialMeltingRecipe(id, inputId, temperature, result, byproducts), MaterialMeltingRecipe.LOADER, advancementID));
   }
 }

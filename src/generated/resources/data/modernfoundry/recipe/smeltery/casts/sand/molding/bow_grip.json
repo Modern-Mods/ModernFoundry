@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:molding_table",
   "id": "modernfoundry:smeltery/casts/sand/molding/bow_grip",
-  "material": {
-    "tag": "modernfoundry:casts/sand"
-  },
+  "material": "#modernfoundry:casts/sand",
   "pattern": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:bow_grip"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:bow_grip"
   },
   "result": "modernfoundry:bow_grip_sand_cast"
 }

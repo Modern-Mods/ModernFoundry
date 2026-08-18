@@ -1,20 +1,18 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/dawnstone/nugget",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:nuggets/dawnstone"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "registry": "minecraft:fluid",
       "tag": "c:molten_dawnstone"
     }
   ],
-  "ingredient": {
-    "tag": "c:nuggets/dawnstone"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/dawnstone/nugget",
+  "ingredient": "#c:nuggets/dawnstone",
   "result": {
     "amount": 10,
     "tag": "c:molten_dawnstone"

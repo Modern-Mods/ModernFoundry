@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.modifiers.hook.interaction;
 
 import lombok.Getter;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import modernmods.modernfoundry.TConstruct;
@@ -36,7 +36,7 @@ public enum InteractionSource {
 
   /** Persistent data key for toggling modifiers */
   @Getter
-  private final ResourceLocation key;
+  private final Identifier key;
 
   InteractionSource(String key) {
     this.key = TConstruct.getResource(key);
@@ -61,7 +61,8 @@ public enum InteractionSource {
    */
   public static InteractionSource fromEquipmentSlot(EquipmentSlot slot) {
     return switch (slot.getType()) {
-      case HUMANOID_ARMOR, ANIMAL_ARMOR -> ARMOR;
+      // 26.1.2 added the SADDLE equipment type; treat it like armor since it is an equipped (non-hand) slot
+      case HUMANOID_ARMOR, ANIMAL_ARMOR, SADDLE -> ARMOR;
       case HAND -> RIGHT_CLICK;
     };
   }

@@ -1,0 +1,17 @@
+{
+  "values": [
+    "minecraft:piglin_head",
+    "modernfoundry:blaze_head",
+    "modernfoundry:enderman_head",
+    "modernfoundry:stray_head",
+    "modernfoundry:husk_head",
+    "modernfoundry:drowned_head",
+    "modernfoundry:spider_head",
+    "modernfoundry:cave_spider_head",
+    "modernfoundry:piglin_brute_head",
+    "modernfoundry:zombified_piglin_head",
+    "modernfoundry:venombone_head",
+    "modernfoundry:blazing_bone_head",
+    "modernfoundry:necronium_head"
+  ]
+}

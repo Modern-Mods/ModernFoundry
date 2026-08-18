@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/slime/magma/ball",
-  "ingredient": {
-    "item": "minecraft:magma_cream"
-  },
+  "ingredient": "minecraft:magma_cream",
   "result": {
     "amount": 250,
     "tag": "c:magma"

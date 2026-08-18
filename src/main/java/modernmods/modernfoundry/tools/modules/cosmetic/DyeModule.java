@@ -4,9 +4,9 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -41,8 +41,8 @@ public enum DyeModule implements ModifierModule, DisplayNameModifierHook, Modifi
   @Override
   public Component getDisplayName(IToolStackView tool, ModifierEntry entry, Component name, @Nullable RegistryAccess access) {
     IModDataView persistentData = tool.getPersistentData();
-    ResourceLocation key = entry.getId();
-    if (persistentData.contains(key, Tag.TAG_INT)) {
+    Identifier key = entry.getId().getIdentifier();
+    if (persistentData.contains(key)) {
       int color = persistentData.getInt(key);
       Modifier modifier = entry.getModifier();
       return modifier.applyStyle(Component.translatable(modifier.getTranslationKey() + ".formatted",
@@ -55,7 +55,7 @@ public enum DyeModule implements ModifierModule, DisplayNameModifierHook, Modifi
   @Nullable
   @Override
   public Component onRemoved(IToolStackView tool, Modifier modifier) {
-    tool.getPersistentData().remove(modifier.getId());
+    tool.getPersistentData().remove(modifier.getId().getIdentifier());
     return null;
   }
 }

@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.modifiers.modules.behavior;
 
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.json.math.FormulaLoadable;
 import modernmods.modernfoundry.library.json.math.ModifierFormula;
 import modernmods.modernfoundry.library.json.math.ModifierFormula.FallbackFormula;

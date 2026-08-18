@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:compat/ceramics/porcelain/bricks_3",
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
       "modid": "ceramics"
     }
   ],
-  "ingredient": {
-    "tag": "ceramics:porcelain_cisterns"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:compat/ceramics/porcelain/bricks_3",
+  "ingredient": "#ceramics:porcelain_cisterns",
   "result": {
     "amount": 750,
     "fluid": "modernfoundry:molten_porcelain"

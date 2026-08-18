@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/osmium/axes",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "modernfoundry:melting/osmium/tools_costing_3"
     }
   ],
-  "ingredient": {
-    "tag": "modernfoundry:melting/osmium/tools_costing_3"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/osmium/axes",
+  "ingredient": "#modernfoundry:melting/osmium/tools_costing_3",
   "result": {
     "amount": 270,
     "tag": "c:molten_osmium",

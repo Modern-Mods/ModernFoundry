@@ -1,9 +1,8 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casts/gold/maille",
   "cast": {
-    "type": "modernfoundry:material",
-    "item": "modernfoundry:maille"
+    "neoforge:ingredient_type": "modernfoundry:material",
+    "match": "modernfoundry:maille"
   },
   "cast_consumed": true,
   "cooling_time": 57,
@@ -11,6 +10,7 @@
     "amount": 90,
     "tag": "c:molten_gold"
   },
+  "id": "modernfoundry:smeltery/casts/gold/maille",
   "result": "modernfoundry:maille_cast",
   "switch_slots": true
 }

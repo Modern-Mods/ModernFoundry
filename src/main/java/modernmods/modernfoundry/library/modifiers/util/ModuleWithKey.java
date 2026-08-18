@@ -2,10 +2,10 @@ package modernmods.modernfoundry.library.modifiers.util;
 
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.util.JsonHelper;
+import net.minecraft.resources.Identifier;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.util.JsonHelper;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 
 import javax.annotation.Nullable;
@@ -15,20 +15,20 @@ import javax.annotation.Nullable;
  */
 public interface ModuleWithKey {
   /** Field for building loadables */
-  LoadableField<ResourceLocation,ModuleWithKey> FIELD = Loadables.RESOURCE_LOCATION.nullableField("key", ModuleWithKey::key);
+  LoadableField<Identifier,ModuleWithKey> FIELD = Loadables.RESOURCE_LOCATION.nullableField("key", ModuleWithKey::key);
 
   /** Gets the key for the module */
-  default ResourceLocation getKey(Modifier modifier) {
-    ResourceLocation key = key();
+  default Identifier getKey(Modifier modifier) {
+    Identifier key = key();
     if (key != null) {
       return key;
     }
-    return modifier.getId();
+    return modifier.getId().getIdentifier();
   }
 
   /** Gets the key field from the record */
   @Nullable
-  ResourceLocation key();
+  Identifier key();
 
   /**
    * Parses the key from JSON
@@ -36,7 +36,7 @@ public interface ModuleWithKey {
    * @return  Key, or null if not present
    */
   @Nullable
-  static ResourceLocation parseKey(JsonObject json) {
+  static Identifier parseKey(JsonObject json) {
     if (json.has("key")) {
       return JsonHelper.getResourceLocation(json, "key");
     }
@@ -45,18 +45,18 @@ public interface ModuleWithKey {
 
   /** Reads the key from the network */
   @Nullable
-  static ResourceLocation fromNetwork(FriendlyByteBuf buffer) {
+  static Identifier fromNetwork(FriendlyByteBuf buffer) {
     if (buffer.readBoolean()) {
-      return buffer.readResourceLocation();
+      return buffer.readIdentifier();
     }
     return null;
   }
 
   /** Writes the key to the network */
-  static void toNetwork(@Nullable ResourceLocation key, FriendlyByteBuf buffer) {
+  static void toNetwork(@Nullable Identifier key, FriendlyByteBuf buffer) {
     if (key != null) {
       buffer.writeBoolean(true);
-      buffer.writeResourceLocation(key);
+      buffer.writeIdentifier(key);
     } else {
       buffer.writeBoolean(false);
     }

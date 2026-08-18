@@ -2,11 +2,12 @@ package modernmods.modernfoundry.gadgets.item;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -22,7 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.extensions.common.IClientMobEffectExtensions;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
-import modernmods.hilt.item.TooltipItem;
+import modernmods.mantle.item.TooltipItem;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerEffect;
 import modernmods.modernfoundry.common.TinkerTags;
@@ -89,7 +90,7 @@ public class PiggyBackPackItem extends TooltipItem {
   }
 
   private static boolean pickupEntity(Player player, Entity target) {
-    if (player.getCommandSenderWorld().isClientSide || target.getType().is(TinkerTags.EntityTypes.PIGGYBACKPACK_BLACKLIST)) {
+    if (player.level().isClientSide() || target.getType().builtInRegistryHolder().is(TinkerTags.EntityTypes.PIGGYBACKPACK_BLACKLIST)) {
       return false;
     }
     // silly players, clicking on entities they're already carrying or riding
@@ -111,7 +112,7 @@ public class PiggyBackPackItem extends TooltipItem {
     // can only ride one entity each
     if (!toRide.isVehicle() && count < MAX_ENTITY_STACK) {
       // todo: possibly throw off all passengers of the target
-      if (target.startRiding(toRide, true)) {
+      if (target.startRiding(toRide, true, true)) {
         if (player instanceof ServerPlayer) {
           TinkerNetwork.getInstance().sendVanillaPacket(player, new ClientboundSetPassengersPacket(player));
         }
@@ -147,7 +148,7 @@ public class PiggyBackPackItem extends TooltipItem {
   }
 
   @Override
-  public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+  public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel worldIn, Entity entityIn, @javax.annotation.Nullable EquipmentSlot slot) {
     if (entityIn instanceof LivingEntity livingEntity && livingEntity.getItemBySlot(EquipmentSlot.CHEST) == stack && entityIn.isVehicle()) {
       int amplifier = this.getEntitiesCarriedCount(livingEntity) - 1;
       livingEntity.addEffect(new MobEffectInstance(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(TinkerGadgets.carryEffect.get()), 2, amplifier, true, false, true));
@@ -169,46 +170,47 @@ public class PiggyBackPackItem extends TooltipItem {
     }
 
     @Override
-    public boolean applyEffectTick(@Nonnull LivingEntity livingEntityIn, int p_76394_2_) {
+    public boolean applyEffectTick(net.minecraft.server.level.ServerLevel serverLevel, @Nonnull LivingEntity livingEntityIn, int p_76394_2_) {
       ItemStack chestArmor = livingEntityIn.getItemBySlot(EquipmentSlot.CHEST);
       if (chestArmor.isEmpty() || chestArmor.getItem() != TinkerGadgets.piggyBackpack.get()) {
         TinkerGadgets.piggyBackpack.get().matchCarriedEntitiesToCount(livingEntityIn, 0);
       } else {
         TinkerGadgets.piggyBackpack.get().matchCarriedEntitiesToCount(livingEntityIn, chestArmor.getCount());
-        if (!livingEntityIn.getCommandSenderWorld().isClientSide) {
+        if (!livingEntityIn.level().isClientSide()) {
           PiggybackCapability.getCapability(livingEntityIn).ifPresent(PiggybackHandler::updatePassengers);
         }
       }
       return true;
     }
 
-    @Override
+    // MobEffect#initializeClient was removed in 26.1. Visibility for this effect is registered by TinkerEffect.ClientExtensions
+    // (its superclass); the custom carry-count inventory icons below are deferred to a future RegisterClientExtensionsEvent re-hook.
     public void initializeClient(Consumer<IClientMobEffectExtensions> consumer) {
       consumer.accept(new IClientMobEffectExtensions() {
         private final Minecraft mc = Minecraft.getInstance();
-        private static final ResourceLocation[] ICONS = {
+        private static final Identifier[] ICONS = {
           TConstruct.getResource("carry"),
           TConstruct.getResource("carry_2"),
           TConstruct.getResource("carry_3")
         };
 
         /** Common logic to render the icon */
-        private void renderIcon(MobEffectInstance effect, GuiGraphics graphics, int x, int y) {
+        private void renderIcon(MobEffectInstance effect, GuiGraphicsExtractor graphics, int x, int y) {
           int amplifier = effect.getAmplifier();
           if (amplifier > 2) {
             amplifier = 2;
           }
-          graphics.blitSprite(ICONS[amplifier], x, y, 18, 18);
+          graphics.blitSprite(RenderPipelines.GUI_TEXTURED, ICONS[amplifier], x, y, 18, 18);
         }
 
         @Override
-        public boolean renderInventoryIcon(MobEffectInstance effect, EffectRenderingInventoryScreen<?> gui, GuiGraphics graphics, int x, int y, int z) {
+        public boolean renderInventoryIcon(MobEffectInstance effect, AbstractContainerScreen<?> gui, GuiGraphicsExtractor graphics, int x, int y, int z) {
           renderIcon(effect, graphics, x, y + 7);
           return true;
         }
 
         @Override
-        public boolean renderGuiIcon(MobEffectInstance effect, Gui gui, GuiGraphics graphics, int x, int y, float z, float alpha) {
+        public boolean renderGuiIcon(MobEffectInstance effect, Gui gui, GuiGraphicsExtractor graphics, int x, int y, float z, float alpha) {
           renderIcon(effect, graphics, x + 3, y + 3);
           return true;
         }

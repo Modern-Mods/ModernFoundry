@@ -6,10 +6,10 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.Hilt;
-import modernmods.hilt.data.registry.NamedComponentRegistry;
+import modernmods.mantle.Mantle;
+import modernmods.mantle.data.registry.NamedComponentRegistry;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.modifiers.modules.ModifierModule;
 import modernmods.modernfoundry.library.modifiers.modules.build.ModifierTraitModule;
@@ -28,10 +28,10 @@ import java.util.function.BiFunction;
 public class ToolTankHelper {
   /** Helper function to parse a fluid from NBT */
   public static final RegistryAccess.Frozen STATIC_REGISTRIES = RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY);
-  public static final BiFunction<CompoundTag, String, FluidStack> PARSE_FLUID = (nbt, key) -> FluidStack.parseOptional(STATIC_REGISTRIES, nbt.getCompound(key));
+  public static final BiFunction<CompoundTag, String, FluidStack> PARSE_FLUID = (nbt, key) -> modernmods.modernfoundry.library.utils.TagUtil.readFluid(nbt.getCompoundOrEmpty(key));
 
   /** Format key for the stat */
-  public static final String MB_FORMAT = Hilt.makeDescriptionId("gui", "fluid.millibucket");
+  public static final String MB_FORMAT = Mantle.makeDescriptionId("gui", "fluid.millibucket");
   /** Stat controlling the max for the default helper */
   public static final CapacityStat CAPACITY_STAT = new CapacityStat(new ToolStatId(TConstruct.MOD_ID, "tank_capacity"), 0xA0A0A0, MB_FORMAT);
   /** Default tank helper for setting fluids */
@@ -45,7 +45,7 @@ public class ToolTankHelper {
   /** Tool stat handling max tank capacity */
   private final INumericToolStat<?> capacityStat;
   /** Key in persistent data storing the fluid */
-  private final ResourceLocation fluidKey;
+  private final Identifier fluidKey;
 
   /** Gets the capacity for the tool */
   public int getCapacity(IToolStackView tool) {
@@ -72,7 +72,7 @@ public class ToolTankHelper {
     if (fluid.getAmount() > capacity) {
       fluid.setAmount(capacity);
     }
-    Tag tag = fluid.saveOptional(STATIC_REGISTRIES);
+    Tag tag = modernmods.modernfoundry.library.utils.TagUtil.writeFluid(fluid);
     if (tag instanceof CompoundTag compound) {
       tool.getPersistentData().put(fluidKey, compound);
     }

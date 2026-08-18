@@ -2,19 +2,19 @@ package modernmods.modernfoundry.library.recipe.casting.material;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.data.loadable.field.ContextKey;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.recipe.IMultiRecipe;
-import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
-import modernmods.hilt.recipe.helper.TypeAwareRecipeSerializer;
+import modernmods.mantle.data.loadable.field.ContextKey;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.recipe.IMultiRecipe;
+import modernmods.mantle.recipe.helper.LoadableRecipeSerializer;
+import modernmods.mantle.recipe.helper.TypeAwareRecipeSerializer;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
 import modernmods.modernfoundry.library.json.predicate.material.MaterialPredicate;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
@@ -43,34 +43,32 @@ public class MaterialCastingRecipe extends AbstractMaterialCastingRecipe impleme
 
   protected final IMaterialItem result;
 
-  public MaterialCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient cast, int itemCost, IMaterialItem result, IJsonPredicate<MaterialVariantId> materials, boolean consumed, boolean switchSlots) {
+  public MaterialCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, Ingredient cast, int itemCost, IMaterialItem result, IJsonPredicate<MaterialVariantId> materials, boolean consumed, boolean switchSlots) {
     super(serializer, id, group, cast, itemCost, consumed, switchSlots, materials);
     this.result = result;
     CastingRecipeLookup.registerCastable(result);
     MaterialCastingLookup.registerItemCost(result, itemCost);
   }
 
-  /** @deprecated use {@link #MaterialCastingRecipe(TypeAwareRecipeSerializer, ResourceLocation, String, Ingredient, int, IMaterialItem, IJsonPredicate, boolean, boolean)} */
+  /** @deprecated use {@link #MaterialCastingRecipe(TypeAwareRecipeSerializer, Identifier, String, Ingredient, int, IMaterialItem, IJsonPredicate, boolean, boolean)} */
   @Deprecated(forRemoval = true)
-  public MaterialCastingRecipe(TypeAwareRecipeSerializer<?> serializer, ResourceLocation id, String group, Ingredient cast, int itemCost, IMaterialItem result, boolean consumed, boolean switchSlots) {
+  public MaterialCastingRecipe(TypeAwareRecipeSerializer<?> serializer, Identifier id, String group, Ingredient cast, int itemCost, IMaterialItem result, boolean consumed, boolean switchSlots) {
     this(serializer, id, group, cast, itemCost, result, MaterialPredicate.ANY, consumed, switchSlots);
   }
 
   @Override
   public boolean matches(ICastingContainer inv, Level worldIn) {
-    if (!this.getCast().test(inv.getStack())) {
+    if (!this.testCast(inv.getStack())) {
       return false;
     }
     MaterialFluidRecipe fluid = getFluidRecipe(inv);
     return fluid != MaterialFluidRecipe.EMPTY && result.canUseMaterial(fluid.getOutput().getId());
   }
 
-  @Override
   public ItemStack getResultItem(HolderLookup.Provider access) {
     return new ItemStack(result);
   }
 
-  @Override
   public ItemStack assemble(ICastingContainer inv, HolderLookup.Provider access) {
     return result.withMaterial(getFluidRecipe(inv).getOutput().getVariant());
   }
@@ -82,7 +80,10 @@ public class MaterialCastingRecipe extends AbstractMaterialCastingRecipe impleme
   public List<IDisplayableCastingRecipe> getRecipes(RegistryAccess access) {
     if (multiRecipes == null) {
       RecipeType<?> type = getType();
-      List<ItemStack> castItems = Arrays.asList(getCast().getItems());
+      // cast is nullable (null = no cast); guard against the NPE so cast-less material casting still expands for JEI
+      net.minecraft.world.item.crafting.Ingredient castIngredient = getCast();
+      List<ItemStack> castItems = castIngredient == null ? List.of()
+        : Arrays.asList(castIngredient.items().map(h -> new net.minecraft.world.item.ItemStack(h)).toArray(net.minecraft.world.item.ItemStack[]::new));
       multiRecipes = MaterialCastingLookup
         .getAllCastingFluids().stream()
         .filter(recipe -> {

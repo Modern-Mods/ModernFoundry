@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/seared/seared_casting_tank",
   "byproducts": [
     {
       "amount": 1000,
@@ -11,9 +10,10 @@
       "fluid": "modernfoundry:molten_glass"
     }
   ],
+  "id": "modernfoundry:smeltery/melting/seared/seared_casting_tank",
   "ingredient": {
-    "type": "modernfoundry:no_container",
-    "item": "modernfoundry:seared_casting_tank"
+    "neoforge:ingredient_type": "modernfoundry:no_container",
+    "match": "modernfoundry:seared_casting_tank"
   },
   "result": {
     "amount": 180,

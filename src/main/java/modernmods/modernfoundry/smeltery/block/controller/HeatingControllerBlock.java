@@ -1,6 +1,8 @@
 package modernmods.modernfoundry.smeltery.block.controller;
 
 import net.minecraft.core.BlockPos;
+import java.util.function.Consumer;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
@@ -14,10 +16,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
-import modernmods.hilt.block.RetexturedBlock;
-import modernmods.hilt.inventory.BaseContainerMenu;
-import modernmods.hilt.util.BlockEntityHelper;
-import modernmods.hilt.util.RetexturedHelper;
+import modernmods.mantle.block.RetexturedBlock;
+import modernmods.mantle.inventory.BaseContainerMenu;
+import modernmods.mantle.util.BlockEntityHelper;
+import modernmods.mantle.util.RetexturedHelper;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
 import modernmods.modernfoundry.smeltery.block.entity.controller.HeatingStructureBlockEntity;
 import modernmods.modernfoundry.smeltery.block.entity.multiblock.MultiblockResult;
@@ -40,7 +42,7 @@ public abstract class HeatingControllerBlock extends ControllerBlock {
     boolean opened = false;
     if (state.getBlock() == this) {
       if (canOpenGui(state)) {
-        if (!world.isClientSide && player instanceof ServerPlayer serverPlayer) {
+        if (!world.isClientSide() && player instanceof ServerPlayer serverPlayer) {
           MenuProvider container = this.getMenuProvider(state, world, pos);
           if (container != null) {
             serverPlayer.openMenu(container, buffer -> {
@@ -60,7 +62,7 @@ public abstract class HeatingControllerBlock extends ControllerBlock {
     }
 
     // only need to update if holding the proper items
-    if (!world.isClientSide) {
+    if (!world.isClientSide()) {
       BlockEntityHelper.get(HeatingStructureBlockEntity.class, world, pos).ifPresent(te -> {
         MultiblockResult result = te.getStructureResult();
         if (!result.isSuccess() && te.showDebugBlockBorder(player)) {
@@ -73,11 +75,11 @@ public abstract class HeatingControllerBlock extends ControllerBlock {
 
   @Override
   protected boolean displayStatus(Player player, Level world, BlockPos pos, BlockState state) {
-    if (!world.isClientSide) {
+    if (!world.isClientSide()) {
       BlockEntityHelper.get(HeatingStructureBlockEntity.class, world, pos).ifPresent(te -> {
         MultiblockResult result = te.getStructureResult();
         if (!result.isSuccess()) {
-          player.displayClientMessage(result.getMessage(), true);
+          player.sendOverlayMessage(result.getMessage());
           TinkerNetwork.getInstance().sendTo(new StructureErrorPositionPacket(pos, result.getPos()), player);
         }
       });
@@ -85,10 +87,7 @@ public abstract class HeatingControllerBlock extends ControllerBlock {
     return true;
   }
 
-  @Override
-  public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag pFlag) {
-    RetexturedHelper.addTooltip(stack, tooltip);
-  }
+  // 26.1.2 removed block-level appendHoverText; the retextured tooltip is now shown by RetexturedBlockItem at item level.
 
   @Override
   public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
@@ -97,7 +96,7 @@ public abstract class HeatingControllerBlock extends ControllerBlock {
   }
 
   @Override
-  public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
+  public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
     return RetexturedBlock.getPickBlock(world, pos, state);
   }
 }

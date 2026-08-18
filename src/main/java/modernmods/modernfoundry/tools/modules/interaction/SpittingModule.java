@@ -8,14 +8,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.json.LevelingInt;
@@ -70,8 +70,8 @@ public record SpittingModule(LevelingInt shots) implements ModifierModule, Gener
   }
 
   @Override
-  public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-    return ModifierUtil.blockWhileCharging(tool, UseAnim.BOW);
+  public ItemUseAnimation getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    return ModifierUtil.blockWhileCharging(tool, ItemUseAnimation.BOW);
   }
 
   /** Performs the actual spitting */
@@ -154,7 +154,7 @@ public record SpittingModule(LevelingInt shots) implements ModifierModule, Gener
 
   @Override
   public void onStoppedUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int timeLeft) {
-    if (!entity.level().isClientSide) {
+    if (!entity.level().isClientSide()) {
       int chargeTime = getUseDuration(tool, modifier) - timeLeft;
       if (chargeTime > 0) {
         spit(tool, modifier, entity, chargeTime);
@@ -172,7 +172,7 @@ public record SpittingModule(LevelingInt shots) implements ModifierModule, Gener
       if (fluid.getAmount() >= modifier.getLevel() && FluidEffectManager.INSTANCE.find(fluid.getFluid()).hasEffects()) {
         int time = HelmetChargingEffect.startUsingHelmet(tool, player, 1.5f);
         // mark the stack with the end time so we know how long to run particles
-        tool.getPersistentData().putInt(modifier.getId(), player.tickCount + time);
+        tool.getPersistentData().putInt(modifier.getId().getIdentifier(), player.tickCount + time);
         return true;
       }
     }
@@ -182,10 +182,10 @@ public record SpittingModule(LevelingInt shots) implements ModifierModule, Gener
   @Override
   public void stopInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, int chargeTime, ModifierEntry activeModifier) {
     if (modifier == activeModifier) {
-      if (chargeTime > 0 && !player.level().isClientSide) {
+      if (chargeTime > 0 && !player.level().isClientSide()) {
         spit(tool, modifier, player, chargeTime);
       }
-      tool.getPersistentData().remove(modifier.getId());
+      tool.getPersistentData().remove(modifier.getId().getIdentifier());
     }
   }
 
@@ -193,7 +193,7 @@ public record SpittingModule(LevelingInt shots) implements ModifierModule, Gener
   public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
     if (isCorrectSlot && tool.hasTag(TinkerTags.Items.WORN_ARMOR)) {
       ModDataNBT persistentData = tool.getPersistentData();
-      int finishTime = persistentData.getInt(modifier.getId());
+      int finishTime = persistentData.getInt(modifier.getId().getIdentifier());
       if (finishTime > 0) {
         // how long we have left?
         int timeLeft = finishTime - holder.tickCount;
@@ -202,7 +202,7 @@ public record SpittingModule(LevelingInt shots) implements ModifierModule, Gener
           holder.playSound(SoundEvents.PLAYER_BREATH, 0.5F, holder.getRandom().nextFloat() * 0.1f + 0.9f);
           SlurpingModule.addFluidParticles(holder, TANK_HELPER.getFluid(tool), 16);
           // stop animation
-          persistentData.remove(modifier.getId());
+          persistentData.remove(modifier.getId().getIdentifier());
         }
         // sound is only every 4 ticks
         else if (timeLeft % 4 == 0) {

@@ -5,8 +5,9 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
-import modernmods.hilt.data.listener.IEarlySafeManagerReloadListener;
+import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
+import modernmods.mantle.data.listener.IEarlySafeManagerReloadListener;
+import modernmods.modernfoundry.TConstruct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,15 +57,18 @@ public class RecipeCacheInvalidator implements IEarlySafeManagerReloadListener {
    * Called when resource managers reload
    * @param event  Reload event
    */
-  public static void onReloadListenerReload(AddReloadListenerEvent event) {
-    event.addListener(INSTANCE);
+  public static void onReloadListenerReload(AddServerReloadListenersEvent event) {
+    event.addListener(TConstruct.getResource("recipe_cache_invalidator"), INSTANCE);
   }
 
   /** Logic to respond properly to late running of the client */
-  @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
   public static class DuelSidedListener implements BooleanConsumer {
     private final Runnable clearCache;
     private boolean clearQueued = false;
+
+    private DuelSidedListener(Runnable clearCache) {
+      this.clearCache = clearCache;
+    }
 
     @Override
     public void accept(boolean client) {

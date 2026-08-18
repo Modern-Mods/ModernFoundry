@@ -6,9 +6,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.tools.SlotType.SlotCount;
@@ -22,7 +22,7 @@ import java.util.List;
 public class DisplayModifierRecipe implements IDisplayModifierRecipe {
   @Getter
   @Nullable
-  private final ResourceLocation recipeId;
+  private final Identifier recipeId;
   private final List<List<ItemStack>> inputs;
   @Getter
   private final List<ItemStack> toolWithoutModifier;
@@ -42,7 +42,7 @@ public class DisplayModifierRecipe implements IDisplayModifierRecipe {
 
   /** @deprecated use {@link #builder()} */
   @Deprecated(forRemoval = true)
-  public DisplayModifierRecipe(@Nullable ResourceLocation id, List<SizedIngredient> inputs, List<ItemStack> toolWithoutModifier, List<ItemStack> toolWithModifier, ModifierEntry displayResult, IntRange level, @Nullable SlotCount slots, List<SlotCount> resultSlots) {
+  public DisplayModifierRecipe(@Nullable Identifier id, List<SizedIngredient> inputs, List<ItemStack> toolWithoutModifier, List<ItemStack> toolWithModifier, ModifierEntry displayResult, IntRange level, @Nullable SlotCount slots, List<SlotCount> resultSlots) {
     this(id, resolve(inputs), toolWithoutModifier, toolWithModifier, displayResult, level, slots, resultSlots, false);
   }
 
@@ -89,7 +89,7 @@ public class DisplayModifierRecipe implements IDisplayModifierRecipe {
   public static class Builder {
     private ModifierEntry result = ModifierEntry.EMPTY;
     @Nullable
-    private ResourceLocation id = null;
+    private Identifier id = null;
     private List<List<ItemStack>> inputs = List.of();
     private List<ItemStack> toolWithoutModifier = List.of();
     private List<ItemStack> toolWithModifier = List.of();

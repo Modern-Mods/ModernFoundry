@@ -1,12 +1,12 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/osmium/oreberry",
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "oreberriesreplanted:osmium_oreberry"
+      "type": "neoforge:registered",
+      "value": "oreberriesreplanted:osmium_oreberry"
     }
   ],
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/osmium/oreberry",
   "ingredient": {
     "item": "oreberriesreplanted:osmium_oreberry"
   },

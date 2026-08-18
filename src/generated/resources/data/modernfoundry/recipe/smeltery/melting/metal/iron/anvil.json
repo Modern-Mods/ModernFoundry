@@ -2,15 +2,9 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/anvil",
   "ingredient": [
-    {
-      "item": "minecraft:anvil"
-    },
-    {
-      "item": "minecraft:chipped_anvil"
-    },
-    {
-      "item": "minecraft:damaged_anvil"
-    }
+    "minecraft:anvil",
+    "minecraft:chipped_anvil",
+    "minecraft:damaged_anvil"
   ],
   "result": {
     "amount": 2790,

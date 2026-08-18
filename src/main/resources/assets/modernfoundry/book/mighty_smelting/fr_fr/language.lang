@@ -8,7 +8,7 @@ armor_materials=Matériaux d'Armure Niveau 3
 armor_materials.subtext=Ces matériaux peuvent être coulés pour fabriquer armures et boucliers.
 
 tools=Outils Polyvalents
-tools.subtext=Ces outils nécessitent une enclume du Modern Foundry pour leur fabrication
+tools.subtext=Ces outils nécessitent une enclume du bricoleur pour leur fabrication
 
 armor=Armure Puissante
 armor.subtext=Les alliages débloquent des matériaux d'armure avancés, offrant des capacités supérieures aux équipements basiques.

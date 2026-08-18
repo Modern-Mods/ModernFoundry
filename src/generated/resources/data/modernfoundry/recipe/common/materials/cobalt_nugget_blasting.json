@@ -3,9 +3,7 @@
   "category": "misc",
   "cookingtime": 50,
   "experience": 0.2,
-  "ingredient": {
-    "item": "modernfoundry:cobalt_shard"
-  },
+  "ingredient": "modernfoundry:cobalt_shard",
   "result": {
     "id": "modernfoundry:cobalt_nugget"
   }

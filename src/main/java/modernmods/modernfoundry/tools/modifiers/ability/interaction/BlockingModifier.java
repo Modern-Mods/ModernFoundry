@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.tools.modifiers.ability.interaction;
 
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import modernmods.modernfoundry.library.modifiers.impl.NoLevelsModifier;
 import modernmods.modernfoundry.library.module.ModuleHookMap.Builder;
 import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
@@ -20,9 +20,9 @@ public class BlockingModifier extends NoLevelsModifier {
     return 50; // late as many modifiers have special blocking interactions
   }
 
-  /** @deprecated use {@link ModifierUtil#blockWhileCharging(IToolStackView, UseAnim)} */
+  /** @deprecated use {@link ModifierUtil#blockWhileCharging(IToolStackView, ItemUseAnimation)} */
   @Deprecated(forRemoval = true)
-  public static UseAnim blockWhileCharging(IToolStackView tool, UseAnim fallback) {
+  public static ItemUseAnimation blockWhileCharging(IToolStackView tool, ItemUseAnimation fallback) {
     return ModifierUtil.blockWhileCharging(tool, fallback);
   }
 }

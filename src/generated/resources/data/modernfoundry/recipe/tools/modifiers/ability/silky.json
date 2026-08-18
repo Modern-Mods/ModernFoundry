@@ -1,23 +1,23 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/ability/silky",
   "allow_crystal": true,
   "check_trait_level": true,
+  "id": "modernfoundry:tools/modifiers/ability/silky",
   "inputs": [
     {
-      "item": "modernfoundry:silky_cloth"
+      "ingredient": "modernfoundry:silky_cloth"
     },
     {
-      "item": "modernfoundry:silky_cloth"
+      "ingredient": "modernfoundry:silky_cloth"
     },
     {
-      "item": "modernfoundry:silky_cloth"
+      "ingredient": "modernfoundry:silky_cloth"
     },
     {
-      "item": "modernfoundry:silky_cloth"
+      "ingredient": "modernfoundry:silky_cloth"
     },
     {
-      "item": "modernfoundry:silky_cloth"
+      "ingredient": "modernfoundry:silky_cloth"
     }
   ],
   "level": 1,
@@ -25,7 +25,5 @@
   "slots": {
     "abilities": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/harvest"
-  }
+  "tools": "#modernfoundry:modifiable/harvest"
 }

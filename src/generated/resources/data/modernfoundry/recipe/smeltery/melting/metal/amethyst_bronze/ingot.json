@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/amethyst_bronze/ingot",
-  "ingredient": {
-    "tag": "c:ingots/amethyst_bronze"
-  },
+  "ingredient": "#c:ingots/amethyst_bronze",
   "result": {
     "amount": 90,
     "tag": "c:molten_amethyst_bronze"

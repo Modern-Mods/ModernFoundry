@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/slimewood/bloodshroom_planks",
-  "ingredient": {
-    "item": "modernfoundry:bloodshroom_planks"
-  },
+  "ingredient": "modernfoundry:bloodshroom_planks",
   "material": "modernfoundry:slimewood#bloodshroom",
   "needed": 1,
   "value": 1

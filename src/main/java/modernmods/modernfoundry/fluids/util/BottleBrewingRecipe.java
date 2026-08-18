@@ -23,6 +23,6 @@ public class BottleBrewingRecipe extends BrewingRecipe {
     if (from == Items.SPLASH_POTION && to == Items.LINGERING_POTION) {
       return Ingredient.of(Items.DRAGON_BREATH);
     }
-    return Ingredient.EMPTY;
+    throw new IllegalArgumentException("Invalid bottle brewing conversion from " + from + " to " + to);
   }
 }

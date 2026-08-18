@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.EmptyFluidHandler;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
@@ -35,7 +35,8 @@ public class GaugeBlockEntity extends BlockEntity {
       BlockPos pos = getBlockPos().relative(side.getOpposite());
       BlockEntity te = level.getBlockEntity(pos);
       if (te != null) {
-        neighbor = LazyOptional.ofNullable(level.getCapability(Capabilities.FluidHandler.BLOCK, pos, level.getBlockState(pos), te, side));
+        var neighborRh = level.getCapability(Capabilities.Fluid.BLOCK, pos, level.getBlockState(pos), te, side);
+        neighbor = LazyOptional.ofNullable(neighborRh == null ? null : IFluidHandler.of(neighborRh));
       } else {
         neighbor = LazyOptional.empty();
       }

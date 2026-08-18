@@ -2,15 +2,15 @@ package modernmods.modernfoundry.library.recipe.alloying;
 
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
-import modernmods.hilt.registration.object.FluidObject;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.registration.object.FluidObject;
 import modernmods.modernfoundry.library.recipe.alloying.AlloyRecipe.AlloyIngredient;
 
 import java.util.ArrayList;
@@ -53,7 +53,8 @@ public class AlloyRecipeBuilder extends AbstractRecipeBuilder<AlloyRecipeBuilder
    * @return  Builder instance
    */
   public static AlloyRecipeBuilder alloy(Fluid fluid, int amount) {
-    return alloy(new FluidStack(fluid, amount));
+    // build a FluidOutput directly, deferring FluidStack construction (components not bound at datagen)
+    return alloy(FluidOutput.fromFluid(fluid, amount), getTemperature(fluid));
   }
 
 
@@ -95,7 +96,8 @@ public class AlloyRecipeBuilder extends AbstractRecipeBuilder<AlloyRecipeBuilder
    * @return  Builder instance
    */
   public AlloyRecipeBuilder addInput(Fluid fluid, int amount) {
-    return addInput(FluidIngredient.of(new FluidStack(fluid, amount)));
+    // FluidIngredient.of(fluid, amount) defers FluidStack construction (components not bound at datagen)
+    return addInput(FluidIngredient.of(fluid, amount));
   }
 
   /**
@@ -117,7 +119,7 @@ public class AlloyRecipeBuilder extends AbstractRecipeBuilder<AlloyRecipeBuilder
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
     if (inputs.size() < 2) {
       throw new IllegalStateException("Invalid alloying recipe " + id + ", must have at least two inputs");
     }

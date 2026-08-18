@@ -2,9 +2,7 @@
   "type": "modernfoundry:item_part_builder",
   "id": "modernfoundry:smeltery/casts/sand/builder_block/small_axe_head",
   "pattern": "modernfoundry:small_axe_head",
-  "pattern_item": {
-    "tag": "c:sand/colorless"
-  },
+  "pattern_item": "#c:sands/colorless",
   "result": {
     "count": 4,
     "item": "modernfoundry:small_axe_head_sand_cast"

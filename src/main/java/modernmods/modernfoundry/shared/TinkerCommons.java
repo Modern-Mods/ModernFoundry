@@ -1,7 +1,8 @@
 package modernmods.modernfoundry.shared;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.advancements.critereon.ItemSubPredicate;
+import net.minecraft.core.component.predicates.DataComponentPredicate;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
@@ -21,23 +22,23 @@ import net.minecraft.world.level.block.WeatheringCopper.WeatherState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.crafting.IngredientType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import modernmods.modernfoundry.compat.neoforged.neoforge.registries.ForgeRegistries;
+import modernmods.mantle.compat.neoforged.neoforge.registries.ForgeRegistries;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import modernmods.hilt.data.predicate.block.BlockPredicate;
-import modernmods.hilt.data.predicate.damage.DamageSourcePredicate;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
-import modernmods.hilt.item.EdibleItem;
-import modernmods.hilt.registration.object.EnumObject;
-import modernmods.hilt.registration.object.ItemObject;
+import modernmods.mantle.data.predicate.block.BlockPredicate;
+import modernmods.mantle.data.predicate.damage.DamageSourcePredicate;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
+import modernmods.mantle.item.EdibleItem;
+import modernmods.mantle.registration.object.EnumObject;
+import modernmods.mantle.registration.object.ItemObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerModule;
 import modernmods.modernfoundry.common.json.BlockOrEntityCondition;
@@ -97,7 +98,7 @@ public final class TinkerCommons extends TinkerModule {
   /*
    * Blocks
    */
-  public static final ItemObject<GlowBlock> glowBlock = BLOCKS.register("glow", () -> new GlowBlock(builder(MapColor.NONE, SoundType.WOOL).noCollission().pushReaction(PushReaction.DESTROY).replaceable().strength(0.0F).lightLevel(s -> 14).noOcclusion()), BLOCK_ITEM);
+  public static final ItemObject<GlowBlock> glowBlock = BLOCKS.register("glow", () -> new GlowBlock(builder(MapColor.NONE, SoundType.WOOL).noCollision().pushReaction(PushReaction.DESTROY).replaceable().strength(0.0F).lightLevel(s -> 14).noOcclusion()), BLOCK_ITEM);
   /**
    * @deprecated Use {@link #glowBlock}
    */
@@ -110,7 +111,7 @@ public final class TinkerCommons extends TinkerModule {
   public static final ItemObject<ClearGlassPaneBlock> clearGlassPane = BLOCKS.register("clear_glass_pane", () -> new ClearGlassPaneBlock(glassBuilder(MapColor.NONE)), BLOCK_ITEM);
   public static final EnumObject<GlassColor,ClearStainedGlassBlock> clearStainedGlass = BLOCKS.registerEnum(GlassColor.values(), "clear_stained_glass", (color) -> new ClearStainedGlassBlock(glassBuilder(color.getDye().getMapColor()), color), BLOCK_ITEM);
   public static final EnumObject<GlassColor,ClearStainedGlassPaneBlock> clearStainedGlassPane = BLOCKS.registerEnum(GlassColor.values(), "clear_stained_glass_pane", (color) -> new ClearStainedGlassPaneBlock(glassBuilder(color.getDye().getMapColor()), color), BLOCK_ITEM);
-  public static final ItemObject<GlassBlock> soulGlass = BLOCKS.register("soul_glass", () -> new SoulGlassBlock(glassBuilder(MapColor.COLOR_BROWN).speedFactor(0.2F).noCollission().isViewBlocking((state, getter, pos) -> true)), TOOLTIP_BLOCK_ITEM);
+  public static final ItemObject<GlassBlock> soulGlass = BLOCKS.register("soul_glass", () -> new SoulGlassBlock(glassBuilder(MapColor.COLOR_BROWN).speedFactor(0.2F).noCollision().isViewBlocking((state, getter, pos) -> true)), TOOLTIP_BLOCK_ITEM);
   public static final ItemObject<ClearGlassPaneBlock> soulGlassPane = BLOCKS.register("soul_glass_pane", () -> new SoulGlassPaneBlock(glassBuilder(MapColor.COLOR_BROWN).speedFactor(0.2F)), TOOLTIP_BLOCK_ITEM);
   // panes
   public static final ItemObject<IronBarsBlock> goldBars = BLOCKS.register("gold_bars", () -> new IronBarsBlock(builder(MapColor.NONE, SoundType.METAL).requiresCorrectToolForDrops().strength(3.0F, 6.0F).noOcclusion()), TOOLTIP_BLOCK_ITEM);
@@ -137,7 +138,7 @@ public final class TinkerCommons extends TinkerModule {
    * Items
    */
   public static final ItemObject<EdibleItem> bacon = ITEMS.register("bacon", () -> new EdibleItem(TinkerFood.BACON));
-  public static final ItemObject<EdibleItem> jeweledApple = ITEMS.register("jeweled_apple", () -> new EdibleItem(TinkerFood.JEWELED_APPLE));
+  public static final ItemObject<EdibleItem> jeweledApple = ITEMS.register("jeweled_apple", () -> new EdibleItem(new Properties().food(TinkerFood.JEWELED_APPLE, TinkerFood.JEWELED_APPLE_CONSUMABLE)));
   public static final ItemObject<Item> cheeseIngot = ITEMS.register("cheese_ingot", () -> new CheeseItem(new Properties().food(TinkerFood.CHEESE)));
   public static final ItemObject<Block> cheeseBlock = BLOCKS.register("cheese_block", () -> new HalfTransparentBlock(builder(MapColor.COLOR_YELLOW, SoundType.HONEY_BLOCK).strength(1.5F, 3.0F).speedFactor(0.4F).jumpFactor(0.5F).noOcclusion()), block -> new CheeseBlockItem(block, new Properties().food(TinkerFood.CHEESE)));
 
@@ -149,20 +150,20 @@ public final class TinkerCommons extends TinkerModule {
   public static final ItemObject<TinkerBookItem> encyclopedia     = ITEMS.register("encyclopedia",      () -> new TinkerBookItem(UNSTACKABLE_PROPS, BookType.ENCYCLOPEDIA));
 
   public static final DeferredHolder<? super ParticleType<FluidParticleData>, ParticleType<FluidParticleData>> fluidParticle = PARTICLE_TYPES.register("fluid", FluidParticleData.Type::new);
-  public static final DeferredHolder<? super ItemSubPredicate.Type<ToolStackItemPredicate>, ItemSubPredicate.Type<ToolStackItemPredicate>> toolStackItemPredicate = ITEM_SUB_PREDICATES.register("tool_stack", () -> new ItemSubPredicate.Type<>(ToolStackItemPredicate.CODEC));
+  public static final DeferredHolder<? super DataComponentPredicate.Type<ToolStackItemPredicate>, DataComponentPredicate.Type<ToolStackItemPredicate>> toolStackItemPredicate = ITEM_SUB_PREDICATES.register("tool_stack", () -> new DataComponentPredicate.ConcreteType<>(ToolStackItemPredicate.CODEC));
 
   /* Loot conditions */
-  public static final DeferredHolder<? super LootItemConditionType, LootItemConditionType> lootConfig = LOOT_CONDITIONS.register(ConfigEnabledCondition.ID.getPath(), () -> new LootItemConditionType(ConfigEnabledCondition.CODEC));
-  public static final DeferredHolder<? super LootItemConditionType, LootItemConditionType> lootBlockOrEntity = LOOT_CONDITIONS.register("block_or_entity", () -> new LootItemConditionType(BlockOrEntityCondition.CODEC));
-  public static final DeferredHolder<? super LootItemConditionType, LootItemConditionType> hasLootContextSet = LOOT_CONDITIONS.register("has_context_set", () -> new LootItemConditionType(HasLootContextSetCondition.CODEC));
-  /** @deprecated use {@link modernmods.hilt.loot.HiltLoot#TAG_FILLED} */
+  public static final DeferredHolder<MapCodec<? extends LootItemCondition>, ? extends MapCodec<? extends LootItemCondition>> lootConfig = LOOT_CONDITIONS.register(ConfigEnabledCondition.ID.getPath(), () -> ConfigEnabledCondition.CODEC);
+  public static final DeferredHolder<MapCodec<? extends LootItemCondition>, ? extends MapCodec<? extends LootItemCondition>> lootBlockOrEntity = LOOT_CONDITIONS.register("block_or_entity", () -> BlockOrEntityCondition.CODEC);
+  public static final DeferredHolder<MapCodec<? extends LootItemCondition>, ? extends MapCodec<? extends LootItemCondition>> hasLootContextSet = LOOT_CONDITIONS.register("has_context_set", () -> HasLootContextSetCondition.CODEC);
+  /** @deprecated use {@link modernmods.mantle.loot.MantleLoot#TAG_FILLED} */
   @SuppressWarnings("removal")
   @Deprecated(forRemoval = true)
-  public static final DeferredHolder<? super LootItemConditionType, LootItemConditionType> lootTagNotEmptyCondition = LOOT_CONDITIONS.register("tag_not_empty", () -> new LootItemConditionType(TagNotEmptyCondition.CODEC));
-  /** @deprecated use {@link modernmods.hilt.loot.HiltLoot#TAG_PREFERENCE} */
+  public static final DeferredHolder<MapCodec<? extends LootItemCondition>, ? extends MapCodec<? extends LootItemCondition>> lootTagNotEmptyCondition = LOOT_CONDITIONS.register("tag_not_empty", () -> TagNotEmptyCondition.CODEC);
+  /** @deprecated use {@link modernmods.mantle.loot.MantleLoot#TAG_PREFERENCE} */
   @SuppressWarnings("removal")
   @Deprecated(forRemoval = true)
-  public static final DeferredHolder<? super LootPoolEntryType, LootPoolEntryType> lootTagPreference = LOOT_ENTRIES.register("tag_preference", () -> new LootPoolEntryType(TagPreferenceLootEntry.CODEC));
+  public static final DeferredHolder<MapCodec<? extends LootPoolEntryContainer>, ? extends MapCodec<? extends LootPoolEntryContainer>> lootTagPreference = LOOT_ENTRIES.register("tag_preference", () -> TagPreferenceLootEntry.CODEC);
   public static final DeferredHolder<? super IngredientType<NoContainerIngredient>, IngredientType<NoContainerIngredient>> noContainerIngredient = INGREDIENT_TYPES.register("no_container", () -> new IngredientType<>(NoContainerIngredient.Serializer.INSTANCE.codec(), NoContainerIngredient.Serializer.INSTANCE.streamCodec()));
   public static final DeferredHolder<? super IngredientType<BlockTagIngredient>, IngredientType<BlockTagIngredient>> blockTagIngredient = INGREDIENT_TYPES.register("block_tag", () -> new IngredientType<>(BlockTagIngredient.Serializer.INSTANCE.codec(), BlockTagIngredient.Serializer.INSTANCE.streamCodec()));
 
@@ -198,7 +199,7 @@ public final class TinkerCommons extends TinkerModule {
   void registerRecipeSerializers(RegisterEvent event) {
     if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER) {
       CriteriaTriggers.register(TConstruct.getResource("block_container_opened").toString(), CONTAINER_OPENED_TRIGGER);
-      // hilt
+      // mantle
       DamageSourcePredicate.LOADER.register(getResource("direct"), TinkerPredicate.DIRECT_DAMAGE.getLoader());
       // entity
       LivingEntityPredicate.LOADER.register(getResource("airborne"), TinkerPredicate.AIRBORNE.getLoader());

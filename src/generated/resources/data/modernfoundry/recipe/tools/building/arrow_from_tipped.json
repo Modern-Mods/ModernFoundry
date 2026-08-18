@@ -2,7 +2,7 @@
   "type": "modernfoundry:tipped_tool_transform",
   "id": "modernfoundry:tools/building/arrow_from_tipped",
   "input": {
-    "type": "hilt:potion_display",
+    "neoforge:ingredient_type": "mantle:potion_display",
     "item": "minecraft:tipped_arrow"
   },
   "materials": [

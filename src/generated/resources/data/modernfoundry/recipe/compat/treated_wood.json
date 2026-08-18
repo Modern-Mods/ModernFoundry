@@ -1,26 +1,24 @@
 {
-  "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:compat/treated_wood",
-  "cast": {
-    "tag": "minecraft:planks"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:treated_wood"
     },
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "registry": "minecraft:fluid",
       "tag": "c:creosote"
     }
   ],
+  "type": "modernfoundry:casting_basin",
+  "cast": "#minecraft:planks",
+  "cast_consumed": true,
   "cooling_time": 100,
   "fluid": {
     "amount": 125,
     "tag": "c:creosote"
   },
+  "id": "modernfoundry:compat/treated_wood",
   "result": {
     "tag": "c:treated_wood"
   }

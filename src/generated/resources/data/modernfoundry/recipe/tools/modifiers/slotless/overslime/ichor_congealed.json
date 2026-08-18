@@ -1,11 +1,7 @@
 {
   "type": "modernfoundry:overslime_modifier",
   "id": "modernfoundry:tools/modifiers/slotless/overslime/ichor_congealed",
-  "ingredient": {
-    "item": "modernfoundry:ichor_congealed_slime"
-  },
+  "ingredient": "modernfoundry:ichor_congealed_slime",
   "restore_amount": 400,
-  "tools": {
-    "tag": "modernfoundry:modifiable/durability"
-  }
+  "tools": "#modernfoundry:modifiable/durability"
 }

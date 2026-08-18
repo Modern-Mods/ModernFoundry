@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import modernmods.hilt.util.BlockEntityHelper;
+import modernmods.mantle.util.BlockEntityHelper;
 import modernmods.modernfoundry.shared.block.TableBlock;
 import modernmods.modernfoundry.smeltery.block.entity.CastingBlockEntity;
 
@@ -50,14 +49,14 @@ public abstract class AbstractCastingBlock extends TableBlock {
 
   @Deprecated
   @Override
-  protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult rayTraceResult) {
+  protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult rayTraceResult) {
     if (player.isShiftKeyDown()) {
-      return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+      return InteractionResult.PASS;
     }
     BlockEntity te = world.getBlockEntity(pos);
     if (te instanceof CastingBlockEntity) {
       ((CastingBlockEntity) te).interact(player, hand);
-      return ItemInteractionResult.SUCCESS;
+      return InteractionResult.SUCCESS;
     }
     return super.useItemOn(stack, state, world, pos, player, hand, rayTraceResult);
   }
@@ -78,7 +77,7 @@ public abstract class AbstractCastingBlock extends TableBlock {
   @SuppressWarnings("deprecation")
   @Deprecated
   @Override
-  public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+  public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, @org.jetbrains.annotations.Nullable net.minecraft.world.level.redstone.Orientation orientation, boolean isMoving) {
     if (worldIn.isClientSide()) {
       return;
     }
@@ -103,7 +102,7 @@ public abstract class AbstractCastingBlock extends TableBlock {
   }
 
   @Override
-  public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
+  public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos, net.minecraft.core.Direction direction) {
     return BlockEntityHelper.get(CastingBlockEntity.class, worldIn, pos).map(CastingBlockEntity::getAnalogSignal).orElse(0);
   }
 }

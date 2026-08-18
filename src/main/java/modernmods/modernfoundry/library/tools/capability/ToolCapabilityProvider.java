@@ -2,10 +2,10 @@ package modernmods.modernfoundry.library.tools.capability;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.mantle.compat.neoforged.neoforge.capabilities.Capability;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.common.util.Lazy;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 import modernmods.modernfoundry.library.tools.nbt.ToolStack;
 

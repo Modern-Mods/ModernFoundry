@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/zinc/geore/shard",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:geore_shards/zinc"
     }
   ],
-  "ingredient": {
-    "tag": "c:geore_shards/zinc"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/zinc/geore/shard",
+  "ingredient": "#c:geore_shards/zinc",
   "result": {
     "amount": 90,
     "tag": "c:molten_zinc"

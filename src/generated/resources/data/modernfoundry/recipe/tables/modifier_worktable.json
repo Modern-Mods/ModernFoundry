@@ -1,13 +1,9 @@
 {
-  "type": "hilt:crafting_shaped_retextured",
+  "type": "mantle:crafting_shaped_retextured",
   "category": "misc",
   "key": {
-    "r": {
-      "tag": "modernfoundry:workstation_rock"
-    },
-    "s": {
-      "tag": "modernfoundry:seared_blocks"
-    }
+    "r": "#modernfoundry:workstation_rock",
+    "s": "#modernfoundry:seared_blocks"
   },
   "match_all": true,
   "pattern": [
@@ -18,6 +14,5 @@
   "result": {
     "id": "modernfoundry:modifier_worktable"
   },
-  "show_notification": true,
   "texture": "r"
 }

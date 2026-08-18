@@ -2,14 +2,13 @@ package modernmods.modernfoundry.smeltery.block.entity.module.alloying;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import modernmods.hilt.block.entity.HiltBlockEntity;
+import modernmods.mantle.block.entity.MantleBlockEntity;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 import modernmods.modernfoundry.library.recipe.alloying.AlloyRecipe;
 import modernmods.modernfoundry.library.recipe.alloying.IAlloyTank;
 import modernmods.modernfoundry.library.recipe.alloying.IMutableAlloyTank;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.function.Predicate;
 
 /** Module to handle running alloys via a fluid handler, can alloy multiple recipes at once */
 public class MultiAlloyingModule implements IAlloyingModule {
-  private final HiltBlockEntity parent;
+  private final MantleBlockEntity parent;
   private final IAlloyTank alloyTank;
 
   /** List of recipes that succeeded last time in {@link #doAlloy()}, only these will be used for the next iteration */
@@ -28,7 +27,7 @@ public class MultiAlloyingModule implements IAlloyingModule {
   /** Predicates for common behaviors */
   private final Predicate<AlloyRecipe> canPerform, performRecipe;
 
-  public MultiAlloyingModule(HiltBlockEntity parent, IMutableAlloyTank alloyTank) {
+  public MultiAlloyingModule(MantleBlockEntity parent, IMutableAlloyTank alloyTank) {
     this.parent = parent;
     this.alloyTank = alloyTank;
     this.canPerform = recipe -> recipe.canPerform(alloyTank);
@@ -49,7 +48,7 @@ public class MultiAlloyingModule implements IAlloyingModule {
    */
   private List<AlloyRecipe> getRecipes() {
     if (lastRecipes == null) {
-      lastRecipes = new ArrayList<>(getLevel().getRecipeManager().getRecipesFor(TinkerRecipeTypes.ALLOYING.get(), alloyTank, getLevel()).stream().map(RecipeHolder::value).toList());
+      lastRecipes = getLevel().getServer().getRecipeManager().recipeMap().getRecipesFor(TinkerRecipeTypes.ALLOYING.get(), alloyTank, getLevel()).map(RecipeHolder::value).toList();
     }
     return lastRecipes;
   }

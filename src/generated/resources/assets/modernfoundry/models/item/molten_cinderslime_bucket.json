@@ -1,6 +1,3 @@
 {
-  "parent": "neoforge:item/bucket_drip",
-  "flip_gas": true,
-  "fluid": "modernfoundry:molten_cinderslime",
-  "loader": "modernfoundry:fluid_container"
+  "parent": "neoforge:item/bucket_drip"
 }

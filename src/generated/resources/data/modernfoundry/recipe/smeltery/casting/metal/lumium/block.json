@@ -1,17 +1,17 @@
 {
-  "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/metal/lumium/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/lumium"
     }
   ],
+  "type": "modernfoundry:casting_basin",
   "cooling_time": 203,
   "fluid": {
     "amount": 810,
     "tag": "c:molten_lumium"
   },
+  "id": "modernfoundry:smeltery/casting/metal/lumium/block",
   "result": {
     "tag": "c:storage_blocks/lumium"
   }

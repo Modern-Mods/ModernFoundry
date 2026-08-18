@@ -5,9 +5,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.field.NullableField;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.field.NullableField;
+import modernmods.mantle.util.typed.TypedMap;
 
 import java.util.List;
 import java.util.function.Function;

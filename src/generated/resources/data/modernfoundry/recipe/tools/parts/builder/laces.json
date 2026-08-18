@@ -1,11 +1,8 @@
 {
   "type": "modernfoundry:part_builder",
-  "id": "modernfoundry:tools/parts/builder/laces",
   "cost": 2,
+  "id": "modernfoundry:tools/parts/builder/laces",
   "pattern": "modernfoundry:laces",
-  "pattern_item": {
-    "tag": "modernfoundry:patterns/default"
-  },
   "result": {
     "item": "modernfoundry:laces"
   }

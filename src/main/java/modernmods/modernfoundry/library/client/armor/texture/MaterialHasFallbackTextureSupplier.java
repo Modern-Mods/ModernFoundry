@@ -6,10 +6,10 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.array.ArrayLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.array.ArrayLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.client.materials.MaterialRenderInfoLoader;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.tools.nbt.ToolStack;
@@ -61,8 +61,8 @@ public class MaterialHasFallbackTextureSupplier implements ArmorTextureSupplier,
   @Override
   public ArmorTexture getArmorTexture(ItemStack stack, TextureType type, RegistryAccess access) {
     CompoundTag tag = TagUtil.getTag(stack);
-    if (tag != null && tag.contains(ToolStack.TAG_MATERIALS, Tag.TAG_LIST)) {
-      String material = tag.getList(ToolStack.TAG_MATERIALS, Tag.TAG_STRING).getString(index);
+    if (tag != null && tag.contains(ToolStack.TAG_MATERIALS)) {
+      String material = tag.getListOrEmpty(ToolStack.TAG_MATERIALS).getString(index).orElse("");
       if (!material.isEmpty() && cache.computeIfAbsent(material, this)) {
         return apply.getArmorTexture(stack, type, access);
       }

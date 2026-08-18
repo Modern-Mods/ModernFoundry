@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/flint/deepslate",
-  "ingredient": {
-    "tag": "c:deepslate"
-  },
+  "ingredient": "#c:deepslate",
   "material": "modernfoundry:flint#deepslate",
   "needed": 1,
   "value": 1

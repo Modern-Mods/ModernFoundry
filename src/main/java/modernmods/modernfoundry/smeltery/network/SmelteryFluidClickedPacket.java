@@ -5,8 +5,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.inventory.BaseContainerMenu;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.inventory.BaseContainerMenu;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.smeltery.block.entity.tank.ISmelteryTankHandler;
 
 /**

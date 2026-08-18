@@ -1,12 +1,10 @@
 {
   "type": "modernfoundry:casting_table_potion",
-  "id": "modernfoundry:smeltery/casting/filling/bottle",
-  "bottle": {
-    "item": "minecraft:glass_bottle"
-  },
+  "bottle": "minecraft:glass_bottle",
   "fluid": {
     "amount": 250,
     "tag": "c:potion"
   },
+  "id": "modernfoundry:smeltery/casting/filling/bottle",
   "result": "minecraft:potion"
 }

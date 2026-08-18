@@ -3,9 +3,7 @@
   "category": "building",
   "group": "modernfoundry:scorched_road_slab",
   "key": {
-    "B": {
-      "item": "modernfoundry:scorched_road"
-    }
+    "B": "modernfoundry:scorched_road"
   },
   "pattern": [
     "BBB"
@@ -13,6 +11,5 @@
   "result": {
     "count": 6,
     "id": "modernfoundry:scorched_road_slab"
-  },
-  "show_notification": true
+  }
 }

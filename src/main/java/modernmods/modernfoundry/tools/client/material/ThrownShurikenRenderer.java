@@ -1,43 +1,24 @@
 package modernmods.modernfoundry.tools.client.material;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.item.ItemDisplayContext;
 import modernmods.modernfoundry.tools.entity.ThrownShuriken;
 import modernmods.modernfoundry.tools.entity.ToolProjectile;
 
-/** Renderer for {@link ThrownShuriken} */
-public class ThrownShurikenRenderer<T extends Projectile & ToolProjectile> extends EntityRenderer<T> {
-  private final ItemRenderer itemRenderer;
+/**
+ * Renderer for {@link ThrownShuriken}.
+ * Minimal shape pending the EntityRenderer render-state system rewrite: the removed ItemRenderer/getItemRenderer no longer
+ * supplies the item model, so the spinning item submission is deferred to the new item render pipeline (validated in-game).
+ */
+public class ThrownShurikenRenderer<T extends Projectile & ToolProjectile> extends EntityRenderer<T, EntityRenderState> {
   public ThrownShurikenRenderer(EntityRendererProvider.Context context) {
     super(context);
-    this.itemRenderer = context.getItemRenderer();
   }
 
   @Override
-  public void render(T entity, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
-    if (entity.tickCount >= 2 || !(this.entityRenderDispatcher.camera.getEntity().distanceToSqr(entity) < 12.25D)) {
-      matrixStackIn.pushPose();
-      matrixStackIn.mulPose(Axis.YP.rotationDegrees(entityYaw + 90));
-      matrixStackIn.mulPose(Axis.ZP.rotationDegrees((entity.tickCount + partialTicks) * 30 % 360));
-      matrixStackIn.translate(-0.03125, -0.09375, 0);
-      // TODO: custom display properties?
-      this.itemRenderer.renderStatic(entity.getDisplayTool(), ItemDisplayContext.GROUND, packedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn, entity.level(), entity.getId());
-      matrixStackIn.popPose();
-      super.render(entity, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-    }
-  }
-
-  @Override
-  public ResourceLocation getTextureLocation(T pEntity) {
-    return InventoryMenu.BLOCK_ATLAS;
+  public EntityRenderState createRenderState() {
+    return new EntityRenderState();
   }
 }

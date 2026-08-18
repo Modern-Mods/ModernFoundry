@@ -1,7 +1,7 @@
 package modernmods.modernfoundry.library.modifiers.hook.special;
 
 import lombok.RequiredArgsConstructor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
 import modernmods.modernfoundry.library.modifiers.modules.capacity.CapacityBarValidator;
@@ -37,7 +37,7 @@ public interface CapacityBarHook {
   @RequiredArgsConstructor
   abstract class PersistentDataCapacityBar implements CapacityBarHook, HookProvider {
     private static final List<ModuleHook<?>> HOOKS = HookProvider.<PersistentDataCapacityBar>defaultHooks(ModifierHooks.CAPACITY_BAR);
-    protected final ResourceLocation key;
+    protected final Identifier key;
 
     @Override
     public List<ModuleHook<?>> getDefaultHooks() {

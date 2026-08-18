@@ -3,10 +3,10 @@
   "id": "modernfoundry:tools/modifiers/worktable/enchantment_converting/ability_tool",
   "inputs": [
     {
-      "item": "modernfoundry:ichor_slime_crystal"
+      "ingredient": "modernfoundry:ichor_slime_crystal"
     },
     {
-      "tag": "c:gems/diamond"
+      "ingredient": "#c:gems/diamond"
     }
   ],
   "match_book": false,

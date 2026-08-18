@@ -4,13 +4,13 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import modernmods.hilt.data.loadable.common.IngredientLoadable;
-import modernmods.hilt.data.loadable.field.RecordField;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.recipe.ingredient.SizedIngredient;
+import modernmods.mantle.data.loadable.common.IngredientLoadable;
+import modernmods.mantle.data.loadable.field.RecordField;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.recipe.ingredient.SizedIngredient;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariant;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
@@ -47,7 +47,7 @@ public abstract class MaterialSwappingRecipe implements ITinkerStationRecipe {
   protected static final RecipeResult<LazyToolStack> INVALID_MATERIAL = RecipeResult.failure(TConstruct.makeTranslationKey("recipe", "part_swapping.invalid_material"));
 
   @Getter
-  protected final ResourceLocation id;
+  protected final Identifier id;
   /** Tools that may use this recipe */
   protected final Ingredient tools;
   /** Max stack size that can be swapped at once */

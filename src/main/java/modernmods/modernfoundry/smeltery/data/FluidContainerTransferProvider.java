@@ -1,18 +1,18 @@
 package modernmods.modernfoundry.smeltery.data;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.conditions.ItemExistsCondition;
-import modernmods.hilt.fluid.transfer.AbstractFluidContainerTransferProvider;
-import modernmods.hilt.fluid.transfer.EmptyFluidContainerTransfer;
-import modernmods.hilt.fluid.transfer.FillFluidContainerTransfer;
-import modernmods.hilt.recipe.data.ItemNameIngredient;
-import modernmods.hilt.recipe.helper.FluidOutput;
-import modernmods.hilt.recipe.helper.ItemOutput;
-import modernmods.hilt.registration.object.FluidObject;
+import net.neoforged.neoforge.common.conditions.NeoForgeConditions;
+import modernmods.mantle.fluid.transfer.AbstractFluidContainerTransferProvider;
+import modernmods.mantle.fluid.transfer.EmptyFluidContainerTransfer;
+import modernmods.mantle.fluid.transfer.FillFluidContainerTransfer;
+import modernmods.mantle.recipe.data.ItemNameIngredient;
+import modernmods.mantle.recipe.helper.FluidOutput;
+import modernmods.mantle.recipe.helper.ItemOutput;
+import modernmods.mantle.registration.object.FluidObject;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.fluids.TinkerFluids;
 import modernmods.modernfoundry.library.recipe.FluidValues;
@@ -49,12 +49,12 @@ public class FluidContainerTransferProvider extends AbstractFluidContainerTransf
   /** Adds a recipe to empty an item, returning no container */
   @SuppressWarnings("removal")
   protected void addContainerlessEmpty(String name, String domain, FluidOutput fluid) {
-    ResourceLocation id = ResourceLocation.fromNamespaceAndPath(domain, name);
-    addTransfer(domain + '_' + name, new EmptyFluidContainerTransfer(ItemNameIngredient.from(id), ItemOutput.EMPTY, fluid), new ItemExistsCondition(id));
+    Identifier id = Identifier.fromNamespaceAndPath(domain, name);
+    addTransfer(domain + '_' + name, new EmptyFluidContainerTransfer(ItemNameIngredient.from(id), ItemOutput.EMPTY, fluid), NeoForgeConditions.itemRegistered(id));
   }
 
   @Override
   public String getName() {
-    return "Modern Foundry Fluid Container Transfer";
+    return "Tinkers' Construct Fluid Container Transfer";
   }
 }

@@ -4,15 +4,14 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.typed.TypedMap;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.typed.TypedMap;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.tools.stat.INumericToolStat;
 import modernmods.modernfoundry.library.tools.stat.IToolStat;
@@ -29,7 +28,6 @@ import java.util.Set;
  * Generic container for tool stats, allows addons to select which stats they wish to use
  */
 @SuppressWarnings("ClassCanBeRecord")
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @EqualsAndHashCode
 @ToString
 public class StatsNBT {
@@ -40,6 +38,10 @@ public class StatsNBT {
 
   /** All currently contained stats */
   private final Map<IToolStat<?>, Object> stats;
+
+  StatsNBT(Map<IToolStat<?>, Object> stats) {
+    this.stats = stats;
+  }
 
   /** Creates a new stats builder */
   public static Builder builder() {
@@ -112,7 +114,7 @@ public class StatsNBT {
 
     // simply try each key as a tool stat
     CompoundTag nbt = (CompoundTag)inbt;
-    for (String key : nbt.getAllKeys()) {
+    for (String key : nbt.keySet()) {
       Tag tag = nbt.get(key);
       if (tag != null) {
         IToolStat<?> stat = readStatIdFromNBT(key);

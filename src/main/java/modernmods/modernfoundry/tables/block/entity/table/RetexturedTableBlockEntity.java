@@ -1,8 +1,9 @@
 package modernmods.modernfoundry.tables.block.entity.table;
 
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -11,9 +12,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import modernmods.hilt.block.entity.IRetexturedBlockEntity;
-import modernmods.hilt.util.RetexturedHelper;
+import net.neoforged.neoforge.model.data.ModelData;
+import modernmods.mantle.block.entity.IRetexturedBlockEntity;
+import modernmods.mantle.util.RetexturedHelper;
 import modernmods.modernfoundry.shared.block.entity.TableBlockEntity;
 
 import javax.annotation.Nonnull;
@@ -45,7 +46,16 @@ public abstract class RetexturedTableBlockEntity extends TableBlockEntity implem
   }
 
   private void textureUpdated() {
-    RetexturedHelper.onTextureUpdated(this);
+    // update the texture in BE data
+    if (level != null && level.isClientSide()) {
+      Block normalizedTexture = texture == Blocks.AIR ? null : texture;
+      ModelData data = getModelData();
+      if (data.get(RetexturedHelper.BLOCK_PROPERTY) != normalizedTexture) {
+        requestModelDataUpdate();
+        BlockState state = getBlockState();
+        level.sendBlockUpdated(worldPosition, state, state, 0);
+      }
+    }
   }
 
   @Override
@@ -59,26 +69,19 @@ public abstract class RetexturedTableBlockEntity extends TableBlockEntity implem
   }
 
   @Override
-  public void saveSynced(CompoundTag tags, HolderLookup.Provider registries) {
-    super.saveSynced(tags, registries);
+  public void saveSynced(ValueOutput output) {
+    super.saveSynced(output);
     if (texture != Blocks.AIR) {
-      tags.putString(TAG_TEXTURE, getTextureName());
+      output.putString(TAG_TEXTURE, getTextureName());
     }
   }
 
   @Override
-  public void saveAdditional(CompoundTag tags, HolderLookup.Provider registries) {
-    super.saveAdditional(tags, registries);
-    if (texture != Blocks.AIR) {
-      tags.putString(TAG_TEXTURE, getTextureName());
-    }
-  }
-
-  @Override
-  public void loadAdditional(CompoundTag tags, HolderLookup.Provider registries) {
-    super.loadAdditional(tags, registries);
-    if (tags.contains(TAG_TEXTURE, Tag.TAG_STRING)) {
-      texture = RetexturedHelper.getBlock(tags.getString(TAG_TEXTURE));
+  public void loadAdditional(ValueInput input) {
+    super.loadAdditional(input);
+    String tex = input.getStringOr(TAG_TEXTURE, "");
+    if (!tex.isEmpty()) {
+      texture = RetexturedHelper.getBlock(tex);
       textureUpdated();
     }
   }

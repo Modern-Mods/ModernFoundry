@@ -12,11 +12,15 @@ import net.minecraft.world.item.ItemStack;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import modernmods.hilt.fluid.FluidTransferHelper;
-import modernmods.hilt.fluid.transfer.FluidContainerTransferManager;
-import modernmods.hilt.fluid.transfer.IFluidContainerTransfer.TransferDirection;
-import modernmods.hilt.fluid.transfer.IFluidContainerTransfer.TransferResult;
-import modernmods.hilt.util.sync.ValidZeroDataSlot;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.access.ItemAccess;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import modernmods.mantle.fluid.FluidTransferHelper;
+import modernmods.mantle.fluid.transfer.FluidContainerTransferManager;
+import modernmods.mantle.fluid.transfer.IFluidContainerTransfer.TransferDirection;
+import modernmods.mantle.fluid.transfer.IFluidContainerTransfer.TransferResult;
+import modernmods.mantle.util.sync.ValidZeroDataSlot;
 import modernmods.modernfoundry.shared.inventory.TriggeringMultiModuleContainerMenu;
 import modernmods.modernfoundry.smeltery.TinkerSmeltery;
 import modernmods.modernfoundry.smeltery.block.entity.controller.HeatingStructureBlockEntity;
@@ -43,8 +47,8 @@ public class HeatingStructureContainerMenu extends TriggeringMultiModuleContaine
     bucketContainer = new SimpleContainer(2);
     if (inv != null && structure != null) {
       // slots for emptying/filling buckets - do first but filtered
-      if (!inv.player.level().isClientSide) {
-        IFluidHandler tank = structure.getTank();
+      if (!inv.player.level().isClientSide()) {
+        ResourceHandler<FluidResource> tank = structure.getTank();
         addSlot(new BucketInputSlot(bucketContainer, 125, 46, tank, this, inv.player));
         bucketResultSlot = addSlot(new BucketResultSlot(bucketContainer, 125, 104, tank, this, inv.player));
       } else {
@@ -55,7 +59,9 @@ public class HeatingStructureContainerMenu extends TriggeringMultiModuleContaine
       // can hold 7 in a column, so try to fill the first column first
       // cap to 4 columns
       MeltingModuleInventory inventory = structure.getMeltingInventory();
-      sideInventory = new SideInventoryContainer<>(TinkerSmeltery.smelteryContainer.get(), id, inv, structure, 0, 0, calcColumns(inventory.getSlots()));
+      // pass the melting inventory directly instead of going through Capabilities.Item (the smeltery's handler is a legacy
+      // IItemHandler that can't be exposed as a ResourceHandler yet, which would throw a ClassCastException here)
+      sideInventory = new SideInventoryContainer<>(TinkerSmeltery.smelteryContainer.get(), id, inv, structure, inventory, 0, 0, calcColumns(inventory.getSlots()));
       addSubContainer(sideInventory, true);
 
       Consumer<DataSlot> referenceConsumer = this::addDataSlot;
@@ -92,7 +98,7 @@ public class HeatingStructureContainerMenu extends TriggeringMultiModuleContaine
   /** Updates the bucket inventory */
   private void updateBucket(Player player) {
     // changing mode means we might have an update
-    if (!player.level().isClientSide && tile != null) {
+    if (!player.level().isClientSide() && tile != null) {
       ItemStack bucket = bucketContainer.getItem(0);
       if (!bucket.isEmpty() && bucketContainer.getItem(1).isEmpty()) {
         TransferResult result = FluidTransferHelper.interactWithStack(tile.getTank(), bucket, transferDirection);
@@ -126,7 +132,7 @@ public class HeatingStructureContainerMenu extends TriggeringMultiModuleContaine
         return false;
       }
       // transfer the fluid
-      if (!player.level().isClientSide && tile != null) {
+      if (!player.level().isClientSide() && tile != null) {
         TransferResult result;
         if (id == 1) {
           // drain fuel into item
@@ -147,7 +153,7 @@ public class HeatingStructureContainerMenu extends TriggeringMultiModuleContaine
       SmelteryTank<?> tank = tile.getTank();
       FluidStack fluid = tank.getFluidInTank(index);
       if (!fluid.isEmpty()) {
-        if (!player.level().isClientSide) {
+        if (!player.level().isClientSide()) {
           ItemStack held = getCarried();
           if (!held.isEmpty()) {
             // if holding an item, fill it from the fluid
@@ -170,7 +176,7 @@ public class HeatingStructureContainerMenu extends TriggeringMultiModuleContaine
   @Override
   public void removed(Player player) {
     super.removed(player);
-    if (!player.level().isClientSide) {
+    if (!player.level().isClientSide()) {
       this.clearContainer(player, bucketContainer);
     }
   }
@@ -198,16 +204,17 @@ public class HeatingStructureContainerMenu extends TriggeringMultiModuleContaine
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-      return FluidContainerTransferManager.INSTANCE.mayHaveTransfer(stack) || stack.getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM) != null;
+      return FluidContainerTransferManager.INSTANCE.mayHaveTransfer(stack)
+        || (!stack.isEmpty() && Capabilities.Fluid.ITEM.getCapability(stack, ItemAccess.forStack(stack)) != null);
     }
   }
 
   /** Bucket input slot - used serverside only to handle draining the bucket when placed in the slot */
   public static class BucketInputSlot extends BucketSlot {
-    private final IFluidHandler tank;
+    private final ResourceHandler<FluidResource> tank;
     private final TransferDirectionSupplier directionSupplier;
     private final Player player;
-    public BucketInputSlot(Container pContainer, int pX, int pY, IFluidHandler tank, TransferDirectionSupplier directionSupplier, Player player) {
+    public BucketInputSlot(Container pContainer, int pX, int pY, ResourceHandler<FluidResource> tank, TransferDirectionSupplier directionSupplier, Player player) {
       super(pContainer, 0, pX, pY);
       this.tank = tank;
       this.directionSupplier = directionSupplier;
@@ -241,10 +248,10 @@ public class HeatingStructureContainerMenu extends TriggeringMultiModuleContaine
 
   /** Bucket result slot - used serverside to trigger fluid transfer when the slot is emptied */
   public static class BucketResultSlot extends ResultSlot {
-    private final IFluidHandler tank;
+    private final ResourceHandler<FluidResource> tank;
     private final TransferDirectionSupplier directionSupplier;
     private final Player player;
-    public BucketResultSlot(Container pContainer, int pX, int pY, IFluidHandler tank, TransferDirectionSupplier directionSupplier, Player player) {
+    public BucketResultSlot(Container pContainer, int pX, int pY, ResourceHandler<FluidResource> tank, TransferDirectionSupplier directionSupplier, Player player) {
       super(pContainer, 1, pX, pY);
       this.tank = tank;
       this.directionSupplier = directionSupplier;

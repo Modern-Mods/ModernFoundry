@@ -3,15 +3,15 @@ package modernmods.modernfoundry.library.modifiers.modules.behavior;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.AbstractArrow.Pickup;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow.Pickup;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.common.ItemStackLoadable;
-import modernmods.hilt.data.loadable.primitive.BooleanLoadable;
-import modernmods.hilt.data.loadable.primitive.IntLoadable;
-import modernmods.hilt.data.loadable.primitive.StringLoadable;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.common.ItemStackLoadable;
+import modernmods.mantle.data.loadable.primitive.BooleanLoadable;
+import modernmods.mantle.data.loadable.primitive.IntLoadable;
+import modernmods.mantle.data.loadable.primitive.StringLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.Modifier;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.ModifierHooks;
@@ -72,7 +72,7 @@ public record InfinityModule(ItemStack ammo, String variantTag, int durabilityUs
     tag.putBoolean(INFINITY, true);
     // if a variant is requested, set that on the stack
     if (!variantTag.isEmpty()) {
-      String variant = tool.getPersistentData().getString(modifier.getId());
+      String variant = tool.getPersistentData().getString(modifier.getId().getIdentifier());
       if (!variant.isEmpty()) {
         tag.putString(variantTag, variant);
       }
@@ -87,7 +87,7 @@ public record InfinityModule(ItemStack ammo, String variantTag, int durabilityUs
     // not an issue if you have multiple types of infinity, they all agree on the goal here
     if (arrow != null && arrow.pickup != Pickup.CREATIVE_ONLY) {
       CompoundTag tag = TagUtil.getTag(ammo);
-      if (tag != null && tag.getBoolean(INFINITY)) {
+      if (tag != null && tag.getBooleanOr(INFINITY, false)) {
         arrow.pickup = Pickup.CREATIVE_ONLY;
       }
     }
@@ -104,7 +104,7 @@ public record InfinityModule(ItemStack ammo, String variantTag, int durabilityUs
   @Override
   public Component onRemoved(IToolStackView tool, Modifier modifier) {
     if (!variantTag.isEmpty()) {
-      tool.getPersistentData().remove(modifier.getId());
+      tool.getPersistentData().remove(modifier.getId().getIdentifier());
     }
     return null;
   }

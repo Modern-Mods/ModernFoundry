@@ -5,12 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.core.registries.BuiltInRegistries;
-import modernmods.hilt.recipe.data.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import modernmods.mantle.recipe.data.FinishedRecipe;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.ApiStatus.Internal;
-import modernmods.hilt.recipe.data.AbstractRecipeBuilder;
-import modernmods.hilt.recipe.ingredient.FluidIngredient;
+import modernmods.mantle.recipe.data.AbstractRecipeBuilder;
+import modernmods.mantle.recipe.ingredient.FluidIngredient;
 
 import java.util.function.Consumer;
 
@@ -48,6 +48,14 @@ public class MeltingFuelBuilder extends AbstractRecipeBuilder<MeltingFuelBuilder
     return fuel(FluidIngredient.of(fluid), duration, getTemperature(fluid));
   }
 
+  /**
+   * Creates a fuel builder from a raw fluid and amount, deferring FluidStack construction. As of 26.1 a FluidStack
+   * cannot be built until fluid data components are bound, which is not the case at datagen time.
+   */
+  public static MeltingFuelBuilder fuel(net.minecraft.world.level.material.Fluid fluid, int amount, int duration) {
+    return fuel(FluidIngredient.of(fluid, amount), duration, getTemperature(fluid));
+  }
+
   /** Setups the builder for solid fuel */
   @Internal
   public static MeltingFuelBuilder solid(int temperature) {
@@ -63,8 +71,8 @@ public class MeltingFuelBuilder extends AbstractRecipeBuilder<MeltingFuelBuilder
   }
 
   @Override
-  public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-    ResourceLocation advancementId = this.buildOptionalAdvancement(id, "melting_fuel");
+  public void save(Consumer<FinishedRecipe> consumer, Identifier id) {
+    Identifier advancementId = this.buildOptionalAdvancement(id, "melting_fuel");
     consumer.accept(new LoadableFinishedRecipe<>(id, new MeltingFuel(id, input, duration, temperature, rate), MeltingFuel.LOADER, advancementId));
   }
 }

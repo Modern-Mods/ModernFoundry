@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "modernfoundry:material",
+    "base_model": "modernfoundry:item/bow_limb",
+    "offset": [
+      5,
+      -2
+    ]
+  }
+}

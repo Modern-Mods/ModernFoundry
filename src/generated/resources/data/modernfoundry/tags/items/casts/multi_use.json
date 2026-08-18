@@ -1,0 +1,32 @@
+{
+  "values": [
+    "#modernfoundry:casts/multi_use/ingot",
+    "#modernfoundry:casts/multi_use/nugget",
+    "#modernfoundry:casts/multi_use/gem",
+    "#modernfoundry:casts/multi_use/rod",
+    "#modernfoundry:casts/multi_use/repair_kit",
+    "#modernfoundry:casts/multi_use/plate",
+    "#modernfoundry:casts/multi_use/gear",
+    "#modernfoundry:casts/multi_use/coin",
+    "#modernfoundry:casts/multi_use/wire",
+    "#modernfoundry:casts/multi_use/pick_head",
+    "#modernfoundry:casts/multi_use/small_axe_head",
+    "#modernfoundry:casts/multi_use/small_blade",
+    "#modernfoundry:casts/multi_use/adze_head",
+    "#modernfoundry:casts/multi_use/hammer_head",
+    "#modernfoundry:casts/multi_use/broad_axe_head",
+    "#modernfoundry:casts/multi_use/broad_blade",
+    "#modernfoundry:casts/multi_use/large_plate",
+    "#modernfoundry:casts/multi_use/tool_binding",
+    "#modernfoundry:casts/multi_use/tough_binding",
+    "#modernfoundry:casts/multi_use/tool_handle",
+    "#modernfoundry:casts/multi_use/tough_handle",
+    "#modernfoundry:casts/multi_use/bow_limb",
+    "#modernfoundry:casts/multi_use/bow_grip",
+    "#modernfoundry:casts/multi_use/helmet_plating",
+    "#modernfoundry:casts/multi_use/chestplate_plating",
+    "#modernfoundry:casts/multi_use/leggings_plating",
+    "#modernfoundry:casts/multi_use/boots_plating",
+    "#modernfoundry:casts/multi_use/maille"
+  ]
+}

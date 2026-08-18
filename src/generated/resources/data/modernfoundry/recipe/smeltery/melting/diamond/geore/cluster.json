@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "c:geore_clusters/diamond"
+    }
+  ],
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/diamond/geore/cluster",
   "byproducts": [
     {
       "amount": 360,
@@ -8,15 +13,8 @@
       "rate": "metal"
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "hilt:tag_filled",
-      "tag": "c:geore_clusters/diamond"
-    }
-  ],
-  "ingredient": {
-    "tag": "c:geore_clusters/diamond"
-  },
+  "id": "modernfoundry:smeltery/melting/diamond/geore/cluster",
+  "ingredient": "#c:geore_clusters/diamond",
   "rate": "gem",
   "result": {
     "amount": 400,

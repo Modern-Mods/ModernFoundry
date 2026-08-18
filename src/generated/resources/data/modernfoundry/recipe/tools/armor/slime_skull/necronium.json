@@ -1,13 +1,11 @@
 {
   "type": "modernfoundry:basin_tool_casting",
-  "id": "modernfoundry:tools/armor/slime_skull/necronium",
-  "cast": {
-    "item": "modernfoundry:necronium_head"
-  },
+  "cast": "modernfoundry:necronium_head",
   "cast_purpose": "consumed_offset",
   "extra_materials": [
     "modernfoundry:necronium"
   ],
+  "id": "modernfoundry:tools/armor/slime_skull/necronium",
   "item_cost": 5,
   "result": "modernfoundry:slime_helmet"
 }

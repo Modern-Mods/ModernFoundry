@@ -1,16 +1,14 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "neoforge:conditions": [
     {
       "type": "modernfoundry:config",
       "prop": "glass_recipe_fix"
     }
   ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
-    "#": {
-      "tag": "c:glass/colorless"
-    }
+    "#": "#c:glass_blocks/colorless"
   },
   "pattern": [
     "# #",
@@ -19,6 +17,5 @@
   "result": {
     "count": 3,
     "id": "minecraft:glass_bottle"
-  },
-  "show_notification": true
+  }
 }

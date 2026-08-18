@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/flint/flint",
-  "ingredient": {
-    "item": "minecraft:flint"
-  },
+  "ingredient": "minecraft:flint",
   "material": "modernfoundry:flint",
   "needed": 1,
   "value": 1

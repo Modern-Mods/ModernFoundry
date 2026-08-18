@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/enderium/ingot",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:ingots/enderium"
     }
   ],
-  "ingredient": {
-    "tag": "c:ingots/enderium"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/enderium/ingot",
+  "ingredient": "#c:ingots/enderium",
   "result": {
     "amount": 90,
     "tag": "c:molten_enderium"

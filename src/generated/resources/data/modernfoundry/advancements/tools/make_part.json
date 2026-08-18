@@ -1,0 +1,37 @@
+{
+  "parent": "modernfoundry:tools/part_builder",
+  "criteria": {
+    "crafted_part": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "modernfoundry:parts"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.modernfoundry.tools.make_part.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:pick_head",
+      "nbt": "{Material:\"modernfoundry:wood\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.tools.make_part.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted_part"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

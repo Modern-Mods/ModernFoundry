@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "value": "twilightforest:ironwood_helmet"
+    }
+  ],
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/ironwood/twilightforest_helmet",
   "byproducts": [
     {
       "amount": 50,
@@ -8,12 +13,7 @@
       "unit_size": 10
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:ironwood_helmet"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/ironwood/twilightforest_helmet",
   "ingredient": {
     "item": "twilightforest:ironwood_helmet"
   },

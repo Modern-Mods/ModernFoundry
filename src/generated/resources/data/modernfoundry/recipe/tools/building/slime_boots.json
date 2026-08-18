@@ -1,10 +1,8 @@
 {
   "type": "modernfoundry:basin_tool_casting",
-  "id": "modernfoundry:tools/building/slime_boots",
-  "cast": {
-    "item": "modernfoundry:laces"
-  },
+  "cast": "modernfoundry:laces",
   "cast_purpose": "first_material",
+  "id": "modernfoundry:tools/building/slime_boots",
   "item_cost": 4,
   "result": "modernfoundry:slime_boots"
 }

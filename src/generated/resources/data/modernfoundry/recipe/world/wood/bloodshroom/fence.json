@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "wooden_fence",
   "key": {
-    "#": {
-      "tag": "c:rods/wooden"
-    },
-    "W": {
-      "item": "modernfoundry:bloodshroom_planks"
-    }
+    "#": "#c:rods/wooden",
+    "W": "modernfoundry:bloodshroom_planks"
   },
   "pattern": [
     "W#W",
@@ -17,6 +13,5 @@
   "result": {
     "count": 3,
     "id": "modernfoundry:bloodshroom_fence"
-  },
-  "show_notification": true
+  }
 }

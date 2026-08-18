@@ -1,11 +1,9 @@
 {
   "type": "modernfoundry:incremental_modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/feather_falling",
   "allow_crystal": true,
   "amount_per_item": 1,
-  "input": {
-    "item": "minecraft:feather"
-  },
+  "id": "modernfoundry:tools/modifiers/upgrade/feather_falling",
+  "input": "minecraft:feather",
   "level": {
     "max": 2
   },
@@ -14,7 +12,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "tag": "modernfoundry:modifiable/armor/boots"
-  }
+  "tools": "#modernfoundry:modifiable/armor/boots"
 }

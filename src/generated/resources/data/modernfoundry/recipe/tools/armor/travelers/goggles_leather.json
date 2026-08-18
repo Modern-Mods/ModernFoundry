@@ -3,7 +3,5 @@
   "id": "modernfoundry:tools/armor/travelers/goggles_leather",
   "index": 1,
   "item_cost": 3,
-  "tools": {
-    "item": "modernfoundry:travelers_helmet"
-  }
+  "tools": "modernfoundry:travelers_helmet"
 }

@@ -11,12 +11,12 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase;
 import net.minecraft.world.phys.HitResult.Type;
-import modernmods.hilt.client.TooltipKey;
-import modernmods.hilt.data.predicate.IJsonPredicate;
-import modernmods.hilt.data.predicate.block.BlockPredicate;
-import modernmods.hilt.data.predicate.damage.DamageSourcePredicate;
-import modernmods.hilt.data.predicate.entity.LivingEntityPredicate;
-import modernmods.hilt.data.predicate.item.ItemPredicate;
+import modernmods.mantle.client.TooltipKey;
+import modernmods.mantle.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.predicate.block.BlockPredicate;
+import modernmods.mantle.data.predicate.damage.DamageSourcePredicate;
+import modernmods.mantle.data.predicate.entity.LivingEntityPredicate;
+import modernmods.mantle.data.predicate.item.ItemPredicate;
 import modernmods.modernfoundry.library.modifiers.hook.armor.OnAttackedModifierHook;
 import modernmods.modernfoundry.library.recipe.casting.CastingRecipeLookup;
 import modernmods.modernfoundry.library.recipe.melting.MeltingRecipeLookup;
@@ -24,7 +24,7 @@ import modernmods.modernfoundry.library.tools.item.ModifiableItem;
 
 import javax.annotation.Nullable;
 
-/** Additional living predicates added by Tinkers, Hilt controls the loader we use these days */
+/** Additional living predicates added by Tinkers, Mantle controls the loader we use these days */
 public class TinkerPredicate {
   private TinkerPredicate() {}
 

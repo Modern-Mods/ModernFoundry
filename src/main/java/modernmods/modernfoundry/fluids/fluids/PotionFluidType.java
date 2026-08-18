@@ -3,25 +3,20 @@ package modernmods.modernfoundry.fluids.fluids;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import modernmods.modernfoundry.compat.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
-import modernmods.hilt.fluid.texture.ClientTextureFluidType;
-import modernmods.hilt.recipe.helper.FluidOutput;
+import modernmods.mantle.recipe.helper.FluidOutput;
 import modernmods.modernfoundry.fluids.TinkerFluids;
 import modernmods.modernfoundry.library.utils.TagUtil;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 public class PotionFluidType extends FluidType {
   public PotionFluidType(Properties properties) {
@@ -30,7 +25,7 @@ public class PotionFluidType extends FluidType {
 
   @Override
   public String getDescriptionId(FluidStack stack) {
-    return Potion.getName(Optional.of(PotionUtils.getPotion(TagUtil.getTag(stack))), "item.minecraft.potion.effect.");
+    return "item.minecraft.potion.effect." + PotionUtils.getPotion(TagUtil.getTag(stack)).value().name();
   }
 
   @Override
@@ -40,30 +35,12 @@ public class PotionFluidType extends FluidType {
     return itemStack;
   }
 
-  @Override
-  public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
-    consumer.accept(new ClientTextureFluidType(this) {
-      /**
-       * Gets the color, based on {@link PotionUtils#getColor(ItemStack)}
-       * @param stack  Fluid stack instance
-       * @return  Color for the fluid
-       */
-      @Override
-      public int getTintColor(FluidStack stack) {
-        CompoundTag tag = TagUtil.getTag(stack);
-        if (tag != null && tag.contains("CustomPotionColor", Tag.TAG_ANY_NUMERIC)) {
-          return tag.getInt("CustomPotionColor") | 0xFF000000;
-        }
-        if (PotionUtils.getPotion(tag).is(Potions.WATER)) {
-          return getTintColor();
-        }
-        return PotionUtils.getColor(PotionUtils.getAllEffects(tag)) | 0xFF000000;
-      }
-    });
-  }
+  // 26.1: FluidType#initializeClient and the IClientFluidTypeExtensions#getTintColor(FluidStack) overload were both
+  // removed. The per-stack potion tint now lives in PotionFluidTintSource (a FluidTintSource), wired to the potion
+  // fluid model in FluidClientEvents#registerFluidModels.
 
   /** Creates the potion tag */
-  private static CompoundTag potionTag(ResourceLocation location) {
+  private static CompoundTag potionTag(Identifier location) {
     CompoundTag tag = new CompoundTag();
     tag.putString("Potion", location.toString());
     return tag;
@@ -79,8 +56,8 @@ public class PotionFluidType extends FluidType {
   /** Creates a fluid stack for the given potion */
   public static FluidStack potionFluid(ResourceKey<Potion> potion, int size) {
     CompoundTag tag = null;
-    if (!potion.location().equals(Potions.WATER.unwrapKey().orElseThrow().location())) {
-      tag = potionTag(potion.location());
+    if (!potion.identifier().equals(Potions.WATER.unwrapKey().orElseThrow().identifier())) {
+      tag = potionTag(potion.identifier());
     }
     return potionFluid(tag, size);
   }
@@ -110,8 +87,11 @@ public class PotionFluidType extends FluidType {
   /** Creates a potion bucket for the given potion */
   public static ItemStack potionBucket(ResourceKey<Potion> potion) {
     ItemStack stack = new ItemStack(TinkerFluids.potion);
-    if (!potion.location().equals(Potions.WATER.unwrapKey().orElseThrow().location())) {
-      TagUtil.setTag(stack, potionTag(potion.location()));
+    if (!potion.identifier().equals(Potions.WATER.unwrapKey().orElseThrow().identifier())) {
+      TagUtil.setTag(stack, potionTag(potion.identifier()));
+      // also bind the vanilla potion component so the item model's minecraft:potion tint colors the bucket per-potion
+      BuiltInRegistries.POTION.get(potion).ifPresent(holder ->
+        stack.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, new net.minecraft.world.item.alchemy.PotionContents(holder)));
     }
     return stack;
   }
@@ -123,6 +103,8 @@ public class PotionFluidType extends FluidType {
     Holder<Potion> holder = BuiltInRegistries.POTION.wrapAsHolder(potion);
     if (!holder.is(Potions.WATER)) {
       TagUtil.setTag(stack, potionTag(BuiltInRegistries.POTION.getKey(potion)));
+      // also bind the vanilla potion component so the item model's minecraft:potion tint colors the bucket per-potion
+      stack.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, new net.minecraft.world.item.alchemy.PotionContents(holder));
     }
     return stack;
   }

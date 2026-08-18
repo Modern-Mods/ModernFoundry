@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.modifiers.hook.armor;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.tools.capability.TinkerDataCapability;
 import modernmods.modernfoundry.library.tools.capability.TinkerDataKeys;

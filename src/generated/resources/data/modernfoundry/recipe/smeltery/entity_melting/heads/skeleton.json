@@ -2,15 +2,9 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/entity_melting/heads/skeleton",
   "ingredient": [
-    {
-      "item": "minecraft:skeleton_skull"
-    },
-    {
-      "item": "minecraft:wither_skeleton_skull"
-    },
-    {
-      "item": "modernfoundry:stray_head"
-    }
+    "minecraft:skeleton_skull",
+    "minecraft:wither_skeleton_skull",
+    "modernfoundry:stray_head"
   ],
   "result": {
     "amount": 250,

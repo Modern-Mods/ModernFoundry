@@ -1,21 +1,19 @@
 {
-  "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casts/gold/gears",
-  "cast": {
-    "tag": "c:gears"
-  },
-  "cast_consumed": true,
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears"
     }
   ],
+  "type": "modernfoundry:casting_table",
+  "cast": "#c:gears",
+  "cast_consumed": true,
   "cooling_time": 57,
   "fluid": {
     "amount": 90,
     "tag": "c:molten_gold"
   },
+  "id": "modernfoundry:smeltery/casts/gold/gears",
   "result": "modernfoundry:gear_cast",
   "switch_slots": true
 }

@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/slime/ender/dirt",
-  "cast": {
-    "item": "minecraft:dirt"
-  },
+  "cast": "minecraft:dirt",
   "cast_consumed": true,
   "cooling_time": 75,
   "fluid": {
     "amount": 500,
     "tag": "modernfoundry:ender_slime"
   },
+  "id": "modernfoundry:smeltery/casting/slime/ender/dirt",
   "result": "modernfoundry:ender_slime_dirt"
 }

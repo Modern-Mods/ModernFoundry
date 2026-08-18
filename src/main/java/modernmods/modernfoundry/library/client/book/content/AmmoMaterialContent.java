@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.library.client.book.content;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.client.book.data.BookData;
-import modernmods.hilt.client.screen.book.element.ItemElement;
-import modernmods.hilt.util.html.HtmlElement;
-import modernmods.hilt.util.html.HtmlSerializable;
+import modernmods.mantle.client.book.data.BookData;
+import modernmods.mantle.client.screen.book.element.ItemElement;
+import modernmods.mantle.util.html.HtmlElement;
+import modernmods.mantle.util.html.HtmlSerializable;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.client.book.elements.TinkerItemElement;
 import modernmods.modernfoundry.library.materials.definition.MaterialId;
@@ -20,14 +20,14 @@ import java.util.List;
 
 public class AmmoMaterialContent extends AbstractMaterialContent {
   /** Page ID for using this index directly */
-  public static final ResourceLocation ID = TConstruct.getResource("ammo_material");
+  public static final Identifier ID = TConstruct.getResource("ammo_material");
 
   public AmmoMaterialContent(MaterialVariantId materialVariant, boolean detailed) {
     super(materialVariant, detailed);
   }
 
   @Override
-  public ResourceLocation getId() {
+  public Identifier getId() {
     return ID;
   }
 

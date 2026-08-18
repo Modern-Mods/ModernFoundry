@@ -29,11 +29,11 @@ public class SkySlimeEntity extends TravelersPlateSlimeEntity {
   }
 
   @Override
-  public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource source) {
+  public boolean causeFallDamage(double distance, float damageMultiplier, DamageSource source) {
     if (isSuppressingBounce()) {
       return super.causeFallDamage(distance, damageMultiplier * 0.2f, source);
     }
-    float[] ret = ForgeHooks.onLivingFall(this, distance, damageMultiplier);
+    float[] ret = ForgeHooks.onLivingFall(this, (float) distance, damageMultiplier);
     if (ret == null) {
       return false;
     }
@@ -44,7 +44,7 @@ public class SkySlimeEntity extends TravelersPlateSlimeEntity {
       setDeltaMovement(motion.x / 0.95f, motion.y * -0.9, motion.z / 0.95f);
       bounceAmount = getDeltaMovement().y;
       fallDistance = 0f;
-      hasImpulse = true;
+      // 26.1.2 removed Entity#hasImpulse; setDeltaMovement already flags the entity for velocity sync.
       setOnGround(false);
       playSound(Sounds.SLIMY_BOUNCE.getSound(), 1f, 1f);
     }

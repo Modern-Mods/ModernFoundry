@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/ice/packed",
-  "ingredient": {
-    "item": "minecraft:packed_ice"
-  },
+  "ingredient": "minecraft:packed_ice",
   "material": "modernfoundry:ice",
   "needed": 1,
   "value": 1

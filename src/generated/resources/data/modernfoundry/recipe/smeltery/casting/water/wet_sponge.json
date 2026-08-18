@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/water/wet_sponge",
-  "cast": {
-    "item": "minecraft:sponge"
-  },
+  "cast": "minecraft:sponge",
   "cast_consumed": true,
   "cooling_time": 1,
   "fluid": {
     "amount": 250,
     "fluid": "minecraft:water"
   },
+  "id": "modernfoundry:smeltery/casting/water/wet_sponge",
   "result": "minecraft:wet_sponge"
 }

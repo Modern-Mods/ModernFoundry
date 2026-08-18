@@ -1,13 +1,13 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/fireprimer",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/fireprimer",
   "inputs": [
     {
-      "tag": "c:ingots/steel"
+      "ingredient": "#c:ingots/steel"
     },
     {
-      "item": "minecraft:flint"
+      "ingredient": "minecraft:flint"
     }
   ],
   "level": 1,
@@ -15,7 +15,5 @@
   "slots": {
     "upgrades": 1
   },
-  "tools": {
-    "item": "modernfoundry:flint_and_brick"
-  }
+  "tools": "modernfoundry:flint_and_brick"
 }

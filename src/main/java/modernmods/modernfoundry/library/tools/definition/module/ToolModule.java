@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.library.tools.definition.module;
 
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.loadable.record.SingletonLoader;
-import modernmods.hilt.data.registry.GenericLoaderRegistry;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.SingletonLoader;
+import modernmods.mantle.data.registry.GenericLoaderRegistry;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
 import modernmods.modernfoundry.library.module.HookProvider;
 import modernmods.modernfoundry.library.module.ModuleHook;
 import modernmods.modernfoundry.library.module.WithHooks;

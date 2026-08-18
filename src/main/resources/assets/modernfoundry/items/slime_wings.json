@@ -1,0 +1,18 @@
+{
+  "model": {
+    "type": "modernfoundry:tool",
+    "base_model": "modernfoundry:item/slime_wings",
+    "parts": [
+      {
+        "name": "slime",
+        "index": 0
+      }
+    ],
+    "modifier_maps": [
+      "modernfoundry:slime/wings"
+    ],
+    "first_modifiers": [
+      "modernfoundry:trim"
+    ]
+  }
+}

@@ -3,7 +3,7 @@ package modernmods.modernfoundry.tools.modifiers.ability.ranged;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.client.ResourceColorManager;
+import modernmods.mantle.client.ResourceColorManager;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.modifiers.impl.NoLevelsModifier;
 import modernmods.modernfoundry.library.modifiers.modules.behavior.InfinityModule;
@@ -30,7 +30,7 @@ public class CrystalshotModifier extends NoLevelsModifier {
   @Override
   public Component getDisplayName(IToolStackView tool, ModifierEntry entry, @Nullable RegistryAccess access) {
     // color the display name for the variant
-    String variant = tool.getPersistentData().getString(getId());
+    String variant = tool.getPersistentData().getString(getId().getIdentifier());
     if (!variant.isEmpty()) {
       String key = getTranslationKey();
       return Component.translatable(getTranslationKey())

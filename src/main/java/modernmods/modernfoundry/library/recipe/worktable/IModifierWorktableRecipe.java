@@ -2,11 +2,11 @@ package modernmods.modernfoundry.library.recipe.worktable;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.recipe.ICommonRecipe;
+import modernmods.mantle.recipe.ICommonRecipe;
 import modernmods.modernfoundry.library.modifiers.ModifierEntry;
 import modernmods.modernfoundry.library.recipe.ITinkerableContainer;
 import modernmods.modernfoundry.library.recipe.RecipeResult;
@@ -22,10 +22,10 @@ import java.util.List;
  */
 public interface IModifierWorktableRecipe extends ICommonRecipe<ITinkerableContainer> {
   /** Gets the recipe ID. */
-  ResourceLocation getId();
+  Identifier getId();
 
   @Override
-  default RecipeType<?> getType() {
+  default RecipeType<? extends IModifierWorktableRecipe> getType() {
     return TinkerRecipeTypes.MODIFIER_WORKTABLE.get();
   }
 
@@ -106,15 +106,13 @@ public interface IModifierWorktableRecipe extends ICommonRecipe<ITinkerableConta
 
   /** Deprecated methods to ignore */
 
-  @Override
-  @Deprecated
+    @Deprecated
   default ItemStack getResultItem(HolderLookup.Provider access) {
     return ItemStack.EMPTY;
   }
 
   @Deprecated
-  @Override
-  default ItemStack assemble(ITinkerableContainer inv, HolderLookup.Provider access) {
+    default ItemStack assemble(ITinkerableContainer inv, HolderLookup.Provider access) {
     return ItemStack.EMPTY;
   }
 }

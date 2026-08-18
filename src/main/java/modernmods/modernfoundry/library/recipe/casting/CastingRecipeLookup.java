@@ -3,9 +3,9 @@ package modernmods.modernfoundry.library.recipe.casting;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import modernmods.hilt.recipe.data.ItemNameOutput;
-import modernmods.hilt.recipe.helper.ItemOutput;
-import modernmods.hilt.util.RegistryHelper;
+import modernmods.mantle.recipe.data.ItemNameOutput;
+import modernmods.mantle.recipe.helper.ItemOutput;
+import modernmods.mantle.util.RegistryHelper;
 import modernmods.modernfoundry.common.recipe.RecipeCacheInvalidator;
 import modernmods.modernfoundry.common.recipe.RecipeCacheInvalidator.DuelSidedListener;
 
@@ -59,7 +59,7 @@ public class CastingRecipeLookup {
       registerCastable(tag);
     // item name output fails here, but that only happens at datagen so just ignore that
     } else if (!output.isEmpty() && output.getClass() != ItemNameOutput.class) {
-      registerCastable(output.get().getItem());
+      registerCastable(output.getItem());
     }
   }
 

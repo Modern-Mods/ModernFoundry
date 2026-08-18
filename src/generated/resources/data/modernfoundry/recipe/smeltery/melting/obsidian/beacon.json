@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/obsidian/beacon",
   "byproducts": [
     {
       "amount": 5000,
       "fluid": "modernfoundry:molten_glass"
     }
   ],
-  "ingredient": {
-    "item": "minecraft:beacon"
-  },
+  "id": "modernfoundry:smeltery/melting/obsidian/beacon",
+  "ingredient": "minecraft:beacon",
   "result": {
     "amount": 3000,
     "fluid": "modernfoundry:molten_obsidian"

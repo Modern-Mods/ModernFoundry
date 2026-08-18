@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:damagable_melting",
   "id": "modernfoundry:smeltery/melting/metal/iron/sword",
-  "ingredient": {
-    "tag": "modernfoundry:melting/iron/tools_costing_2"
-  },
+  "ingredient": "#modernfoundry:melting/iron/tools_costing_2",
   "result": {
     "amount": 180,
     "tag": "c:molten_iron",

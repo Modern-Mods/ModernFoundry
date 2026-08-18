@@ -1,11 +1,8 @@
 {
   "type": "modernfoundry:part_builder",
-  "id": "modernfoundry:tools/parts/builder/shield_core",
   "cost": 4,
+  "id": "modernfoundry:tools/parts/builder/shield_core",
   "pattern": "modernfoundry:shield_core",
-  "pattern_item": {
-    "tag": "modernfoundry:patterns/default"
-  },
   "result": {
     "item": "modernfoundry:shield_core"
   }

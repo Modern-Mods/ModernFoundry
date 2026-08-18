@@ -1,15 +1,13 @@
 {
   "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/slimesteel/reinforcement",
   "byproducts": [
     {
       "amount": 250,
       "fluid": "modernfoundry:molten_obsidian"
     }
   ],
-  "ingredient": {
-    "item": "modernfoundry:slimesteel_reinforcement"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/slimesteel/reinforcement",
+  "ingredient": "modernfoundry:slimesteel_reinforcement",
   "result": {
     "amount": 30,
     "fluid": "modernfoundry:molten_slimesteel"

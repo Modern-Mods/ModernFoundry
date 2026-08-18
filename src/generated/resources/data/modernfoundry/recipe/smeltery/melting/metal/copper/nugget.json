@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/copper/nugget",
-  "ingredient": {
-    "tag": "c:nuggets/copper"
-  },
+  "ingredient": "#c:nuggets/copper",
   "result": {
     "amount": 10,
     "tag": "c:molten_copper"

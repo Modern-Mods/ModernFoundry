@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.json.predicate.modifier;
 
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.modifiers.ModifierId;
 
 /** Predicate matching a single modifier */

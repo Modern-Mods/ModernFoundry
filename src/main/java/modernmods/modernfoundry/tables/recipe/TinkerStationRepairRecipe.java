@@ -3,7 +3,7 @@ package modernmods.modernfoundry.tables.recipe;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -37,7 +37,7 @@ public class TinkerStationRepairRecipe implements ITinkerStationRecipe {
   private static final IntConsumer NO_ACTION = i -> {};
 
   @Getter
-  private final ResourceLocation id;
+  private final Identifier id;
 
   /**
    * Gets the material for the given slot
@@ -218,7 +218,7 @@ public class TinkerStationRepairRecipe implements ITinkerStationRecipe {
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public RecipeSerializer<? extends TinkerStationRepairRecipe> getSerializer() {
     return TinkerTables.tinkerStationRepairSerializer.get();
   }
 }

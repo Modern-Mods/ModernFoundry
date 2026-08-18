@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableSet;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.util.CombatHelper;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.util.CombatHelper;
 import modernmods.modernfoundry.common.TinkerDamageTypes;
 import modernmods.modernfoundry.library.json.LevelingValue;
 import modernmods.modernfoundry.library.json.TinkerLoadables;
@@ -72,7 +72,7 @@ public record UpdateHealthModule(LevelingValue bonus, Set<EquipmentSlot> slots, 
   public void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
     if (condition.matches(tool, modifier) && slots.contains(context.getChangedSlot())) {
       Level level = context.getLevel();
-      if (!level.isClientSide && EquipmentChangeModifierHook.didEquip(tool, context)) {
+      if (!level.isClientSide() && EquipmentChangeModifierHook.didEquip(tool, context)) {
         updateHealth(context.getEntity(), bonus.compute(modifier));
       }
     }
@@ -82,7 +82,7 @@ public record UpdateHealthModule(LevelingValue bonus, Set<EquipmentSlot> slots, 
   public void onUnequip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
     if (condition.matches(tool, modifier) && slots.contains(context.getChangedSlot())) {
       Level level = context.getLevel();
-      if (!level.isClientSide && EquipmentChangeModifierHook.didUnequip(tool, context)) {
+      if (!level.isClientSide() && EquipmentChangeModifierHook.didUnequip(tool, context)) {
         updateHealth(context.getEntity(), -bonus.compute(modifier));
       }
     }

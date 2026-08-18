@@ -3,7 +3,7 @@ package modernmods.modernfoundry.shared.network;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.network.FriendlyByteBuf;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import modernmods.hilt.network.packet.IThreadsafePacket;
+import modernmods.mantle.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.shared.client.ClientGeneratePartTexturesCommand;
 
 /** Packet to tell the client to generate tool textures */

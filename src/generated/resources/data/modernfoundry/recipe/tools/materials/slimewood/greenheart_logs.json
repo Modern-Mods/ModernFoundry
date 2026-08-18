@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:material",
   "id": "modernfoundry:tools/materials/slimewood/greenheart_logs",
-  "ingredient": {
-    "tag": "modernfoundry:greenheart_logs"
-  },
+  "ingredient": "#modernfoundry:greenheart_logs",
   "leftover": "modernfoundry:greenheart_planks",
   "material": "modernfoundry:slimewood#greenheart",
   "needed": 1,

@@ -5,18 +5,10 @@
   "input_slots": [
     {
       "filter": [
-        {
-          "item": "modernfoundry:helmet_plating"
-        },
-        {
-          "item": "modernfoundry:chestplate_plating"
-        },
-        {
-          "item": "modernfoundry:leggings_plating"
-        },
-        {
-          "item": "modernfoundry:boots_plating"
-        }
+        "modernfoundry:helmet_plating",
+        "modernfoundry:chestplate_plating",
+        "modernfoundry:leggings_plating",
+        "modernfoundry:boots_plating"
       ],
       "icon": "modernfoundry:plating",
       "translation_key": "pattern.modernfoundry.plating",
@@ -24,9 +16,7 @@
       "y": 29
     },
     {
-      "filter": {
-        "item": "modernfoundry:maille"
-      },
+      "filter": "modernfoundry:maille",
       "icon": "modernfoundry:maille",
       "translation_key": "item.modernfoundry.maille",
       "x": 33,

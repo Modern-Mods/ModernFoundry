@@ -1,12 +1,12 @@
 package modernmods.modernfoundry.library.json.variable.tool;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.registry.GenericLoaderRegistry;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.registry.GenericLoaderRegistry;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
 import modernmods.modernfoundry.library.json.variable.ToFloatFunction;
 import modernmods.modernfoundry.library.json.variable.VariableLoaderRegistry;
 import modernmods.modernfoundry.library.json.variable.melee.MeleeVariable;
@@ -18,7 +18,7 @@ import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
 
 import javax.annotation.Nullable;
 
-import static modernmods.hilt.data.loadable.record.SingletonLoader.singleton;
+import static modernmods.mantle.data.loadable.record.SingletonLoader.singleton;
 
 /**
  * Variable that fetches a value from a tool instance.
@@ -76,7 +76,7 @@ public interface ToolVariable extends IHaveLoader, MeleeVariable, ConditionalSta
 
 
   /** Registers a variable with tools, melee, conditional stat, and mining speed */
-  static void register(ResourceLocation name, RecordLoadable<? extends ToolVariable> loader) {
+  static void register(Identifier name, RecordLoadable<? extends ToolVariable> loader) {
     LOADER.register(name, loader);
     MeleeVariable.LOADER.register(name, loader);
     ConditionalStatVariable.register(name, loader);

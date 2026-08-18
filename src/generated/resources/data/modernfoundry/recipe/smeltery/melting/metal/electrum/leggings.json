@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/metal/electrum/leggings",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:armors/leggings/electrum"
     }
   ],
-  "ingredient": {
-    "tag": "c:armors/leggings/electrum"
-  },
+  "type": "modernfoundry:damagable_melting",
+  "id": "modernfoundry:smeltery/melting/metal/electrum/leggings",
+  "ingredient": "#c:armors/leggings/electrum",
   "result": {
     "amount": 630,
     "tag": "c:molten_electrum",

@@ -1,11 +1,12 @@
 package modernmods.modernfoundry.library.client.materials;
 
+import modernmods.modernfoundry.TConstruct;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextColor;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
-import modernmods.hilt.client.ResourceColorManager;
-import modernmods.hilt.data.listener.ISafeManagerReloadListener;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
+import modernmods.mantle.client.ResourceColorManager;
+import modernmods.mantle.data.listener.ISafeManagerReloadListener;
 import modernmods.modernfoundry.library.materials.definition.MaterialVariantId;
 import modernmods.modernfoundry.library.utils.Util;
 
@@ -33,8 +34,8 @@ public class MaterialTooltipCache {
   private MaterialTooltipCache() {}
 
   /** Called during the event to initialize the cache invalidators */
-  public static void init(RegisterClientReloadListenersEvent manager)  {
-    manager.registerReloadListener(RELOAD_LISTENER);
+  public static void init(AddClientReloadListenersEvent manager)  {
+    manager.addListener(TConstruct.getResource("material_tooltip_cache"), RELOAD_LISTENER);
   }
 
   /** Logic to convert a material ID to a string */

@@ -1,14 +1,15 @@
 package modernmods.modernfoundry.common.data.tags;
 
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagEntry;
+import net.minecraft.data.tags.TagAppender;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.DamageTypeTagsProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 import modernmods.modernfoundry.TConstruct;
 
 import java.util.concurrent.CompletableFuture;
@@ -66,8 +67,8 @@ import static modernmods.modernfoundry.common.TinkerTags.DamageTypes.PROJECTILE_
 
 @SuppressWarnings("removal")
 public class DamageTypeTagProvider extends DamageTypeTagsProvider {
-  public DamageTypeTagProvider(PackOutput packOutput, CompletableFuture<Provider> lookup, @Nullable ExistingFileHelper existingFileHelper) {
-    super(packOutput, lookup, TConstruct.MOD_ID, existingFileHelper);
+  public DamageTypeTagProvider(PackOutput packOutput, CompletableFuture<Provider> lookup) {
+    super(packOutput, lookup, TConstruct.MOD_ID);
   }
 
   @SuppressWarnings("unchecked")
@@ -103,14 +104,14 @@ public class DamageTypeTagProvider extends DamageTypeTagsProvider {
     addOptional(MAGIC_PROTECTION, tf, "haunt", "ominous_fire", "twilight_scepter");
     addOptional(PROJECTILE_PROTECTION, tf, "falling_ice");
     // anything "magic" is good against lich shields, so tag our magic fluids
-    tag(TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(tf, "breaks_lich_shields"))).add(FLUID_MAGIC.values());
+    tag(TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath(tf, "breaks_lich_shields"))).add(FLUID_MAGIC.values());
   }
 
   /** Adds the given IDs from the given domain to the tag as optional entries. */
   private void addOptional(TagKey<DamageType> tag, String domain, String... names) {
-    TagAppender<DamageType> appender = tag(tag);
+    TagAppender<ResourceKey<DamageType>, DamageType> appender = tag(tag);
     for (String name : names) {
-      appender.addOptional(ResourceLocation.fromNamespaceAndPath(domain, name));
+      appender.add(TagEntry.optionalElement(Identifier.fromNamespaceAndPath(domain, name)));
     }
   }
 }

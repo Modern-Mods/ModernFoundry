@@ -2,8 +2,8 @@ package modernmods.modernfoundry.library.json.variable.block;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.conditions.ICondition;
-import modernmods.hilt.data.loadable.mapping.ConditionalLoadable.ConditionalObject;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.mapping.ConditionalLoadable.ConditionalObject;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 import modernmods.modernfoundry.library.utils.Util;
 
 /**

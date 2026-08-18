@@ -3,7 +3,7 @@ package modernmods.modernfoundry.library.tools.definition.module.aoe;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.world.entity.player.Player;
-import modernmods.hilt.data.registry.NamedComponentRegistry;
+import modernmods.mantle.data.registry.NamedComponentRegistry;
 import modernmods.modernfoundry.TConstruct;
 
 import javax.annotation.Nullable;

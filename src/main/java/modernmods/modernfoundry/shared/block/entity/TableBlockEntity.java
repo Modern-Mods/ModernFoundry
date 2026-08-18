@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import modernmods.hilt.block.entity.InventoryBlockEntity;
+import modernmods.mantle.block.entity.InventoryBlockEntity;
 import modernmods.modernfoundry.common.SoundUtils;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.common.network.InventorySlotSyncPacket;
@@ -43,7 +43,7 @@ public abstract class TableBlockEntity extends InventoryBlockEntity {
   @Override
   public void setItem(int slot, ItemStack itemstack) {
     // send a slot update to the client when items change, so we can update the TESR
-    if (level != null && level instanceof ServerLevel && !level.isClientSide && !ItemStack.matches(itemstack, getItem(slot))) {
+    if (level != null && level instanceof ServerLevel && !level.isClientSide() && !ItemStack.matches(itemstack, getItem(slot))) {
       TinkerNetwork.getInstance().sendToClientsAround(new InventorySlotSyncPacket(itemstack, slot, worldPosition), (ServerLevel) level, this.worldPosition);
     }
     super.setItem(slot, itemstack);
@@ -54,23 +54,13 @@ public abstract class TableBlockEntity extends InventoryBlockEntity {
     return true;
   }
 
-  @Override
-  public void saveSynced(CompoundTag nbt, HolderLookup.Provider registries) {
-    super.saveSynced(nbt, registries);
-    writeInventoryToNBT(nbt, registries);
-  }
-
-  @Override
-  public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-    CompoundTag nbt = super.getUpdateTag(registries);
-    return nbt;
-  }
+  // saveSynced (inventory sync) and getUpdateTag are handled by the InventoryBlockEntity/MantleBlockEntity base
 
   /**
    * Sends a packet to all players with this container open
    */
   public void syncToRelevantPlayers(Consumer<Player> action) {
-    if (this.level == null || this.level.isClientSide) {
+    if (this.level == null || this.level.isClientSide()) {
       return;
     }
 
@@ -103,7 +93,7 @@ public abstract class TableBlockEntity extends InventoryBlockEntity {
    */
   protected void playCraftSound(Player player) {
     if (isSoundReady(player)) {
-      SoundUtils.playSoundForAll(player, Sounds.SAW.getSound(), 0.8f, 0.8f + 0.4f * player.level().random.nextFloat());
+      SoundUtils.playSoundForAll(player, Sounds.SAW.getSound(), 0.8f, 0.8f + 0.4f * player.level().getRandom().nextFloat());
     }
   }
 
@@ -112,7 +102,7 @@ public abstract class TableBlockEntity extends InventoryBlockEntity {
    * @param player  Player to send an update to
    */
   protected void syncScreen(Player player) {
-    if (this.level != null && !this.level.isClientSide && player instanceof ServerPlayer serverPlayer) {
+    if (this.level != null && !this.level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
       TinkerNetwork.getInstance().sendTo(UpdateStationScreenPacket.INSTANCE, serverPlayer);
     }
   }
@@ -121,7 +111,7 @@ public abstract class TableBlockEntity extends InventoryBlockEntity {
    * Update the screen for all players using this UI
    */
   protected void syncScreenToRelevantPlayers() {
-    if (this.level != null && !this.level.isClientSide) {
+    if (this.level != null && !this.level.isClientSide()) {
       syncToRelevantPlayers(this::syncScreen);
     }
   }

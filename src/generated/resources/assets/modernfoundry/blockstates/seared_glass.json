@@ -1,7 +1,13 @@
 {
   "variants": {
     "": {
-      "model": "modernfoundry:block/smeltery/glass/block"
+      "type": "mantle:connected",
+      "model": "modernfoundry:block/smeltery/glass/block",
+      "connection": {
+        "textures": {
+          "all": "cornerless_full"
+        }
+      }
     }
   }
 }

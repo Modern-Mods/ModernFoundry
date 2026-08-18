@@ -1,40 +1,32 @@
 {
   "icon": {
     "item": "modernfoundry:javelin",
-    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+    "nbt": "{tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
   },
   "input_slots": [
     {
-      "filter": {
-        "item": "modernfoundry:small_blade"
-      },
+      "filter": "modernfoundry:small_blade",
       "icon": "modernfoundry:small_blade",
       "translation_key": "item.modernfoundry.small_blade",
       "x": 45,
       "y": 26
     },
     {
-      "filter": {
-        "item": "modernfoundry:tool_handle"
-      },
+      "filter": "modernfoundry:tool_handle",
       "icon": "modernfoundry:tool_handle",
       "translation_key": "item.modernfoundry.tool_handle",
       "x": 7,
       "y": 62
     },
     {
-      "filter": {
-        "item": "modernfoundry:bow_limb"
-      },
+      "filter": "modernfoundry:bow_limb",
       "icon": "modernfoundry:bow_limb",
       "translation_key": "item.modernfoundry.bow_limb",
       "x": 45,
       "y": 46
     },
     {
-      "filter": {
-        "item": "modernfoundry:bow_grip"
-      },
+      "filter": "modernfoundry:bow_grip",
       "icon": "modernfoundry:bow_grip",
       "translation_key": "item.modernfoundry.bow_grip",
       "x": 25,

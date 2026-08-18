@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "modernfoundry:fancy_item_frame",
   "key": {
-    "M": {
-      "item": "modernfoundry:obsidian_pane"
-    },
-    "e": {
-      "tag": "c:nuggets/netherite"
-    }
+    "M": "modernfoundry:obsidian_pane",
+    "e": "#c:nuggets/netherite"
   },
   "pattern": [
     " e ",
@@ -17,6 +13,5 @@
   ],
   "result": {
     "id": "modernfoundry:netherite_item_frame"
-  },
-  "show_notification": true
+  }
 }

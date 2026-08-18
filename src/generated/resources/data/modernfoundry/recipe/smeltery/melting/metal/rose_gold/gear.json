@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/rose_gold/gear",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:gears/rose_gold"
     }
   ],
-  "ingredient": {
-    "tag": "c:gears/rose_gold"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/rose_gold/gear",
+  "ingredient": "#c:gears/rose_gold",
   "result": {
     "amount": 360,
     "tag": "c:molten_rose_gold"

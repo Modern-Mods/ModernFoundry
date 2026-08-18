@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/magnetic",
   "allow_crystal": true,
+  "id": "modernfoundry:tools/modifiers/upgrade/magnetic",
   "inputs": [
     {
-      "item": "minecraft:compass"
+      "ingredient": "minecraft:compass"
     }
   ],
   "level": {
@@ -15,11 +15,7 @@
     "upgrades": 1
   },
   "tools": [
-    {
-      "tag": "modernfoundry:modifiable/melee/weapon"
-    },
-    {
-      "tag": "modernfoundry:modifiable/harvest"
-    }
+    "#modernfoundry:modifiable/melee/weapon",
+    "#modernfoundry:modifiable/harvest"
   ]
 }

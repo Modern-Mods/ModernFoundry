@@ -1,0 +1,24 @@
+{
+  "values": [
+    "modernfoundry:pickaxe",
+    "modernfoundry:sledge_hammer",
+    "modernfoundry:vein_hammer",
+    "modernfoundry:mattock",
+    "modernfoundry:pickadze",
+    "modernfoundry:excavator",
+    "modernfoundry:hand_axe",
+    "modernfoundry:broad_axe",
+    "modernfoundry:kama",
+    "modernfoundry:scythe",
+    "modernfoundry:dagger",
+    "modernfoundry:sword",
+    "modernfoundry:cleaver",
+    "modernfoundry:javelin",
+    "modernfoundry:flint_and_brick",
+    {
+      "id": "modernfoundry:minotaur_axe",
+      "required": false
+    },
+    "#modernfoundry:modifiable/interactable/dual"
+  ]
+}

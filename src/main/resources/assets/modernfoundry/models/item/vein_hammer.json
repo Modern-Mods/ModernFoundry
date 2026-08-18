@@ -1,38 +1,13 @@
 {
-  "loader": "modernfoundry:tool",
   "parent": "modernfoundry:item/tool/vein_hammer/display",
   "textures": {
-    "head":   "modernfoundry:item/tool/vein_hammer/head",
+    "head": "modernfoundry:item/tool/vein_hammer/head",
     "handle": "modernfoundry:item/tool/vein_hammer/handle",
-    "grip":   "modernfoundry:item/tool/vein_hammer/grip",
-    "front":  "modernfoundry:item/tool/vein_hammer/front",
-
-    "large_head":   "modernfoundry:item/tool/vein_hammer/large/head",
+    "grip": "modernfoundry:item/tool/vein_hammer/grip",
+    "front": "modernfoundry:item/tool/vein_hammer/front",
+    "large_head": "modernfoundry:item/tool/vein_hammer/large/head",
     "large_handle": "modernfoundry:item/tool/vein_hammer/large/handle",
-    "large_grip":   "modernfoundry:item/tool/vein_hammer/large/grip",
-    "large_front":  "modernfoundry:item/tool/vein_hammer/large/front"
-  },
-  "modifier_maps": ["modernfoundry:vein_hammer"],
-  "modifier_roots": {
-    "small": [ "modernfoundry:item/tool/vein_hammer/modifiers/" ],
-    "large": [ "modernfoundry:item/tool/vein_hammer/large/modifiers/" ]
-  },
-  "large": true,
-  "large_offset": [-2, 2],
-  "parts": [
-    { "name": "handle", "index": 1 },
-    { "name": "head",   "index": 0 },
-    { "name": "grip",   "index": 2 },
-    { "name": "front",  "index": 3 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "modernfoundry:charging": 2 },
-      "model": "modernfoundry:item/tool/vein_hammer/blocking"
-    },
-    {
-      "predicate": { "modernfoundry:broken": 1 },
-      "model": "modernfoundry:item/tool/vein_hammer/broken"
-    }
-  ]
+    "large_grip": "modernfoundry:item/tool/vein_hammer/large/grip",
+    "large_front": "modernfoundry:item/tool/vein_hammer/large/front"
+  }
 }

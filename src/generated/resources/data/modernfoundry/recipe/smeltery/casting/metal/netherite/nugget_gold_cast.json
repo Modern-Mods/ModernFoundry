@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/netherite/nugget_gold_cast",
-  "cast": {
-    "tag": "modernfoundry:casts/multi_use/nugget"
-  },
+  "cast": "#modernfoundry:casts/multi_use/nugget",
   "cooling_time": 25,
   "fluid": {
     "amount": 10,
     "tag": "c:molten_netherite"
   },
+  "id": "modernfoundry:smeltery/casting/metal/netherite/nugget_gold_cast",
   "result": {
     "tag": "c:nuggets/netherite"
   }

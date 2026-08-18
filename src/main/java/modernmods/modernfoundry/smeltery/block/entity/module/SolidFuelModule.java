@@ -3,20 +3,25 @@ package modernmods.modernfoundry.smeltery.block.entity.module;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.ForgeHooks;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
+import modernmods.mantle.compat.neoforged.neoforge.common.util.LazyOptional;
 import java.util.function.Consumer;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.EmptyFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
-import modernmods.hilt.block.entity.HiltBlockEntity;
-import modernmods.hilt.inventory.EmptyItemHandler;
-import modernmods.hilt.util.WeakConsumerWrapper;
+import net.neoforged.neoforge.transfer.EmptyResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import modernmods.mantle.block.entity.MantleBlockEntity;
+import modernmods.mantle.inventory.EmptyItemHandler;
+import modernmods.mantle.util.WeakConsumerWrapper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
 import modernmods.modernfoundry.library.recipe.fuel.MeltingFuel;
@@ -35,8 +40,11 @@ public class SolidFuelModule extends FuelModule {
   /** Last item handler where items were extracted */
   @Nullable
   private LazyOptional<IItemHandler> itemHandler;
+  /** Raw fluid resource handler for the fuel tank, exposed to menus */
+  @Nullable
+  private ResourceHandler<FluidResource> fluidTank;
 
-  public SolidFuelModule(HiltBlockEntity parent, BlockPos fuelPos) {
+  public SolidFuelModule(MantleBlockEntity parent, BlockPos fuelPos) {
     super(parent);
     this.fuelPos = fuelPos;
   }
@@ -56,6 +64,7 @@ public class SolidFuelModule extends FuelModule {
       }
       itemHandler = null;
       fluidHandler = null;
+      fluidTank = null;
     }
   }
 
@@ -82,15 +91,16 @@ public class SolidFuelModule extends FuelModule {
             rate = solid.getRate();
             parent.setChangedFast();
             // return the container
-            ItemStack container = extracted.getCraftingRemainingItem();
+            ItemStackTemplate remainderTemplate = extracted.getItem().getCraftingRemainder(extracted);
+            ItemStack container = remainderTemplate != null ? remainderTemplate.create() : ItemStack.EMPTY;
             if (!container.isEmpty()) {
               // if we cannot insert the container back, spit it on the ground
               ItemStack notInserted = ItemHandlerHelper.insertItem(handler, container, false);
               if (!notInserted.isEmpty()) {
                 Level world = getLevel();
-                double x = (world.random.nextFloat() * 0.5F) + 0.25D;
-                double y = (world.random.nextFloat() * 0.5F) + 0.25D;
-                double z = (world.random.nextFloat() * 0.5F) + 0.25D;
+                double x = (world.getRandom().nextFloat() * 0.5F) + 0.25D;
+                double y = (world.getRandom().nextFloat() * 0.5F) + 0.25D;
+                double z = (world.getRandom().nextFloat() * 0.5F) + 0.25D;
                 ItemEntity itementity = new ItemEntity(world, fuelPos.getX() + x, fuelPos.getY() + y, fuelPos.getZ() + z, container);
                 itementity.setDefaultPickUpDelay();
                 world.addFreshEntity(itementity);
@@ -116,17 +126,21 @@ public class SolidFuelModule extends FuelModule {
     if (te != null) {
       // first, identify a capability that has what we need
       // on the chance both are present, we prioritize fluid; we don't expect that to change
-      IFluidHandler fluidCapability = getLevel().getCapability(Capabilities.FluidHandler.BLOCK, fuelPos, null, te, null);
+      ResourceHandler<FluidResource> fluidRh = getLevel().getCapability(Capabilities.Fluid.BLOCK, fuelPos, null, te, null);
+      fluidTank = fluidRh;
+      IFluidHandler fluidCapability = fluidRh == null ? null : IFluidHandler.of(fluidRh);
       fluidHandler = LazyOptional.ofNullable(fluidCapability);
       if (fluidHandler.isPresent()) {
         fluidHandler.addListener(fluidListener);
       }
-      IItemHandler itemCapability = getLevel().getCapability(Capabilities.ItemHandler.BLOCK, fuelPos, null, te, null);
+      ResourceHandler<ItemResource> itemRh = getLevel().getCapability(Capabilities.Item.BLOCK, fuelPos, null, te, null);
+      IItemHandler itemCapability = itemRh == null ? null : IItemHandler.of(itemRh);
       itemHandler = LazyOptional.ofNullable(itemCapability);
       if (itemHandler.isPresent()) {
         itemHandler.addListener(itemListener);
       }
     } else {
+      fluidTank = null;
       fluidHandler = LazyOptional.empty();
       itemHandler = LazyOptional.empty();
     }
@@ -174,10 +188,7 @@ public class SolidFuelModule extends FuelModule {
   /* Fluid handler */
 
   /** Gets the fluid handler for proxy */
-  public IFluidHandler getTank() {
-    if (fluidHandler != null) {
-      return fluidHandler.orElse(EmptyFluidHandler.INSTANCE);
-    }
-    return EmptyFluidHandler.INSTANCE;
+  public ResourceHandler<FluidResource> getTank() {
+    return fluidTank != null ? fluidTank : EmptyResourceHandler.instance();
   }
 }

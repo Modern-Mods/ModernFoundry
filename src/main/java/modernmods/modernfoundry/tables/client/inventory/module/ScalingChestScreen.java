@@ -1,29 +1,28 @@
 package modernmods.modernfoundry.tables.client.inventory.module;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
-import net.neoforged.neoforge.items.IItemHandler;
-import modernmods.hilt.client.screen.MultiModuleScreen;
-import modernmods.hilt.inventory.BaseContainerMenu;
-import modernmods.hilt.inventory.EmptyItemHandler;
+import modernmods.mantle.client.screen.MultiModuleScreen;
+import modernmods.mantle.inventory.BaseContainerMenu;
+import modernmods.modernfoundry.tables.block.entity.chest.AbstractChestBlockEntity;
+import modernmods.modernfoundry.tables.block.entity.inventory.IChestItemHandler;
 import modernmods.modernfoundry.tables.block.entity.inventory.IScalingContainer;
-
-import java.util.Optional;
 
 public class ScalingChestScreen<T extends BlockEntity> extends DynamicContainerScreen<MultiModuleScreen<?>,BaseContainerMenu<T>> {
   private final IScalingContainer scaling;
   public ScalingChestScreen(MultiModuleScreen<?> parent, BaseContainerMenu<T> container, Inventory playerInventory, Component title) {
     super(parent, container, playerInventory, title);
     BlockEntity tile = container.getTile();
-    IItemHandler handler = Optional.ofNullable(tile)
-                                   .map(t -> t.getLevel() == null ? null : t.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, t.getBlockPos(), t.getBlockState(), t, null))
-                                   .orElse(EmptyItemHandler.INSTANCE);
-    this.scaling = handler instanceof IScalingContainer ? (IScalingContainer) handler : handler::getSlots;
+    // the chest's own item handler is an IScalingContainer, so read it directly off the block entity to preserve the visual size logic
+    if (tile instanceof AbstractChestBlockEntity chest) {
+      IChestItemHandler handler = chest.getItemHandler();
+      this.scaling = handler;
+    } else {
+      this.scaling = () -> 0;
+    }
     this.slotCount = scaling.getVisualSize();
     this.sliderActive = true;
   }
@@ -66,5 +65,5 @@ public class ScalingChestScreen<T extends BlockEntity> extends DynamicContainerS
   }
 
   @Override
-  protected void renderLabels(GuiGraphics graphics, int x, int y) {}
+  public void handleDrawGuiContainerForegroundLayer(GuiGraphicsExtractor graphics, int x, int y) {}
 }

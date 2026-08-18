@@ -1,9 +1,9 @@
 {
   "type": "modernfoundry:severing",
-  "id": "modernfoundry:tools/severing/phantom_membrane",
   "entity": {
     "type": "minecraft:phantom"
   },
+  "id": "modernfoundry:tools/severing/phantom_membrane",
   "looting_bonus": 0.01,
   "per_level_chance": 0.05,
   "result": "minecraft:phantom_membrane"

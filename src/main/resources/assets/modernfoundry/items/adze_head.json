@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "modernfoundry:material",
+    "base_model": "modernfoundry:item/adze_head",
+    "offset": [
+      -5,
+      1
+    ]
+  }
+}

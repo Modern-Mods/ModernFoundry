@@ -1,11 +1,10 @@
 {
   "type": "modernfoundry:crafting_shaped_materials",
-  "id": "modernfoundry:tools/parts/fake_ingot_to_block",
   "category": "misc",
   "key": {
     "#": {
-      "type": "modernfoundry:material",
-      "item": "modernfoundry:fake_ingot",
+      "neoforge:ingredient_type": "modernfoundry:material",
+      "match": "modernfoundry:fake_ingot",
       "material": {
         "type": "modernfoundry:has_part",
         "part": "modernfoundry:fake_storage_block"
@@ -19,7 +18,6 @@
     "###"
   ],
   "result": {
-    "item": "modernfoundry:fake_storage_block"
-  },
-  "show_notification": true
+    "id": "modernfoundry:fake_storage_block"
+  }
 }

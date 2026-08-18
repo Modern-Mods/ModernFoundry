@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/metal/copper/wire",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:wires/copper"
     }
   ],
-  "ingredient": {
-    "tag": "c:wires/copper"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/copper/wire",
+  "ingredient": "#c:wires/copper",
   "result": {
     "amount": 45,
     "tag": "c:molten_copper"

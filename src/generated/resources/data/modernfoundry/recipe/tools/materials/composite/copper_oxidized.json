@@ -1,10 +1,10 @@
 {
   "type": "modernfoundry:material_fluid",
-  "id": "modernfoundry:tools/materials/composite/copper_oxidized",
   "fluid": {
     "amount": 250,
-    "tag": "hilt:water"
+    "tag": "mantle:water"
   },
+  "id": "modernfoundry:tools/materials/composite/copper_oxidized",
   "input": "modernfoundry:copper",
   "output": "modernfoundry:copper#oxidized",
   "temperature": 1

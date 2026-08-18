@@ -2,12 +2,8 @@
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/clay/brick",
   "ingredient": [
-    {
-      "item": "minecraft:brick"
-    },
-    {
-      "tag": "minecraft:decorated_pot_sherds"
-    }
+    "minecraft:brick",
+    "#minecraft:decorated_pot_sherds"
   ],
   "result": {
     "amount": 250,

@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.json.predicate;
 
-import modernmods.hilt.data.loadable.field.LoadableField;
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
-import modernmods.hilt.data.loadable.primitive.FloatLoadable;
+import modernmods.mantle.data.loadable.field.LoadableField;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.primitive.FloatLoadable;
 
 /** Common logic for variable range predicates. */
 public interface VariableRangePredicate {

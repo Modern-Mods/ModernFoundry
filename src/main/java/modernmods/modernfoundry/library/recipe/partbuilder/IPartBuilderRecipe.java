@@ -1,12 +1,13 @@
 package modernmods.modernfoundry.library.recipe.partbuilder;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
-import modernmods.hilt.recipe.ICommonRecipe;
+import modernmods.mantle.recipe.ICommonRecipe;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
@@ -22,12 +23,12 @@ import java.util.stream.Stream;
 /** Common interface for part builder recipes */
 public interface IPartBuilderRecipe extends ICommonRecipe<IPartBuilderContainer> {
   /** Default patterns in a part builder recipe, Forge has cache invalidation for vanilla, so this is fine as long as that persists */
-  Ingredient DEFAULT_PATTERNS = Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS);
+  Ingredient DEFAULT_PATTERNS = modernmods.modernfoundry.library.recipe.ingredient.LazyTagIngredient.of(TinkerTags.Items.DEFAULT_PATTERNS);
   /** Pattern to use for recipes that don't implement the standard pattern behavior */
   Pattern MISSING = new Pattern(TConstruct.MOD_ID, "missingno");
 
   /** Gets the recipe ID. */
-  ResourceLocation getId();
+  Identifier getId();
 
   /** Gets the pattern needed for this recipe,
    * if there are multiple recipes with the same pattern, they are effectively merged */
@@ -69,18 +70,17 @@ public interface IPartBuilderRecipe extends ICommonRecipe<IPartBuilderContainer>
 
   /** Assembles the result with the given pattern */
   default ItemStack assemble(IPartBuilderContainer inv, HolderLookup.Provider access, Pattern pattern) {
-    return assemble(inv, access);
+    return assemble(inv);
   }
 
   /* Recipe data */
 
   @Override
-  default RecipeType<?> getType() {
+  default RecipeType<? extends IPartBuilderRecipe> getType() {
     return TinkerRecipeTypes.PART_BUILDER.get();
   }
 
-  @Override
-  default ItemStack getToastSymbol() {
+    default ItemStack getToastSymbol() {
     return new ItemStack(TinkerTables.partBuilder);
   }
 

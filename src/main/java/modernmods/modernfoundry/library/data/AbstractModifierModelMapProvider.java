@@ -5,16 +5,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.PackOutput.Target;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.Item;
-import modernmods.hilt.data.GenericDataProvider;
-import modernmods.hilt.data.loadable.Loadables;
-import modernmods.hilt.registration.object.IdAwareObject;
+import modernmods.mantle.data.GenericDataProvider;
+import modernmods.mantle.data.loadable.Loadables;
+import modernmods.mantle.registration.object.IdAwareObject;
 import modernmods.modernfoundry.library.client.modifiers.MaterialModifierModel;
 import modernmods.modernfoundry.library.client.modifiers.ModifierModelMapManager;
 import modernmods.modernfoundry.library.client.modifiers.NormalModifierModel;
@@ -43,7 +43,7 @@ import java.util.concurrent.CompletableFuture;
 
 /** Data provider for modifier model maps */
 public abstract class AbstractModifierModelMapProvider extends GenericDataProvider {
-  private final Map<ResourceLocation, Builder> models = new HashMap<>();
+  private final Map<Identifier, Builder> models = new HashMap<>();
 
   /** Argument for {@code largeSeparator} to disable large textures entirely. */
   protected static final char SMALL = '\0';
@@ -55,14 +55,14 @@ public abstract class AbstractModifierModelMapProvider extends GenericDataProvid
   }
 
   /** Creates a new material for the given texture */
-  protected Material material(ResourceLocation texture) {
+  protected Material material(Identifier texture) {
     return ModifierModel.blockAtlas(texture);
   }
 
   /** Creates a new material for the given texture */
   @SuppressWarnings("removal")
   protected Material material(String texture) {
-    return ModifierModel.blockAtlas(ResourceLocation.fromNamespaceAndPath(modId, texture));
+    return ModifierModel.blockAtlas(Identifier.fromNamespaceAndPath(modId, texture));
   }
 
   /** Creates a tool texture for the given name */
@@ -85,23 +85,23 @@ public abstract class AbstractModifierModelMapProvider extends GenericDataProvid
   /* Builder */
 
   /** Gets the builder for the given tool */
-  protected Builder tool(ResourceLocation tool, ResourceLocation base) {
+  protected Builder tool(Identifier tool, Identifier base) {
     return this.models.computeIfAbsent(tool, id -> new Builder(base));
   }
 
   /** Gets the builder for the given tool */
-  protected Builder tool(ResourceLocation tool) {
+  protected Builder tool(Identifier tool) {
     return tool(tool, tool);
   }
 
   /** Gets the builder for the given tool */
   @SuppressWarnings("removal")
   protected Builder tool(String tool) {
-    return tool(ResourceLocation.fromNamespaceAndPath(modId, tool));
+    return tool(Identifier.fromNamespaceAndPath(modId, tool));
   }
 
   /** Adds the given model to the tool variant */
-  protected Builder tool(ResourceLocation tool, String variant) {
+  protected Builder tool(Identifier tool, String variant) {
     return tool(tool.withSuffix(variant), tool);
   }
 
@@ -136,7 +136,7 @@ public abstract class AbstractModifierModelMapProvider extends GenericDataProvid
   protected class Builder {
     private final Map<String, ModifierModel> constant = new LinkedHashMap<>();
     private final Map<ModifierId, ModifierModel> modifiers = new LinkedHashMap<>();
-    private final ResourceLocation id;
+    private final Identifier id;
 
     /** Merges the variable arguments */
     private static ModifierModel merge(ModifierModel model, ModifierModel... models) {
@@ -288,7 +288,7 @@ public abstract class AbstractModifierModelMapProvider extends GenericDataProvid
     /* Cosmetic */
 
     /** Adds the trim model to the tool */
-    public Builder trim(ArmorItem.Type type) {
+    public Builder trim(ArmorType type) {
       return modifier(TinkerModifiers.trim.getId(), TrimModifierModel.Armor.values()[type.ordinal()]);
     }
 

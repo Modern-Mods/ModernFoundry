@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "modernfoundry:tank",
+    "base": "modernfoundry:item/seared_fuel_tank"
+  }
+}

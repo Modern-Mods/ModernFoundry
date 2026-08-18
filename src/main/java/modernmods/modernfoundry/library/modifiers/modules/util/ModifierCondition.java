@@ -1,8 +1,8 @@
 package modernmods.modernfoundry.library.modifiers.modules.util;
 
-import modernmods.hilt.data.loadable.field.RecordField;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.predicate.IJsonPredicate;
+import modernmods.mantle.data.loadable.field.RecordField;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.predicate.IJsonPredicate;
 import modernmods.modernfoundry.library.json.IntRange;
 import modernmods.modernfoundry.library.json.predicate.tool.ToolContextPredicate;
 import modernmods.modernfoundry.library.json.predicate.tool.ToolStackPredicate;

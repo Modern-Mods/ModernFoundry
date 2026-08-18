@@ -1,15 +1,13 @@
 {
-  "type": "modernfoundry:melting",
-  "id": "modernfoundry:smeltery/melting/diamond/geore/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:geore_blocks/diamond"
     }
   ],
-  "ingredient": {
-    "tag": "c:geore_blocks/diamond"
-  },
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/diamond/geore/block",
+  "ingredient": "#c:geore_blocks/diamond",
   "result": {
     "amount": 400,
     "fluid": "modernfoundry:molten_diamond"

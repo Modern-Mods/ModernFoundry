@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/cobalt/reinforcement",
-  "ingredient": {
-    "item": "modernfoundry:cobalt_reinforcement"
-  },
+  "ingredient": "modernfoundry:cobalt_reinforcement",
   "result": {
     "amount": 90,
     "tag": "c:molten_cobalt"

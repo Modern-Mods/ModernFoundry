@@ -1,0 +1,38 @@
+{
+  "parent": "modernfoundry:tools/materials_and_you",
+  "criteria": {
+    "crafted_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "modernfoundry:part_builder"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.modernfoundry.tools.part_builder.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "modernfoundry:part_builder"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.modernfoundry.tools.part_builder.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted_block"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

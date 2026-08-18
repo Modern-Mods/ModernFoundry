@@ -2,7 +2,7 @@ package modernmods.modernfoundry.library.client.armor.texture;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
 
 import java.util.List;
 

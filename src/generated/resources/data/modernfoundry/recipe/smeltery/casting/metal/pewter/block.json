@@ -1,17 +1,17 @@
 {
-  "type": "modernfoundry:casting_basin",
-  "id": "modernfoundry:smeltery/casting/metal/pewter/block",
   "neoforge:conditions": [
     {
-      "type": "hilt:tag_filled",
+      "type": "mantle:tag_filled",
       "tag": "c:storage_blocks/pewter"
     }
   ],
+  "type": "modernfoundry:casting_basin",
   "cooling_time": 139,
   "fluid": {
     "amount": 810,
     "tag": "c:molten_pewter"
   },
+  "id": "modernfoundry:smeltery/casting/metal/pewter/block",
   "result": {
     "tag": "c:storage_blocks/pewter"
   }

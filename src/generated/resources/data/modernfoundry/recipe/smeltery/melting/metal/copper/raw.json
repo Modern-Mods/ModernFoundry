@@ -1,6 +1,5 @@
 {
   "type": "modernfoundry:ore_melting",
-  "id": "modernfoundry:smeltery/melting/metal/copper/raw",
   "byproducts": [
     {
       "amount": 30,
@@ -8,9 +7,8 @@
       "tag": "c:molten_gold"
     }
   ],
-  "ingredient": {
-    "tag": "c:raw_materials/copper"
-  },
+  "id": "modernfoundry:smeltery/melting/metal/copper/raw",
+  "ingredient": "#c:raw_materials/copper",
   "rate": "metal",
   "result": {
     "amount": 90,

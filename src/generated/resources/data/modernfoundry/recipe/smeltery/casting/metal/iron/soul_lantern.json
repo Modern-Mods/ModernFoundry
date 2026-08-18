@@ -1,14 +1,12 @@
 {
   "type": "modernfoundry:casting_table",
-  "id": "modernfoundry:smeltery/casting/metal/iron/soul_lantern",
-  "cast": {
-    "item": "minecraft:soul_torch"
-  },
+  "cast": "minecraft:soul_torch",
   "cast_consumed": true,
   "cooling_time": 57,
   "fluid": {
     "amount": 80,
     "tag": "c:molten_iron"
   },
+  "id": "modernfoundry:smeltery/casting/metal/iron/soul_lantern",
   "result": "minecraft:soul_lantern"
 }

@@ -5,8 +5,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ResultSlot;
 import net.minecraft.world.item.ItemStack;
 import modernmods.modernfoundry.compat.neoforged.neoforge.event.ForgeEventFactory;
-import modernmods.hilt.inventory.CustomResultSlot;
-import modernmods.hilt.inventory.IContainerCraftingCustom;
+import modernmods.mantle.inventory.CustomResultSlot;
+import modernmods.mantle.inventory.IContainerCraftingCustom;
 
 import javax.annotation.Nonnull;
 
@@ -27,7 +27,7 @@ public class CraftingResultSlot extends ResultSlot {
   @Override
   protected void checkTakeAchievements(ItemStack stack) {
     if (this.removeCount > 0) {
-      stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
+      stack.onCraftedBy(this.player, this.removeCount);
       ForgeEventFactory.firePlayerCraftingEvent(this.player, stack, this.container);
     }
     this.removeCount = 0;

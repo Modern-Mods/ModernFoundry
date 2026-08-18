@@ -1,6 +1,11 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:registered",
+      "value": "twilightforest:ironwood_shovel"
+    }
+  ],
   "type": "modernfoundry:damagable_melting",
-  "id": "modernfoundry:smeltery/melting/ironwood/twilightforest_shovel",
   "byproducts": [
     {
       "amount": 10,
@@ -8,12 +13,7 @@
       "unit_size": 10
     }
   ],
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:item_exists",
-      "item": "twilightforest:ironwood_shovel"
-    }
-  ],
+  "id": "modernfoundry:smeltery/melting/ironwood/twilightforest_shovel",
   "ingredient": {
     "item": "twilightforest:ironwood_shovel"
   },

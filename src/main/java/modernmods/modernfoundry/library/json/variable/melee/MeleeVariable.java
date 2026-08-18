@@ -1,9 +1,9 @@
 package modernmods.modernfoundry.library.json.variable.melee;
 
 import net.minecraft.world.entity.LivingEntity;
-import modernmods.hilt.data.loadable.record.RecordLoadable;
-import modernmods.hilt.data.registry.GenericLoaderRegistry;
-import modernmods.hilt.data.registry.GenericLoaderRegistry.IHaveLoader;
+import modernmods.mantle.data.loadable.record.RecordLoadable;
+import modernmods.mantle.data.registry.GenericLoaderRegistry;
+import modernmods.mantle.data.registry.GenericLoaderRegistry.IHaveLoader;
 import modernmods.modernfoundry.library.json.variable.VariableLoaderRegistry;
 import modernmods.modernfoundry.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
 import modernmods.modernfoundry.library.tools.context.ToolAttackContext;

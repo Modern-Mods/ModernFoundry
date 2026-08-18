@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/knightmetal/cluster",
-  "ingredient": {
-    "item": "modernfoundry:knightmetal_cluster"
-  },
+  "ingredient": "modernfoundry:knightmetal_cluster",
   "result": {
     "amount": 40,
     "fluid": "modernfoundry:molten_knightmetal"

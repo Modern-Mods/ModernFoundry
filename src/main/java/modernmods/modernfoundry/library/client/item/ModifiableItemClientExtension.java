@@ -7,7 +7,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import modernmods.modernfoundry.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
@@ -33,12 +33,12 @@ public class ModifiableItemClientExtension implements IClientItemExtensions {
     // to avoid redundant operations, we copied even methods that are unmodified, changes are noted below
     int sideOffset = arm == HumanoidArm.RIGHT ? 1 : -1;
     if (player.isUsingItem() && player.getUseItemRemainingTicks() > 0 && player.getUsedItemHand() == hand) {
-      UseAnim anim = stack.getUseAnimation();
+      ItemUseAnimation anim = stack.getUseAnimation();
       switch (anim) {
         // merged BLOCK and NONE - same code
         case NONE, BLOCK:
-          // Let ItemInHandRenderer apply the vanilla arm transform.
-          return false;
+          applyItemArmTransform(poseStack, equipProgress, sideOffset);
+          break;
 
         case EAT:
         case DRINK:
@@ -62,7 +62,7 @@ public class ModifiableItemClientExtension implements IClientItemExtensions {
         // crossbow is moved from the vanilla special case to a general animation
         case BOW:
         case CROSSBOW: {
-          boolean isBow = anim == UseAnim.BOW;
+          boolean isBow = anim == ItemUseAnimation.BOW;
           applyItemArmTransform(poseStack, equipProgress, sideOffset);
           // change: merged in crossbow
           if (isBow) {
@@ -139,10 +139,6 @@ public class ModifiableItemClientExtension implements IClientItemExtensions {
             poseStack.mulPose(Axis.XP.rotationDegrees(xRot));
           }
           // end: applyBrushTransform
-          break;
-        default:
-          // Unhandled use animations belong to the vanilla renderer.
-          return false;
       }
     } else if (player.isAutoSpinAttack()) {
       applyItemArmTransform(poseStack, equipProgress, sideOffset);
@@ -150,8 +146,18 @@ public class ModifiableItemClientExtension implements IClientItemExtensions {
       poseStack.mulPose(Axis.YP.rotationDegrees(sideOffset * 105));
       poseStack.mulPose(Axis.ZP.rotationDegrees(sideOffset * -85));
     } else {
-      // Let ItemInHandRenderer apply vanilla equip and swing transforms.
-      return false;
+      poseStack.translate(
+        sideOffset * -0.4f * Mth.sin(Mth.sqrt(swingProgress) * PI),
+        0.2f * Mth.sin(Mth.sqrt(swingProgress) * PI * 2),
+        -0.2f * Mth.sin(swingProgress * PI));
+      applyItemArmTransform(poseStack, equipProgress, sideOffset);
+      // begin: applyItemArmAttackTransform
+      poseStack.mulPose(Axis.YP.rotationDegrees(sideOffset * (45 + Mth.sin(swingProgress * swingProgress * (float)Math.PI) * -20)));
+      float rotation = Mth.sin(Mth.sqrt(swingProgress) * PI);
+      poseStack.mulPose(Axis.ZP.rotationDegrees(sideOffset * rotation * -20));
+      poseStack.mulPose(Axis.XP.rotationDegrees(rotation * -80));
+      poseStack.mulPose(Axis.YP.rotationDegrees(sideOffset * -45));
+      // end: applyItemArmAttackTransform
     }
     return true;
   }

@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.library.modifiers.fluid;
 
-import modernmods.hilt.data.loadable.primitive.EnumLoadable;
+import modernmods.mantle.data.loadable.primitive.EnumLoadable;
 
 /** Enum for changing how a JSON effect combines its cost for multiple targets */
 public enum GroupCost {

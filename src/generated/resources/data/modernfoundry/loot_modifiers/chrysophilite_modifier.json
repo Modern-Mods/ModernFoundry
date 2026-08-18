@@ -1,8 +1,8 @@
 {
-  "type": "hilt:add_entry",
+  "type": "mantle:add_entry",
   "conditions": [
     {
-      "condition": "hilt:block_tag",
+      "condition": "mantle:block_tag",
       "tag": "modernfoundry:chrysophilite_ores"
     },
     {
@@ -34,9 +34,9 @@
   ],
   "post_conditions": [
     {
-      "type": "hilt:inverted",
+      "type": "mantle:inverted",
       "condition": {
-        "type": "hilt:contains_item",
+        "type": "mantle:contains_item",
         "ingredient": {
           "tag": "modernfoundry:chrysophilite_ores"
         }

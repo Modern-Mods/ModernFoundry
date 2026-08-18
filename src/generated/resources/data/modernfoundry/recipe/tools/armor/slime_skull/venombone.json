@@ -1,13 +1,11 @@
 {
   "type": "modernfoundry:basin_tool_casting",
-  "id": "modernfoundry:tools/armor/slime_skull/venombone",
-  "cast": {
-    "item": "modernfoundry:venombone_head"
-  },
+  "cast": "modernfoundry:venombone_head",
   "cast_purpose": "consumed_offset",
   "extra_materials": [
     "modernfoundry:venombone"
   ],
+  "id": "modernfoundry:tools/armor/slime_skull/venombone",
   "item_cost": 5,
   "result": "modernfoundry:slime_helmet"
 }

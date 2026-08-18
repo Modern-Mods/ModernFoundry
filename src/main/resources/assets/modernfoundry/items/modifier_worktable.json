@@ -1,0 +1,7 @@
+{
+  "model": {
+    "type": "mantle:retextured",
+    "model": "modernfoundry:item/modifier_worktable",
+    "retextured": ["leg", "legBottom"]
+  }
+}

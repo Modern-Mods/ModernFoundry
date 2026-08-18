@@ -42,14 +42,14 @@ import java.util.Objects;
 
 /**
  * External logic for the ToolCore that handles mining calculations and breaking blocks.
- * TODO: needs big updates
+ * Note: needs big updates
  */
 public class ToolHarvestLogic {
   private ToolHarvestLogic() {}
 
   /**
    * Gets the amount of damage this tool should take for the given block state.
-   * TODO 1.21: remove in favor of {@link #getDamage(IToolStackView, Level, BlockPos, BlockState)}
+   * Note: candidate to remove in favor of {@link #getDamage(IToolStackView, Level, BlockPos, BlockState)}
    * @param tool   Tool to check
    * @param state  State to check
    * @return  Damage to deal
@@ -94,7 +94,7 @@ public class ToolHarvestLogic {
     ServerLevel world = context.getWorld();
     BlockPos pos = context.getPos();
     if (removed == null) {
-      removed = state.onDestroyedByPlayer(world, pos, context.getPlayer(), context.canHarvest(), world.getFluidState(pos));
+      removed = state.onDestroyedByPlayer(world, pos, context.getPlayer(), context.getPlayer().getMainHandItem(), context.canHarvest(), world.getFluidState(pos));
     }
     // if removed by anything, finally destroy it
     if (removed) {
@@ -134,7 +134,7 @@ public class ToolHarvestLogic {
       return false;
     }
     // checked after the Forge hook, so we have to recheck
-    // TODO: is this needed? Seems its called inside ForgeHooks.onBlockBreakEvent
+    // Note: is this needed? Seems its called inside ForgeHooks.onBlockBreakEvent
     if (player.blockActionRestricted(world, pos, type)) {
       return false;
     }
@@ -179,7 +179,7 @@ public class ToolHarvestLogic {
 
   /**
    * Breaks a secondary block.
-   * TODO 1.21: remove this header in favor of {@link #breakExtraBlock(IToolStackView, ItemStack, ToolHarvestContext)}
+   * Note: candidate to remove this header in favor of {@link #breakExtraBlock(IToolStackView, ItemStack, ToolHarvestContext)}
    * @param tool      Tool instance
    * @param stack     Stack instance for vanilla functions
    * @param context   Tool harvest context
@@ -204,7 +204,7 @@ public class ToolHarvestLogic {
       // need to send the event to tell the client a block was broken
       // normally this is sent within one of the block breaking hooks that is called on both sides, suppressing the packet being sent to the breaking player
       // we only break the center block client side, so need to send the event directly
-      // TODO: in theory, we can use this to reduce the number of sounds playing on breaking a lot of blocks, would require sending a custom packet if we want the particles still
+      // Note: in theory, we can use this to reduce the number of sounds playing on breaking a lot of blocks, would require sending a custom packet if we want the particles still
       world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(context.getState()));
       TinkerNetwork.getInstance().sendVanillaPacket(Objects.requireNonNull(context.getPlayer()), new ClientboundBlockUpdatePacket(world, pos));
       return true;
@@ -223,19 +223,7 @@ public class ToolHarvestLogic {
    * @return  True if the block break is overridden.
    */
   public static boolean handleBlockBreak(ItemStack stack, BlockPos pos, Player player) {
-    return handleBlockBreak(stack, pos, player, BlockSideHitListener.getSideHit(player));
-  }
-
-  /**
-   * Handles a block break when the caller has the current hit face available.
-   * @param stack   Stack instance for breaking
-   * @param pos     Position to break
-   * @param player  Player instance
-   * @param sideHit Side of the block being hit, or null to use the tracked side
-   * @return True if the block break was overridden
-   */
-  public static boolean handleBlockBreak(ItemStack stack, BlockPos pos, Player player, @Nullable Direction sideHit) {
-    // TODO: offhand harvest reconsidering
+    // Note: offhand harvest reconsidering
     /* this is a really dumb hack.
     // Basically when something with silktouch harvests a block from the offhand
     // the game can't detect that. so we have to switch around the items in the hands for the break call
@@ -251,25 +239,25 @@ public class ToolHarvestLogic {
     }*/
 
     // client can run normal block breaking
-    if (player.level().isClientSide || !(player instanceof ServerPlayer serverPlayer)) {
+    if (player.level().isClientSide() || !(player instanceof ServerPlayer serverPlayer)) {
       return false;
     }
 
     // if broken, clear the item stack temporarily then break
     ToolStack tool = ToolStack.from(stack);
-    Direction hitFace = sideHit != null ? sideHit : BlockSideHitListener.getSideHit(player);
-    ServerLevel world = serverPlayer.serverLevel();
+    Direction sideHit = BlockSideHitListener.getSideHit(player);
+    ServerLevel world = serverPlayer.level();
     BlockState state = world.getBlockState(pos);
     if (tool.isBroken()) {
       // no harvest context
       player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-      ToolHarvestContext context = new ToolHarvestContext(world, serverPlayer, state, pos, hitFace,
+      ToolHarvestContext context = new ToolHarvestContext(world, serverPlayer, state, pos, sideHit,
         !player.isCreative() && state.canHarvestBlock(world, pos, player), false);
       breakBlock(tool, ItemStack.EMPTY, context, true);
       player.setItemInHand(InteractionHand.MAIN_HAND, stack);
     } else {
       // run standard breaking logic
-      runBlockBreak(stack, tool, state, pos, hitFace, serverPlayer, null);
+      runBlockBreak(stack, tool, state, pos, sideHit, serverPlayer, null);
     }
     return true;
   }
@@ -285,7 +273,7 @@ public class ToolHarvestLogic {
    */
   public static int runBlockBreak(ItemStack stack, IToolStackView tool, BlockState state, BlockPos pos, Direction sideHit, ServerPlayer player, @Nullable Projectile projectile) {
     // create contexts
-    ServerLevel world = player.serverLevel();
+    ServerLevel world = player.level();
 
     // add in harvest info
     // must not be broken, and the tool definition must be effective
@@ -297,7 +285,7 @@ public class ToolHarvestLogic {
       entry.getHook(ModifierHooks.BLOCK_HARVEST).startHarvest(tool, entry, context);
     }
     // let armor change enchantments
-    // TODO: should we have a hook for non-enchantment armor responses?
+    // Note: should we have a hook for non-enchantment armor responses?
     ItemEnchantments originalEnchantments = HarvestEnchantmentsModifierHook.updateHarvestEnchantments(tool, stack, context);
     // need to calculate the iterator before we break the block, as we need the reference hardness from the center
     UseOnContext useContext = new UseOnContext(world, player, InteractionHand.MAIN_HAND, stack, Util.createTraceResult(pos, sideHit, false));
@@ -340,7 +328,7 @@ public class ToolHarvestLogic {
       return false;
     }
 
-    if (!worldIn.isClientSide && worldIn instanceof ServerLevel) {
+    if (!worldIn.isClientSide() && worldIn instanceof ServerLevel) {
       // must not be broken, and the tool definition must be effective
       boolean isEffective = IsEffectiveToolHook.isEffective(tool, state);
       ToolHarvestContext context = new ToolHarvestContext((ServerLevel) worldIn, entityLiving, state, pos, Direction.UP, true, isEffective);

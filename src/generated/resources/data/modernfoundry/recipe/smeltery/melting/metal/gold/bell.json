@@ -1,9 +1,7 @@
 {
   "type": "modernfoundry:melting",
   "id": "modernfoundry:smeltery/melting/metal/gold/bell",
-  "ingredient": {
-    "item": "minecraft:bell"
-  },
+  "ingredient": "minecraft:bell",
   "result": {
     "amount": 360,
     "tag": "c:molten_gold"
