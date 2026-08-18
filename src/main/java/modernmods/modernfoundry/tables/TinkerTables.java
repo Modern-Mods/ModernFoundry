@@ -16,7 +16,10 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import modernmods.hilt.block.entity.InventoryBlockEntity;
 import modernmods.hilt.recipe.helper.LoadableRecipeSerializer;
 import modernmods.hilt.recipe.helper.SimpleRecipeSerializer;
 import modernmods.hilt.registration.object.ItemObject;
@@ -99,7 +102,7 @@ public final class TinkerTables extends TinkerModule {
   public static final ItemObject<TableBlock> castChest, modifierWorktable;
   static {
     Block.Properties STONE_TABLE = builder(MapColor.COLOR_GRAY, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 9.0F).noOcclusion();
-    castChest = BLOCKS.register("cast_chest", () -> new ChestBlock(STONE_TABLE, CastChestBlockEntity::new, false), BLOCK_ITEM);
+    castChest = BLOCKS.register("cast_chest", () -> new ChestBlock(STONE_TABLE, CastChestBlockEntity::new, true), BLOCK_ITEM);
     modifierWorktable = BLOCKS.register("modifier_worktable", () -> new GenericTableBlock(STONE_TABLE, ModifierWorktableBlockEntity::new), BLOCK_ITEM);
   }
 
@@ -168,6 +171,18 @@ public final class TinkerTables extends TinkerModule {
       loader.registerRequiredLayout(tinkersAnvil.getId());
       loader.registerRequiredLayout(scorchedAnvil.getId());
     });
+  }
+
+  @SubscribeEvent
+  void registerCapabilities(RegisterCapabilitiesEvent event) {
+    InventoryBlockEntity.registerItemHandler(event, craftingStationTile.get());
+    InventoryBlockEntity.registerItemHandler(event, tinkerStationTile.get());
+    InventoryBlockEntity.registerItemHandler(event, partBuilderTile.get());
+    InventoryBlockEntity.registerItemHandler(event, modifierWorktableTile.get());
+
+    event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, tinkersChestTile.get(), (be, side) -> be.getItemHandler());
+    event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, partChestTile.get(), (be, side) -> be.getItemHandler());
+    event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, castChestTile.get(), (be, side) -> be.getItemHandler());
   }
 
   /** Adds all relevant items to the creative tab, called in the general tab */

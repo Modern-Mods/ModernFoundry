@@ -19,7 +19,7 @@ import modernmods.modernfoundry.tables.block.entity.inventory.IChestItemHandler;
 import javax.annotation.Nullable;
 
 /**
- * Chest holding 64 slots of 16 items each
+ * Chest holding 64 slots of 64 items each
  */
 public class TinkersChestBlockEntity extends AbstractChestBlockEntity {
   /** NBT tag for colors of the chest */
@@ -76,7 +76,7 @@ public class TinkersChestBlockEntity extends AbstractChestBlockEntity {
 
     @Override
     public int getSlotLimit(int slot) {
-      return 16;
+      return 64;
     }
 
     @Override

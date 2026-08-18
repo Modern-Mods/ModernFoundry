@@ -1,6 +1,7 @@
 {
   "values": [
     "#modernfoundry:parts",
+    "#modernfoundry:patterns",
     "modernfoundry:helmet_plating_dummy",
     "modernfoundry:chestplate_plating_dummy",
     "modernfoundry:leggings_plating_dummy",

@@ -986,3 +986,268 @@
 - Archive validation: the exact JAR contains all 10 harvest/tag entries and `data/modernfoundry/loot_table/blocks/cobalt_ore.json`; cobalt is Diamond-only and the cobalt loot table has pools/output.
 - Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.4-NeoForge.jar`; SHA-256 `145dfb244cdade4dc47faadbef504974e1bae2b509f5fea2f117e787ff0e8fb8`.
 - Manual validation: not performed. Fresh-world Nether mining with diamond and netherite pickaxes, plus client/dedicated-server smoke tests, remain outstanding.
+
+## 2026-08-17 - Fix Crafting Station ore duplication
+
+**Prompt / Task**
+- Fix Crafting Station ore duplication: ingredients were not consumed, and Shift + Right Click could fill the inventory with ore blocks or ingots.
+
+**What Changed**
+- Mapped compact `CraftingInput` remainder coordinates back to the raw 3x3 Crafting Station slots in `CraftingStationBlockEntity.takeResult`.
+- Treated missing remainder entries as empty so the shared consumption path cannot skip an input.
+
+**Steps Taken**
+- Read the empty root `TASK.md` and traced the Crafting Station menu, lazy result slot, block entity, and vanilla `CraftingInput.ofPositioned` behavior.
+- Confirmed Minecraft compacts non-empty crafting bounds, while the old consumption loop indexed the untrimmed 3x3 inventory directly.
+- Updated the single shared result-consumption path without changing recipes, recipe IDs, or output balance.
+
+**Architecture / Module Ownership**
+- Relevant class: `tables/block/entity/table/CraftingStationBlockEntity.java`.
+- Owning module/system: Crafting Station result consumption and vanilla crafting-grid coordinate mapping.
+- Existing logic reused or extracted: `CraftingInput.Positioned` and the existing recipe remainder contract.
+- Net line change: 8 additions and 4 removals in the production source; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The fix preserves vanilla remainder-item behavior while translating compact recipe coordinates to the real table slots; no recipe-specific ore allowlist or special case was added.
+
+**Build / Validation**
+- Production build: `rtk .\\gradlew.bat build --console=plain --no-daemon` passed; existing deprecation warnings remain.
+- Tests/checks: `rtk .\\gradlew.bat test check --console=plain --no-daemon` passed; `testJunit` reported `NO-SOURCE`.
+- Static validation: `rtk git diff --check` passed.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.5-NeoForge.jar` contains `CraftingStationBlockEntity.class`; SHA-256 `06a09cb958eca27753952d45eebe6735a1a931c6ea5f795c3f5c4476ee1ffee2`.
+- Manual validation: not performed; live Crafting Station tests with centered ore recipes and Shift + Right Click remain outstanding.
+
+## 2026-08-17 - Restore inventory drops, leaf saplings, and JEI modifier textures
+
+**Prompt / Task**
+- Fix reported inventory loss in stations, anvils, and chests; restore pattern-chest slots and pattern insertion/drops; make sky leaves drop saplings; and remove black/purple missing textures from JEI.
+
+**What Changed**
+- Registered NeoForge `Capabilities.ItemHandler.BLOCK` providers for the Hilt inventory tables/anvils and the three Tinkers' chest block-entity types.
+- Added `TinkerTags.Items.PATTERNS` to `TinkerTags.Items.CHEST_PARTS` in both the provider and shipped generated tag.
+- Replaced the always-true loot shim with NeoForge's native `CanItemPerformAbility.canItemPerformAbility(ItemAbilities.SHEARS_DIG)` and removed the unused shim.
+- Added the existing `gui/modifiers` directory to the shipped Minecraft block atlas.
+
+**Steps Taken**
+- Read the empty root `TASK.md`, traced Hilt's `InventoryBlock.onRemove` and `InventoryBlockEntity.registerItemHandler` paths, and confirmed missing capabilities caused empty chest screens and voided drops.
+- Traced the part chest validator, leaf loot provider, generated sky-leaf loot table, and JEI `ModifierIconManager` atlas lookup.
+- Confirmed the processed resources and JAR contain the updated atlas, chest tag, and native leaf ability condition.
+
+**Architecture / Module Ownership**
+- Relevant class/resource changes: `tables/TinkerTables.java`, `common/data/tags/ItemTagProvider.java`, `common/data/loot/BlockLootTableProvider.java`, `data/modernfoundry/tags/item/chest_parts.json`, and `assets/minecraft/atlases/blocks.json`.
+- Owning module/system: NeoForge block capabilities, Tinker table/chest inventories, generated loot/tags, and the JEI modifier icon atlas.
+- Existing logic reused or extracted: Hilt's shared inventory capability registration/drop path, existing pattern/chest tags, NeoForge's native loot condition, and existing modifier textures.
+- Net line change: 25 additions, 4 removals, and 1 unused compatibility-shim deletion across the production/resource files; required changelog and trace entries appended.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Fixed the shared capability registration boundary so every affected table/chest receives the same slot, automation, and break-drop behavior without block-specific drop code.
+- Kept the existing loot and texture assets; only corrected their native registration/atlas exposure.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat check build --console=plain --no-daemon"` passed after final dead-shim cleanup in 52 seconds; existing deprecation warnings remain.
+- Tests/checks: Gradle `test` and `check` passed; `testJunit` reported `NO-SOURCE`; `git diff --check` passed.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.5-NeoForge.jar` contains the updated atlas, chest tag, and sky-leaf loot table; SHA-256 `295a71340ceb605ebdf9aa22745552001fe7827570506d94cb0b8414bcf618fe`.
+- Manual validation: not performed; fresh-world station/anvil/chest break-and-replace tests, pattern-chest UI/insertion, sky-leaf harvesting, and JEI visual smoke remain outstanding.
+- Tests created or run: no dedicated tests added.
+
+## 2026-08-17 - Fix chest inventory drops and stack limits
+
+**Prompt / Task**
+- Make Part, Tinkers', and Cast Chests drop their contents when broken and allow item stacks up to 64.
+
+**What Changed**
+- Added shared chest break handling that drops and clears the live chest item handler before Hilt's block-entity removal path runs.
+- Enabled normal drops for Cast Chests, which were registered with `dropsItems = false`.
+- Raised the Part, Cast, and Tinkers' Chest handler slot limits from 8/4/16 to 64.
+
+**Steps Taken**
+- Read the empty root `TASK.md` and traced `ChestBlock`, Hilt's `InventoryBlock.onRemove`, the NeoForge item-handler providers, and all three custom chest handlers.
+- Confirmed the Cast Chest registration explicitly disabled drops and that the custom slot limits were 8, 4, and 16.
+- Kept the existing capability registrations for menu/automation access while making the shared chest break path independent of capability lookup success.
+
+**Architecture / Module Ownership**
+- Relevant classes: `tables/block/ChestBlock.java`, `tables/TinkerTables.java`, and the three `tables/block/entity/chest/*BlockEntity.java` handlers.
+- Owning module/system: custom chest block removal and NeoForge `IItemHandler` storage limits.
+- Existing logic reused or extracted: Hilt's `InventoryBlock` removal contract, vanilla `Containers.dropItemStack`, the existing chest handlers, and existing capability providers.
+- Net line change: 18 additions and 1 removal in `ChestBlock`, 1 registration correction, and 6 handler/comment updates; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Dropping through the actual chest handler before calling Hilt's cleanup prevents item loss even if the block capability lookup is unavailable; extracting each stack before spawning it prevents handler mutation from clearing the dropped entity's stack, and leaves the normal Hilt path empty.
+- The 64 limit removes the custom artificial cap while preserving each item's own maximum stack size and the existing per-slot item validation.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat check build --console=plain --no-daemon"` passed in 2m32s; existing deprecation warnings remain.
+- Tests/checks: Gradle `test` and `check` passed; `testJunit` reported `NO-SOURCE`; `git diff --check` passed.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.5-NeoForge.jar` contains the changed chest classes and does not contain the removed `CanToolPerformAction` shim.
+- Exact artifact SHA-256: `1e2badc702a73f54879a0539535caae4e00fe038251185b9ac50d4b6011355da`.
+- Manual validation: not performed; live break-and-pickup tests for all three chest types and 64-item insertion remain outstanding.
+- Tests created or run: no dedicated tests added.
+
+## 2026-08-17 - Fix Nether slime leaf drops
+
+**Prompt / Task**
+- Make slime leaves drop their matching saplings sometimes instead of always dropping leaf blocks, like regular leaves.
+
+**What Changed**
+- Reused the existing regular slime-leaf loot helper for Nether Blood and Ichor leaves in `BlockLootTableProvider`.
+- Updated the canonical Blood and Ichor generated loot tables so normal harvesting can drop their matching saplings and slimeballs, while Silk Touch or shears still return the leaf block.
+
+**Steps Taken**
+- Read the empty root `TASK.md` and traced both foliage-type branches through the loot-table provider.
+- Compared the stale Blood and Ichor tables with the already-correct Sky and Earth leaf tables.
+- Updated the provider and the two shipped canonical JSON resources, then parsed both JSON files and checked their generated archive entries.
+
+**Architecture / Module Ownership**
+- Relevant source/resources: `common/data/loot/BlockLootTableProvider.java` and `data/modernfoundry/loot_table/blocks/{blood,ichor}_slime_leaves.json`.
+- Owning module/system: Modern Foundry generated block loot tables for slime foliage.
+- Existing logic reused or extracted: `randomDropSlimeBallOrSapling`, `dropSapling`, and the existing native shear-ability condition; no new helper or abstraction.
+- Net line change: one existing Nether branch correction plus two generated loot-table updates; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Fixed the stale shipped data at the runtime resource boundary and kept the existing sapling chances, Fortune behavior, slimeball behavior, Silk Touch behavior, and shears behavior unchanged.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat check build --console=plain --no-daemon"` passed in 3m11s; existing Gradle deprecation warnings remain.
+- Tests/checks: Gradle `test`, `check`, and `testJunit` (`NO-SOURCE`) completed successfully; `git diff --check` passed.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.5-NeoForge.jar` contains both updated leaf loot tables, the chest tag, and the modifier atlas; SHA-256 `b7c39d3e32a68382bf1e85240b014a16f59ee5ad545e76377392bb9069905fae`.
+- Manual validation: not performed; in-game harvesting with bare hands/tools, Silk Touch, shears, Fortune, and explosion drops remains outstanding.
+- Tests created or run: no dedicated tests added.
+
+## 2026-08-17 - Keep shear-capable tools on sapling drops
+
+**Prompt / Task**
+- Stop slime leaves from returning the leaf block instead of the matching sapling when broken.
+
+**What Changed**
+- Changed the leaf self-drop dispatch from NeoForge's generic `SHEARS_DIG` ability to a literal `minecraft:shears` item check plus Silk Touch.
+- Updated all five shipped slime-leaf loot tables so Kamas, Scythes, and other Tinkers tools with `SHEARS_DIG` receive the normal sapling/propagule-or-slimeball path.
+- Kept the generic shears ability for ferns, tall grass, and vines.
+
+**Steps Taken**
+- Read the empty root `TASK.md` and verified the Earth table already had a sapling chance for ordinary tools.
+- Traced `CanItemPerformAbility`, `ShearsModule`, and the KAMA/SCYTHE tool definitions; those tools expose `SHEARS_DIG`, which selected the leaf-block branch.
+- Updated the shared provider condition and canonical Earth, Sky, Blood, Ichor, and Ender leaf tables, then parsed every table and inspected the packaged JSON.
+
+**Architecture / Module Ownership**
+- Relevant source/resources: `common/data/loot/BlockLootTableProvider.java` and `data/modernfoundry/loot_table/blocks/*_slime_leaves.json`.
+- Owning module/system: Modern Foundry slime-foliage loot generation and shipped block loot resources.
+- Existing logic reused or extracted: vanilla `minecraft:match_tool`, existing Silk Touch/sapling/slimeball logic, and the existing generic shear-ability path for non-leaf foliage.
+- Net line change: one shared leaf dispatch condition plus five generated leaf-table condition updates; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- This preserves regular vanilla behavior for actual shears and Silk Touch while preventing Tinkers' shear-like harvesting tools from forcing leaf-block drops.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat check build --console=plain --no-daemon"` passed in 3m26s; existing Gradle deprecation warnings remain.
+- Tests/checks: Gradle `test`, `check`, and `testJunit` (`NO-SOURCE`) completed successfully; all five JSON tables parsed; `git diff --check` passed.
+- Archive validation: the exact JAR contains all five updated leaf tables, each with `minecraft:match_tool`/`minecraft:shears` for the leaf-block branch; SHA-256 `0a8e1477ecfb20c8db853fc0e988c2b0b9fcee0fa06f2823b28cbecf169c4d2d`.
+- Manual validation: not performed; live tests with a KAMA/Scythe, ordinary tool, Silk Touch, vanilla shears, Fortune, and explosions remain outstanding.
+- Tests created or run: no dedicated tests added.
+
+## 2026-08-17 - Fix slime leaf item rendering and Blood loot loading
+
+**Prompt / Task**
+- Fix Slime Leaves continuing to drop leaf blocks and appearing invisible in the player's hand and as dropped item entities.
+
+**What Changed**
+- Removed the invalid `modernfoundry:blood_slime_ball` entry from the shipped Blood slime-leaf loot table; Blood has no registered slime-ball item.
+- Added an opaque alpha channel when block colors are reused for block-item colors, making tinted slime-leaf item quads render instead of becoming fully transparent.
+
+**Steps Taken**
+- Read the empty root `TASK.md` and traced the shipped loot tables, block/item models, client color aliases, and the Testing instance log.
+- Confirmed the log's Blood loot-table parse error and verified that the leaf item models use tinted `block/leaves` quads.
+- Parsed all five slime-leaf loot JSON files, checked the Blood table no longer references the unregistered item, and built the project.
+
+**Architecture / Module Ownership**
+- Relevant source/resource: `common/ClientEventBase.java` and `data/modernfoundry/loot_table/blocks/blood_slime_leaves.json`.
+- Owning module/system: client block-item color registration and generated slime-foliage loot resources.
+- Existing logic reused or extracted: the existing block color handlers, loot-table sapling dispatch, and existing model resources; no new helper or abstraction.
+- Net line change: one shared color-handler expression and removal of the stale Blood loot pool; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Minecraft item rendering consumes ARGB colors while block color handlers provide RGB values; adding only the missing opaque alpha fixes the shared alias path without changing foliage colors.
+- Removing the invalid Blood item reference lets its already-shipped sapling dispatch load normally; Silk Touch/actual shears behavior remains unchanged.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat check build --console=plain --no-daemon"` passed in 3m15s; existing Gradle deprecation warnings remain.
+- Tests/checks: Gradle `test`, `check`, and `testJunit` (`NO-SOURCE`) completed successfully; all five leaf JSON files parsed; `git diff --check` passed.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.5-NeoForge.jar` contains the corrected Blood loot table, all five leaf item models, the atlas, and `ClientEventBase.class`.
+- Exact artifact SHA-256: `69c91a4a8fa2658f9df9bae15c9204b2636f432748a0d41a9e7b5dbf3c78f3a0`.
+- Manual validation: not performed; live harvesting and client visual smoke with bare hands/tools, Silk Touch, vanilla shears, and dropped items remain outstanding.
+- Tests created or run: no dedicated tests added.
+
+## 2026-08-17 - Make slime leaf drops sapling-only
+
+**Prompt / Task**
+- Stop Slime Leaves from dropping their leaf blocks and return the matching saplings instead.
+
+**What Changed**
+- Removed the leaf-block self-drop branch from all five slime-leaf loot tables.
+- Earth, Sky, Blood, Ichor, and Ender leaves now use their matching sapling or propagule as the harvest output, while existing slimeball and Fortune behavior remains.
+
+**Steps Taken**
+- Verified the Testing instance was using the prior build, then traced the current loot tables and `BlockLootTableProvider`.
+- Confirmed the player test world contained a vanilla shears stack, which the prior tables intentionally treated as a leaf-block drop.
+- Changed the shared sapling helper and Ender-leaf registration, updated all five canonical generated tables, parsed the resources, and checked the packaged archive for leaf-block outputs.
+- Rebuilt and synchronized the exact artifact to the Testing Prism instance.
+
+**Architecture / Module Ownership**
+- Relevant source/resources: `common/data/loot/BlockLootTableProvider.java` and `data/modernfoundry/loot_table/blocks/*_slime_leaves.json`.
+- Owning module/system: Modern Foundry generated block loot tables for slime foliage.
+- Existing logic reused or extracted: the existing sapling/Fortune/slimeball loot helpers and explosion handling; no new helper or abstraction.
+- Net line change: one shared loot helper, the Ender registration, and five canonical loot tables; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The leaf item is no longer a possible output for any tool, including vanilla shears or Silk Touch, matching the requested saplings-only behavior.
+- Slimeball secondary drops remain gated by the existing shear/Silk Touch exclusion and Fortune chances.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat check build --console=plain --no-daemon"` passed in 3m11s; existing Gradle deprecation warnings remain.
+- Tests/checks: Gradle `test` and `check` passed; `testJunit` reported `NO-SOURCE`; JSON parsing and `git diff --check` passed.
+- Archive validation: all five packaged leaf tables contain matching sapling outputs and no leaf-block output names.
+- Exact artifact: `build/libs/ModernFoundry-1.21.1-4.1.5-NeoForge.jar`; SHA-256 `9f49be19f2dcac331053be4298a8991c8955df63e6f5f8d30fe793781fc41daf`.
+- Testing instance artifact: synchronized to the same SHA-256.
+- Manual validation: not performed; live harvesting in Minecraft remains the final smoke-test gap.
+- Tests created or run: no dedicated tests added.
+
+## 2026-08-18 - Restore slime-leaf harvesting dispatch
+
+**Prompt / Task**
+- Restore normal slime-leaf behavior: shears must drop the leaf block, while ordinary breaking must sometimes drop the matching sapling, such as a Greenheart sapling from Earth slime leaves.
+
+**What Changed**
+- Changed the shared slime-leaf sapling helper to reuse vanilla `createSilkTouchOrShearsDispatchTable`.
+- Restored the same shears/Silk Touch dispatch and sapling chance in all five shipped slime-leaf loot tables.
+- Kept slimeball and Fortune drops restricted to ordinary harvesting.
+
+**Steps Taken**
+- Read the empty root `TASK.md` and traced the current provider, vanilla `BlockLootSubProvider` leaves helper, and all five canonical generated loot tables.
+- Confirmed the previous saplings-only helper had removed the self-drop dispatch, which explained both missing shears drops and the broken normal-harvest path.
+- Updated the shared helper and canonical generated resources, then rebuilt and synchronized the exact JAR to the Testing Prism instance.
+
+**Architecture / Module Ownership**
+- Relevant source/resources: `common/data/loot/BlockLootTableProvider.java` and `data/modernfoundry/loot_table/blocks/*_slime_leaves.json`.
+- Owning module/system: Modern Foundry generated slime-foliage block loot.
+- Existing logic reused or extracted: vanilla `createSilkTouchOrShearsDispatchTable`, the existing sapling/Fortune helper, and existing slimeball pools.
+- Net line change: one shared helper correction plus five generated loot-table dispatch restorations; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The native dispatch is the smallest root-cause fix and keeps the mod aligned with Minecraft/NeoForge leaf behavior instead of duplicating shears and Silk Touch predicates.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat check build --console=plain --no-daemon"` passed in 3m02s; existing Gradle deprecation warnings remain.
+- Data task: `rtk .\\gradlew.bat runData --console=plain --no-daemon` passed; this checkout has no active data providers, so tracked generated resources were updated directly from the provider contract.
+- Tests/checks: Gradle `check` passed; `testJunit` reported `NO-SOURCE`; all five loot JSON files parsed; `git diff --check` passed.
+- Archive validation: the exact JAR contains all five updated slime-leaf loot tables.
+- Exact artifact and Testing instance SHA-256: `86f1797b007f1fee023249d4b326e7e2f3a89b8584eb32b913d3ff54f4431a85`.
+- Manual validation: not performed; live tests with ordinary tools, Fortune, Silk Touch, and shears remain outstanding.
+- Tests created or run: no dedicated tests added.

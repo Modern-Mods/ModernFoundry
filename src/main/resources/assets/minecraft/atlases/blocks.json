@@ -7,6 +7,11 @@
     },
     {
       "type": "minecraft:directory",
+      "source": "gui/modifiers",
+      "prefix": "gui/modifiers/"
+    },
+    {
+      "type": "minecraft:directory",
       "source": "gui/tinker_pattern",
       "prefix": "gui/tinker_pattern/"
     }

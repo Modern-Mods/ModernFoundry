@@ -9,6 +9,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -96,9 +97,25 @@ public class ChestBlock extends TabbedTableBlock {
   }
 
   @Override
+  public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    if (state.getBlock() != newState.getBlock() && dropsItems) {
+      BlockEntity te = worldIn.getBlockEntity(pos);
+      if (te instanceof AbstractChestBlockEntity chest) {
+        dropInventoryItems(state, worldIn, pos, chest.getItemHandler());
+      }
+    }
+    super.onRemove(state, worldIn, pos, newState, isMoving);
+  }
+
+  @Override
   protected void dropInventoryItems(BlockState state, Level worldIn, BlockPos pos, IItemHandler inventory) {
     if (dropsItems) {
-      dropInventoryItems(worldIn, pos, inventory);
+      for (int slot = 0; slot < inventory.getSlots(); slot++) {
+        ItemStack stack = inventory.extractItem(slot, Integer.MAX_VALUE, false);
+        if (!stack.isEmpty()) {
+          Containers.dropItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
+        }
+      }
     }
   }
 }

@@ -487,7 +487,7 @@ public class ItemTagProvider extends ItemTagsProvider {
           TinkerToolParts.maille.get(), TinkerToolParts.shieldCore.get())
         .add(TinkerToolParts.plating.values().toArray(new Item[0]));
     // tag for the part chest items
-    this.tag(TinkerTags.Items.CHEST_PARTS).addTag(TinkerTags.Items.TOOL_PARTS).add(TinkerSmeltery.dummyPlating.values().toArray(new Item[0]));
+    this.tag(TinkerTags.Items.CHEST_PARTS).addTags(TinkerTags.Items.TOOL_PARTS, TinkerTags.Items.PATTERNS).add(TinkerSmeltery.dummyPlating.values().toArray(new Item[0]));
 
     IntrinsicTagAppender<Item> slimySeeds = this.tag(TinkerTags.Items.SLIMY_SEEDS);
     TinkerWorld.slimeGrassSeeds.values().forEach(slimySeeds::add);

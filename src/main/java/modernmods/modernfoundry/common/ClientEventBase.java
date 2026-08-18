@@ -18,7 +18,7 @@ public abstract class ClientEventBase {
    * @param block        Block to register
    */
   protected static void registerBlockItemColorAlias(BlockColors blockColors, ItemColors itemColors, Block block) {
-    itemColors.register((stack, index) -> blockColors.getColor(block.defaultBlockState(), null, null, index), block);
+    itemColors.register((stack, index) -> 0xFF000000 | blockColors.getColor(block.defaultBlockState(), null, null, index), block);
   }
 
   /**

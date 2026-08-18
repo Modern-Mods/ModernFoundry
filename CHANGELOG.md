@@ -3,6 +3,8 @@
     * Added cobalt ore to the vanilla pickaxe and diamond-tool tags; netherite tools qualify through the vanilla diamond-tier tag.
 * Built and verified the latest Modern Foundry 1.21.1-4.1.4 NeoForge JAR.
     * SHA-256: `238b86893f814f95341f1fff10bc3bab8c704633f1f17dddb387688f35768ada`.
+* Fixed Crafting Station recipes failing to consume compacted-grid inputs.
+    * Centered or otherwise shifted 1x1 ore recipes now consume the actual backing slot, preventing infinite crafting and Shift + Right Click inventory filling.
 * Fixed common colorless glass tags omitting vanilla glass.
     * Early fuel gauges, tanks, and pane-based smeltery recipes now accept vanilla glass before a smeltery or melter is available.
 * Fixed Modern Foundry 1.21.1 island templates not being discoverable by Minecraft.
@@ -59,3 +61,29 @@
     * Kept cobalt ore Diamond+ and seared fuel tanks/melters Stone-tier; all 93 material-stat files match the reference after namespace translation.
 * Built and verified the updated Modern Foundry 1.21.1-4.1.4 NeoForge JAR.
     * SHA-256: `145dfb244cdade4dc47faadbef504974e1bae2b509f5fea2f117e787ff0e8fb8`.
+
+* Fixed inventory blocks voiding their contents when opened, filled, or broken.
+    * Registered NeoForge item-handler capabilities for stations, anvils, and all Tinkers' chests, and included patterns in the part-chest whitelist.
+* Fixed sky slime leaves dropping as blocks instead of saplings.
+    * Switched leaf loot generation to NeoForge's native shear-ability condition.
+* Fixed black/purple missing textures in JEI modifier icons.
+    * Added the existing `modernfoundry:gui/modifiers` directory to Minecraft's block atlas.
+* Fixed Part, Tinkers', and Cast Chests deleting their contents when broken.
+    * Each chest now drops and clears its live inventory before block-entity removal, and Cast Chests use normal drop handling.
+* Increased Part, Tinkers', and Cast Chest slot limits to 64 items.
+* Fixed Blood and Ichor slime leaves dropping themselves instead of their saplings.
+    * Normal harvesting now follows the regular slime-leaf behavior: matching saplings can drop, while the leaf block is reserved for Silk Touch or shears.
+* Fixed slime leaves treating Tinkers shear-capable tools as vanilla shears.
+    * Leaf blocks now require the actual shears item or Silk Touch; Kamas, Scythes, and similar tools receive sapling drops instead.
+
+* Fixed slime leaf items rendering invisible in hand and as dropped items.
+    * Block-derived item color aliases now preserve an opaque alpha channel for tinted foliage models.
+* Fixed Blood slime leaf loot failing to load.
+    * Removed the stale reference to the nonexistent `modernfoundry:blood_slime_ball` item so normal harvesting can return Blood slime saplings.
+* Fixed slime leaves returning leaf blocks instead of saplings.
+    * Earth, Sky, Blood, Ichor, and Ender leaves now use sapling-only harvest outputs; existing slimeball and Fortune behavior is retained.
+* Restored regular slime-leaf harvesting behavior.
+    * Shears or Silk Touch now return the leaf block, while ordinary breaking rolls the matching sapling, including Greenheart saplings from Earth slime leaves.
+    * Existing slimeball and Fortune behavior remains gated to ordinary harvesting.
+* Built and verified the updated Modern Foundry 1.21.1-4.1.5 NeoForge JAR.
+    * SHA-256: `86f1797b007f1fee023249d4b326e7e2f3a89b8584eb32b913d3ff54f4431a85`.
