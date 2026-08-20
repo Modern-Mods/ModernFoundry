@@ -1,6 +1,7 @@
 package modernmods.modernfoundry.tools.data;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ArmorItem;
@@ -84,11 +85,14 @@ import static modernmods.modernfoundry.tools.TinkerToolParts.bowstring;
 import static modernmods.modernfoundry.tools.TinkerToolParts.broadAxeHead;
 import static modernmods.modernfoundry.tools.TinkerToolParts.broadBlade;
 import static modernmods.modernfoundry.tools.TinkerToolParts.fletching;
+import static modernmods.modernfoundry.tools.TinkerToolParts.greatBlade;
 import static modernmods.modernfoundry.tools.TinkerToolParts.hammerHead;
 import static modernmods.modernfoundry.tools.TinkerToolParts.largePlate;
 import static modernmods.modernfoundry.tools.TinkerToolParts.pickHead;
 import static modernmods.modernfoundry.tools.TinkerToolParts.smallAxeHead;
 import static modernmods.modernfoundry.tools.TinkerToolParts.smallBlade;
+import static modernmods.modernfoundry.tools.TinkerToolParts.spearHead;
+import static modernmods.modernfoundry.tools.TinkerToolParts.slenderBlade;
 import static modernmods.modernfoundry.tools.TinkerToolParts.toolBinding;
 import static modernmods.modernfoundry.tools.TinkerToolParts.toolHandle;
 import static modernmods.modernfoundry.tools.TinkerToolParts.toughBinding;
@@ -434,6 +438,103 @@ public class ToolDefinitionDataProvider extends AbstractToolDefinitionDataProvid
       .module(new SweepWeaponAttack(1))
       // faster tool name logic
       .module(FixedMaterialToolName.FIRST);
+
+    define(ToolDefinitions.GREATSWORD)
+      .module(PartStatsModule.parts()
+        .part(greatBlade)
+        .part(toolHandle, 0.5f)
+        .part(toolHandle, 0.5f).build())
+      .module(defaultThreeParts)
+      .module(new SetStatsModule(StatsNBT.builder()
+        .set(ToolStats.ATTACK_DAMAGE, 4f)
+        .set(ToolStats.ATTACK_SPEED, 1.1f).build()))
+      .module(new MultiplyStatsModule(MultiplierNBT.builder().set(ToolStats.MINING_SPEED, 0.5f).build()))
+      .smallToolStartingSlots()
+      .module(ToolTraitsModule.builder().trait(TinkerModifiers.necrotic).build())
+      .module(ToolActionsModule.of(ItemAbilities.SWORD_DIG))
+      .module(swordHarvest)
+      .module(new CircleWeaponAttack(2));
+
+    define(ToolDefinitions.RAPIER)
+      .module(PartStatsModule.parts()
+        .part(slenderBlade)
+        .part(largePlate)
+        .part(toughHandle)
+        .part(toolHandle).build())
+      .module(defaultFourParts)
+      .module(new SetStatsModule(StatsNBT.builder()
+        .set(ToolStats.ATTACK_DAMAGE, 1.5f)
+        .set(ToolStats.ATTACK_SPEED, 2.75f).build()))
+      .module(new MultiplyStatsModule(MultiplierNBT.builder()
+        .set(ToolStats.MINING_SPEED, 0.75f)
+        .set(ToolStats.DURABILITY, 0.75f).build()))
+      .largeToolStartingSlots()
+      .module(ToolTraitsModule.builder().trait(ModifierIds.silkyShears).build())
+      .module(ToolActionsModule.of(ItemAbilities.SWORD_DIG))
+      .module(swordHarvest);
+
+    define(ToolDefinitions.ESTOC)
+      .module(PartStatsModule.parts()
+        .part(slenderBlade)
+        .part(toughHandle)
+        .part(toolHandle).build())
+      .module(defaultThreeParts)
+      .module(new SetStatsModule(StatsNBT.builder()
+        .set(ToolStats.ATTACK_DAMAGE, 2.5f)
+        .set(ToolStats.ATTACK_SPEED, 1.8f).build()))
+      .module(new MultiplyStatsModule(MultiplierNBT.builder()
+        .set(ToolStats.MINING_SPEED, 0.75f)
+        .set(ToolStats.DURABILITY, 1.0f).build()))
+      .smallToolStartingSlots()
+      .module(ToolTraitsModule.builder()
+        .trait(ModifierIds.silkyShears)
+        .trait(ModifierIds.pierce).build())
+      .module(ToolActionsModule.of(ItemAbilities.SWORD_DIG))
+      .module(swordHarvest);
+
+    define(ToolDefinitions.PIKE)
+      .module(PartStatsModule.parts()
+        .part(spearHead)
+        .part(toughHandle, 0.5f)
+        .part(toughHandle, 0.5f).build())
+      .module(defaultThreeParts)
+      .module(new SetStatsModule(StatsNBT.builder()
+        .set(ToolStats.ATTACK_DAMAGE, 3f)
+        .set(ToolStats.ATTACK_SPEED, 1.8f).build()))
+      .module(new MultiplyStatsModule(MultiplierNBT.builder()
+        .set(ToolStats.ATTACK_DAMAGE, 1.2f)
+        .set(ToolStats.MINING_SPEED, 0.5f)
+        .set(ToolStats.DURABILITY, 1.1f).build()))
+      .smallToolStartingSlots()
+      .module(ToolTraitsModule.builder()
+        .trait(ModifierIds.lengthy)
+        .trait(ModifierIds.antiaquatic, 2)
+        .trait(ModifierIds.silkyShears).build())
+      .module(ToolActionsModule.of(ItemAbilities.SWORD_DIG))
+      .module(swordHarvest)
+      .module(new SweepWeaponAttack(2));
+
+    define(ToolDefinitions.LANCE)
+      .module(PartStatsModule.parts()
+        .part(spearHead)
+        .part(toolHandle, 0.5f)
+        .part(toolHandle, 0.5f).build())
+      .module(defaultThreeParts)
+      .module(new SetStatsModule(StatsNBT.builder()
+        .set(ToolStats.ATTACK_DAMAGE, 3f)
+        .set(ToolStats.ATTACK_SPEED, 1.8f).build()))
+      .module(new MultiplyStatsModule(MultiplierNBT.builder()
+        .set(ToolStats.ATTACK_DAMAGE, 1.2f)
+        .set(ToolStats.MINING_SPEED, 0.5f)
+        .set(ToolStats.DURABILITY, 1.1f).build()))
+      .smallToolStartingSlots()
+      .module(ToolTraitsModule.builder()
+        .trait(ModifierIds.lengthy)
+        .trait(ModifierIds.pierce)
+        .trait(ModifierIds.silkyShears).build())
+      .module(ToolActionsModule.of(ItemAbilities.SWORD_DIG))
+      .module(swordHarvest)
+      .module(new ParticleWeaponAttack(ParticleTypes.ELECTRIC_SPARK));
 
     define(ToolDefinitions.CLEAVER)
       // parts

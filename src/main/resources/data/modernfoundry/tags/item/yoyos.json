@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "modernfoundry:wooden_yoyo",
+    "modernfoundry:stone_yoyo",
+    "modernfoundry:iron_yoyo",
+    "modernfoundry:golden_yoyo",
+    "modernfoundry:diamond_yoyo",
+    "modernfoundry:netherite_yoyo"
+  ]
+}

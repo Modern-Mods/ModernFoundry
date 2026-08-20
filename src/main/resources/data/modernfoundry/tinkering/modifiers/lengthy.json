@@ -1,0 +1,20 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "minecraft:player.entity_interaction_range",
+      "flat": 1.5,
+      "operation": "addition",
+      "slots": ["mainhand", "offhand", "feet", "legs", "chest", "head"],
+      "unique": "modernfoundry.lengthy.entity_interaction_range"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.9,
+      "operation": "add",
+      "stat": "modernfoundry:durability"
+    }
+  ],
+  "tooltip_display": "always"
+}

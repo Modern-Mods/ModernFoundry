@@ -59,6 +59,7 @@ public class ModifierIds {
   public static final ModifierId sticky     = id("sticky");
   // general abilities
   public static final ModifierId reach = id("reach");
+  public static final ModifierId lengthy = id("lengthy");
   public static final ModifierId glowing = id("glowing");
   public static final ModifierId firestarter = id("firestarter");
   public static final ModifierId flamewake = id("flamewake"); // TODO: consider merging into firestarter, the rest do it

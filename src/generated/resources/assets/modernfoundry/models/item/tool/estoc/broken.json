@@ -1,0 +1,19 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "head": "modernfoundry:item/tool/estoc/blade_broken",
+    "guard_estoc": "modernfoundry:item/tool/estoc/guard_estoc",
+    "handle": "modernfoundry:item/tool/estoc/handle"
+  },
+  "modifier_maps": ["modernfoundry:sword_broken", "modernfoundry:sword"],
+  "modifier_roots": [
+    "modernfoundry:item/tool/sword/modifiers/broken/",
+    "modernfoundry:item/tool/sword/modifiers/"
+  ],
+  "parts": [
+    { "name": "handle", "index": 2 },
+    { "name": "head", "index": 0 },
+    { "name": "guard_estoc", "index": 1 }
+  ]
+}

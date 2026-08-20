@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:part_builder",
+  "id": "modernfoundry:tools/parts/builder/spear_head",
+  "cost": 2,
+  "pattern": "modernfoundry:spear_head",
+  "pattern_item": [
+    {
+      "tag": "modernfoundry:patterns/default"
+    },
+    {
+      "item": "modernfoundry:spear_head_cast"
+    }
+  ],
+  "result": {
+    "item": "modernfoundry:spear_head"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:modifier",
+  "id": "modernfoundry:tools/modifiers/ability/improvable",
+  "allow_crystal": true,
+  "inputs": [
+    { "item": "minecraft:experience_bottle" },
+    { "item": "minecraft:nether_star" },
+    { "item": "minecraft:experience_bottle" },
+    { "item": "minecraft:experience_bottle" },
+    { "item": "minecraft:experience_bottle" }
+  ],
+  "level": { "max": 1 },
+  "result": "modernfoundry:improvable",
+  "slots": { "abilities": 1 },
+  "tools": { "tag": "modernfoundry:modifiable" }
+}

@@ -1251,3 +1251,163 @@
 - Exact artifact and Testing instance SHA-256: `86f1797b007f1fee023249d4b326e7e2f3a89b8584eb32b913d3ff54f4431a85`.
 - Manual validation: not performed; live tests with ordinary tools, Fortune, Silk Touch, and shears remain outstanding.
 - Tests created or run: no dedicated tests added.
+
+## 2026-08-19 - Integrate native weapon content phases 1 and 2
+
+**Prompt / Task**
+- Proceed with implementation of the Modern Foundry native integration plan.
+- Complete the Katanas, Battle Spades, and Tinkers' Weaponry content wave in the Modern Foundry namespace.
+
+**What Changed**
+- Added native `katana`, `fuma_shuriken`, and `battle_spade` registrations and data.
+- Added `great_blade` and `spear_head`, their gold/sand casts, and `greatsword`, `pike`, and `lance` tool definitions.
+- Added the `lengthy` modifier with the reference entity-range and durability effects.
+- Added station layouts, tool-building and part-casting recipes, item tags, modifier tags, client item properties/colors, models, material texture generation metadata, translations, and player-facing README attribution.
+- Removed duplicate generic fallback copies from generated tool texture folders; canonical static textures remain in main resources and generated material variants remain shipped.
+
+**Steps Taken**
+- Read `TASK.md`, project instructions, current registrations/providers, and the reference Tinkers' Weaponry generated data and license.
+- Extended existing Modern Foundry registries, providers, tags, client hooks, and resource conventions without adding an addon framework or dependency.
+- Added the 20 Phase 2 generator texture entries and synchronized the tracked namespace/data outputs because this checkout excludes providers from compilation and has no active GatherData providers.
+- Audited JSON syntax, generated/main resource duplicates, external addon namespaces, model texture references, and the built archive.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `TinkerToolParts`, `TinkerSmeltery`, `TinkerTools`, `ToolDefinitions`, `ToolDefinitionDataProvider`, `StationSlotLayoutProvider`, `ToolsRecipeProvider`, `ModifierProvider`, `ToolClientEvents`, and existing item-model/tag providers.
+- Owning module/system: Modern Foundry native Tinker tool, part, modifier, recipe, client, and resource systems.
+- Existing logic reused or extracted: existing `TinkerModule` registries, tool-definition modules, station layout builders, casting/part recipe helpers, item tag helpers, client property/color registration, and model providers; no new Java classes or parallel framework.
+- Net line change: existing Java providers and registries extended; new generated/native data and reference-derived assets added; no build files or optional dependencies changed.
+- New files: native Phase 1/2 models, textures, recipes, layouts, tags, tool definitions, and modifier data.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Used Modern Foundry's `modernfoundry` namespace and existing serialization/data systems so the content does not require the original mods or Json Things.
+- Preserved reference defaults and player-facing names; 1.20.1 Forge assets/data were adapted to the active 1.21.1 NeoForge model and registry conventions.
+- Kept optional integrations optional and retained attribution in `README.md` for `References/TinkersWeaponry-1.20.1/LICENSE`.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat check build --console=plain --no-daemon"` passed; existing Gradle/NeoForge deprecation warnings remain.
+- Tests/checks: Gradle `check`, `test`, and `testJunit` (`NO-SOURCE`) passed; `verifyGeneratedTextures` passed; JSON parsing and `git diff --check` passed; main/generated duplicate audit returned zero.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.6-NeoForge.jar` contains the new tools, parts, casts, modifier, data, client resources, and classes; targeted external addon namespace audit returned zero.
+- Exact artifact SHA-256: `43ECAF22D14DA9CE4073CF06BBA6CE974A7205C5C49A23503D9EA8ED21E31E64`.
+- Manual validation: not performed; fresh-world construction, live combat/harvest behavior, client visuals, dedicated-server loading, multiplayer sync, and optional-integration smoke remain outstanding.
+- Tests created or run: no dedicated tests added.
+
+## 2026-08-20 - Complete native rapier, leveling, and yoyo integration
+
+**Prompt / Task**
+- Continue implementation of `TASK.md` through the remaining reference-content phases.
+- Complete the Rapier/Estoc behavior, Improvable leveling, yoyo runtime, cross-feature audit, and release-readiness checks.
+
+**What Changed**
+- Phase 3: added native `slender_blade`, its casts, `rapier` and `estoc` definitions, station layouts, recipes, tags, models, textures, translations, and `RapierItem` leap/sting behavior.
+- Phase 3: routed Rapier sting damage through the server-side tool path and exposed the reference multiplier through `rapierAttackBonus` with bounded config validation.
+- Phase 4: added the `improvable` modifier, persistent tool progression through the existing tool-stack data model, configurable level/slot/stat rules, XP hooks for mining, harvesting, shearing, combat, projectiles, armor damage, interactions, movement, and modifier actions, plus level-up packets, tooltip data, existing command-path integration, and sounds.
+- Phase 5: added six native yoyo items, recipes, tags, translations, models, textures, the registered yoyo entity, controller behaviors, targeting, movement, collision, attacks, retraction, particles, tracker/retract packets, renderer, and narrow first-/third-person hand rendering hooks.
+- Phase 6: audited Modern Foundry namespace ownership, external addon identifiers, generated/main resource duplicates, optional integration boundaries, registry/data paths, and shared network registration.
+- Phase 7: inspected the built archive for expected yoyo, rapier, estoc, leveling, and native namespace content; updated player documentation and attribution.
+
+**Steps Taken**
+- Read the active `TASK.md`, current Modern Foundry registration/config/network patterns, and the remaining reference behavior before editing.
+- Reused existing tool definitions, station layouts, recipe/tag providers, modifier registration, tool-stack serialization, `TinkerNetwork`, entity registration, client bootstrap, and renderer conventions.
+- Kept yoyo simulation and damage server-authoritative; retained only the narrow client hand-layer mixin needed to hide a yoyo item while its entity is deployed.
+- Fixed yoyo clip destination writes before the final build so entity targeting receives the computed segment intersection.
+- Audited the final JAR and confirmed the new rapier, estoc, leveling, and yoyo paths use only the `modernfoundry` namespace; pre-existing legacy book/compatibility paths were kept outside this integration wave.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `RapierItem`, `ImprovableModifier`, `ToolLevellingUtil`, `LevelUpPacket`, yoyo item/entity/controller/behavior/control/packet classes, `YoyoRenderer`, `TinkerTools`, `TinkerNetwork`, `Config`, tool data providers, client hooks, and native resources.
+- Owning module/system: Modern Foundry tool actions, modifier progression, native entity runtime, client rendering, networking, configuration, and data/resource providers.
+- Existing logic reused or extracted: native modular-tool definitions and stack data, existing modifier hooks, server event paths, existing network channel, entity tracking, item model generation, and client render registration; no addon framework or new dependency.
+- Net line change: existing registries/providers/config/network/client paths extended with new runtime classes and native data/assets; no build files or optional integrations changed.
+- New files: Rapier/Estoc runtime and generated data/assets, leveling runtime/packet, yoyo runtime/renderer/mixin and six item/resource sets.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Kept all IDs, packages, assets, data, packets, and config keys in the `modernfoundry`/`modernmods.modernfoundry` namespace.
+- Preserved reference defaults and behavior where the 1.21.1 NeoForge APIs required adaptation; Netherite Yoyo reuses the Diamond texture because the reference has no Netherite texture, as documented in `README.md` and `Credits.txt`.
+- Used a narrow client mixin only for deployed-yoyo hand visibility because no existing item-layer event provides equivalent cancellation; common entity logic remains dedicated-server safe.
+- No new external dependency was added; JEI and JSON Things remain optional.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat clean build --console=plain --no-daemon"` passed in 5m17s; existing Gradle/NeoForge deprecation warnings remain.
+- Tests/checks: `verifyGeneratedTextures`, Gradle `check`, and project tests passed; targeted diff inspection for `README.md`, `CHANGELOG.md`, and `TRACELOG.md` is clean; repository-wide `git diff --check` still reports pre-existing trailing whitespace in dirty `Ideas.md:14` and `Ideas.md:23`; no dedicated test sources were added.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.6-NeoForge.jar` contains the expected rapier, estoc, leveling, and yoyo classes/assets/data; targeted new-content audit found no `yoyos`, `jozufozu`, or `jsonthings` paths.
+- Exact artifact SHA-256: `c61c2955bfd5f77f637e8294e1e695b72ec322565ae09a6fdadb4ce12445901d`.
+- Client smoke: client bootstrap/resource reload completed and `ItemInHandLayerMixin` applied; run was stopped before fresh-world gameplay.
+- Dedicated-server smoke: Modern Foundry/Hilt loading reached the server bootstrap, then Hilt 1.13 failed before world load because `DumpLootModifiers` rejected `neoforge:loot_modifiers/global_loot_modifiers.json` as a `Component.translatable` argument.
+- Manual validation: fresh-world construction, live combat/harvest, yoyo physics/render interaction, two-player tracking, save/reload, chunk unload/reload, and optional-integration smoke remain outstanding.
+- Tests created or run: no dedicated tests added.
+
+## 2026-08-20 - Fix Rapier, Yoyo hand state, and Improvable recipe
+
+**Prompt / Task**
+- Fix Rapier backwards leap, Yoyo hand rendering after use/item switching, and Foundry Anvil application of Improvable with Nether Star and Experience Bottles.
+
+**What Changed**
+- Kept Rapier leap execution independent of the base modifiable-item `PASS` result, preserving the server-side backward movement and cooldown path.
+- Made first- and third-person Yoyo hiding compare the deployed entity stack with the currently held stack; switched weapons now render instead of being hidden by stale tracker state.
+- Added native `improvable` modifier and salvage recipe resources under `src/main/resources/data/modernfoundry/recipe/tools/modifiers/`, using one Nether Star, four Experience Bottles, one ability slot, and the `modernfoundry:modifiable` tag.
+- Documented the Improvable recipe in `README.md`.
+
+**Steps Taken**
+- Read `TASK.md`, traced the existing `ModifiableItem` use path, Yoyo reference mixins, tracker state, active resource roots, and modifier recipe schema.
+- Confirmed this checkout excludes data-provider classes from the main source set and has no active GatherData providers, so the runtime recipe is shipped as a canonical main resource rather than left only in an unused provider.
+- Parsed both recipe JSON files, compiled the changed Java, ran the full clean build, inspected the built JAR, and ran `git diff --check`.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `RapierItem`, `ItemInHandRendererMixin`, `ItemInHandLayerMixin`, modifier recipe resources, and `README.md`.
+- Owning module/system: native Modern Foundry tool actions, Yoyo client hand rendering, and Foundry Anvil modifier recipes.
+- Existing logic reused or extracted: the reference leap formula, existing Yoyo tracker/entity stack, existing modifier recipe schema, and the existing `modernfoundry:modifiable` item tag; no new framework or dependency.
+- Net line change: targeted hand-state guards and two recipe resources; no build files changed.
+- New files: `src/main/resources/data/modernfoundry/recipe/tools/modifiers/ability/improvable.json` and `src/main/resources/data/modernfoundry/recipe/tools/modifiers/salvage/ability/improvable.json`.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Stack matching removes stale tracker hiding without changing Yoyo entity ownership or server-side discard behavior.
+- Main-resource recipe files match this checkout's shipped-resource ownership and ensure the recipe exists in the runtime JAR; the unused provider addition remains aligned with the same recipe contract.
+- The Yoyo entity renderer retains the reference's diamond-block 3D placeholder because no dedicated redistributable custom Yoyo mesh exists; item hand models remain the reference handheld item models.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat clean build --console=plain --no-daemon"` passed in 5m40s; existing Gradle/NeoForge deprecation warnings remain.
+- Tests/checks: `compileJava`, Gradle `test`, `check`, and `testJunit` (`NO-SOURCE`) passed; both recipe files parsed; `git diff --check` passed with only existing Git line-ending warnings.
+- Data task: `rtk cmd.exe /d /c ".\\gradlew.bat runData --console=plain --no-daemon"` passed; configured GatherData reported zero active providers and wrote no tracked generated files.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.6-NeoForge.jar` contains both Improvable recipes, `modernfoundry.mixins.json`, Rapier/Yoyo classes, and Yoyo mixins.
+- Exact artifact SHA-256: `d29f7984978edd8f70f73bde947d6d2e8d0ea2dbadd44f6999ef9ad470261071`.
+- Manual validation: not performed; fresh-world Anvil application, Rapier movement, Yoyo rendering, weapon switching, dedicated-server, multiplayer, and optional-integration smoke remain outstanding.
+- Tests created or run: no dedicated tests added.
+
+## 2026-08-20 - Fix Rapier impulse, Yoyo model/state, and Improvable tooltip
+
+**Prompt / Task**
+- Continue `TASK.md` implementation for the reported Rapier leap, Yoyo rendering/hand-state, and Improvable tooltip bugs.
+
+**What Changed**
+- Marked Rapier's reference backward velocity as an impulse so server motion synchronization sends it to clients.
+- Changed `yoyo_3d.json` from the flat generated-item parent to Minecraft's block model parent so its element geometry renders.
+- Changed `YoyoTracker.apply` so zero IDs clear a hand while unresolved nonzero entity IDs preserve the current state.
+- Hid the internal `tank_handler` modifier and removed the provider-owned dynamic Improvable JSON override; the native `ImprovableModifier` and translated level/XP tooltip now remain authoritative.
+- Removed stale generated `src/generated/resources/data/modernfoundry/tinkering/modifiers/improvable.json` output.
+
+**Steps Taken**
+- Read current task/instructions and traced Rapier use, vanilla motion synchronization, Yoyo tracker packets/entity lifecycle, model inheritance, modifier display defaults, and data-provider output.
+- Ran data generation/validation, inspected the generated-resource result, built from a clean state, parsed targeted JSON, checked the exact archive contents, and reviewed whitespace diagnostics.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `RapierItem`, `YoyoTracker`, `TinkerModifiers`, `ModifierProvider`, and the Yoyo item model.
+- Owning module/system: native tool actions, Yoyo client/entity tracking, modifier registration/data, and tooltip display.
+- Existing logic reused or extracted: vanilla `hasImpulse` motion path, existing Yoyo tracker packet/entity lookup, `BasicModifier.TooltipDisplay`, native `NoLevelsModifier`, and existing tooltip translations.
+- Net line change: five targeted source/resource fixes plus removal of one stale generated modifier file; no new files.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Kept reference leap direction and strength unchanged; only restored vanilla motion propagation.
+- Kept Yoyo packet semantics authoritative: zero means clear, unresolved entity means wait rather than erase state.
+- Hid only the technical tank handler; real tank modifiers remain visible.
+
+**Build / Validation**
+- Data task: `rtk .\\gradlew.bat runData --console=plain --no-daemon` passed; configured GatherData reported no active providers and the stale generated override remained absent.
+- Production build: standalone `clean` passed, followed by `rtk .\\gradlew.bat build --console=plain --no-daemon` from that clean state; build passed with existing deprecation warnings.
+- Tests/checks: Gradle `test`, `check`, and `testJunit` (`NO-SOURCE`) passed; four targeted JSON files parsed; `git diff --check` reported no whitespace errors, only Git line-ending warnings.
+- Archive validation: `ModernFoundry-1.21.1-4.1.6-NeoForge.jar` contains both Improvable recipes, all six Yoyo models, Rapier/Yoyo classes, and translations; no `tinkering/modifiers/improvable.json` override is present.
+- Exact artifact SHA-256: `01b72ca72271849e513003ffd2ba469166ddc9dafe1f2aa4919324c950a9e232`.
+- Manual validation: not performed; fresh-world Rapier movement, first-/third-person Yoyo use/switching, Anvil application, dedicated-server, multiplayer, and optional-integration smoke remain outstanding.
+- Tests created or run: no dedicated tests added.

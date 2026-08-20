@@ -1,0 +1,13 @@
+{
+  "icon": {
+    "item": "modernfoundry:estoc",
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+  },
+  "input_slots": [
+    { "filter": { "item": "modernfoundry:slender_blade" }, "icon": "modernfoundry:slender_blade", "translation_key": "item.modernfoundry.slender_blade", "x": 15, "y": 26 },
+    { "filter": { "item": "modernfoundry:tough_handle" }, "icon": "modernfoundry:tough_handle", "translation_key": "item.modernfoundry.tough_handle", "x": 33, "y": 44 },
+    { "filter": { "item": "modernfoundry:tool_handle" }, "icon": "modernfoundry:tool_handle", "translation_key": "item.modernfoundry.tool_handle", "x": 51, "y": 62 }
+  ],
+  "sortIndex": 9,
+  "translation_key": "item.modernfoundry.estoc"
+}

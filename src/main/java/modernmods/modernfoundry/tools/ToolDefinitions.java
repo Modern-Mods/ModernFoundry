@@ -26,13 +26,21 @@ public final class ToolDefinitions {
   // swords
   public static final ToolDefinition DAGGER = ToolDefinition.create(TinkerTools.dagger);
   public static final ToolDefinition SWORD = ToolDefinition.create(TinkerTools.sword);
+  public static final ToolDefinition KATANA = ToolDefinition.create(TinkerTools.katana);
+  public static final ToolDefinition GREATSWORD = ToolDefinition.create(TinkerTools.greatsword);
+  public static final ToolDefinition RAPIER = ToolDefinition.create(TinkerTools.rapier);
+  public static final ToolDefinition ESTOC = ToolDefinition.create(TinkerTools.estoc);
   public static final ToolDefinition CLEAVER = ToolDefinition.create(TinkerTools.cleaver);
+  public static final ToolDefinition BATTLE_SPADE = ToolDefinition.create(TinkerTools.battleSpade);
 
   // ranged
   public static final ToolDefinition CROSSBOW = ToolDefinition.create(TinkerTools.crossbow);
   public static final ToolDefinition LONGBOW = ToolDefinition.create(TinkerTools.longbow);
   public static final ToolDefinition FISHING_ROD = ToolDefinition.create(TinkerTools.fishingRod);
   public static final ToolDefinition JAVELIN = ToolDefinition.create(TinkerTools.javelin);
+  public static final ToolDefinition FUMA_SHURIKEN = ToolDefinition.create(TinkerTools.fumaShuriken);
+  public static final ToolDefinition PIKE = ToolDefinition.create(TinkerTools.pike);
+  public static final ToolDefinition LANCE = ToolDefinition.create(TinkerTools.lance);
   // ammo
   public static final ToolDefinition ARROW = ToolDefinition.create(TinkerTools.arrow);
   public static final ToolDefinition SHURIKEN = ToolDefinition.create(TinkerTools.shuriken);

@@ -385,6 +385,9 @@ public final class TinkerSmeltery extends TinkerModule {
   public static final CastItemObject broadBladeCast   = ITEMS.registerCast(TinkerToolParts.broadBlade, ITEM_PROPS);
   public static final CastItemObject broadAxeHeadCast = ITEMS.registerCast(TinkerToolParts.broadAxeHead, ITEM_PROPS);
   public static final CastItemObject largePlateCast  = ITEMS.registerCast(TinkerToolParts.largePlate, ITEM_PROPS);
+  public static final CastItemObject greatBladeCast = ITEMS.registerCast(TinkerToolParts.greatBlade, ITEM_PROPS);
+  public static final CastItemObject spearHeadCast = ITEMS.registerCast(TinkerToolParts.spearHead, ITEM_PROPS);
+  public static final CastItemObject slenderBladeCast = ITEMS.registerCast(TinkerToolParts.slenderBlade, ITEM_PROPS);
   // bindings
   public static final CastItemObject toolBindingCast = ITEMS.registerCast(TinkerToolParts.toolBinding, ITEM_PROPS);
   public static final CastItemObject toughBindingCast = ITEMS.registerCast(TinkerToolParts.toughBinding, ITEM_PROPS);
@@ -657,6 +660,9 @@ public final class TinkerSmeltery extends TinkerModule {
     accept(output, getter, broadAxeHeadCast);
     accept(output, getter, broadBladeCast);
     accept(output, getter, largePlateCast);
+    accept(output, getter, greatBladeCast);
+    accept(output, getter, spearHeadCast);
+    accept(output, getter, slenderBladeCast);
     // binding and rods
     accept(output, getter, toolHandleCast);
     accept(output, getter, toolBindingCast);

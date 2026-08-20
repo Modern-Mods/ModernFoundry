@@ -42,6 +42,9 @@ public class TinkerItemModelProvider extends ItemModelProvider {
     // plates
     part(TinkerToolParts.adzeHead, "pickadze/adze").offset(-5, 1);
     part(TinkerToolParts.largePlate);
+    part(TinkerToolParts.greatBlade);
+    part(TinkerToolParts.spearHead);
+    part(TinkerToolParts.slenderBlade);
     // bows
     part(TinkerToolParts.bowLimb, "longbow/limb_bottom").offset(5, -2);
     part(TinkerToolParts.bowGrip, "crossbow/body").offset(-2, -2);
@@ -100,6 +103,9 @@ public class TinkerItemModelProvider extends ItemModelProvider {
     cast(TinkerSmeltery.broadBladeCast);
     cast(TinkerSmeltery.broadAxeHeadCast);
     cast(TinkerSmeltery.largePlateCast);
+    cast(TinkerSmeltery.greatBladeCast);
+    cast(TinkerSmeltery.spearHeadCast);
+    cast(TinkerSmeltery.slenderBladeCast);
     // bindings
     cast(TinkerSmeltery.toolBindingCast);
     cast(TinkerSmeltery.toughBindingCast);

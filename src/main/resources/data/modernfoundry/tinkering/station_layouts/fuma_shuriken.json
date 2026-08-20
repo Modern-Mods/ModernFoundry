@@ -1,0 +1,14 @@
+{
+  "icon": {
+    "item": "modernfoundry:fuma_shuriken",
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+  },
+  "input_slots": [
+    { "filter": { "item": "modernfoundry:small_blade" }, "icon": "modernfoundry:small_blade", "translation_key": "item.modernfoundry.small_blade", "x": 28, "y": 38 },
+    { "filter": { "item": "modernfoundry:small_blade" }, "icon": "modernfoundry:small_blade", "translation_key": "item.modernfoundry.small_blade", "x": 50, "y": 58 },
+    { "filter": { "item": "modernfoundry:bow_limb" }, "icon": "modernfoundry:bow_limb", "translation_key": "item.modernfoundry.bow_limb", "x": 50, "y": 38 },
+    { "filter": { "item": "modernfoundry:tough_handle" }, "icon": "modernfoundry:tough_handle", "translation_key": "item.modernfoundry.tough_handle", "x": 28, "y": 58 }
+  ],
+  "sortIndex": 10,
+  "translation_key": "item.modernfoundry.fuma_shuriken"
+}

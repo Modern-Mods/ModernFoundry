@@ -1,6 +1,7 @@
 {
   "values": [
     "modernfoundry:javelin",
+    "modernfoundry:fuma_shuriken",
     "#modernfoundry:modifiable/ranged/launcher",
     "#modernfoundry:modifiable/ranged/small",
     "#modernfoundry:modifiable/ranged/broad"

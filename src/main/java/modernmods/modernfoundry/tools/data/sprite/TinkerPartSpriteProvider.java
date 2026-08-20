@@ -36,6 +36,7 @@ public class TinkerPartSpriteProvider extends AbstractPartSpriteProvider {
     // heads
     addHead("large_plate");
     addHead("small_blade");
+    addHead("slender_blade");
     // handles
     addHandle("tool_handle");
     addHandle("tough_handle");
@@ -129,6 +130,10 @@ public class TinkerPartSpriteProvider extends AbstractPartSpriteProvider {
     buildTool("dagger").addBreakableHead("blade").addHandle("crossguard");
     buildTool("sword").addBreakableHead("blade").addHandle("guard").addHandle("handle");
     buildTool("cleaver").withLarge().addBreakableHead("head").addBreakableHead("shield").addHandle("handle").addHandle("guard");
+    buildTool("rapier").addBreakableHead("blade").addBinding("guard_cup").addHandle("guard").addHandle("handle");
+    buildTool("estoc").addBreakableHead("blade").addHandle("guard_estoc").addHandle("handle");
+    buildTool("rapier").withLarge().addBreakableHead("blade").addHandle("guard").addHandle("guard_cup").addHandle("handle");
+    buildTool("estoc").addBreakableHead("blade").addHandle("guard_estoc").addHandle("handle");
     // bow
     buildTool("crossbow")
       .addLimb("limb").addGrip("body")

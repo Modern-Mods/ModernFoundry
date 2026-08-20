@@ -1,0 +1,17 @@
+{
+  "type": "modernfoundry:part_builder",
+  "id": "modernfoundry:tools/parts/builder/great_blade",
+  "cost": 2,
+  "pattern": "modernfoundry:great_blade",
+  "pattern_item": [
+    {
+      "tag": "modernfoundry:patterns/default"
+    },
+    {
+      "item": "modernfoundry:great_blade_cast"
+    }
+  ],
+  "result": {
+    "item": "modernfoundry:great_blade"
+  }
+}

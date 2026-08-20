@@ -79,6 +79,9 @@ public final class TinkerToolParts extends TinkerModule {
   // plates
   public static final ItemObject<ToolPartItem> adzeHead = ITEMS.register("adze_head", () -> new ToolPartItem(ITEM_PROPS, HeadMaterialStats.ID));
   public static final ItemObject<ToolPartItem> largePlate = ITEMS.register("large_plate", () -> new ToolPartItem(ITEM_PROPS, HeadMaterialStats.ID));
+  public static final ItemObject<ToolPartItem> greatBlade = ITEMS.register("great_blade", () -> new ToolPartItem(ITEM_PROPS, HeadMaterialStats.ID));
+  public static final ItemObject<ToolPartItem> spearHead = ITEMS.register("spear_head", () -> new ToolPartItem(ITEM_PROPS, HeadMaterialStats.ID));
+  public static final ItemObject<ToolPartItem> slenderBlade = ITEMS.register("slender_blade", () -> new ToolPartItem(ITEM_PROPS, HeadMaterialStats.ID));
   // bows
   public static final ItemObject<ToolPartItem> bowLimb = ITEMS.register("bow_limb", () -> new ToolPartItem(ITEM_PROPS, LimbMaterialStats.ID));
   public static final ItemObject<ToolPartItem> bowGrip = ITEMS.register("bow_grip", () -> new ToolPartItem(ITEM_PROPS, GripMaterialStats.ID));
@@ -124,6 +127,9 @@ public final class TinkerToolParts extends TinkerModule {
     accept(output, broadAxeHead);
     accept(output, broadBlade);
     accept(output, largePlate);
+    accept(output, greatBlade);
+    accept(output, spearHead);
+    accept(output, slenderBlade);
     // binding and rods
     accept(output, toolHandle);
     accept(output, toolBinding);

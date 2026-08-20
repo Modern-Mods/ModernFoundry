@@ -159,6 +159,7 @@ import modernmods.modernfoundry.library.modifiers.modules.technical.ArmorStatMod
 import modernmods.modernfoundry.library.modifiers.modules.technical.MaxArmorStatModule;
 import modernmods.modernfoundry.library.modifiers.util.DynamicModifier;
 import modernmods.modernfoundry.library.modifiers.util.ModifierDeferredRegister;
+import modernmods.modernfoundry.library.modifiers.impl.BasicModifier.TooltipDisplay;
 import modernmods.modernfoundry.library.modifiers.util.ModifierLevelDisplay;
 import modernmods.modernfoundry.library.modifiers.util.StaticModifier;
 import modernmods.modernfoundry.library.module.ModuleHookMap;
@@ -231,6 +232,7 @@ import modernmods.modernfoundry.tools.modifiers.traits.skull.SelfDestructiveModi
 import modernmods.modernfoundry.tools.modifiers.traits.skull.StrongBonesModifier;
 import modernmods.modernfoundry.tools.modifiers.traits.skull.WildfireModifier;
 import modernmods.modernfoundry.tools.modifiers.traits.skull.WitheredModifier;
+import modernmods.modernfoundry.tools.modifiers.upgrades.ImprovableModifier;
 import modernmods.modernfoundry.tools.modifiers.upgrades.melee.PiercingModifier;
 import modernmods.modernfoundry.tools.modifiers.upgrades.melee.SweepingEdgeModifier;
 import modernmods.modernfoundry.tools.modifiers.upgrades.ranged.SinistralModifier;
@@ -376,6 +378,7 @@ public final class TinkerModifiers extends TinkerModule {
    */
 
   // upgrades
+  public static final StaticModifier<ImprovableModifier> improvable = MODIFIERS.register("improvable", ImprovableModifier::new);
   public static final StaticModifier<SinistralModifier> sinistral = MODIFIERS.register("sinistral", SinistralModifier::new);
 
   // abilities
@@ -426,7 +429,7 @@ public final class TinkerModifiers extends TinkerModule {
 
   // logic handlers - used as modifier traits
   /** Handles the fluid tank logic for any fluid using modifiers. */
-  public static final StaticModifier<Modifier> tankHandler = MODIFIERS.register("tank_handler", () -> ModuleHookMap.builder().addModule(new TankModule(ToolTankHelper.TANK_HELPER)).modifier().levelDisplay(ModifierLevelDisplay.NO_LEVELS).priority(300).build());
+  public static final StaticModifier<Modifier> tankHandler = MODIFIERS.register("tank_handler", () -> ModuleHookMap.builder().addModule(new TankModule(ToolTankHelper.TANK_HELPER)).modifier().tooltipDisplay(TooltipDisplay.NEVER).levelDisplay(ModifierLevelDisplay.NO_LEVELS).priority(300).build());
   /** Handles the energy bar for Forge Energy using modifiers. */
   public static final StaticModifier<Modifier> energyHandler = MODIFIERS.register("energy_handler", EnergyHandlerModifier::new);
 

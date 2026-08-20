@@ -2,6 +2,7 @@
   "modernfoundry:reinforced":  ["modernfoundry:item/materials/reinforcement/emerald", "modernfoundry:gui/modifiers/book"],
   "modernfoundry:unbreakable": ["modernfoundry:gui/modifiers/unbreakable", "modernfoundry:gui/modifiers/book"],
   "modernfoundry:overforced":  ["modernfoundry:item/materials/reinforcement/slimesteel", "modernfoundry:gui/modifiers/book"],
+  "modernfoundry:improvable":  ["minecraft:item/nether_star", "modernfoundry:gui/modifiers/book"],
   "modernfoundry:overslime":   ["minecraft:item/slime_ball", "modernfoundry:gui/modifiers/book"],
   "modernfoundry:soulbound":   ["minecraft:item/echo_shard", "modernfoundry:gui/modifiers/book"],
   "modernfoundry:smelting":    ["minecraft:item/campfire", "modernfoundry:gui/modifiers/book"],

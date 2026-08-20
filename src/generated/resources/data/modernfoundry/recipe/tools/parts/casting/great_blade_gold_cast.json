@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:table_casting_material",
+  "id": "modernfoundry:tools/parts/casting/great_blade_gold_cast",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/great_blade"
+  },
+  "item_cost": 2,
+  "result": "modernfoundry:great_blade"
+}

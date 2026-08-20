@@ -99,12 +99,17 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
                              .outputSize(2)
                              .save(consumer, prefix(TinkerTools.dagger, folder));
     toolBuilding(consumer, TinkerTools.sword, folder);
+    toolBuilding(consumer, TinkerTools.greatsword, folder);
+    toolBuilding(consumer, TinkerTools.rapier, folder);
+    toolBuilding(consumer, TinkerTools.estoc, folder);
     toolBuilding(consumer, TinkerTools.cleaver, folder);
     // bow
     toolBuilding(consumer, TinkerTools.crossbow, folder);
     toolBuilding(consumer, TinkerTools.longbow, folder);
     toolBuilding(consumer, TinkerTools.fishingRod, folder);
     toolBuilding(consumer, TinkerTools.javelin, folder);
+    toolBuilding(consumer, TinkerTools.pike, folder);
+    toolBuilding(consumer, TinkerTools.lance, folder);
     // ammo
     ToolBuildingRecipeBuilder.toolBuildingRecipe(TinkerTools.arrow.get())
       .outputSize(4)
@@ -445,6 +450,9 @@ public class ToolsRecipeProvider extends BaseRecipeProvider implements IMaterial
     partRecipes(consumer, TinkerToolParts.toughBinding, TinkerSmeltery.toughBindingCast, 3, partFolder, castFolder);
     partRecipes(consumer, TinkerToolParts.adzeHead,     TinkerSmeltery.adzeHeadCast,     2, partFolder, castFolder);
     partRecipes(consumer, TinkerToolParts.largePlate,   TinkerSmeltery.largePlateCast,   4, partFolder, castFolder);
+    partRecipes(consumer, TinkerToolParts.greatBlade,   TinkerSmeltery.greatBladeCast,   2, partFolder, castFolder);
+    partRecipes(consumer, TinkerToolParts.spearHead,    TinkerSmeltery.spearHeadCast,    2, partFolder, castFolder);
+    partRecipes(consumer, TinkerToolParts.slenderBlade, TinkerSmeltery.slenderBladeCast, 6, partFolder, castFolder);
     partRecipes(consumer, TinkerToolParts.toolHandle,   TinkerSmeltery.toolHandleCast,   1, partFolder, castFolder);
     partRecipes(consumer, TinkerToolParts.toughHandle,  TinkerSmeltery.toughHandleCast,  3, partFolder, castFolder);
     // armor

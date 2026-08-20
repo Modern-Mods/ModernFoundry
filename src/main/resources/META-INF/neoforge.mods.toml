@@ -4,6 +4,9 @@ issueTrackerURL="https://github.com/Modern-Mods/ModernFoundry/issues"
 logoFile="logo.png"
 license="MIT"
 
+[[mixins]]
+config="modernfoundry.mixins.json"
+
 [[mods]]
     modId="modernfoundry"
     version="${version}"

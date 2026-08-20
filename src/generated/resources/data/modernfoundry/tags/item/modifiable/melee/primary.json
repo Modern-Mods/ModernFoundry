@@ -10,6 +10,14 @@
     "modernfoundry:javelin",
     "modernfoundry:battlesign",
     "modernfoundry:swasher",
+    "modernfoundry:katana",
+    "modernfoundry:fuma_shuriken",
+    "modernfoundry:battle_spade",
+    "modernfoundry:greatsword",
+    "modernfoundry:pike",
+    "modernfoundry:lance",
+    "modernfoundry:rapier",
+    "modernfoundry:estoc",
     {
       "id": "modernfoundry:minotaur_axe",
       "required": false

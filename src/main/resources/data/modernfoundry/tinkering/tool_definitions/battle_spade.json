@@ -1,0 +1,65 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        "modernfoundry:adze_head",
+        "modernfoundry:tool_handle",
+        "modernfoundry:small_blade"
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 1.0,
+        "modernfoundry:attack_speed": 1.2
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:attack_damage": 0.9,
+        "modernfoundry:durability": 1.1,
+        "modernfoundry:mining_speed": 0.7
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": { "upgrades": 3, "abilities": 1 }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        { "name": "modernfoundry:pathing", "level": 1 },
+        { "name": "modernfoundry:bane_of_sssss", "level": 2 }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": ["shovel_dig"]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "minecraft:mineable/shovel"
+    },
+    {
+      "type": "modernfoundry:circle_aoe",
+      "3D": false,
+      "diameter": 1
+    },
+    {
+      "type": "modernfoundry:fixed_material_name",
+      "index": 0
+    }
+  ]
+}

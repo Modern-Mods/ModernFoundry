@@ -9,6 +9,14 @@
       "stat_type": "modernfoundry:head"
     },
     {
+      "path": "modernfoundry:item/tool/parts/great_blade",
+      "stat_type": "modernfoundry:head"
+    },
+    {
+      "path": "modernfoundry:item/tool/parts/spear_head",
+      "stat_type": "modernfoundry:head"
+    },
+    {
       "path": "modernfoundry:item/tool/parts/tool_handle",
       "stat_type": "modernfoundry:handle"
     },
@@ -735,6 +743,78 @@
     },
     {
       "path": "modernfoundry:item/tool/sword/handle",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/greatsword/head",
+      "stat_type": "modernfoundry:head"
+    },
+    {
+      "path": "modernfoundry:item/tool/greatsword/handle",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/greatsword/guard",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/greatsword/large/head",
+      "stat_type": "modernfoundry:head"
+    },
+    {
+      "path": "modernfoundry:item/tool/greatsword/large/handle",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/greatsword/large/guard",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/lance/head",
+      "stat_type": "modernfoundry:head"
+    },
+    {
+      "path": "modernfoundry:item/tool/lance/handle",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/lance/guard",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/lance/large/head",
+      "stat_type": "modernfoundry:head"
+    },
+    {
+      "path": "modernfoundry:item/tool/lance/large/handle",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/lance/large/guard",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/pike/head",
+      "stat_type": "modernfoundry:head"
+    },
+    {
+      "path": "modernfoundry:item/tool/pike/handle",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/pike/guard",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/pike/large/head",
+      "stat_type": "modernfoundry:head"
+    },
+    {
+      "path": "modernfoundry:item/tool/pike/large/handle",
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "path": "modernfoundry:item/tool/pike/large/guard",
       "stat_type": "modernfoundry:handle"
     },
     {

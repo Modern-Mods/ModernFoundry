@@ -131,6 +131,25 @@ public class StationSlotLayoutProvider extends AbstractStationSlotLayoutProvider
       .addInputItem(TinkerToolParts.toolHandle, 12, 62)
       .addInputItem(TinkerToolParts.toolHandle, 30, 44)
       .build();
+    defineModifiable(TinkerTools.greatsword)
+      .sortIndex(SORT_WEAPON + SORT_LARGE)
+      .addInputItem(TinkerToolParts.greatBlade, 48, 26)
+      .addInputItem(TinkerToolParts.toolHandle, 12, 62)
+      .addInputItem(TinkerToolParts.toolHandle, 30, 44)
+      .build();
+    defineModifiable(TinkerTools.rapier)
+      .sortIndex(SORT_WEAPON)
+      .addInputItem(TinkerToolParts.slenderBlade, 10, 22)
+      .addInputItem(TinkerToolParts.largePlate, 33, 44)
+      .addInputItem(TinkerToolParts.toughHandle, 33, 64)
+      .addInputItem(TinkerToolParts.toolHandle, 53, 64)
+      .build();
+    defineModifiable(TinkerTools.estoc)
+      .sortIndex(SORT_WEAPON)
+      .addInputItem(TinkerToolParts.slenderBlade, 15, 26)
+      .addInputItem(TinkerToolParts.toughHandle, 33, 44)
+      .addInputItem(TinkerToolParts.toolHandle, 51, 62)
+      .build();
     defineModifiable(TinkerTools.cleaver)
       .sortIndex(SORT_WEAPON + SORT_LARGE)
       .addInputItem(TinkerToolParts.broadBlade,  45, 26)
@@ -163,6 +182,18 @@ public class StationSlotLayoutProvider extends AbstractStationSlotLayoutProvider
       .addInputItem(TinkerToolParts.toolHandle,  7, 62)
       .addInputItem(TinkerToolParts.bowLimb,    45, 46)
       .addInputItem(TinkerToolParts.bowGrip,    25, 46)
+      .build();
+    defineModifiable(TinkerTools.pike)
+      .sortIndex(SORT_WEAPON)
+      .addInputItem(TinkerToolParts.spearHead, 48, 26)
+      .addInputItem(TinkerToolParts.toughHandle, 12, 62)
+      .addInputItem(TinkerToolParts.toughHandle, 30, 44)
+      .build();
+    defineModifiable(TinkerTools.lance)
+      .sortIndex(SORT_WEAPON)
+      .addInputItem(TinkerToolParts.spearHead, 48, 26)
+      .addInputItem(TinkerToolParts.toolHandle, 12, 62)
+      .addInputItem(TinkerToolParts.toolHandle, 30, 44)
       .build();
     defineModifiable(TinkerTools.arrow)
       .sortIndex(SORT_AMMO)

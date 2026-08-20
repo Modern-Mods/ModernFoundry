@@ -1,0 +1,21 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "head": "modernfoundry:item/tool/rapier/blade_broken",
+    "guard_cup": "modernfoundry:item/tool/rapier/guard_cup",
+    "guard": "modernfoundry:item/tool/rapier/guard",
+    "handle": "modernfoundry:item/tool/rapier/handle"
+  },
+  "modifier_maps": ["modernfoundry:sword_broken", "modernfoundry:sword"],
+  "modifier_roots": [
+    "modernfoundry:item/tool/sword/modifiers/broken/",
+    "modernfoundry:item/tool/sword/modifiers/"
+  ],
+  "parts": [
+    { "name": "handle", "index": 3 },
+    { "name": "head", "index": 0 },
+    { "name": "guard", "index": 2 },
+    { "name": "guard_cup", "index": 1 }
+  ]
+}

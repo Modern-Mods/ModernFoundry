@@ -1,0 +1,4 @@
+{
+  "parent": "modernfoundry:item/yoyo_3d",
+  "textures": {"layer0": "modernfoundry:item/wooden_yoyo"}
+}

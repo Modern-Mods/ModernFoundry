@@ -349,12 +349,20 @@ public class ItemTagProvider extends ItemTagsProvider {
     // sword
     addToolTags(TinkerTools.dagger,  MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, PARRY, SMALL_TOOLS, BONUS_SLOTS, ItemTags.SWORDS, UNSALVAGABLE);
     addToolTags(TinkerTools.sword,   MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, SMALL_TOOLS, BONUS_SLOTS, ItemTags.SWORDS, AOE);
+    addToolTags(TinkerTools.katana,  MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS, ItemTags.SWORDS, AOE);
+    addToolTags(TinkerTools.greatsword, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, SMALL_TOOLS, BONUS_SLOTS, ItemTags.SWORDS, AOE);
+    addToolTags(TinkerTools.rapier, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, SMALL_TOOLS, BONUS_SLOTS, ItemTags.SWORDS, UNSALVAGABLE);
+    addToolTags(TinkerTools.estoc, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, SMALL_TOOLS, BONUS_SLOTS, ItemTags.SWORDS, UNSALVAGABLE);
     addToolTags(TinkerTools.cleaver, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS, ItemTags.SWORDS, AOE);
+    addToolTags(TinkerTools.battleSpade, MULTIPART_TOOL, DURABILITY, HARVEST, HARVEST_PRIMARY, MELEE_PRIMARY, MELEE_WEAPON, INTERACTABLE_RIGHT, SWORD, AOE, SMALL_TOOLS, BONUS_SLOTS, ItemTags.SHOVELS);
     // ranged
     addToolTags(TinkerTools.crossbow,   MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, CROSSBOWS,    INTERACTABLE_LEFT,  SMALL_RANGED, BONUS_SLOTS, Tags.Items.TOOLS_CROSSBOWS);
     addToolTags(TinkerTools.longbow,    MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, LONGBOWS,     INTERACTABLE_LEFT,  BROAD_RANGED, BONUS_SLOTS, Tags.Items.TOOLS_BOWS, BALLISTAS);
     addToolTags(TinkerTools.fishingRod, MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, FISHING_RODS, INTERACTABLE_DUAL,  SMALL_RANGED, BONUS_SLOTS, Tags.Items.TOOLS_FISHING_RODS);
     addToolTags(TinkerTools.javelin,    MULTIPART_TOOL, DURABILITY, MELEE_PRIMARY, RANGED,      INTERACTABLE_RIGHT, BROAD_RANGED, BONUS_SLOTS, Tags.Items.TOOLS_TRIDENTS);
+    addToolTags(TinkerTools.fumaShuriken, MULTIPART_TOOL, DURABILITY, MELEE_PRIMARY, RANGED, INTERACTABLE_RIGHT, BROAD_RANGED, BROAD_TOOLS, BONUS_SLOTS);
+    addToolTags(TinkerTools.pike, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, SMALL_TOOLS, BONUS_SLOTS, ItemTags.SWORDS, AOE);
+    addToolTags(TinkerTools.lance, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, SMALL_TOOLS, BONUS_SLOTS, ItemTags.SWORDS, AOE);
     addToolTags(TinkerTools.arrow,       MULTIPART_TOOL, AMMO,        UNSALVAGABLE, UNSWAPPABLE, SINGLE_USE, DYEABLE, ItemTags.ARROWS);
     addToolTags(TinkerTools.shuriken,    MULTIPART_TOOL, THROWN_AMMO, UNSALVAGABLE, UNSWAPPABLE, SINGLE_USE);
     addToolTags(TinkerTools.throwingAxe, MULTIPART_TOOL, THROWN_AMMO, UNSALVAGABLE, UNSWAPPABLE, SINGLE_USE);
@@ -480,6 +488,7 @@ public class ItemTagProvider extends ItemTagsProvider {
           TinkerToolParts.pickHead.get(), TinkerToolParts.hammerHead.get(),
           TinkerToolParts.smallAxeHead.get(), TinkerToolParts.broadAxeHead.get(),
           TinkerToolParts.smallBlade.get(), TinkerToolParts.broadBlade.get(),
+          TinkerToolParts.greatBlade.get(), TinkerToolParts.spearHead.get(), TinkerToolParts.slenderBlade.get(),
           TinkerToolParts.adzeHead.get(), TinkerToolParts.largePlate.get(),
           TinkerToolParts.toolBinding.get(), TinkerToolParts.toughBinding.get(),
           TinkerToolParts.toolHandle.get(), TinkerToolParts.toughHandle.get(),
@@ -633,6 +642,9 @@ public class ItemTagProvider extends ItemTagsProvider {
     addCast.accept(TinkerSmeltery.broadAxeHeadCast);
     addCast.accept(TinkerSmeltery.broadBladeCast);
     addCast.accept(TinkerSmeltery.largePlateCast);
+    addCast.accept(TinkerSmeltery.greatBladeCast);
+    addCast.accept(TinkerSmeltery.spearHeadCast);
+    addCast.accept(TinkerSmeltery.slenderBladeCast);
     // bindings
     addCast.accept(TinkerSmeltery.toolBindingCast);
     addCast.accept(TinkerSmeltery.toughBindingCast);

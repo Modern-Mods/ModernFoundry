@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/pike",
+  "result": "modernfoundry:pike",
+  "result_count": 1
+}

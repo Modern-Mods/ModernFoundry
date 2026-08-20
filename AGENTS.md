@@ -6,15 +6,23 @@ Guidelines for AI coding agents working on **Modern Foundry**, a **Minecraft 1.2
 
 ```text
 / (root)
-├─ src/                               # Modern Foundry source, resources, generated data, and tests (EDIT HERE)
-├─ References/                        # Reference material and external sources (READ-ONLY)
-├─ libs/                              # Local dependency artifacts (READ-ONLY)
-├─ .gradle/                           # Gradle cache (GENERATED; DO NOT EDIT)
-├─ build/                             # Gradle build output (GENERATED; DO NOT EDIT)
-├─ run/                               # Development runtime data (GENERATED; DO NOT EDIT)
-├─ logs/                              # Runtime logs (GENERATED; DO NOT EDIT)
-├─ com/                               # Tracked compiled artifacts (READ-ONLY)
-└─ META-INF/                          # Packaged metadata and artifacts (READ-ONLY)
+├─ src/                                      # Modern Foundry source, resources, generated data, and tests (EDIT HERE)
+├─ References/                               # Reference material and external sources (READ-ONLY)
+|   ├─TinkersConstruct-1.20.1/               # Original Tinker's Contruct `1.20.1` Source Code
+|   ├─Minecraft_Client_Source_1.21.1/        # Decompiled Minecraft Vanilla `1.21.1` Client Source Code
+|   ├─TinkersKatanas-main/                   # MIT Katana Addon
+|   ├─TinkersWeaponry-1.20.1/                # MIT Weapon Addon
+|   ├─TinkersBattleSpades-main/              # MIT Weapon Addon
+|   ├─Tinkers-Rapier-1.20.1/                 # MIT Weapon Addon
+|   ├─tinkers-levelling-addon-1.20/          # MIT Tool/Weapon Leveling Addon
+|   └─ Yoyos-1.20/                           # MIT Weapon Addon
+├─ libs/                                     # Local dependency artifacts (READ-ONLY)
+├─ .gradle/                                  # Gradle cache (GENERATED; DO NOT EDIT)
+├─ build/                                    # Gradle build output (GENERATED; DO NOT EDIT)
+├─ run/                                      # Development runtime data (GENERATED; DO NOT EDIT)
+├─ logs/                                     # Runtime logs (GENERATED; DO NOT EDIT)
+├─ com/                                      # Tracked compiled artifacts (READ-ONLY)
+└─ META-INF/                                 # Packaged metadata and artifacts (READ-ONLY)
 ```
 
 ### Allowed edits

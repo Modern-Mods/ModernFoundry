@@ -176,7 +176,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
     // abilities
     this.tag(GENERAL_ABILITIES).add(
       ModifierIds.expanded, ModifierIds.gilded, ModifierIds.unbreakable,
-      ModifierIds.luck, TinkerModifiers.melting.getId());
+      ModifierIds.luck, ModifierIds.lengthy, TinkerModifiers.melting.getId());
     this.tag(MELEE_ABILITIES).add(
       ModifierIds.blocking, TinkerModifiers.parrying.getId(),
       TinkerModifiers.dualWielding.getId(), ModifierIds.spilling);

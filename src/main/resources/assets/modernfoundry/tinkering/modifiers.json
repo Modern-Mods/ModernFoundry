@@ -4,6 +4,7 @@
   "modernfoundry:diamond":    "modernfoundry:normal",
   "modernfoundry:netherite":  "modernfoundry:normal",
   "modernfoundry:overforced": "modernfoundry:normal",
+  "modernfoundry:improvable": "modernfoundry:normal",
   "modernfoundry:overslime":  "modernfoundry:overslime",
 
   "modernfoundry:haste":      { "type": "modernfoundry:normal", "luminosity": 7 },

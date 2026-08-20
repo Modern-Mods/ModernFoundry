@@ -1,0 +1,7 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "id": "modernfoundry:tools/modifiers/salvage/ability/improvable",
+  "modifier": "modernfoundry:improvable",
+  "slots": { "abilities": 1 },
+  "tools": { "tag": "modernfoundry:modifiable" }
+}

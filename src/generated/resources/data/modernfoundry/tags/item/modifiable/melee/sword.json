@@ -1,6 +1,13 @@
 {
   "values": [
     "modernfoundry:sword",
-    "modernfoundry:cleaver"
+    "modernfoundry:cleaver",
+    "modernfoundry:katana",
+    "modernfoundry:battle_spade",
+    "modernfoundry:greatsword",
+    "modernfoundry:pike",
+    "modernfoundry:lance",
+    "modernfoundry:rapier",
+    "modernfoundry:estoc"
   ]
 }

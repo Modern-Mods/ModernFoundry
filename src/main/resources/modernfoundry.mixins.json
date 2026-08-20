@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "modernmods.modernfoundry.tools.yoyo.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ItemInHandLayerMixin",
+    "ItemInHandRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

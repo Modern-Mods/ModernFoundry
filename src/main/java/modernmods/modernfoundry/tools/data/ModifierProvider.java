@@ -375,6 +375,9 @@ public class ModifierProvider extends AbstractModifierProvider implements ICondi
     buildModifier(ModifierIds.reach)
       .addModule(AttributeModule.builder(Attributes.BLOCK_INTERACTION_RANGE, Operation.ADD_VALUE).eachLevel(1))
       .addModule(AttributeModule.builder(Attributes.ENTITY_INTERACTION_RANGE, Operation.ADD_VALUE).eachLevel(1));
+    buildModifier(ModifierIds.lengthy)
+      .addModule(AttributeModule.builder(Attributes.ENTITY_INTERACTION_RANGE, Operation.ADD_VALUE).flat(1.5f))
+      .addModule(StatBoostModule.add(ToolStats.DURABILITY).flat(0.9f));
     buildModifier(ModifierIds.expanded).addModule(new VolatileIntModule(IModifiable.EXPANDED, LevelingInt.eachLevel(1)));
     // fire primer is just expanded now, isn't that neat? this might have a hidden application
     buildModifier(ModifierIds.fireprimer).addModule(new VolatileIntModule(IModifiable.EXPANDED, LevelingInt.flat(1))).levelDisplay(ModifierLevelDisplay.NO_LEVELS);

@@ -1,0 +1,24 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/tall",
+  "textures": {
+    "head": "modernfoundry:item/tool/greatsword/head_broken",
+    "handle": "modernfoundry:item/tool/greatsword/handle",
+    "guard": "modernfoundry:item/tool/greatsword/guard",
+    "large_head": "modernfoundry:item/tool/greatsword/large/head_broken",
+    "large_handle": "modernfoundry:item/tool/greatsword/large/handle",
+    "large_guard": "modernfoundry:item/tool/greatsword/large/guard"
+  },
+  "modifier_maps": ["modernfoundry:sword_broken", "modernfoundry:sword"],
+  "modifier_roots": {
+    "small": ["modernfoundry:item/tool/sword/modifiers/broken/", "modernfoundry:item/tool/sword/modifiers/"],
+    "large": ["modernfoundry:item/tool/sword/large/modifiers/broken/", "modernfoundry:item/tool/sword/large/modifiers/"]
+  },
+  "large": true,
+  "large_offset": [-2, 2],
+  "parts": [
+    {"name": "handle", "index": 1},
+    {"name": "head", "index": 0},
+    {"name": "guard", "index": 2}
+  ]
+}

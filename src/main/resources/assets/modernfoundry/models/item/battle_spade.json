@@ -1,0 +1,20 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/axe",
+  "textures": {
+    "blade": "modernfoundry:item/tool/battle_spade/blade",
+    "shovel": "modernfoundry:item/tool/battle_spade/shovel",
+    "handle": "modernfoundry:item/tool/battle_spade/handle"
+  },
+  "modifier_maps": ["modernfoundry:sword"],
+  "modifier_roots": ["modernfoundry:item/tool/sword/modifiers/"],
+  "parts": [
+    { "name": "blade", "index": 2 },
+    { "name": "shovel", "index": 0 },
+    { "name": "handle", "index": 1 }
+  ],
+  "overrides": [
+    { "predicate": { "modernfoundry:charging": 2 }, "model": "modernfoundry:item/battle_spade/blocking" },
+    { "predicate": { "modernfoundry:broken": 1 }, "model": "modernfoundry:item/battle_spade/broken" }
+  ]
+}

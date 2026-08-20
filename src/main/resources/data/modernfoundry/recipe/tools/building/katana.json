@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/katana",
+  "result": "modernfoundry:katana",
+  "result_count": 1
+}

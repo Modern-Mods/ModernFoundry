@@ -1,0 +1,4 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": { "layer0": "modernfoundry:item/cast/slender_blade" }
+}

@@ -3,6 +3,8 @@
     "modernfoundry:dagger",
     "modernfoundry:arrow",
     "modernfoundry:shuriken",
-    "modernfoundry:throwing_axe"
+    "modernfoundry:throwing_axe",
+    "modernfoundry:rapier",
+    "modernfoundry:estoc"
   ]
 }

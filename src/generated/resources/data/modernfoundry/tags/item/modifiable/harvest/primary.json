@@ -12,6 +12,7 @@
     "modernfoundry:scythe",
     "modernfoundry:melting_pan",
     "modernfoundry:war_pick",
+    "modernfoundry:battle_spade",
     {
       "id": "modernfoundry:minotaur_axe",
       "required": false

@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/greatsword",
+  "result": "modernfoundry:greatsword",
+  "result_count": 1
+}

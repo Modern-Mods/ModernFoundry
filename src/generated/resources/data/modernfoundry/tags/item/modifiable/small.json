@@ -7,6 +7,12 @@
     "modernfoundry:kama",
     "modernfoundry:dagger",
     "modernfoundry:sword",
-    "modernfoundry:flint_and_brick"
+    "modernfoundry:flint_and_brick",
+    "modernfoundry:battle_spade",
+    "modernfoundry:greatsword",
+    "modernfoundry:pike",
+    "modernfoundry:lance",
+    "modernfoundry:rapier",
+    "modernfoundry:estoc"
   ]
 }

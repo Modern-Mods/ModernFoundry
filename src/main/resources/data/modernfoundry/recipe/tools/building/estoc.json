@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/estoc",
+  "result": "modernfoundry:estoc",
+  "result_count": 1
+}

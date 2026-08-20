@@ -280,6 +280,17 @@ public class ModifierRecipeProvider extends BaseRecipeProvider {
                          .setTools(ingredientFromTags(TinkerTags.Items.MELEE, TinkerTags.Items.HARVEST, TinkerTags.Items.LAUNCHERS, TinkerTags.Items.LEGGINGS))
                          .saveSalvage(consumer, prefix(ModifierIds.experienced, upgradeSalvage))
                          .save(consumer, prefix(ModifierIds.experienced, upgradeFolder));
+    ModifierRecipeBuilder.modifier(TinkerModifiers.improvable)
+                         .addInput(Items.EXPERIENCE_BOTTLE)
+                         .addInput(Items.NETHER_STAR)
+                         .addInput(Items.EXPERIENCE_BOTTLE)
+                         .addInput(Items.EXPERIENCE_BOTTLE)
+                         .addInput(Items.EXPERIENCE_BOTTLE)
+                         .setMaxLevel(1)
+                         .setSlots(SlotType.ABILITY, 1)
+                         .setTools(TinkerTags.Items.MODIFIABLE)
+                         .saveSalvage(consumer, prefix(TinkerModifiers.improvable, abilitySalvage))
+                         .save(consumer, prefix(TinkerModifiers.improvable, abilityFolder));
     ModifierRecipeBuilder.modifier(ModifierIds.magnetic)
                          .addInput(Items.COMPASS)
                          .setMaxLevel(5)

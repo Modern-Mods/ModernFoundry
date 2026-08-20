@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,6 +15,8 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -24,6 +27,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.saveddata.maps.MapId;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
@@ -39,6 +43,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import org.joml.Matrix4f;
+import modernmods.hilt.client.SafeClientAccess;
+import modernmods.hilt.client.TooltipKey;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.config.Config;
@@ -52,25 +58,33 @@ import modernmods.modernfoundry.library.tools.capability.TinkerDataKeys;
 import modernmods.modernfoundry.library.tools.capability.inventory.ToolInventoryCapability;
 import modernmods.modernfoundry.library.tools.context.EquipmentChangeContext;
 import modernmods.modernfoundry.library.tools.helper.ModifierUtil;
+import modernmods.modernfoundry.library.tools.helper.TooltipUtil;
 import modernmods.modernfoundry.library.tools.item.IModifiableDisplay;
 import modernmods.modernfoundry.library.tools.item.ranged.ModifiableBowItem;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
+import modernmods.modernfoundry.library.tools.nbt.ToolStack;
 import modernmods.modernfoundry.library.utils.Orientation2D;
 import modernmods.modernfoundry.library.utils.Orientation2D.Orientation1D;
 import modernmods.modernfoundry.library.utils.Util;
 import modernmods.modernfoundry.tools.TinkerModifiers;
 import modernmods.modernfoundry.tools.modules.armor.MinimapModule;
 import modernmods.modernfoundry.tools.modules.armor.SleevesModule;
+import modernmods.modernfoundry.tools.logic.ToolLevellingUtil;
+import modernmods.modernfoundry.tools.yoyo.YoyoTracker;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /** Modifier event hooks that run client side */
 @EventBusSubscriber(modid = TConstruct.MOD_ID, value = Dist.CLIENT, bus = Bus.GAME)
 public class ModifierClientEvents {
   private static final RenderType MAP_BACKGROUND = RenderType.text(ResourceLocation.withDefaultNamespace("textures/map/map_background.png"));
   private static final RenderType MAP_BACKGROUND_CHECKERBOARD = RenderType.text(ResourceLocation.withDefaultNamespace("textures/map/map_background_checkerboard.png"));
+  private static final Component TOOLTIP_HOLD_ALT = TConstruct.makeTranslation("tooltip", "hold_alt",
+    TConstruct.makeTranslation("key", "alt").withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.ITALIC));
 
   @SubscribeEvent
   static void onTooltipEvent(ItemTooltipEvent event) {
@@ -83,7 +97,133 @@ public class ModifierClientEvents {
         }
         return false;
       });
+      addImprovableTooltip(event);
     }
+  }
+
+  private static void addImprovableTooltip(ItemTooltipEvent event) {
+    TooltipKey key = SafeClientAccess.getTooltipKey();
+    if (key == TooltipKey.SHIFT || key == TooltipKey.CONTROL) return;
+
+    ItemStack stack = event.getItemStack();
+    ToolStack tool = ToolStack.from(stack);
+    if (!ToolLevellingUtil.hasImprovable(tool)) return;
+
+    if (key == TooltipKey.ALT) {
+      addLevelTooltip(event, tool);
+      return;
+    }
+
+    List<Component> info = new ArrayList<>();
+    int level = ToolLevellingUtil.level(tool);
+    MutableComponent levelName = TConstruct.makeTranslation("tooltip", "level.name", getLevelName(level),
+      Component.literal(Integer.toString(level)).withStyle(ChatFormatting.GRAY));
+    info.add(TConstruct.makeTranslation("tooltip", "level", levelName));
+    if (ToolLevellingUtil.canLevelUp(level)) {
+      info.add(TConstruct.makeTranslation("tooltip", "xp",
+        TConstruct.makeTranslation("tooltip", "xp.value",
+          Component.literal(Integer.toString(tool.getPersistentData().getInt(ToolLevellingUtil.EXPERIENCE_KEY))).withStyle(ChatFormatting.GOLD),
+          Component.literal(Integer.toString(ToolLevellingUtil.getXpNeededForLevel(level + 1, ToolLevellingUtil.isBroadTool(tool)))).withStyle(ChatFormatting.GOLD)
+        )));
+    }
+
+    List<Component> tooltip = event.getToolTip();
+    int insert = stack.isDamageableItem() && !tool.isUnbreakable() && tool.hasTag(TinkerTags.Items.DURABILITY) ? 2 : 1;
+    tooltip.addAll(Math.min(insert, tooltip.size()), info);
+    int hold = tooltip.indexOf(TooltipUtil.TOOLTIP_HOLD_CTRL);
+    if (hold < 0) hold = tooltip.indexOf(TooltipUtil.TOOLTIP_HOLD_SHIFT);
+    if (hold >= 0) tooltip.add(hold + 1, TOOLTIP_HOLD_ALT);
+  }
+
+  private static void addLevelTooltip(ItemTooltipEvent event, ToolStack tool) {
+    List<Component> tooltip = new ArrayList<>();
+    List<Component> original = event.getToolTip();
+    tooltip.add(original.isEmpty() ? event.getItemStack().getHoverName() : original.get(0));
+
+    Map<String, Integer> slots = new LinkedHashMap<>();
+    for (String slot : ToolLevellingUtil.parseHistory(tool.getPersistentData().getString(ToolLevellingUtil.SLOT_HISTORY_KEY))) {
+      slots.merge(slot, 1, Integer::sum);
+    }
+    if (!slots.isEmpty()) {
+      tooltip.add(section("info.slots"));
+      slots.forEach((slot, count) -> tooltip.add(TConstruct.makeTranslation("tooltip", "info.slots." + slot,
+        Component.literal(Integer.toString(count)).withStyle(slotColor(slot)))));
+    }
+
+    Map<String, Double> stats = new LinkedHashMap<>();
+    for (String stat : ToolLevellingUtil.parseHistory(tool.getPersistentData().getString(ToolLevellingUtil.STAT_HISTORY_KEY))) {
+      stats.merge(stat, ToolLevellingUtil.getStatValue(tool, stat), Double::sum);
+    }
+    if (!stats.isEmpty()) {
+      if (tooltip.size() > 1) tooltip.add(Component.empty());
+      tooltip.add(section("info.stats"));
+      stats.forEach((stat, value) -> tooltip.add(TConstruct.makeTranslation("tooltip", "info.stats." + statPath(stat),
+        Component.literal(ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(value)).withStyle(statColor(stat)))));
+    }
+
+    int level = ToolLevellingUtil.level(tool);
+    boolean nextSlot = ToolLevellingUtil.canPredictNextSlot(tool);
+    boolean nextStat = ToolLevellingUtil.canPredictNextStat(tool);
+    if (ToolLevellingUtil.canLevelUp(level) && (nextSlot || nextStat)) {
+      if (tooltip.size() > 1) tooltip.add(Component.empty());
+      tooltip.add(section("info.next_level"));
+      if (nextSlot) {
+        String slot = ToolLevellingUtil.getSlot(tool, level + 1);
+        if (slot != null) tooltip.add(TConstruct.makeTranslation("tooltip", "info.next_level.slot",
+          TConstruct.makeTranslation("tooltip", "slot." + slot).withStyle(slotColor(slot))));
+      }
+      if (nextStat) {
+        String stat = ToolLevellingUtil.getStat(tool, level + 1);
+        if (stat != null) tooltip.add(TConstruct.makeTranslation("tooltip", "info.next_level.stat",
+          Component.literal(ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(ToolLevellingUtil.getStatValue(tool, stat))).withStyle(statColor(stat)),
+          TConstruct.makeTranslation("tooltip", "stat." + statPath(stat))));
+      }
+    }
+
+    original.clear();
+    original.addAll(tooltip);
+  }
+
+  private static MutableComponent section(String name) {
+    return TConstruct.makeTranslation("tooltip", name).withStyle(ChatFormatting.AQUA, ChatFormatting.UNDERLINE);
+  }
+
+  private static MutableComponent getLevelName(int level) {
+    int base = level % 15;
+    MutableComponent name = TConstruct.makeTranslation("tooltip", "level." + base).withStyle(ChatFormatting.GRAY);
+    int pluses = level / 15;
+    return pluses == 0 ? name : name.append(Component.literal("+".repeat(pluses)).withStyle(ChatFormatting.GRAY));
+  }
+
+  private static String statPath(String stat) {
+    return switch (stat) {
+      case ToolLevellingUtil.ATTACK_DAMAGE -> "attack_damage";
+      case ToolLevellingUtil.ATTACK_SPEED -> "attack_speed";
+      case ToolLevellingUtil.MINING_SPEED -> "mining_speed";
+      case ToolLevellingUtil.ARMOR_TOUGHNESS -> "armor_toughness";
+      case ToolLevellingUtil.KNOCKBACK_RESISTANCE -> "knockback_resistance";
+      case ToolLevellingUtil.DRAW_SPEED -> "draw_speed";
+      case ToolLevellingUtil.PROJECTILE_DAMAGE -> "projectile_damage";
+      default -> stat;
+    };
+  }
+
+  private static ChatFormatting slotColor(String slot) {
+    return switch (slot) {
+      case ToolLevellingUtil.ABILITY -> ChatFormatting.LIGHT_PURPLE;
+      case ToolLevellingUtil.DEFENSE -> ChatFormatting.RED;
+      case ToolLevellingUtil.SOUL -> ChatFormatting.DARK_PURPLE;
+      default -> ChatFormatting.GREEN;
+    };
+  }
+
+  private static ChatFormatting statColor(String stat) {
+    return switch (stat) {
+      case ToolLevellingUtil.ATTACK_DAMAGE -> ChatFormatting.RED;
+      case ToolLevellingUtil.ATTACK_SPEED -> ChatFormatting.LIGHT_PURPLE;
+      case ToolLevellingUtil.DURABILITY, ToolLevellingUtil.MINING_SPEED -> ChatFormatting.GREEN;
+      default -> ChatFormatting.AQUA;
+    };
   }
 
   /** Determines whether to render the given hand based on modifiers */
@@ -95,6 +235,10 @@ public class ModifierClientEvents {
     }
     // when firing your melee weapon with ballista, don't render it in the other hand; makes it look like you duplicated your weapon
     InteractionHand hand = event.getHand();
+    if (YoyoTracker.on(player).hasYoyo(hand)) {
+      event.setCanceled(true);
+      return;
+    }
     ItemStack held = player.getItemInHand(hand);
     ItemStack opposite = player.getItemInHand(Util.getOpposite(hand));
     if (!held.isEmpty() && !opposite.isEmpty() && opposite.is(TinkerTags.Items.BALLISTAS) && ModifierUtil.getPersistentInt(opposite, ModifiableBowItem.KEY_BALLISTA, 0) == ModifiableBowItem.FLAG_BALLISTA_HELD) {

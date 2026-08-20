@@ -1,0 +1,13 @@
+{
+  "icon": {
+    "item": "modernfoundry:battle_spade",
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+  },
+  "input_slots": [
+    { "filter": { "item": "modernfoundry:adze_head" }, "icon": "modernfoundry:adze_head", "translation_key": "item.modernfoundry.adze_head", "x": 33, "y": 42 },
+    { "filter": { "item": "modernfoundry:tool_handle" }, "icon": "modernfoundry:tool_handle", "translation_key": "item.modernfoundry.tool_handle", "x": 15, "y": 60 },
+    { "filter": { "item": "modernfoundry:small_blade" }, "icon": "modernfoundry:small_blade", "translation_key": "item.modernfoundry.small_blade", "x": 53, "y": 22 }
+  ],
+  "sortIndex": 10,
+  "translation_key": "item.modernfoundry.battle_spade"
+}

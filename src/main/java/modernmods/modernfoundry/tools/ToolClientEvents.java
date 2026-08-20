@@ -81,6 +81,7 @@ import modernmods.modernfoundry.tools.client.ToolContainerScreen;
 import modernmods.modernfoundry.tools.client.material.CombatFishingHookRenderer;
 import modernmods.modernfoundry.tools.client.material.ThrownShurikenRenderer;
 import modernmods.modernfoundry.tools.client.material.ThrownToolRenderer;
+import modernmods.modernfoundry.tools.client.YoyoRenderer;
 import modernmods.modernfoundry.tools.item.ModifierCrystalItem;
 import modernmods.modernfoundry.tools.logic.DoubleJumpHandler;
 import modernmods.modernfoundry.tools.logic.InteractionHandler;
@@ -154,6 +155,7 @@ public class ToolClientEvents extends ClientEventBase {
     event.registerEntityRenderer(TinkerTools.materialArrow.get(), ThrownToolRenderer::new);
     event.registerEntityRenderer(TinkerTools.thrownShuriken.get(), ThrownShurikenRenderer::new);
     event.registerEntityRenderer(TinkerTools.thrownTool.get(), ThrownToolRenderer::new);
+    event.registerEntityRenderer(TinkerTools.yoyoEntity.get(), YoyoRenderer::new);
     event.registerEntityRenderer(TinkerModifiers.fluidSpitEntity.get(), FluidEffectProjectileRenderer::new);
     event.registerEntityRenderer(TinkerModifiers.fireball.get(), context -> new ThrownItemRenderer<>(context, 0.75f, true));
   }
@@ -193,12 +195,20 @@ public class ToolClientEvents extends ClientEventBase {
       // sword
       TinkerItemProperties.registerToolProperties(TinkerTools.dagger);
       TinkerItemProperties.registerToolProperties(TinkerTools.sword);
+      TinkerItemProperties.registerToolProperties(TinkerTools.katana);
+      TinkerItemProperties.registerToolProperties(TinkerTools.greatsword);
+      TinkerItemProperties.registerToolProperties(TinkerTools.rapier);
+      TinkerItemProperties.registerToolProperties(TinkerTools.estoc);
       TinkerItemProperties.registerToolProperties(TinkerTools.cleaver);
+      TinkerItemProperties.registerToolProperties(TinkerTools.battleSpade);
       // bow
       TinkerItemProperties.registerCrossbowProperties(TinkerTools.crossbow);
       TinkerItemProperties.registerToolProperties(TinkerTools.longbow);
       TinkerItemProperties.registerToolProperties(TinkerTools.fishingRod);
       TinkerItemProperties.registerToolProperties(TinkerTools.javelin);
+      TinkerItemProperties.registerToolProperties(TinkerTools.fumaShuriken);
+      TinkerItemProperties.registerToolProperties(TinkerTools.pike);
+      TinkerItemProperties.registerToolProperties(TinkerTools.lance);
       // misc
       TinkerItemProperties.registerToolProperties(TinkerTools.flintAndBrick);
       TinkerItemProperties.registerToolProperties(TinkerTools.skyStaff);
@@ -259,12 +269,20 @@ public class ToolClientEvents extends ClientEventBase {
     // weapon
     registerItemColors(colors, TinkerTools.dagger);
     registerItemColors(colors, TinkerTools.sword);
+    registerItemColors(colors, TinkerTools.katana);
+    registerItemColors(colors, TinkerTools.greatsword);
+    registerItemColors(colors, TinkerTools.rapier);
+    registerItemColors(colors, TinkerTools.estoc);
     registerItemColors(colors, TinkerTools.cleaver);
+    registerItemColors(colors, TinkerTools.battleSpade);
     // bow
     registerItemColors(colors, TinkerTools.crossbow);
     registerItemColors(colors, TinkerTools.longbow);
     registerItemColors(colors, TinkerTools.fishingRod);
     registerItemColors(colors, TinkerTools.javelin);
+    registerItemColors(colors, TinkerTools.fumaShuriken);
+    registerItemColors(colors, TinkerTools.pike);
+    registerItemColors(colors, TinkerTools.lance);
     registerItemColors(colors, TinkerTools.arrow);
     registerItemColors(colors, TinkerTools.shuriken);
     registerItemColors(colors, TinkerTools.throwingAxe);

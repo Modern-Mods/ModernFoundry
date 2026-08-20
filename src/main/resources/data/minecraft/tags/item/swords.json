@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "modernfoundry:katana",
+    "modernfoundry:greatsword",
+    "modernfoundry:pike",
+    "modernfoundry:lance",
+    "modernfoundry:rapier",
+    "modernfoundry:estoc"
+  ]
+}

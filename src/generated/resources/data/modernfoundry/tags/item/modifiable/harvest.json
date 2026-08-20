@@ -4,6 +4,13 @@
     "modernfoundry:sword",
     "modernfoundry:cleaver",
     "modernfoundry:swasher",
+    "modernfoundry:katana",
+    "modernfoundry:battle_spade",
+    "modernfoundry:greatsword",
+    "modernfoundry:pike",
+    "modernfoundry:lance",
+    "modernfoundry:rapier",
+    "modernfoundry:estoc",
     "#modernfoundry:modifiable/harvest/primary",
     "#modernfoundry:modifiable/harvest/stone"
   ]

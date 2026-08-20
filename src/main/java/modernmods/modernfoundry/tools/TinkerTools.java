@@ -13,6 +13,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.neoforged.neoforge.common.crafting.IngredientType;
@@ -124,12 +125,15 @@ import modernmods.modernfoundry.tools.entity.ThrownTool;
 import modernmods.modernfoundry.tools.item.CrystalshotItem;
 import modernmods.modernfoundry.tools.item.CrystalshotItem.CrystalshotEntity;
 import modernmods.modernfoundry.tools.item.ModifiableSwordItem;
+import modernmods.modernfoundry.tools.item.RapierItem;
 import modernmods.modernfoundry.tools.item.SlimeskullItem;
 import modernmods.modernfoundry.tools.logic.EquipmentChangeWatcher;
 import modernmods.modernfoundry.tools.logic.ModifiableArrowDispenserBehavior;
 import modernmods.modernfoundry.tools.logic.ModifiableShurikenDispenserBehavior;
 import modernmods.modernfoundry.tools.menu.ToolContainerMenu;
 import modernmods.modernfoundry.tools.modules.MeltingFluidEffectiveModule;
+import modernmods.modernfoundry.tools.yoyo.YoyoEntity;
+import modernmods.modernfoundry.tools.yoyo.YoyoItem;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -181,12 +185,27 @@ public final class TinkerTools extends TinkerModule {
   // problem is setting the durability sets the max stack size, and we don't want that. And we need TieredItem to work with piglins
   public static final ItemObject<ModifiableItem> dagger = ITEMS.register("dagger", () -> new ModifiableSwordItem(new Item.Properties().durability(-1).stacksTo(2), ToolDefinitions.DAGGER, 2));
   public static final ItemObject<ModifiableItem> sword = ITEMS.register("sword", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.SWORD));
+  public static final ItemObject<ModifiableItem> katana = ITEMS.register("katana", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.KATANA));
+  public static final ItemObject<ModifiableItem> greatsword = ITEMS.register("greatsword", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.GREATSWORD));
+  public static final ItemObject<RapierItem> rapier = ITEMS.register("rapier", () -> new RapierItem(UNSTACKABLE_PROPS, ToolDefinitions.RAPIER, true));
+  public static final ItemObject<RapierItem> estoc = ITEMS.register("estoc", () -> new RapierItem(UNSTACKABLE_PROPS, ToolDefinitions.ESTOC, false));
   public static final ItemObject<ModifiableItem> cleaver = ITEMS.register("cleaver", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.CLEAVER));
+  public static final ItemObject<ModifiableItem> battleSpade = ITEMS.register("battle_spade", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.BATTLE_SPADE));
+
+  public static final ItemObject<YoyoItem> woodenYoyo = ITEMS.register("wooden_yoyo", () -> new YoyoItem(Tiers.WOOD, new Item.Properties()));
+  public static final ItemObject<YoyoItem> stoneYoyo = ITEMS.register("stone_yoyo", () -> new YoyoItem(Tiers.STONE, new Item.Properties()));
+  public static final ItemObject<YoyoItem> ironYoyo = ITEMS.register("iron_yoyo", () -> new YoyoItem(Tiers.IRON, new Item.Properties()));
+  public static final ItemObject<YoyoItem> diamondYoyo = ITEMS.register("diamond_yoyo", () -> new YoyoItem(Tiers.DIAMOND, new Item.Properties()));
+  public static final ItemObject<YoyoItem> goldenYoyo = ITEMS.register("golden_yoyo", () -> new YoyoItem(Tiers.GOLD, new Item.Properties()));
+  public static final ItemObject<YoyoItem> netheriteYoyo = ITEMS.register("netherite_yoyo", () -> new YoyoItem(Tiers.NETHERITE, new Item.Properties().fireResistant()));
 
   public static final ItemObject<ModifiableCrossbowItem> crossbow = ITEMS.register("crossbow", () -> new ModifiableCrossbowItem(UNSTACKABLE_PROPS, ToolDefinitions.CROSSBOW));
   public static final ItemObject<ModifiableBowItem> longbow = ITEMS.register("longbow", () -> new ModifiableBowItem(UNSTACKABLE_PROPS, ToolDefinitions.LONGBOW, true));
   public static final ItemObject<ModifiableItem> fishingRod = ITEMS.register("fishing_rod", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.FISHING_ROD));
   public static final ItemObject<ModifiableItem> javelin = ITEMS.register("javelin", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.JAVELIN));
+  public static final ItemObject<ModifiableItem> fumaShuriken = ITEMS.register("fuma_shuriken", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.FUMA_SHURIKEN));
+  public static final ItemObject<ModifiableItem> pike = ITEMS.register("pike", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.PIKE));
+  public static final ItemObject<ModifiableItem> lance = ITEMS.register("lance", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.LANCE));
   public static final ItemObject<ModifiableArrowItem> arrow = ITEMS.register("arrow", () -> new ModifiableArrowItem(ITEM_PROPS, ToolDefinitions.ARROW));
   public static final ItemObject<ModifiableShurikenItem> shuriken = ITEMS.register("shuriken", () -> new ModifiableShurikenItem(new Item.Properties().stacksTo(16), ToolDefinitions.SHURIKEN));
   public static final ItemObject<ModifiableShurikenItem> throwingAxe = ITEMS.register("throwing_axe", () -> new ModifiableShurikenItem(new Item.Properties().stacksTo(16), ToolDefinitions.THROWING_AXE));
@@ -251,6 +270,7 @@ public final class TinkerTools extends TinkerModule {
   public static final DeferredHolder<? super EntityType<ModifiableArrow>, EntityType<ModifiableArrow>> materialArrow = ENTITIES.register("arrow", () -> EntityType.Builder.<ModifiableArrow>of(ModifiableArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20));
   public static final DeferredHolder<? super EntityType<ThrownShuriken>, EntityType<ThrownShuriken>> thrownShuriken = ENTITIES.register("thrown_shuriken", () -> EntityType.Builder.<ThrownShuriken>of(ThrownShuriken::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
   public static final DeferredHolder<? super EntityType<ThrownTool>, EntityType<ThrownTool>> thrownTool = ENTITIES.register("thrown_tool", () -> EntityType.Builder.<ThrownTool>of(ThrownTool::new, MobCategory.MISC).sized(0.5f, 0.5f).clientTrackingRange(4).updateInterval(20));
+  public static final DeferredHolder<? super EntityType<YoyoEntity>, EntityType<YoyoEntity>> yoyoEntity = ENTITIES.register("yoyo", () -> EntityType.Builder.<YoyoEntity>of(YoyoEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(8).updateInterval(1));
   static {
     // used for the fishing bobber
     DATA_SERIALIZERS.register("material_variant", () -> MaterialVariantId.DATA_ACCESSOR);
@@ -379,6 +399,17 @@ public final class TinkerTools extends TinkerModule {
     acceptTool(output, kama);
     acceptTool(output, dagger);
     acceptTool(output, sword);
+    acceptTool(output, katana);
+    acceptTool(output, greatsword);
+    acceptTool(output, rapier);
+    acceptTool(output, estoc);
+    acceptTool(output, battleSpade);
+    tab.accept(woodenYoyo.get());
+    tab.accept(stoneYoyo.get());
+    tab.accept(ironYoyo.get());
+    tab.accept(goldenYoyo.get());
+    tab.accept(diamondYoyo.get());
+    tab.accept(netheriteYoyo.get());
 
     // broad tools
     acceptTool(output, sledgeHammer);
@@ -393,6 +424,9 @@ public final class TinkerTools extends TinkerModule {
     acceptTool(output, longbow);
     acceptTool(output, fishingRod);
     acceptTool(output, javelin);
+    acceptTool(output, fumaShuriken);
+    acceptTool(output, pike);
+    acceptTool(output, lance);
     acceptTool(output, arrow);
     acceptTool(output, shuriken);
     acceptEFLN(shuriken.get(), tab);

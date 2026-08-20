@@ -28,6 +28,105 @@ public class Config {
     public final List<ConfigurableAction> toolTweaks;
     public final BooleanValue syncKnockbackResistance;
     public final EnumValue<ToolSyncType> toolInventorySync;
+    public final DoubleValue rapierAttackBonus;
+
+    // improvable modifier
+    public final EnumValue<GainingMethod> improvableToolsSlotGainingMethod;
+    public final EnumValue<GainingMethod> improvableRangedSlotGainingMethod;
+    public final EnumValue<GainingMethod> improvableArmorSlotGainingMethod;
+    public final EnumValue<GainingMethod> improvableStaffSlotGainingMethod;
+    public final EnumValue<GainingMethod> improvableToolsStatGainingMethod;
+    public final EnumValue<GainingMethod> improvableRangedStatGainingMethod;
+    public final EnumValue<GainingMethod> improvableArmorStatGainingMethod;
+    public final EnumValue<GainingMethod> improvableStaffStatGainingMethod;
+    public final IntValue improvableMaxLevel;
+    public final IntValue improvableBaseExperience;
+    public final DoubleValue improvableRequiredXpMultiplier;
+    public final DoubleValue improvableBroadToolRequiredXpMultiplier;
+    public final ConfigValue<List<? extends String>> improvableToolsSlotOrder;
+    public final ConfigValue<List<? extends String>> improvableArmorSlotOrder;
+    public final ConfigValue<List<? extends String>> improvableStaffSlotOrder;
+    public final ConfigValue<List<? extends String>> improvableRangedSlotOrder;
+    public final ConfigValue<List<? extends String>> improvableToolsStatOrder;
+    public final ConfigValue<List<? extends String>> improvableArmorStatOrder;
+    public final ConfigValue<List<? extends String>> improvableStaffStatOrder;
+    public final ConfigValue<List<? extends String>> improvableRangedStatOrder;
+    public final IntValue improvableToolDurabilityValue;
+    public final DoubleValue improvableToolAttackDamageValue;
+    public final DoubleValue improvableToolAttackSpeedValue;
+    public final DoubleValue improvableToolMiningSpeedValue;
+    public final IntValue improvableRangedDurabilityValue;
+    public final DoubleValue improvableRangedDrawSpeedValue;
+    public final DoubleValue improvableRangedVelocityValue;
+    public final DoubleValue improvableRangedAccuracyValue;
+    public final DoubleValue improvableRangedProjectileDamageValue;
+    public final DoubleValue improvableRangedAttackDamageValue;
+    public final DoubleValue improvableRangedAttackSpeedValue;
+    public final IntValue improvableArmorDurabilityValue;
+    public final DoubleValue improvableArmorValue;
+    public final DoubleValue improvableArmorToughnessValue;
+    public final DoubleValue improvableArmorKnockbackResistanceValue;
+    public final IntValue improvableStaffDurabilityValue;
+    public final DoubleValue improvableStaffDrawSpeedValue;
+    public final DoubleValue improvableStaffVelocityValue;
+    public final DoubleValue improvableStaffAccuracyValue;
+    public final DoubleValue improvableStaffProjectileDamageValue;
+    public final DoubleValue improvableStaffArmorValue;
+    public final BooleanValue improvableDamageDealt;
+    public final BooleanValue improvableDamageTaken;
+    public final BooleanValue improvableDamageBlocked;
+    public final BooleanValue improvableEnablePvp;
+    public final IntValue improvableFlyingTime;
+    public final BooleanValue improvableMiningXp;
+    public final BooleanValue improvableHarvestingXp;
+    public final BooleanValue improvableShearingXp;
+    public final BooleanValue improvableStrippingXp;
+    public final BooleanValue improvableScrappingXp;
+    public final BooleanValue improvableWaxingOffXp;
+    public final BooleanValue improvableTillingXp;
+    public final BooleanValue improvablePathMakingXp;
+    public final BooleanValue improvableAttackingXp;
+    public final BooleanValue improvableShootingXp;
+    public final BooleanValue improvableTakingDamageXp;
+    public final BooleanValue improvableBlockingDamageXp;
+    public final BooleanValue improvableThornsXp;
+    public final BooleanValue improvableFlyingXp;
+    public final BooleanValue improvablePlowingXp;
+    public final BooleanValue improvablePathMakerXp;
+    public final BooleanValue improvableSnowdriftXp;
+    public final BooleanValue improvableFlamewakeXp;
+    public final BooleanValue improvableFrostWalkerXp;
+    public final BooleanValue improvableWarpingXp;
+    public final BooleanValue improvableFlingingXp;
+    public final BooleanValue improvableSpringingXp;
+    public final BooleanValue improvableBonkingXp;
+    public final BooleanValue improvableGlowingXp;
+    public final BooleanValue improvableFirestarterXp;
+    public final IntValue improvableBonusMiningXp;
+    public final IntValue improvableBonusHarvestingXp;
+    public final IntValue improvableBonusShearingXp;
+    public final IntValue improvableBonusStrippingXp;
+    public final IntValue improvableBonusScrappingXp;
+    public final IntValue improvableBonusWaxingOffXp;
+    public final IntValue improvableBonusTillingXp;
+    public final IntValue improvableBonusPathMakingXp;
+    public final IntValue improvableBonusAttackingXp;
+    public final IntValue improvableBonusShootingXp;
+    public final IntValue improvableBonusTakingDamageXp;
+    public final IntValue improvableBonusBlockingDamageXp;
+    public final IntValue improvableBonusThornsXp;
+    public final IntValue improvableBonusFlyingXp;
+    public final IntValue improvableBonusPlowingXp;
+    public final IntValue improvableBonusPathMakerXp;
+    public final IntValue improvableBonusSnowdriftXp;
+    public final IntValue improvableBonusFlamewakeXp;
+    public final IntValue improvableBonusFrostWalkerXp;
+    public final IntValue improvableBonusWarpingXp;
+    public final IntValue improvableBonusFlingingXp;
+    public final IntValue improvableBonusSpringingXp;
+    public final IntValue improvableBonusBonkingXp;
+    public final IntValue improvableBonusGlowingXp;
+    public final IntValue improvableBonusFirestarterXp;
 
     // recipes
     public final BooleanValue addGravelToFlintRecipe;
@@ -92,6 +191,113 @@ public class Config {
           "MINIMAL (default): syncs the minimal info to prevent an inventory desync if the client lost the stack.",
           "DISABLED: syncs nothing. May cause inventory desync issues if the client lost the tool.")
         .defineEnum("toolInventorySync", ToolSyncType.MINIMAL);
+
+      this.rapierAttackBonus = builder
+        .comment("Multiplier applied to rapier sting attacks.")
+        .translation("modernfoundry.configgui.rapierAttackBonus")
+        .defineInRange("rapierAttackBonus", 1D, 0.01D, 10D);
+
+      builder.comment("Experience and progression settings for the improvable modifier.").push("improvable");
+      this.improvableToolsSlotGainingMethod = builder.defineEnum("toolsSlotGainingMethod", GainingMethod.PREDEFINED_ORDER);
+      this.improvableRangedSlotGainingMethod = builder.defineEnum("rangedSlotGainingMethod", GainingMethod.PREDEFINED_ORDER);
+      this.improvableArmorSlotGainingMethod = builder.defineEnum("armorSlotGainingMethod", GainingMethod.PREDEFINED_ORDER);
+      this.improvableStaffSlotGainingMethod = builder.defineEnum("staffSlotGainingMethod", GainingMethod.PREDEFINED_ORDER);
+      this.improvableToolsStatGainingMethod = builder.defineEnum("toolsStatGainingMethod", GainingMethod.NONE);
+      this.improvableRangedStatGainingMethod = builder.defineEnum("rangedStatGainingMethod", GainingMethod.NONE);
+      this.improvableArmorStatGainingMethod = builder.defineEnum("armorStatGainingMethod", GainingMethod.NONE);
+      this.improvableStaffStatGainingMethod = builder.defineEnum("staffStatGainingMethod", GainingMethod.NONE);
+      this.improvableMaxLevel = builder.defineInRange("maxLevel", 5, 0, Integer.MAX_VALUE);
+      this.improvableBaseExperience = builder.defineInRange("baseExperience", 500, 1, Integer.MAX_VALUE);
+      this.improvableRequiredXpMultiplier = builder.defineInRange("requiredXpMultiplier", 2D, 1D, 100D);
+      this.improvableBroadToolRequiredXpMultiplier = builder.defineInRange("broadToolRequiredXpMultiplier", 3D, 1D, 100D);
+
+      this.improvableToolsSlotOrder = builder.defineList("toolsSlotTypeOrder", List.of("upgrade", "upgrade", "upgrade", "ability", "upgrade"), s -> s instanceof String && List.of("upgrade", "ability", "defense", "soul").contains(s));
+      this.improvableRangedSlotOrder = builder.defineList("rangedSlotTypeOrder", List.of("upgrade", "upgrade", "upgrade", "ability", "upgrade"), s -> s instanceof String && List.of("upgrade", "ability", "defense", "soul").contains(s));
+      this.improvableArmorSlotOrder = builder.defineList("armorSlotTypeOrder", List.of("upgrade", "defense", "upgrade", "ability", "defense"), s -> s instanceof String && List.of("upgrade", "ability", "defense", "soul").contains(s));
+      this.improvableStaffSlotOrder = builder.defineList("staffSlotTypeOrder", List.of("upgrade", "upgrade", "upgrade", "defense", "ability"), s -> s instanceof String && List.of("upgrade", "ability", "defense", "soul").contains(s));
+      this.improvableToolsStatOrder = builder.defineList("toolsStatTypeOrder", List.of("durability", "attackDamage", "attackSpeed", "miningSpeed"), s -> s instanceof String);
+      this.improvableRangedStatOrder = builder.defineList("rangedStatTypeOrder", List.of("durability", "drawSpeed", "velocity", "accuracy", "projectileDamage"), s -> s instanceof String);
+      this.improvableArmorStatOrder = builder.defineList("armorStatTypeOrder", List.of("durability", "armor", "armorToughness", "knockbackResistance"), s -> s instanceof String);
+      this.improvableStaffStatOrder = builder.defineList("staffStatTypeOrder", List.of("durability", "drawSpeed", "velocity", "accuracy", "projectileDamage", "armor"), s -> s instanceof String);
+
+      this.improvableToolDurabilityValue = builder.defineInRange("toolDurability", 50, 1, 1000);
+      this.improvableToolAttackDamageValue = builder.defineInRange("toolAttackDamage", 0.5D, 0.1D, 10D);
+      this.improvableToolAttackSpeedValue = builder.defineInRange("toolAttackSpeed", 0.25D, 0.1D, 10D);
+      this.improvableToolMiningSpeedValue = builder.defineInRange("toolMiningSpeed", 1D, 0.1D, 10D);
+      this.improvableRangedDurabilityValue = builder.defineInRange("rangedDurability", 30, 1, 1000);
+      this.improvableRangedDrawSpeedValue = builder.defineInRange("rangedDrawSpeed", 0.1D, 0.1D, 10D);
+      this.improvableRangedVelocityValue = builder.defineInRange("rangedVelocity", 0.1D, 0.1D, 10D);
+      this.improvableRangedAccuracyValue = builder.defineInRange("rangedAccuracy", 0.01D, 0.01D, 1D);
+      this.improvableRangedProjectileDamageValue = builder.defineInRange("rangedProjectileDamage", 0.1D, 0.1D, 10D);
+      this.improvableRangedAttackDamageValue = builder.defineInRange("rangedAttackDamage", 0.5D, 0.1D, 10D);
+      this.improvableRangedAttackSpeedValue = builder.defineInRange("rangedAttackSpeed", 0.25D, 0.1D, 10D);
+      this.improvableArmorDurabilityValue = builder.defineInRange("armorDurability", 50, 1, 1000);
+      this.improvableArmorValue = builder.defineInRange("armor", 0.25D, 0.1D, 10D);
+      this.improvableArmorToughnessValue = builder.defineInRange("armorToughness", 0.1D, 0.1D, 10D);
+      this.improvableArmorKnockbackResistanceValue = builder.defineInRange("armorKnockbackResistance", 0.1D, 0.1D, 1D);
+      this.improvableStaffDurabilityValue = builder.defineInRange("staffDurability", 30, 1, 1000);
+      this.improvableStaffDrawSpeedValue = builder.defineInRange("staffDrawSpeed", 0.1D, 0.1D, 10D);
+      this.improvableStaffVelocityValue = builder.defineInRange("staffVelocity", 0.1D, 0.1D, 10D);
+      this.improvableStaffAccuracyValue = builder.defineInRange("staffAccuracy", 0.01D, 0.01D, 1D);
+      this.improvableStaffProjectileDamageValue = builder.defineInRange("staffProjectileDamage", 0.1D, 0.1D, 10D);
+      this.improvableStaffArmorValue = builder.defineInRange("staffArmor", 0.25D, 0.1D, 10D);
+
+      this.improvableDamageDealt = builder.define("damageDealt", true);
+      this.improvableDamageTaken = builder.define("damageTaken", true);
+      this.improvableDamageBlocked = builder.define("damageBlocked", true);
+      this.improvableEnablePvp = builder.define("pvp", true);
+      this.improvableFlyingTime = builder.defineInRange("flyingTime", 300, 1, 1200);
+      this.improvableMiningXp = builder.define("mining", true);
+      this.improvableHarvestingXp = builder.define("harvesting", true);
+      this.improvableShearingXp = builder.define("shearing", true);
+      this.improvableStrippingXp = builder.define("stripping", true);
+      this.improvableScrappingXp = builder.define("scrapping", true);
+      this.improvableWaxingOffXp = builder.define("waxingOff", true);
+      this.improvableTillingXp = builder.define("tilling", true);
+      this.improvablePathMakingXp = builder.define("pathMaking", true);
+      this.improvableAttackingXp = builder.define("attacking", true);
+      this.improvableShootingXp = builder.define("shooting", true);
+      this.improvableTakingDamageXp = builder.define("takingDamage", true);
+      this.improvableBlockingDamageXp = builder.define("blockingDamage", true);
+      this.improvableThornsXp = builder.define("thorns", true);
+      this.improvableFlyingXp = builder.define("flying", true);
+      this.improvablePlowingXp = builder.define("plowing", true);
+      this.improvablePathMakerXp = builder.define("pathMaker", true);
+      this.improvableSnowdriftXp = builder.define("snowdrift", true);
+      this.improvableFlamewakeXp = builder.define("flamewake", true);
+      this.improvableFrostWalkerXp = builder.define("frostWalker", true);
+      this.improvableWarpingXp = builder.define("warping", true);
+      this.improvableFlingingXp = builder.define("flinging", true);
+      this.improvableSpringingXp = builder.define("springing", true);
+      this.improvableBonkingXp = builder.define("bonking", true);
+      this.improvableGlowingXp = builder.define("glowing", true);
+      this.improvableFirestarterXp = builder.define("firestarter", true);
+      this.improvableBonusMiningXp = builder.defineInRange("bonusMining", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusHarvestingXp = builder.defineInRange("bonusHarvesting", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusShearingXp = builder.defineInRange("bonusShearing", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusStrippingXp = builder.defineInRange("bonusStripping", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusScrappingXp = builder.defineInRange("bonusScrapping", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusWaxingOffXp = builder.defineInRange("bonusWaxingOff", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusTillingXp = builder.defineInRange("bonusTilling", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusPathMakingXp = builder.defineInRange("bonusPathMaking", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusAttackingXp = builder.defineInRange("bonusAttacking", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusShootingXp = builder.defineInRange("bonusShooting", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusTakingDamageXp = builder.defineInRange("bonusTakingDamage", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusBlockingDamageXp = builder.defineInRange("bonusBlockingDamage", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusThornsXp = builder.defineInRange("bonusThorns", 3, 0, Integer.MAX_VALUE);
+      this.improvableBonusFlyingXp = builder.defineInRange("bonusFlying", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusPlowingXp = builder.defineInRange("bonusPlowing", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusPathMakerXp = builder.defineInRange("bonusPathMaker", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusSnowdriftXp = builder.defineInRange("bonusSnowdrift", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusFlamewakeXp = builder.defineInRange("bonusFlamewake", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusFrostWalkerXp = builder.defineInRange("bonusFrostWalker", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusWarpingXp = builder.defineInRange("bonusWarping", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusFlingingXp = builder.defineInRange("bonusFlinging", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusSpringingXp = builder.defineInRange("bonusSpringing", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusBonkingXp = builder.defineInRange("bonusBonking", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusGlowingXp = builder.defineInRange("bonusGlowing", 0, 0, Integer.MAX_VALUE);
+      this.improvableBonusFirestarterXp = builder.defineInRange("bonusFirestarter", 0, 0, Integer.MAX_VALUE);
+      builder.pop();
 
       builder.pop(); // gameplay
 
@@ -227,6 +433,7 @@ public class Config {
     public final ModConfigSpec.BooleanValue renderSleevesItem;
     public final ModConfigSpec.BooleanValue modifiersIDsInAdvancedTooltips;
     public final ModConfigSpec.IntValue maxSmelteryItemQuads;
+    public final ModConfigSpec.BooleanValue improvableLevelUpMessage;
 
     // JEI
     public final BooleanValue showModifiersInJEI;
@@ -328,6 +535,10 @@ public class Config {
                  "Setting this lower will cause fewer items to be renderer (but never a partial item). Set to -1 to allow unlimited quads, and 0 to disable the item renderer.")
         .defineInRange("maxSmelteryItemQuads", 3500, -1, Short.MAX_VALUE);
 
+      this.improvableLevelUpMessage = builder
+        .comment("Show a chat message and vanilla level-up sound when a tool gains a level.")
+        .define("improvableLevelUpMessage", true);
+
       this.modifiersIDsInAdvancedTooltips = builder
         .comment("If true, shows modifier IDs in advanced tooltips for tools and tool parts.",
                  "They are more intrusive than most advanced tooltip content, so this option is provided in case some mod made poor design decisions and put essential gameplay info in tooltips or for pack makers who do not need modifier info.")
@@ -416,6 +627,12 @@ public class Config {
     FULL_STACK,
     MINIMAL,
     DISABLED;
+  }
+
+  public enum GainingMethod {
+    NONE,
+    PREDEFINED_ORDER,
+    RANDOM
   }
 
   /** Configuration for an ore rate, such as melter or foundry */

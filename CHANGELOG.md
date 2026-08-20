@@ -85,5 +85,39 @@
 * Restored regular slime-leaf harvesting behavior.
     * Shears or Silk Touch now return the leaf block, while ordinary breaking rolls the matching sapling, including Greenheart saplings from Earth slime leaves.
     * Existing slimeball and Fortune behavior remains gated to ordinary harvesting.
+* Added native Katanas, Fuma Shurikens, and Battle Spades from the integrated reference content.
+    * Added their tool definitions, layouts, recipes, tags, models, textures, and translations under the Modern Foundry namespace.
+* Added Tinkers' Weaponry greatswords, pikes, lances, Great Blades, and Spear Heads.
+    * Preserved reference stats, traits, attacks, casts, material textures, client properties, and the Lengthy modifier.
+    * Added the required Mrthomas20121 MIT-license attribution to the README.
+* Built and verified Modern Foundry 1.21.1-4.1.6 with the Phase 1 and Phase 2 content.
+    * SHA-256: `43ECAF22D14DA9CE4073CF06BBA6CE974A7205C5C49A23503D9EA8ED21E31E64`.
 * Built and verified the updated Modern Foundry 1.21.1-4.1.5 NeoForge JAR.
     * SHA-256: `86f1797b007f1fee023249d4b326e7e2f3a89b8584eb32b913d3ff54f4431a85`.
+
+* Added native Rapier and Estoc tools with reference leap behavior and Rapier sting attacks.
+    * Added slender-blade parts, casts, tool layouts, recipes, models, textures, translations, and the configurable rapier sting multiplier.
+* Added the `improvable` modifier and server-side tool progression.
+    * Added persisted experience and level/stat/slot progression, configurable XP sources, level-up sync, tooltip data, and existing tool-command integration.
+* Added wooden, stone, iron, golden, diamond, and netherite Yoyos.
+    * Added native entity control, targeting, movement, collision, attacks, retraction, particles, tracking packets, renderer, recipes, tags, models, textures, and hand-rendering integration.
+* Built and verified Modern Foundry 1.21.1-4.1.6 with the Phase 3–5 content.
+    * SHA-256: `c61c2955bfd5f77f637e8294e1e695b72ec322565ae09a6fdadb4ce12445901d`.
+* Fixed Rapier right-click leap behavior.
+    * The server now applies the reference backward leap even when the base modifiable-item use path returns `PASS`.
+* Fixed deployed Yoyos leaving later weapon selections invisible in hand.
+    * First- and third-person hand hiding now applies only while the current stack matches the deployed Yoyo, so switching items restores vanilla rendering immediately.
+* Added the shipped Foundry Anvil recipe for the `improvable` modifier.
+    * One Nether Star and four Experience Bottles apply one ability-level modifier to `modernfoundry:modifiable` tools, including weapons.
+* Built and verified Modern Foundry 1.21.1-4.1.6 after the Rapier, Yoyo, and Improvable fixes.
+    * SHA-256: `d29f7984978edd8f70f73bde947d6d2e8d0ea2dbadd44f6999ef9ad470261071`.
+* Fixed Rapier leap movement not propagating after use.
+    * Rapier now marks its server-side backward impulse for vanilla motion synchronization.
+* Fixed Yoyo 3D item models loading as flat sprites.
+    * Yoyo models now use Minecraft's block model parent so their element geometry renders in hand and inventory.
+* Fixed stale Yoyo tracker packets hiding later held items.
+    * Unresolved nonzero entity IDs no longer overwrite a valid hand state with `null`; zero still clears the hand.
+* Fixed Improvable tooltips exposing the technical `tank_handler` modifier and dynamic override.
+    * The internal tank handler is hidden, and the generated Improvable level-only override was removed so the native modifier hooks and translated level/XP tooltip remain active.
+* Built and verified Modern Foundry 1.21.1-4.1.6 after the final Rapier, Yoyo, and Improvable fixes.
+    * SHA-256: `01b72ca72271849e513003ffd2ba469166ddc9dafe1f2aa4919324c950a9e232`.
