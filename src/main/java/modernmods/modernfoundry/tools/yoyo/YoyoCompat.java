@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import modernmods.hilt.registration.object.ItemObject;
 import modernmods.modernfoundry.common.registration.ItemDeferredRegisterExtension;
-import modernmods.modernfoundry.tools.yoyo.api.BlockInteraction;
-import modernmods.modernfoundry.tools.yoyo.api.EntityInteraction;
 import modernmods.modernfoundry.tools.yoyo.compat.AdAstraYoyoItem;
 import modernmods.modernfoundry.tools.yoyo.compat.ManaYoyoItem;
 import modernmods.modernfoundry.tools.yoyo.compat.PigIronYoyoItem;
@@ -184,8 +182,7 @@ public final class YoyoCompat {
       case PRESSURIZED -> new PressurizedYoyoItem(tier);
       default -> new YoyoItem(tier);
     };
-    return item.addEntityInteraction(tier.getEntityInteractions().toArray(new EntityInteraction[0]))
-      .addBlockInteraction(tier.getBlockInteractions().toArray(new BlockInteraction[0]));
+    return item;
   }
 
   private static void cord(ItemDeferredRegisterExtension items, String name) {

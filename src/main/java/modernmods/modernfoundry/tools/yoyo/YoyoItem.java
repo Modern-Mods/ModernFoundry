@@ -82,6 +82,8 @@ public class YoyoItem extends TieredItem implements IYoyo {
       this.yoyoTier = tier;
       this.defaultAttackDamage = tier.getTier().getAttackDamageBonus() + 3.0F;
       this.factory = factory;
+      this.entityInteractions.addAll(tier.getEntityInteractions());
+      this.blockInteractions.addAll(tier.getBlockInteractions());
    }
 
    public YoyoItem(Properties properties, YoyoTier tier) {

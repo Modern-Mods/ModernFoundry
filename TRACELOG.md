@@ -1447,3 +1447,37 @@
 - Exact artifact SHA-256: `2cefefa197b575065e3f9fc33df90f67a3a2e0bec88f17713a7143be3b8b7e3a`.
 - Manual validation: Prism/fresh-world JEI search, creative-tab display, crafting, Anvil enchantment application, throwing/retraction, attack/collecting/breaking, first-/third-person rendering, save/reload, dedicated-server tracking, multiplayer sync, and optional-mod smoke remain outstanding.
 - Tests created or run: no dedicated Yoyo tests added.
+
+## 2026-08-21 - Fix Yoyo tooltips and entity damage
+
+**Prompt / Task**
+- Fix raw Yoyo tooltip translations and restore Yoyo entity damage reported during Prism testing.
+
+**What Changed**
+- Removed a stray leading `+` from `assets/modernfoundry/lang/en_us.json`; the invalid JSON prevented all Yoyo names and tooltip translations from loading.
+- Added compatibility aliases for the earlier `enchantment.modernfoundry.yoyo.*` translation keys shown in the affected tooltip.
+- Copied each `YoyoTier` entity/block interaction list into `YoyoItem` during construction and removed the compatibility path's duplicate copy, restoring core Yoyo attacks without double-applying compatibility interactions.
+
+**Steps Taken**
+- Read the task contract and inspected the supplied screenshot as evidence.
+- Traced tooltip keys through the language resource and Yoyo enchantment data.
+- Traced the server collision path through `YoyoEntity`, `YoyoItem`, `YoyoCompat`, and `Interaction.attackEntity`.
+- Compared the interaction registration path with the decompiled 1.21.1 reference.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `YoyoItem`, `YoyoCompat`, and the Modern Foundry English language resource.
+- Owning module/system: native Yoyo item/tier registration and client resource localization.
+- Existing logic reused or extracted: the existing `YoyoTier` interaction lists and reference `Interaction` handlers.
+- Net line change: small targeted source/resource fix, plus documentation.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The constructor is the single ownership point for tier interactions, so core and optional tiers share one path and compatibility interactions are not duplicated.
+- The current enchantment data keys remain unchanged; aliases preserve compatibility with the key form visible in the user's installed resource state.
+
+**Build / Validation**
+- Production build: `./gradlew.bat build --console=plain --no-daemon` passed.
+- Compile/checks: `compileJava`, `test`, `check`, `testJunit` (`NO-SOURCE`), `verifyGeneratedTextures`, and JSON parsing passed; existing Gradle/NeoForge deprecation warnings remain.
+- Manual validation: Prism gameplay retest remains required after installing the rebuilt JAR; no manual in-game test was performed here.
+- Tests created or run: no dedicated Yoyo tests added.

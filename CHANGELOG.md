@@ -1,4 +1,6 @@
 # Unreleased
+* Fixed integrated Yoyos showing raw translation keys and failing to damage entities.
+    * Repaired the malformed English language resource and ensured core and compatibility tiers copy their reference entity interactions without duplicate hits.
 * Replaced the legacy yoyo implementation with the official Yoyos Relaunched 1.21.1 runtime architecture.
     * Added the copper and creative yoyos, official core stats, data components, enchantments, recipes, advancements, tags, models, textures, sound, config screen, packets, renderer, and hand integration.
     * Removed the superseded controller/tracker resource and runtime paths; all shipped yoyo identifiers remain in the `modernfoundry` namespace.
