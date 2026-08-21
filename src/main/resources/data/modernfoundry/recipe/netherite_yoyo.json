@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "template": {"item": "minecraft:netherite_upgrade_smithing_template"},
-  "base": {"item": "modernfoundry:diamond_yoyo"},
-  "addition": {"item": "minecraft:netherite_ingot"},
-  "result": {"id": "modernfoundry:netherite_yoyo"}
-}

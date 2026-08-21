@@ -70,7 +70,7 @@ import modernmods.modernfoundry.tools.TinkerModifiers;
 import modernmods.modernfoundry.tools.modules.armor.MinimapModule;
 import modernmods.modernfoundry.tools.modules.armor.SleevesModule;
 import modernmods.modernfoundry.tools.logic.ToolLevellingUtil;
-import modernmods.modernfoundry.tools.yoyo.YoyoTracker;
+import modernmods.modernfoundry.tools.yoyo.YoyoEntity;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -235,7 +235,7 @@ public class ModifierClientEvents {
     }
     // when firing your melee weapon with ballista, don't render it in the other hand; makes it look like you duplicated your weapon
     InteractionHand hand = event.getHand();
-    if (YoyoTracker.on(player).hasYoyo(hand)) {
+    if (YoyoEntity.isCasting(player, hand)) {
       event.setCanceled(true);
       return;
     }

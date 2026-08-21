@@ -40,7 +40,7 @@ This makes the foundry more than a single machine: it is a connected production 
 
 The current tool library covers mining, excavation, farming, combat, ranged combat, exploration, and utility. Examples include pickaxes, sledge hammers, vein hammers, mattocks, pickadzes, excavators, hand axes, broad axes, kamas, scythes, daggers, swords, katanas, Fuma Shurikens, battle spades, rapiers, estocs, greatswords, pikes, lances, cleavers, longbows, crossbows, fishing rods, javelins, arrows, shurikens, throwing axes, staffs, melting pans, war picks, battlesigns, and swashers.
 
-Integrated reference content also adds Rapier and Estoc leap behavior, Rapier sting attacks, and six tiered Yoyos: wooden, stone, iron, golden, diamond, and netherite. The Improvable modifier tracks tool experience and progression; apply it at the Foundry Anvil with one Nether Star and four Experience Bottles. Rapier sting damage and Improvable progression and XP sources remain configurable in `modernfoundry-common.toml`.
+Integrated reference content also adds Rapier and Estoc leap behavior, Rapier sting attacks, and eight tiered Yoyos: wooden, stone, copper, iron, golden, diamond, netherite, and creative. The 1.21.1 Yoyos reference's optional compatibility tiers are also registered when their source mod is loaded, while Modern Foundry's own TConstruct materials are available natively. The Improvable modifier tracks tool experience and progression; apply it at the Foundry Anvil with one Nether Star and four Experience Bottles. Rapier sting damage and Improvable progression and XP sources remain configurable in `modernfoundry-common.toml`.
 
 The bundle also includes modifiable shields, slime-themed armor, slime wings, crystalshot ammunition, and other equipment built on the same material-and-modifier systems.
 
@@ -95,14 +95,10 @@ Each new `mod_version` publishes a GitHub release marked **Latest** with the cur
 Copyright (c) 2025-2026 Mrthomas20121
 Source license: References/TinkersWeaponry-1.20.1/LICENSE
 
-Yoyo runtime and tier textures adapted from Yoyos by Jozsef Augusztiny
+Yoyo runtime, recipes, enchantments, models, and tier textures adapted from the MIT Yoyos Relaunched 1.21.1 reference by iglee42
 
 Copyright (c) 2018-2023 Jozsef Augusztiny
-Source license: References/Yoyos-1.20/LICENSE.md
-
-The reference does not ship a Netherite Yoyo texture. Modern Foundry reuses
-the Diamond Yoyo texture for that tier while keeping the reference item and
-entity behavior.
+Source license: MIT, as declared by `References/Yoyos-1.21-Decompiled/META-INF/neoforge.mods.toml`
 
 Thanks to the SlimeKnights projects and contributors, NeoForge, Just Enough Items, and the other libraries and integrations that make this work possible.
 

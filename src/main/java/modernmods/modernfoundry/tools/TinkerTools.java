@@ -13,7 +13,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.neoforged.neoforge.common.crafting.IngredientType;
@@ -133,10 +132,14 @@ import modernmods.modernfoundry.tools.logic.ModifiableShurikenDispenserBehavior;
 import modernmods.modernfoundry.tools.menu.ToolContainerMenu;
 import modernmods.modernfoundry.tools.modules.MeltingFluidEffectiveModule;
 import modernmods.modernfoundry.tools.yoyo.YoyoEntity;
+import modernmods.modernfoundry.tools.yoyo.YoyoDataComponents;
 import modernmods.modernfoundry.tools.yoyo.YoyoItem;
+import modernmods.modernfoundry.tools.yoyo.YoyoCompat;
+import modernmods.modernfoundry.tools.yoyo.YoyosTiers;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.List;
 
 import static modernmods.modernfoundry.TConstruct.getResource;
 
@@ -163,6 +166,11 @@ public final class TinkerTools extends TinkerModule {
   /** Loot function type for tool add data */
   public static final DeferredHolder<LootItemFunctionType<?>, ? extends LootItemFunctionType<?>> lootAddToolData = LOOT_FUNCTIONS.register("add_tool_data", () -> new LootItemFunctionType<>(AddToolDataFunction.CODEC));
   public static final DeferredHolder<? super IngredientType<ToolHookIngredient>, IngredientType<ToolHookIngredient>> toolHookIngredient = INGREDIENT_TYPES.register("tool_hook", () -> new IngredientType<>(ToolHookIngredient.Serializer.INSTANCE.codec(), ToolHookIngredient.Serializer.INSTANCE.streamCodec()));
+
+  static {
+    DATA_COMPONENTS.register("attack", () -> YoyoDataComponents.ATTACK);
+    DATA_COMPONENTS.register("enchantments", () -> YoyoDataComponents.ENCHANTMENTS);
+  }
 
   /*
    * Items
@@ -192,12 +200,16 @@ public final class TinkerTools extends TinkerModule {
   public static final ItemObject<ModifiableItem> cleaver = ITEMS.register("cleaver", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.CLEAVER));
   public static final ItemObject<ModifiableItem> battleSpade = ITEMS.register("battle_spade", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.BATTLE_SPADE));
 
-  public static final ItemObject<YoyoItem> woodenYoyo = ITEMS.register("wooden_yoyo", () -> new YoyoItem(Tiers.WOOD, new Item.Properties()));
-  public static final ItemObject<YoyoItem> stoneYoyo = ITEMS.register("stone_yoyo", () -> new YoyoItem(Tiers.STONE, new Item.Properties()));
-  public static final ItemObject<YoyoItem> ironYoyo = ITEMS.register("iron_yoyo", () -> new YoyoItem(Tiers.IRON, new Item.Properties()));
-  public static final ItemObject<YoyoItem> diamondYoyo = ITEMS.register("diamond_yoyo", () -> new YoyoItem(Tiers.DIAMOND, new Item.Properties()));
-  public static final ItemObject<YoyoItem> goldenYoyo = ITEMS.register("golden_yoyo", () -> new YoyoItem(Tiers.GOLD, new Item.Properties()));
-  public static final ItemObject<YoyoItem> netheriteYoyo = ITEMS.register("netherite_yoyo", () -> new YoyoItem(Tiers.NETHERITE, new Item.Properties().fireResistant()));
+  public static final ItemObject<Item> cord = ITEMS.register("cord", () -> new Item(new Item.Properties()));
+  public static final ItemObject<YoyoItem> woodenYoyo = ITEMS.register("wooden_yoyo", () -> new YoyoItem(YoyosTiers.WOODEN));
+  public static final ItemObject<YoyoItem> stoneYoyo = ITEMS.register("stone_yoyo", () -> new YoyoItem(YoyosTiers.STONE));
+  public static final ItemObject<YoyoItem> copperYoyo = ITEMS.register("copper_yoyo", () -> new YoyoItem(YoyosTiers.COPPER));
+  public static final ItemObject<YoyoItem> ironYoyo = ITEMS.register("iron_yoyo", () -> new YoyoItem(YoyosTiers.IRON));
+  public static final ItemObject<YoyoItem> goldenYoyo = ITEMS.register("golden_yoyo", () -> new YoyoItem(YoyosTiers.GOLD));
+  public static final ItemObject<YoyoItem> diamondYoyo = ITEMS.register("diamond_yoyo", () -> new YoyoItem(YoyosTiers.DIAMOND));
+  public static final ItemObject<YoyoItem> netheriteYoyo = ITEMS.register("netherite_yoyo", () -> new YoyoItem(YoyosTiers.NETHERITE));
+  public static final ItemObject<YoyoItem> creativeYoyo = ITEMS.register("creative_yoyo", () -> new YoyoItem(YoyosTiers.CREATIVE));
+  public static final List<ItemObject<YoyoItem>> compatYoyos = YoyoCompat.register(ITEMS);
 
   public static final ItemObject<ModifiableCrossbowItem> crossbow = ITEMS.register("crossbow", () -> new ModifiableCrossbowItem(UNSTACKABLE_PROPS, ToolDefinitions.CROSSBOW));
   public static final ItemObject<ModifiableBowItem> longbow = ITEMS.register("longbow", () -> new ModifiableBowItem(UNSTACKABLE_PROPS, ToolDefinitions.LONGBOW, true));
@@ -270,7 +282,7 @@ public final class TinkerTools extends TinkerModule {
   public static final DeferredHolder<? super EntityType<ModifiableArrow>, EntityType<ModifiableArrow>> materialArrow = ENTITIES.register("arrow", () -> EntityType.Builder.<ModifiableArrow>of(ModifiableArrow::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20));
   public static final DeferredHolder<? super EntityType<ThrownShuriken>, EntityType<ThrownShuriken>> thrownShuriken = ENTITIES.register("thrown_shuriken", () -> EntityType.Builder.<ThrownShuriken>of(ThrownShuriken::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
   public static final DeferredHolder<? super EntityType<ThrownTool>, EntityType<ThrownTool>> thrownTool = ENTITIES.register("thrown_tool", () -> EntityType.Builder.<ThrownTool>of(ThrownTool::new, MobCategory.MISC).sized(0.5f, 0.5f).clientTrackingRange(4).updateInterval(20));
-  public static final DeferredHolder<? super EntityType<YoyoEntity>, EntityType<YoyoEntity>> yoyoEntity = ENTITIES.register("yoyo", () -> EntityType.Builder.<YoyoEntity>of(YoyoEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(8).updateInterval(1));
+  public static final DeferredHolder<? super EntityType<YoyoEntity>, EntityType<YoyoEntity>> yoyoEntity = ENTITIES.register("yoyo", () -> EntityType.Builder.<YoyoEntity>of(YoyoEntity::new, MobCategory.MISC).noSummon().sized(0.25F, 0.25F).clientTrackingRange(64).updateInterval(1));
   static {
     // used for the fishing bobber
     DATA_SERIALIZERS.register("material_variant", () -> MaterialVariantId.DATA_ACCESSOR);
@@ -404,12 +416,17 @@ public final class TinkerTools extends TinkerModule {
     acceptTool(output, rapier);
     acceptTool(output, estoc);
     acceptTool(output, battleSpade);
+    tab.accept(cord.get());
     tab.accept(woodenYoyo.get());
     tab.accept(stoneYoyo.get());
+    tab.accept(copperYoyo.get());
     tab.accept(ironYoyo.get());
     tab.accept(goldenYoyo.get());
     tab.accept(diamondYoyo.get());
     tab.accept(netheriteYoyo.get());
+    tab.accept(creativeYoyo.get());
+    YoyoCompat.cords().forEach(cord -> tab.accept(cord.get()));
+    compatYoyos.forEach(yoyo -> tab.accept(yoyo.get()));
 
     // broad tools
     acceptTool(output, sledgeHammer);

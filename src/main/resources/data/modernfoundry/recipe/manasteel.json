@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "botania"
+    }
+  ],
+  "key": {
+    "C": {
+      "item": "modernfoundry:mana_cord"
+    },
+    "I": {
+      "item": "botania:manasteel_ingot"
+    },
+    "S": {
+      "item": "botania:livingwood_twig"
+    }
+  },
+  "pattern": [
+    " I ",
+    "ISI",
+    "CI "
+  ],
+  "result": {
+    "id": "modernfoundry:manasteel_yoyo"
+  },
+  "show_notification": true
+}

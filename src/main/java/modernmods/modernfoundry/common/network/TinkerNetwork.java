@@ -38,8 +38,10 @@ import modernmods.modernfoundry.tools.network.PushBlockRowPacket;
 import modernmods.modernfoundry.tools.network.SyncProjectileModifiersPacket;
 import modernmods.modernfoundry.tools.network.TinkerControlPacket;
 import modernmods.modernfoundry.tools.network.ToolContainerFluidUpdatePacket;
-import modernmods.modernfoundry.tools.yoyo.YoyoRetractPacket;
-import modernmods.modernfoundry.tools.yoyo.YoyoTrackerPacket;
+import modernmods.modernfoundry.tools.network.YoyoCollectedDropsPacket;
+import modernmods.modernfoundry.tools.network.YoyoHandSyncPacket;
+import modernmods.modernfoundry.tools.network.YoyoToggleAttackPacket;
+import modernmods.modernfoundry.tools.network.YoyoToggleEnchantmentPacket;
 
 import javax.annotation.Nullable;
 
@@ -111,8 +113,10 @@ public class TinkerNetwork extends NetworkWrapper {
     instance.registerPacket(UpdateFluidEffectsPacket.class, UpdateFluidEffectsPacket::decode, PacketDirection.PLAY_TO_CLIENT);
     instance.registerPacket(PushBlockRowPacket.class, PushBlockRowPacket::new, PacketDirection.PLAY_TO_CLIENT);
     instance.registerPacket(LevelUpPacket.class, LevelUpPacket::new, PacketDirection.PLAY_TO_CLIENT);
-    instance.registerPacket(YoyoRetractPacket.class, YoyoRetractPacket::new, PacketDirection.PLAY_TO_CLIENT);
-    instance.registerPacket(YoyoTrackerPacket.class, YoyoTrackerPacket::new, PacketDirection.PLAY_TO_CLIENT);
+    instance.registerPacket(YoyoCollectedDropsPacket.class, YoyoCollectedDropsPacket::new, PacketDirection.PLAY_TO_CLIENT);
+    instance.registerPacket(YoyoHandSyncPacket.class, YoyoHandSyncPacket::new, PacketDirection.PLAY_TO_CLIENT);
+    instance.registerPacket(YoyoToggleAttackPacket.class, YoyoToggleAttackPacket::new, PacketDirection.PLAY_TO_SERVER);
+    instance.registerPacket(YoyoToggleEnchantmentPacket.class, YoyoToggleEnchantmentPacket::new, PacketDirection.PLAY_TO_SERVER);
 
     // smeltery
     instance.registerPacket(FluidUpdatePacket.class, FluidUpdatePacket::new, PacketDirection.PLAY_TO_CLIENT);

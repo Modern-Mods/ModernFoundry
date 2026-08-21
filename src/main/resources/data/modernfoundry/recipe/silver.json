@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "occultism"
+    }
+  ],
+  "key": {
+    "C": {
+      "item": "modernfoundry:cord"
+    },
+    "I": {
+      "item": "occultism:silver_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " I ",
+    "ISI",
+    "CI "
+  ],
+  "result": {
+    "id": "modernfoundry:silver_yoyo"
+  },
+  "show_notification": true
+}

@@ -1,4 +1,6 @@
 {
-  "parent": "modernfoundry:item/yoyo_3d",
-  "textures": {"layer0": "modernfoundry:item/netherite_yoyo"}
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "modernfoundry:item/netherite"
+  }
 }

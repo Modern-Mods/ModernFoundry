@@ -82,6 +82,7 @@ import modernmods.modernfoundry.tools.client.material.CombatFishingHookRenderer;
 import modernmods.modernfoundry.tools.client.material.ThrownShurikenRenderer;
 import modernmods.modernfoundry.tools.client.material.ThrownToolRenderer;
 import modernmods.modernfoundry.tools.client.YoyoRenderer;
+import modernmods.modernfoundry.tools.client.YoyosKeybindings;
 import modernmods.modernfoundry.tools.item.ModifierCrystalItem;
 import modernmods.modernfoundry.tools.logic.DoubleJumpHandler;
 import modernmods.modernfoundry.tools.logic.InteractionHandler;
@@ -164,11 +165,13 @@ public class ToolClientEvents extends ClientEventBase {
   static void registerKeyBinding(RegisterKeyMappingsEvent event) {
     event.register(HELMET_INTERACT);
     event.register(LEGGINGS_INTERACT);
+    YoyosKeybindings.register(event);
   }
 
   @SubscribeEvent
   static void clientSetupEvent(FMLClientSetupEvent event) {
     NeoForge.EVENT_BUS.addListener(ToolClientEvents::handleKeyBindings);
+    NeoForge.EVENT_BUS.addListener(YoyosKeybindings::handleEventInput);
     NeoForge.EVENT_BUS.addListener(ToolClientEvents::handleInput);
     AbstractArmorModel.init();
 

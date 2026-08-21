@@ -1,4 +1,7 @@
 # Unreleased
+* Replaced the legacy yoyo implementation with the official Yoyos Relaunched 1.21.1 runtime architecture.
+    * Added the copper and creative yoyos, official core stats, data components, enchantments, recipes, advancements, tags, models, textures, sound, config screen, packets, renderer, and hand integration.
+    * Removed the superseded controller/tracker resource and runtime paths; all shipped yoyo identifiers remain in the `modernfoundry` namespace.
 * Fixed Nether cobalt ore drops when mined with diamond-tier tools.
     * Added cobalt ore to the vanilla pickaxe and diamond-tool tags; netherite tools qualify through the vanilla diamond-tier tag.
 * Built and verified the latest Modern Foundry 1.21.1-4.1.4 NeoForge JAR.
@@ -121,3 +124,6 @@
     * The internal tank handler is hidden, and the generated Improvable level-only override was removed so the native modifier hooks and translated level/XP tooltip remain active.
 * Built and verified Modern Foundry 1.21.1-4.1.6 after the final Rapier, Yoyo, and Improvable fixes.
     * SHA-256: `01b72ca72271849e513003ffd2ba469166ddc9dafe1f2aa4919324c950a9e232`.
+* Replaced the legacy Yoyo implementation with the decompiled official 1.21.1 reference content.
+    * Added native core and loaded-mod compatibility tiers, recipes, cords, enchantments, tags, models, textures, and reference runtime behavior under the `modernfoundry` namespace.
+    * Built and verified `ModernFoundry-1.21.1-4.1.6-NeoForge.jar`; SHA-256: `2cefefa197b575065e3f9fc33df90f67a3a2e0bec88f17713a7143be3b8b7e3a`.

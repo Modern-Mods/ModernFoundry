@@ -1,6 +1,6 @@
 package modernmods.modernfoundry.tools.yoyo.mixin;
 
-import modernmods.modernfoundry.tools.yoyo.YoyoTracker;
+import modernmods.modernfoundry.tools.yoyo.YoyoEntity;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.world.InteractionHand;
@@ -22,6 +22,6 @@ public abstract class ItemInHandRendererMixin {
   }
 
   private static boolean modernfoundry$isThrownYoyo(LocalPlayer player, InteractionHand hand) {
-    return YoyoTracker.on(player).hasYoyo(hand);
+    return YoyoEntity.isCasting(player, hand);
   }
 }

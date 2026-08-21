@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "key": {
+    "C": {
+      "item": "modernfoundry:cord"
+    },
+    "I": {
+      "item": "create:andesite_alloy_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " I ",
+    "ISI",
+    "CI "
+  ],
+  "result": {
+    "id": "modernfoundry:andesite_alloy_yoyo"
+  },
+  "show_notification": true
+}

@@ -260,5 +260,15 @@
       { "name": "block/amethyst/shimmer", "pitch": 1.45, "volume": 0.2 }
     ],
     "subtitle": "subtitles.modernfoundry.block.ender_crystal.chime"
+  },
+  "entity.yoyo.throw": {
+    "category": "entities",
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.fishing_bobber.throw"
+      }
+    ],
+    "subtitle": "entity.yoyo.throw.subtitle"
   }
 }

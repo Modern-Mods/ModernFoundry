@@ -1,0 +1,16 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {"recipe": "modernfoundry:netherite"},
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "unlock": {
+      "conditions": {"items": [{"items": ["minecraft:netherite_ingot"]}]},
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [["unlock", "has_the_recipe"]],
+  "rewards": {"recipes": ["modernfoundry:netherite"]},
+  "sends_telemetry_event": false
+}

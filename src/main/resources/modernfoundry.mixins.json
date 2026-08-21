@@ -7,6 +7,9 @@
     "ItemInHandLayerMixin",
     "ItemInHandRendererMixin"
   ],
+  "mixins": [
+    "ItemStackMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

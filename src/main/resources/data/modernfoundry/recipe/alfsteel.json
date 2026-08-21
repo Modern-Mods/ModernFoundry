@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:smithing_transform",
+  "conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "botania"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mythicbotany"
+    }
+  ],
+  "addition": {
+    "item": "mythicbotany:alfsteel_ingot"
+  },
+  "base": {
+    "item": "modernfoundry:terrasteel_yoyo"
+  },
+  "result": {
+    "id": "modernfoundry:alfsteel_yoyo"
+  },
+  "template": {
+    "item": "mythicbotany:alfsteel_template"
+  }
+}

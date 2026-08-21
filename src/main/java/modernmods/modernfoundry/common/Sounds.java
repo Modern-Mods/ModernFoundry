@@ -42,6 +42,7 @@ public enum Sounds {
   BONK,
   SPIT,
   TOY_SQUEAK,
+  YOYO_THROW("entity.yoyo.throw"),
 
   // modifiers
   NECROTIC_HEAL,

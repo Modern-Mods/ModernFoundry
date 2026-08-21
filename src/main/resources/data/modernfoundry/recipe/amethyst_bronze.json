@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "modernfoundry:cord"
+    },
+    "I": {
+      "item": "modernfoundry:amethyst_bronze_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " I ",
+    "ISI",
+    "CI "
+  ],
+  "result": {
+    "id": "modernfoundry:amethyst_bronze_yoyo"
+  },
+  "show_notification": true
+}

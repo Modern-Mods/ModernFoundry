@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "modernfoundry:item/malum/soul_stained_steel"
+  }
+}

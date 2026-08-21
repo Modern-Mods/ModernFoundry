@@ -1411,3 +1411,39 @@
 - Exact artifact SHA-256: `01b72ca72271849e513003ffd2ba469166ddc9dafe1f2aa4919324c950a9e232`.
 - Manual validation: not performed; fresh-world Rapier movement, first-/third-person Yoyo use/switching, Anvil application, dedicated-server, multiplayer, and optional-integration smoke remain outstanding.
 - Tests created or run: no dedicated tests added.
+## 2026-08-21 - Replace Yoyos with the official 1.21.1 reference
+
+**Prompt / Task**
+- Replace Modern Foundry's prior Yoyo implementation based on `References/Yoyos-1.20` with the decompiled MIT 1.21.1 reference under `References/Yoyos-1.21-Decompiled`.
+
+**What Changed**
+- Replaced the legacy controller/tracker runtime with the official-style Yoyo item, entity, interaction, tier, enchantment, data-component, packet, renderer, config, and hand-rendering paths under `modernmods.modernfoundry`.
+- Added the eight core Yoyos, cord, official recipes, enchantments, advancements, enchantable tags, Yoyo tags, sounds, translations, models, and textures using `modernfoundry` IDs.
+- Added the reference's optional compatibility tiers and cord items with loaded-mod registration gates, reflection-safe mana and pneumatic behavior, pig-iron behavior, effect interactions, recipes, models, and copied compatibility textures. Modern Foundry's own TConstruct-material tiers register natively.
+- Removed the old Yoyo controller, tracker, behavior, target, motion, packet, and obsolete item/resource files.
+
+**Steps Taken**
+- Read and inventoried the decompiled 1.21.1 items, runtime classes, compatibility plugins, recipes, models, textures, mixins, and attribution metadata.
+- Adapted package names, registry IDs, resource namespaces, network ownership, entity registration, creative-tab registration, and client hooks to Modern Foundry's existing systems.
+- Copied the reference textures into `assets/modernfoundry`, parsed the targeted JSON resources, audited the source and archive for stale `yoyos`/external Java namespaces, and reviewed the final diff.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `TinkerTools`, `TinkerModule`, `TinkerNetwork`, `YoyoItem`, `YoyoEntity`, `Interaction`, `YoyoCompat`, Yoyo client/network classes, mixins, and Yoyo resources.
+- Owning module/system: Modern Foundry's native item/entity/deferred-register, network, client-render, sound, and resource systems.
+- Existing logic reused or extracted: native Modern Foundry registers, `TinkerNetwork`, `ENTITIES`, creative-tab callback, and client renderer/event patterns; no new runtime dependency was added.
+- Net line change: legacy Yoyo runtime/resources were removed and replaced by the reference-derived runtime plus core and compatibility resources; an exact aggregate line count was not separately calculated because the work includes binary assets and untracked additions.
+- New files: official-style Yoyo API/runtime/client/network classes, compatibility item classes, compatibility recipes/models/textures, enchantments, advancements, and tags.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The official 1.21.1 reference is now the Yoyo source of truth; all integrated Java and runtime IDs use the Modern Foundry namespace.
+- Optional mods remain optional: compatibility classes use loaded-mod gates and reflection instead of compile-time dependencies. Same-name compatibility tiers follow the first registered source when multiple reference plugins provide the same name.
+- The reference's Creative Yoyo advancement still points at its intentionally absent normal recipe, adapted to `modernfoundry:creative`.
+
+**Build / Validation**
+- Production build: `./gradlew.bat build --console=plain --no-daemon` passed.
+- Tests/checks: `compileJava`, Gradle `test`, `check`, `testJunit` (`NO-SOURCE`), targeted JSON parsing, `verifyGeneratedTextures`, and `git diff --check` passed; existing Gradle/NeoForge deprecation warnings remain.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.6-NeoForge.jar` contains the required Yoyo classes, core and compatibility resource paths, and no stale external Yoyo namespace paths.
+- Exact artifact SHA-256: `2cefefa197b575065e3f9fc33df90f67a3a2e0bec88f17713a7143be3b8b7e3a`.
+- Manual validation: Prism/fresh-world JEI search, creative-tab display, crafting, Anvil enchantment application, throwing/retraction, attack/collecting/breaking, first-/third-person rendering, save/reload, dedicated-server tracking, multiplayer sync, and optional-mod smoke remain outstanding.
+- Tests created or run: no dedicated Yoyo tests added.
