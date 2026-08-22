@@ -1,6 +1,6 @@
 {
   "loader": "modernfoundry:tool",
-  "parent": "forge:item/default-tool",
+  "parent": "neoforge:item/default-tool",
   "textures": {
     "blade":         "modernfoundry:item/tool/cutlass/broken_blade",
     "binding":        "modernfoundry:item/tool/cutlass/binding",

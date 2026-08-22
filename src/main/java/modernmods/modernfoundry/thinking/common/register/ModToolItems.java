@@ -1,13 +1,11 @@
 package modernmods.modernfoundry.thinking.common.register;
 
-import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.thinking.common.things.item.ModifiableAtlatlItem;
 import modernmods.modernfoundry.thinking.common.things.item.ModifiableRepeatingCrossbowItem;
 import modernmods.modernfoundry.thinking.common.things.item.ToolDefinitions;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import modernmods.hilt.registration.object.ItemObject;
 import modernmods.modernfoundry.common.registration.CastItemObject;
 import modernmods.modernfoundry.library.tools.helper.ToolBuildHandler;
@@ -24,12 +22,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ModToolItems extends ModModule {
-    public static final DeferredHolder<? super CreativeModeTab, CreativeModeTab> tabTool = CREATIVE_TABS.register(
-            "tool", () -> CreativeModeTab.builder().title(TConstruct.makeTranslation("itemGroup", "tool"))
-                    .icon(() -> ModToolItems.paxel.get().getRenderTool())
-                    .displayItems(ModToolItems::addTabItems)
-                    .withTabsBefore(ModCommonItems.tab.getId())
-                    .build());
     //Tools
     public static final ItemObject<ModifiableItem> paxel = ITEMS.register( "paxel", () -> new ModifiableItem(Stack1Item, ToolDefinitions.PAXEL));
     public static final ItemObject<ModifiableItem>  knife = ITEMS.register( "knife", () -> new ModifiableItem(Stack1Item, ToolDefinitions.KNIFE));
@@ -52,7 +44,8 @@ public class ModToolItems extends ModModule {
     public static final ItemObject<Item> seeking_arrow = ITEMS.register("seeking_arrow", GENERAL_PROPS);
     @Deprecated(forRemoval = true)
     public static final ItemObject<Item> roving_arrow = ITEMS.register("roving_arrow", GENERAL_PROPS);
-    private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
+    /** Adds the complete tools to Modern Foundry's canonical tools tab. */
+    public static void addToolItems(CreativeModeTab.Output output) {
         Consumer<ItemStack> tab = output::accept;
         acceptTool(tab,paxel);
         acceptTool(tab,knife);
@@ -66,6 +59,11 @@ public class ModToolItems extends ModModule {
         acceptTool(tab,seared_bucket);
         acceptTool(tab,tinkers_bronze_bucket);
         acceptTool(tab,battle_bucket);
+    }
+
+    /** Adds the extra tool parts to the canonical tool-parts tab. */
+    public static void addPartItems(CreativeModeTab.Output output) {
+        Consumer<ItemStack> tab = output::accept;
         acceptPart(tab,narrow_blade);
         acceptPart(tab,guard);
         tab.accept(narrow_blade_cast.get().getDefaultInstance());

@@ -1,0 +1,6 @@
+{
+  "parent": "neoforge:item/bucket_drip",
+  "loader": "modernfoundry:fluid_container",
+  "fluid": "modernfoundry:molten_forgotten_metal",
+  "flip_gas": false
+}

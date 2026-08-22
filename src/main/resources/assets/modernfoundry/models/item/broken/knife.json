@@ -1,6 +1,6 @@
 {
   "loader": "modernfoundry:tool",
-  "parent": "forge:item/default-tool",
+  "parent": "neoforge:item/default-tool",
   "textures": {
     "blade_left":         "modernfoundry:item/tool/knife/broken_blade_left",
     "blade_right":        "modernfoundry:item/tool/knife/broken_blade_right",

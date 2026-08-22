@@ -1,5 +1,5 @@
 {
-  "loader": "forge:composite",
+    "loader": "neoforge:composite",
   "parent": "block/block",
   "textures": {
     "particle": "modernfoundry:block/shimmerslime"
@@ -21,4 +21,3 @@
     }
   }
 }
-

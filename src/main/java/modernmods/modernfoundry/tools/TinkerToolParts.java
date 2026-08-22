@@ -34,6 +34,7 @@ import modernmods.modernfoundry.tools.stats.HandleMaterialStats;
 import modernmods.modernfoundry.tools.stats.HeadMaterialStats;
 import modernmods.modernfoundry.tools.stats.LimbMaterialStats;
 import modernmods.modernfoundry.tools.stats.PlatingMaterialStats;
+import modernmods.modernfoundry.thinking.common.register.ModToolItems;
 import modernmods.modernfoundry.tools.stats.RepairStats;
 import modernmods.modernfoundry.tools.stats.StatlessMaterialStats;
 
@@ -153,6 +154,8 @@ public final class TinkerToolParts extends TinkerModule {
     accept(output, ribcage);
     accept(output, shell);
     accept(output, laces);
+
+    ModToolItems.addPartItems(tab);
 
     // end with modifier crystal dynamic listing
     ModifierCrystalItem.addVariants(output);

@@ -136,3 +136,9 @@
     * Thinking now reuses Modern Foundry's existing implementation instead of registering a second static modifier with the same ID.
 * Built and verified `ModernFoundry-1.21.1-4.1.6-NeoForge.jar` after the native integration and label updates.
     * SHA-256: `842ee265194b202585bcc1cd61f5d1967b5973e9681dc1fc7d9305c01a35cd48`.
+* Fixed the reported Modern Foundry creative-tab, texture, and naming issues.
+    * Merged the Thinking tools and parts into the canonical Modern Foundry tabs, removing the duplicate tools tab.
+    * Replaced stale Forge-era model parents, repaired the Shimmer Slime composite loader, and added the missing TCI fluid blockstates and bucket models.
+    * Added slime-foliage particle mappings, bronze and Fantastic Gadgetry assets, integration/fluid translations, and the TCI license notice.
+* Built and verified `ModernFoundry-1.21.1-4.1.6-NeoForge.jar` after the resource fixes.
+    * SHA-256: `da8ea02af6d351b3209f08d7ad35daff57f86f4771050a0bd4fbe5ff3f0f9efc`.

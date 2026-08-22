@@ -1,7 +1,6 @@
 {
-    "parent": "forge:item/bucket_drip",
+    "parent": "neoforge:item/bucket_drip",
     "flip_gas": true,
     "fluid": "modernfoundry:molten_adamantium",
     "loader": "modernfoundry:fluid_container"
 }
-

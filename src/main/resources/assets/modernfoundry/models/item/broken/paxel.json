@@ -1,6 +1,6 @@
 {
   "loader": "modernfoundry:tool",
-  "parent": "forge:item/default-tool",
+  "parent": "neoforge:item/default-tool",
   "textures": {
     "axe":         "modernfoundry:item/tool/paxel/broken_axe",
     "head":        "modernfoundry:item/tool/paxel/broken_head",

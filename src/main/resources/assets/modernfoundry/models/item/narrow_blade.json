@@ -1,6 +1,6 @@
 {
   "loader": "modernfoundry:material",
-  "parent": "forge:item/default",
+  "parent": "neoforge:item/default",
   "textures": {
     "texture": "modernfoundry:item/tool/parts/narrow_blade"
   }

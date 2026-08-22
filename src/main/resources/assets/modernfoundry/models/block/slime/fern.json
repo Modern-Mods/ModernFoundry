@@ -2,6 +2,7 @@
     "render_type": "minecraft:cutout",
     "parent": "block/tinted_cross",
     "textures": {
+        "particle": "modernfoundry:block/slime/foliage/fern",
         "cross": "modernfoundry:block/slime/foliage/fern"
     }
 }

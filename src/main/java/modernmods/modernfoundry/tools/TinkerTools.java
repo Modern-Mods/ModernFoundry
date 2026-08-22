@@ -136,6 +136,7 @@ import modernmods.modernfoundry.tools.yoyo.YoyoDataComponents;
 import modernmods.modernfoundry.tools.yoyo.YoyoItem;
 import modernmods.modernfoundry.tools.yoyo.YoyoCompat;
 import modernmods.modernfoundry.tools.yoyo.YoyosTiers;
+import modernmods.modernfoundry.thinking.common.register.ModToolItems;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -457,6 +458,8 @@ public final class TinkerTools extends TinkerModule {
     if (ModList.get().isLoaded("twilightforest")) {
       acceptTool(output, minotaurAxe);
     }
+
+    ModToolItems.addToolItems(tab);
 
     // armor
     acceptTools(output, travelersGear);

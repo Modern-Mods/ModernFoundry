@@ -1514,3 +1514,39 @@
 - Compile/checks: `compileJava`, `test`, `check`, `testJunit` (`NO-SOURCE`), `verifyGeneratedTextures`, and JSON parsing passed; existing Gradle/NeoForge deprecation warnings remain.
 - Manual validation: Prism gameplay retest remains required after installing the rebuilt JAR; no manual in-game test was performed here.
 - Tests created or run: no dedicated Yoyo tests added.
+
+## 2026-08-22 - Fix creative tabs and missing resources
+
+**Prompt / Task**
+- Implement the supplied Modern Foundry bug list covering duplicate tools tabs, missing textures, and untranslated player-facing names.
+
+**What Changed**
+- Removed the standalone Thinking tools creative tab and added its tools and parts to `TinkerTools` and `TinkerToolParts`.
+- Replaced stale Forge-era item parents with NeoForge parents, including the remaining default/default-tool models.
+- Switched the Shimmer Slime composite model to NeoForge and added explicit particle textures to the four slime foliage cross models.
+- Added 13 TCI fluid blockstates, 13 TCI bucket models, bronze block/material assets, Fantastic Gadgetry's item model, English translations, and the TCI license notice.
+
+**Steps Taken**
+- Read `TASK.md` and the project instructions, inspected the supplied screenshots, traced the creative-tab registrations, and audited related model, blockstate, texture, and localization paths.
+- Parsed and audited the targeted resources, ran the resource verifier, launched the client twice, reviewed the resource-reload log, built the final artifact, and inspected its archive contents.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `ModToolItems`, `TinkerTools`, `TinkerToolParts`, TCI resource assets, bucket models, Shimmer Slime model, and English localization.
+- Owning module/system: Modern Foundry creative-tab registration and the NeoForge client resource/model pipeline.
+- Existing logic reused or extracted: the canonical Modern Foundry tools and tool-parts tabs, existing Hilt fluid bucket model conventions, and existing slime foliage textures.
+- Net line change: targeted registry/resource additions and model-parent corrections; no Java dependencies or build files changed.
+- New files: 13 TCI fluid blockstates, 13 TCI bucket models, bronze/Fantastic Gadgetry models and textures, and `META-INF/licenses/tcintegrations.txt`.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Keeping one canonical tab per player-facing tool surface removes duplicate navigation without changing item IDs or tool data.
+- The model fixes use the active NeoForge parents and existing texture assets; no fallback checkerboard resources or new rendering system was added.
+- User-supplied screenshots and existing `BUGS.md`/`Ideas.md` changes were preserved.
+
+**Build / Validation**
+- Production build: `rtk .\\gradlew.bat clean build --console=plain --no-daemon` passed in 5m19s with the repository's existing Java/Gradle deprecation warnings.
+- Tests/checks: standalone `verifyGeneratedTextures` passed; Gradle `test`, `check`, and `testJunit` (`NO-SOURCE`) passed; targeted JSON and asset-parent audits passed. `git diff --check` reported only existing LF/CRLF conversion warnings.
+- Client validation: `runClient` reached the Minecraft main menu and completed resource reload. The final log contained no missing bucket, Shimmer Slime, slime-foliage, or Forge item-parent errors. In-world visual checking was not completed because the Windows automation layer detected concurrent user input when entering the test world.
+- Archive validation: `ModernFoundry-1.21.1-4.1.6-NeoForge.jar` contains all 13 TCI blockstates, all 13 TCI bucket models, 7 bronze assets, Fantastic Gadgetry, the English language file, and the TCI license. SHA-256: `da8ea02af6d351b3209f08d7ad35daff57f86f4771050a0bd4fbe5ff3f0f9efc`.
+- Remaining unrelated client warnings: deprecated `roving_arrow`/`seeking_arrow` item model entries, dynamic `unknown` tool render variants, vanilla armor-trim sprites, and vanilla goat-horn sounds.
+- Tests created or run: no dedicated tests added.

@@ -1,6 +1,6 @@
 {
   "loader": "modernfoundry:tool",
-  "parent": "forge:item/default",
+  "parent": "neoforge:item/default",
   "textures": {
     "tool": "modernfoundry:item/tool/bucket/tinkers_bronze_bucket"
   },

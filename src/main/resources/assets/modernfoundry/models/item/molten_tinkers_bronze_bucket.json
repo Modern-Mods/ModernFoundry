@@ -1,5 +1,5 @@
 {
-    "parent": "forge:item/bucket_drip",
+    "parent": "neoforge:item/bucket_drip",
     "flip_gas": false,
     "loader": "modernfoundry:fluid_container",
     "fluid": "modernfoundry:molten_tinkers_bronze"

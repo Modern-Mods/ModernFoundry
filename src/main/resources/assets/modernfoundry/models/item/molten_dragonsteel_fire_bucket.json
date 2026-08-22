@@ -1,0 +1,6 @@
+{
+  "parent": "neoforge:item/bucket_drip",
+  "loader": "modernfoundry:fluid_container",
+  "fluid": "modernfoundry:molten_dragonsteel_fire",
+  "flip_gas": false
+}
