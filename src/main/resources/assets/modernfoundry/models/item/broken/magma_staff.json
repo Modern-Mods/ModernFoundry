@@ -1,0 +1,13 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff",
+  "textures": {
+    "tool":         "modernfoundry:item/tool/magma_staff/staff_broken",
+    "large_tool":   "modernfoundry:item/tool/magma_staff/staff_large_broken"  },
+  "large": true,
+  "first_modifiers": [ "modernfoundry:dyed", "modernfoundry:embellishment" ],
+  "modifier_roots": {
+    "small": [ "modernfoundry:item/tool/staff/modifiers/" ],
+    "large": [ "modernfoundry:item/tool/staff/large_modifiers/" ]
+}
+}

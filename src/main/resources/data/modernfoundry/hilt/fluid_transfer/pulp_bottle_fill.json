@@ -1,0 +1,11 @@
+{
+  "type": "hilt:fill_item",
+  "fluid": {
+    "amount": 250,
+    "tag": "forge:pulp"
+  },
+  "input": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": "modernfoundry:pulp_bottle"
+}

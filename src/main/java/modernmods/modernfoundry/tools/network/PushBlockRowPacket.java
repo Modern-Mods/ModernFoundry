@@ -1,11 +1,11 @@
 package modernmods.modernfoundry.tools.network;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import modernmods.hilt.client.SafeClientAccess;
 import modernmods.hilt.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.library.modifiers.fluid.block.MoveBlocksFluidEffect;
 
@@ -36,7 +36,7 @@ public record PushBlockRowPacket(BlockPos pos, Direction direction, boolean push
   /** Accesses client only safely */
   private static class HandleClient {
     public static void handle(PushBlockRowPacket packet) {
-      Level level = Minecraft.getInstance().level;
+      Level level = SafeClientAccess.getLevel();
       if (level != null) {
         MoveBlocksFluidEffect.moveBlocks(level, packet.pos, level.getBlockState(packet.pos), packet.facing(), packet.direction, packet.moving);
       }

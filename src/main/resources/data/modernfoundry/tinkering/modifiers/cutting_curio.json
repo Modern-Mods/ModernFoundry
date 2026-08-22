@@ -1,0 +1,41 @@
+{
+  "condition":  {
+    "type": "neoforge:mod_loaded",
+    "modid": "tinkers_ingenuity"
+  },
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "tinkers_ingenuity:curio_break_speed",
+      "block": {
+        "type": "hilt:or",
+        "predicates": [
+          {
+            "type": "hilt:tag",
+            "tag": "forge:stone"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "forge:blackstone"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "forge:cobblestone"
+          },
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:cuttable_blocks"
+          }
+        ]
+      },
+      "effective": false,
+      "entity": "hilt:any",
+      "modifier": {
+        "factor": 0.55,
+        "operation": "multiplier_base",
+        "single": false
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "tools": {
+    "item": "modernfoundry:cutlass"
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "modifier": "modernfoundry:counter_advanced"
+}

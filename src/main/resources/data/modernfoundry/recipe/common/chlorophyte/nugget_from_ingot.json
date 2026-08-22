@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:chlorophyte_ingot" }],
+  "result": {
+    "item": "modernfoundry:chlorophyte_nugget",
+    "count": 9
+  }
+}

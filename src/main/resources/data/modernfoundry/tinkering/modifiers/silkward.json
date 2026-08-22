@@ -1,0 +1,17 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:modifier_slot",
+      "each_level": 2,
+      "name": "defense"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": -2.0,
+      "operation": "add",
+      "stat": "modernfoundry:armor"
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,37 +1,63 @@
 {
-  "values": [
-    "modernfoundry:flint",
-    "modernfoundry:bone",
-    "modernfoundry:chorus",
-    "modernfoundry:scorched_stone",
-    "modernfoundry:necrotic_bone",
-    "modernfoundry:venombone",
-    "modernfoundry:weeping_vine",
-    "modernfoundry:nahuatl",
-    "modernfoundry:steel",
-    "modernfoundry:darkthread",
-    "modernfoundry:manyullyn",
-    "modernfoundry:blazing_bone",
-    "modernfoundry:knightmetal",
-    {
-      "id": "modernfoundry:silver",
-      "required": false
-    },
-    {
-      "id": "modernfoundry:invar",
-      "required": false
-    },
-    {
-      "id": "modernfoundry:pewter",
-      "required": false
-    },
-    {
-      "id": "modernfoundry:necronium",
-      "required": false
-    },
-    {
-      "id": "modernfoundry:nicrosil",
-      "required": false
-    }
-  ]
+    "values":  [
+                   "modernfoundry:flint",
+                   "modernfoundry:bone",
+                   "modernfoundry:chorus",
+                   "modernfoundry:scorched_stone",
+                   "modernfoundry:necrotic_bone",
+                   "modernfoundry:venombone",
+                   "modernfoundry:weeping_vine",
+                   "modernfoundry:nahuatl",
+                   "modernfoundry:steel",
+                   "modernfoundry:darkthread",
+                   "modernfoundry:manyullyn",
+                   "modernfoundry:blazing_bone",
+                   "modernfoundry:knightmetal",
+                   {
+                       "id":  "modernfoundry:silver",
+                       "required":  false
+                   },
+                   {
+                       "id":  "modernfoundry:invar",
+                       "required":  false
+                   },
+                   {
+                       "id":  "modernfoundry:pewter",
+                       "required":  false
+                   },
+                   {
+                       "id":  "modernfoundry:necronium",
+                       "required":  false
+                   },
+                   {
+                       "id":  "modernfoundry:nicrosil",
+                       "required":  false
+                   },
+                   "modernfoundry:netherrack",
+                   "modernfoundry:dusk",
+                   "modernfoundry:lightite",
+                   "modernfoundry:sponge",
+                   "modernfoundry:black_chocolate",
+                   "modernfoundry:spectre",
+                   "modernfoundry:verdant_frogcroaking",
+                   "modernfoundry:ochre_frogcroaking",
+                   "modernfoundry:pearlescent_frogcroaking",
+                   "modernfoundry:burnt_ashes",
+                   "modernfoundry:bacium",
+                   "modernfoundry:warden_steel",
+                   "modernfoundry:bound_chain",
+                   "modernfoundry:chillslime_cryogel",
+                   "modernfoundry:metherite",
+                   "modernfoundry:stabilized_gunpowder",
+                   "modernfoundry:scarlet_slimestone",
+                   "modernfoundry:ancient_ceramic",
+                   {
+                       "id":  "modernfoundry:copshowium",
+                       "required":  false
+                   },
+                   "modernfoundry:solidified_emptiness",
+                   "modernfoundry:colorite",
+                   "modernfoundry:errorite",
+                   "modernfoundry:adamantium"
+               ]
 }

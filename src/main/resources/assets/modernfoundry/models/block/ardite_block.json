@@ -1,0 +1,9 @@
+{
+	"loader": "hilt:colored_block",
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "modernfoundry:block/ardite_top",
+        "top":    "modernfoundry:block/ardite_top",
+        "side":   "modernfoundry:block/ardite"
+    }
+}

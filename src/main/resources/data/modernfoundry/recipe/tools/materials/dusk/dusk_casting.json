@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "input": "modernfoundry:cactus",
+  "fluid": {
+    "tag": "modernfoundry:venom",
+    "amount": 250
+  },
+  "temperature": 10,
+  "output": "modernfoundry:dusk"
+}

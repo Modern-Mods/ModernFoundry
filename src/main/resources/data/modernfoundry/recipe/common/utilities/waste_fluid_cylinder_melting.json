@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:waste_fluid_cylinder" },
+  "result": {
+    "fluid": "modernfoundry:molten_electrical_steel",
+    "amount": 450
+  },
+  "temperature": 900,
+  "time": 100
+}

@@ -1,9 +1,10 @@
 {
-  "values": [
-    "modernfoundry:flinging",
-    "modernfoundry:springing",
-    "modernfoundry:bonking",
-    "modernfoundry:warping",
-    "modernfoundry:throwing"
-  ]
+    "values":  [
+                   "modernfoundry:flinging",
+                   "modernfoundry:springing",
+                   "modernfoundry:bonking",
+                   "modernfoundry:warping",
+                   "modernfoundry:throwing",
+                   "modernfoundry:sprinting"
+               ]
 }

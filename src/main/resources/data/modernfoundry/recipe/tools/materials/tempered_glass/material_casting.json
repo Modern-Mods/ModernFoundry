@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:molten_tempered_glass",
+    "amount": 250
+  },
+  "temperature": 950,
+  "output": "modernfoundry:tempered_glass"
+}

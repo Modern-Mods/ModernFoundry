@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:melting",
+  "rate": "metal",
+  "ingredient": {
+    "item": "modernfoundry:gilded_silky_cloth"
+  },
+  "result": {
+    "fluid": "modernfoundry:molten_gold",
+    "amount": 720
+  },
+  "temperature": 700,
+  "time": 100,
+  "byproducts": [
+    {
+      "fluid": "modernfoundry:molten_rose_gold",
+      "amount": 180
+    }
+  ]
+}

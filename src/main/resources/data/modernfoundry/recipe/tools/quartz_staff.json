@@ -1,0 +1,8 @@
+{
+  "type": "modernfoundry:tool_building",
+  "extra_requirements": [
+  { "item": "modernfoundry:quartz_crystal" },
+  { "item": "modernfoundry:quartz_crystal" }
+],
+  "result": "modernfoundry:quartz_staff"
+}

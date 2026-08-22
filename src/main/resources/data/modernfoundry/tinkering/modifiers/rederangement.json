@@ -1,0 +1,20 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:rederangement"
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "forge:entity_gravity",
+      "each_level": -0.1,
+      "operation": "multiply_total",
+      "slots": [
+        "mainhand",
+        "offhand"
+      ],
+      "tooltip_style": "percent"
+    }
+    ],
+  "tooltip_display": "always"
+}

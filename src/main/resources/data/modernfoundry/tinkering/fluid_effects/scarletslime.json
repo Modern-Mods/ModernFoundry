@@ -1,0 +1,27 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "modernfoundry:disintegration",
+          "level": 2,
+          "time": 180
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "set",
+      "effect": "modernfoundry:disintegration",
+      "level": 2,
+      "time": 180
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "fluid": "modernfoundry:scarletslime"
+  }
+}

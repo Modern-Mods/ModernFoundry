@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/echo_bronze" },
+  "result": {
+    "fluid": "modernfoundry:molten_echo_bronze",
+    "amount": 10
+  },
+  "temperature": 150,
+  "time": 2
+}

@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/shroomite" },
+  "result": {
+    "fluid": "modernfoundry:molten_shroomite",
+    "amount": 10
+  },
+  "temperature": 600,
+  "time": 8
+}

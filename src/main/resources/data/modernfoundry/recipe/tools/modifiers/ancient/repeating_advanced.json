@@ -1,0 +1,28 @@
+{
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "tag": "forge:ingots/beetron"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "tag": "forge:ingots/beetron"
+    },
+    {
+      "item": "modernfoundry:surging_wellspring"
+    },
+    {
+      "item": "modernfoundry:surging_wellspring"
+    }
+  ],
+  "tools": {
+    "item": "modernfoundry:repeating_crossbow"
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "allow_crystal": true,
+  "result": "modernfoundry:repeating_advanced"
+}

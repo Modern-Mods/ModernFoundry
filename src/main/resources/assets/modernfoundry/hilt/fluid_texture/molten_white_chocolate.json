@@ -1,0 +1,11 @@
+{
+  "color": "FFdaa86c",
+  "fog": {
+    "calculate_color": true,
+    "end": 2.0,
+    "shape": "sphere",
+    "start": 0.25
+  },
+  "flowing": "modernfoundry:fluid/food/stew/flowing",
+  "still": "modernfoundry:fluid/food/stew/still"
+}

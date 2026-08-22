@@ -1,7 +1,8 @@
 {
-  "values": [
-    "modernfoundry:flinging",
-    "modernfoundry:springing",
-    "modernfoundry:grapple"
-  ]
+    "values":  [
+                   "modernfoundry:flinging",
+                   "modernfoundry:springing",
+                   "modernfoundry:grapple",
+                   "modernfoundry:sprinting"
+               ]
 }

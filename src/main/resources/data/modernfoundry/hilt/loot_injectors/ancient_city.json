@@ -1,0 +1,28 @@
+{
+  "name": "minecraft:chests/ancient_city",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:mace",
+          "weight": 4
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

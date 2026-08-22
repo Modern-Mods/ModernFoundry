@@ -1,0 +1,28 @@
+{
+  "type": "modernfoundry:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "modernfoundry:ancient_ceramic"
+    },
+    {
+      "item": "modernfoundry:ancient_ceramic"
+    },
+    {
+      "item": "modernfoundry:ancient_ceramic"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:ceramic",
+  "tools": {
+    "type": "forge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/ancient"
+      },
+      {
+        "tag": "modernfoundry:modifiable/bonus_slots"
+      }
+    ]
+  }
+}

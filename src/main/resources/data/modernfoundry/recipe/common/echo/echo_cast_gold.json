@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/gem"
+  },
+  "fluid": {
+    "fluid": "modernfoundry:molten_echo",
+    "amount": 100
+  },
+  "result": "minecraft:echo_shard",
+  "cooling_time": 31
+}

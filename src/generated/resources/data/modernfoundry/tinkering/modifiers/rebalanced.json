@@ -2,6 +2,16 @@
   "level_display": "modernfoundry:no_levels",
   "modules": [
     {
+      "type": "modernfoundry:swappable_bonus_slot",
+      "bonus": "ancient",
+      "match": "ancient",
+      "slots": -1,
+      "tool": {
+        "type": "hilt:tag",
+        "tag": "modernfoundry:modifiable/ancient"
+      }
+    },
+    {
       "type": "modernfoundry:swappable_slot",
       "slots": 1
     },

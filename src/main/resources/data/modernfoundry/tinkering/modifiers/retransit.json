@@ -1,0 +1,32 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:retransit",
+      "_comment": "Cooling time at “0” level, must be int. For example, when it is 240, the time at 1 level is 220(11s)",
+      "each_level": 240
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "forge:entity_gravity",
+      "each_level": -0.1,
+      "operation": "multiply_total",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
+    },
+    {
+      "type": "modernfoundry:armor_level",
+      "allow_broken": false,
+      "held_tag": "modernfoundry:modifiable/armor/held",
+      "key": "modernfoundry:retransit"
+    }
+    ],
+  "tooltip_display": "always"
+}

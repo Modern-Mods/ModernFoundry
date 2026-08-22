@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:lightite_block" }],
+  "result": {
+    "item": "modernfoundry:lightite_ingot",
+    "count": 9
+  }
+}

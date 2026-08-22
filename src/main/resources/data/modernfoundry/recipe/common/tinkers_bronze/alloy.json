@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "modernfoundry:molten_copper",   "amount":   180 },
+    { "tag": "modernfoundry:molten_glass", "amount":  1000 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:molten_tinkers_bronze",
+    "amount": 180
+  },
+  "temperature": 550
+}

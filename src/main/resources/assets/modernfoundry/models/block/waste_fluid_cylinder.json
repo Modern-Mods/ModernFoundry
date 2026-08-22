@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable_with_bottom",
+  "textures": {
+    "front": "modernfoundry:block/waste_fluid_cylinder/front",
+    "side": "modernfoundry:block/waste_fluid_cylinder/side",
+    "top": "modernfoundry:block/waste_fluid_cylinder/top",
+    "bottom": "modernfoundry:block/electrical_steel_block"
+  }
+}

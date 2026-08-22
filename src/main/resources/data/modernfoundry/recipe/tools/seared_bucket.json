@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "B B",
+    " B "
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:rods/wooden"
+    },
+    "B":  [
+      {
+         "item": "modernfoundry:seared_brick"
+      },
+      {
+         "item": "modernfoundry:scorched_brick"
+      }
+    ]
+  },
+  "result": {
+    "item": "modernfoundry:seared_bucket"
+  }
+}

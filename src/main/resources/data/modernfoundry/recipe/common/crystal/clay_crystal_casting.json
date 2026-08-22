@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "cast": {
+    "item": "minecraft:clay"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "minecraft:water",
+    "amount": 1000
+  },
+  "result": "modernfoundry:clay_crystal",
+  "cooling_time": 1000
+}

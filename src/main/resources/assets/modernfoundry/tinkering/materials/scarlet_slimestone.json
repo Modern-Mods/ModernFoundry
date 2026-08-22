@@ -1,0 +1,53 @@
+{
+  "fallbacks": [
+    "slime_wood",
+    "crystal"
+  ],
+  "color": "A52548",
+  "luminosity": 5,
+  "generator": {
+    "transformer": {
+      "type": "modernfoundry:recolor_sprite",
+      "color_mapping": {
+        "type": "modernfoundry:grey_to_color",
+        "palette": [
+          {
+            "grey": 0,
+            "color": "FF000000"
+          },
+          {
+            "grey": 63,
+            "color": "FF1D070A"
+          },
+          {
+            "grey": 102,
+            "color": "FF41141E"
+          },
+          {
+            "grey": 140,
+            "color": "FF56212C"
+          },
+          {
+            "grey": 178,
+            "color": "FFA52548"
+          },
+          {
+            "grey": 216,
+            "color": "FFED494E"
+          },
+          {
+            "grey": 255,
+            "color": "FFF27D81"
+          }
+        ]
+      }
+    },
+    "supported_stats": [
+      "modernfoundry:head",
+      "modernfoundry:handle",
+      "modernfoundry:extra",
+      "modernfoundry:repair_kit"
+    ],
+    "ignoreMaterial_stats": false
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "forge:molten_steel",   "amount":   180 },
+    { "fluid": "modernfoundry:molten_obsidian",   "amount":   500 },
+    { "fluid": "modernfoundry:molten_glass", "amount":  1000 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:molten_tempered_glass",
+    "amount": 1000
+  },
+  "temperature": 950
+}

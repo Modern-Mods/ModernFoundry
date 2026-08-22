@@ -1,0 +1,27 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "modernfoundry:sculk_power",
+          "level": 1,
+          "time": 160
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "add",
+      "effect": "modernfoundry:sculk_power",
+      "level": 1,
+      "time": 160
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "fluid": "modernfoundry:liquid_sculk_power"
+  }
+}

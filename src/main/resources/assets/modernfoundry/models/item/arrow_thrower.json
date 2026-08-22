@@ -1,0 +1,36 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/tall",
+  "textures": {
+    "grip_top":         "modernfoundry:item/tool/atlatl/grip_top",
+    "grip_bottom":      "modernfoundry:item/tool/atlatl/grip_bottom",
+    "limb":             "modernfoundry:item/tool/atlatl/limb",
+    "bowstring":             "modernfoundry:item/tool/atlatl/bowstring",
+
+    "large_grip_top":         "modernfoundry:item/tool/atlatl/large/grip_top",
+    "large_grip_bottom":      "modernfoundry:item/tool/atlatl/large/grip_bottom",
+    "large_limb":             "modernfoundry:item/tool/atlatl/large/limb",
+    "large_bowstring":             "modernfoundry:item/tool/atlatl/large/bowstring" },
+  "parts": [
+    { "name": "grip_top", "index": 0 },
+    { "name": "grip_bottom",    "index": 2 },
+    { "name": "limb",        "index": 1 },
+    { "name": "bowstring",        "index": 3 }
+  ],
+  "large": true,
+  "large_offset": [-8, 4],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:charging": 1 },
+      "model": "modernfoundry:item/atlatl/pulling"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2},
+      "model": "modernfoundry:item/atlatl/blocking"
+    },
+    {
+      "predicate": { "modernfoundry:broken": 1 },
+      "model": "modernfoundry:item/atlatl/broken"
+    }
+  ]
+}

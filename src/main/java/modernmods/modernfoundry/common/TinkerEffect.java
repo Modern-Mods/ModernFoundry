@@ -13,6 +13,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientMobEffectExtension
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.Locale;
 
 /** Effect extension with a few helpers */
 public class TinkerEffect extends MobEffect {
@@ -29,12 +30,12 @@ public class TinkerEffect extends MobEffect {
 
   // keep old call sites compact while targeting the holder-based 1.21 API
   public TinkerEffect addAttributeModifier(Attribute pAttribute, String pUuid, double pAmount, Operation pOperation) {
-    super.addAttributeModifier(BuiltInRegistries.ATTRIBUTE.wrapAsHolder(pAttribute), ResourceLocation.fromNamespaceAndPath("modernfoundry", pUuid), pAmount, pOperation);
+    super.addAttributeModifier(BuiltInRegistries.ATTRIBUTE.wrapAsHolder(pAttribute), ResourceLocation.fromNamespaceAndPath("modernfoundry", pUuid.toLowerCase(Locale.ROOT)), pAmount, pOperation);
     return this;
   }
 
   public TinkerEffect addAttributeModifier(Holder<Attribute> attribute, String uuid, double amount, Operation operation) {
-    super.addAttributeModifier(attribute, ResourceLocation.fromNamespaceAndPath("modernfoundry", uuid), amount, operation);
+    super.addAttributeModifier(attribute, ResourceLocation.fromNamespaceAndPath("modernfoundry", uuid.toLowerCase(Locale.ROOT)), amount, operation);
     return this;
   }
 

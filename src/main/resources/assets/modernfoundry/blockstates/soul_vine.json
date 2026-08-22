@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "modernfoundry:block/soul_vine",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "modernfoundry:block/soul_vine"
+    },
+    "axis=z": {
+      "model": "modernfoundry:block/soul_vine",
+      "x": 90
+    }
+  }
+}

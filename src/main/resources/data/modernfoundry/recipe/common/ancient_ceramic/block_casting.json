@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "fluid": {
+    "fluid": "modernfoundry:molten_ancient_ceramic",
+    "amount": 810
+  },
+  "result": "modernfoundry:ancient_ceramic_block",
+  "cooling_time": 250
+}

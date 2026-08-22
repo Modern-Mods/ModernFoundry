@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "modernfoundry:cobalt_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": { "#": { "item": "modernfoundry:adamantium_ingot" }},
+  "result": {
+    "item": "modernfoundry:adamantium_block"
+  }
+}

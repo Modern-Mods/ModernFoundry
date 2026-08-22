@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:spectre_block" }],
+  "result": {
+    "item": "modernfoundry:spectre_ingot",
+    "count": 9
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "modernfoundry:ancient_ceramic_block"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "modernfoundry:ancient_ceramic",
+  "leftover": {
+    "item": "modernfoundry:ancient_ceramic"
+  }
+}

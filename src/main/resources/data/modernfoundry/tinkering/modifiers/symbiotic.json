@@ -1,0 +1,11 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:symbiotic",
+      "_comment": "Chance per level",
+      "each_level": 0.15
+    }
+    ],
+  "tooltip_display": "always"
+}

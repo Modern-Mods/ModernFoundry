@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "tag": "forge:nuggets/obsidian_bronze"
+  },
+  "value": 1,
+  "needed": 9,
+  "material": "modernfoundry:obsidian_bronze"
+}

@@ -1,0 +1,12 @@
+{
+  "entries": [
+    "modernfoundry:lustrous/ardite",
+    "modernfoundry:lustrous/chlorophyll",
+    "modernfoundry:drowned_modifier",
+    "modernfoundry:guardian_modifier",
+    "modernfoundry:piglin_modifier",
+    "modernfoundry:mace",
+    "modernfoundry:repeating_crossbow"
+  ],
+  "replace": false
+}

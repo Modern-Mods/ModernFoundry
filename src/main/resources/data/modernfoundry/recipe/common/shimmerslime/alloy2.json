@@ -1,0 +1,17 @@
+{
+  "condition": {
+    "type": "forge:tag_empty",
+    "tag": "forge:glowstone"
+  },
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "forge:molten_zith", "amount":  90 },
+    { "fluid": "modernfoundry:ender_slime",   "amount":   250 },
+    { "fluid": "modernfoundry:blazing_blood", "amount":  250 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:molten_shimmerslime",
+    "amount": 180
+  },
+  "temperature": 1300
+}

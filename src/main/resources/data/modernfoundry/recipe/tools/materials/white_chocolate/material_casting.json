@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "modernfoundry:white_chocolate"
+  },
+  "value": 1,
+  "needed": 4,
+  "material": "modernfoundry:white_chocolate"
+}

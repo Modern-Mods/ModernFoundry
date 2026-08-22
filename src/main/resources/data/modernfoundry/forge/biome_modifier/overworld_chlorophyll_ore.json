@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#modernfoundry:chlorophyll_ore_spawn",
+  "features": [
+    "modernfoundry:chlorophyll_ore_small",
+    "modernfoundry:chlorophyll_ore_large"
+  ],
+  "step": "underground_ores"
+}

@@ -1,9 +1,12 @@
 {
-  "values": [
-    "modernfoundry:sky_staff",
-    "modernfoundry:earth_staff",
-    "modernfoundry:ichor_staff",
-    "modernfoundry:ender_staff",
-    "modernfoundry:melting_pan"
-  ]
+    "values":  [
+                   "modernfoundry:sky_staff",
+                   "modernfoundry:earth_staff",
+                   "modernfoundry:ichor_staff",
+                   "modernfoundry:ender_staff",
+                   "modernfoundry:melting_pan",
+                   "modernfoundry:quartz_staff",
+                   "modernfoundry:magma_staff",
+                   "modernfoundry:clay_staff"
+               ]
 }

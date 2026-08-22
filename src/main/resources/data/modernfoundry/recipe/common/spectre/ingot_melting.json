@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:ingots/spectre" },
+  "result": {
+    "fluid": "modernfoundry:molten_spectre",
+    "amount": 90
+  },
+  "temperature": 600,
+  "time": 15
+}

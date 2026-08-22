@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "modernfoundry:pulp",
+    "modernfoundry:flowing_pulp"
+  ]
+}

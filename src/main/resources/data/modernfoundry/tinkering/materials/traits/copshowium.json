@@ -1,0 +1,44 @@
+{
+ "perStat": {
+  "modernfoundry:ranged": [
+   {
+    "name": "modernfoundry:reverse",
+    "level": 1
+   },
+   {
+    "name": "modernfoundry:rederangement",
+    "level": 1
+   }
+  ],
+  "modernfoundry:melee_harvest": [
+   {
+    "name": "modernfoundry:reverse",
+    "level": 1
+   },
+   {
+    "name": "modernfoundry:rederangement",
+    "level": 1
+   }
+  ],
+  "modernfoundry:armor": [
+   {
+    "name": "modernfoundry:reverse",
+    "level": 1
+   },
+   {
+    "name": "modernfoundry:retransit",
+    "level": 1
+   }
+  ],
+  "modernfoundry:plating_shield": [
+   {
+    "level": 1,
+    "name": "modernfoundry:reverse"
+   },
+   {
+    "name": "modernfoundry:retransit",
+    "level": 1
+   }
+  ]
+ }
+}

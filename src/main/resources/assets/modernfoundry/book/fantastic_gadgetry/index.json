@@ -1,0 +1,23 @@
+[
+  {
+    "name": "intro",
+    "data": "sections/intro.json",
+    "icon": {
+      "item": "modernfoundry:sky_slime_ball"
+    }
+  },
+  {
+    "name": "gadgets",
+    "data": "sections/gadgets.json",
+    "icon": {
+      "item": "modernfoundry:flint_shuriken"
+    }
+  },
+  {
+    "name": "exploration",
+    "data": "sections/exploration.json",
+    "icon": {
+      "item": "modernfoundry:sky_slime_sapling"
+    }
+  }
+]

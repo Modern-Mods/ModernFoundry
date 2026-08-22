@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "shroomite_ingot",
+  "ingredient": {
+    "item": "modernfoundry:shroomite_compound"
+  },
+  "result": "modernfoundry:shroomite_ingot",
+  "experience": 1.2,
+  "cookingtime": 100
+}

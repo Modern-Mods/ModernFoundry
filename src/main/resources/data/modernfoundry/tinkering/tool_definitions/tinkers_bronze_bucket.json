@@ -1,0 +1,33 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:tank_capacity": 8.0
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "upgrades": 4,
+        "abilities": 1
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "name": "modernfoundry:bucketing"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:circle_aoe",
+      "3D": false,
+      "diameter": 1
+    },
+    {
+      "type": "modernfoundry:dual_option_interaction"
+    }
+  ]
+}

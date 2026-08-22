@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:drying_rack",
+  "ingredient": [
+    {
+      "item": "minecraft:beef"
+    }
+  ],
+  "output": {
+    "item": "modernfoundry:beef_jerky"
+  }
+}

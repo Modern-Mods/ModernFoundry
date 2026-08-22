@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:electrical_steel_block" },
+  "result": {
+    "fluid": "modernfoundry:molten_electrical_steel",
+    "amount": 810
+  },
+  "temperature": 900,
+  "time": 200
+}

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "item": "modernfoundry:bacon"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "tag": "forge:molten_ardite",
+    "amount": 180
+  },
+  "result": "modernfoundry:bacium",
+  "cooling_time": 200
+}

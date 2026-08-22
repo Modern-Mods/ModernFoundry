@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "condition":  {
+    "type": "neoforge:mod_loaded",
+    "modid": "farmersdelight"
+  },
+  "values": [
+    {
+      "id": "farmersdelight:backstabbing",
+      "required": false
+    }
+  ]
+}

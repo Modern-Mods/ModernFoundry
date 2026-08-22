@@ -1,0 +1,5 @@
+{
+ "default": [
+  { "name": "modernfoundry:deposition", "level": 1 }
+ ]
+}

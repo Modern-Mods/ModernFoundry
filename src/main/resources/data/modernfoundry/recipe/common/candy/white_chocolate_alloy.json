@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "fluid": "modernfoundry:molten_black_chocolate",   "amount":  500 },
+    { "tag": "forge:milk", "amount":  250 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:molten_white_chocolate",
+    "amount": 450
+  },
+  "temperature": 80
+}

@@ -1,0 +1,76 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff",
+  "textures": {
+    "low":            "modernfoundry:item/tool/quartz_staff/low",
+    "high":           "modernfoundry:item/tool/quartz_staff/high",
+    "grip":           "modernfoundry:item/tool/quartz_staff/grip",
+    "crystal":        "modernfoundry:item/tool/quartz_staff/crystal",
+    
+    "large_low":            "modernfoundry:item/tool/quartz_staff/large/low",
+    "large_high":           "modernfoundry:item/tool/quartz_staff/large/high",
+    "large_grip":           "modernfoundry:item/tool/quartz_staff/large/grip",
+    "large_crystal":        "modernfoundry:item/tool/quartz_staff/large/crystal"
+  },
+  "large": true,
+  "modifier_roots": {
+    "small": [ "modernfoundry:item/tool/quartz_staff/modifiers/" ],
+    "large": [ "modernfoundry:item/tool/quartz_staff/large_modifiers/" ]
+  },
+  "parts": [
+    { "name": "low",      "index": 0 },
+    { "name": "high",     "index": 1 },
+    { "name": "grip",     "index": 2 },
+    { "name": "crystal" }
+  ],
+  "overrides": [
+    {
+      "predicate": { "modernfoundry:charging": 1 },
+      "model": "modernfoundry:item/staff/quartz/charging_1"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.4 },
+      "model": "modernfoundry:item/staff/quartz/charging_2"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.7 },
+      "model": "modernfoundry:item/staff/quartz/charging_3"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.9 },
+      "model": "modernfoundry:item/staff/quartz/charging_4"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 1.0 },
+      "model": "modernfoundry:item/staff/quartz/charging_5"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2 },
+      "model": "modernfoundry:item/staff/quartz/blocking"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.05 },
+      "model": "modernfoundry:item/staff/quartz/blocking_1"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.4 },
+      "model": "modernfoundry:item/staff/quartz/blocking_2"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.7 },
+      "model": "modernfoundry:item/staff/quartz/blocking_3"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.9 },
+      "model": "modernfoundry:item/staff/quartz/blocking_4"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 1.0 },
+      "model": "modernfoundry:item/staff/quartz/blocking_5"
+    },
+   {
+      "predicate": { "modernfoundry:broken": 1  },
+      "model": "modernfoundry:item/broken/quartz_staff"
+    }
+  ]
+}

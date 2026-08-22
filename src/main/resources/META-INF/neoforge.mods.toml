@@ -7,6 +7,9 @@ license="MIT"
 [[mixins]]
 config="modernfoundry.mixins.json"
 
+[[mixins]]
+config="modernfoundry_thinking.mixins.json"
+
 [[mods]]
     modId="modernfoundry"
     version="${version}"

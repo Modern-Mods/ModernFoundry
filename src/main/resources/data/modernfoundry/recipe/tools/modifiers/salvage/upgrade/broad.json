@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "modifier": "modernfoundry:broad",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "modernfoundry:modifiable/shields"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:melting",
+  "rate": "metal",
+  "ingredient": {
+    "item": "modernfoundry:lightite_compound"
+  },
+  "result": {
+    "fluid": "modernfoundry:molten_lightite",
+    "amount": 120
+  },
+  "temperature": 450,
+  "time": 20
+}

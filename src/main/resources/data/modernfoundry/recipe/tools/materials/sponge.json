@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "minecraft:sponge"
+  },
+  "value": 1,
+  "needed": 2,
+  "material": "modernfoundry:sponge"
+}

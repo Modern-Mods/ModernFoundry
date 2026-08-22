@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "modernfoundry:cobalt_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": { "#": { "item": "modernfoundry:lightite_ingot" }},
+  "result": {
+    "item": "modernfoundry:lightite_block"
+  }
+}

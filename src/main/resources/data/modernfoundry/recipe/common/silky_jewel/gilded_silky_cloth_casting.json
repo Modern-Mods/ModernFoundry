@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": { "item": "modernfoundry:silky_cloth" },
+  "cast_consumed": true,
+  "fluid": {
+    "tag": "forge:molten_gold",
+    "amount": 720
+  },
+  "result": "modernfoundry:gilded_silky_cloth",
+  "cooling_time": 140
+}

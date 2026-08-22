@@ -1,0 +1,8 @@
+{
+  "type": "modernfoundry:table_casting_material",
+  "cast": {
+    "tag": "modernfoundry:casts/multi_use/guard"
+  },
+  "item_cost": 2,
+  "result": "modernfoundry:guard"
+}

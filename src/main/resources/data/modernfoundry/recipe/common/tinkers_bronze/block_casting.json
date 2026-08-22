@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "fluid": {
+    "fluid": "modernfoundry:molten_tinkers_bronze",
+    "amount": 810
+  },
+  "result": "modernfoundry:tinkers_bronze_block",
+  "cooling_time": 165
+}

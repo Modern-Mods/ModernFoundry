@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "modernfoundry:warden_steel",
+  "temperature": 1100,
+  "result": {
+    "fluid": "modernfoundry:molten_warden_steel",
+    "amount": 90
+  }
+}

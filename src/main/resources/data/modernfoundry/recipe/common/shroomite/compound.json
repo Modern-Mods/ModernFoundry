@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [
+
+{
+ "item": "modernfoundry:chlorophyll_b"
+},
+{
+ "item": "minecraft:warped_fungus"
+},
+{
+ "item": "minecraft:glow_ink_sac"
+}
+],
+  "result": {
+    "item": "modernfoundry:shroomite_compound"
+  }
+}

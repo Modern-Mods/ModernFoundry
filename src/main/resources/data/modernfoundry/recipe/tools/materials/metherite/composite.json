@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "input": "modernfoundry:gold",
+  "fluid": {
+    "fluid": "modernfoundry:molten_obsidian",
+    "amount": 500
+  },
+  "temperature": 850,
+  "output": "modernfoundry:metherite"
+}

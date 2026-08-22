@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "modernfoundry:crossbow",
+    "modernfoundry:repeating_crossbow",
+    {
+      "id": "tinkers_things:blowpipe",
+      "required": false
+    }
+  ]
+}

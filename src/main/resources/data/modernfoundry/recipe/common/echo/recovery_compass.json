@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:melting",
+  "byproducts": [
+    {
+      "amount": 360,
+      "fluid": "modernfoundry:molten_iron"
+    }
+  ],
+  "ingredient": {
+    "item": "minecraft:recovery_compass"
+  },
+  "result": {
+    "amount": 800,
+    "fluid": "modernfoundry:molten_echo"
+  },
+  "temperature": 50,
+  "time": 87
+}

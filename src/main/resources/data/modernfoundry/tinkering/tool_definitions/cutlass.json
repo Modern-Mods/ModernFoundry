@@ -1,0 +1,73 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:material_stats",
+      "primary_part": 0,
+      "stat_types": [
+        "modernfoundry:head",
+        "modernfoundry:shield_core",
+        "modernfoundry:handle"
+      ]
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:ancient"
+        },
+        {
+          "type": "modernfoundry:ancient"
+        },
+        {
+          "type": "modernfoundry:ancient"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_traits",
+      "hooks": [
+        "modernfoundry:rebalanced_trait"
+      ],
+      "material_index": 2,
+      "stat_type": "modernfoundry:handle"
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:block_amount": 40.0,
+        "modernfoundry:block_angle": 60.0,
+        "modernfoundry:attack_damage": 3.0,
+        "modernfoundry:attack_speed": 0.7,
+        "modernfoundry:use_item_speed": 0.1
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:durability": 0.9,
+        "modernfoundry:attack_damage": 1.2
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 3
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "name": "modernfoundry:counter_attack"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "sword_dig"
+      ]
+    }
+  ]
+}

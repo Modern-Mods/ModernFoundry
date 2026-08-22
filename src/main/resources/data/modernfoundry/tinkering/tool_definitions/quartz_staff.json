@@ -1,0 +1,70 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        {
+          "item": "modernfoundry:tough_handle",
+          "scale": 0.5
+        },
+        {
+          "item": "modernfoundry:tough_handle",
+          "scale": 0.5
+        },
+        "modernfoundry:large_plate"
+       ],
+         "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:durability": 125.0,
+        "modernfoundry:block_amount": 17.5,
+        "modernfoundry:use_item_speed": 0.4,
+        "modernfoundry:attack_damage": 1.5,
+        "modernfoundry:attack_speed": 1.8
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "upgrades": 3,
+        "abilities": 2
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "name": "modernfoundry:targeted",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:circle_aoe",
+      "3D": false,
+      "diameter": 1
+    },
+    {
+      "type": "modernfoundry:dual_option_interaction"
+    }
+  ]
+}

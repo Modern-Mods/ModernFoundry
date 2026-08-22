@@ -42,6 +42,10 @@ import modernmods.modernfoundry.tools.network.YoyoCollectedDropsPacket;
 import modernmods.modernfoundry.tools.network.YoyoHandSyncPacket;
 import modernmods.modernfoundry.tools.network.YoyoToggleAttackPacket;
 import modernmods.modernfoundry.tools.network.YoyoToggleEnchantmentPacket;
+import modernmods.modernfoundry.thinking.common.networking.packet.packet.ItemStackSyncS2CPacket;
+import modernmods.modernfoundry.integrations.network.ArsElementalSetData;
+import modernmods.modernfoundry.integrations.network.BotaniaSetData;
+import modernmods.modernfoundry.integrations.network.LaunchGhostSword;
 
 import javax.annotation.Nullable;
 
@@ -117,6 +121,10 @@ public class TinkerNetwork extends NetworkWrapper {
     instance.registerPacket(YoyoHandSyncPacket.class, YoyoHandSyncPacket::new, PacketDirection.PLAY_TO_CLIENT);
     instance.registerPacket(YoyoToggleAttackPacket.class, YoyoToggleAttackPacket::new, PacketDirection.PLAY_TO_SERVER);
     instance.registerPacket(YoyoToggleEnchantmentPacket.class, YoyoToggleEnchantmentPacket::new, PacketDirection.PLAY_TO_SERVER);
+    instance.registerPacket(ItemStackSyncS2CPacket.class, ItemStackSyncS2CPacket::new, PacketDirection.PLAY_TO_CLIENT);
+    instance.registerPacket(ArsElementalSetData.class, ArsElementalSetData::new, PacketDirection.PLAY_TO_CLIENT);
+    instance.registerPacket(BotaniaSetData.class, BotaniaSetData::new, PacketDirection.PLAY_TO_CLIENT);
+    instance.registerPacket(LaunchGhostSword.class, LaunchGhostSword::new, PacketDirection.PLAY_TO_SERVER);
 
     // smeltery
     instance.registerPacket(FluidUpdatePacket.class, FluidUpdatePacket::new, PacketDirection.PLAY_TO_CLIENT);

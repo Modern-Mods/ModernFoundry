@@ -1,0 +1,22 @@
+{
+  "perStat": {
+    "modernfoundry:arrow_head": [
+      {
+        "name": "modernfoundry:riding_shoot"
+      }
+    ],
+    "modernfoundry:melee_harvest": [
+      {
+        "name": "modernfoundry:overdose"
+      },
+      { 
+        "name": "modernfoundry:overslime"
+      }
+    ],
+    "modernfoundry:shield_core": [
+      {
+        "name": "modernfoundry:spiky"
+      }
+    ]
+  }
+}

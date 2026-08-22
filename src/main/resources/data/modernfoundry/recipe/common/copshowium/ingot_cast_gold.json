@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "crossroads"
+    }
+  ],
+  "type": "modernfoundry:casting_table",
+  "cast": { "tag": "modernfoundry:casts/multi_use/ingot" },
+  "cast_consumed": false,
+  "fluid": {
+    "fluid": "crossroads:molten_copshowium",
+    "amount": 90
+  },
+  "result": {
+    "item": "crossroads:ingot_copshowium"
+  },
+  "cooling_time": 110
+}

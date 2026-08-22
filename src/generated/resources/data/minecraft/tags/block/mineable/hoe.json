@@ -1,10 +1,13 @@
 {
-  "values": [
-    "modernfoundry:earth_slime_leaves",
-    "modernfoundry:sky_slime_leaves",
-    "modernfoundry:ichor_slime_leaves",
-    "modernfoundry:ender_slime_leaves",
-    "modernfoundry:blood_slime_leaves"
-  ]
+    "values":  [
+                   "modernfoundry:earth_slime_leaves",
+                   "modernfoundry:sky_slime_leaves",
+                   "modernfoundry:ichor_slime_leaves",
+                   "modernfoundry:ender_slime_leaves",
+                   "modernfoundry:blood_slime_leaves",
+                   "modernfoundry:echo_bronze_block",
+                   "modernfoundry:waste_fluid_cylinder",
+                   "modernfoundry:warden_steel_block",
+                   "modernfoundry:soul_vine"
+               ]
 }
-

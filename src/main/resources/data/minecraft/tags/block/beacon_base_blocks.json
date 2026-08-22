@@ -1,0 +1,14 @@
+{
+  "values": [
+    "modernfoundry:ardite_block",
+    "modernfoundry:lightite_block",
+    "modernfoundry:chlorophyte_block",
+    "modernfoundry:spectre_block",
+    "modernfoundry:shroomite_block",
+    "modernfoundry:electrical_steel_block",
+    "modernfoundry:warden_steel_block",
+    "modernfoundry:zith_block",
+    "modernfoundry:shimmerslime_block",
+    "modernfoundry:adamantium_block"
+  ]
+}

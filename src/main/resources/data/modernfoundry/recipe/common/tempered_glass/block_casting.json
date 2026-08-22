@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "cooling_time": 130,
+  "fluid": {
+    "amount": 1000,
+    "fluid": "modernfoundry:molten_tempered_glass"
+  },
+  "result": "modernfoundry:tempered_glass"
+}

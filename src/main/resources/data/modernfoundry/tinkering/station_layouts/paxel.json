@@ -1,0 +1,37 @@
+{
+  "translation_key": "item.modernfoundry.paxel",
+  "icon": {
+    "item": "modernfoundry:paxel",
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+  },
+  "sortIndex": 6,
+  "input_slots": [
+     {
+      "icon": "modernfoundry:small_axe_head",
+      "translation_key": "item.modernfoundry.small_axe_head",
+      "x": 31,
+      "y": 22,
+      "filter": {
+        "item": "modernfoundry:small_axe_head"
+      }
+    },
+    {
+      "icon": "modernfoundry:tool_handle",
+      "translation_key": "item.modernfoundry.tool_handle",
+      "x": 22,
+      "y": 52,
+      "filter": {
+        "item": "modernfoundry:tool_handle"
+      }
+    },  
+    {
+      "icon": "modernfoundry:pick_head",
+      "translation_key": "item.modernfoundry.pick_head",
+      "x": 52,
+      "y": 42,
+      "filter": {
+        "item": "modernfoundry:pick_head"
+      }
+    }
+  ]
+}

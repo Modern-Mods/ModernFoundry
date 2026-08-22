@@ -1,0 +1,15 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_melee_damage",
+      "each_level": 2.0,
+      "percent": false,
+      "target":  {  
+      "type": "hilt:inverted",
+      "inverted_type": "hilt:fire_immune"    
+     }
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:shroomite_ingot" }],
+  "result": {
+    "item": "modernfoundry:shroomite_nugget",
+    "count": 9
+  }
+}

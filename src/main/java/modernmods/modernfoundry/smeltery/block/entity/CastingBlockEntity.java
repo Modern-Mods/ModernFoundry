@@ -37,6 +37,7 @@ import modernmods.hilt.recipe.helper.RecipeHelper;
 import modernmods.hilt.util.BlockEntityHelper;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.Sounds;
+import modernmods.modernfoundry.thinking.data.ModTags;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
 import modernmods.modernfoundry.library.recipe.TinkerRecipeTypes;
@@ -285,7 +286,7 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
     // fully filled
     FluidStack currentFluid = tank.getFluid();
     if (coolingTime >= 0) {
-      timer++;
+      timer += hasFastCoolingBlock(level, pos) ? 2 : 1;
       if (timer >= coolingTime) {
         if (!currentRecipe.value().matches(castingInventory, level)) {
           // if lost our recipe or the recipe needs more fluid then we have, we are done
@@ -335,11 +336,18 @@ public abstract class CastingBlockEntity extends TableBlockEntity implements Wor
     // fully filled
     FluidStack currentFluid = tank.getFluid();
     if (currentFluid.getAmount() >= tank.getCapacity() && !currentFluid.isEmpty()) {
-      timer++;
+      timer += hasFastCoolingBlock(level, pos) ? 2 : 1;
       if (level.random.nextFloat() > 0.9f) {
         level.addParticle(ParticleTypes.SMOKE, pos.getX() + level.random.nextDouble(), pos.getY() + 1.1d, pos.getZ() + level.random.nextDouble(), 0.0D, 0.0D, 0.0D);
       }
     }
+  }
+
+  private static boolean hasFastCoolingBlock(Level level, BlockPos pos) {
+    return level.getBlockState(pos.east()).is(ModTags.Blocks.cooling_fast)
+      || level.getBlockState(pos.west()).is(ModTags.Blocks.cooling_fast)
+      || level.getBlockState(pos.south()).is(ModTags.Blocks.cooling_fast)
+      || level.getBlockState(pos.north()).is(ModTags.Blocks.cooling_fast);
   }
 
   @Nullable

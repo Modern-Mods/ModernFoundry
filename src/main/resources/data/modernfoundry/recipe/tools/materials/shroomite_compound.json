@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "modernfoundry:shroomite_compound"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "modernfoundry:shroomite_compound"
+}

@@ -1,0 +1,33 @@
+{
+  "perStat": {
+    "modernfoundry:arrow_head": [
+      {
+        "name": "modernfoundry:frozen"
+      }
+    ],
+    "modernfoundry:melee_harvest": [
+      {
+        "name": "modernfoundry:overfreeze"
+      },
+      {
+        "name": "modernfoundry:overslime"
+      }
+    ],
+    "modernfoundry:armor": [
+      {
+        "name": "modernfoundry:overfreeze"
+      },
+      {
+        "name": "modernfoundry:overslime"
+      }
+    ],
+    "modernfoundry:plating_shield": [
+      {
+        "name": "modernfoundry:overfreeze"
+      },
+      {
+        "name": "modernfoundry:overslime"
+      }
+    ]
+  }
+}

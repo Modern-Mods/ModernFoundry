@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:molten_beetron",
+    "amount": 90
+  },
+  "temperature": 400,
+  "output": "modernfoundry:beetron"
+}

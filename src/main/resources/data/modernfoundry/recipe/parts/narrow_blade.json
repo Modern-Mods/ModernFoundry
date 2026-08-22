@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:part_builder",
+  "pattern": "modernfoundry:narrow_blade",
+  "pattern_item": [
+    { "tag": "modernfoundry:patterns/default" },
+    { "item": "modernfoundry:narrow_blade_cast" }
+  ],
+  "cost": 1,
+  "result": { "item": "modernfoundry:narrow_blade" }
+}

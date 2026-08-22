@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "rate": "metal",
+  "ingredient": {
+    "item": "modernfoundry:raw_ardite"
+  },
+  "result": {
+    "fluid": "modernfoundry:molten_ardite",
+    "amount": 90
+  },
+  "temperature": 950,
+  "time": 22,
+  "byproducts": [
+    {
+      "fluid": "modernfoundry:molten_gold",
+      "amount": 30
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "stats": {
+    "modernfoundry:binding": {},
+    "modernfoundry:handle": {
+      "durability": -0.05,
+      "mining_speed": -0.05,
+      "melee_speed": 0.05,
+      "melee_damage": -0.2
+    },
+    "modernfoundry:head": {
+      "durability": 750,
+      "miningSpeed": 3.0,
+      "mining_tier": "minecraft:wood",
+      "melee_attack": 0.25
+    }
+  }
+}

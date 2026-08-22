@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "forge:molten_copper",   "amount":   90 },
+    { "tag": "forge:molten_ardite",   "amount":   90 },
+    { "fluid": "modernfoundry:molten_echo",   "amount":   100}
+  ],
+  "result": {
+    "fluid": "modernfoundry:emptiness",
+    "amount": 200
+  },
+  "temperature": 1100
+}

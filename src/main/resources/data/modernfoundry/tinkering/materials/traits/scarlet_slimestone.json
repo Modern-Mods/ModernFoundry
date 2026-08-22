@@ -1,0 +1,6 @@
+{
+ "default": [
+  { "name": "modernfoundry:overslime", "level": 1 },
+  { "name": "modernfoundry:overdisintegrate", "level": 1 }
+ ]
+}

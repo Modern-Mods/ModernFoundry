@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cooling_time": 65,
+  "fluid": {
+    "amount": 250,
+    "fluid": "modernfoundry:molten_tempered_glass"
+  },
+  "result": "modernfoundry:tempered_glass_pane"
+}

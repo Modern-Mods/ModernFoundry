@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "tools": {
+    "item": "modernfoundry:melting_pan"
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "modifier": "modernfoundry:melt_advanced"
+}

@@ -1,0 +1,24 @@
+{
+  "condition":  {
+    "type": "neoforge:mod_loaded",
+    "modid": "tinkers_ingenuity"
+  },
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "tinkers_ingenuity:curio_attribute_adder",
+      "amount": 0.25,
+      "attribute": "modernfoundry:player.use_item_speed",
+      "name": "modernfoundry:lightly_speed",
+      "operation": "multiply_base"
+    },
+    {
+      "type": "tinkers_ingenuity:curio_attribute_adder",
+      "amount": -0.1,
+      "attribute": "forge:entity_gravity",
+      "name": "modernfoundry:lightly_speed",
+      "operation": "multiply_total"
+    }
+  ],
+  "tooltip_display": "always"
+}

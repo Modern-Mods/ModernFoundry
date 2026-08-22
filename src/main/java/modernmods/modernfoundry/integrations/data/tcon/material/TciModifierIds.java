@@ -1,0 +1,32 @@
+package modernmods.modernfoundry.integrations.data.tcon.material;
+
+import modernmods.modernfoundry.TConstruct;
+
+import modernmods.modernfoundry.library.modifiers.ModifierId;
+
+
+public class TciModifierIds {
+
+    public static final ModifierId mana = id("mana");
+    public static final ModifierId livingwood = id("livingwood");
+    public static final ModifierId moderate = id("moderate");
+    public static final ModifierId waterPowered = id("water_powered");
+    public static final ModifierId soulStained = id("soul_stained");
+    public static final ModifierId masticate = id("masticate");
+    public static final ModifierId oxygenated = id("oxygenated");
+    public static final ModifierId hellish = id("hellish");
+    public static final ModifierId kinetic = id("kinetic");
+    public static final ModifierId engineersGoggles = id("engineers_goggles");
+    public static final ModifierId multiVision = id("multivision");
+    public static final ModifierId dragonScales = id("dragonscales");
+    public static final ModifierId flamed = id("flamed");
+    public static final ModifierId iced = id("iced");
+    public static final ModifierId zapped = id("zapped");
+
+    private TciModifierIds() {}
+
+    private static ModifierId id(String name) {
+        return new ModifierId(TConstruct.MOD_ID, name);
+    }
+
+}

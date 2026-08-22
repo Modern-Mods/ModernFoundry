@@ -1,0 +1,7 @@
+{
+    "parent": "modernfoundry:block/platform/bottom",
+	"textures": {
+		"side": "modernfoundry:block/platform/ardite_side",
+		"top":  "modernfoundry:block/platform/ardite_top"
+	}
+}

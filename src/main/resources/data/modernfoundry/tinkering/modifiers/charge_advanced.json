@@ -1,0 +1,29 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_stat",
+      "formula": [
+        "$charge",
+        0.04,
+        "*",
+        "$level",
+        "*",
+        "$multiplier",
+        "*",
+        "$value",
+        "+"
+      ],
+      "percent": false,
+      "stat": "modernfoundry:projectile_damage",
+      "variables": {
+        "charge": {
+          "type": "modernfoundry:mod_data",
+          "key": "modernfoundry:war_charge",
+          "source": "persistent"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

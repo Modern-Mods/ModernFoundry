@@ -1,0 +1,6 @@
+{
+ "default": [
+   { "name": "modernfoundry:overcharge"},
+   {"name": "modernfoundry:overslime"}
+ ]
+}

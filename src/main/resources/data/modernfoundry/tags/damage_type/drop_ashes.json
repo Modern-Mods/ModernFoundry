@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:freeze",
+    "minecraft:drown",
+    "modernfoundry:fluid_cold_melee",
+    "modernfoundry:fluid_cold_ranged",
+    "modernfoundry:water_melee",
+    "modernfoundry:water_ranged"
+  ]
+}

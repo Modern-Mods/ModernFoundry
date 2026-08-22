@@ -1,0 +1,28 @@
+{
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "tag": "forge:ingots/shroomite"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "tag": "forge:ingots/shroomite"
+    },
+    {
+      "item": "modernfoundry:surging_wellspring"
+    },
+    {
+      "item": "modernfoundry:surging_wellspring"
+    }
+  ],
+  "tools": {
+    "item": "modernfoundry:cutlass"
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "allow_crystal": true,
+  "result": "modernfoundry:counter_advanced"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "tools": {
+    "item": "modernfoundry:mace"
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "modifier": "modernfoundry:density_advanced"
+}

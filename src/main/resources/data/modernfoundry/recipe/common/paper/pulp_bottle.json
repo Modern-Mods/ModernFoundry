@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [
+    {
+      "tag": "modernfoundry:pulp_ingredient"
+    },
+    {
+      "type": "forge:partial_nbt",
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:water\"}"
+    }
+],
+  "result": {
+    "item": "modernfoundry:pulp_bottle"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:drying_rack",
+  "ingredient": [
+    {
+      "item": "minecraft:magma_cream"
+    }
+  ],
+  "output": {
+    "item": "modernfoundry:magma_slime_drop"
+  }
+}

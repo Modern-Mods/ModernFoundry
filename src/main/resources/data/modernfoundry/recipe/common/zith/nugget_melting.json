@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/zith" },
+  "result": {
+    "fluid": "modernfoundry:molten_zith",
+    "amount": 10
+  },
+  "temperature": 1500,
+  "time": 27
+}

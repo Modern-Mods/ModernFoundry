@@ -1,0 +1,23 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.4,
+      "operation": "multiply_base",
+      "stat": "modernfoundry:accuracy"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "flat": 0.4,
+      "operation": "multiply_base",
+      "stat": "modernfoundry:draw_speed"
+    },
+    {
+      "type": "modernfoundry:bide_time",
+      "_comment": "Cooling time(ticks)",
+      "each_level": 100
+    }
+  ],
+  "tooltip_display": "always"
+}

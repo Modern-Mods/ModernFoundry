@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "modernfoundry:zith",
+  "temperature": 1500,
+  "result": {
+    "fluid": "modernfoundry:molten_zith",
+    "amount": 90
+  }
+}

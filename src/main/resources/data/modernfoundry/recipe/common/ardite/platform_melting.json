@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": {
+    "item": "modernfoundry:ardite_platform"
+  },
+  "result": {
+    "fluid": "modernfoundry:molten_ardite",
+    "amount": 100
+  },
+  "temperature": 950,
+  "time": 68
+}

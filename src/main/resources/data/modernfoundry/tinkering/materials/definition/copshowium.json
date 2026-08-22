@@ -1,0 +1,19 @@
+{
+  "condition": {
+    "type": "neoforge:or",
+    "values": [
+      {
+        "type": "modernfoundry:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "neoforge:mod_loaded",
+        "modid": "crossroads"
+      }
+    ]
+  },
+  "craftable": false,
+  "tier": 4,
+  "sortOrder": 5,
+  "hidden": false
+}

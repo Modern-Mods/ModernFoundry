@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:spectre_block" },
+  "result": {
+    "fluid": "modernfoundry:molten_spectre",
+    "amount": 810
+  },
+  "temperature": 600,
+  "time": 40
+}

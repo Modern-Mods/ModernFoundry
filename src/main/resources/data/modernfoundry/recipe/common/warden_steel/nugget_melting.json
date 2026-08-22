@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/warden_steel" },
+  "result": {
+    "fluid": "modernfoundry:molten_warden_steel",
+    "amount": 10
+  },
+  "temperature": 1100,
+  "time": 4
+}

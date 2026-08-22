@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:ashes" },
+  "result": {
+    "fluid": "modernfoundry:reburn_ashes",
+    "amount": 25
+  },
+  "temperature": 1500,
+  "time": 200
+}

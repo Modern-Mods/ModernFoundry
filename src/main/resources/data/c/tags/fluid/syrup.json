@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#modernfoundry:syrup",
+    {
+      "id": "thermal:syrup",
+      "required": false
+    }
+  ]
+}

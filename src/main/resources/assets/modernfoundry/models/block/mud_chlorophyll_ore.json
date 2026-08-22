@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "modernfoundry:block/mud_chlorophyll_ore"
+    }
+}

@@ -1,0 +1,63 @@
+{
+  "_comment": "From Tinker's Calibration by jamesdsj",
+  "fallbacks": [
+    "metal"
+  ],
+  "color": "5A575A",
+  "luminosity": 0,
+  "generator": {
+    "transformer": {
+      "type": "modernfoundry:recolor_sprite",
+      "color_mapping": {
+        "type": "modernfoundry:grey_to_color",
+        "palette": [
+          {
+            "grey": 0,
+            "color": "FF000000"
+          },
+          {
+            "grey": 63,
+            "color": "FF271C1D"
+          },
+          {
+            "grey": 102,
+            "color": "FF3C3232"
+          },
+          {
+            "grey": 140,
+            "color": "FF4C4143"
+          },
+          {
+            "grey": 178,
+            "color": "FF4D494D"
+          },
+          {
+            "grey": 216,
+            "color": "FF737173"
+          },
+          {
+            "grey": 255,
+            "color": "FF918F91"
+          }
+        ]
+      }
+    },
+    "supportedStats": [
+      "modernfoundry:head",
+      "modernfoundry:handle",
+      "modernfoundry:binding",
+      "modernfoundry:repair_kit",
+      "modernfoundry:armor_plating",
+      "modernfoundry:plating_boots",
+      "modernfoundry:plating_leggings",
+      "modernfoundry:plating_chestplate",
+      "modernfoundry:plating_helmet",
+      "modernfoundry:plating_shield",
+      "modernfoundry:maille",
+      "modernfoundry:armor_maille",
+      "modernfoundry:limb",
+      "modernfoundry:grip"
+    ],
+    "ignoreMaterialStats": false
+  }
+}

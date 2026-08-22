@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:echo_bronze_ingot" }],
+  "result": {
+    "item": "modernfoundry:echo_bronze_nugget",
+    "count": 9
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:roving_arrow" },
+  "result": {
+    "fluid": "modernfoundry:molten_lightite",
+    "amount": 10
+  },
+  "temperature": 450,
+  "time": 10
+}

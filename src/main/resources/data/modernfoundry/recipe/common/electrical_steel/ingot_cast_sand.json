@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": { "tag": "modernfoundry:casts/single_use/ingot" },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "modernfoundry:molten_electrical_steel",
+    "amount": 90
+  },
+  "result": "modernfoundry:electrical_steel_ingot",
+  "cooling_time": 100
+}

@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:drying_rack",
+  "ingredient": [
+    {
+      "item": "minecraft:rotten_flesh"
+    }
+  ],
+  "output": {
+    "item": "modernfoundry:rotten_flesh_jerky"
+  }
+}

@@ -270,5 +270,11 @@
       }
     ],
     "subtitle": "entity.yoyo.throw.subtitle"
+  },
+  "damage_blocking": {
+    "sounds": [
+      "modernfoundry:damage_blocking"
+    ],
+    "subtitle": "subtitles.modernfoundry.damage_blocking"
   }
 }

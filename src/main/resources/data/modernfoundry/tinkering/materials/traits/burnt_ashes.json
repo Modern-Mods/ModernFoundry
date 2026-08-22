@@ -1,0 +1,28 @@
+{
+  "perStat": {
+    "modernfoundry:ranged": [
+      {
+        "name": "modernfoundry:burning_out",
+        "level": 1
+      }
+    ],
+    "modernfoundry:melee_harvest": [
+      {
+        "name": "modernfoundry:burning_out",
+        "level": 1
+      }
+    ],
+    "modernfoundry:armor": [
+      {
+        "name": "modernfoundry:reburning",
+        "level": 1
+      }
+    ],
+    "modernfoundry:plating_shield": [
+      {
+        "level": 1,
+        "name": "modernfoundry:reburning"
+      }
+    ]
+  }
+}

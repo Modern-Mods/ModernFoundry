@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "modernfoundry:zith_block",
+    "modernfoundry:zith_ore",
+    "modernfoundry:raw_zith_block",
+    "modernfoundry:zith_platform"
+  ]
+}

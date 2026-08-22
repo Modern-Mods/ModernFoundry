@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "modid": "tinkers_ingenious",
+      "type": "neoforge:mod_loaded"
+    }
+  ],
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "hilt:water",   "amount":   100 },
+    { "tag": "forge:sculk_gene", "amount":  45 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:molten_echo",
+    "amount": 100
+  },
+  "temperature": 50
+}

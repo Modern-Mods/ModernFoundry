@@ -1448,6 +1448,39 @@
 - Manual validation: Prism/fresh-world JEI search, creative-tab display, crafting, Anvil enchantment application, throwing/retraction, attack/collecting/breaking, first-/third-person rendering, save/reload, dedicated-server tracking, multiplayer sync, and optional-mod smoke remain outstanding.
 - Tests created or run: no dedicated Yoyo tests added.
 
+## 2026-08-21 - Finish native integration registration and release verification
+
+**Prompt / Task**
+- Complete the native 1.21.1 fold-in of `References/TCIntegrations-1.20.1` and `References/Tinkers-Thinking-1.20.1`, translating their Tinkers/Mantle-facing implementation to Modern Foundry/Hilt systems.
+
+**What Changed**
+- Removed Thinking's duplicate `sinistral` static modifier registration; the imported crossbow path already uses Modern Foundry's existing `TinkerModifiers.sinistral` implementation, which is semantically identical.
+- Renamed the Thinking creative-tab display strings to Modern Foundry names and documented the native integration content and MIT/sound attributions in `README.md`.
+
+**Steps Taken**
+- Compared both `SinistralModifier` implementations and traced every runtime/resource reference before editing.
+- Compiled the port, launched the dedicated server, audited the exact JAR for native integration/tool/resource paths, checked the new integration source/resources for stale external namespace identifiers, and reviewed whitespace diagnostics.
+
+**Architecture / Module Ownership**
+- Relevant class/resource changes: `thinking/common/register/ModModifiers.java`, `assets/modernfoundry/lang/en_us.json`, `README.md`, and the required project logs.
+- Owning module/system: Modern Foundry's native modifier registration, translated Thinking registrations, existing Hilt-backed tool/data systems, and optional integration boundaries.
+- Existing logic reused or extracted: `TinkerModifiers.sinistral`; no new registry, compatibility layer, dependency, or parallel modifier implementation was added.
+- Net line change: one duplicate registration removed, two player-facing labels translated, and documentation/log entries appended.
+- New files: none in this final fix.
+- Build files updated: none in this final fix.
+
+**Rationale / Tradeoffs**
+- Keeping one canonical `modernfoundry:sinistral` ID preserves existing recipes, tags, tool serialization, and crossbow behavior without an ID rename or duplicate static state.
+- Reference attribution remains in the player-facing README and copied sound credit file; original source trees remain read-only.
+
+**Build / Validation**
+- Production build: `rtk .\\gradlew.bat clean build --console=plain --no-daemon` passed; existing Java/NeoForge deprecation warnings remain.
+- Tests/checks: Gradle `test`, `check`, and `testJunit` (`NO-SOURCE`) passed; `git diff --check` passed.
+- Dedicated-server smoke: `runServer` reached `Done (5.008s)` after the duplicate registration fix. The dev server still logs unrelated existing data warnings/errors for optional-material yoyo tag entries, the Copshowium recipe, the Quartz Staff layout, and legacy tag conventions; it did not block readiness.
+- Archive validation: `ModernFoundry-1.21.1-4.1.6-NeoForge.jar` contains native `integrations` and `thinking` classes plus the translated tool definitions, layouts, recipes, and models. Final SHA-256: `842ee265194b202585bcc1cd61f5d1967b5973e9681dc1fc7d9305c01a35cd48`.
+- Manual validation: fresh-world feature parity, client visuals, optional-mod combinations, multiplayer synchronization, save/reload, and gameplay smoke remain outstanding.
+- Tests created or run: no dedicated integration tests added.
+
 ## 2026-08-21 - Fix Yoyo tooltips and entity damage
 
 **Prompt / Task**

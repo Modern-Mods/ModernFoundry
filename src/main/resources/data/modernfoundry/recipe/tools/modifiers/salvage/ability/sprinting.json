@@ -1,0 +1,18 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "modifier": "modernfoundry:sprinting",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "type": "forge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/durability"
+      },
+      {
+        "tag": "modernfoundry:modifiable/interactable/right"
+      }
+    ]
+  }
+}

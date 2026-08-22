@@ -1,0 +1,5 @@
+{
+ "default": [
+  { "name": "modernfoundry:magic_transform", "level": 1 }
+ ]
+}

@@ -1,0 +1,52 @@
+{
+  "type": "hilt:add_entry",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/silverfish"
+    },
+    {
+      "condition": "minecraft:killed_by_player"
+    }
+  ],
+  "entry": {
+    "type": "minecraft:item",
+    "name": "modernfoundry:repeating_crossbow"
+  },
+  "functions": [
+    {
+      "function": "modernfoundry:add_tool_data",
+      "materials": [
+        {
+          "type": "modernfoundry:ancient"
+        },
+        {
+          "type": "modernfoundry:ancient"
+        },
+        {
+          "type": "modernfoundry:ancient"
+        }
+      ]
+    },
+    {
+      "add": false,
+      "count": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": -18.0
+      },
+      "function": "minecraft:set_count"
+    },
+    {
+      "count": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 1.0
+      },
+      "function": "minecraft:looting_enchant",
+      "limit": 1
+    }
+  ],
+  "post_conditions": [
+  ]
+}

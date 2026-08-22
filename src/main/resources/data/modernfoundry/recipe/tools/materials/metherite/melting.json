@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:material_melting",
+  "byproducts": [
+    {
+      "tag": "modernfoundry:molten_gold",
+      "amount": 90
+    }
+  ],
+  "input": "modernfoundry:metherite",
+  "temperature": 850,
+  "result": {
+    "fluid": "modernfoundry:molten_obsidian",
+    "amount": 500
+  }
+}

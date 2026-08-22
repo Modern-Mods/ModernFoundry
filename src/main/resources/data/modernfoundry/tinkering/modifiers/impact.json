@@ -1,0 +1,18 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": -0.15,
+      "operation": "multiply_base",
+      "stat": "modernfoundry:velocity"
+    },
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 0.30,
+      "operation": "multiply_base",
+      "stat": "modernfoundry:projectile_damage"
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "forge:honey",   "amount":   250 },
+    { "tag": "hilt:water", "amount":  250 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:syrup",
+    "amount": 300
+  },
+  "temperature": 75
+}

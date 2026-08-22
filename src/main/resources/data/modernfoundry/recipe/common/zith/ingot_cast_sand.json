@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": { "tag": "modernfoundry:casts/single_use/ingot" },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "modernfoundry:molten_zith",
+    "amount": 90
+  },
+  "result": "modernfoundry:zith_ingot",
+  "cooling_time": 80
+}

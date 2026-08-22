@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "modernfoundry:obsidian_bronze",
+  "temperature": 950,
+  "result": {
+    "fluid": "modernfoundry:molten_obsidian_bronze",
+    "amount": 90
+  }
+}

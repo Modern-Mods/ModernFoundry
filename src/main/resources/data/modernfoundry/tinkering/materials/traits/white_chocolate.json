@@ -1,0 +1,10 @@
+{
+  "perStat": {
+    "modernfoundry:melee_harvest": [
+      {
+        "name": "modernfoundry:inspired",
+        "level": 1
+      }
+    ]
+  }
+}

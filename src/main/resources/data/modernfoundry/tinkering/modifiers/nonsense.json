@@ -1,0 +1,17 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:craft_count",
+      "multiplier": {
+        "flat": 3
+      }
+    },
+    {
+      "type": "modernfoundry:nonsense",
+      "_comment": "Chance to discard",
+      "each_level": 0.5
+    }
+  ],
+  "tooltip_display": "always"
+}

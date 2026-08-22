@@ -1,0 +1,10 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:nocturnal",
+      "each_level": 0.35
+    }
+  ],
+  "tooltip_display": "always"
+}

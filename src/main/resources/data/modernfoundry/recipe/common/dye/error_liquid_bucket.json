@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "modernfoundry:venom_bucket"
+    },
+    {
+      "item": "modernfoundry:chromatic_crystal"
+    },
+    {
+      "item": "minecraft:shulker_shell"
+    },
+    {
+      "item": "modernfoundry:dragon_scale"
+    }
+  ],
+  "result": {
+    "item": "modernfoundry:error_liquid_bucket",
+    "count": 1
+  }
+}

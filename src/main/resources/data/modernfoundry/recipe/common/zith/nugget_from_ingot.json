@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:zith_ingot" }],
+  "result": {
+    "item": "modernfoundry:zith_nugget",
+    "count": 9
+  }
+}

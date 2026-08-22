@@ -1,0 +1,48 @@
+{
+  "type": "hilt:add_entry",
+  "conditions": [
+    {
+      "condition": "hilt:block_tag",
+      "tag": "neoforge:ores/chlorophyll"
+    },
+    {
+      "condition": "modernfoundry:has_modifier",
+      "modifier": "modernfoundry:lustrous"
+    }
+  ],
+  "entry": {
+    "type": "hilt:tag_preference",
+    "tag": "forge:nuggets/chlorophyte"
+  },
+  "functions": [
+    {
+      "add": false,
+      "count": {
+        "type": "minecraft:uniform",
+        "max": 4,
+        "min": 2
+      },
+      "function": "minecraft:set_count"
+    },
+    {
+      "formula": "minecraft:ore_drops",
+      "function": "modernfoundry:modifier_bonus",
+      "include_base": false,
+      "modifier": "modernfoundry:lustrous"
+    },
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
+  "post_conditions": [
+    {
+      "type": "hilt:inverted",
+      "condition": {
+        "type": "hilt:contains_item",
+        "ingredient": {
+          "tag": "neoforge:ores/chlorophyll"
+        }
+      }
+    }
+  ]
+}

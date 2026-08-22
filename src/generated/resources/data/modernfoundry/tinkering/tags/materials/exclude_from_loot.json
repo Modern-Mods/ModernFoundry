@@ -1,9 +1,9 @@
 {
-  "values": [
-    "modernfoundry:ancient_hide",
-    {
-      "id": "modernfoundry:fiery",
-      "required": false
-    }
-  ]
+    "values":  [
+                   "modernfoundry:ancient_hide",
+                   {
+                       "id":  "modernfoundry:fiery",
+                       "required":  false
+                   }
+               ]
 }

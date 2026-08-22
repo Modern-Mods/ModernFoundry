@@ -1,13 +1,19 @@
 {
-  "values": [
-    "modernfoundry:overgrowth",
-    "modernfoundry:overcast",
-    "modernfoundry:overburn",
-    "modernfoundry:overlord",
-    "modernfoundry:overshield",
-    "modernfoundry:overwield",
-    "modernfoundry:overforced",
-    "modernfoundry:overslime_friend",
-    "modernfoundry:overworked"
-  ]
+    "values":  [
+                   "modernfoundry:overgrowth",
+                   "modernfoundry:overcast",
+                   "modernfoundry:overburn",
+                   "modernfoundry:overlord",
+                   "modernfoundry:overshield",
+                   "modernfoundry:overwield",
+                   "modernfoundry:overforced",
+                   "modernfoundry:overslime_friend",
+                   "modernfoundry:overworked",
+                   "modernfoundry:overeat",
+                   "modernfoundry:overdose",
+                   "modernfoundry:overfreeze",
+                   "modernfoundry:overdisintegrate",
+                   "modernfoundry:overcharge",
+                   "modernfoundry:overbear"
+               ]
 }

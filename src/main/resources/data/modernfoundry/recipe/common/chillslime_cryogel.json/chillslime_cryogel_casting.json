@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "item": "modernfoundry:ashes"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "modernfoundry:chillslime",
+    "amount": 250
+  },
+  "result": "modernfoundry:chillslime_cryogel",
+  "cooling_time": 150
+}

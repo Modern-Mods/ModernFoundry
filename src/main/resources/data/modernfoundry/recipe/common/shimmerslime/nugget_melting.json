@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/shimmerslime" },
+  "result": {
+    "fluid": "modernfoundry:molten_shimmerslime",
+    "amount": 10
+  },
+  "temperature": 1300,
+  "time": 25
+}

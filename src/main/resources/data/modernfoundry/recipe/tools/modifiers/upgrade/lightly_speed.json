@@ -1,0 +1,16 @@
+{
+  "type": "modernfoundry:incremental_modifier",
+  "input": {
+    "item": "modernfoundry:lightite_reinforcement"
+  },
+  "amount_per_item": 1,
+  "needed_per_level": 5,
+  "tools": {
+    "tag": "modernfoundry:modifiable/held"
+  },
+  "slots": {
+    "upgrades": 1
+  },
+  "allow_crystal": true,
+  "result": "modernfoundry:lightly_speed"
+}

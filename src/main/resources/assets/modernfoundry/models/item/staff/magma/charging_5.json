@@ -1,0 +1,16 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff_charging",
+  "textures": {
+    "tool":         "modernfoundry:item/tool/magma_staff/staff_5",
+    "broken":       "modernfoundry:item/tool/magma_staff/staff_broken",
+    "large_tool":   "modernfoundry:item/tool/magma_staff/staff_large_5",
+    "large_broken": "modernfoundry:item/tool/magma_staff/staff_large_broken"
+  },
+  "large": true,
+  "modifier_roots": {
+    "small": [ "modernfoundry:item/tool/staff/modifiers/earth/5/", "modernfoundry:item/tool/staff/modifiers/earth/", "modernfoundry:item/tool/staff/modifiers/" ],
+    "large": [ "modernfoundry:item/tool/staff/large_modifiers/earth/5/", "modernfoundry:item/tool/staff/large_modifiers/earth/", "modernfoundry:item/tool/staff/large_modifiers/" ]
+  },
+  "first_modifiers": [ "modernfoundry:dyed", "modernfoundry:embellishment" ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "item": "minecraft:cactus"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "tag": "modernfoundry:venom",
+    "amount": 250
+  },
+  "result": "modernfoundry:dusk_chunk",
+  "cooling_time": 30
+}

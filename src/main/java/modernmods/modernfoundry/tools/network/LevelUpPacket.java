@@ -1,13 +1,14 @@
 package modernmods.modernfoundry.tools.network;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import modernmods.hilt.client.SafeClientAccess;
 import modernmods.hilt.network.packet.IThreadsafePacket;
 import modernmods.modernfoundry.common.config.Config;
 
@@ -39,15 +40,15 @@ public class LevelUpPacket implements IThreadsafePacket {
 
   private static class HandleClient {
     private static void handle(LevelUpPacket packet) {
-      Minecraft minecraft = Minecraft.getInstance();
-      if (minecraft.player == null) {
+      Player player = SafeClientAccess.getPlayer();
+      if (player == null) {
         return;
       }
       if (Config.CLIENT.improvableLevelUpMessage.get()) {
-        minecraft.player.displayClientMessage(Component.translatable("message.modernfoundry.level_up",
+        player.displayClientMessage(Component.translatable("message.modernfoundry.level_up",
           packet.toolName, packet.level).withStyle(ChatFormatting.GREEN), false);
       }
-      minecraft.player.playSound(SoundEvents.PLAYER_LEVELUP, 1.0F, 1.0F);
+      player.playSound(SoundEvents.PLAYER_LEVELUP, 1.0F, 1.0F);
     }
   }
 }

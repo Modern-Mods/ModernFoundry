@@ -1,22 +1,27 @@
 {
-  "values": [
-    "modernfoundry:iron_platform",
-    "#modernfoundry:copper_platforms",
-    "modernfoundry:earth_slime_dirt",
-    "modernfoundry:earth_earth_slime_grass",
-    "modernfoundry:sky_earth_slime_grass",
-    "modernfoundry:blood_earth_slime_grass",
-    "modernfoundry:earth_sky_slime_grass",
-    "modernfoundry:earth_vanilla_slime_grass",
-    "modernfoundry:greenheart_log",
-    "modernfoundry:greenheart_wood",
-    "modernfoundry:seared_drain",
-    "modernfoundry:seared_chute",
-    "modernfoundry:smeltery_controller",
-    "modernfoundry:seared_fluid_cannon",
-    "modernfoundry:copper_gauge",
-    "modernfoundry:cast_chest",
-    "modernfoundry:seared_fuel_tank",
-    "modernfoundry:seared_melter"
-  ]
+    "values":  [
+                   "modernfoundry:iron_platform",
+                   "#modernfoundry:copper_platforms",
+                   "modernfoundry:earth_slime_dirt",
+                   "modernfoundry:earth_earth_slime_grass",
+                   "modernfoundry:sky_earth_slime_grass",
+                   "modernfoundry:blood_earth_slime_grass",
+                   "modernfoundry:earth_sky_slime_grass",
+                   "modernfoundry:earth_vanilla_slime_grass",
+                   "modernfoundry:greenheart_log",
+                   "modernfoundry:greenheart_wood",
+                   "modernfoundry:seared_drain",
+                   "modernfoundry:seared_chute",
+                   "modernfoundry:smeltery_controller",
+                   "modernfoundry:seared_fluid_cannon",
+                   "modernfoundry:copper_gauge",
+                   "modernfoundry:cast_chest",
+                   "modernfoundry:seared_fuel_tank",
+                   "modernfoundry:seared_melter",
+                   "modernfoundry:waste_fluid_cylinder",
+                   "modernfoundry:warden_steel_block",
+                   "modernfoundry:soul_vine",
+                   "modernfoundry:bound_chain",
+                   "modernfoundry:ancient_ceramic_block"
+               ]
 }

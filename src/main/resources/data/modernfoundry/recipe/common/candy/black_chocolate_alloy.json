@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "fluid": "modernfoundry:molten_cocoa",   "amount":  500 },
+    { "tag": "forge:syrup", "amount":  200 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:molten_black_chocolate",
+    "amount": 450
+  },
+  "temperature": 90
+}

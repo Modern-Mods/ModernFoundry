@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/beetron" },
+  "result": {
+    "fluid": "modernfoundry:molten_beetron",
+    "amount": 10
+  },
+  "temperature": 400,
+  "time": 2
+}

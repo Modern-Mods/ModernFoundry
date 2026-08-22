@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "modernfoundry:verdant_frogcroaking"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "modernfoundry:verdant_frogcroaking"
+}

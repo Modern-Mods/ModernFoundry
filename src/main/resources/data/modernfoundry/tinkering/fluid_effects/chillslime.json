@@ -1,0 +1,27 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "modernfoundry:freezing_cold",
+          "level": 1,
+          "time": 80
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "set",
+      "effect": "modernfoundry:freezing_cold",
+      "level": 1,
+      "time": 80
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "fluid": "modernfoundry:chillslime"
+  }
+}

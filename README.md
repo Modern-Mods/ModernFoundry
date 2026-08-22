@@ -42,6 +42,8 @@ The current tool library covers mining, excavation, farming, combat, ranged comb
 
 Integrated reference content also adds Rapier and Estoc leap behavior, Rapier sting attacks, and eight tiered Yoyos: wooden, stone, copper, iron, golden, diamond, netherite, and creative. The 1.21.1 Yoyos reference's optional compatibility tiers are also registered when their source mod is loaded, while Modern Foundry's own TConstruct materials are available natively. Yoyos use the reference entity interactions for server-side damage and collection. The Improvable modifier tracks tool experience and progression; apply it at the Foundry Anvil with one Nether Star and four Experience Bottles. Rapier sting damage and Improvable progression and XP sources remain configurable in `modernfoundry-common.toml`.
 
+The native integrations suite adds cross-mod material fluids, storage, recipes, and equipment modifiers behind loaded-mod checks, so the base Modern Foundry feature set does not require those source mods. The additional native equipment suite adds the repeating crossbow, atlatl, seeking arrows, drying rack, soul shards, bronze materials, effects, potions, and its expanded modifier set.
+
 The bundle also includes modifiable shields, slime-themed armor, slime wings, crystalshot ammunition, and other equipment built on the same material-and-modifier systems.
 
 Ordinary Modern Foundry tools and weapons use vanilla-style first-person equip, attack-speed cooldown, and swing animations.
@@ -99,6 +101,10 @@ Yoyo runtime, recipes, enchantments, models, and tier textures adapted from the 
 
 Copyright (c) 2018-2023 Jozsef Augusztiny
 Source license: MIT, as declared by `References/Yoyos-1.21-Decompiled/META-INF/neoforge.mods.toml`
+
+Native integrations and equipment content adapted from the MIT references `References/TCIntegrations-1.20.1` by Wendall Cada (wendall911) and `References/Tinkers-Thinking-1.20.1` by CreepingCreeper.
+
+Source licenses: `References/TCIntegrations-1.20.1/LICENSE` and `References/Tinkers-Thinking-1.20.1/LICENSE`. The damage-blocking sound remains credited in `src/main/resources/assets/modernfoundry/sounds/_credits.txt` under its Creative Commons Attribution license.
 
 Thanks to the SlimeKnights projects and contributors, NeoForge, Just Enough Items, and the other libraries and integrations that make this work possible.
 

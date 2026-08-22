@@ -1,5 +1,22 @@
 {
-  "stats": {
-    "modernfoundry:fletching": {}
-  }
+    "stats":  {
+                  "modernfoundry:fletching":  {
+
+                                              },
+                  "modernfoundry:binding":  {
+
+                                            },
+                  "modernfoundry:maille":  {
+
+                                           },
+                  "modernfoundry:shield_core":  {
+
+                                                },
+                  "modernfoundry:repair_kit":  {
+
+                                               },
+                  "modernfoundry:bowstring":  {
+
+                                              }
+              }
 }

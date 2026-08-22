@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:molding_table",
+  "material": { "item": "modernfoundry:blank_red_sand_cast" },
+  "pattern": {
+    "type": "modernfoundry:material",
+    "item": "modernfoundry:narrow_blade"
+  },
+  "result": "modernfoundry:narrow_blade_red_sand_cast"
+}

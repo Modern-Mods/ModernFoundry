@@ -51,6 +51,14 @@ public class ModifiableArrow extends AbstractArrow implements ToolProjectile, Re
     super(type, level);
   }
 
+  public ModifiableArrow(EntityType<? extends AbstractArrow> type, Level level, double pX, double pY, double pZ) {
+    super(type, pX, pY, pZ, level, ItemStack.EMPTY, null);
+  }
+
+  public ModifiableArrow(EntityType<? extends AbstractArrow> type, Level level, LivingEntity shooter) {
+    super(type, shooter, level, ItemStack.EMPTY, null);
+  }
+
   public ModifiableArrow(Level level, double pX, double pY, double pZ) {
     super(TinkerTools.materialArrow.get(), pX, pY, pZ, level, ItemStack.EMPTY, null);
   }

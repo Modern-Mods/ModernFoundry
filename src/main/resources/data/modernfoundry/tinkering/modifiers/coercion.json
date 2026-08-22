@@ -1,0 +1,19 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_stat",
+      "entity": {
+        "type": "hilt:has_effect",
+        "effect": "minecraft:invisibility"
+      },
+      "each_level": 1.0,
+      "percent": false,
+      "stat": "modernfoundry:projectile_damage"
+    },
+    {
+      "type": "modernfoundry:coercion"
+    }
+  ],
+  "tooltip_display": "always"
+}

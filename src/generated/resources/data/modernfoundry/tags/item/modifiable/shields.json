@@ -1,7 +1,8 @@
 {
-  "values": [
-    "modernfoundry:battlesign",
-    "modernfoundry:travelers_shield",
-    "modernfoundry:plate_shield"
-  ]
+    "values":  [
+                   "modernfoundry:battlesign",
+                   "modernfoundry:travelers_shield",
+                   "modernfoundry:plate_shield",
+                   "modernfoundry:cutlass"
+               ]
 }

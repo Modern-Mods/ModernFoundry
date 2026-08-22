@@ -1,18 +1,20 @@
 {
-  "values": [
-    "modernfoundry:pickaxe",
-    "modernfoundry:mattock",
-    "modernfoundry:pickadze",
-    "modernfoundry:hand_axe",
-    "modernfoundry:kama",
-    "modernfoundry:dagger",
-    "modernfoundry:sword",
-    "modernfoundry:flint_and_brick",
-    "modernfoundry:battle_spade",
-    "modernfoundry:greatsword",
-    "modernfoundry:pike",
-    "modernfoundry:lance",
-    "modernfoundry:rapier",
-    "modernfoundry:estoc"
-  ]
+    "values":  [
+                   "modernfoundry:pickaxe",
+                   "modernfoundry:mattock",
+                   "modernfoundry:pickadze",
+                   "modernfoundry:hand_axe",
+                   "modernfoundry:kama",
+                   "modernfoundry:dagger",
+                   "modernfoundry:sword",
+                   "modernfoundry:flint_and_brick",
+                   "modernfoundry:battle_spade",
+                   "modernfoundry:greatsword",
+                   "modernfoundry:pike",
+                   "modernfoundry:lance",
+                   "modernfoundry:rapier",
+                   "modernfoundry:estoc",
+                   "modernfoundry:paxel",
+                   "modernfoundry:knife"
+               ]
 }

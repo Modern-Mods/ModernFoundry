@@ -1,0 +1,66 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        "modernfoundry:bow_grip",
+        "modernfoundry:bow_limb",
+        "modernfoundry:bow_grip",
+        "modernfoundry:bowstring"
+      ]
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:accuracy": 0.65,
+        "modernfoundry:velocity": 1.35,
+        "modernfoundry:durability": 125,
+        "modernfoundry:use_item_speed": 0.60
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:draw_speed": 1.80,
+        "modernfoundry:projectile_damage": 0.65,
+        "modernfoundry:durability": 2.25
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 2
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "name": "modernfoundry:ballista"
+        }
+      ]
+    }
+  ]
+}

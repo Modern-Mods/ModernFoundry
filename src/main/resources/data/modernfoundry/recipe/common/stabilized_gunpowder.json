@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": {
+    "tag": "forge:gunpowder"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "modernfoundry:powdered_snow",
+    "amount": 500
+  },
+  "result": "modernfoundry:stabilized_gunpowder",
+  "cooling_time": 50
+}

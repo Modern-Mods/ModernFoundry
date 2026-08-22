@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:silky_jewel_block" }],
+  "result": {
+    "item": "modernfoundry:silky_jewel",
+    "count": 9
+  }
+}

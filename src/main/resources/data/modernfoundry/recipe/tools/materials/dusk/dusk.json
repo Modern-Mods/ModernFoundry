@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "modernfoundry:dusk_chunk"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "modernfoundry:dusk"
+}

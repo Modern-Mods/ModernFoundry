@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "modernfoundry:stone_stick"
+    },
+    "X": {
+        "tag": "minecraft:coals"
+      }
+  },
+  "result": {
+    "item": "modernfoundry:stone_torch",
+    "count": 4
+  }
+}

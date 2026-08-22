@@ -1,7 +1,8 @@
 {
-  "values": [
-    "#c:rods/wooden",
-    "#c:rods/blaze",
-    "#c:rods/breeze"
-  ]
+    "values":  [
+                   "#c:rods/wooden",
+                   "#c:rods/blaze",
+                   "#c:rods/breeze",
+                   "#c:rods/stone"
+               ]
 }

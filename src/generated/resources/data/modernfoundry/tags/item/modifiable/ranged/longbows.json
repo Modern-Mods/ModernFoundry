@@ -1,5 +1,6 @@
 {
-  "values": [
-    "modernfoundry:longbow"
-  ]
+    "values":  [
+                   "modernfoundry:longbow",
+                   "modernfoundry:arrow_thrower"
+               ]
 }

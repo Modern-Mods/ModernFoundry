@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "modernfoundry:block/wall_stone_torch"
+    },
+    "facing=north": {
+      "model": "modernfoundry:block/wall_stone_torch",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "modernfoundry:block/wall_stone_torch",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "modernfoundry:block/wall_stone_torch",
+      "y": 180
+    }
+  }
+}

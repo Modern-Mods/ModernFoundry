@@ -50,6 +50,24 @@ sourceSets {
             exclude 'modernmods/modernfoundry/tools/data/material/MaterialStatsDataProvider.java'
             exclude 'modernmods/modernfoundry/tools/data/material/MaterialTraitsDataProvider.java'
             exclude 'modernmods/modernfoundry/tools/data/material/TrimMaterialProvider.java'
+            // TCIntegrations data generators are reference inventory only; this checkout ships
+            // their translated resources directly and does not have an active generator bus.
+            exclude 'modernmods/modernfoundry/integrations/data/BaseRecipeProvider.java'
+            exclude 'modernmods/modernfoundry/integrations/data/client/**'
+            exclude 'modernmods/modernfoundry/integrations/data/loot/**'
+            exclude 'modernmods/modernfoundry/integrations/data/recipes/**'
+            exclude 'modernmods/modernfoundry/integrations/data/tcon/**'
+            exclude 'modernmods/modernfoundry/integrations/data/DataGenerators.java'
+            exclude 'modernmods/modernfoundry/integrations/data/EntityTypeTagProvider.java'
+            exclude 'modernmods/modernfoundry/integrations/data/ModBlockTagsProvider.java'
+            exclude 'modernmods/modernfoundry/integrations/data/ModItemTagsProvider.java'
+            exclude 'modernmods/modernfoundry/integrations/data/integration/CreateGogglesPredicate.java'
+            exclude 'modernmods/modernfoundry/integrations/data/integration/ProjectEConversionProvider.java'
+            exclude 'modernmods/modernfoundry/integrations/config/**'
+            exclude 'modernmods/modernfoundry/integrations/proxy/**'
+            exclude 'modernmods/modernfoundry/integrations/common/ConsecrationTConstructModule.java'
+            exclude 'modernmods/modernfoundry/integrations/client/compat/**'
+            exclude 'modernmods/modernfoundry/integrations/event/GameOverlayEventHandler.java'
         }
         resources {
             srcDirs "src/generated/resources"
@@ -310,6 +328,7 @@ tasks.named('jar', Jar).configure {
 java {
     withSourcesJar()
 }
+
 
 sourcesJar {
     exclude 'assets/**'

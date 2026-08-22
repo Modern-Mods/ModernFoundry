@@ -1,0 +1,58 @@
+{
+  "translation_key": "item.modernfoundry.quartz_staff",
+  "icon": {
+    "item": "modernfoundry:quartz_staff",
+    "nbt": {
+    "tic_display": true,
+    "tic_materials": ["modernfoundry:ui_render#head", "modernfoundry:ui_render#handle", "modernfoundry:ui_render#extra"]
+  }
+},
+"sortIndex": 20,
+"input_slots": [
+{
+"icon": "modernfoundry:tough_handle",
+"translation_key": "item.modernfoundry.tough_handle",
+"x": 10,
+"y": 60,
+"filter": {
+"item": "modernfoundry:tough_handle"
+}
+},
+{
+"icon": "modernfoundry:tough_handle",
+"translation_key": "item.modernfoundry.tough_handle",
+"x": 32,
+"y": 44,
+"filter": {
+"item": "modernfoundry:tough_handle"
+}
+},
+{
+"icon": "modernfoundry:large_plate",
+"translation_key": "item.modernfoundry.large_plate",
+"x": 54,
+"y": 22,
+"filter": {
+"item": "modernfoundry:large_plate"
+}
+},
+{
+"icon": "modernfoundry:quartz_crystal",
+"translation_key": "item.modernfoundry.quartz_crystal",
+"x": 34,
+"y": 22,
+"filter": {
+"item": "modernfoundry:quartz_crystal"
+}
+},
+{
+"icon": "modernfoundry:quartz_crystal",
+"translation_key": "item.modernfoundry.quartz_crystal",
+"x": 54,
+"y": 42,
+"filter": {
+"item": "modernfoundry:quartz_crystal"
+}
+}
+]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "chlorophyte_ingot",
+  "ingredient": {
+    "item": "modernfoundry:chlorophyll_ore"
+  },
+  "result": "modernfoundry:chlorophyte_ingot",
+  "experience": 1.2,
+  "cookingtime": 100
+}

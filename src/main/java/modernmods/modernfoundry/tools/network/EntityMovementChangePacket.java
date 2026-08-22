@@ -1,9 +1,10 @@
 package modernmods.modernfoundry.tools.network;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import modernmods.hilt.client.SafeClientAccess;
 import modernmods.hilt.network.packet.IThreadsafePacket;
 
 public class EntityMovementChangePacket implements IThreadsafePacket {
@@ -52,8 +53,8 @@ public class EntityMovementChangePacket implements IThreadsafePacket {
   /** Safely runs client side only code in a method only called on client */
   private static class HandleClient {
     private static void handle(EntityMovementChangePacket packet) {
-      assert Minecraft.getInstance().level != null;
-      Entity entity = Minecraft.getInstance().level.getEntity(packet.entityID);
+      Level level = SafeClientAccess.getLevel();
+      Entity entity = level == null ? null : level.getEntity(packet.entityID);
       if (entity != null) {
         entity.setDeltaMovement(packet.x, packet.y, packet.z);
         entity.setYRot(packet.yRot);

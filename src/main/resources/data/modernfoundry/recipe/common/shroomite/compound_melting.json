@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "rate": "metal",
+  "ingredient": {
+    "item": "modernfoundry:shroomite_compound"
+  },
+  "result": {
+    "fluid": "modernfoundry:molten_shroomite",
+    "amount": 90
+  },
+  "temperature": 600,
+  "time": 30,
+  "byproducts": [
+    {
+      "fluid": "minecraft:water",
+      "amount": 250
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/mace",
+  "textures": {
+    "plate":         "modernfoundry:item/tool/mace/plate",
+    "head":         "modernfoundry:item/tool/mace/head",
+    "handle":       "modernfoundry:item/tool/mace/broken_handle"
+  },
+  "parts": [
+    { "name": "plate", "index": 0 },
+    { "name": "handle", "index": 1 },
+    { "name": "head"}
+  ]
+}

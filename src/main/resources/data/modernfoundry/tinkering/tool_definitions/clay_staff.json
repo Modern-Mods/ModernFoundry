@@ -1,0 +1,51 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:durability": 250.0,
+        "modernfoundry:block_amount": 6.6,
+        "modernfoundry:use_item_speed": 0.9,
+        "modernfoundry:attack_damage": 1.0,
+        "modernfoundry:attack_speed": 1.2
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "upgrades": 1,
+        "abilities": 1
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "name": "modernfoundry:overslime_friend",
+          "level": 1
+        },
+        {
+          "name": "modernfoundry:clay",
+          "level": 1
+        },
+        {
+          "name": "modernfoundry:shiny",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_repair",
+      "material": "modernfoundry:clay",
+      "stat_type": "modernfoundry:limb"
+    },
+    {
+      "type": "modernfoundry:circle_aoe",
+      "3D": false,
+      "diameter": 1
+    },
+    {
+      "type": "modernfoundry:dual_option_interaction"
+    }
+  ]
+}

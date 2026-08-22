@@ -1,0 +1,5 @@
+{
+ "default": [
+  { "name": "modernfoundry:durable", "level": 1 }
+ ]
+}

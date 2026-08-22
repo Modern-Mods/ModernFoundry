@@ -1,0 +1,15 @@
+{
+  "type": "modernfoundry:material_melting",
+  "byproducts": [
+    {
+      "tag": "modernfoundry:molten_zith",
+      "amount": 90
+    }
+  ],
+  "input": "modernfoundry:colorite",
+  "temperature": 250,
+  "result": {
+    "fluid": "modernfoundry:color_liquid",
+    "amount": 250
+  }
+}

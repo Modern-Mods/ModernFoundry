@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "value": {
+        "modid": "tinkers_ingenious",
+        "type": "neoforge:mod_loaded"
+      },
+      "type": "neoforge:not"
+    }
+  ],
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "minecraft:echo_shard" },
+  "result": {
+    "fluid": "modernfoundry:molten_echo",
+    "amount": 100
+  },
+  "temperature": 50,
+  "time": 31
+}

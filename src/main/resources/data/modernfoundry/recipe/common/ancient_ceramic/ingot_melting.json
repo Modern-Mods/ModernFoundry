@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:ancient_ceramic" },
+  "result": {
+    "fluid": "modernfoundry:molten_ancient_ceramic",
+    "amount": 90
+  },
+  "temperature": 1200,
+  "time": 24
+}

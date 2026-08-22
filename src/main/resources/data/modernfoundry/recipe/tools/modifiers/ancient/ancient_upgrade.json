@@ -1,0 +1,25 @@
+{
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "item": "modernfoundry:clay_crystal"
+    }
+  ],
+  "tools": {
+    "type": "forge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/ancient"
+      },
+      {
+        "tag": "modernfoundry:modifiable/bonus_slots"
+      }
+    ]
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "level": 1,
+  "allow_crystal": true,
+  "result": "modernfoundry:ancient_upgrade"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "modernfoundry:chillslime_cryogel"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "modernfoundry:chillslime_cryogel"
+}

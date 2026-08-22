@@ -1,0 +1,6 @@
+{
+  "default": [
+    {"name": "modernfoundry:sculk_catalyse", "level": 1},
+    {"name": "modernfoundry:sculk_siphon", "level": 1}
+  ]
+}

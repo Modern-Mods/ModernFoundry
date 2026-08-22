@@ -1,0 +1,29 @@
+{
+  "perStat": {
+    "modernfoundry:ranged": [
+      {
+        "name": "modernfoundry:impact"
+      }
+    ],
+    "modernfoundry:melee_harvest": [
+      {
+        "name": "modernfoundry:cutting"
+      }
+    ],
+    "modernfoundry:armor": [
+      {
+        "name": "modernfoundry:countermeasures"
+      }
+    ],
+    "modernfoundry:plating_shield": [
+      {
+        "name": "modernfoundry:countermeasures"
+      }
+    ],
+    "tinkers_ingenuity:curio": [
+      {
+        "name": "modernfoundry:cutting_curio"
+      }
+    ]
+  }
+}

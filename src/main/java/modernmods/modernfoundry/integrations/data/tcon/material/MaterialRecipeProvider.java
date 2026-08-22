@@ -1,0 +1,79 @@
+package modernmods.modernfoundry.integrations.data.tcon.material;
+
+import java.util.function.Consumer;
+
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+
+import net.neoforged.neoforge.common.crafting.conditions.OrCondition;
+
+import modernmods.hilt.recipe.helper.ItemOutput;
+import modernmods.modernfoundry.fluids.TinkerFluids;
+import modernmods.modernfoundry.library.data.recipe.IMaterialRecipeHelper;
+
+import modernmods.modernfoundry.integrations.common.TagManager;
+import modernmods.modernfoundry.integrations.data.BaseRecipeProvider;
+import modernmods.modernfoundry.integrations.data.integration.ModIntegration;
+import modernmods.modernfoundry.integrations.items.TciItems;
+
+public class MaterialRecipeProvider extends BaseRecipeProvider implements IMaterialRecipeHelper {
+
+    public MaterialRecipeProvider(PackOutput packOutput) {
+        super(packOutput);
+    }
+
+    @Override
+    public String getName() {
+        return "TciIntegration - TCon Material Recipes";
+    }
+
+    @Override
+    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+        addMaterialItems(consumer);
+        addMaterialSmeltery(consumer);
+    }
+
+    private void addMaterialItems(Consumer<FinishedRecipe> consumer) {
+        String folder = "tools/materials/";
+        Consumer<FinishedRecipe> botaniaConsumer = withCondition(consumer, modLoaded(ModIntegration.BOTANIA_MODID));
+        Consumer<FinishedRecipe> aquacultureConsumer = withCondition(consumer, modLoaded(ModIntegration.AQUACULTURE_MODID));
+        Consumer<FinishedRecipe> malumConsumer = withCondition(consumer, modLoaded(ModIntegration.MALUM_MODID));
+        Consumer<FinishedRecipe> brassConsumer = withCondition(consumer, tagCondition("ingots/brass"));
+        Consumer<FinishedRecipe> ifdConsumer = withCondition(consumer, modLoaded(ModIntegration.IFD_MODID));
+        Consumer<FinishedRecipe> adAstraConsumer = withCondition(consumer, new OrCondition(modLoaded(ModIntegration.AD_ASTRA_MODID), modLoaded(ModIntegration.BEYOND_EARTH_MODID)));
+
+        materialRecipe(botaniaConsumer, MaterialIds.livingWood, Ingredient.of(ModIntegration.BOTANIA_LIVINGWOOD_PLANKS), 1, 1, folder + "livingwood/planks");
+        materialRecipe(botaniaConsumer, MaterialIds.livingWood, Ingredient.of(TagManager.Items.BOTANIA_LIVINGWOOD_LOGS), 4, 1, ItemOutput.fromStack(new ItemStack(ModIntegration.BOTANIA_LIVINGWOOD_PLANKS)), folder + "livingwood/logs");
+        materialRecipe(botaniaConsumer, MaterialIds.livingRock, Ingredient.of(new ItemStack(ModIntegration.LIVING_ROCK)), 1, 1, folder + "livingrock");
+        materialRecipe(botaniaConsumer, MaterialIds.manaString, Ingredient.of(new ItemStack(ModIntegration.MANA_STRING)), 1, 1, folder + "manastring");
+
+        metalMaterialRecipe(botaniaConsumer, MaterialIds.manaSteel, folder, MaterialIds.manaSteel.getPath(), true);
+        metalMaterialRecipe(aquacultureConsumer, MaterialIds.neptunium, folder, MaterialIds.neptunium.getPath(), true);
+        metalMaterialRecipe(malumConsumer, MaterialIds.soulStainedSteel, folder, MaterialIds.soulStainedSteel.getPath(), true);
+        metalMaterialRecipe(brassConsumer, MaterialIds.brass, folder, MaterialIds.brass.getPath(), true);
+        metalMaterialRecipe(ifdConsumer, MaterialIds.dragonsteelFire, folder, MaterialIds.dragonsteelFire.getPath(), true);
+        metalMaterialRecipe(ifdConsumer, MaterialIds.dragonsteelIce, folder, MaterialIds.dragonsteelIce.getPath(), true);
+        metalMaterialRecipe(ifdConsumer, MaterialIds.dragonsteelLightning, folder, MaterialIds.dragonsteelLightning.getPath(), true);
+        metalMaterialRecipe(adAstraConsumer, MaterialIds.desh, folder, MaterialIds.desh.getPath(), true);
+        metalMaterialRecipe(adAstraConsumer, MaterialIds.calorite, folder, MaterialIds.calorite.getPath(), true);
+        metalMaterialRecipe(adAstraConsumer, MaterialIds.ostrum, folder, MaterialIds.ostrum.getPath(), true);
+    }
+
+    private void addMaterialSmeltery(Consumer<FinishedRecipe> consumer) {
+        String folder = "tools/materials/";
+
+        compatMeltingCasting(consumer, MaterialIds.brass, TinkerFluids.moltenBrass, folder);
+        compatMeltingCasting(consumer, MaterialIds.manaSteel, TciItems.MOLTEN_MANASTEEL, folder);
+        compatMeltingCasting(consumer, MaterialIds.neptunium, TciItems.MOLTEN_NEPTUNIUM, folder);
+        compatMeltingCasting(consumer, MaterialIds.soulStainedSteel, TciItems.MOLTEN_SOUL_STAINED_STEEL, folder);
+        compatMeltingCasting(consumer, MaterialIds.dragonsteelFire, TciItems.MOLTEN_DRAGONSTEEL_FIRE, folder);
+        compatMeltingCasting(consumer, MaterialIds.dragonsteelIce, TciItems.MOLTEN_DRAGONSTEEL_ICE, folder);
+        compatMeltingCasting(consumer, MaterialIds.dragonsteelLightning, TciItems.MOLTEN_DRAGONSTEEL_LIGHTNING, folder);
+        compatMeltingCasting(consumer, MaterialIds.desh, TciItems.MOLTEN_DESH, folder);
+        compatMeltingCasting(consumer, MaterialIds.calorite, TciItems.MOLTEN_CALORITE, folder);
+        compatMeltingCasting(consumer, MaterialIds.ostrum, TciItems.MOLTEN_OSTRUM, folder);
+    }
+
+}

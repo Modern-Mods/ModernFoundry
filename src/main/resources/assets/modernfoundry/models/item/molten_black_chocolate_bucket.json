@@ -1,0 +1,7 @@
+{
+    "parent": "forge:item/bucket_drip",
+    "flip_gas": false,
+    "fluid": "modernfoundry:molten_black_chocolate",
+    "loader": "modernfoundry:fluid_container"
+}
+

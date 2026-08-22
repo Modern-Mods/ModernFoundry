@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "modernfoundry:lightite",
+  "temperature": 450,
+  "result": {
+    "fluid": "modernfoundry:molten_lightite",
+    "amount": 90
+  }
+}

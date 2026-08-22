@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:ingots/adamantium" },
+  "result": {
+    "fluid": "modernfoundry:molten_adamantium",
+    "amount": 90
+  },
+  "temperature": 1400,
+  "time": 76
+}

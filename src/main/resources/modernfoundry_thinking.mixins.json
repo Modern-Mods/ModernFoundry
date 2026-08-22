@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "modernmods.modernfoundry.thinking.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ItemInHandRendererMixin",
+    "PlayerRendererMixin"
+  ],
+  "mixins": [
+    "CrossbowItemMixin",
+    "ModifiableArrowDispenserBehaviorMixin",
+    "ModifiableArrowItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

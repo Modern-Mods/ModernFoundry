@@ -1,0 +1,22 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:lightly_attack",
+      "_comment": "Per level",
+      "each_level": 0.3
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "forge:entity_gravity",
+      "each_level": -0.1,
+      "operation": "multiply_total",
+      "slots": [
+        "mainhand",
+        "offhand"
+      ],
+      "tooltip_style": "percent"
+    }
+    ],
+  "tooltip_display": "always"
+}

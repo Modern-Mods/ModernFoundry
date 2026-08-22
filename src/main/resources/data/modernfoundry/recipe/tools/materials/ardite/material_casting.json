@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:molten_ardite",
+    "amount": 90
+  },
+  "temperature": 950,
+  "output": "modernfoundry:ardite"
+}

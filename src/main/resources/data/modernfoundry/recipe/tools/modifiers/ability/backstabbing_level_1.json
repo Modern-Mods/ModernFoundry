@@ -1,0 +1,35 @@
+{  
+  "conditions": [
+      {
+        "modid": "farmersdelight",
+        "type": "neoforge:mod_loaded"
+      }
+    ],
+    "type": "modernfoundry:modifier",
+    "inputs": [
+      {
+        "tag": "forge:ingots/pig_iron"
+      },
+      {
+        "item": "farmersdelight:ham"
+      },
+      {
+        "tag": "forge:ingots/pig_iron"
+      },
+     {
+        "tag": "forge:ingots/pig_iron"
+      },
+     {
+        "tag": "forge:ingots/pig_iron"
+      }
+    ],
+    "tools": {
+      "tag": "modernfoundry:modifiable/melee"
+    },
+    "slots": {
+      "abilities": 1
+    },
+    "level": 1,
+    "allow_crystal": true,
+    "result": "modernfoundry:backstabbing"
+  }

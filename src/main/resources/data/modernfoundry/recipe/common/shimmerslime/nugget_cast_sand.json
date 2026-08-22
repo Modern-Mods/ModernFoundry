@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": { "tag": "modernfoundry:casts/single_use/nugget" },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "modernfoundry:molten_shimmerslime",
+    "amount": 10
+  },
+  "result": "modernfoundry:shimmerslime_nugget",
+  "cooling_time": 25
+}

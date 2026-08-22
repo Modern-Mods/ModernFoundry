@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:lightite_block" },
+  "result": {
+    "fluid": "modernfoundry:molten_lightite",
+    "amount": 810
+  },
+  "temperature": 450,
+  "time": 50
+}

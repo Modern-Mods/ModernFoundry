@@ -1,6 +1,10 @@
 {
-  "values": [
-    "#modernfoundry:molten_quartz",
-    "#modernfoundry:molten_amethyst"
-  ]
+    "values":  [
+                   "#modernfoundry:molten_quartz",
+                   "#modernfoundry:molten_amethyst",
+                   "#c:syrup",
+                   "#c:molten_echo",
+                   "modernfoundry:liquid_sculk_power",
+                   "modernfoundry:emptiness"
+               ]
 }

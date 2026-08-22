@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "tag": "forge:gems/silky_jewel"
+    }
+  ],
+  "tools": {
+    "tag": "modernfoundry:modifiable/bonus_slots"
+  },
+  "level": 1,
+  "allow_crystal": true,
+  "result":  "modernfoundry:repayed"
+}

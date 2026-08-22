@@ -1,12 +1,15 @@
 {
-  "values": [
-    "modernfoundry:melting_pan",
-    "modernfoundry:war_pick",
-    "modernfoundry:battlesign",
-    "modernfoundry:swasher",
-    {
-      "id": "modernfoundry:minotaur_axe",
-      "required": false
-    }
-  ]
+    "values":  [
+                   "modernfoundry:melting_pan",
+                   "modernfoundry:war_pick",
+                   "modernfoundry:battlesign",
+                   "modernfoundry:swasher",
+                   {
+                       "id":  "modernfoundry:minotaur_axe",
+                       "required":  false
+                   },
+                   "modernfoundry:mace",
+                   "modernfoundry:cutlass",
+                   "modernfoundry:repeating_crossbow"
+               ]
 }

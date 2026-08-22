@@ -1,8 +1,12 @@
 {
-  "values": [
-    "modernfoundry:blocking",
-    "modernfoundry:parrying",
-    "modernfoundry:dual_wielding",
-    "modernfoundry:spilling"
-  ]
+    "values":  [
+                   "modernfoundry:blocking",
+                   "modernfoundry:parrying",
+                   "modernfoundry:dual_wielding",
+                   "modernfoundry:spilling",
+                   {
+                       "id":  "modernfoundry:backstabbing",
+                       "required":  false
+                   }
+               ]
 }

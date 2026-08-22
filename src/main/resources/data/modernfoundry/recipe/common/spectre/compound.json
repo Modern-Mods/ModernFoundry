@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [
+{ 
+ "item": "modernfoundry:chlorophyll_a"
+ },
+{
+ "item": "minecraft:ghast_tear"
+},
+{
+ "item": "minecraft:crying_obsidian"
+}
+],
+  "result": {
+    "item": "modernfoundry:spectre_compound"
+  }
+}

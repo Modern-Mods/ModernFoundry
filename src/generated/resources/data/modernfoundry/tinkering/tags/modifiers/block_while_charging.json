@@ -1,13 +1,14 @@
 {
-  "values": [
-    "modernfoundry:flinging",
-    "modernfoundry:springing",
-    "modernfoundry:bonking",
-    "modernfoundry:warping",
-    "modernfoundry:spitting",
-    "modernfoundry:scope",
-    "modernfoundry:zoom",
-    "modernfoundry:brushing",
-    "modernfoundry:throwing"
-  ]
+    "values":  [
+                   "modernfoundry:flinging",
+                   "modernfoundry:springing",
+                   "modernfoundry:bonking",
+                   "modernfoundry:warping",
+                   "modernfoundry:spitting",
+                   "modernfoundry:scope",
+                   "modernfoundry:zoom",
+                   "modernfoundry:brushing",
+                   "modernfoundry:throwing",
+                   "modernfoundry:sprinting"
+               ]
 }

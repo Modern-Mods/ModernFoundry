@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "###",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "modernfoundry:stone_stick"
+    }
+  },
+  "result": {
+    "item": "modernfoundry:stone_ladder",
+    "count": 3
+  }
+}

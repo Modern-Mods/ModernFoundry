@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "modernfoundry:ichor_slime_crystal"
+      },
+      {
+        "item": "modernfoundry:magma_crystal"
+      },
+      {
+        "item": "modernfoundry:earth_slime_crystal"
+      },
+      {
+        "item": "modernfoundry:quartz_crystal"
+      },
+      {
+        "item": "modernfoundry:clay_crystal"
+      },
+      {
+        "item": "modernfoundry:sky_slime_crystal"
+      },
+      {
+        "item": "minecraft:amethyst_shard"
+      },
+      {
+        "item": "modernfoundry:ender_slime_crystal"
+      },
+      {
+        "item": "minecraft:echo_shard"
+      }
+    ],
+  "result": {
+    "item": "modernfoundry:chromatic_crystal"
+  }
+}

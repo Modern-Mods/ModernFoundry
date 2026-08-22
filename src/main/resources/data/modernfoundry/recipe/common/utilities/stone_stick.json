@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:cobblestone"
+    }
+  },
+  "result": {
+    "item": "modernfoundry:stone_stick",
+    "count": 4
+  }
+}

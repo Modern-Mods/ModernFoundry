@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "modernfoundry:white_chocolate",
+  "temperature": 80,
+  "result": {
+    "fluid": "modernfoundry:molten_white_chocolate",
+    "amount": 90
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "hilt:add_entry",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/piglin_bartering"
+    },
+    {
+      "condition": "minecraft:random_chance",
+       "chance": 0.08
+    }
+  ],
+  "entry": {
+    "type": "minecraft:loot_table",
+    "name": "modernfoundry/loot_tables/modifiers/piglin_modifier"
+  },
+  "functions": [
+  ],
+  "post_conditions": [
+  ]
+}

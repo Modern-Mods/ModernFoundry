@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:casting_table",
+  "fluid": {
+    "fluid": "modernfoundry:pulp",
+    "amount": 250
+  },
+  "result": "minecraft:paper",
+  "cooling_time": 15
+}

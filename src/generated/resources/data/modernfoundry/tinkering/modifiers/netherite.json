@@ -10,6 +10,9 @@
       "flag": "modernfoundry:indestructible"
     },
     {
+      "type": "modernfoundry:netherite"
+    },
+    {
       "type": "modernfoundry:stat_boost",
       "flat": 0.2,
       "operation": "multiply_base",

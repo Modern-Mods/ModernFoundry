@@ -1,17 +1,22 @@
 {
   "type": "modernfoundry:modifier",
-  "id": "modernfoundry:tools/modifiers/upgrade/sinistral",
   "allow_crystal": true,
   "check_trait_level": true,
   "inputs": [
     {
-      "tag": "c:ingots/slimesteel"
+      "tag": "forge:ingots/manyullyn"
     },
     {
       "item": "minecraft:nautilus_shell"
     },
     {
-      "tag": "c:ingots/slimesteel"
+      "tag": "forge:ingots/manyullyn"
+    },
+    {
+      "tag": "forge:slimeball/sky"
+    },
+    {
+      "tag": "forge:slimeball/sky"
     }
   ],
   "level": 1,
@@ -20,14 +25,20 @@
     "upgrades": 1
   },
   "tools": {
-    "type": "neoforge:intersection",
-    "children": [
-      {
-        "tag": "modernfoundry:modifiable/ranged/crossbows"
-      },
-      {
-        "tag": "modernfoundry:modifiable/interactable/left"
-      }
-    ]
+    "type": "forge:difference",
+    "base": {
+      "type": "forge:intersection",
+      "children": [
+        {
+          "tag": "modernfoundry:modifiable/interactable/left"
+        },
+        {
+          "tag": "modernfoundry:modifiable/ranged/crossbows"
+        }
+      ]
+    },
+    "subtracted": {
+      "item": "modernfoundry:repeating_crossbow"
+    }
   }
 }

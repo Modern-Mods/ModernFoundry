@@ -1,0 +1,16 @@
+{
+  "perStat": {
+    "modernfoundry:melee_harvest": [
+      { "name": "modernfoundry:reverse"},
+      { "name": "modernfoundry:repercussion"}
+    ],
+    "modernfoundry:armor": [
+      { "name": "modernfoundry:reverse"},
+      { "name": "modernfoundry:remisdirection"}
+    ],
+    "modernfoundry:plating_shield": [
+      { "name": "modernfoundry:reverse"},
+      { "name": "modernfoundry:remisdirection"}
+    ]
+  }
+}

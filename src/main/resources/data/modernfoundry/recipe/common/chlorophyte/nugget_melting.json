@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/chlorophyte" },
+  "result": {
+    "fluid": "modernfoundry:molten_chlorophyte",
+    "amount": 10
+  },
+  "temperature": 600,
+  "time": 8
+}

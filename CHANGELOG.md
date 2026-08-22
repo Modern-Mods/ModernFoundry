@@ -129,3 +129,10 @@
 * Replaced the legacy Yoyo implementation with the decompiled official 1.21.1 reference content.
     * Added native core and loaded-mod compatibility tiers, recipes, cords, enchantments, tags, models, textures, and reference runtime behavior under the `modernfoundry` namespace.
     * Built and verified `ModernFoundry-1.21.1-4.1.6-NeoForge.jar`; SHA-256: `2cefefa197b575065e3f9fc33df90f67a3a2e0bec88f17713a7143be3b8b7e3a`.
+* Completed the native TCIntegrations and Tinkers-Thinking content fold-in.
+    * Added the translated integrations, materials, fluids, equipment, modifiers, effects, recipes, and client resources under the Modern Foundry namespace.
+    * Reused Modern Foundry and Hilt registration, tool, network, and optional-integration systems; translated the Thinking creative-tab names to Modern Foundry.
+* Fixed duplicate registration of the shared `modernfoundry:sinistral` modifier.
+    * Thinking now reuses Modern Foundry's existing implementation instead of registering a second static modifier with the same ID.
+* Built and verified `ModernFoundry-1.21.1-4.1.6-NeoForge.jar` after the native integration and label updates.
+    * SHA-256: `842ee265194b202585bcc1cd61f5d1967b5973e9681dc1fc7d9305c01a35cd48`.

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "modernfoundry:cobalt_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": { "#": { "item": "modernfoundry:zith_ingot" }},
+  "result": {
+    "item": "modernfoundry:zith_block"
+  }
+}

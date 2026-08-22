@@ -1,0 +1,34 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:conditional_melee_damage",
+      "each_level": 5.0,
+      "percent": false,
+      "target":
+          {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:pig_like"
+          }
+    },
+    {
+      "type": "modernfoundry:mob_effect",
+      "effect": "minecraft:weakness",
+      "target": {
+            "type": "hilt:tag",
+            "tag": "modernfoundry:pig_like"
+      },
+      "hooks": [
+        "modernfoundry:melee_hit"
+      ],
+      "level": {
+        "flat": 2.0
+      },
+      "time": {
+        "flat": 80.0,
+        "random": 20.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

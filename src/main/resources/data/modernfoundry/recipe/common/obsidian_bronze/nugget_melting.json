@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/obsidian_bronze" },
+  "result": {
+    "fluid": "modernfoundry:molten_obsidian_bronze",
+    "amount": 10
+  },
+  "temperature": 950,
+  "time": 16
+}

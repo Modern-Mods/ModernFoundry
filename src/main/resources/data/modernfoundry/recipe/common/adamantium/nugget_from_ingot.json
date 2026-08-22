@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:adamantium_ingot" }],
+  "result": {
+    "item": "modernfoundry:adamantium_nugget",
+    "count": 9
+  }
+}

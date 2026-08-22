@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "modernfoundry:molten_cobalt",   "amount":   90 },
+    { "tag": "modernfoundry:molten_ardite", "amount":  90 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:molten_manyullyn",
+    "amount": 90
+  },
+  "temperature": 1200
+}

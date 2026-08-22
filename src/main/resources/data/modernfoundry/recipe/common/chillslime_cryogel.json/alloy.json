@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "forge:molten_steel",   "amount":   90 },
+    { "fluid": "modernfoundry:sky_slime",   "amount":   250 },
+    { "fluid": "modernfoundry:powdered_snow",   "amount":   250 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:chillslime",
+    "amount": 500
+  },
+  "temperature": 910
+}

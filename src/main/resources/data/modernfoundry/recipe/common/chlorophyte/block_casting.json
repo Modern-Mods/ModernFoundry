@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "fluid": {
+    "fluid": "modernfoundry:molten_chlorophyte",
+    "amount": 810
+  },
+  "result": "modernfoundry:chlorophyte_block",
+  "cooling_time": 105
+}

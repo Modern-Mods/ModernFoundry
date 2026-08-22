@@ -1,0 +1,59 @@
+{
+  "stats": {
+    "modernfoundry:binding": {},
+    "modernfoundry:maille": {},
+    "modernfoundry:handle": {
+      "durability": -0.15,
+      "mining_speed": 0.1,
+      "melee_speed": -0.05,
+      "melee_damage": 0.1
+    },
+    "modernfoundry:head": {
+      "durability": 540,
+      "mining_speed": 6.5,
+      "mining_tier": "minecraft:diamond",
+      "melee_attack": 2.25
+    },
+    "modernfoundry:limb": {
+      "durability": 540,
+      "draw_speed": 0.15,
+      "velocity": -0.05,
+      "accuracy": 0.10
+    },
+    "modernfoundry:grip": {
+      "durability": -0.15,
+      "accuracy": 0.05,
+      "melee_damage": 2.25
+    },
+    "modernfoundry:plating_boots": {
+      "armor": 2.0,
+      "durability": 221
+    },
+    "modernfoundry:plating_chestplate": {
+      "armor": 6.0,
+      "durability": 272
+    },
+    "modernfoundry:plating_helmet": {
+      "armor": 2.0,
+      "durability": 187
+    },
+    "modernfoundry:plating_leggings": {
+      "armor": 4.0,
+      "durability": 255
+    },
+    "modernfoundry:plating_shield": {
+      "durability": 306
+    },
+    "tinkers_ingenuity:curio_extra": {
+      "optional": true
+    },
+    "tinkers_ingenuity:curio_main": {
+      "curio_armor": 0.2,
+      "curio_max_health": 12.0,
+      "curio_melee_attack": 0.05,
+      "curio_movement_speed": 0.05,
+      "curio_projectile_attack": 0.05,
+      "optional": true
+    }
+  }
+}

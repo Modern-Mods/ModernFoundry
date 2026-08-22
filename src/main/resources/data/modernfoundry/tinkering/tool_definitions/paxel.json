@@ -1,0 +1,112 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        {
+          "item": "modernfoundry:small_axe_head",
+          "scale": 0.5
+        },
+        "modernfoundry:tool_handle",
+        {
+          "item": "modernfoundry:pick_head",
+          "scale": 0.5
+        }
+      ],
+      "stat_provider": "modernfoundry:melee_harvest"
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        },
+        {
+          "type": "modernfoundry:random",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 4.5,
+        "modernfoundry:attack_speed": 1.1
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:durability": 1.25,
+        "modernfoundry:mining_speed": 0.8
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 3
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "name": "modernfoundry:killager",
+          "level": 1
+        },
+        {
+          "name": "modernfoundry:stripping",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:tool_actions",
+      "tool_actions": [
+        "pickaxe_dig",
+        "axe_dig",
+        "shield_disable"
+      ]
+    },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "modernfoundry:mineable/paxel"
+    },
+    {
+      "type": "modernfoundry:mining_speed_modifier",
+      "modifier": -0.35,
+      "predicate_type": "hilt:or",
+      "predicates": [
+        {
+          "type": "hilt:tag",
+          "tag": "modernfoundry:slimy_planks"
+        },
+        {
+          "type": "hilt:inverted",
+          "inverted_type": "hilt:tag",
+          "tag": "modernfoundry:mineable/paxel_fast"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:melee_particle",
+      "particle": "modernfoundry:axe_attack"
+    },
+    {
+      "type": "modernfoundry:box_aoe",
+      "expansion_direction": "modernfoundry:side_hit",
+      "expansions": [
+        {
+          "height": 1
+        }
+      ]
+    }
+  ]
+}

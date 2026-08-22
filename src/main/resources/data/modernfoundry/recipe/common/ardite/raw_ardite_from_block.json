@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:raw_ardite_block" }],
+  "result": {
+    "item": "modernfoundry:raw_ardite",
+    "count": 9
+  }
+}

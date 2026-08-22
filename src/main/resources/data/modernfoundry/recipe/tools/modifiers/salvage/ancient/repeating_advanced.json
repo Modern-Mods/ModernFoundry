@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:modifier_salvage",
+  "tools": {
+    "item": "modernfoundry:repeating_crossbow"
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "modifier": "modernfoundry:repeating_advanced"
+}

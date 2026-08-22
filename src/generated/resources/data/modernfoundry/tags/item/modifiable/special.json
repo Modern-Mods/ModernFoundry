@@ -1,8 +1,12 @@
 {
-  "values": [
-    "modernfoundry:sky_staff",
-    "modernfoundry:earth_staff",
-    "modernfoundry:ichor_staff",
-    "modernfoundry:ender_staff"
-  ]
+    "values":  [
+                   "modernfoundry:sky_staff",
+                   "modernfoundry:earth_staff",
+                   "modernfoundry:ichor_staff",
+                   "modernfoundry:ender_staff",
+                   "modernfoundry:quartz_staff",
+                   "modernfoundry:magma_staff",
+                   "modernfoundry:clay_staff",
+                   "#modernfoundry:modifiable/bucket"
+               ]
 }

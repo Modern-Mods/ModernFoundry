@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:molten_echo_bronze",
+    "amount": 90
+  },
+  "temperature": 150,
+  "output": "modernfoundry:echo_bronze"
+}

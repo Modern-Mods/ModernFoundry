@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "modernfoundry:block/stone_ladder",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "modernfoundry:block/stone_ladder"
+    },
+    "facing=south": {
+      "model": "modernfoundry:block/stone_ladder",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modernfoundry:block/stone_ladder",
+      "y": 270
+    }
+  }
+}

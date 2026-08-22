@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "modernfoundry:chlorophyll_ore",
+    "modernfoundry:deepslate_chlorophyll_ore",
+    "modernfoundry:mud_chlorophyll_ore"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "blade_left":         "modernfoundry:item/tool/knife/broken_blade_left",
+    "blade_right":        "modernfoundry:item/tool/knife/broken_blade_right",
+    "handle":      "modernfoundry:item/tool/knife/handle"
+  },
+  "modifier_roots": [ "modernfoundry:item/tool/knife/modifiers/" ],
+  "parts": [
+    { "name": "handle", "index": 1 },
+    { "name": "blade_left", "index": 0 },
+    { "name": "blade_right", "index": 2 }
+  ]
+}

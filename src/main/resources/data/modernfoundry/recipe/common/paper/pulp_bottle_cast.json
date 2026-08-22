@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": { "item": "minecraft:glass_bottle" },
+  "fluid": {
+    "fluid": "modernfoundry:pulp",
+    "amount": 250
+  },
+  "result": "modernfoundry:pulp_bottle",
+  "cooling_time": 1
+}

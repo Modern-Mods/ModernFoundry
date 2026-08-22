@@ -1,0 +1,9 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "forge:item/default",
+  "textures": {
+    "tool": "modernfoundry:item/tool/bucket/battle_bucket"
+  },
+  "modifier_roots": [ "modernfoundry:item/tool/bucket/modifiers/" ],
+  "first_modifiers": [{ "name": "modernfoundry:tank", "forced": true }]
+}

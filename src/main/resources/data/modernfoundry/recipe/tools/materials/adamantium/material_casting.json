@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:molten_adamantium",
+    "amount": 90
+  },
+  "temperature": 1296,
+  "output": "modernfoundry:adamantium"
+}

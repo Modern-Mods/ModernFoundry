@@ -1,0 +1,31 @@
+{
+  "type": "modernfoundry:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "tag": "forge:ingots/amethyst_bronze"
+    },
+    {
+      "tag": "forge:ingots/tinkers_bronze"
+    },
+    {
+      "tag": "forge:ingots/obsidian_bronze"
+    },
+    {
+      "tag": "forge:ingots/echo_bronze"
+    }
+  ],
+  "level": 1,
+  "result": "modernfoundry:bronze",
+  "tools": {
+    "type": "forge:intersection",
+    "children": [
+      {
+        "tag": "modernfoundry:modifiable/ancient"
+      },
+      {
+        "tag": "modernfoundry:modifiable/bonus_slots"
+      }
+    ]
+  }
+}

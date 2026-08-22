@@ -1,0 +1,13 @@
+{
+  "modifier_id": "modernfoundry:repayed",
+  "text": [
+    {
+      "text": "获得一个额外的升级槽"
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "单次使用",
+    "无需槽位"
+  ]
+}

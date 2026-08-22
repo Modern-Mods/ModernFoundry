@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "modernfoundry:cobalt_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": { "#": { "item": "modernfoundry:chlorophyte_nugget" }},
+  "result": {
+    "item": "modernfoundry:chlorophyte_ingot"
+  }
+}

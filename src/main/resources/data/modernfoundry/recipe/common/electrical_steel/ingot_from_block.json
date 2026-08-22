@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:electrical_steel_block" }],
+  "result": {
+    "item": "modernfoundry:electrical_steel_ingot",
+    "count": 9
+  }
+}

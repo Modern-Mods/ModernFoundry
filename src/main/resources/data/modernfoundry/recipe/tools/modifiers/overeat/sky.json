@@ -1,0 +1,8 @@
+{
+  "type": "modernfoundry:modifier_repair",
+  "modifier": "modernfoundry:overeat",
+  "ingredient": {
+    "item": "modernfoundry:sky_slime_drop"
+  },
+  "repair_amount": 120
+}

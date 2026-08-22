@@ -1,0 +1,28 @@
+{
+  "stats": {
+    "modernfoundry:binding": {},
+    "modernfoundry:handle": {
+      "durability": -0.15,
+      "mining_speed": -0.15,
+      "melee_speed": 0.2,
+      "melee_damage": 0.1
+    },
+    "modernfoundry:head": {
+      "durability": 1350,
+      "mining_speed": 4.5,
+      "mining_tier": "minecraft:netherite",
+      "melee_attack": 3.5
+    },
+    "modernfoundry:limb": {
+      "durability": 1350,
+      "draw_speed": -0.1,
+      "velocity": 0.15,
+      "accuracy": -0.1
+    },
+    "modernfoundry:grip": {
+      "durability": -0.15,
+      "accuracy": -0.1,
+      "melee_damage": 3.5
+    }
+  }
+}

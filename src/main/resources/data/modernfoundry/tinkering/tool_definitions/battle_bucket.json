@@ -1,0 +1,43 @@
+{
+  "modules": [
+    {
+    "type": "modernfoundry:base_stats",
+    "stats": {
+      "modernfoundry:block_amount": 5,
+      "modernfoundry:use_item_speed": 0.9,
+      "modernfoundry:attack_damage": 2.5,
+      "modernfoundry:attack_speed": 2.0,
+      "modernfoundry:durability": 100
+    }
+  },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:tank_capacity": 5.0
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "upgrades": 2,
+        "abilities": 1
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "name": "modernfoundry:bucketing"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:circle_aoe",
+      "3D": false,
+      "diameter": 1
+    },
+    {
+      "type": "modernfoundry:dual_option_interaction"
+    }
+    ]
+}

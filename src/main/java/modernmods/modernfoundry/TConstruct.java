@@ -44,6 +44,24 @@ import modernmods.modernfoundry.tools.TinkerToolParts;
 import modernmods.modernfoundry.tools.TinkerTools;
 import modernmods.modernfoundry.world.TinkerStructures;
 import modernmods.modernfoundry.world.TinkerWorld;
+import modernmods.modernfoundry.thinking.common.recipes.ModRecipes;
+import modernmods.modernfoundry.thinking.common.register.ModBlockEntities;
+import modernmods.modernfoundry.thinking.common.register.ModCommonItems;
+import modernmods.modernfoundry.thinking.common.register.ModEffects;
+import modernmods.modernfoundry.thinking.common.register.ModEntities;
+import modernmods.modernfoundry.thinking.common.register.ModFluids;
+import modernmods.modernfoundry.thinking.common.register.ModModifiers;
+import modernmods.modernfoundry.thinking.common.register.ModPotions;
+import modernmods.modernfoundry.thinking.common.library.OnDeath;
+import modernmods.modernfoundry.thinking.common.library.OnExpPickUp;
+import modernmods.modernfoundry.thinking.common.library.Onhurt;
+import modernmods.modernfoundry.thinking.common.register.ModToolItems;
+import modernmods.modernfoundry.integrations.items.TciItems;
+import modernmods.modernfoundry.integrations.items.TciModifiers;
+import modernmods.modernfoundry.integrations.items.TciIntegrationHooks;
+import modernmods.modernfoundry.integrations.data.integration.ModIntegration;
+import modernmods.modernfoundry.integrations.event.PlayerEventHandler;
+import modernmods.modernfoundry.integrations.event.ToolEventHandler;
 
 import java.util.Locale;
 import java.util.Random;
@@ -94,6 +112,30 @@ public class TConstruct {
     bus.register(new TinkerSmeltery());
     bus.register(new TinkerFluids());
 
+    // Native Tinkers' Thinking integration
+    new ModCommonItems();
+    new ModToolItems();
+    new ModEffects();
+    new ModEntities();
+    bus.register(new ModBlockEntities());
+    new ModFluids();
+    bus.register(new ModModifiers());
+    ModModifiers.init();
+    ModPotions.registers(bus);
+    NeoForge.EVENT_BUS.register(new ModPotions());
+    ModRecipes.init(bus);
+    NeoForge.EVENT_BUS.register(new OnExpPickUp());
+    NeoForge.EVENT_BUS.register(new OnDeath());
+    NeoForge.EVENT_BUS.register(new Onhurt());
+
+    // Native TCIntegrations content
+    new TciItems();
+    TciModifiers.init();
+    new TciModifiers();
+    TciIntegrationHooks.init();
+    NeoForge.EVENT_BUS.register(PlayerEventHandler.class);
+    NeoForge.EVENT_BUS.register(ToolEventHandler.class);
+
     // init deferred registers
     TinkerModule.initRegisters(bus);
     TinkerNetwork.setup();
@@ -113,6 +155,7 @@ public class TConstruct {
 
   @SubscribeEvent
   static void commonSetup(final FMLCommonSetupEvent event) {
+    ModIntegration.refresh();
     ToolDefinitionLoader.init();
     StationSlotLayoutLoader.init();
   }

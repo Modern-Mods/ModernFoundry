@@ -1,0 +1,12 @@
+{
+
+  "type": "modernfoundry:casting_table",
+  "cast": { "tag": "minecraft:decorated_pot_sherds" },
+  "cast_consumed": true,
+  "fluid": {
+    "fluid": "modernfoundry:liquid_sculk_power",
+    "amount": 100
+  },
+  "result": "modernfoundry:ancient_ceramic",
+  "cooling_time": 65
+ }

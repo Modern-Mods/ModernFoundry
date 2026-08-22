@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "fluid": {
+    "fluid": "modernfoundry:molten_lightite",
+    "amount": 810
+  },
+  "result": "modernfoundry:lightite_block",
+  "cooling_time": 145
+}

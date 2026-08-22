@@ -1,0 +1,14 @@
+{
+  "perStat": {
+    "modernfoundry:melee_harvest": [
+      {
+        "name": "modernfoundry:sculk_catalyse",
+        "level": 1
+      },
+      {
+        "name": "modernfoundry:sculk_levitate",
+        "level": 1
+      }
+    ]
+  }
+}

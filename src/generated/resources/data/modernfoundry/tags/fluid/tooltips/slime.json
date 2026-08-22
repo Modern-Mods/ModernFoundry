@@ -1,7 +1,12 @@
 {
-  "values": [
-    "#c:magma",
-    "#c:ender",
-    "#modernfoundry:slime"
-  ]
+    "values":  [
+                   "#c:magma",
+                   "#c:ender",
+                   "#modernfoundry:slime",
+                   "#c:pulp",
+                   "modernfoundry:chillslime",
+                   "modernfoundry:scarletslime",
+                   "modernfoundry:color_liquid",
+                   "modernfoundry:error_liquid"
+               ]
 }

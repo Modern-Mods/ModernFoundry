@@ -1,0 +1,26 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff_charging",
+  "textures": {
+    "low":     "modernfoundry:item/tool/quartz_staff/low",
+    "high":    "modernfoundry:item/tool/quartz_staff/high",
+    "grip":    "modernfoundry:item/tool/quartz_staff/grip",
+    "crystal": "modernfoundry:item/tool/quartz_staff/crystal_3",
+    
+    "large_low":     "modernfoundry:item/tool/quartz_staff/large/low",
+    "large_high":    "modernfoundry:item/tool/quartz_staff/large/high",
+    "large_grip":    "modernfoundry:item/tool/quartz_staff/large/grip",
+    "large_crystal": "modernfoundry:item/tool/quartz_staff/large/crystal_3"
+  },
+  "large": true,
+  "modifier_roots": {
+    "small": [ "modernfoundry:item/tool/staff/modifiers/" ],
+    "large": [ "modernfoundry:item/tool/staff/large_modifiers/" ]
+  },
+  "parts": [
+    { "name": "low",    "index": 0 },
+    { "name": "high",   "index": 1 },
+    { "name": "grip",   "index": 2 },
+    { "name": "crystal" }
+  ]
+}

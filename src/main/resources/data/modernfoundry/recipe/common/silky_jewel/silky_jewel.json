@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "BCB",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "item": "modernfoundry:gilded_silky_cloth"
+    },
+    "B": {
+      "item": "modernfoundry:silky_cloth"
+    },
+    "C": {
+      "tag": "forge:gems/emerald"
+    }
+  },
+  "result": {
+    "item": "modernfoundry:silky_jewel"
+  }
+}

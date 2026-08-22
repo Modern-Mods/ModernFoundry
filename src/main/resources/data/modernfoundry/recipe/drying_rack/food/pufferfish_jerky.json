@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:drying_rack",
+  "ingredient": [
+    {
+      "item": "minecraft:pufferfish"
+    }
+  ],
+  "output": {
+    "item": "modernfoundry:pufferfish_jerky"
+  }
+}

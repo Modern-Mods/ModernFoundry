@@ -1,16 +1,18 @@
 {
-  "values": [
-    "modernfoundry:draconic",
-    "modernfoundry:rebalanced",
-    "modernfoundry:redirected",
-    "modernfoundry:trim",
-    "modernfoundry:harmonious",
-    "modernfoundry:recapitated",
-    "modernfoundry:forecast",
-    "modernfoundry:writable",
-    {
-      "id": "modernfoundry:embossed",
-      "required": false
-    }
-  ]
+    "values":  [
+                   "modernfoundry:draconic",
+                   "modernfoundry:rebalanced",
+                   "modernfoundry:redirected",
+                   "modernfoundry:trim",
+                   "modernfoundry:harmonious",
+                   "modernfoundry:recapitated",
+                   "modernfoundry:forecast",
+                   "modernfoundry:writable",
+                   {
+                       "id":  "modernfoundry:embossed",
+                       "required":  false
+                   },
+                   "modernfoundry:repayed",
+                   "modernfoundry:withernic"
+               ]
 }

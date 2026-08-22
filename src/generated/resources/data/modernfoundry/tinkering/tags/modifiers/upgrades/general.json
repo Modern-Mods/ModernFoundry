@@ -1,21 +1,22 @@
 {
-  "values": [
-    "modernfoundry:diamond",
-    "modernfoundry:emerald",
-    "modernfoundry:netherite",
-    "modernfoundry:reinforced",
-    "modernfoundry:overforced",
-    "modernfoundry:soulbound",
-    "modernfoundry:experienced",
-    "modernfoundry:magnetic",
-    "modernfoundry:scope",
-    "modernfoundry:zoom",
-    "modernfoundry:tank",
-    "modernfoundry:smelting",
-    "modernfoundry:fireprimer",
-    {
-      "id": "modernfoundry:the_one_probe",
-      "required": false
-    }
-  ]
+    "values":  [
+                   "modernfoundry:diamond",
+                   "modernfoundry:emerald",
+                   "modernfoundry:netherite",
+                   "modernfoundry:reinforced",
+                   "modernfoundry:overforced",
+                   "modernfoundry:soulbound",
+                   "modernfoundry:experienced",
+                   "modernfoundry:magnetic",
+                   "modernfoundry:scope",
+                   "modernfoundry:zoom",
+                   "modernfoundry:tank",
+                   "modernfoundry:smelting",
+                   "modernfoundry:fireprimer",
+                   {
+                       "id":  "modernfoundry:the_one_probe",
+                       "required":  false
+                   },
+                   "modernfoundry:lightly_speed"
+               ]
 }

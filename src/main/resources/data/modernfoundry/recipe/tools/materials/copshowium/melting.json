@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "crossroads"
+    }
+  ],
+  "type": "modernfoundry:material_melting",
+  "input": "modernfoundry:copshowium",
+  "temperature": 950,
+  "result": {
+    "fluid": "crossroads:molten_copshowium",
+    "amount": 90
+  }
+}

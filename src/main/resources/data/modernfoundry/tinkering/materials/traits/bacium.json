@@ -1,0 +1,28 @@
+{
+  "perStat": {
+    "modernfoundry:melee_harvest": [
+      {
+        "name": "modernfoundry:bane_of_pigs",
+        "level": 1
+      }
+    ],
+    "modernfoundry:armor": [
+      {
+        "name": "modernfoundry:antibrute",
+        "level": 1
+      }
+    ],
+    "modernfoundry:plating_shield": [
+      {
+        "level": 1,
+        "name": "modernfoundry:antibrute"
+      }
+    ],
+    "modernfoundry:arrow_shaft": [
+      {
+        "level": 1,
+        "name": "modernfoundry:resisting"
+      }
+    ]
+  }
+}

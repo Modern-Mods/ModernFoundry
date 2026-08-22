@@ -1,0 +1,53 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:durability": 625.0,
+        "modernfoundry:block_amount": 15.0,
+        "modernfoundry:use_item_speed": 0.8,
+        "modernfoundry:velocity": 1.2,
+        "modernfoundry:accuracy": 0.40
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:projectile_damage": 1.15
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "upgrades": 2,
+        "abilities": 2
+      }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        {
+          "name": "modernfoundry:bucketing",
+          "level": 1
+        },
+        {
+          "name": "modernfoundry:tank",
+          "level": 7
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_repair",
+      "material": "modernfoundry:blazing_bone",
+      "stat_type": "modernfoundry:limb"
+    },
+    {
+      "type": "modernfoundry:circle_aoe",
+      "3D": false,
+      "diameter": 1
+    },
+    {
+      "type": "modernfoundry:dual_option_interaction"
+    }
+  ]
+}

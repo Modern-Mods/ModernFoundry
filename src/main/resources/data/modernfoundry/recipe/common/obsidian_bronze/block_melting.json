@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:obsidian_bronze_block" },
+  "result": {
+    "fluid": "modernfoundry:molten_obsidian_bronze",
+    "amount": 810
+  },
+  "temperature": 950,
+  "time": 120
+}

@@ -1,0 +1,15 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:antibrute"
+    },
+    {
+      "type": "modernfoundry:armor_level",
+      "allow_broken": false,
+      "held_tag": "modernfoundry:modifiable/armor/held",
+      "key": "modernfoundry:antibrute"
+    }
+  ],
+  "tooltip_display": "always"
+}

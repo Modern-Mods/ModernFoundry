@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:beetron_block" }],
+  "result": {
+    "item": "modernfoundry:beetron_ingot",
+    "count": 9
+  }
+}

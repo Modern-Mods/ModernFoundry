@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:table_casting_material",
+  "cast": {
+    "tag": "modernfoundry:casts/single_use/narrow_blade"
+  },
+  "cast_consumed": true,
+  "item_cost": 1,
+  "result": "modernfoundry:narrow_blade"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:emptiness",
+    "amount": 100
+  },
+  "temperature": 1200,
+  "output": "modernfoundry:solidified_emptiness"
+}

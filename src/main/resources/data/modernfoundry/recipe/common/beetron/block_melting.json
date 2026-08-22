@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:beetron_block" },
+  "result": {
+    "fluid": "modernfoundry:molten_beetron",
+    "amount": 810
+  },
+  "temperature": 400,
+  "time": 100
+}

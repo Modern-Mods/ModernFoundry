@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "input": "modernfoundry:rock",
+  "fluid": {
+    "fluid": "modernfoundry:scarletslime",
+    "amount": 250
+  },
+  "temperature": 1100,
+  "output": "modernfoundry:scarlet_slimestone"
+}

@@ -1,0 +1,31 @@
+{
+  "perStat": {
+    "modernfoundry:ranged": [
+      {
+        "name": "modernfoundry:lightly_attack",
+        "level": 1
+      }
+    ],
+    "modernfoundry:melee_harvest": [
+      {
+        "name": "modernfoundry:lightly_attack",
+        "level": 1
+      }
+    ],
+    "modernfoundry:armor": [
+      {
+        "name": "modernfoundry:hurried",
+        "level": 1
+      }
+    ],
+    "modernfoundry:plating_shield": [
+      {
+        "level": 1,
+        "name": "modernfoundry:hurried"
+      }
+    ],
+    "tinkers_ingenuity:curio": [
+      {"name": "modernfoundry:lightly_speed_curio"}
+    ]
+  }
+}

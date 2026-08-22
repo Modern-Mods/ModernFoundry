@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "minecraft:sugar_cane" },
+  "result": {
+    "fluid": "modernfoundry:syrup",
+    "amount": 100
+  },
+  "temperature": 75,
+  "time": 32
+}

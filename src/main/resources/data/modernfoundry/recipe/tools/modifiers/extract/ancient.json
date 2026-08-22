@@ -1,0 +1,38 @@
+{
+  "type": "modernfoundry:extract_modifier",
+  "inputs": [
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:wet_sponge"
+    }
+  ],
+  "leftovers": [
+    "minecraft:sponge"
+  ],
+  "modifier_predicate": {
+    "type": "hilt:and",
+    "predicates": [
+      {
+        "type": "hilt:inverted",
+        "inverted_type": "modernfoundry:tag",
+        "tag": "modernfoundry:extract_blacklist/tools"
+      },
+      {
+        "type": "modernfoundry:slot_type",
+        "slot": "ancient"
+      }
+    ]
+  },
+  "name": "ancient",
+  "tools": {
+    "type": "forge:difference",
+    "base": {
+      "tag": "modernfoundry:modifiable"
+    },
+    "subtracted": {
+      "tag": "modernfoundry:modifiable/unsalvageable"
+    }
+  }
+}

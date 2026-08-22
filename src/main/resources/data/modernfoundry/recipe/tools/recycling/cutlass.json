@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:part_builder_tool_recycling",
+  "parts": [
+    "modernfoundry:repair_kit",
+    "modernfoundry:shield_core",
+    "modernfoundry:tool_handle"
+  ],
+  "pattern": {
+    "tag": "modernfoundry:patterns/default"
+  },
+  "tools": {
+    "item": "modernfoundry:cutlass"
+  }
+}

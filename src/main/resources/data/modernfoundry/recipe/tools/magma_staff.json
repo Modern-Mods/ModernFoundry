@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AWA",
+    " I ",
+    " W "
+  ],
+  "key": {
+    "A": {
+      "item": "modernfoundry:magma_crystal"
+    },
+    "W": {
+      "item": "modernfoundry:blazing_bone"
+    },
+    "I":   [
+      {
+         "item": "modernfoundry:seared_brick"
+      },
+      {
+         "item": "modernfoundry:scorched_brick"
+      }
+    ]
+  },
+  "result": {
+    "item": "modernfoundry:magma_staff"
+  }
+}

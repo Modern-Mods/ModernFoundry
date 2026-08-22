@@ -1,0 +1,19 @@
+{
+  "type": "modernfoundry:ore_melting",
+  "rate": "metal",
+  "ingredient": {
+    "item": "modernfoundry:spectre_compound"
+  },
+  "result": {
+    "fluid": "modernfoundry:molten_spectre",
+    "amount": 90
+  },
+  "temperature": 600,
+  "time": 30,
+  "byproducts": [
+    {
+      "fluid": "minecraft:water",
+      "amount": 250
+    }
+  ]
+}

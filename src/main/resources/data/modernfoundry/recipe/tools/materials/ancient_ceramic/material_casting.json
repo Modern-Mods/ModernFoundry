@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:molten_ancient_ceramic",
+    "amount": 90
+  },
+  "temperature": 1200,
+  "output": "modernfoundry:ancient_ceramic"
+}

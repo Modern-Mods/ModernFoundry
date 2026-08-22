@@ -1,0 +1,28 @@
+{
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "tag": "forge:ingots/ardite"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "tag": "forge:ingots/ardite"
+    },
+    {
+      "item": "modernfoundry:surging_wellspring"
+    },
+    {
+      "item": "modernfoundry:surging_wellspring"
+    }
+  ],
+  "tools": {
+    "item": "modernfoundry:battlesign"
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "allow_crystal": true,
+  "result": "modernfoundry:battle_advanced"
+}

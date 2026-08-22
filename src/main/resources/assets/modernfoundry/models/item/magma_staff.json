@@ -1,0 +1,64 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/staff",
+  "textures": {
+    "tool":         "modernfoundry:item/tool/magma_staff/staff",
+    "large_tool":   "modernfoundry:item/tool/magma_staff/staff_large"
+  },
+  "large": true,
+  "first_modifiers": [ "modernfoundry:dyed", "modernfoundry:embellishment" ],
+  "modifier_roots": {
+    "small": [ "modernfoundry:item/tool/staff/modifiers/" ],
+    "large": [ "modernfoundry:item/tool/staff/large_modifiers/" ]
+},
+  "overrides": [ 
+    {
+     "predicate": { "modernfoundry:charging": 1 },
+     "model": "modernfoundry:item/staff/magma/charging_1"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.4 },
+      "model": "modernfoundry:item/staff/magma/charging_2"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.7 },
+      "model": "modernfoundry:item/staff/magma/charging_3"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 0.9 },
+      "model": "modernfoundry:item/staff/magma/charging_4"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 1, "modernfoundry:charge": 1.0 },
+      "model": "modernfoundry:item/staff/magma/charging_5"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2 },
+      "model": "modernfoundry:item/staff/magma/blocking"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.05 },
+      "model": "modernfoundry:item/staff/magma/blocking_1"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.4 },
+      "model": "modernfoundry:item/staff/magma/blocking_2"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.7 },
+      "model": "modernfoundry:item/staff/magma/blocking_3"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 0.9 },
+      "model": "modernfoundry:item/staff/magma/blocking_4"
+    },
+    {
+      "predicate": { "modernfoundry:charging": 2, "modernfoundry:charge": 1.0 },
+      "model": "modernfoundry:item/staff/magma/blocking_5"
+    },
+    {
+  "predicate": { "modernfoundry:broken": 1 },
+  "model": "modernfoundry:item/broken/magma_staff"
+  }
+  ]
+}

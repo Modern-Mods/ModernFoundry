@@ -1,0 +1,54 @@
+{
+  "fallbacks": [
+    "crystal"
+  ],
+  "color": "00E7B5",
+  "luminosity": 5,
+  "generator": {
+    "transformer": {
+      "type": "modernfoundry:recolor_sprite",
+      "color_mapping": {
+        "type": "modernfoundry:grey_to_color",
+        "palette": [
+          {
+            "grey": 0,
+            "color": "FF000000"
+          },
+          {
+            "grey": 63,
+            "color": "FF00513F"
+          },
+          {
+            "grey": 102,
+            "color": "FF007259"
+          },
+          {
+            "grey": 140,
+            "color": "FF00AB86"
+          },
+          {
+            "grey": 178,
+            "color": "FF00CCA0"
+          },
+          {
+            "grey": 216,
+            "color": "FF00E7B5"
+          },
+          {
+            "grey": 255,
+            "color": "FF8FFFE7"
+          }
+        ]
+      }
+    },
+    "supported_stats": [
+      "modernfoundry:head",
+      "modernfoundry:handle",
+      "modernfoundry:extra",
+      "modernfoundry:repair_kit",
+      "modernfoundry:limb",
+      "modernfoundry:grip"
+    ],
+    "ignoreMaterial_stats": false
+  }
+}

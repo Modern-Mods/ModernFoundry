@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/ardite" },
+  "result": {
+    "fluid": "modernfoundry:molten_ardite",
+    "amount": 10
+  },
+  "temperature": 950,
+  "time": 10
+}

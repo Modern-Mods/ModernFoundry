@@ -1,0 +1,16 @@
+{
+  "conditions": [
+    {
+      "modid": "tinkers_things",
+      "type": "neoforge:mod_loaded"
+    }
+  ],
+  "type": "modernfoundry:material_fluid",
+  "input": "tinkers_things:silky_cloth",
+  "fluid": {
+    "tag": "forge:molten_gold",
+    "amount": 720
+  },
+  "temperature": 15,
+  "output": "modernfoundry:gilded_silky_cloth"
+}

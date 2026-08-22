@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "modernfoundry:adamantium",
+  "temperature": 1400,
+  "result": {
+    "fluid": "modernfoundry:molten_adamantium",
+    "amount": 90
+  }
+}

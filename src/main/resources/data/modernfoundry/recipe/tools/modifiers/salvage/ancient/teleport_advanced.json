@@ -1,0 +1,16 @@
+{
+  "conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tinkersinnovation"
+    }
+  ],
+  "type": "modernfoundry:modifier_salvage",
+  "tools": {
+    "item": "tinkersinnovation:teleport_staff"
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "modifier": "modernfoundry:teleport_advanced"
+}

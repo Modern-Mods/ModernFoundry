@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { 
+    "item": "modernfoundry:clay_crystal" },
+  "result": {
+    "fluid": "modernfoundry:molten_clay",
+    "amount": 250
+  },
+  "temperature": 400,
+  "time": 120
+}

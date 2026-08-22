@@ -1,0 +1,6 @@
+{
+    "parent": "forge:item/bucket_drip",
+    "flip_gas": true,
+    "loader": "modernfoundry:fluid_container",
+    "fluid": "modernfoundry:molten_zith"
+}

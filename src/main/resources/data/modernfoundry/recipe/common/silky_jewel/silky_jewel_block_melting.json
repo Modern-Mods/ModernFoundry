@@ -1,0 +1,23 @@
+{
+  "type": "modernfoundry:melting",
+  "rate": "metal",
+  "ingredient": {
+    "item": "modernfoundry:silky_jewel_block"
+  },
+  "result": {
+    "fluid": "modernfoundry:molten_gold",
+    "amount": 12960
+  },
+  "temperature": 700,
+  "time": 1600,
+  "byproducts": [
+    {
+      "fluid": "modernfoundry:molten_rose_gold",
+      "amount": 3240
+    },
+   {
+      "fluid": "modernfoundry:molten_emerald",
+      "amount": 900
+    }
+  ]
+}

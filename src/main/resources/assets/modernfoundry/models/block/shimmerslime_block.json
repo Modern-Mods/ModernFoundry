@@ -1,0 +1,24 @@
+{
+  "loader": "forge:composite",
+  "parent": "block/block",
+  "textures": {
+    "particle": "modernfoundry:block/shimmerslime"
+  },
+  "children": {
+    "metal": {
+      "render_type": "minecraft:solid",
+      "parent": "modernfoundry:block/template/cube_all_14",
+      "textures": {
+        "all": "modernfoundry:block/shimmerslime_zith"
+      }
+    },
+    "slime": {
+      "render_type": "minecraft:translucent",
+      "parent": "block/cube_all",
+      "textures": {
+        "all": "modernfoundry:block/shimmerslime_slime"
+      }
+    }
+  }
+}
+

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "fluid": "modernfoundry:molten_echo",   "amount":   100 },
+    { "tag": "modernfoundry:liquid_soul", "amount":  100 },
+    { "fluid": "modernfoundry:ichor", "amount":  100 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:liquid_sculk_power",
+    "amount": 200
+  },
+  "temperature": 1000
+}

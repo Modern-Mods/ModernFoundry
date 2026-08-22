@@ -1,12 +1,13 @@
 {
-  "values": [
-    "modernfoundry:sledge_hammer",
-    "modernfoundry:vein_hammer",
-    "modernfoundry:excavator",
-    "modernfoundry:broad_axe",
-    "modernfoundry:scythe",
-    "modernfoundry:cleaver",
-    "modernfoundry:katana",
-    "modernfoundry:fuma_shuriken"
-  ]
+    "values":  [
+                   "modernfoundry:sledge_hammer",
+                   "modernfoundry:vein_hammer",
+                   "modernfoundry:excavator",
+                   "modernfoundry:broad_axe",
+                   "modernfoundry:scythe",
+                   "modernfoundry:cleaver",
+                   "modernfoundry:katana",
+                   "modernfoundry:fuma_shuriken",
+                   "modernfoundry:arrow_thrower"
+               ]
 }

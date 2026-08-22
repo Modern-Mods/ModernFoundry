@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": { "tag": "modernfoundry:casts/multi_use/nugget" },
+  "cast_consumed": false,
+  "fluid": {
+    "fluid": "modernfoundry:molten_lightite",
+    "amount": 10
+  },
+  "result": "modernfoundry:lightite_nugget",
+  "cooling_time": 5
+}

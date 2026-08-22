@@ -1,5 +1,6 @@
 {
-  "values": [
-    "minecraft:quartz"
-  ]
+    "values":  [
+                   "minecraft:quartz",
+                   "modernfoundry:quartz_crystal"
+               ]
 }

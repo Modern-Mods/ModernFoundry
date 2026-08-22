@@ -1,0 +1,56 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:material_stats",
+      "primary_part": 0,
+      "stat_types": [
+        "modernfoundry:limb",
+        "modernfoundry:grip",
+        "modernfoundry:bowstring"
+      ]
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        {
+          "type": "modernfoundry:random"
+        },
+        {
+          "type": "modernfoundry:random"
+        },
+        {
+          "type": "modernfoundry:random"
+        }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_traits",
+      "hooks": [
+        "modernfoundry:rebalanced_trait"
+      ],
+      "material_index": 1,
+      "stat_type":  "modernfoundry:grip"
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 1.0,
+        "modernfoundry:attack_speed": 1.2,
+        "modernfoundry:draw_speed": 0.8
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:durability": 1.6
+      }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": {
+        "abilities": 1,
+        "upgrades": 2
+      }
+    }
+  ]
+}

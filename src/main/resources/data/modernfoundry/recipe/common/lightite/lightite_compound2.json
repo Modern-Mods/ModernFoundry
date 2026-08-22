@@ -1,0 +1,15 @@
+{
+  "condition": {
+    "type": "forge:tag_empty",
+    "tag": "forge:molten_titanium"
+  },
+  "type": "modernfoundry:casting_table",
+  "cast": { "item": "minecraft:phantom_membrane" },
+  "cast_consumed": true,
+  "fluid": {
+    "tag": "forge:molten_iron",
+    "amount": 180
+  },
+  "result": "modernfoundry:lightite_compound",
+  "cooling_time": 45
+}

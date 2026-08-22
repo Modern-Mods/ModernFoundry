@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "modernfoundry:cobalt_ingot",
+  "ingredients": [{ "item": "modernfoundry:ancient_ceramic_block" }],
+  "result": {
+    "item": "modernfoundry:ancient_ceramic",
+    "count": 9
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "input": "modernfoundry:zith",
+  "fluid": {
+    "fluid": "modernfoundry:error_liquid",
+    "amount": 250
+  },
+  "temperature": 250,
+  "output": "modernfoundry:errorite"
+}

@@ -1,0 +1,14 @@
+{
+  "perStat": {
+    "modernfoundry:ranged": [
+      {
+        "name": "modernfoundry:sculk_catalyse",
+        "level": 1
+      },
+      {
+        "name": "modernfoundry:sculk_gravity",
+        "level": 1
+      }
+    ]
+  }
+}

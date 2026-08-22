@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "modernfoundry:ancient_ceramic"
+  },
+  "value": 1,
+  "needed": 1,
+  "material": "modernfoundry:ancient_ceramic"
+}

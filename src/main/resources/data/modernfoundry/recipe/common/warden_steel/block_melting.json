@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:warden_steel_block" },
+  "result": {
+    "fluid": "modernfoundry:molten_warden_steel",
+    "amount": 810
+  },
+  "temperature": 1100,
+  "time": 250
+}

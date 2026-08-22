@@ -1,0 +1,7 @@
+{
+    "parent": "modernfoundry:block/platform/neither",
+	"textures": {
+		"side": "modernfoundry:block/platform/zith_side",
+		"top":  "modernfoundry:block/platform/zith_top"
+	}
+}

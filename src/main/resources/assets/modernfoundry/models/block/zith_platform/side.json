@@ -1,0 +1,7 @@
+{
+    "parent": "modernfoundry:block/platform/side",
+    "textures": {
+		"side":     "modernfoundry:block/platform/zith_side",
+		"particle": "modernfoundry:block/platform/zith_top"
+    }
+}

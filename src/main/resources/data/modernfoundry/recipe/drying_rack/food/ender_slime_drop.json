@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:drying_rack",
+  "ingredient": [
+    {
+      "tag": "forge:slimeball/ender"
+    }
+  ],
+  "output": {
+    "item": "modernfoundry:ender_slime_drop"
+  }
+}

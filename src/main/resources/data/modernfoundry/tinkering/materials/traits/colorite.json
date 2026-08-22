@@ -1,0 +1,12 @@
+{
+  "perStat": {
+    "modernfoundry:ranged": [
+      { "name": "modernfoundry:reverse"},
+      { "name": "modernfoundry:recharge"}
+    ],
+    "modernfoundry:melee_harvest": [
+      { "name": "modernfoundry:reverse"},
+      { "name": "modernfoundry:redye"}
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "minecraft:cocoa_beans" },
+  "result": {
+    "fluid": "modernfoundry:molten_cocoa",
+    "amount": 250
+  },
+  "temperature": 100,
+  "time": 40
+}

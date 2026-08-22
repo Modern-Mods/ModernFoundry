@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+     "tag": "forge:gems/quartz"
+  },
+  "result": "modernfoundry:quartz_crystal",
+  "count": 1
+}

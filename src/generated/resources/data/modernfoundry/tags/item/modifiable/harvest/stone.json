@@ -1,9 +1,10 @@
 {
-  "values": [
-    "modernfoundry:pickaxe",
-    "modernfoundry:sledge_hammer",
-    "modernfoundry:vein_hammer",
-    "modernfoundry:pickadze",
-    "modernfoundry:war_pick"
-  ]
+    "values":  [
+                   "modernfoundry:pickaxe",
+                   "modernfoundry:sledge_hammer",
+                   "modernfoundry:vein_hammer",
+                   "modernfoundry:pickadze",
+                   "modernfoundry:war_pick",
+                   "modernfoundry:paxel"
+               ]
 }

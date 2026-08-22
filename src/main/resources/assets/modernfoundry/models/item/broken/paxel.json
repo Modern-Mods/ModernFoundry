@@ -1,0 +1,15 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "axe":         "modernfoundry:item/tool/paxel/broken_axe",
+    "head":        "modernfoundry:item/tool/paxel/broken_head",
+    "handle":      "modernfoundry:item/tool/pickaxe/handle"
+  },
+  "modifier_roots": [ "modernfoundry:item/tool/paxel/modifiers/" ],
+  "parts": [
+    { "name": "handle", "index": 1 },
+    { "name": "head",    "index": 0},
+    { "name": "axe",   "index": 2}
+  ]
+}

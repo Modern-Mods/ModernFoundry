@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_end",
+  "features": [
+    "modernfoundry:zith_ore_small",
+    "modernfoundry:zith_ore_large"
+  ],
+  "step": "underground_decoration"
+}

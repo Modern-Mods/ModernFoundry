@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:part_builder_tool_recycling",
+  "parts": [
+    "modernfoundry:repair_kit",
+    "modernfoundry:tool_handle"
+  ],
+  "pattern": {
+    "tag": "modernfoundry:patterns/default"
+  },
+  "tools": {
+    "item": "modernfoundry:mace"
+  }
+}

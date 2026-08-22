@@ -1,0 +1,27 @@
+{
+  "block_effects": [
+    {
+      "type": "modernfoundry:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "minecraft:darkness",
+          "level": 1,
+          "time": 200
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "modernfoundry:mob_effect",
+      "action": "set",
+      "effect": "minecraft:darkness",
+      "level": 1,
+      "time": 200
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "fluid": "modernfoundry:molten_echo"
+  }
+}

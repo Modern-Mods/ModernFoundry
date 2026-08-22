@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:casting_table",
+  "cast": { "tag": "modernfoundry:casts/multi_use/ingot" },
+  "cast_consumed": false,
+  "fluid": {
+    "fluid": "modernfoundry:molten_obsidian_bronze",
+    "amount": 90
+  },
+  "result": "modernfoundry:obsidian_bronze_ingot",
+  "cooling_time": 110
+}

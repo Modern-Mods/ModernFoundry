@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:tempered_glass_pane" },
+  "result": {
+    "fluid": "modernfoundry:molten_tempered_glass",
+    "amount": 1000
+  },
+  "temperature": 250,
+  "time": 65
+}

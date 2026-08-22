@@ -1,20 +1,21 @@
 {
-  "values": [
-    "modernfoundry:bucketing",
-    "modernfoundry:firestarter",
-    "modernfoundry:glowing",
-    "modernfoundry:pathing",
-    "modernfoundry:stripping",
-    "modernfoundry:tilling",
-    "modernfoundry:brushing",
-    "modernfoundry:spitting",
-    "modernfoundry:splashing",
-    "modernfoundry:slurping",
-    "modernfoundry:bonking",
-    "modernfoundry:flinging",
-    "modernfoundry:springing",
-    "modernfoundry:warping",
-    "modernfoundry:throwing",
-    "modernfoundry:drill_attack"
-  ]
+    "values":  [
+                   "modernfoundry:bucketing",
+                   "modernfoundry:firestarter",
+                   "modernfoundry:glowing",
+                   "modernfoundry:pathing",
+                   "modernfoundry:stripping",
+                   "modernfoundry:tilling",
+                   "modernfoundry:brushing",
+                   "modernfoundry:spitting",
+                   "modernfoundry:splashing",
+                   "modernfoundry:slurping",
+                   "modernfoundry:bonking",
+                   "modernfoundry:flinging",
+                   "modernfoundry:springing",
+                   "modernfoundry:warping",
+                   "modernfoundry:throwing",
+                   "modernfoundry:drill_attack",
+                   "modernfoundry:sprinting"
+               ]
 }

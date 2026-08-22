@@ -1,0 +1,37 @@
+{
+  "stats": {
+    "modernfoundry:binding": {},
+    "modernfoundry:maille": {},
+    "modernfoundry:handle": {
+      "durability": -0.15,
+      "mining_speed": -0.15,
+      "melee_speed": -0.15,
+      "melee_damage": 0.2
+    },
+    "modernfoundry:head": {
+      "durability": 1150,
+      "mining_speed": 3.5,
+      "mining_tier": "minecraft:netherite",
+      "melee_attack": 4
+    },
+    "modernfoundry:plating_boots": {
+      "armor": 4,
+      "durability": 458
+    },
+    "modernfoundry:plating_chestplate": {
+      "armor": 9,
+      "durability": 576
+    },
+    "modernfoundry:plating_helmet": {
+      "armor": 4,
+      "durability": 396
+    },
+    "modernfoundry:plating_leggings": {
+      "armor": 7,
+      "durability": 540
+    },
+    "modernfoundry:plating_shield": {
+      "durability": 648
+    }
+  }
+}

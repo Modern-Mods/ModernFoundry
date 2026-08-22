@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "forge:molten_steel",   "amount":   90 },
+    { "tag": "forge:molten_quartz", "amount":  100 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:molten_electrical_steel",
+    "amount": 90
+  },
+  "temperature": 900
+}

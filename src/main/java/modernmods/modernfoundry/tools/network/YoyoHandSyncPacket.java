@@ -5,6 +5,7 @@ import modernmods.hilt.network.packet.IThreadsafePacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -30,7 +31,8 @@ public final class YoyoHandSyncPacket implements IThreadsafePacket {
 
   @Override
   public void handleThreadsafe(IPayloadContext context) {
-    if (SafeClientAccess.getPlayer() instanceof net.minecraft.client.player.LocalPlayer player) {
+    Player player = SafeClientAccess.getPlayer();
+    if (player != null) {
       player.setItemInHand(hand, stack);
     }
   }

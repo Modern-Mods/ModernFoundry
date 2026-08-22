@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "forge:molten_zith", "amount":  90 },
+    { "tag": "modernfoundry:molten_debris", "amount":  180 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:molten_adamantium",
+    "amount": 180
+  },
+  "temperature": 1400
+}

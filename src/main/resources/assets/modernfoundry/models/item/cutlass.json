@@ -1,0 +1,23 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "blade":         "modernfoundry:item/tool/cutlass/blade",
+    "binding":        "modernfoundry:item/tool/cutlass/binding",
+    "handle":      "modernfoundry:item/tool/cutlass/handle"
+  },
+  "modifier_roots": [ "modernfoundry:item/tool/cutlass/modifiers/" ],
+  "parts": [
+    { "name": "handle", "index": 2 },
+    { "name": "blade", "index": 0 },
+    { "name": "binding", "index": 1 }
+  ],
+  "overrides": [{
+    "predicate": { "modernfoundry:charging": 2 },
+    "model": "modernfoundry:item/blocking/cutlass"
+  },
+  {
+    "predicate": { "modernfoundry:broken": 1  },
+    "model": "modernfoundry:item/broken/cutlass"
+  }]
+}

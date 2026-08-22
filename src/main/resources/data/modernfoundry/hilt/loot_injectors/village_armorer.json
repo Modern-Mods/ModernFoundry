@@ -1,0 +1,31 @@
+{
+  "name": "minecraft:chests/village/village_armorer",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:cutlass",
+          "weight": 1
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

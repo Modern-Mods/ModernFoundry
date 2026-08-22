@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:pulp",
+    "amount": 30
+  },
+  "temperature": 15,
+  "output": "modernfoundry:paper"
+}

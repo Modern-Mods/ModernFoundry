@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "modernfoundry:stone_stick"
+  },
+  "value": 1,
+  "needed": 2,
+  "material": "modernfoundry:rock"
+}

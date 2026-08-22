@@ -1,0 +1,24 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:hurried",
+      "_comment": "Per level",
+      "each_level": 0.0025
+    },
+    {
+      "type": "modernfoundry:attribute",
+      "attribute": "forge:entity_gravity",
+      "each_level": -0.1,
+      "operation": "multiply_total",
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
+    }
+    ],
+  "tooltip_display": "always"
+}

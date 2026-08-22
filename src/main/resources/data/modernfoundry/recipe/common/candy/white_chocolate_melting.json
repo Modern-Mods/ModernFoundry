@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:white_chocolate" },
+  "result": {
+    "fluid": "modernfoundry:molten_white_chocolate",
+    "amount": 90
+  },
+  "temperature": 80,
+  "time": 40
+}

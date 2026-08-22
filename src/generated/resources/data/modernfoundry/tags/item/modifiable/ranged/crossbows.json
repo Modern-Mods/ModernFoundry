@@ -1,6 +1,7 @@
 {
-  "values": [
-    "modernfoundry:crossbow",
-    "modernfoundry:war_pick"
-  ]
+    "values":  [
+                   "modernfoundry:crossbow",
+                   "modernfoundry:war_pick",
+                   "modernfoundry:repeating_crossbow"
+               ]
 }

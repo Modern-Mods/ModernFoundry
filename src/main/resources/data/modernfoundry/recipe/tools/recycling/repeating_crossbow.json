@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:part_builder_tool_recycling",
+  "parts": [
+    "modernfoundry:bow_limb",
+    "modernfoundry:bow_grip",
+    "modernfoundry:bowstring"
+  ],
+  "pattern": {
+    "tag": "modernfoundry:patterns/default"
+  },
+  "tools": {
+    "item": "modernfoundry:repeating_crossbow"
+  }
+}

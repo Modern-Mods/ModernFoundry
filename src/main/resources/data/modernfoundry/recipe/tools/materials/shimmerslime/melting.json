@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "modernfoundry:shimmerslime",
+  "temperature": 1300,
+  "result": {
+    "fluid": "modernfoundry:molten_shimmerslime",
+    "amount": 90
+  }
+}

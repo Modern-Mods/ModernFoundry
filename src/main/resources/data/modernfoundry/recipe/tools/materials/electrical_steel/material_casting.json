@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:molten_electrical_steel",
+    "amount": 90
+  },
+  "temperature": 900,
+  "output": "modernfoundry:electrical_steel"
+}

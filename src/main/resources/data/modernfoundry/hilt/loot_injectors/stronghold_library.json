@@ -1,0 +1,31 @@
+{
+  "name": "minecraft:chests/stronghold_library",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "modernfoundry:add_tool_data",
+              "materials": [
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                },
+                {
+                  "type": "modernfoundry:ancient"
+                }
+              ]
+            }
+          ],
+          "name": "modernfoundry:repeating_crossbow",
+          "weight": 3
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

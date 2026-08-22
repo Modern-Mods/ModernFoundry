@@ -1,6 +1,10 @@
 {
-  "values": [
-    "modernfoundry:luck",
-    "modernfoundry:tool_belt"
-  ]
+    "values":  [
+                   "modernfoundry:luck",
+                   "modernfoundry:tool_belt",
+                   {
+                       "id":  "modernfoundry:backstabbing",
+                       "required":  false
+                   }
+               ]
 }

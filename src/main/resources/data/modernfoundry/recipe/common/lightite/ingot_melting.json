@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:ingots/lightite" },
+  "result": {
+    "fluid": "modernfoundry:molten_lightite",
+    "amount": 90
+  },
+  "temperature": 450,
+  "time": 14
+}

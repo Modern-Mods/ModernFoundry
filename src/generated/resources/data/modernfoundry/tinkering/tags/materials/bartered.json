@@ -1,21 +1,24 @@
 {
-  "values": [
-    "modernfoundry:nahuatl",
-    "modernfoundry:obsidian",
-    "modernfoundry:darkthread",
-    "modernfoundry:cobalt",
-    "modernfoundry:steel",
-    "modernfoundry:manyullyn",
-    "modernfoundry:hepatizon",
-    "modernfoundry:cinderslime",
-    "modernfoundry:queens_slime",
-    "modernfoundry:blazing_bone",
-    "modernfoundry:blazewood",
-    "modernfoundry:jeweled_hide",
-    "modernfoundry:ancient",
-    {
-      "id": "modernfoundry:necronium",
-      "required": false
-    }
-  ]
+    "values":  [
+                   "modernfoundry:nahuatl",
+                   "modernfoundry:obsidian",
+                   "modernfoundry:darkthread",
+                   "modernfoundry:cobalt",
+                   "modernfoundry:steel",
+                   "modernfoundry:manyullyn",
+                   "modernfoundry:hepatizon",
+                   "modernfoundry:cinderslime",
+                   "modernfoundry:queens_slime",
+                   "modernfoundry:blazing_bone",
+                   "modernfoundry:blazewood",
+                   "modernfoundry:jeweled_hide",
+                   "modernfoundry:ancient",
+                   {
+                       "id":  "modernfoundry:necronium",
+                       "required":  false
+                   },
+                   "modernfoundry:stewium",
+                   "modernfoundry:burnt_ashes",
+                   "modernfoundry:bacium"
+               ]
 }

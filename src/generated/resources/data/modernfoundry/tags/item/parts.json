@@ -1,14 +1,15 @@
 {
-  "values": [
-    "modernfoundry:arrow_head",
-    "modernfoundry:arrow_shaft",
-    "modernfoundry:fletching",
-    "modernfoundry:ribcage",
-    "modernfoundry:shell",
-    "modernfoundry:laces",
-    "modernfoundry:repair_kit",
-    "modernfoundry:fake_ingot",
-    "modernfoundry:fake_storage_block",
-    "#modernfoundry:parts/bartered"
-  ]
+    "values":  [
+                   "modernfoundry:arrow_head",
+                   "modernfoundry:arrow_shaft",
+                   "modernfoundry:fletching",
+                   "modernfoundry:ribcage",
+                   "modernfoundry:shell",
+                   "modernfoundry:laces",
+                   "modernfoundry:repair_kit",
+                   "modernfoundry:fake_ingot",
+                   "modernfoundry:fake_storage_block",
+                   "#modernfoundry:parts/bartered",
+                   "modernfoundry:guard"
+               ]
 }

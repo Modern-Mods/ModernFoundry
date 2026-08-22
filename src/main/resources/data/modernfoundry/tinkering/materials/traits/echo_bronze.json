@@ -1,0 +1,11 @@
+{
+  "default": [
+    {"name": "modernfoundry:sculk_catalyse"},
+    {"name": "modernfoundry:sculk_boost"}
+  ],
+  "perStat": {
+    "tinkers_ingenuity:curio": [
+      {"name": "modernfoundry:sculk_catalyse_curio"},
+      {"name": "modernfoundry:sculk_heal"}]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material",
+  "ingredient": {
+    "item": "modernfoundry:stabilized_gunpowder"
+  },
+  "value": 1,
+  "needed": 2,
+  "material": "modernfoundry:stabilized_gunpowder"
+}

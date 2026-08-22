@@ -1,29 +1,38 @@
 {
-  "values": [
-    "modernfoundry:copper",
-    "modernfoundry:cactus",
-    "modernfoundry:iron",
-    "modernfoundry:weeping_vine",
-    "modernfoundry:amethyst_bronze",
-    "modernfoundry:steel",
-    "modernfoundry:manyullyn",
-    "modernfoundry:cinderslime",
-    "modernfoundry:knightslime",
-    {
-      "id": "modernfoundry:lead",
-      "required": false
-    },
-    {
-      "id": "modernfoundry:bronze",
-      "required": false
-    },
-    {
-      "id": "modernfoundry:electrum",
-      "required": false
-    },
-    {
-      "id": "modernfoundry:fiery",
-      "required": false
-    }
-  ]
+    "values":  [
+                   "modernfoundry:copper",
+                   "modernfoundry:cactus",
+                   "modernfoundry:iron",
+                   "modernfoundry:weeping_vine",
+                   "modernfoundry:amethyst_bronze",
+                   "modernfoundry:steel",
+                   "modernfoundry:manyullyn",
+                   "modernfoundry:cinderslime",
+                   "modernfoundry:knightslime",
+                   {
+                       "id":  "modernfoundry:lead",
+                       "required":  false
+                   },
+                   {
+                       "id":  "modernfoundry:bronze",
+                       "required":  false
+                   },
+                   {
+                       "id":  "modernfoundry:electrum",
+                       "required":  false
+                   },
+                   {
+                       "id":  "modernfoundry:fiery",
+                       "required":  false
+                   },
+                   "modernfoundry:tinkers_bronze",
+                   "modernfoundry:spectre",
+                   "modernfoundry:burnt_ashes",
+                   {
+                       "id":  "modernfoundry:copshowium",
+                       "required":  false
+                   },
+                   "modernfoundry:solidified_emptiness",
+                   "modernfoundry:colorite"
+               ]
 }

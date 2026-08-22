@@ -1,0 +1,28 @@
+{
+  "type": "modernfoundry:modifier",
+  "inputs": [
+    {
+      "tag": "forge:ingots/electrical_steel"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "tag": "forge:ingots/electrical_steel"
+    },
+    {
+      "item": "modernfoundry:surging_wellspring"
+    },
+    {
+      "item": "modernfoundry:surging_wellspring"
+    }
+  ],
+  "tools": {
+    "item": "modernfoundry:mace"
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "allow_crystal": true,
+  "result": "modernfoundry:density_advanced"
+}

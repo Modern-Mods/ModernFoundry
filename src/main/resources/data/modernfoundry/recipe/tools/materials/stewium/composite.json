@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "input": "modernfoundry:ardite",
+  "fluid": {
+    "tag": "forge:rabbit_stew",
+    "amount": 125
+  },
+  "temperature": 100,
+  "output": "modernfoundry:stewium"
+}

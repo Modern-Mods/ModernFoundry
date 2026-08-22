@@ -1,0 +1,31 @@
+{
+  "type": "hilt:add_entry",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/warden"
+    },
+    {
+      "condition": "minecraft:killed_by_player"
+    }
+  ],
+  "entry": {
+    "type": "minecraft:item",
+    "name": "modernfoundry:mace"
+  },
+  "functions": [
+    {
+      "function": "modernfoundry:add_tool_data",
+      "materials": [
+        {
+          "type": "modernfoundry:ancient"
+        },
+        {
+          "type": "modernfoundry:ancient"
+        }
+      ]
+    }
+  ],
+  "post_conditions": [
+  ]
+}

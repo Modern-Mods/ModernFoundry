@@ -1,0 +1,11 @@
+{
+  "type": "modernfoundry:drying_rack",
+  "ingredient": [
+    {
+      "tag": "forge:slimeball/ichor"
+    }
+  ],
+  "output": {
+    "item": "modernfoundry:ichor_slime_drop"
+  }
+}

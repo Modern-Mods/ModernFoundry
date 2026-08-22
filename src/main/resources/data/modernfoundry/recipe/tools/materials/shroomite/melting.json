@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_melting",
+  "input": "modernfoundry:shroomite",
+  "temperature": 600,
+  "result": {
+    "fluid": "modernfoundry:molten_shroomite",
+    "amount": 90
+  }
+}

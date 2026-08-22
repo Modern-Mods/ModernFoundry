@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:ice",
+    "minecraft:snow_block",
+    "minecraft:powder_snow",
+    "modernfoundry:budding_sky_slime_crystal",
+    "modernfoundry:sky_slime_crystal_block",
+    "modernfoundry:sky_congealed_slime",
+    "modernfoundry:sky_slime"
+  ]
+}

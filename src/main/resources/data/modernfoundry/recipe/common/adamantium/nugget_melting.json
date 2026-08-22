@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/adamantium" },
+  "result": {
+    "fluid": "modernfoundry:molten_adamantium",
+    "amount": 10
+  },
+  "temperature": 1400,
+  "time": 26
+}

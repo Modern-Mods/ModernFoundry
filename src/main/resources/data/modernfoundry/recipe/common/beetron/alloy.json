@@ -1,0 +1,12 @@
+{
+  "type": "modernfoundry:alloy",
+  "inputs": [
+    { "tag": "forge:molten_iron",   "amount":   90 },
+    { "tag": "forge:beetroot_soup", "amount":  500 }
+  ],
+  "result": {
+    "fluid": "modernfoundry:molten_beetron",
+    "amount": 90
+  },
+  "temperature": 400
+}

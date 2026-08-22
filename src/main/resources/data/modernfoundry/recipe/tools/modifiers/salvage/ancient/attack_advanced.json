@@ -1,0 +1,16 @@
+{
+  "conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "type": "modernfoundry:modifier_salvage",
+  "tools": {
+    "item": "modernfoundry:minotaur_axe"
+  },
+  "slots": {
+    "ancient": 1
+  },
+  "modifier": "modernfoundry:attack_advanced"
+}

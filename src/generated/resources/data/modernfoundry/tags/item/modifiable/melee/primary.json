@@ -1,26 +1,35 @@
 {
-  "values": [
-    "modernfoundry:sledge_hammer",
-    "modernfoundry:hand_axe",
-    "modernfoundry:broad_axe",
-    "modernfoundry:scythe",
-    "modernfoundry:dagger",
-    "modernfoundry:sword",
-    "modernfoundry:cleaver",
-    "modernfoundry:javelin",
-    "modernfoundry:battlesign",
-    "modernfoundry:swasher",
-    "modernfoundry:katana",
-    "modernfoundry:fuma_shuriken",
-    "modernfoundry:battle_spade",
-    "modernfoundry:greatsword",
-    "modernfoundry:pike",
-    "modernfoundry:lance",
-    "modernfoundry:rapier",
-    "modernfoundry:estoc",
-    {
-      "id": "modernfoundry:minotaur_axe",
-      "required": false
-    }
-  ]
+    "values":  [
+                   "modernfoundry:sledge_hammer",
+                   "modernfoundry:hand_axe",
+                   "modernfoundry:broad_axe",
+                   "modernfoundry:scythe",
+                   "modernfoundry:dagger",
+                   "modernfoundry:sword",
+                   "modernfoundry:cleaver",
+                   "modernfoundry:javelin",
+                   "modernfoundry:battlesign",
+                   "modernfoundry:swasher",
+                   "modernfoundry:katana",
+                   "modernfoundry:fuma_shuriken",
+                   "modernfoundry:battle_spade",
+                   "modernfoundry:greatsword",
+                   "modernfoundry:pike",
+                   "modernfoundry:lance",
+                   "modernfoundry:rapier",
+                   "modernfoundry:estoc",
+                   {
+                       "id":  "modernfoundry:minotaur_axe",
+                       "required":  false
+                   },
+                   "modernfoundry:paxel",
+                   "modernfoundry:knife",
+                   "modernfoundry:mace",
+                   "modernfoundry:cutlass",
+                   "modernfoundry:arrow_thrower",
+                   "modernfoundry:repeating_crossbow",
+                   "modernfoundry:clay_staff",
+                   "modernfoundry:quartz_staff",
+                   "modernfoundry:battle_bucket"
+               ]
 }

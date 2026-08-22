@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#c:ingots/ardite",
+    "#c:ingots/lightite",
+    "#c:ingots/chlorophyte",
+    "#c:ingots/spectre",
+    "#c:ingots/shroomite",
+    "#c:ingots/electrical_steel",
+    "#c:ingots/warden_steel",
+    "#c:ingots/zith",
+    "#c:ingots/shimmerslime",
+    "#c:ingots/adamantium"
+  ]
+}

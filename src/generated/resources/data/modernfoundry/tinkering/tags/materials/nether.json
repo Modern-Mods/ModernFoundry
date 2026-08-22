@@ -1,18 +1,23 @@
 {
-  "values": [
-    "modernfoundry:wood",
-    "modernfoundry:flint",
-    "modernfoundry:rock",
-    "modernfoundry:bone",
-    "modernfoundry:leather",
-    "modernfoundry:string",
-    "modernfoundry:gold",
-    "modernfoundry:slimewood",
-    "modernfoundry:nahuatl",
-    "modernfoundry:obsidian",
-    "modernfoundry:darkthread",
-    "modernfoundry:steel",
-    "modernfoundry:ancient",
-    "#modernfoundry:nether/gated"
-  ]
+    "values":  [
+                   "modernfoundry:wood",
+                   "modernfoundry:flint",
+                   "modernfoundry:rock",
+                   "modernfoundry:bone",
+                   "modernfoundry:leather",
+                   "modernfoundry:string",
+                   "modernfoundry:gold",
+                   "modernfoundry:slimewood",
+                   "modernfoundry:nahuatl",
+                   "modernfoundry:obsidian",
+                   "modernfoundry:darkthread",
+                   "modernfoundry:steel",
+                   "modernfoundry:ancient",
+                   "#modernfoundry:nether/gated",
+                   "modernfoundry:ardite",
+                   "modernfoundry:adamantium",
+                   "modernfoundry:stewium",
+                   "modernfoundry:burnt_ashes",
+                   "modernfoundry:bacium"
+               ]
 }

@@ -1,0 +1,28 @@
+{
+  "perStat": {
+    "modernfoundry:ranged": [
+      {
+        "name": "modernfoundry:mock",
+        "level": 1
+      }
+    ],
+    "modernfoundry:melee_harvest": [
+      {
+        "name": "modernfoundry:mock",
+        "level": 1
+      }
+    ],
+    "modernfoundry:armor": [
+      {
+        "name": "modernfoundry:concealing",
+        "level": 1
+      }
+    ],
+    "modernfoundry:plating_shield": [
+      {
+        "level": 1,
+        "name": "modernfoundry:concealing"
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:molten_tinkers_bronze",
+    "amount": 90
+  },
+  "temperature": 550,
+  "output": "modernfoundry:tinkers_bronze"
+}

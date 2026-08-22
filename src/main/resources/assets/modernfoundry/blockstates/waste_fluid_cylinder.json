@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "modernfoundry:block/waste_fluid_cylinder",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "modernfoundry:block/waste_fluid_cylinder"
+    },
+    "facing=south": {
+      "model": "modernfoundry:block/waste_fluid_cylinder",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modernfoundry:block/waste_fluid_cylinder",
+      "y": 270
+    }
+  }
+}

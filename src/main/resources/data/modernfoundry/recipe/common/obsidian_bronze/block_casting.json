@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "fluid": {
+    "fluid": "modernfoundry:molten_obsidian_bronze",
+    "amount": 810
+  },
+  "result": "modernfoundry:obsidian_bronze_block",
+  "cooling_time": 320
+}

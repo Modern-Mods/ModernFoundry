@@ -1,0 +1,9 @@
+{
+  "type": "modernfoundry:material_fluid",
+  "fluid": {
+    "fluid": "modernfoundry:molten_chlorophyte",
+    "amount": 90
+  },
+  "temperature": 600,
+  "output": "modernfoundry:chlorophyte"
+}

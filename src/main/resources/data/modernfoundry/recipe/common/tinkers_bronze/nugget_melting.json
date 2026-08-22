@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "tag": "forge:nuggets/tinkers_bronze" },
+  "result": {
+    "fluid": "modernfoundry:molten_tinkers_bronze",
+    "amount": 10
+  },
+  "temperature": 550,
+  "time": 8
+}

@@ -1,34 +1,46 @@
 {
-  "perStat": {
-    "modernfoundry:armor": [
-      {
-        "level": 1,
-        "name": "modernfoundry:golden"
-      },
-      {
-        "level": 1,
-        "name": "modernfoundry:magic_protection"
-      }
-    ],
-    "modernfoundry:plating_shield": [
-      {
-        "level": 1,
-        "name": "modernfoundry:magic_protection"
-      }
-    ],
-    "modernfoundry:skull": [
-      {
-        "level": 1,
-        "name": "modernfoundry:chrysophilite"
-      },
-      {
-        "level": 1,
-        "name": "modernfoundry:piglin_disguise"
-      },
-      {
-        "level": 1,
-        "name": "modernfoundry:golden"
-      }
-    ]
-  }
+    "perStat":  {
+                    "modernfoundry:armor":  [
+                                                {
+                                                    "level":  1,
+                                                    "name":  "modernfoundry:golden"
+                                                },
+                                                {
+                                                    "level":  1,
+                                                    "name":  "modernfoundry:magic_protection"
+                                                }
+                                            ],
+                    "modernfoundry:plating_shield":  [
+                                                         {
+                                                             "level":  1,
+                                                             "name":  "modernfoundry:magic_protection"
+                                                         }
+                                                     ],
+                    "modernfoundry:skull":  [
+                                                {
+                                                    "level":  1,
+                                                    "name":  "modernfoundry:chrysophilite"
+                                                },
+                                                {
+                                                    "level":  1,
+                                                    "name":  "modernfoundry:piglin_disguise"
+                                                },
+                                                {
+                                                    "level":  1,
+                                                    "name":  "modernfoundry:golden"
+                                                }
+                                            ],
+                    "modernfoundry:ranged":  [
+                                                 {
+                                                     "name":  "modernfoundry:prickly",
+                                                     "level":  1
+                                                 }
+                                             ],
+                    "modernfoundry:melee_harvest":  [
+                                                        {
+                                                            "name":  "modernfoundry:prickly",
+                                                            "level":  1
+                                                        }
+                                                    ]
+                }
 }

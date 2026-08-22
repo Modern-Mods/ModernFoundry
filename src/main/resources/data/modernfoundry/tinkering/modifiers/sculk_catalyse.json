@@ -1,0 +1,15 @@
+{
+  "level_display": "modernfoundry:no_levels",
+  "modules": [
+    {
+      "type": "modernfoundry:sculk_catalyse"
+    },
+    {
+      "type": "modernfoundry:armor_level",
+      "allow_broken": false,
+      "held_tag": "modernfoundry:modifiable/held",
+      "key": "modernfoundry:sculk_catalyse"
+    }
+  ],
+  "tooltip_display": "always"
+}

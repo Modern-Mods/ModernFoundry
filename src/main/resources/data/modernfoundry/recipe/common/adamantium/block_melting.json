@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:adamantium_block" },
+  "result": {
+    "fluid": "modernfoundry:molten_adamantium",
+    "amount": 810
+  },
+  "temperature": 1400,
+  "time": 233
+}

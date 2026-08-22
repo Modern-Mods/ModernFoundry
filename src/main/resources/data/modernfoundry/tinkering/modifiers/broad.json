@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    {
+      "type": "modernfoundry:stat_boost",
+      "each_level": 30,
+      "operation": "add",
+      "stat": "modernfoundry:block_angle"
+    }
+  ],
+  "tooltip_display": "always"
+}

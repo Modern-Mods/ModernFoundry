@@ -1,10 +1,11 @@
 {
-  "values": [
-    "modernfoundry:fiery",
-    "modernfoundry:freezing",
-    "modernfoundry:thorns",
-    "modernfoundry:ricochet",
-    "modernfoundry:springy",
-    "modernfoundry:blockade"
-  ]
+    "values":  [
+                   "modernfoundry:fiery",
+                   "modernfoundry:freezing",
+                   "modernfoundry:thorns",
+                   "modernfoundry:ricochet",
+                   "modernfoundry:springy",
+                   "modernfoundry:blockade",
+                   "modernfoundry:broad"
+               ]
 }

@@ -1,0 +1,13 @@
+{
+  "type": "modernfoundry:casting_basin",
+  "cast": {
+    "item": "minecraft:ochre_froglight"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "tag": "forge:molten_echo",
+    "amount": 200
+  },
+  "result": "modernfoundry:ochre_frogcroaking",
+  "cooling_time": 1000
+}

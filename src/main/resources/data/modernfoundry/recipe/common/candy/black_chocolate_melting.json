@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:black_chocolate" },
+  "result": {
+    "fluid": "modernfoundry:molten_black_chocolate",
+    "amount": 90
+  },
+  "temperature": 90,
+  "time": 40
+}

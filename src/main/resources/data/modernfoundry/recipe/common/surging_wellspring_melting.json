@@ -1,0 +1,10 @@
+{
+  "type": "modernfoundry:melting",
+  "ingredient": { "item": "modernfoundry:surging_wellspring" },
+  "result": {
+    "fluid": "modernfoundry:molten_copper",
+    "amount": 90
+  },
+  "temperature": 500,
+  "time": 120
+}

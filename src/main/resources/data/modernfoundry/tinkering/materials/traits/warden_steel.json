@@ -1,0 +1,11 @@
+{
+  "default": [
+    {"name": "modernfoundry:sculk_catalyse", "level": 1},
+    {"name": "modernfoundry:sculk_struggle", "level": 1}
+  ],
+  "perStat": {
+    "tinkers_ingenuity:curio": [
+      {"name": "modernfoundry:sculk_catalyse_curio"},
+      {"name": "modernfoundry:sculk_struggle_curio"}]
+  }
+}
