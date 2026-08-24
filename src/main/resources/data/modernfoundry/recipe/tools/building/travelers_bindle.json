@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/travelers_bindle",
+  "extra_requirements": [{ "item": "minecraft:leather" }],
+  "result": "modernfoundry:travelers_bindle"
+}

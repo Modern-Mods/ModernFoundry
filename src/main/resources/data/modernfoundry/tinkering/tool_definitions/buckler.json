@@ -1,0 +1,43 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": ["modernfoundry:shield_core", "modernfoundry:bow_limb", "modernfoundry:bow_grip"],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": {
+        "modernfoundry:attack_damage": 1.5,
+        "modernfoundry:attack_speed": 1.2,
+        "modernfoundry:block_amount": 15,
+        "modernfoundry:block_angle": 140.0,
+        "modernfoundry:use_item_speed": 0.7
+      }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": { "modernfoundry:durability": 1.1 }
+    },
+    {
+      "type": "modernfoundry:modifier_slots",
+      "slots": { "upgrades": 3, "defense": 2 }
+    },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        { "name": "modernfoundry:blocking", "level": 1 },
+        { "name": "modernfoundry:throwing", "level": 1 },
+        { "name": "modernfoundry:returning", "level": 1 }
+      ]
+    }
+  ]
+}

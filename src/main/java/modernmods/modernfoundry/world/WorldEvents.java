@@ -5,13 +5,16 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.SkullBlock;
+import net.neoforged.neoforge.common.BasicItemListing;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent.LivingVisibilityEvent;
+import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -67,5 +70,17 @@ public class WorldEvents {
     if (weight > 0) {
       event.getRareTrades().addAll(Collections.nCopies(weight, AncientToolItemListing.INSTANCE));
     }
+  }
+
+  @SubscribeEvent
+  static void oreberryTrades(VillagerTradesEvent event) {
+    if (!Config.COMMON.oreberriesEnableVillager.get() || event.getType() != VillagerProfession.TOOLSMITH) {
+      return;
+    }
+    event.getTrades().get(1).add(new BasicItemListing(12, new ItemStack(Oreberries.ironBush.get()), 12, 2, 0.2F));
+    event.getTrades().get(1).add(new BasicItemListing(12, new ItemStack(Oreberries.goldBush.get()), 12, 2, 0.2F));
+    event.getTrades().get(1).add(new BasicItemListing(12, new ItemStack(Oreberries.copperBush.get()), 12, 2, 0.2F));
+    event.getTrades().get(1).add(new BasicItemListing(12, new ItemStack(Oreberries.tinBush.get()), 12, 2, 0.2F));
+    event.getTrades().get(1).add(new BasicItemListing(12, new ItemStack(Oreberries.aluminumBush.get()), 12, 2, 0.2F));
   }
 }

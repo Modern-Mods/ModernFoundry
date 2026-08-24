@@ -1,0 +1,55 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": [
+        { "item": "modernfoundry:small_blade", "scale": 0.25 },
+        { "item": "modernfoundry:small_blade", "scale": 0.25 },
+        { "item": "modernfoundry:small_blade", "scale": 0.25 },
+        { "item": "modernfoundry:small_blade", "scale": 0.25 },
+        "modernfoundry:tough_handle"
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 }
+      ]
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": { "modernfoundry:attack_damage": 6.0, "modernfoundry:attack_speed": 0.5 }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:attack_damage": 1.7,
+        "modernfoundry:durability": 1.3,
+        "modernfoundry:mining_speed": 0.2
+      }
+    },
+    { "type": "modernfoundry:modifier_slots", "slots": { "upgrades": 1 } },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [{ "name": "modernfoundry:silky_shears", "level": 1 }]
+    },
+    { "type": "modernfoundry:tool_actions", "tool_actions": ["sword_dig"] },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "c:mineable/sword"
+    },
+    {
+      "type": "modernfoundry:mining_speed_modifier",
+      "blocks": ["minecraft:cobweb"],
+      "modifier": 7.5,
+      "predicate_type": "hilt:set"
+    },
+    { "type": "modernfoundry:sweep_melee", "range": 3.0 }
+  ]
+}

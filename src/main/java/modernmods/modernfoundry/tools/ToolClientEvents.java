@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
@@ -38,6 +39,7 @@ import modernmods.hilt.client.SafeClientAccess;
 import modernmods.hilt.client.TooltipKey;
 import modernmods.hilt.data.listener.ISafeManagerReloadListener;
 import modernmods.modernfoundry.TConstruct;
+import modernmods.modernfoundry.gadgets.item.SlimeGadgetDataComponents;
 import modernmods.modernfoundry.common.ClientEventBase;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.network.TinkerNetwork;
@@ -212,6 +214,13 @@ public class ToolClientEvents extends ClientEventBase {
       TinkerItemProperties.registerToolProperties(TinkerTools.fumaShuriken);
       TinkerItemProperties.registerToolProperties(TinkerTools.pike);
       TinkerItemProperties.registerToolProperties(TinkerTools.lance);
+      TinkerItemProperties.registerToolProperties(TinkerTools.throwingCard);
+      TinkerItemProperties.registerToolProperties(TinkerTools.buckler);
+      TinkerItemProperties.registerToolProperties(TinkerTools.quarterstaff);
+      TinkerItemProperties.registerToolProperties(TinkerTools.helixBlade);
+      TinkerItemProperties.registerToolProperties(TinkerTools.scissors);
+      TinkerItemProperties.registerToolProperties(TinkerTools.travelersBindle);
+      TinkerItemProperties.registerToolProperties(TinkerTools.fluidWand);
       // misc
       TinkerItemProperties.registerToolProperties(TinkerTools.flintAndBrick);
       TinkerItemProperties.registerToolProperties(TinkerTools.skyStaff);
@@ -234,6 +243,8 @@ public class ToolClientEvents extends ClientEventBase {
       TinkerTools.plateArmor.forEach(brokenConsumer);
       TinkerTools.slimesuit.forEach(brokenConsumer);
       TinkerItemProperties.registerToolProperties(TinkerTools.slimeWings);
+      ItemProperties.register(TinkerTools.slimeGadgetBoots.get(), getResource("slime_type"), (stack, level, entity, seed) -> SlimeGadgetDataComponents.getType(stack));
+      ItemProperties.register(TinkerTools.slimeSling.get(), getResource("slime_type"), (stack, level, entity, seed) -> SlimeGadgetDataComponents.getType(stack));
     });
   }
 
@@ -289,6 +300,13 @@ public class ToolClientEvents extends ClientEventBase {
     registerItemColors(colors, TinkerTools.arrow);
     registerItemColors(colors, TinkerTools.shuriken);
     registerItemColors(colors, TinkerTools.throwingAxe);
+    registerItemColors(colors, TinkerTools.throwingCard);
+    registerItemColors(colors, TinkerTools.buckler);
+    registerItemColors(colors, TinkerTools.quarterstaff);
+    registerItemColors(colors, TinkerTools.helixBlade);
+    registerItemColors(colors, TinkerTools.scissors);
+    registerItemColors(colors, TinkerTools.travelersBindle);
+    registerItemColors(colors, TinkerTools.fluidWand);
     // ancient
     registerItemColors(colors, TinkerTools.meltingPan);
     registerItemColors(colors, TinkerTools.warPick);
@@ -303,8 +321,11 @@ public class ToolClientEvents extends ClientEventBase {
     Consumer<Item> brokenConsumer = item -> event.register(ToolModel.COLOR_HANDLER, item);
     TinkerTools.travelersGear.forEach(brokenConsumer);
     TinkerTools.plateArmor.forEach(brokenConsumer);
+    brokenConsumer.accept(TinkerTools.backpack.get());
     TinkerTools.slimesuit.forEach(brokenConsumer);
     registerItemColors(colors, TinkerTools.slimeWings);
+    event.register((stack, index) -> 0xFF000000 | SlimeGadgetDataComponents.getColor(stack), TinkerTools.slimeGadgetBoots.get());
+    event.register((stack, index) -> 0xFF000000 | SlimeGadgetDataComponents.getColor(stack), TinkerTools.slimeSling.get());
 
     // modifier crystal
     event.register((stack, index) -> {

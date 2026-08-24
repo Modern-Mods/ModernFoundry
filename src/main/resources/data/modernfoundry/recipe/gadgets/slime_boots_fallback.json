@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "modernfoundry:slime_gadget_boots",
+  "pattern": ["A A", "B B"],
+  "key": {
+    "A": { "tag": "c:slimeballs" },
+    "B": { "tag": "modernfoundry:congealed_slime" }
+  },
+  "result": { "id": "modernfoundry:slime_gadget_boots", "components": { "modernfoundry:slime_type": 5 } }
+}

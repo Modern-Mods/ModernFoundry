@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "modernfoundry:item/tconstruct/queens_slime"
+    "layer0": "modernfoundry:item/modernfoundry/queens_slime"
   }
 }

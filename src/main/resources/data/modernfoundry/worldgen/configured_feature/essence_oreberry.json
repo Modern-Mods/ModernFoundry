@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:oreberry_bush",
+  "config": {
+    "state": {
+      "Name": "modernfoundry:essence_berry_bush",
+      "Properties": {
+        "age": "3"
+      }
+    },
+    "size_chance": 8,
+    "replace_blocks": [
+      "minecraft:stone",
+      "minecraft:grass_block",
+      "minecraft:dirt",
+      "minecraft:water",
+      "minecraft:sand",
+      "minecraft:gravel",
+      "minecraft:snow"
+    ]
+  }
+}
+

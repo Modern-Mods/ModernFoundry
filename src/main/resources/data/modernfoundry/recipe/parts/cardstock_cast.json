@@ -1,0 +1,9 @@
+{
+  "id": "modernfoundry:parts/cardstock_cast",
+  "type": "modernfoundry:casting_table",
+  "cast": { "item": "minecraft:paper" },
+  "cast_consumed": true,
+  "cooling_time": 57,
+  "fluid": { "tag": "forge:molten_gold", "amount": 90 },
+  "result": "modernfoundry:cardstock_cast"
+}

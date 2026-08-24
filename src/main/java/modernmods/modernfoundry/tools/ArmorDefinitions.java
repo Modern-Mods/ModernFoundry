@@ -3,6 +3,7 @@ package modernmods.modernfoundry.tools;
 import modernmods.modernfoundry.common.Sounds;
 import modernmods.modernfoundry.library.tools.definition.ModifiableArmorMaterial;
 import modernmods.modernfoundry.library.tools.definition.ToolDefinition;
+import net.minecraft.world.item.ArmorItem;
 
 import static modernmods.modernfoundry.TConstruct.getResource;
 
@@ -18,4 +19,8 @@ public class ArmorDefinitions {
   /** High modifiers armor set */
   public static final ModifiableArmorMaterial SLIMESUIT = ModifiableArmorMaterial.create(getResource("slime"), Sounds.EQUIP_SLIME.getSound());
   public static final ToolDefinition SLIME_WINGS = ToolDefinition.create(TinkerTools.slimeWings);
+
+  /** Native Tinkers Bags backpack armor uses the existing modifiable armor stack. */
+  public static final ModifiableArmorMaterial BACKPACK = ModifiableArmorMaterial.create(getResource("backpack"), Sounds.EQUIP_TRAVELERS.getSound(), ArmorItem.Type.CHESTPLATE);
+  public static final ToolDefinition BACKPACK_TOOL = ToolDefinition.create(getResource("backpack"));
 }

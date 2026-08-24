@@ -1,0 +1,23 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "blade_l": "modernfoundry:arsenal/item/tool/scissors/blade_l",
+    "blade_r": "modernfoundry:arsenal/item/tool/scissors/blade_r",
+    "handle_l": "modernfoundry:arsenal/item/tool/scissors/handle_l",
+    "handle_r": "modernfoundry:arsenal/item/tool/scissors/handle_r",
+    "large_blade_l": "modernfoundry:arsenal/item/tool/scissors/large/blade_l",
+    "large_blade_r": "modernfoundry:arsenal/item/tool/scissors/large/blade_r",
+    "large_handle_l": "modernfoundry:arsenal/item/tool/scissors/large/handle_l",
+    "large_handle_r": "modernfoundry:arsenal/item/tool/scissors/large/handle_r"
+  },
+  "modifier_maps": ["modernfoundry:sword"],
+  "large": true,
+  "large_offset": [-3, -3],
+  "parts": [
+    { "name": "blade_l", "index": 0 },
+    { "name": "blade_r", "index": 1 },
+    { "name": "handle_l", "index": 2 },
+    { "name": "handle_r", "index": 3 }
+  ]
+}

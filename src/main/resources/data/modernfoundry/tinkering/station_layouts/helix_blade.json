@@ -1,0 +1,12 @@
+{
+  "translation_key": "item.modernfoundry.helix_blade",
+  "icon": { "item": "modernfoundry:helix_blade", "nbt": "{tic_display:1b}" },
+  "sortIndex": 13,
+  "input_slots": [
+    { "filter": { "item": "modernfoundry:small_blade" }, "icon": "modernfoundry:small_blade", "translation_key": "item.modernfoundry.small_blade", "x": 30, "y": 24 },
+    { "filter": { "item": "modernfoundry:small_blade" }, "icon": "modernfoundry:small_blade", "translation_key": "item.modernfoundry.small_blade", "x": 48, "y": 24 },
+    { "filter": { "item": "modernfoundry:small_blade" }, "icon": "modernfoundry:small_blade", "translation_key": "item.modernfoundry.small_blade", "x": 30, "y": 42 },
+    { "filter": { "item": "modernfoundry:small_blade" }, "icon": "modernfoundry:small_blade", "translation_key": "item.modernfoundry.small_blade", "x": 48, "y": 42 },
+    { "filter": { "item": "modernfoundry:tough_handle" }, "icon": "modernfoundry:tough_handle", "translation_key": "item.modernfoundry.tough_handle", "x": 12, "y": 60 }
+  ]
+}

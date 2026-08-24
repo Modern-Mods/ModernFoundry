@@ -241,6 +241,10 @@ public class InteractionHandler {
       return InteractionResult.PASS;
     }
 
+    if (!player.level().isClientSide) {
+      ToolStack.ensureInitialized(chestplate);
+    }
+
     // first, run the modifier hook
     ToolStack tool = ToolStack.from(chestplate);
     for (ModifierEntry entry : tool.getModifierList()) {

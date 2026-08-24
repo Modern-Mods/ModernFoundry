@@ -44,6 +44,7 @@ import modernmods.modernfoundry.tools.TinkerToolParts;
 import modernmods.modernfoundry.tools.TinkerTools;
 import modernmods.modernfoundry.world.TinkerStructures;
 import modernmods.modernfoundry.world.TinkerWorld;
+import modernmods.modernfoundry.world.Oreberries;
 import modernmods.modernfoundry.thinking.common.recipes.ModRecipes;
 import modernmods.modernfoundry.thinking.common.register.ModBlockEntities;
 import modernmods.modernfoundry.thinking.common.register.ModCommonItems;
@@ -97,6 +98,7 @@ public class TConstruct {
     // base
     bus.register(new TinkerCommons());
     bus.register(new TinkerMaterials());
+    new Oreberries();
     new TinkerEffects();
     bus.register(new TinkerGadgets());
     bus.register(new TinkerAttributes());

@@ -60,6 +60,8 @@ public class ModifierIds {
   // general abilities
   public static final ModifierId reach = id("reach");
   public static final ModifierId lengthy = id("lengthy");
+  public static final ModifierId range = id("range");
+  public static final ModifierId guillotine = id("guillotine");
   public static final ModifierId glowing = id("glowing");
   public static final ModifierId firestarter = id("firestarter");
   public static final ModifierId flamewake = id("flamewake"); // TODO: consider merging into firestarter, the rest do it
@@ -158,6 +160,9 @@ public class ModifierIds {
   public static final ModifierId swiftSneak = id("swift_sneak");
   public static final ModifierId workbench = id("workbench");
   public static final ModifierId toolBelt = id("tool_belt");
+  public static final ModifierId smallStash = id("small_stash");
+  public static final ModifierId hoarding = id("hoarding");
+  public static final ModifierId extraPocket = id("extra_pocket");
   public static final ModifierId leaping = id("leaping");
   public static final ModifierId soulBelt = id("soul_belt");
   public static final ModifierId craftingTable = id("crafting_table");

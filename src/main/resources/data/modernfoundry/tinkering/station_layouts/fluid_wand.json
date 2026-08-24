@@ -1,0 +1,10 @@
+{
+  "translation_key": "item.modernfoundry.fluid_wand",
+  "icon": { "item": "modernfoundry:fluid_wand", "nbt": "{tic_display:1b}" },
+  "sortIndex": 23,
+  "input_slots": [
+    { "filter": { "item": "modernfoundry:bow_limb" }, "icon": "modernfoundry:bow_limb", "translation_key": "item.modernfoundry.bow_limb", "x": 24, "y": 38 },
+    { "filter": { "item": "modernfoundry:bow_limb" }, "icon": "modernfoundry:bow_limb", "translation_key": "item.modernfoundry.bow_limb", "x": 42, "y": 38 },
+    { "filter": { "item": "modernfoundry:seared_fluid_cannon" }, "icon": "modernfoundry:seared_fluid_cannon", "translation_key": "block.modernfoundry.seared_fluid_cannon", "x": 33, "y": 58 }
+  ]
+}

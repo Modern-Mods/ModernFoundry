@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/iron/native_oreberry",
+  "ingredient": {
+    "item": "modernfoundry:iron_oreberry"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_iron"
+  },
+  "temperature": 800,
+  "time": 20
+}
+

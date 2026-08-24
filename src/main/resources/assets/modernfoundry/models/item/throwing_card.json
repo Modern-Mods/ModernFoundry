@@ -1,0 +1,14 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "card_top": "modernfoundry:arsenal/item/tool/ammo/card_top",
+    "card_bottom": "modernfoundry:arsenal/item/tool/ammo/card_bottom"
+  },
+  "modifier_roots": ["modernfoundry:arsenal/item/tool/ammo/card_modifiers/"],
+  "show_traits": true,
+  "parts": [
+    { "name": "card_top", "index": 0 },
+    { "name": "card_bottom", "index": 1 }
+  ]
+}

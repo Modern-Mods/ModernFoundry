@@ -1550,3 +1550,117 @@
 - Archive validation: `ModernFoundry-1.21.1-4.1.6-NeoForge.jar` contains all 13 TCI blockstates, all 13 TCI bucket models, 7 bronze assets, Fantastic Gadgetry, the English language file, and the TCI license. SHA-256: `da8ea02af6d351b3209f08d7ad35daff57f86f4771050a0bd4fbe5ff3f0f9efc`.
 - Remaining unrelated client warnings: deprecated `roving_arrow`/`seeking_arrow` item model entries, dynamic `unknown` tool render variants, vanilla armor-trim sprites, and vanilla goat-horn sounds.
 - Tests created or run: no dedicated tests added.
+
+## 2026-08-23 - Complete native reference-integration release gate
+
+**Prompt / Task**
+- Finish the remaining `NEWTASK.md` work, build the latest Modern Foundry JAR, and provide an additions breakdown.
+
+**What Changed**
+- Completed the release handoff for the native Construct's Armory, Armory Expansion, Constructs Arsenal, Tinkers Bags, Tinkers Wands, Oreberries, and Tinkers Construct 1.12 slime-gadget integration wave.
+- Retained native Modern Foundry ownership for registries, data, recipes, tags, models, translations, worldgen, configuration, client hooks, and optional integrations.
+- Retained the Armory Expansion provenance/permission notice and all applicable third-party license notices in `META-INF/licenses`.
+
+**Steps Taken**
+- Re-read `TASK.md`, `NEWTASK.md`, repository instructions, and the active ponytail constraints; preserved the existing dirty worktree.
+- Ran `runServer --rerun-tasks`; the dedicated dev server reached `Done (4.948s)`.
+- Ran `clean build --console=plain --no-daemon`; Gradle `test`, `check`, and `testJunit` (`NO-SOURCE`) passed.
+- Inspected the release JAR for native classes, feature resource families, license notices, and stale external namespace paths.
+- Ran `git diff --check` and calculated the final artifact hash.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: existing native tool, armor, smeltery, client, world, config, and data owners plus the new slime-gadget and Oreberry runtime seams.
+- Owning module/system: Modern Foundry's `TinkerTools`, `TinkerToolParts`, `ArmorDefinitions`, `TinkerSmeltery`, client registration, world registration/worldgen, and `TinkerNetwork` patterns.
+- Existing logic reused or extracted: native tool/armor stack state, station layouts, modifier modules, fluid cannon/tank/spitting/AOE behavior, slime color/render systems, recipe/data conventions, and optional-plugin boundaries.
+- Net line change: existing registrations and resource/data surfaces extended with native reference content; no new runtime dependency or parallel addon framework.
+- New files: native gadget/worldgen runtime classes, reference-derived native data/assets, and seven task-specific license notices.
+- Build files updated: the existing optional Json Things source exclusion remains; no new runtime dependency was added.
+
+**Rationale / Tradeoffs**
+- The integration uses one Modern Foundry namespace and existing owners so the reference mods and Json Things are not required at runtime.
+- The six canonical Oreberry types are registered deterministically; arbitrary runtime registry mutation from legacy configuration was not carried forward.
+- Armory Expansion's external material IDs and unsupported traits remain an optional compatibility inventory rather than invented base-mod behavior.
+
+**Build / Validation**
+- Production build: `rtk .\\gradlew.bat clean build --console=plain --no-daemon` passed in 5m13s with the repository's existing deprecation warnings.
+- Tests/checks: Gradle `test`, `check`, `testJunit` (`NO-SOURCE`), `verifyGeneratedTextures`, targeted archive/resource audits, and `git diff --check` passed.
+- Dedicated-server smoke: fresh `runServer --rerun-tasks` reached `Done (4.948s)`; unrelated baseline Hilt recipe-context, legacy-tag, and modifier-reference diagnostics remain in the dev log, while no imported-group-specific recipe or bag-definition error was reproduced.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.6-NeoForge.jar` (31,236,603 bytes) contains the native feature resources and all nine license notices; targeted stale external namespace scan returned zero.
+- SHA-256: `347a7f93faff05659cb8fc23a7761e15d450cc67e0d038fd0160c01a15df96c8`.
+- Manual validation: client visual checks, fresh-world construction/use, persistence/chunk reload, two-player synchronization, and optional-integration combinations remain outstanding and are not claimed.
+- Tests created or run: no dedicated integration tests added.
+
+## 2026-08-23 - Repair imported asset atlas and namespace paths
+
+**Prompt / Task**
+- Bundle the requested Armory Expansion asset set and align the namespaces so the Slime Boots/Sling, Throwing Cards, Buckler, Quarterstaff, Helix Blade, Scissors, Bindle, Fluid Wands, Backpacks, Cardstock patterns, and Card Parts load correctly.
+- Finish the remaining `NEWTASK.md` release work and provide the latest JAR.
+
+**What Changed**
+- Added atlas sources for `gadgets`, `arsenal/item`, `bags/item`, and `wands/item`.
+- Moved five shared pattern textures to `assets/modernfoundry/textures/gui/tinker_pattern/`.
+- Moved 91 backpack armor textures to `assets/modernfoundry/textures/tinker_armor/backpack/` and corrected the backpack armor model prefixes.
+- Removed verified-empty legacy asset directories and added the missing `tinkers-thinking-mit.txt` notice; nine license notices are now bundled.
+
+**Steps Taken**
+- Audited the requested resource families, atlas sources, model texture references, legacy paths, license notices, and the release archive.
+- Ran `verifyGeneratedTextures`, targeted JSON/resource/path audits, the Gradle clean build with tests/checks, the final JAR build, and `git diff --check`.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: Minecraft atlas sources, Modern Foundry item/armor model resources, shared pattern textures, backpack armor textures, and `META-INF/licenses`.
+- Owning module/system: Modern Foundry's native resource namespace, Minecraft client atlas stitching/model loading, and project attribution convention.
+- Existing logic reused or extracted: the existing shared `tinker_pattern` path, native `modernfoundry` model paths, and the established license-notice layout; no parallel loader or runtime dependency was added.
+- Net line change: resource-only finishing pass; no Java or build-file changes were needed for the path repair.
+- New files: five shared pattern textures, 91 backpack armor textures, and one MIT license notice; legacy duplicates were removed.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Directory atlas sources are required for Minecraft to stitch the imported texture families; correcting the shared paths fixes all dependent models through the existing client pipeline.
+- The repair preserves the native `modernfoundry` namespace and retains attribution without inventing fallback assets or external runtime dependencies.
+
+**Build / Validation**
+- Production build and final JAR build passed with the repository's existing Gradle deprecation warnings.
+- Tests/checks: `verifyGeneratedTextures`, targeted JSON/resource/path audits, and `git diff --check` passed.
+- Archive validation: `build/libs/ModernFoundry-1.21.1-4.1.6-NeoForge.jar` is 31,236,447 bytes, contains the 20 required asset entries and all nine license notices, matched 8 checked source/JAR asset byte pairs, and contains no stale external namespace paths.
+- SHA-256: `e6f0afa38707085d88bcaa80cf3c686cc8a0997e35a38b8474cca81f1a795c4f`.
+- Manual validation: client in-world visual checks, fresh-world construction/use, persistence/chunk reload, two-player synchronization, and optional-integration combinations remain outstanding and are not claimed.
+- Tests created or run: no dedicated integration tests added.
+
+## 2026-08-23 - Fix reported gadget, tool, backpack, and Oreberry issues
+
+**Prompt / Task**
+- Fix broken Slime Boots equipped textures without adding player bounce behavior.
+- Make backpacks open as containers.
+- Make Helix Blades draw and swing through the normal sword path.
+- Add the missing Quarterstaff item/equipped assets, side art, part-slot assets, and Oreberry resources.
+
+**What Changed**
+- Added the Slime Boots equipped armor layers and kept the boots out of bounce handling.
+- Completed backpack registration/data wiring, hoarding inventory initialization, armor tagging, and the server-side opening route.
+- Registered Helix Blade as a `ModifiableSwordItem` and included the sword tag/model-property path instead of custom animation code.
+- Added Quarterstaff item and equipped models plus the Buckler, Scissors, Helix Blade, and Quarterstaff side-art and part-slot assets.
+- Added native Oreberry items, bushes, textures, models, tinting, recipes, and worldgen resources.
+
+**Steps Taken**
+- Traced the existing native owners in `TinkerTools`, `TinkerToolParts`, `ArmorDefinitions`, `ToolDefinitions`, `ToolClientEvents`, `InteractionHandler`, and the Oreberry world/content registrations.
+- Preserved the supplied screenshots and unrelated dirty worktree changes.
+- Completed `runData`, `git diff --check`, and the clean Gradle build.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: native tool and armor registries, client model/property registration, `InteractionHandler`, backpack modifier/tool data, Oreberry registration/worldgen, and Modern Foundry asset/data resources.
+- Owning module/system: Modern Foundry's existing tool, armor, modifier, client resource, inventory, and worldgen systems.
+- Existing logic reused or extracted: the standard modifiable sword behavior, existing backpack capability/opening flow, native atlas/model conventions, and existing slime gadget behavior.
+- Net line change: targeted runtime/resource/data additions already present in the working tree; no parallel animation, bounce, container, or registry system was introduced.
+- New files: native Oreberry runtime/data/assets, gadget/tool models and textures, backpack/armor assets, and the task-specific resource additions.
+- Build files updated: no additional build-file change was made during this checkpoint; existing worktree changes were preserved.
+
+**Rationale / Tradeoffs**
+- The requested no-bounce behavior is preserved by leaving Slime Boots passive and limiting launch behavior to the existing Slime Sling path.
+- Helix Blade reuses the standard sword identity so vanilla draw/swing handling applies without a custom animation layer.
+
+**Build / Validation**
+- `runData` passed; no active data providers rewrote generated resources.
+- `rtk git diff --check` passed with only existing line-ending conversion warnings.
+- `rtk cmd.exe /d /c ".\\gradlew.bat clean build --console=plain --no-daemon"` passed in 5m26s; `compileJava`, `verifyGeneratedTextures`, `test`, `check`, and packaging completed, with the repository's existing deprecation warnings.
+- Manual in-game verification was intentionally left to the user; client visuals, backpack interaction, combat animation, fresh-world behavior, persistence, and multiplayer behavior are not claimed here.
+- Tests created or run: existing Gradle test suite; no dedicated tests added.

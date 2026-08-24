@@ -91,6 +91,8 @@ public final class TinkerToolParts extends TinkerModule {
   public static final ItemObject<ToolPartItem> arrowHead = ITEMS.register("arrow_head", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.ARROW_HEAD.getIdentifier()));
   public static final ItemObject<ToolPartItem> arrowShaft = ITEMS.register("arrow_shaft", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.ARROW_SHAFT.getIdentifier()));
   public static final ItemObject<ToolPartItem> fletching = ITEMS.register("fletching", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.FLETCHING.getIdentifier()));
+  public static final ItemObject<ToolPartItem> cardTop = ITEMS.register("card_top", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.ARROW_HEAD.getIdentifier()));
+  public static final ItemObject<ToolPartItem> cardBottom = ITEMS.register("card_bottom", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.FLETCHING.getIdentifier()));
   // other parts
   public static final ItemObject<ToolPartItem> toolBinding = ITEMS.register("tool_binding", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.BINDING.getIdentifier()));
   public static final ItemObject<ToolPartItem> toughBinding = ITEMS.register("tough_binding", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.BINDING.getIdentifier()));
@@ -100,6 +102,7 @@ public final class TinkerToolParts extends TinkerModule {
   public static final EnumObject<ArmorItem.Type,ToolPartItem> plating = ITEMS.registerEnum(ModifiableArmorMaterial.ARMOR_TYPES, "plating", type -> new ToolPartItem(ITEM_PROPS, PlatingMaterialStats.TYPES.get(type.ordinal()).getId()));
   public static final ItemObject<ToolPartItem> maille = ITEMS.register("maille", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.MAILLE.getIdentifier()));
   public static final ItemObject<ToolPartItem> shieldCore = ITEMS.register("shield_core", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.SHIELD_CORE.getIdentifier()));
+  public static final ItemObject<ToolPartItem> canvas = ITEMS.register("canvas", () -> new ToolPartItem(ITEM_PROPS, StatlessMaterialStats.CUIRASS.getIdentifier()));
   // slimesuit
   public static final ItemObject<ToolPartItem> ribcage = ITEMS.register("ribcage", () -> new ToolPartItem(ITEM_PROPS, RepairStats.RIBCAGE.getId()));
   public static final ItemObject<ToolPartItem> shell = ITEMS.register("shell", () -> new ToolPartItem(ITEM_PROPS, RepairStats.SHELL.getId()));
@@ -143,6 +146,8 @@ public final class TinkerToolParts extends TinkerModule {
     accept(output, arrowHead);
     accept(output, arrowShaft);
     accept(output, fletching);
+    accept(output, cardTop);
+    accept(output, cardBottom);
     // plating, pair each one with the dummy plating item
     for (ArmorItem.Type type : ModifiableArmorMaterial.ARMOR_TYPES) {
       tab.accept(TinkerSmeltery.dummyPlating.get(type));

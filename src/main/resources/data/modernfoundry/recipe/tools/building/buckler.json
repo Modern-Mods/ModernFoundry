@@ -1,0 +1,5 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/buckler",
+  "result": "modernfoundry:buckler"
+}

@@ -1,0 +1,7 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "modernfoundry:gold_oreberry",
+  "step": "underground_decoration"
+}
+

@@ -36,6 +36,7 @@ import modernmods.modernfoundry.world.client.SlimeColorReloadListener;
 import modernmods.modernfoundry.world.client.SlimeColorizer;
 import modernmods.modernfoundry.world.client.TerracubeRenderer;
 import modernmods.modernfoundry.world.client.TinkerSlimeRenderer;
+import modernmods.modernfoundry.world.item.OreberryItem;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
@@ -162,6 +163,13 @@ public class WorldClientEvents extends ClientEventBase {
     event.register(
       (state, reader, pos, index) -> getSlimeColorByPos(pos, FoliageType.ENDER, SlimeColorizer.LOOP_OFFSET),
       TinkerWorld.enderSlimeVine.get());
+
+    event.register((state, reader, pos, index) -> 0xFFC7A3, Oreberries.ironBush.get());
+    event.register((state, reader, pos, index) -> 0xFFCC33, Oreberries.goldBush.get());
+    event.register((state, reader, pos, index) -> 0xFF8833, Oreberries.copperBush.get());
+    event.register((state, reader, pos, index) -> 0xBB4422, Oreberries.tinBush.get());
+    event.register((state, reader, pos, index) -> 0xEEFFFF, Oreberries.aluminumBush.get());
+    event.register((state, reader, pos, index) -> 0xFFFFFF, Oreberries.essenceBush.get());
   }
 
   @SubscribeEvent
@@ -180,6 +188,18 @@ public class WorldClientEvents extends ClientEventBase {
     registerBlockItemColorAlias(blockColors, itemColors, TinkerWorld.slimeTallGrass);
     registerBlockItemColorAlias(blockColors, itemColors, TinkerWorld.skySlimeVine);
     registerBlockItemColorAlias(blockColors, itemColors, TinkerWorld.enderSlimeVine);
+
+    event.register((stack, index) -> ((OreberryItem) stack.getItem()).color(),
+      Oreberries.ironBerry.get(), Oreberries.goldBerry.get(), Oreberries.copperBerry.get(),
+      Oreberries.tinBerry.get(), Oreberries.aluminumBerry.get(), Oreberries.essenceBerry.get());
+    event.register((stack, index) -> 0xFFC7A3, Oreberries.ironBush.asItem());
+    event.register((stack, index) -> 0xFFCC33, Oreberries.goldBush.asItem());
+    event.register((stack, index) -> 0xFF8833, Oreberries.copperBush.asItem());
+    event.register((stack, index) -> 0xBB4422, Oreberries.tinBush.asItem());
+    event.register((stack, index) -> 0xEEFFFF, Oreberries.aluminumBush.asItem());
+    event.register((stack, index) -> 0xFFFFFF, Oreberries.essenceBush.asItem());
+    event.register((stack, index) -> 0xFFBA80, Oreberries.tinNugget.get());
+    event.register((stack, index) -> 0xEEFFFF, Oreberries.aluminumNugget.get());
   }
 
   /**

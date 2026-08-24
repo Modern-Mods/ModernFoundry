@@ -594,7 +594,7 @@ public class SmelteryRecipeBuilder {
   @SuppressWarnings("removal")
   public SmelteryRecipeBuilder oreberry() {
     assert baseUnit == FluidValues.INGOT;
-    itemMelting(1/9f, "oreberry", 1 / 3f, new ResourceLocation("oreberriesreplanted", name.getPath() + "_oreberry"), false);
+    itemMelting(1/9f, "oreberry", 1 / 3f, new ResourceLocation("modernfoundry", name.getPath() + "_oreberry"), false);
     return this;
   }
 

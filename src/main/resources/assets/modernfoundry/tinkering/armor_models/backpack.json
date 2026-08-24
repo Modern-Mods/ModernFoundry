@@ -1,0 +1,14 @@
+{
+  "layers": [
+    {
+      "type": "modernfoundry:first_present",
+      "options": [
+        { "type": "modernfoundry:dyed", "prefix": "modernfoundry:backpack/plating_" },
+        { "type": "modernfoundry:material", "index": 0, "prefix": "modernfoundry:backpack/plating_" }
+      ]
+    },
+    { "type": "modernfoundry:material", "index": 1, "prefix": "modernfoundry:backpack/straps_" },
+    { "type": "modernfoundry:material", "index": 2, "prefix": "modernfoundry:backpack/panel_left_" },
+    { "type": "modernfoundry:material", "index": 3, "prefix": "modernfoundry:backpack/panel_right_" }
+  ]
+}

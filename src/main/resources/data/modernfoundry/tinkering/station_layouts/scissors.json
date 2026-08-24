@@ -1,0 +1,11 @@
+{
+  "translation_key": "item.modernfoundry.scissors",
+  "icon": { "item": "modernfoundry:scissors", "nbt": "{tic_display:1b}" },
+  "sortIndex": 14,
+  "input_slots": [
+    { "filter": { "item": "modernfoundry:small_blade" }, "icon": "modernfoundry:small_blade", "translation_key": "item.modernfoundry.small_blade", "x": 24, "y": 32 },
+    { "filter": { "item": "modernfoundry:small_blade" }, "icon": "modernfoundry:small_blade", "translation_key": "item.modernfoundry.small_blade", "x": 42, "y": 32 },
+    { "filter": { "item": "modernfoundry:tool_handle" }, "icon": "modernfoundry:tool_handle", "translation_key": "item.modernfoundry.tool_handle", "x": 24, "y": 52 },
+    { "filter": { "item": "modernfoundry:tool_handle" }, "icon": "modernfoundry:tool_handle", "translation_key": "item.modernfoundry.tool_handle", "x": 42, "y": 52 }
+  ]
+}

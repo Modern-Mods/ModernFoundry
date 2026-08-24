@@ -1,4 +1,5 @@
 {
+  "id": "modernfoundry:parts/guard_casting_composite",
   "type": "modernfoundry:table_casting_composite",
   "result": "modernfoundry:guard",
   "item_cost": 2

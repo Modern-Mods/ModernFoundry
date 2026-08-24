@@ -1,0 +1,22 @@
+{
+  "type": "modernfoundry:oreberry_bush",
+  "config": {
+    "state": {
+      "Name": "modernfoundry:copper_oreberry_bush",
+      "Properties": {
+        "age": "3"
+      }
+    },
+    "size_chance": 12,
+    "replace_blocks": [
+      "minecraft:stone",
+      "minecraft:grass_block",
+      "minecraft:dirt",
+      "minecraft:water",
+      "minecraft:sand",
+      "minecraft:gravel",
+      "minecraft:snow"
+    ]
+  }
+}
+

@@ -1,4 +1,5 @@
 {
+  "id": "modernfoundry:parts/narrow_blade_casting_sand",
   "type": "modernfoundry:table_casting_material",
   "cast": {
     "tag": "modernfoundry:casts/single_use/narrow_blade"

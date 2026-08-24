@@ -78,6 +78,8 @@ sourceSets {
             // NeoForge 1.21 uses singular data pack directories. Keep the old
             // generated 1.20-style paths out of the runtime jar to avoid duplicates.
             exclude 'data/**/recipes/**'
+            // The excluded legacy provider emitted optional Oreberries Replanted recipes.
+            exclude 'data/modernfoundry/recipe/smeltery/melting/metal/*/oreberry.json'
             exclude 'data/**/advancements/**'
             exclude 'data/**/loot_tables/**'
             exclude 'data/**/tags/blocks/**'

@@ -1,0 +1,7 @@
+{
+  "parent": "modernfoundry:block/oreberry_bush_stage0_base",
+  "textures": {
+    "all": "modernfoundry:oreberries/blocks/essence_berry_bush"
+  }
+}
+

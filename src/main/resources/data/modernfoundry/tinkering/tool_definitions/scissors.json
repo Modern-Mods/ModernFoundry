@@ -1,0 +1,71 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:material_stats",
+      "stat_types": [
+        { "stat": "modernfoundry:head", "scale": 0.5 },
+        { "stat": "modernfoundry:head", "scale": 0.5 },
+        { "stat": "modernfoundry:handle", "scale": 0.5 },
+        { "stat": "modernfoundry:handle", "scale": 0.5 }
+      ],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 }
+      ]
+    },
+    {
+      "type": "modernfoundry:material_traits",
+      "hooks": ["modernfoundry:rebalanced_trait"],
+      "material_index": 0,
+      "stat_type": "modernfoundry:head"
+    },
+    {
+      "type": "modernfoundry:base_stats",
+      "stats": { "modernfoundry:attack_damage": 2.0, "modernfoundry:attack_speed": 0.8 }
+    },
+    {
+      "type": "modernfoundry:multiply_stats",
+      "multipliers": {
+        "modernfoundry:attack_damage": 1.15,
+        "modernfoundry:durability": 2.2,
+        "modernfoundry:mining_speed": 0.65
+      }
+    },
+    { "type": "modernfoundry:modifier_slots", "slots": { "upgrades": 2, "abilities": 1 } },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [
+        { "name": "modernfoundry:shears", "level": 1 },
+        { "name": "modernfoundry:guillotine", "level": 1 },
+        { "name": "modernfoundry:severing", "level": 3 }
+      ]
+    },
+    { "type": "modernfoundry:tool_actions", "tool_actions": ["hoe_dig"] },
+    {
+      "type": "modernfoundry:is_effective",
+      "predicate_type": "hilt:tag",
+      "tag": "modernfoundry:mineable/scythe"
+    },
+    {
+      "type": "modernfoundry:mining_speed_modifier",
+      "blocks": ["minecraft:wool"],
+      "modifier": 0.5,
+      "predicate_type": "hilt:tag",
+      "tag": "minecraft:wool"
+    },
+    {
+      "type": "modernfoundry:mining_speed_modifier",
+      "blocks": ["minecraft:vine", "minecraft:glow_lichen"],
+      "modifier": 0.1,
+      "predicate_type": "hilt:set"
+    },
+    { "type": "modernfoundry:circle_aoe", "3D": true, "diameter": 1 },
+    { "type": "modernfoundry:sweep_melee", "range": 2.0 }
+  ]
+}

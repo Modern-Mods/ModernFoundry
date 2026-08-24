@@ -1,4 +1,5 @@
 {
+  "id": "modernfoundry:parts/guard_casting_sand",
   "type": "modernfoundry:table_casting_material",
   "cast": {
     "tag": "modernfoundry:casts/single_use/guard"

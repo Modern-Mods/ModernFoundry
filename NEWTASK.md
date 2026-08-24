@@ -564,6 +564,20 @@ The integration is complete only when all of the following are true:
 - Build, data/resource validation, artifact inspection, diff review, and the
   required project documentation updates are complete.
 
+## Verification snapshot - 2026-08-23
+
+- [x] Native implementation and resource integration for all seven reference groups is present in the current checkout.
+- [x] Fresh `runServer --rerun-tasks` reached `Done (4.948s)` on Java 21 / NeoForge 21.1.240.
+- [x] `clean build` passed, including Gradle `test` and `check`.
+- [x] The final JAR contains the native resource families, generated data, runtime classes, and all nine bundled license notices.
+- [x] The targeted external namespace audit and `git diff --check` passed.
+- [ ] Client/fresh-world gameplay and visual smoke, persistence/chunk-reload, two-player synchronization, and optional-integration parity remain open; they were not performed in this release-gate execution.
+
+The phase boxes below remain unchecked where their exit gates require manual
+coverage that was not performed. The checked snapshot above records only
+implementation, server-bootstrap, build, archive, attribution, and static
+audit evidence.
+
 ## Implementation checklist
 
 - [ ] Phase 0: contract, overlap inventory, collision map, module map, and licensing.

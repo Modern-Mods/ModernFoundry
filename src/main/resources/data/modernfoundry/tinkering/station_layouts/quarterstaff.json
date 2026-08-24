@@ -1,0 +1,11 @@
+{
+  "translation_key": "item.modernfoundry.quarterstaff",
+  "icon": { "item": "modernfoundry:quarterstaff", "nbt": "{tic_display:1b}" },
+  "sortIndex": 10,
+  "input_slots": [
+    { "filter": { "item": "modernfoundry:tool_handle" }, "icon": "modernfoundry:tool_handle", "translation_key": "item.modernfoundry.tool_handle", "x": 12, "y": 62 },
+    { "filter": { "item": "modernfoundry:tool_handle" }, "icon": "modernfoundry:tool_handle", "translation_key": "item.modernfoundry.tool_handle", "x": 48, "y": 26 },
+    { "filter": { "item": "modernfoundry:adze_head" }, "icon": "modernfoundry:adze_head", "translation_key": "item.modernfoundry.adze_head", "x": 12, "y": 44 },
+    { "filter": { "item": "modernfoundry:shield_core" }, "icon": "modernfoundry:shield_core", "translation_key": "item.modernfoundry.shield_core", "x": 30, "y": 44 }
+  ]
+}

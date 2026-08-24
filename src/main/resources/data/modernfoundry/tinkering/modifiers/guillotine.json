@@ -1,0 +1,12 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "modules": [
+    {
+      "type": "modernfoundry:sling_knockback",
+      "damage_multiplier": 2.25,
+      "drawtime_multiplier": 1.5,
+      "force_multiplier": { "each_level": 0.0, "flat": 0.0 }
+    }
+  ],
+  "tooltip_display": "always"
+}

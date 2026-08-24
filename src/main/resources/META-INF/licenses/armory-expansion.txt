@@ -1,0 +1,20 @@
+Armory Expansion integration notice
+
+Source: Armory Expansion by YaibaToKen
+Repository snapshot: References/Armory-Expansion-master
+Project: https://www.curseforge.com/minecraft/mc-mods/armory-expansion
+
+The Armory Expansion snapshot contains material, armor-stat, trait,
+ore-dictionary, and alloy JSON plus translations, but no bitmap assets. This
+workspace records the snapshot's material/trait inventory and optional
+compatibility boundary; external-owned material IDs are not registered in the
+base feature set when their owner mod is absent, and unsupported traits are
+not replaced with invented behavior. The repository owner explicitly
+authorized this workspace to move any required Armory Expansion assets into
+Modern Foundry; that authorization is retained here for provenance and must
+accompany any redistribution of adapted material data. This notice is not a
+substitute for an upstream license.
+
+Armory Expansion metadata credits the MMDLib team and MMD Community for help
+and contributed code bits. No Armory Expansion framework, external package,
+or external runtime dependency is included in Modern Foundry.

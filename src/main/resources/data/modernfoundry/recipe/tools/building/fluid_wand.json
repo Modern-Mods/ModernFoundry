@@ -1,0 +1,6 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/fluid_wand",
+  "extra_requirements": [{ "item": "modernfoundry:seared_fluid_cannon" }],
+  "result": "modernfoundry:fluid_wand"
+}

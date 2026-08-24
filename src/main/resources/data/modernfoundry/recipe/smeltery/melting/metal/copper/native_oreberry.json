@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/copper/native_oreberry",
+  "ingredient": {
+    "item": "modernfoundry:copper_oreberry"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_copper"
+  },
+  "temperature": 500,
+  "time": 17
+}
+

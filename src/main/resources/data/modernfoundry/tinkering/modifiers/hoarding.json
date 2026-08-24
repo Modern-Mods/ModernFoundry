@@ -1,0 +1,8 @@
+{
+  "level_display": "modernfoundry:default",
+  "modules": [
+    { "type": "modernfoundry:inventory", "slots": { "each_level": 9 } },
+    { "type": "modernfoundry:inventory_menu", "on_key": "shift" }
+  ],
+  "tooltip_display": "always"
+}

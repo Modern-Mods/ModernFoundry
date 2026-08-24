@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "modernfoundry:item/tconstruct/cobalt"
+    "layer0": "modernfoundry:item/modernfoundry/cobalt"
   }
 }

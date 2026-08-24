@@ -1,0 +1,12 @@
+{
+  "icon": {
+    "item": "modernfoundry:throwing_card",
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\",\"modernfoundry:ui_render#large\",\"modernfoundry:ui_render#extra_large\"]}"
+  },
+  "input_slots": [
+    { "filter": { "item": "modernfoundry:card_top" }, "icon": "modernfoundry:card_top", "translation_key": "item.modernfoundry.card_top", "x": 33, "y": 29 },
+    { "filter": { "item": "modernfoundry:card_bottom" }, "icon": "modernfoundry:card_bottom", "translation_key": "item.modernfoundry.card_bottom", "x": 33, "y": 53 }
+  ],
+  "sortIndex": 7,
+  "translation_key": "item.modernfoundry.throwing_card"
+}

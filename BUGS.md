@@ -1,20 +1,16 @@
 # Bugs
 
 
-Modern Foundry has two creative tabs for tools
-![alt text](image-10.png)
-![alt text](image-11.png)
+- Slime boots have broken equipped textures
+- Slime boots dont bounce the player when equipped
+- Quarterstaff is missing an asset section
+- Missing textures for side art on anvil/part builder 
+- dont think backpacks are working as containers 
+- Oreberries have broken assets
+- Helix sword doesnt swing/draw like a sword
 
-Missing Textures;
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png) - a bunch of invisible buckets
-![alt text](image-3.png)
-![alt text](image-4.png)
-![alt text](image-5.png)
-![alt text](image-6.png)
-![alt text](image-7.png)
-![alt text](image-9.png) - breaking bushes
 
-Naming Issues
-![alt text](image-8.png)
+
+
+
+- Need FTB Ultimine compatability

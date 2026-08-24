@@ -1,0 +1,4 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": { "layer0": "modernfoundry:arsenal/item/cardstock_cast" }
+}

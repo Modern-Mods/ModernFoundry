@@ -126,6 +126,8 @@ import modernmods.modernfoundry.tools.item.CrystalshotItem.CrystalshotEntity;
 import modernmods.modernfoundry.tools.item.ModifiableSwordItem;
 import modernmods.modernfoundry.tools.item.RapierItem;
 import modernmods.modernfoundry.tools.item.SlimeskullItem;
+import modernmods.modernfoundry.gadgets.item.SlimeGadgetDataComponents;
+import modernmods.modernfoundry.gadgets.item.SlimeGadgetItem;
 import modernmods.modernfoundry.tools.logic.EquipmentChangeWatcher;
 import modernmods.modernfoundry.tools.logic.ModifiableArrowDispenserBehavior;
 import modernmods.modernfoundry.tools.logic.ModifiableShurikenDispenserBehavior;
@@ -171,6 +173,7 @@ public final class TinkerTools extends TinkerModule {
   static {
     DATA_COMPONENTS.register("attack", () -> YoyoDataComponents.ATTACK);
     DATA_COMPONENTS.register("enchantments", () -> YoyoDataComponents.ENCHANTMENTS);
+    DATA_COMPONENTS.register("slime_type", () -> SlimeGadgetDataComponents.SLIME_TYPE);
   }
 
   /*
@@ -202,6 +205,8 @@ public final class TinkerTools extends TinkerModule {
   public static final ItemObject<ModifiableItem> battleSpade = ITEMS.register("battle_spade", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.BATTLE_SPADE));
 
   public static final ItemObject<Item> cord = ITEMS.register("cord", () -> new Item(new Item.Properties()));
+  public static final ItemObject<SlimeGadgetItem.Boots> slimeGadgetBoots = ITEMS.register("slime_gadget_boots", () -> new SlimeGadgetItem.Boots(UNSTACKABLE_PROPS));
+  public static final ItemObject<SlimeGadgetItem.Sling> slimeSling = ITEMS.register("slimesling", () -> new SlimeGadgetItem.Sling(UNSTACKABLE_PROPS));
   public static final ItemObject<YoyoItem> woodenYoyo = ITEMS.register("wooden_yoyo", () -> new YoyoItem(YoyosTiers.WOODEN));
   public static final ItemObject<YoyoItem> stoneYoyo = ITEMS.register("stone_yoyo", () -> new YoyoItem(YoyosTiers.STONE));
   public static final ItemObject<YoyoItem> copperYoyo = ITEMS.register("copper_yoyo", () -> new YoyoItem(YoyosTiers.COPPER));
@@ -222,6 +227,13 @@ public final class TinkerTools extends TinkerModule {
   public static final ItemObject<ModifiableArrowItem> arrow = ITEMS.register("arrow", () -> new ModifiableArrowItem(ITEM_PROPS, ToolDefinitions.ARROW));
   public static final ItemObject<ModifiableShurikenItem> shuriken = ITEMS.register("shuriken", () -> new ModifiableShurikenItem(new Item.Properties().stacksTo(16), ToolDefinitions.SHURIKEN));
   public static final ItemObject<ModifiableShurikenItem> throwingAxe = ITEMS.register("throwing_axe", () -> new ModifiableShurikenItem(new Item.Properties().stacksTo(16), ToolDefinitions.THROWING_AXE));
+  public static final ItemObject<ModifiableShurikenItem> throwingCard = ITEMS.register("throwing_card", () -> new ModifiableShurikenItem(new Item.Properties().stacksTo(32), ToolDefinitions.THROWING_CARD));
+  public static final ItemObject<ModifiableItem> buckler = ITEMS.register("buckler", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.BUCKLER));
+  public static final ItemObject<ModifiableItem> quarterstaff = ITEMS.register("quarterstaff", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.QUARTERSTAFF));
+  public static final ItemObject<ModifiableSwordItem> helixBlade = ITEMS.register("helix_blade", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, ToolDefinitions.HELIX_BLADE));
+  public static final ItemObject<ModifiableItem> scissors = ITEMS.register("scissors", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.SCISSORS));
+  public static final ItemObject<ModifiableItem> travelersBindle = ITEMS.register("travelers_bindle", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.TRAVELERS_BINDLE));
+  public static final ItemObject<ModifiableItem> fluidWand = ITEMS.register("fluid_wand", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.FLUID_WAND));
 
   public static final ItemObject<ModifiableItem> flintAndBrick = ITEMS.register("flint_and_brick", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.FLINT_AND_BRICK));
   public static final ItemObject<ModifiableItem> skyStaff = ITEMS.register("sky_staff", () -> new ModifiableItem(UNSTACKABLE_PROPS, ToolDefinitions.SKY_STAFF));
@@ -249,6 +261,7 @@ public final class TinkerTools extends TinkerModule {
   // armor
   public static final EnumObject<ArmorItem.Type,ModifiableArmorItem> travelersGear = ITEMS.registerEnum("travelers", ModifiableArmorMaterial.ARMOR_TYPES, type -> new MultilayerArmorItem(ArmorDefinitions.TRAVELERS, type, UNSTACKABLE_PROPS));
   public static final EnumObject<ArmorItem.Type,ModifiableArmorItem> plateArmor = ITEMS.registerEnum("plate", ModifiableArmorMaterial.ARMOR_TYPES, type -> new MultilayerArmorItem(ArmorDefinitions.PLATE, type, UNSTACKABLE_PROPS));
+  public static final ItemObject<MultilayerArmorItem> backpack = ITEMS.register("backpack", () -> new MultilayerArmorItem(ArmorDefinitions.BACKPACK, ArmorItem.Type.CHESTPLATE, UNSTACKABLE_PROPS, ArmorDefinitions.BACKPACK_TOOL, getResource("backpack")));
   public static final EnumObject<ArmorItem.Type,ModifiableArmorItem> slimesuit = new EnumObject.Builder<ArmorItem.Type,ModifiableArmorItem>(ArmorItem.Type.class)
     .put(ArmorItem.Type.HELMET, ITEMS.register("slime_helmet", () -> new SlimeskullItem(ArmorDefinitions.SLIMESUIT, SlimeskullItem.MODEL_LOCATION, UNSTACKABLE_PROPS)))
     // TODO 1.21: rename to slime chestplate as we no longer need the migration
@@ -428,6 +441,7 @@ public final class TinkerTools extends TinkerModule {
     tab.accept(creativeYoyo.get());
     YoyoCompat.cords().forEach(cord -> tab.accept(cord.get()));
     compatYoyos.forEach(yoyo -> tab.accept(yoyo.get()));
+    addSlimeGadgetVariants(tab);
 
     // broad tools
     acceptTool(output, sledgeHammer);
@@ -449,6 +463,13 @@ public final class TinkerTools extends TinkerModule {
     acceptTool(output, shuriken);
     acceptEFLN(shuriken.get(), tab);
     acceptTool(output, throwingAxe);
+    acceptTool(output, throwingCard);
+    acceptTool(output, buckler);
+    acceptTool(output, quarterstaff);
+    acceptTool(output, helixBlade);
+    acceptTool(output, scissors);
+    acceptTool(output, travelersBindle);
+    acceptTool(output, fluidWand);
 
     // ancient tools
     acceptTool(output, meltingPan);
@@ -466,8 +487,20 @@ public final class TinkerTools extends TinkerModule {
     acceptTool(output, travelersShield);
     acceptTools(output, plateArmor);
     acceptTool(output, plateShield);
+    acceptTool(output, backpack);
     acceptTools(output, slimesuit);
     acceptTool(output, slimeWings);
+  }
+
+  private static void addSlimeGadgetVariants(CreativeModeTab.Output tab) {
+    for (int type = 0; type < 5; type++) {
+      ItemStack boots = new ItemStack(slimeGadgetBoots.get());
+      boots.set(SlimeGadgetDataComponents.SLIME_TYPE, type);
+      tab.accept(boots);
+      ItemStack sling = new ItemStack(slimeSling.get());
+      sling.set(SlimeGadgetDataComponents.SLIME_TYPE, type);
+      tab.accept(sling);
+    }
   }
 
   /** Adds a tool to the tab */

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "modernfoundry:item/tconstruct/slimesteel"
+    "layer0": "modernfoundry:item/modernfoundry/slimesteel"
   }
 }

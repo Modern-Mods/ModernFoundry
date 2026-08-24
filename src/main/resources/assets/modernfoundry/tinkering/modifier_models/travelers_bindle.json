@@ -1,0 +1,8 @@
+{
+  "modifiers": {
+    "modernfoundry:dyed": {
+      "type": "modernfoundry:dyed",
+      "texture": "modernfoundry:bags/item/tool/travelers_bindle/modifiers/dyed"
+    }
+  }
+}

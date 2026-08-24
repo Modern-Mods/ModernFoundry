@@ -1,0 +1,23 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "top_handle": "modernfoundry:arsenal/item/tool/quarterstaff/bottom_handle_broken",
+    "bottom_handle": "modernfoundry:arsenal/item/tool/quarterstaff/bottom_handle_broken",
+    "caps": "modernfoundry:arsenal/item/tool/quarterstaff/caps",
+    "grip": "modernfoundry:arsenal/item/tool/quarterstaff/grip",
+    "large_top_handle": "modernfoundry:arsenal/item/tool/quarterstaff/large/bottom_handle_broken",
+    "large_bottom_handle": "modernfoundry:arsenal/item/tool/quarterstaff/large/bottom_handle_broken",
+    "large_caps": "modernfoundry:arsenal/item/tool/quarterstaff/large/caps",
+    "large_grip": "modernfoundry:arsenal/item/tool/quarterstaff/large/grip"
+  },
+  "modifier_maps": ["modernfoundry:staff"],
+  "large": true,
+  "large_offset": [-16, 16],
+  "parts": [
+    { "name": "top_handle", "index": 1 },
+    { "name": "bottom_handle", "index": 0 },
+    { "name": "caps", "index": 2 },
+    { "name": "grip", "index": 3 }
+  ]
+}

@@ -1,4 +1,5 @@
 {
+  "id": "modernfoundry:parts/narrow_blade_casting_gold",
   "type": "modernfoundry:table_casting_material",
   "cast": {
     "tag": "modernfoundry:casts/multi_use/narrow_blade"

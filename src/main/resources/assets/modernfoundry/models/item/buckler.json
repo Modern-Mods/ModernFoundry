@@ -1,0 +1,16 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "modernfoundry:item/base/shield",
+  "textures": {
+    "core": "modernfoundry:arsenal/item/tool/buckler/core",
+    "rim_top": "modernfoundry:arsenal/item/tool/buckler/rim_top",
+    "rim_bottom": "modernfoundry:arsenal/item/tool/buckler/rim_bottom"
+  },
+  "modifier_roots": ["modernfoundry:arsenal/item/tool/buckler/modifiers/"],
+  "first_modifiers": ["modernfoundry:dyed"],
+  "parts": [
+    { "name": "rim_top", "index": 1 },
+    { "name": "core", "index": 0 },
+    { "name": "rim_bottom", "index": 2 }
+  ]
+}

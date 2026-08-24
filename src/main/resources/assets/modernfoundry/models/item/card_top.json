@@ -1,0 +1,5 @@
+{
+  "parent": "neoforge:item/default",
+  "loader": "modernfoundry:material",
+  "textures": { "texture": "modernfoundry:arsenal/item/tool/ammo/card_top" }
+}

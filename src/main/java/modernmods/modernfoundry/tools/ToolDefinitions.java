@@ -45,6 +45,13 @@ public final class ToolDefinitions {
   public static final ToolDefinition ARROW = ToolDefinition.create(TinkerTools.arrow);
   public static final ToolDefinition SHURIKEN = ToolDefinition.create(TinkerTools.shuriken);
   public static final ToolDefinition THROWING_AXE = ToolDefinition.create(TinkerTools.throwingAxe);
+  public static final ToolDefinition THROWING_CARD = ToolDefinition.create(TinkerTools.throwingCard);
+  public static final ToolDefinition BUCKLER = ToolDefinition.create(TinkerTools.buckler);
+  public static final ToolDefinition QUARTERSTAFF = ToolDefinition.create(TinkerTools.quarterstaff);
+  public static final ToolDefinition HELIX_BLADE = ToolDefinition.create(TinkerTools.helixBlade);
+  public static final ToolDefinition SCISSORS = ToolDefinition.create(TinkerTools.scissors);
+  public static final ToolDefinition TRAVELERS_BINDLE = ToolDefinition.create(TinkerTools.travelersBindle);
+  public static final ToolDefinition FLUID_WAND = ToolDefinition.create(TinkerTools.fluidWand);
 
   // special
   public static final ToolDefinition FLINT_AND_BRICK = ToolDefinition.create(TinkerTools.flintAndBrick);

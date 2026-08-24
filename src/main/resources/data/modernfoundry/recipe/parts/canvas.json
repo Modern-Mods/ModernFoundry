@@ -1,0 +1,8 @@
+{
+  "id": "modernfoundry:parts/canvas",
+  "type": "modernfoundry:part_builder",
+  "cost": 2,
+  "pattern": "modernfoundry:canvas",
+  "pattern_item": { "tag": "modernfoundry:patterns/default" },
+  "result": { "item": "modernfoundry:canvas" }
+}

@@ -1,4 +1,5 @@
 {
+  "id": "modernfoundry:parts/narrow_blade",
   "type": "modernfoundry:part_builder",
   "pattern": "modernfoundry:narrow_blade",
   "pattern_item": [

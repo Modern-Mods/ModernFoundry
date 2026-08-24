@@ -1,0 +1,10 @@
+{
+  "translation_key": "item.modernfoundry.travelers_bindle",
+  "icon": { "item": "modernfoundry:travelers_bindle", "nbt": "{tic_display:1b}" },
+  "sortIndex": 21,
+  "input_slots": [
+    { "filter": { "item": "modernfoundry:bow_limb" }, "icon": "modernfoundry:bow_limb", "translation_key": "item.modernfoundry.bow_limb", "x": 28, "y": 38 },
+    { "filter": { "item": "modernfoundry:bowstring" }, "icon": "modernfoundry:bowstring", "translation_key": "item.modernfoundry.bowstring", "x": 50, "y": 38 },
+    { "filter": { "item": "minecraft:leather" }, "icon": "minecraft:leather", "translation_key": "item.minecraft.leather", "x": 50, "y": 58 }
+  ]
+}

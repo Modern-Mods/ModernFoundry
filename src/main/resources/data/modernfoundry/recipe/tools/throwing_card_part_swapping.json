@@ -1,0 +1,6 @@
+{
+  "id": "modernfoundry:tools/throwing_card_part_swapping",
+  "type": "modernfoundry:tinker_station_part_swapping",
+  "max_stack_size": 8,
+  "tools": { "item": "modernfoundry:throwing_card" }
+}

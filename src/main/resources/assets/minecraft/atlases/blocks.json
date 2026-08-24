@@ -2,8 +2,33 @@
   "sources": [
     {
       "type": "minecraft:directory",
+      "source": "gadgets",
+      "prefix": "gadgets/"
+    },
+    {
+      "type": "minecraft:directory",
+      "source": "arsenal/item",
+      "prefix": "arsenal/item/"
+    },
+    {
+      "type": "minecraft:directory",
+      "source": "bags/item",
+      "prefix": "bags/item/"
+    },
+    {
+      "type": "minecraft:directory",
+      "source": "wands/item",
+      "prefix": "wands/item/"
+    },
+    {
+      "type": "minecraft:directory",
       "source": "fluid",
       "prefix": "fluid/"
+    },
+    {
+      "type": "minecraft:directory",
+      "source": "oreberries",
+      "prefix": "oreberries/"
     },
     {
       "type": "minecraft:directory",

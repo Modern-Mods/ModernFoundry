@@ -29,6 +29,10 @@ public class Config {
     public final BooleanValue syncKnockbackResistance;
     public final EnumValue<ToolSyncType> toolInventorySync;
     public final DoubleValue rapierAttackBonus;
+    public final DoubleValue oreberriesTickGrowthChance;
+    public final DoubleValue oreberriesBonemealGrowthChance;
+    public final BooleanValue oreberriesEnableVillager;
+    public final IntValue oreberriesSilkTouchRequirement;
 
     // improvable modifier
     public final EnumValue<GainingMethod> improvableToolsSlotGainingMethod;
@@ -196,6 +200,21 @@ public class Config {
         .comment("Multiplier applied to rapier sting attacks.")
         .translation("modernfoundry.configgui.rapierAttackBonus")
         .defineInRange("rapierAttackBonus", 1D, 0.01D, 10D);
+
+      builder.comment("Oreberry growth and harvesting settings.").push("oreberries");
+      this.oreberriesTickGrowthChance = builder
+        .comment("Chance that a random tick advances an oreberry bush by one growth stage.")
+        .defineInRange("tickGrowthChance", 0.05D, 0.0D, 1.0D);
+      this.oreberriesBonemealGrowthChance = builder
+        .comment("Chance that bone meal advances an oreberry bush. Zero disables bone meal.")
+        .defineInRange("bonemealGrowthChance", 0.0D, 0.0D, 1.0D);
+      this.oreberriesEnableVillager = builder
+        .comment("Adds canonical oreberry trades to the toolsmith.")
+        .define("enableVillager", true);
+      this.oreberriesSilkTouchRequirement = builder
+        .comment("Minimum Silk Touch level required to harvest an oreberry bush as a block.")
+        .defineInRange("silkTouchRequirement", 0, 0, Integer.MAX_VALUE);
+      builder.pop();
 
       builder.comment("Experience and progression settings for the improvable modifier.").push("improvable");
       this.improvableToolsSlotGainingMethod = builder.defineEnum("toolsSlotGainingMethod", GainingMethod.PREDEFINED_ORDER);

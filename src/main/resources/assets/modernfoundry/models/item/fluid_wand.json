@@ -1,0 +1,15 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "handle": "modernfoundry:wands/item/tool/fluid_wand/handle",
+    "guard": "modernfoundry:wands/item/tool/fluid_wand/guard",
+    "tank": "modernfoundry:wands/item/tool/fluid_wand/tank"
+  },
+  "modifier_roots": ["modernfoundry:wands/item/tool/fluid_wand/modifiers/"],
+  "parts": [
+    { "name": "handle", "index": 0 },
+    { "name": "guard", "index": 1 },
+    { "name": "tank" }
+  ]
+}

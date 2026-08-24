@@ -1,4 +1,10 @@
 # Unreleased
+* Added the native reference-integration wave for Construct's Armory, Constructs Arsenal, Tinkers Bags, Tinkers Wands, Oreberries, and the Slime Boots/Slime Sling gadgets.
+    * Reused Modern Foundry's registries, tool/armor data, recipes, tags, client assets, worldgen, configuration, and optional-integration boundaries.
+    * Added the applicable license notices and preserved Construct's Armory/Tinkers' Construct-derived attribution.
+* Recorded the Armory Expansion compatibility inventory and legal boundary.
+    * The snapshot contributes 21 Ice and Fire material records, 2 Matter Overdrive material records, and 45 Construct's Armory trait records, with no bitmap assets; unsupported external traits remain documented instead of being invented.
+* Added the six canonical Oreberry bushes, berry items, recipes, worldgen, villager-trade toggle, client tinting, and player-facing translations.
 * Fixed integrated Yoyos showing raw translation keys and failing to damage entities.
     * Repaired the malformed English language resource and ensured core and compatibility tiers copy their reference entity interactions without duplicate hits.
 * Replaced the legacy yoyo implementation with the official Yoyos Relaunched 1.21.1 runtime architecture.
@@ -6,6 +12,10 @@
     * Removed the superseded controller/tracker resource and runtime paths; all shipped yoyo identifiers remain in the `modernfoundry` namespace.
 * Fixed Nether cobalt ore drops when mined with diamond-tier tools.
     * Added cobalt ore to the vanilla pickaxe and diamond-tool tags; netherite tools qualify through the vanilla diamond-tier tag.
+
+* Completed the native reference-integration release gate.
+    * Clean Modern Foundry 1.21.1-4.1.6 NeoForge build, Gradle checks, dedicated-server bootstrap, JAR namespace/license audit, and SHA-256 verification passed.
+    * Manual client, fresh-world, persistence, multiplayer, and optional-integration parity remain separate acceptance work and are not claimed here.
 * Built and verified the latest Modern Foundry 1.21.1-4.1.4 NeoForge JAR.
     * SHA-256: `238b86893f814f95341f1fff10bc3bab8c704633f1f17dddb387688f35768ada`.
 * Fixed Crafting Station recipes failing to consume compacted-grid inputs.
@@ -142,3 +152,14 @@
     * Added slime-foliage particle mappings, bronze and Fantastic Gadgetry assets, integration/fluid translations, and the TCI license notice.
 * Built and verified `ModernFoundry-1.21.1-4.1.6-NeoForge.jar` after the resource fixes.
     * SHA-256: `da8ea02af6d351b3209f08d7ad35daff57f86f4771050a0bd4fbe5ff3f0f9efc`.
+* Repaired the imported Armory Expansion, Constructs Arsenal, Tinkers Bags, Tinkers Wands, and slime-gadget asset paths.
+    * Added atlas sources for `gadgets`, `arsenal/item`, `bags/item`, and `wands/item`; moved the shared pattern textures and 91 backpack armor textures into their native Modern Foundry paths; and corrected backpack model prefixes.
+    * Added the missing Tinkers Thinking MIT notice, bringing the bundled license notices to nine.
+* Built and verified `ModernFoundry-1.21.1-4.1.6-NeoForge.jar` after the asset namespace repairs.
+    * SHA-256: `e6f0afa38707085d88bcaa80cf3c686cc8a0997e35a38b8474cca81f1a795c4f`.
+* Fixed the reported Slime Boots, backpack, Helix Blade, Quarterstaff, part-art, part-slot, and Oreberry issues.
+    * Slime Boots now use the native equipped armor layers and remain passive; equipping them does not bounce the player.
+    * Backpacks now use the registered hoarding inventory, chestplate tag, capability initialization, and server opening route.
+    * Helix Blades use the native modifiable sword path for standard draw and swing behavior.
+    * Added the missing Quarterstaff item/equipped models and the Buckler, Scissors, Helix Blade, and Quarterstaff side-art and part-slot assets.
+    * Added the missing Oreberry item, bush, texture, tint, recipe, and worldgen resources.

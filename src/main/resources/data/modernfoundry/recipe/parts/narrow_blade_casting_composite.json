@@ -1,4 +1,5 @@
 {
+  "id": "modernfoundry:parts/narrow_blade_casting_composite",
   "type": "modernfoundry:table_casting_composite",
   "result": "modernfoundry:narrow_blade",
   "item_cost": 1

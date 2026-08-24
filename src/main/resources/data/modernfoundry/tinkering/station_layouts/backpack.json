@@ -1,0 +1,11 @@
+{
+  "translation_key": "item.modernfoundry.backpack",
+  "icon": { "item": "modernfoundry:backpack", "nbt": "{Damage:0,tic_broken:0b,tic_display:1b}" },
+  "sortIndex": 22,
+  "input_slots": [
+    { "filter": { "item": "modernfoundry:chestplate_plating" }, "icon": "modernfoundry:chestplate_plating", "translation_key": "item.modernfoundry.chestplate_plating", "x": 33, "y": 29 },
+    { "filter": { "item": "modernfoundry:canvas" }, "icon": "modernfoundry:canvas", "translation_key": "item.modernfoundry.canvas", "x": 33, "y": 53 },
+    { "filter": { "item": "modernfoundry:shield_core" }, "icon": "modernfoundry:shield_core", "translation_key": "item.modernfoundry.shield_core", "x": 13, "y": 41 },
+    { "filter": { "item": "modernfoundry:shield_core" }, "icon": "modernfoundry:shield_core", "translation_key": "item.modernfoundry.shield_core", "x": 53, "y": 41 }
+  ]
+}

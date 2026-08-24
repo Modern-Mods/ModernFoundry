@@ -1,0 +1,8 @@
+{
+  "level_display": { "type": "modernfoundry:unique", "first_unique": false, "unique_until": 2 },
+  "modules": [
+    { "type": "modernfoundry:inventory", "slots": { "each_level": 3 } },
+    { "type": "modernfoundry:inventory_menu", "on_key": "any" }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,12 @@
+Tinkers' Construct 1.12 gadget attribution
+
+The Slime Sling and Slime Boots behavior and assets were adapted from
+Tinkers' Construct 1.12. The reference README states that code, textures, and
+binaries are licensed under the MIT License. The original asset credits are
+retained in assets/modernfoundry/sounds/_credits.txt and this notice.
+
+Graphics:
+- Blue and Green SlimeCrystal graphics by baddaspig.
+- Slime Sling and Slime Boots graphics by Futureazoo.
+
+The legacy package and runtime dependency are not included.

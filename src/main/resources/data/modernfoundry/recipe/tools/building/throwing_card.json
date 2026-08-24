@@ -1,0 +1,7 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/throwing_card",
+  "result": "modernfoundry:throwing_card",
+  "result_count": 8,
+  "slot_layout": "modernfoundry:throwing_card"
+}

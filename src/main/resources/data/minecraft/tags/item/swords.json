@@ -6,6 +6,7 @@
     "modernfoundry:pike",
     "modernfoundry:lance",
     "modernfoundry:rapier",
-    "modernfoundry:estoc"
+    "modernfoundry:estoc",
+    "modernfoundry:helix_blade"
   ]
 }

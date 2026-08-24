@@ -1,0 +1,22 @@
+{
+  "modules": [
+    {
+      "type": "modernfoundry:part_stats",
+      "parts": ["modernfoundry:bow_limb", "modernfoundry:bowstring"],
+      "primary_part": 0
+    },
+    {
+      "type": "modernfoundry:default_materials",
+      "materials": [
+        { "type": "modernfoundry:random", "tier": 1 },
+        { "type": "modernfoundry:random", "tier": 1 }
+      ]
+    },
+    { "type": "modernfoundry:modifier_slots", "slots": { "upgrades": 5 } },
+    {
+      "type": "modernfoundry:traits",
+      "traits": [{ "name": "modernfoundry:small_stash", "level": 1 }]
+    },
+    { "type": "modernfoundry:fixed_material_name", "index": 0 }
+  ]
+}

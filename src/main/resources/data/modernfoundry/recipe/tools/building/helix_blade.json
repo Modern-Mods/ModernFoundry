@@ -1,0 +1,5 @@
+{
+  "type": "modernfoundry:tool_building",
+  "id": "modernfoundry:tools/building/helix_blade",
+  "result": "modernfoundry:helix_blade"
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "modernfoundry:block/oreberry_bush_full_base",
+  "textures": {
+    "all": "modernfoundry:oreberries/blocks/oreberry_bush"
+  }
+}
+

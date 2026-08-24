@@ -1,0 +1,16 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "stick": "modernfoundry:bags/item/tool/travelers_bindle/stick",
+    "binding": "modernfoundry:bags/item/tool/travelers_bindle/binding",
+    "sack": "modernfoundry:bags/item/tool/travelers_bindle/sack"
+  },
+  "modifier_maps": ["modernfoundry:travelers_bindle"],
+  "first_modifiers": ["modernfoundry:dyed"],
+  "parts": [
+    { "name": "stick", "index": 0 },
+    { "name": "binding", "index": 1 },
+    { "name": "sack" }
+  ]
+}

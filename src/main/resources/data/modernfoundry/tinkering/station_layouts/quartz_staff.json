@@ -2,11 +2,8 @@
   "translation_key": "item.modernfoundry.quartz_staff",
   "icon": {
     "item": "modernfoundry:quartz_staff",
-    "nbt": {
-    "tic_display": true,
-    "tic_materials": ["modernfoundry:ui_render#head", "modernfoundry:ui_render#handle", "modernfoundry:ui_render#extra"]
-  }
-},
+    "nbt": "{tic_display:1b,tic_materials:[\"modernfoundry:ui_render#head\",\"modernfoundry:ui_render#handle\",\"modernfoundry:ui_render#extra\"]}"
+  },
 "sortIndex": 20,
 "input_slots": [
 {

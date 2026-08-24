@@ -1,0 +1,14 @@
+{
+  "type": "modernfoundry:melting",
+  "id": "modernfoundry:smeltery/melting/metal/aluminum/native_oreberry",
+  "ingredient": {
+    "item": "modernfoundry:aluminum_oreberry"
+  },
+  "result": {
+    "amount": 10,
+    "tag": "c:molten_aluminum"
+  },
+  "temperature": 425,
+  "time": 16
+}
+

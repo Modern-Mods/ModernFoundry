@@ -1,0 +1,26 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default-tool",
+  "textures": {
+    "blade_tl": "modernfoundry:arsenal/item/tool/helix_blade/blade_tl_broken",
+    "blade_tr": "modernfoundry:arsenal/item/tool/helix_blade/blade_tr_broken",
+    "blade_bl": "modernfoundry:arsenal/item/tool/helix_blade/blade_bl_broken",
+    "blade_br": "modernfoundry:arsenal/item/tool/helix_blade/blade_br_broken",
+    "hilt": "modernfoundry:arsenal/item/tool/helix_blade/hilt",
+    "large_blade_tl": "modernfoundry:arsenal/item/tool/helix_blade/large/blade_tl_broken",
+    "large_blade_tr": "modernfoundry:arsenal/item/tool/helix_blade/large/blade_tr_broken",
+    "large_blade_bl": "modernfoundry:arsenal/item/tool/helix_blade/large/blade_bl_broken",
+    "large_blade_br": "modernfoundry:arsenal/item/tool/helix_blade/large/blade_br_broken",
+    "large_hilt": "modernfoundry:arsenal/item/tool/helix_blade/large/hilt"
+  },
+  "modifier_maps": ["modernfoundry:sword"],
+  "large": true,
+  "large_offset": [3, -3],
+  "parts": [
+    { "name": "blade_tl", "index": 0 },
+    { "name": "blade_tr", "index": 1 },
+    { "name": "blade_bl", "index": 2 },
+    { "name": "blade_br", "index": 3 },
+    { "name": "hilt", "index": 4 }
+  ]
+}

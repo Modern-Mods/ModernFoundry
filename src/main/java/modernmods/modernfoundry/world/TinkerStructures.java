@@ -26,6 +26,8 @@ import modernmods.modernfoundry.world.worldgen.trees.config.SlimeFungusConfig;
 import modernmods.modernfoundry.world.worldgen.trees.config.SlimeTreeConfig;
 import modernmods.modernfoundry.world.worldgen.trees.feature.SlimeFungusFeature;
 import modernmods.modernfoundry.world.worldgen.trees.feature.SlimeTreeFeature;
+import modernmods.modernfoundry.world.worldgen.oreberries.OreberryBushFeature;
+import modernmods.modernfoundry.world.worldgen.oreberries.OreberryFeatureConfig;
 
 /**
  * Contains any logic relevant to structure generation, including trees and islands
@@ -63,6 +65,8 @@ public final class TinkerStructures extends TinkerModule {
   public static final DeferredHolder<Feature<?>,SlimeTreeFeature> slimeTree = FEATURES.register("slime_tree", () -> new SlimeTreeFeature(SlimeTreeConfig.CODEC));
   /** Nether variant of slimy trees */
   public static final DeferredHolder<Feature<?>,SlimeFungusFeature> slimeFungus = FEATURES.register("slime_fungus", () -> new SlimeFungusFeature(SlimeFungusConfig.CODEC));
+  /** Canonical Oreberries cluster generator; custom registry IDs are intentionally not supported. */
+  public static final DeferredHolder<Feature<?>, OreberryBushFeature> oreberryBush = FEATURES.register("oreberry_bush", () -> new OreberryBushFeature(OreberryFeatureConfig.CODEC));
 
   /* Greenheart trees */
   public static final ResourceKey<ConfiguredFeature<?,?>> earthSlimeTree = key(Registries.CONFIGURED_FEATURE, "earth_slime_tree");

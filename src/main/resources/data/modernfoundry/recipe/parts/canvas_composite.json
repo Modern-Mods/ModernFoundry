@@ -1,0 +1,6 @@
+{
+  "id": "modernfoundry:parts/canvas_composite",
+  "type": "modernfoundry:table_casting_composite",
+  "result": "modernfoundry:canvas",
+  "item_cost": 2
+}

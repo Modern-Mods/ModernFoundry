@@ -1,0 +1,14 @@
+{
+  "level_display": "modernfoundry:single_level",
+  "tooltip_display": "always",
+  "modules": [
+    {
+      "type": "modernfoundry:attribute",
+      "unique": "modernfoundry.modifier.range",
+      "attribute": "minecraft:player.entity_interaction_range",
+      "operation": "addition",
+      "each_level": 2.0,
+      "slots": ["mainhand", "offhand"]
+    }
+  ]
+}

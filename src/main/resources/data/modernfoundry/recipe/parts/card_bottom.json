@@ -1,0 +1,9 @@
+{
+  "id": "modernfoundry:parts/card_bottom",
+  "type": "modernfoundry:part_builder",
+  "allow_uncraftable": true,
+  "cost": 1,
+  "pattern": "modernfoundry:card_bottom",
+  "pattern_item": [{ "tag": "modernfoundry:patterns/default" }, { "item": "modernfoundry:cardstock_cast" }],
+  "result": { "item": "modernfoundry:card_bottom" }
+}

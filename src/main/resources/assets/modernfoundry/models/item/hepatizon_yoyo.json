@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "modernfoundry:item/tconstruct/hepatizon"
+    "layer0": "modernfoundry:item/modernfoundry/hepatizon"
   }
 }

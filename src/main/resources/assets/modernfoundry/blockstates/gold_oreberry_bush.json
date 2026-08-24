@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "modernfoundry:block/gold_oreberry_bush_stage0"
+    },
+    "age=1": {
+      "model": "modernfoundry:block/gold_oreberry_bush_stage1"
+    },
+    "age=2": {
+      "model": "modernfoundry:block/gold_oreberry_bush_full"
+    },
+    "age=3": {
+      "model": "modernfoundry:block/gold_oreberry_bush_ripe"
+    }
+  }
+}
+

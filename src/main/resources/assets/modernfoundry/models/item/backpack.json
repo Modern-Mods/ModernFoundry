@@ -1,0 +1,19 @@
+{
+  "loader": "modernfoundry:tool",
+  "parent": "neoforge:item/default",
+  "textures": {
+    "plating": "modernfoundry:bags/item/tool/backpack/plating",
+    "strap": "modernfoundry:bags/item/tool/backpack/straps",
+    "panel_left": "modernfoundry:bags/item/tool/backpack/panel_left",
+    "panel_right": "modernfoundry:bags/item/tool/backpack/panel_right",
+    "clasp": "modernfoundry:bags/item/tool/backpack/clasp"
+  },
+  "modifier_maps": ["modernfoundry:backpack/backpack"],
+  "parts": [
+    { "name": "plating", "index": 0 },
+    { "name": "strap", "index": 1 },
+    { "name": "panel_left", "index": 2 },
+    { "name": "panel_right", "index": 3 },
+    { "name": "clasp" }
+  ]
+}

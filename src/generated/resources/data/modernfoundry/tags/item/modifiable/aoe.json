@@ -21,6 +21,7 @@
                    "modernfoundry:war_pick",
                    "modernfoundry:katana",
                    "modernfoundry:battle_spade",
+                   "modernfoundry:helix_blade",
                    {
                        "id":  "modernfoundry:minotaur_axe",
                        "required":  false

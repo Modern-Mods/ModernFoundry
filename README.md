@@ -50,6 +50,14 @@ Ordinary Modern Foundry tools and weapons use vanilla-style first-person equip, 
 
 Server-side modifiable-tool block breaking uses the shared harvest path, preserving tool-specific area-of-effect mining and other block-break behavior.
 
+### Native reference integrations
+
+The native integration wave also includes Construct's Armory armor parts and accessories, Constructs Arsenal tools, Tinkers Bags, Tinkers Wands, six canonical Oreberry bushes, and the Slime Boots and Slime Sling gadgets. They use Modern Foundry registries, data, recipes, tags, models, translations, and optional-integration boundaries; the reference mods and Json Things are not runtime requirements.
+
+Construct's Armory visual resources are namespaced under `assets/modernfoundry/textures/armory` and are covered by the bundled LGPL v3 notice and attribution records. Armory Expansion itself supplied material/trait JSON rather than bitmap assets. Its snapshot contains 21 Ice and Fire material records, 2 Matter Overdrive material records, and 45 Construct's Armory trait records. Those external-owned IDs remain an optional compatibility inventory: native equivalents are reused only where Modern Foundry already owns the behavior, and unsupported external traits are documented rather than replaced with invented gameplay.
+
+Oreberries intentionally ships the six canonical IDs from the reference (`iron`, `gold`, `copper`, `tin`, `aluminum`, and `essence`). Registry mutation from arbitrary user JSON was not carried forward; safe growth, bonemeal, silk-touch, villager-trade, and world-generation settings remain in the native configuration/data path.
+
 ### Materials, fluids, and traits
 
 Materials affect the statistics and behavior of the parts they make up. The repository includes materials such as cobalt, steel, slimesteel, amethyst bronze, rose gold, pig iron, cinderslime, Queen's Slime, manyullyn, hepatizon, knightmetal, Knightslime, soulsteel, and additional material families loaded from data.
@@ -105,6 +113,8 @@ Source license: MIT, as declared by `References/Yoyos-1.21-Decompiled/META-INF/n
 Native integrations and equipment content adapted from the MIT references `References/TCIntegrations-1.20.1` by Wendall Cada (wendall911) and `References/Tinkers-Thinking-1.20.1` by CreepingCreeper.
 
 Source licenses: `References/TCIntegrations-1.20.1/LICENSE` and `References/Tinkers-Thinking-1.20.1/LICENSE`. The damage-blocking sound remains credited in `src/main/resources/assets/modernfoundry/sounds/_credits.txt` under its Creative Commons Attribution license.
+
+Construct's Armory armor resources are adapted from C4's LGPL v3 project and retain the Tinkers' Construct-derived attribution required by that project. Armory Expansion material-data provenance and the optional external-material boundary are recorded in `src/main/resources/META-INF/licenses/armory-expansion.txt`.
 
 Thanks to the SlimeKnights projects and contributors, NeoForge, Just Enough Items, and the other libraries and integrations that make this work possible.
 
