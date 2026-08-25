@@ -468,6 +468,7 @@ public final class TinkerSmeltery extends TinkerModule {
   void registerCapabilities(RegisterCapabilitiesEvent event) {
     registerFluid(event, tank.get());
     registerFluid(event, drain.get());
+    registerFluid(event, duct.get());
     registerFluid(event, channel.get());
     registerFluid(event, fluidCannon.get());
     registerFluid(event, lantern.get());

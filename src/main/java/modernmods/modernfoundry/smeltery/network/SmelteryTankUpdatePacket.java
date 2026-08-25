@@ -1,6 +1,5 @@
 package modernmods.modernfoundry.smeltery.network;
 
-import lombok.AllArgsConstructor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,10 +16,14 @@ import java.util.List;
 /**
  * Packet sent whenever the contents of the smeltery tank change
  */
-@AllArgsConstructor
 public class SmelteryTankUpdatePacket implements IThreadsafePacket {
   private final BlockPos pos;
   private final List<FluidStack> fluids;
+
+  public SmelteryTankUpdatePacket(BlockPos pos, List<FluidStack> fluids) {
+    this.pos = pos;
+    this.fluids = fluids.stream().map(FluidStack::copy).toList();
+  }
 
   public SmelteryTankUpdatePacket(FriendlyByteBuf buffer) {
     pos = buffer.readBlockPos();

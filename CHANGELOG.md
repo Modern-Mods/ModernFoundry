@@ -1,4 +1,6 @@
 # Unreleased
+* Fixed smeltery fluid synchronization racing with external pipe transfers.
+    * Network packets now snapshot fluid stacks before asynchronous encoding, preventing Mekanism and other compatible fluid pipes from disconnecting clients during imports or exports.
 * Fixed Slime armor rendering on Minecraft 1.21.1.
     * Renders every armor material layer through NeoForge's texture hook instead of indexing only the first layer.
     * Applies dye tint only to dyeable layers and ignores armor items assigned to the wrong equipment slot.
@@ -96,3 +98,7 @@
     * Preserved the existing NBT schema and built-in-lookup compatibility overloads.
 * Built and verified the latest Modern Foundry 1.21.1-4.1.6 NeoForge JAR.
     * SHA-256: `fffa8566c1cdc326eb8b93f9e3f7f71f8862615aa38c8c04f1495c458f855eb7`.
+* Added native NeoForge fluid capability exposure to smeltery ducts.
+    * Compatible fluid transport mods can now import from and export to ducts; the existing drain capability remains available.
+* Added FTB Ultimine compatibility for Modern Foundry mining tools.
+    * Primary and stone harvest tools are included without changing ordinary tool or weapon behavior.

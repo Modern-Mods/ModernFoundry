@@ -1348,3 +1348,104 @@
 - Archive check: `META-INF/neoforge.mods.toml` and the crowbar texture path are present.
 - Manual validation: not performed; live Minecraft client, dedicated-server, and in-world smoke testing remain outstanding.
 - Tests created or run: no test task was requested or run; the JAR task compiled and packaged the current source.
+
+## 2026-08-25 - Expose smeltery duct fluid capability
+
+**Prompt / Task**
+- Make compatible fluid pipes able to import and export fluids through smeltery ports.
+
+**What Changed**
+- Registered the existing duct block-entity fluid handler with NeoForge's native `Capabilities.FluidHandler.BLOCK` capability.
+- Kept the existing mode-aware port wrapper, so input/output restrictions continue to apply to external transfers.
+- Documented compatible native fluid-pipe interoperability in `README.md` and `CHANGELOG.md`.
+
+**Steps Taken**
+- Traced `TinkerSmeltery.registerCapabilities`, `DuctBlockEntity`, `DuctTankWrapper`, and `SmelteryInputOutputBlockEntity`.
+- Added the duct registration beside the existing drain registration.
+- Preserved the unrelated dirty crowbar assets, tests, and smeltery edits.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `smeltery/TinkerSmeltery.java` capability registration.
+- Owning module/system: NeoForge block fluid capabilities and smeltery fluid-port handlers.
+- Existing logic reused or extracted: `registerFluid(...)`, `DuctTankWrapper`, and `PortFluidHandler`.
+- Net line change: 1 production line, plus required documentation entries.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Native capability exposure lets Mekanism, Pipez, EnderIO, Create, and other compatible transport mods discover the port without hard dependencies or per-mod adapters.
+
+**Build / Validation**
+- Production compile: `rtk proxy cmd.exe /d /c ".\\gradlew.bat compileJava --console=plain --no-daemon"` passed with the repository's existing deprecation warnings.
+- Production build: `rtk proxy cmd.exe /d /c ".\\gradlew.bat build -x test --console=plain --no-daemon"` passed; the JAR and generated resources were produced.
+- Clean full build: production compilation and JAR packaging passed, but `compileTestJava` was blocked by the pre-existing untracked `CrowbarItemTest` referencing the not-yet-created `CrowbarItem`.
+- Focused test: blocked by the same unrelated test-compilation error.
+- `git diff --check`: passed.
+- Manual validation: no live Minecraft, pipe-mod, client, dedicated-server, or multiplayer smoke test performed.
+
+## 2026-08-25 - Add FTB Ultimine mining-tool compatibility
+
+**Prompt / Task**
+- Allow Modern Foundry tools to use FTB Ultimine when FTB Ultimine is active.
+
+**What Changed**
+- Added the `ftbultimine:included_tools` item tag contribution for Modern Foundry's existing primary and stone harvest tags.
+- Kept the broad harvest tag out so daggers, swords, cleavers, and swashers are not newly included as Ultimine tools.
+- Added a resource regression test and documented the compatibility.
+
+**Steps Taken**
+- Read the checked-in FTB Ultimine source and traced its `included_tools` validation path and Modern Foundry's harvest tags.
+- Wrote the regression test first, confirmed the missing-resource red condition, then added the minimal data tag.
+- Processed the resource, ran focused validation, built the production artifact, and reviewed the final diff.
+
+**Architecture / Module Ownership**
+- Relevant resource/test change: `data/ftbultimine/tags/item/included_tools.json` and `FTBUltimineCompatibilityTest`.
+- Owning module/system: optional data-pack compatibility between Modern Foundry harvest tools and FTB Ultimine.
+- Existing logic reused or extracted: Modern Foundry's `modifiable/harvest/primary` and `modifiable/harvest/stone` tags; no runtime integration or dependency added.
+- Net line change: one 7-line resource, one 29-line regression test, and documentation entries; no Java runtime changes.
+- New files: one compatibility resource and one test.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- FTB Ultimine already exposes an item allow tag, so a resource-only contribution avoids an optional compile/runtime dependency and leaves normal Modern Foundry behavior unchanged.
+- The narrower existing harvest tags exclude Modern Foundry's weapon entries while covering the block-mining tools.
+
+**Build / Validation**
+- Production build: `rtk cmd /d /c ".\\gradlew.bat build -x test --console=plain --no-daemon"` passed; the resource was present in the processed output and packaged JAR.
+- Focused test: `rtk cmd /d /c ".\\gradlew.bat test --tests modernmods.modernfoundry.compat.FTBUltimineCompatibilityTest -x compileTestJava --console=plain --no-daemon"` passed using the freshly compiled test class.
+- Resource validation: JSON parsing confirmed `replace: false` with only the primary and stone tags; `git diff --check` passed.
+- Full test limitation: the normal test task remains blocked by the pre-existing dirty `CrowbarItemTest` referencing a missing `CrowbarItem` class; no unrelated files were changed.
+- Manual validation: no live Minecraft/FTB Ultimine client, dedicated-server, multiplayer, or gameplay smoke test performed.
+
+## 2026-08-25 - Snapshot smeltery tank update packets
+
+**Prompt / Task**
+- Diagnose and fix the client disconnect reported when Mekanism pipes transfer fluid from a smeltery.
+
+**What Changed**
+- `SmelteryTankUpdatePacket` now deep-copies the fluid list and each `FluidStack` when constructed, so asynchronous Netty encoding cannot iterate the live smeltery tank list while it changes.
+- Added a regression test covering list removal and stack-amount mutation after packet creation.
+- Marked the built-in fluid registry as synced in the shared packet-test fixture so `FluidStack` network codecs can run in isolation.
+
+**Steps Taken**
+- Traced the Prism log's `ConcurrentModificationException` from packet encoding back to `SmelteryTank.syncFluids()` passing its mutable `fluids` list.
+- Wrote and ran the regression test red; it encoded zero fluids after the source list was cleared.
+- Added the minimal constructor snapshot, ran the focused test green, and reviewed the changed files.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `smeltery/network/SmelteryTankUpdatePacket` and its packet regression test.
+- Owning module/system: smeltery fluid synchronization across the server thread and Netty network thread.
+- Existing logic reused or extracted: the existing packet codec and `SmelteryTank.syncFluids()` call path; no pipe-mod dependency or adapter was added.
+- Net line change: one packet constructor, one test-fixture registry entry, and one new regression test; no changes to the existing fluid capability implementation.
+- New files: `src/test/java/modernmods/modernfoundry/smeltery/network/SmelteryTankUpdatePacketTest.java`.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Snapshotting at the packet boundary fixes the shared race for every smeltery fluid update, including external imports and exports, without locking the live tank or adding integration-specific code.
+
+**Build / Validation**
+- Red regression: focused test failed before the fix because the packet observed the cleared source list.
+- Focused regression: `.\gradlew.bat test --tests modernmods.modernfoundry.smeltery.network.SmelteryTankUpdatePacketTest -x compileTestJava --console=plain --no-daemon` passed.
+- Production build: `.\gradlew.bat build -x test --console=plain --no-daemon` passed.
+- Full test limitation: normal `compileTestJava` remains blocked by the pre-existing dirty `CrowbarItemTest` referencing missing `CrowbarItem`.
+- Manual validation: no live Prism/Mekanism client, pipe transfer, dedicated-server, or multiplayer smoke test performed.

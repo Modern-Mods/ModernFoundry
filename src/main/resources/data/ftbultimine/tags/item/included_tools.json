@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#modernfoundry:modifiable/harvest/primary",
+    "#modernfoundry:modifiable/harvest/stone"
+  ]
+}

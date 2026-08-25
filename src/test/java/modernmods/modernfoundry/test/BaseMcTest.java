@@ -41,6 +41,7 @@ public class BaseMcTest {
     try {
       Method setSync = BaseMappedRegistry.class.getDeclaredMethod("setSync", boolean.class);
       setSync.setAccessible(true);
+      setSync.invoke(BuiltInRegistries.FLUID, true);
       setSync.invoke(BuiltInRegistries.ITEM, true);
       setSync.invoke(BuiltInRegistries.DATA_COMPONENT_TYPE, true);
     } catch (ReflectiveOperationException e) {

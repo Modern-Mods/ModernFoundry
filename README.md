@@ -29,6 +29,7 @@ The processing line is built around both seared and scorched structures. Dependi
 
 *   Melters, heaters, alloyers, Smeltery Controllers, and Foundry Controllers
 *   Seared and scorched tanks, casting tanks, gauges, drains, ducts, chutes, channels, and faucets
+*   Native NeoForge fluid capabilities on smeltery drains and ducts for compatible fluid pipes and transport mods
 *   Seared melters and fuel tanks use the common glass tag and are harvestable with a stone pickaxe
 *   Casting Tables and Casting Basins for parts, ingots, nuggets, gems, plates, gears, wires, and special components
 *   Fluid cannons, portable tanks, copper cans, and other fluid-handling tools
@@ -45,6 +46,8 @@ The bundle also includes modifiable shields, slime-themed armor, slime wings, cr
 Ordinary Modern Foundry tools and weapons use vanilla-style first-person equip, attack-speed cooldown, and swing animations.
 
 Server-side modifiable-tool block breaking uses the shared harvest path, preserving tool-specific area-of-effect mining and other block-break behavior.
+
+FTB Ultimine can use Modern Foundry's primary and stone mining tools when both mods are installed; ordinary tools and weapons remain unchanged.
 
 ### Materials, fluids, and traits
 

@@ -83,7 +83,7 @@ public class DuctBlockEntity extends SmelteryFluidIO implements MenuProvider {
 
   @Override
   protected LazyOptional<IFluidHandler> makeWrapper(LazyOptional<IFluidHandler> capability) {
-    return LazyOptional.of(() -> new DuctTankWrapper(capability.orElse(emptyInstance), itemHandler));
+    return LazyOptional.of(() -> wrapFluidHandler(new DuctTankWrapper(capability.orElse(emptyInstance), itemHandler)));
   }
 
   @Nonnull

@@ -33,11 +33,51 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 import static modernmods.hilt.util.RetexturedHelper.TAG_TEXTURE;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 /**
  * Shared logic between drains and ducts
  */
 public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponentBlockEntity implements IRetexturedBlockEntity, ILegacyCapabilityBlockEntity {
+  private static final String TAG_FLUID_PORT_MODE = "fluidPortMode";
+
+  public enum FluidPortMode {
+    BOTH(true, true),
+    INPUT(true, false),
+    OUTPUT(false, true);
+
+    private final boolean allowsFill;
+    private final boolean allowsDrain;
+
+    FluidPortMode(boolean allowsFill, boolean allowsDrain) {
+      this.allowsFill = allowsFill;
+      this.allowsDrain = allowsDrain;
+    }
+
+    public FluidPortMode next() {
+      return values()[(ordinal() + 1) % values().length];
+    }
+
+    public boolean allowsFill() {
+      return allowsFill;
+    }
+
+    public boolean allowsDrain() {
+      return allowsDrain;
+    }
+
+    private static FluidPortMode fromTag(CompoundTag tags) {
+      if (tags.contains(TAG_FLUID_PORT_MODE, Tag.TAG_STRING)) {
+        try {
+          return valueOf(tags.getString(TAG_FLUID_PORT_MODE));
+        } catch (IllegalArgumentException ignored) {
+          // Unknown values are treated like legacy ports.
+        }
+      }
+      return BOTH;
+    }
+  }
+
   /** Capability this TE watches */
   private final Capability<T> capability;
   /** Empty capability for in case the valid capability becomes invalid without invalidating */
@@ -46,6 +86,8 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
   protected final Consumer<LazyOptional<T>> listener = new WeakConsumerWrapper<>(this, (te, cap) -> te.clearHandler());
   @Nullable
   private LazyOptional<T> capabilityHolder = null;
+  @Getter
+  private FluidPortMode fluidPortMode = FluidPortMode.BOTH;
 
   /* Retexturing */
   @Nonnull
@@ -69,6 +111,19 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
   public void invalidateCaps() {
     // TODO(neoforge-capabilities): re-expose via RegisterCapabilitiesEvent (was super.invalidateCaps();)
     clearHandler();
+  }
+
+  public boolean cycleFluidPortMode() {
+    FluidPortMode next = fluidPortMode.next();
+    if (next == fluidPortMode) {
+      return false;
+    }
+    fluidPortMode = next;
+    setChangedFast();
+    if (level != null) {
+      level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+    }
+    return true;
   }
 
   @Override
@@ -171,6 +226,7 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
   @Override
   protected void saveSynced(CompoundTag tags) {
     super.saveSynced(tags);
+    tags.putString(TAG_FLUID_PORT_MODE, fluidPortMode.name());
     if (texture != Blocks.AIR) {
       tags.putString(TAG_TEXTURE, getTextureName());
     }
@@ -179,6 +235,7 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
   @Override
   public void load(CompoundTag tags) {
     super.load(tags);
+    fluidPortMode = FluidPortMode.fromTag(tags);
     if (tags.contains(TAG_TEXTURE, Tag.TAG_STRING)) {
       texture = RetexturedHelper.getBlock(tags.getString(TAG_TEXTURE));
       RetexturedHelper.onTextureUpdated(this);
@@ -194,7 +251,11 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
 
     /** Wraps the given capability */
     protected LazyOptional<IFluidHandler> makeWrapper(LazyOptional<IFluidHandler> capability) {
-      return LazyOptional.of(() -> capability.orElse(emptyInstance));
+      return LazyOptional.of(() -> wrapFluidHandler(capability.orElse(emptyInstance)));
+    }
+
+    protected IFluidHandler wrapFluidHandler(IFluidHandler handler) {
+      return new PortFluidHandler(handler, this);
     }
 
     @Override
@@ -208,6 +269,51 @@ public abstract class SmelteryInputOutputBlockEntity<T> extends SmelteryComponen
         }
       }
       return LazyOptional.empty();
+    }
+  }
+
+  private static final class PortFluidHandler implements IFluidHandler {
+    private final IFluidHandler parent;
+    private final SmelteryFluidIO port;
+
+    private PortFluidHandler(IFluidHandler parent, SmelteryFluidIO port) {
+      this.parent = parent;
+      this.port = port;
+    }
+
+    @Override
+    public int getTanks() {
+      return parent.getTanks();
+    }
+
+    @Override
+    public FluidStack getFluidInTank(int tank) {
+      return parent.getFluidInTank(tank);
+    }
+
+    @Override
+    public int getTankCapacity(int tank) {
+      return parent.getTankCapacity(tank);
+    }
+
+    @Override
+    public boolean isFluidValid(int tank, FluidStack stack) {
+      return port.getFluidPortMode().allowsFill() && parent.isFluidValid(tank, stack);
+    }
+
+    @Override
+    public int fill(FluidStack resource, FluidAction action) {
+      return port.getFluidPortMode().allowsFill() ? parent.fill(resource, action) : 0;
+    }
+
+    @Override
+    public FluidStack drain(FluidStack resource, FluidAction action) {
+      return port.getFluidPortMode().allowsDrain() ? parent.drain(resource, action) : FluidStack.EMPTY;
+    }
+
+    @Override
+    public FluidStack drain(int maxDrain, FluidAction action) {
+      return port.getFluidPortMode().allowsDrain() ? parent.drain(maxDrain, action) : FluidStack.EMPTY;
     }
   }
 
