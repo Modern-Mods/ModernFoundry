@@ -10,6 +10,11 @@
 
 ## Potential mods to incorporate:
 - https://www.curseforge.com/minecraft/mc-mods/tinkers-things-json
+    * Chisels
+    * Halberds?
+    * Blowpipes
+    * Shortbows
+    * Large Repair Kits
 - https://www.curseforge.com/minecraft/mc-mods/voidsteel-material
 - https://www.curseforge.com/minecraft/mc-mods/constructs-casting
 - https://www.curseforge.com/minecraft/mc-mods/long-time-no-sword-longsword
