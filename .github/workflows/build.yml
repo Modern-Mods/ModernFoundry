@@ -29,7 +29,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Make Gradle wrappers executable
+      - name: Make Gradle wrapper executable
         run: chmod +x ModernFoundry/gradlew
 
       - name: Read ModernFoundry version
@@ -41,35 +41,53 @@ jobs:
           mod_version="$(awk -F= '$1 == "mod_version" { print $2; exit }' gradle.properties | tr -d '\r')"
           tag_lanzador="$(awk -F= '$1 == "tag_lanzador" { print $2; exit }' gradle.properties | tr -d '\r')"
           hilt_version="$(awk -F= '$1 == "hilt_version" { print $2; exit }' gradle.properties | tr -d '\r')"
+
+          echo "minecraft_version=$minecraft_version" >> "$GITHUB_OUTPUT"
           echo "mod_version=$mod_version" >> "$GITHUB_OUTPUT"
+          echo "hilt_version=$hilt_version" >> "$GITHUB_OUTPUT"
           echo "release_tag=v${mod_version}" >> "$GITHUB_OUTPUT"
           echo "jar=ModernFoundry/build/libs/ModernFoundry-${minecraft_version}-${mod_version}-${tag_lanzador}.jar" >> "$GITHUB_OUTPUT"
-          echo "hilt_jar=Hilt-${minecraft_version}-${hilt_version}.jar" >> "$GITHUB_OUTPUT"
+          echo "hilt_jar=ModernFoundry/libs/Hilt-${minecraft_version}-${hilt_version}.jar" >> "$GITHUB_OUTPUT"
 
-      - name: Fetch required Hilt release JAR
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Verify bundled Hilt JAR
+        shell: bash
         run: |
-          mkdir -p ModernFoundry/libs
-          hilt_asset="$(gh api repos/Modern-Mods/Hilt/releases/latest --jq ".assets[] | select(.name == \"${{ steps.version.outputs.hilt_jar }}\") | .browser_download_url" | head -n 1)"
-          test -n "$hilt_asset"
-          curl --fail --location "$hilt_asset" --output "ModernFoundry/libs/${{ steps.version.outputs.hilt_jar }}"
+          if [ ! -f "${{ steps.version.outputs.hilt_jar }}" ]; then
+            echo "::error::Required Hilt JAR not found: ${{ steps.version.outputs.hilt_jar }}"
+            echo "Contents of ModernFoundry/libs:"
+            ls -la ModernFoundry/libs || true
+            exit 1
+          fi
+
+          echo "Using bundled Hilt dependency:"
+          echo "${{ steps.version.outputs.hilt_jar }}"
 
       - name: Build ModernFoundry
         working-directory: ModernFoundry
         run: ./gradlew clean build --no-daemon --console=plain
 
       - name: Verify ModernFoundry JAR
+        shell: bash
         run: |
-          test -f "${{ steps.version.outputs.jar }}"
+          if [ ! -f "${{ steps.version.outputs.jar }}" ]; then
+            echo "::error::Expected ModernFoundry JAR was not created:"
+            echo "${{ steps.version.outputs.jar }}"
+            echo "Contents of ModernFoundry/build/libs:"
+            ls -la ModernFoundry/build/libs || true
+            exit 1
+          fi
+
           echo "Built ${{ steps.version.outputs.jar }}"
 
       - name: Check for existing release
         id: release
         env:
           GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
-          if gh release view "${{ steps.version.outputs.release_tag }}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+          if gh release view "${{ steps.version.outputs.release_tag }}" \
+            --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+
             echo "publish=false" >> "$GITHUB_OUTPUT"
             echo "${{ steps.version.outputs.release_tag }} already exists; skipping release creation."
           else
@@ -80,6 +98,7 @@ jobs:
         if: steps.release.outputs.publish == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
           gh release create "${{ steps.version.outputs.release_tag }}" \
             "${{ steps.version.outputs.jar }}" \
