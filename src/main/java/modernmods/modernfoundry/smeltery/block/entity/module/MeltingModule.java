@@ -2,6 +2,7 @@ package modernmods.modernfoundry.smeltery.block.entity.module;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
@@ -210,9 +211,18 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
    * @return  Module in NBT
    */
   public CompoundTag writeToTag() {
+    return writeToTag(TagUtil.BUILTIN_LOOKUP);
+  }
+
+  /**
+   * Writes this module to NBT using the active registry provider
+   * @param registries  Registry provider for data component serialization
+   * @return  Module in NBT
+   */
+  public CompoundTag writeToTag(HolderLookup.Provider registries) {
     CompoundTag nbt = new CompoundTag();
     if (!stack.isEmpty()) {
-      nbt = (CompoundTag) stack.save(TagUtil.BUILTIN_LOOKUP, nbt);
+      nbt = (CompoundTag) stack.save(registries, nbt);
       nbt.putInt(TAG_CURRENT_TIME, currentTime);
       nbt.putInt(TAG_REQUIRED_TIME, requiredTime);
       nbt.putInt(TAG_REQUIRED_TEMP, requiredTemp);
@@ -225,7 +235,16 @@ public class MeltingModule implements IMeltingContainer, ContainerData {
    * @param nbt  NBT
    */
   public void readFromTag(CompoundTag nbt) {
-    stack = ItemStack.parseOptional(TagUtil.BUILTIN_LOOKUP, nbt);
+    readFromTag(nbt, TagUtil.BUILTIN_LOOKUP);
+  }
+
+  /**
+   * Reads this module from NBT using the active registry provider
+   * @param nbt        NBT
+   * @param registries Registry provider for data component deserialization
+   */
+  public void readFromTag(CompoundTag nbt, HolderLookup.Provider registries) {
+    stack = ItemStack.parseOptional(registries, nbt);
     if (!stack.isEmpty()) {
       currentTime = nbt.getInt(TAG_CURRENT_TIME);
       requiredTime = nbt.getInt(TAG_REQUIRED_TIME);

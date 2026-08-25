@@ -607,7 +607,11 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
 
   /* Tag */
 
-  private void loadFromTag(CompoundTag nbt) {
+  private HolderLookup.Provider getRegistryAccess() {
+    return level == null ? BUILTIN_LOOKUP : level.registryAccess();
+  }
+
+  private void loadFromTag(CompoundTag nbt, HolderLookup.Provider registries) {
     if (nbt.contains(TAG_TANK, Tag.TAG_COMPOUND)) {
       tank.read(nbt.getCompound(TAG_TANK));
       FluidStack first = tank.getFluidInTank(0);
@@ -616,7 +620,7 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
       }
     }
     if (nbt.contains(TAG_INVENTORY, Tag.TAG_COMPOUND)) {
-      meltingInventory.readFromTag(nbt.getCompound(TAG_INVENTORY));
+      meltingInventory.readFromTag(nbt.getCompound(TAG_INVENTORY), registries);
     }
     if (nbt.contains(TAG_STRUCTURE, Tag.TAG_COMPOUND)) {
       setStructure(multiblock.readFromTag(nbt.getCompound(TAG_STRUCTURE), this.worldPosition));
@@ -642,9 +646,9 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
     fuelModule.writeToTag(compound);
   }
 
-  private void saveSyncedData(CompoundTag compound) {
+  private void saveSyncedData(CompoundTag compound, HolderLookup.Provider registries) {
     compound.put(TAG_TANK, tank.write(new CompoundTag()));
-    compound.put(TAG_INVENTORY, meltingInventory.writeToTag());
+    compound.put(TAG_INVENTORY, meltingInventory.writeToTag(registries));
     if (texture != Blocks.AIR) {
       compound.putString(TAG_TEXTURE, getTextureName());
     }
@@ -670,13 +674,14 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   @Override
   public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registries) {
     super.loadAdditional(nbt, registries);
-    loadFromTag(nbt);
+    loadFromTag(nbt, registries);
   }
 
   @Override
   public void load(CompoundTag nbt) {
-    super.loadAdditional(nbt, BUILTIN_LOOKUP);
-    loadFromTag(nbt);
+    HolderLookup.Provider registries = getRegistryAccess();
+    super.loadAdditional(nbt, registries);
+    loadFromTag(nbt, registries);
   }
 
   @Override
@@ -688,7 +693,7 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   @Override
   public void saveAdditional(CompoundTag compound) {
     // Tag that just writes to disk
-    super.saveAdditional(compound, BUILTIN_LOOKUP);
+    super.saveAdditional(compound, getRegistryAccess());
     saveAdditionalData(compound);
   }
 
@@ -696,14 +701,15 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   public void saveSynced(CompoundTag compound, HolderLookup.Provider registries) {
     // Tag that writes to disk and syncs to client
     super.saveSynced(compound, registries);
-    saveSyncedData(compound);
+    saveSyncedData(compound, registries);
   }
 
   @Override
   public void saveSynced(CompoundTag compound) {
     // Tag that writes to disk and syncs to client
-    super.saveSynced(compound, BUILTIN_LOOKUP);
-    saveSyncedData(compound);
+    HolderLookup.Provider registries = getRegistryAccess();
+    super.saveSynced(compound, registries);
+    saveSyncedData(compound, registries);
   }
 
   @Override
@@ -717,7 +723,7 @@ public abstract class HeatingStructureBlockEntity extends NameableBlockEntity im
   @Override
   public CompoundTag getUpdateTag() {
     // Tag that just syncs to client
-    CompoundTag nbt = super.getUpdateTag(BUILTIN_LOOKUP);
+    CompoundTag nbt = super.getUpdateTag(getRegistryAccess());
     saveUpdateData(nbt);
     return nbt;
   }

@@ -1,4 +1,7 @@
 # Unreleased
+* Fixed Slime armor rendering on Minecraft 1.21.1.
+    * Renders every armor material layer through NeoForge's texture hook instead of indexing only the first layer.
+    * Applies dye tint only to dyeable layers and ignores armor items assigned to the wrong equipment slot.
 * Fixed Nether cobalt ore drops when mined with diamond-tier tools.
     * Added cobalt ore to the vanilla pickaxe and diamond-tool tags; netherite tools qualify through the vanilla diamond-tier tag.
 * Built and verified the latest Modern Foundry 1.21.1-4.1.4 NeoForge JAR.
@@ -87,3 +90,9 @@
     * Existing slimeball and Fortune behavior remains gated to ordinary harvesting.
 * Built and verified the updated Modern Foundry 1.21.1-4.1.5 NeoForge JAR.
     * SHA-256: `86f1797b007f1fee023249d4b326e7e2f3a89b8584eb32b913d3ff54f4431a85`.
+
+* Fixed smeltery item serialization with Minecraft 1.21.1 dynamic registries.
+    * Melting inventories now use the active registry provider when saving and loading item stacks, preventing enchanted stacks from crashing world ticks.
+    * Preserved the existing NBT schema and built-in-lookup compatibility overloads.
+* Built and verified the latest Modern Foundry 1.21.1-4.1.6 NeoForge JAR.
+    * SHA-256: `fffa8566c1cdc326eb8b93f9e3f7f71f8862615aa38c8c04f1495c458f855eb7`.

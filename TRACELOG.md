@@ -1251,3 +1251,100 @@
 - Exact artifact and Testing instance SHA-256: `86f1797b007f1fee023249d4b326e7e2f3a89b8584eb32b913d3ff54f4431a85`.
 - Manual validation: not performed; live tests with ordinary tools, Fortune, Silk Touch, and shears remain outstanding.
 - Tests created or run: no dedicated tests added.
+
+## 2026-08-25 - Fix Slime armor material-layer rendering
+
+**Prompt / Task**
+- Implement the recommended fix for the `ArrayIndexOutOfBoundsException` reported from `SlimeArmorLayer.getArmorResource`.
+
+**What Changed**
+- Replaced first-layer indexing with iteration over every `ArmorMaterial.Layer`.
+- Passed each layer to `ClientHooks.getArmorTexture`, applied dye tint only when the layer is dyeable, and ignored armor items whose equipment slot is not `HEAD`.
+- Removed the obsolete type-based `getArmorResource` helper.
+- Added a narrow source-contract regression test for the layer loop and texture-hook call.
+
+**Steps Taken**
+- Read the empty `TASK.md`, traced the shared slime armor renderer, and compared its behavior with vanilla 1.21.1 `HumanoidArmorLayer`.
+- Added the regression test, attempted the targeted Gradle test, and confirmed Gradle was blocked before test execution by existing checkout-wide missing-symbol errors.
+- Applied the renderer fix, ran the equivalent source-contract assertion successfully, and checked the complete source diff for whitespace errors.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `world/client/SlimeArmorLayer.java` and `src/test/java/modernmods/modernfoundry/world/client/SlimeArmorLayerTest.java`.
+- Owning module/system: client-side slime entity armor and head-item rendering.
+- Existing logic reused or extracted: vanilla material-layer iteration and NeoForge `ClientHooks.getArmorTexture`.
+- Net line change: renderer `+9/-18`; one regression test added; no new runtime abstraction.
+- New files: one source-contract test.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Armor materials can expose zero, one, or multiple layers; iterating the list removes the invalid fixed index and preserves multi-layer textures and dye behavior.
+- The existing skull and generic head-item paths remain unchanged; mismatched armor is no longer rendered as a head item.
+
+**Build / Validation**
+- Production build or compile-only check: targeted Gradle test was blocked at `compileJava` by unresolved existing classes including `Orientation2D`, `ResourceId`, `ModuleHook`, and `LazyOptional`; a clean retry was blocked by Gradle's generated `build`/NeoForm state before Java compilation completed.
+- Manual validation: not performed; live client/in-world armor rendering smoke testing remains outstanding.
+- Tests created or run: JUnit test was not reached; equivalent source-contract assertion passed; `git diff --check` passed.
+
+## 2026-08-25 - Fix dynamic-registry smeltery item serialization
+
+**Prompt / Task**
+- Implement the recommended fix for the crash caused by saving an enchanted item in a smeltery melting inventory.
+
+**What Changed**
+- Added provider-aware `writeToTag` and `readFromTag` overloads to `MeltingModule` and `MeltingModuleInventory`.
+- Routed heating-structure save/load and sync paths, plus the legacy melter caller, through the active `HolderLookup.Provider` instead of always using the built-in registry.
+- Added a regression test that creates a dynamic enchantment registry and round-trips an enchanted book without changing the NBT schema.
+
+**Steps Taken**
+- Read the crash stack and traced the failing `ItemStack.save` call from `MeltingModule` through the melting inventory and heating-structure sync path.
+- Reused Minecraft's provider-aware `ItemStack.save` and `ItemStack.parseOptional` APIs, retaining built-in-lookup overloads for callers without a live level.
+- Ran the full `check build` verification and inspected the focused JUnit result and final artifact hash.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `smeltery/block/entity/module/MeltingModule`, `MeltingModuleInventory`, `HeatingStructureBlockEntity`, and `MelterBlockEntity`.
+- Owning module/system: smeltery melting-inventory persistence and block-entity synchronization.
+- Existing logic reused or extracted: Minecraft's active registry provider and existing module/inventory NBT format; no new runtime abstraction.
+- Net line change: 68 runtime lines added net across four existing classes; one 84-line regression test added.
+- New files: `src/test/java/modernmods/modernfoundry/smeltery/block/entity/module/MeltingModuleTest.java`.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Minecraft 1.21.1 enchantments are resolved through a dynamic registry that `TagUtil.BUILTIN_LOOKUP` cannot access. Passing the level's provider fixes the source failure while preserving existing serialized keys and compatibility wrappers.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat check build --console=plain --no-daemon"` passed in 7m36s; existing Gradle deprecation warnings remain.
+- Tests/checks: the `test` task reported 1 test, 0 failures, 0 errors; `testJunit` reported `NO-SOURCE`.
+- Artifact: `build/libs/ModernFoundry-1.21.1-4.1.6-NeoForge.jar`; SHA-256 `7834212b42e79ca9c6965903ba14ef85aca5f3a62dc080e17f255ab451ce29dd`.
+- Manual validation: not performed; live Minecraft world, client synchronization, and dedicated-server smoke testing remain outstanding.
+- Tests created or run: `MeltingModuleTest.providerAwareSerializationRoundTripsEnchantedStack` passed.
+
+## 2026-08-25 - Build latest Modern Foundry JAR
+
+**Prompt / Task**
+- Build the latest Modern Foundry JAR from the current checkout.
+
+**What Changed**
+- Rebuilt the configured 1.21.1-4.1.6 NeoForge artifact; this build task made no source changes.
+
+**Steps Taken**
+- Read the empty `TASK.md` and preserved the existing dirty worktree.
+- Ran the explicit fresh-JAR Gradle task with the repository wrapper.
+- Verified the artifact path, size, archive entries, timestamp, and SHA-256.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: none; Gradle `jar` packaging only.
+- Owning module/system: project build and release artifact packaging.
+- Existing logic reused or extracted: the existing Gradle wrapper and `jar` task.
+- Net line change: documentation only.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Used `jar --rerun-tasks` to force a fresh artifact while leaving the user's uncommitted source and asset changes intact.
+
+**Build / Validation**
+- Production build: `rtk cmd.exe /d /c ".\\gradlew.bat jar --rerun-tasks --console=plain --no-daemon"` passed in 4m37s; 27 actionable tasks, with 100 existing compiler warnings.
+- Artifact: `build/libs/ModernFoundry-1.21.1-4.1.6-NeoForge.jar`; 23,381,319 bytes; SHA-256 `fffa8566c1cdc326eb8b93f9e3f7f71f8862615aa38c8c04f1495c458f855eb7`.
+- Archive check: `META-INF/neoforge.mods.toml` and the crowbar texture path are present.
+- Manual validation: not performed; live Minecraft client, dedicated-server, and in-world smoke testing remain outstanding.
+- Tests created or run: no test task was requested or run; the JAR task compiled and packaged the current source.

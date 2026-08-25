@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.MutableComponent;
@@ -192,13 +193,17 @@ public class MelterBlockEntity extends NameableBlockEntity implements ITankInven
     return true;
   }
 
+  private HolderLookup.Provider getRegistryAccess() {
+    return level == null ? TagUtil.BUILTIN_LOOKUP : level.registryAccess();
+  }
+
   @Override
   public void load(CompoundTag tag) {
     super.load(tag);
     tank.readFromNBT(TagUtil.BUILTIN_LOOKUP, tag.getCompound(NBTTags.TANK));
     fuelModule.readFromTag(tag);
     if (tag.contains(TAG_INVENTORY, Tag.TAG_COMPOUND)) {
-      meltingInventory.readFromTag(tag.getCompound(TAG_INVENTORY));
+      meltingInventory.readFromTag(tag.getCompound(TAG_INVENTORY), getRegistryAccess());
     }
   }
 
@@ -206,7 +211,7 @@ public class MelterBlockEntity extends NameableBlockEntity implements ITankInven
   public void saveSynced(CompoundTag tag) {
     super.saveSynced(tag);
     tag.put(NBTTags.TANK, tank.writeToNBT(TagUtil.BUILTIN_LOOKUP, new CompoundTag()));
-    tag.put(TAG_INVENTORY, meltingInventory.writeToTag());
+    tag.put(TAG_INVENTORY, meltingInventory.writeToTag(getRegistryAccess()));
   }
 
   @Override

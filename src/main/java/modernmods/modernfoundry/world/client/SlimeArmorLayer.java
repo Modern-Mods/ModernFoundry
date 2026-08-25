@@ -23,6 +23,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.BlockItem;
 import modernmods.modernfoundry.compat.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.Item;
@@ -67,7 +68,7 @@ public class SlimeArmorLayer<T extends Slime, M extends HierarchicalModel<T>, A 
 
       Item item = helmet.getItem();
       // helmet renderer, based on humanoid armor layer
-      if (item instanceof ArmorItem armor && armor.getType() == ArmorItem.Type.HELMET) {
+      if (item instanceof ArmorItem armor && armor.getEquipmentSlot() == EquipmentSlot.HEAD) {
         this.getParentModel().copyPropertiesTo(armorModel);
         armorModel.setAllVisible(false);
         armorModel.head.visible = true;
@@ -75,17 +76,19 @@ public class SlimeArmorLayer<T extends Slime, M extends HierarchicalModel<T>, A 
         //noinspection UnstableApiUsage  I am reimplementing vanilla stuff, I will call vanilla hooks
         Model model = ForgeHooksClient.getArmorModel(entity, helmet, EquipmentSlot.HEAD, armorModel);
         boolean enchanted = helmet.hasFoil();
+        int dyeColor = -1;
         if (armor instanceof DyeableLeatherItem dyeable) {
           int color = dyeable.getColor(helmet);
           float red = (color >> 16 & 255) / 255.0F;
           float green = (color >> 8 & 255) / 255.0F;
           float blue = (color & 255) / 255.0F;
-          renderModel(matrices, buffer, packedLight, enchanted, model, color(red, green, blue, 1.0F), getArmorResource(entity, helmet, armor, ""));
-          renderModel(matrices, buffer, packedLight, enchanted, model, -1, getArmorResource(entity, helmet, armor, "_overlay"));
-        } else {
-          renderModel(matrices, buffer, packedLight, enchanted, model, -1, getArmorResource(entity, helmet, armor, ""));
+          dyeColor = color(red, green, blue, 1.0F);
         }
-      } else {
+        for (ArmorMaterial.Layer layer : armor.getMaterial().value().layers()) {
+          renderModel(matrices, buffer, packedLight, enchanted, model, layer.dyeable() ? dyeColor : -1,
+            ClientHooks.getArmorTexture(entity, helmet, layer, false, EquipmentSlot.HEAD));
+        }
+      } else if (!(item instanceof ArmorItem)) {
         // block model renderer, based on custom head layer
 
         // skull block rendering
@@ -117,16 +120,4 @@ public class SlimeArmorLayer<T extends Slime, M extends HierarchicalModel<T>, A 
     return ((int)(alpha * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255);
   }
 
-  /**
-   * More generic ForgeHook version of the above function, it allows for Items to have more control over what texture they provide.
-   *
-   * @param entity Entity wearing the armor
-   * @param stack ItemStack for the armor
-   * @param armor Armor item instance
-   * @param type Subtype, can be null or "overlay"
-   * @return ResourceLocation pointing at the armor's texture
-   */
-  public static ResourceLocation getArmorResource(Entity entity, ItemStack stack, ArmorItem armor, String type) {
-    return ClientHooks.getArmorTexture(entity, stack, armor.getMaterial().value().layers().get(0), false, EquipmentSlot.HEAD);
-  }
 }

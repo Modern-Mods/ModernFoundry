@@ -1,5 +1,6 @@
 package modernmods.modernfoundry.smeltery.block.entity.module;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -13,6 +14,7 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 import modernmods.hilt.block.entity.HiltBlockEntity;
 import modernmods.modernfoundry.library.recipe.melting.IMeltingContainer.IOreRate;
 import modernmods.modernfoundry.library.recipe.melting.IMeltingRecipe;
+import modernmods.modernfoundry.library.utils.TagUtil;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -312,11 +314,20 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
    * @return  Module in Tag
    */
   public CompoundTag writeToTag() {
+    return writeToTag(TagUtil.BUILTIN_LOOKUP);
+  }
+
+  /**
+   * Writes this inventory to NBT using the active registry provider
+   * @param registries  Registry provider for item data component serialization
+   * @return  Inventory in Tag
+   */
+  public CompoundTag writeToTag(HolderLookup.Provider registries) {
     CompoundTag nbt = new CompoundTag();
     ListTag list = new ListTag();
     for (int i = 0; i < modules.length; i++) {
       if (modules[i] != null && !modules[i].getStack().isEmpty()) {
-        CompoundTag moduleTag = modules[i].writeToTag();
+        CompoundTag moduleTag = modules[i].writeToTag(registries);
         moduleTag.putByte(TAG_SLOT, (byte)i);
         list.add(moduleTag);
       }
@@ -333,6 +344,15 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
    * @param nbt  Tag compound
    */
   public void readFromTag(CompoundTag nbt) {
+    readFromTag(nbt, TagUtil.BUILTIN_LOOKUP);
+  }
+
+  /**
+   * Reads this inventory from NBT using the active registry provider
+   * @param nbt        Tag compound
+   * @param registries Registry provider for item data component deserialization
+   */
+  public void readFromTag(CompoundTag nbt, HolderLookup.Provider registries) {
     if (!strictSize) {
       int newSize = nbt.getByte(TAG_SIZE) & 255;
       if (newSize != modules.length) {
@@ -352,7 +372,7 @@ public class MeltingModuleInventory implements IItemHandlerModifiable {
       if (item.contains(TAG_SLOT, Tag.TAG_BYTE)) {
         int slot = item.getByte(TAG_SLOT) & 255;
         if (validSlot(slot)) {
-          getModule(slot).readFromTag(item);
+          getModule(slot).readFromTag(item, registries);
         }
       }
     }
