@@ -1,4 +1,6 @@
 # Unreleased
+* Fixed multiplayer clients disconnecting while joining when modifier synchronization arrives before the client world exists.
+    * Enchantment mappings now resolve through the registry access carried by NeoForge's network buffer.
 * Fixed smeltery fluid synchronization racing with external pipe transfers.
     * Network packets now snapshot fluid stacks before asynchronous encoding, preventing Mekanism and other compatible fluid pipes from disconnecting clients during imports or exports.
 * Fixed Slime armor rendering on Minecraft 1.21.1.
@@ -102,3 +104,6 @@
     * Compatible fluid transport mods can now import from and export to ducts; the existing drain capability remains available.
 * Added FTB Ultimine compatibility for Modern Foundry mining tools.
     * Primary and stone harvest tools are included without changing ordinary tool or weapon behavior.
+
+* Fixed sand cast recipes using the correct `c:sands` item tag.
+    * Updated blank sand cast, red sand cast, and builder-block recipe inputs.

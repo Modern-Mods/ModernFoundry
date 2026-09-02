@@ -3,7 +3,7 @@
   "id": "modernfoundry:smeltery/casts/sand/builder_block/tough_handle",
   "pattern": "modernfoundry:tough_handle",
   "pattern_item": {
-    "tag": "c:sand/colorless"
+    "tag": "c:sands"
   },
   "result": {
     "count": 4,

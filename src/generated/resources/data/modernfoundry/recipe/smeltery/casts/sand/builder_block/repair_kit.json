@@ -3,7 +3,7 @@
   "id": "modernfoundry:smeltery/casts/sand/builder_block/repair_kit",
   "pattern": "modernfoundry:repair_kit",
   "pattern_item": {
-    "tag": "c:sand/colorless"
+    "tag": "c:sands"
   },
   "result": {
     "count": 4,

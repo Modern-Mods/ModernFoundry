@@ -3,7 +3,7 @@
   "id": "modernfoundry:smeltery/casts/sand/builder_block/chestplate_plating",
   "pattern": "modernfoundry:chestplate_plating",
   "pattern_item": {
-    "tag": "c:sand/colorless"
+    "tag": "c:sands"
   },
   "result": {
     "count": 4,

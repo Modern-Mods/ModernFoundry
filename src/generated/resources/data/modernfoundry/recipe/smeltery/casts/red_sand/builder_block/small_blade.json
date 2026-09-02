@@ -3,7 +3,7 @@
   "id": "modernfoundry:smeltery/casts/red_sand/builder_block/small_blade",
   "pattern": "modernfoundry:small_blade",
   "pattern_item": {
-    "tag": "c:sand/red"
+    "tag": "c:sands"
   },
   "result": {
     "count": 4,

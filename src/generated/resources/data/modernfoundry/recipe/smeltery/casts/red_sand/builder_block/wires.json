@@ -9,7 +9,7 @@
   ],
   "pattern": "modernfoundry:wire",
   "pattern_item": {
-    "tag": "c:sand/red"
+    "tag": "c:sands"
   },
   "result": {
     "count": 4,

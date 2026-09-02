@@ -3,7 +3,7 @@
   "id": "modernfoundry:smeltery/casts/red_sand/builder_block/tool_binding",
   "pattern": "modernfoundry:tool_binding",
   "pattern_item": {
-    "tag": "c:sand/red"
+    "tag": "c:sands"
   },
   "result": {
     "count": 4,

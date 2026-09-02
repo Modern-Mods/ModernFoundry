@@ -3,7 +3,7 @@
   "id": "modernfoundry:smeltery/casts/red_sand/builder_block/leggings_plating",
   "pattern": "modernfoundry:leggings_plating",
   "pattern_item": {
-    "tag": "c:sand/red"
+    "tag": "c:sands"
   },
   "result": {
     "count": 4,

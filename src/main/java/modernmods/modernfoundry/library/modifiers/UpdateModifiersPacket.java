@@ -9,6 +9,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -80,7 +81,10 @@ public class UpdateModifiersPacket implements IThreadsafePacket {
   }
 
   /** Gets the active enchantment registry lookup for packet encoding or decoding. */
-  private static HolderLookup.RegistryLookup<Enchantment> enchantmentLookup() {
+  private static HolderLookup.RegistryLookup<Enchantment> enchantmentLookup(FriendlyByteBuf buffer) {
+    if (buffer instanceof RegistryFriendlyByteBuf registryBuffer) {
+      return registryBuffer.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
+    }
     HolderLookup.RegistryLookup<Enchantment> lookup = CommonHooks.resolveLookup(Registries.ENCHANTMENT);
     if (lookup == null) {
       throw new DecoderException("Enchantment registry is unavailable");
@@ -89,13 +93,13 @@ public class UpdateModifiersPacket implements IThreadsafePacket {
   }
 
   /** Looks up an enchantment by ID. */
-  private static Enchantment getEnchantment(ResourceLocation id) {
-    return enchantmentLookup().get(ResourceKey.create(Registries.ENCHANTMENT, id)).map(Holder::value).orElseThrow(() -> new DecoderException("Unknown enchantment " + id));
+  private static Enchantment getEnchantment(ResourceLocation id, FriendlyByteBuf buffer) {
+    return enchantmentLookup(buffer).get(ResourceKey.create(Registries.ENCHANTMENT, id)).map(Holder::value).orElseThrow(() -> new DecoderException("Unknown enchantment " + id));
   }
 
   /** Gets the ID for the given enchantment. */
-  private static ResourceLocation getEnchantmentId(Enchantment enchantment) {
-    return enchantmentLookup().listElements()
+  private static ResourceLocation getEnchantmentId(Enchantment enchantment, FriendlyByteBuf buffer) {
+    return enchantmentLookup(buffer).listElements()
       .filter(holder -> holder.value() == enchantment)
       .findFirst()
       .map(holder -> holder.key().location())
@@ -127,7 +131,7 @@ public class UpdateModifiersPacket implements IThreadsafePacket {
     size = buffer.readVarInt();
     for (int i = 0; i < size; i++) {
       enchantmentBuilder.put(
-        getEnchantment(buffer.readResourceLocation()),
+        getEnchantment(buffer.readResourceLocation(), buffer),
         getModifier(modifiers, new ModifierId(buffer.readResourceLocation())));
     }
     enchantmentMap = enchantmentBuilder.build();
@@ -161,7 +165,7 @@ public class UpdateModifiersPacket implements IThreadsafePacket {
     // enchantment mapping
     buffer.writeVarInt(enchantmentMap.size());
     for (Entry<Enchantment,Modifier> entry : enchantmentMap.entrySet()) {
-      buffer.writeResourceLocation(getEnchantmentId(entry.getKey()));
+      buffer.writeResourceLocation(getEnchantmentId(entry.getKey(), buffer));
       buffer.writeResourceLocation(entry.getValue().getId());
     }
     buffer.writeVarInt(enchantmentTagMappings.size());

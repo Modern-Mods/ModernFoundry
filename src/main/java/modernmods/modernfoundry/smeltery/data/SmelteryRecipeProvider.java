@@ -142,11 +142,11 @@ public class SmelteryRecipeProvider extends BaseRecipeProvider implements ISmelt
 
     // sand casts
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, TinkerSmeltery.blankSandCast, 4)
-                          .requires(Tags.Items.SAND_COLORLESS)
+                          .requires(Tags.Items.SANDS)
                           .unlockedBy("has_casting", has(TinkerSmeltery.searedTable))
                           .save(consumer, location("smeltery/sand_cast"));
     ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, TinkerSmeltery.blankRedSandCast, 4)
-                          .requires(Tags.Items.SAND_RED)
+                          .requires(Tags.Items.SANDS)
                           .unlockedBy("has_casting", has(TinkerSmeltery.searedTable))
                           .save(consumer, location("smeltery/red_sand_cast"));
 

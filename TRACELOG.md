@@ -1449,3 +1449,70 @@
 - Production build: `.\gradlew.bat build -x test --console=plain --no-daemon` passed.
 - Full test limitation: normal `compileTestJava` remains blocked by the pre-existing dirty `CrowbarItemTest` referencing missing `CrowbarItem`.
 - Manual validation: no live Prism/Mekanism client, pipe transfer, dedicated-server, or multiplayer smoke test performed.
+
+## 2026-09-02 - Fix pre-world enchantment packet decoding
+
+**Prompt / Task**
+- Fix the intermittent multiplayer disconnect caused by `Enchantment registry is unavailable` while clients join a Modern Foundry server.
+
+**What Changed**
+- `UpdateModifiersPacket` now resolves enchantments from the `RegistryFriendlyByteBuf` registry access supplied by NeoForge during packet encoding and decoding.
+- Retained the existing `CommonHooks.resolveLookup` fallback for direct non-network `FriendlyByteBuf` callers.
+- Added a regression test that decodes an enchantment mapping before a client world exists.
+
+**Steps Taken**
+- Read the issue report and traced `modernfoundry:network/20` through Hilt's packet codec into `UpdateModifiersPacket`.
+- Confirmed NeoForge's network codec supplies `RegistryFriendlyByteBuf`, while `CommonHooks.resolveLookup` relies on the current server or client world and returns no client lookup before world creation.
+- Wrote the regression test first, observed it fail with the pre-fix lookup, restored the buffer-based lookup, and reran it successfully.
+- Preserved the unrelated dirty Crowbar files and existing documentation changes.
+
+**Architecture / Module Ownership**
+- Relevant class/test: `library/modifiers/UpdateModifiersPacket` and `UpdateModifiersPacketTest`.
+- Owning module/system: Modern Foundry modifier synchronization over Hilt/NeoForge custom payloads.
+- Existing logic reused or extracted: NeoForge's registry-aware network buffer; no Hilt API or packet format change.
+- Net line change: one packet lookup path and one regression test; changelog and trace entries appended.
+- New files: `src/test/java/modernmods/modernfoundry/library/modifiers/UpdateModifiersPacketTest.java`.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The packet must use the connection's registry snapshot because its decode can occur before `Minecraft.level` is initialized. The fallback keeps ordinary direct-buffer callers compatible.
+
+**Build / Validation**
+- Production compile: `rtk cmd.exe /d /c ".\\gradlew.bat compileJava --console=plain --no-daemon"` passed with existing deprecation warnings.
+- Red regression: the reverted focused test failed at the expected no-throw assertion with 1 failed test.
+- Green regression: `rtk cmd.exe /d /c ".\\gradlew.bat test --tests modernmods.modernfoundry.library.modifiers.UpdateModifiersPacketTest --init-script C:\\Users\\Zach\\AppData\\Local\\Temp\\modernfoundry-test-init.gradle --console=plain --no-daemon"` passed with 1 test and 0 failures; the temporary init script excluded only the unrelated missing-Crowbar test and was removed afterward.
+- Full test limitation: normal `compileTestJava` remains blocked by the pre-existing untracked `CrowbarItemTest` referencing missing `CrowbarItem`.
+- Manual validation: no live Minecraft client, dedicated server, or multiplayer join smoke test performed.
+
+## 2026-09-02 - Fix sand cast recipe tags
+
+**Prompt / Task**
+- Correct the sand cast recipe inputs from `c:sand/colorless` and `c:sand/red` to `c:sands`.
+
+**What Changed**
+- Updated the inactive recipe providers to use NeoForge's `Tags.Items.SANDS` constant.
+- Updated all 58 checked-in generated recipes containing the stale sand tag paths.
+
+**Steps Taken**
+- Read `TASK.md` and the project instructions.
+- Traced the generated recipe inputs to `SmelteryRecipeProvider` and `ICastCreationHelper`.
+- Confirmed `Tags.Items.SANDS` exists in the project's NeoForge 21.1.240 dependency.
+- Preserved existing unrelated dirty work and documentation changes.
+
+**Architecture / Module Ownership**
+- Relevant classes/resources: `SmelteryRecipeProvider`, `ICastCreationHelper`, and generated smeltery recipe JSON.
+- Owning module/system: Modern Foundry smeltery recipe data.
+- Existing logic reused or extracted: NeoForge's shared `Tags.Items.SANDS` tag.
+- Net line change: four provider references, 58 generated tag values, and required log entries.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- The checked-in generated resources are runtime source in this checkout, while the provider references keep future recipe generation aligned with the same shared tag.
+
+**Build / Validation**
+- Modified recipe JSON validation: all 58 changed files parsed successfully.
+- Stale-tag scan: no `c:sand/colorless` or `c:sand/red` references remain under `src`.
+- Production compile: `rtk cmd.exe /d /c ".\\gradlew.bat compileJava --console=plain --no-daemon"` passed.
+- Tests: not run; this is a literal recipe-tag correction with no new behavior code.
+- Manual validation: no live Minecraft client or recipe-crafting smoke test performed.

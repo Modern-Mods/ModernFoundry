@@ -3,7 +3,7 @@
   "id": "modernfoundry:smeltery/casts/sand/builder_block/broad_blade",
   "pattern": "modernfoundry:broad_blade",
   "pattern_item": {
-    "tag": "c:sand/colorless"
+    "tag": "c:sands"
   },
   "result": {
     "count": 4,

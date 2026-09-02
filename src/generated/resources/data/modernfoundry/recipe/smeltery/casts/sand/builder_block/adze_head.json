@@ -3,7 +3,7 @@
   "id": "modernfoundry:smeltery/casts/sand/builder_block/adze_head",
   "pattern": "modernfoundry:adze_head",
   "pattern_item": {
-    "tag": "c:sand/colorless"
+    "tag": "c:sands"
   },
   "result": {
     "count": 4,
