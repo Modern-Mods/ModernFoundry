@@ -107,3 +107,5 @@
 
 * Fixed sand cast recipes using the correct `c:sands` item tag.
     * Updated blank sand cast, red sand cast, and builder-block recipe inputs.
+* Fixed Crafting Station ingredients remaining after crafting.
+    * Positioned recipes now consume items from their actual 3x3 grid slots, preventing material duplication.

@@ -1516,3 +1516,36 @@
 - Production compile: `rtk cmd.exe /d /c ".\\gradlew.bat compileJava --console=plain --no-daemon"` passed.
 - Tests: not run; this is a literal recipe-tag correction with no new behavior code.
 - Manual validation: no live Minecraft client or recipe-crafting smoke test performed.
+
+## 2026-09-02 - Fix Crafting Station ingredient duplication
+
+**Prompt / Task**
+- Fix the reported Crafting Station exploit where crafting produces the result without consuming the grid materials.
+
+**What Changed**
+- `CraftingStationBlockEntity.takeResult` now writes consumed stacks and crafting remainders to the calculated raw 3x3 inventory slot instead of the compact recipe index.
+- Added a regression test for a vertically positioned two-input recipe.
+
+**Steps Taken**
+- Read `TASK.md` and the project instructions.
+- Traced Crafting Station result taking through `CraftingStationContainerMenu`, `LazyResultContainer`, and `CraftingStationBlockEntity.takeResult`.
+- Confirmed `CraftingInput.ofPositioned` compacts the two inputs to a 1x2 recipe with a raw-grid offset, while the existing writes still used compact indices.
+- Wrote the regression test first, observed it fail because the positioned ingredient remained in the station, then changed the three writes to use the calculated slot.
+- Reviewed the changed source, test, and required project logs.
+
+**Architecture / Module Ownership**
+- Relevant class/test: `CraftingStationBlockEntity` and `CraftingStationBlockEntityTest`.
+- Owning module/system: Crafting Station inventory consumption and vanilla 1.21.1 crafting-remainder handling.
+- Existing logic reused or extracted: the existing `CraftingInput.Positioned` coordinate translation; no recipe-specific exceptions or new abstraction.
+- Net line change: three production write targets, one regression test, and required documentation entries.
+- New files: `src/test/java/modernmods/modernfoundry/tables/block/entity/table/CraftingStationBlockEntityTest.java`.
+- Build files updated: none in the final change; a temporary test-source exclusion for an unrelated missing-Crowbar test was removed after focused validation.
+
+**Rationale / Tradeoffs**
+- The calculated `slot` is the single source of truth for mapping compact recipe coordinates back to the station's backing inventory. Using it in every branch fixes both single-item consumption and remainder merging without changing recipe behavior.
+
+**Build / Validation**
+- Red regression: focused test failed as expected because the positioned ingredient remained after `takeResult`.
+- Green regression: `rtk cmd.exe /d /c ".\\gradlew.bat test --tests modernmods.modernfoundry.tables.block.entity.table.CraftingStationBlockEntityTest --console=plain --no-daemon --no-watch-fs"` passed with 1 test and 0 failures; the temporary exclusion only bypassed the unrelated existing missing-Crowbar test.
+- Full test limitation: normal `compileTestJava` remains blocked by the existing `CrowbarItemTest` referencing missing `CrowbarItem`.
+- Manual validation: no live Minecraft client, dedicated server, multiplayer, or Crafting Station gameplay smoke test performed.

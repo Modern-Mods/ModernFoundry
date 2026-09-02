@@ -181,16 +181,16 @@ public class CraftingStationBlockEntity extends RetexturedTableBlockEntity imple
 
       // if empty or size 1, set directly (decreases by 1)
       if (original.isEmpty() || original.getCount() == 1) {
-        this.setItem(i, newStack);
+        this.setItem(slot, newStack);
       }
       else if (ItemStack.isSameItemSameComponents(original, newStack)) {
         // if matching, merge (decreasing by 1
         newStack.grow(original.getCount() - 1);
-        this.setItem(i, newStack);
+        this.setItem(slot, newStack);
       }
       else {
         // directly update the slot
-        this.setItem(i, original.copyWithCount(original.getCount() - 1));
+        this.setItem(slot, original.copyWithCount(original.getCount() - 1));
         // otherwise, drop the item as the player
         if (!newStack.isEmpty() && !player.getInventory().add(newStack)) {
           player.drop(newStack, false);
