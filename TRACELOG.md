@@ -1582,3 +1582,39 @@
 - JSON validation: both new files parse with `jq`, and the referenced `modernfoundry:slimy_logs` block and item tags exist.
 - Manual validation: ran `runClient` and loaded a world with no tag-loading errors for `minecraft:logs` or `modernfoundry` tags. The user confirmed in-game that Mattocks now drop slime logs.
 - Tests created or run: no new tests; the existing suite ran as part of `build`.
+
+## 2026-10-09 - Restore remaining vanilla slime wood tags
+
+**Prompt / Task**
+- Restore the other vanilla slime wood tags that the tag providers declare but that were never shipped.
+
+**What Changed**
+- Added 13 block tags under `src/generated/resources/data/minecraft/tags/block/`: `planks`, `wooden_slabs`, `wooden_stairs`, `wooden_fences`, `fence_gates`, `wooden_doors`, `wooden_trapdoors`, `wooden_buttons`, `wooden_pressure_plates`, `standing_signs`, `wall_signs`, `ceiling_hanging_signs`, `wall_hanging_signs`.
+- Added 12 item tags under `src/generated/resources/data/minecraft/tags/item/`: the `ItemTagProvider` copies of the above (`signs` and `hanging_signs` for signs) plus `non_flammable_wood`.
+- Changed the 60 `remove` entries in `minecraft/tags/block/mineable/axe.json` from `tconstruct:` to `modernfoundry:`.
+
+**Steps Taken**
+- Read `BlockTagProvider.addWorld`/`addWoodTags` and `ItemTagProvider` (wood section, `addNonFlammableTag`) to get the exact tag contents.
+- Confirmed the providers are excluded from compilation in `build.gradle`, so datagen cannot produce these files. Wrote them with a one-off script that refused to overwrite existing files, keeping the provider's entry order.
+- Confirmed the `c:fences/wooden` and `c:fence_gates/wooden` tags were already shipped.
+- Found that vanilla `mineable/axe` includes `#minecraft:planks` and the `#minecraft:wooden_*` tags, so adding slime planks would also make them axe-mineable unless the provider's removal list applied. Checked the NeoForge 21.1 `TagLoader`: `remove` entries are applied in file order after earlier entries are resolved, so a corrected removal list does take effect.
+- Checked that every `modernfoundry:` ID and tag referenced from `data/minecraft/tags/{block,item}` resolves to an existing blockstate, item model, or tag file.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: generated tag resources only; no Java changes.
+- Owning module/system: world slime wood tags and tool harvest tags.
+- Existing logic reused or extracted: existing `modernfoundry:slimy_planks` and per-wood `*_logs` tags.
+- Net line change: 25 new JSON tag files; 60 namespace changes in `axe.json`.
+- New files: the 25 tag files listed above.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- `non_flammable_wood` ships together with `planks` and the other wooden tags. Vanilla furnace fuel in 1.21.1 grants burn time to `#minecraft:planks` and the wooden tags unless an item is in `non_flammable_wood`, so without it, slime wood would become fuel.
+- Slime planks joining `#minecraft:planks` lets them craft vanilla planks recipes (sticks, crafting tables, chests, and so on), which matches the provider's intent.
+- Leaves and saplings (`minecraft:leaves`, `minecraft:saplings`) are also declared but unshipped. They were left for a separate change because they aren't wood.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests.
+- JSON validation: all files under `data/minecraft/tags/{block,item}` parse with `jq`, and all referenced IDs resolve.
+- Manual validation: not performed in-game for this change.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.

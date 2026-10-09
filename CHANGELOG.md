@@ -111,3 +111,7 @@
     * Positioned recipes now consume items from their actual 3x3 grid slots, preventing material duplication.
 * Fixed Mattocks not dropping slime tree logs.
     * Restored the vanilla `minecraft:logs` block and item tags for greenheart, skyroot, bloodshroom, and enderbark logs, so Mattocks treat them as effective and the correct tool.
+* Restored the remaining vanilla tags for slime wood.
+    * Greenheart, skyroot, bloodshroom, and enderbark planks, slabs, stairs, fences, fence gates, doors, trapdoors, buttons, pressure plates, and signs are back in their `minecraft:` block and item tags, so vanilla recipes and other mods recognize them again.
+    * Slime wood items are tagged `minecraft:non_flammable_wood`, so they still can't be used as furnace fuel.
+    * Fixed the axe tag's removal list, which used stale `tconstruct:` IDs, so slime planks stay shovel-mineable only, as intended.
