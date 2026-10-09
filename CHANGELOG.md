@@ -109,3 +109,5 @@
     * Updated blank sand cast, red sand cast, and builder-block recipe inputs.
 * Fixed Crafting Station ingredients remaining after crafting.
     * Positioned recipes now consume items from their actual 3x3 grid slots, preventing material duplication.
+* Fixed Mattocks not dropping slime tree logs.
+    * Restored the vanilla `minecraft:logs` block and item tags for greenheart, skyroot, bloodshroom, and enderbark logs, so Mattocks treat them as effective and the correct tool.

@@ -1549,3 +1549,36 @@
 - Green regression: `rtk cmd.exe /d /c ".\\gradlew.bat test --tests modernmods.modernfoundry.tables.block.entity.table.CraftingStationBlockEntityTest --console=plain --no-daemon --no-watch-fs"` passed with 1 test and 0 failures; the temporary exclusion only bypassed the unrelated existing missing-Crowbar test.
 - Full test limitation: normal `compileTestJava` remains blocked by the existing `CrowbarItemTest` referencing missing `CrowbarItem`.
 - Manual validation: no live Minecraft client, dedicated server, multiplayer, or Crafting Station gameplay smoke test performed.
+
+## 2026-10-09 - Fix Mattock slime log drops
+
+**Prompt / Task**
+- A Mattock chopping a slime tree is not treated as an axe and drops no logs, although it works on vanilla trees.
+
+**What Changed**
+- Added `src/generated/resources/data/minecraft/tags/block/logs.json` and `src/generated/resources/data/minecraft/tags/item/logs.json`, each containing `#modernfoundry:slimy_logs`.
+
+**Steps Taken**
+- `TASK.md` was empty; scope came from the user report.
+- Traced the Mattock definition in `ToolDefinitionDataProvider`: its effective-block check uses `modernfoundry:mineable/mattock`, which covers axe blocks only through `#minecraft:logs`.
+- Confirmed that slime logs and wood are created with `requiresCorrectToolForDrops()` in `TinkerWorld.createSlimewood`, so a tool that is not effective on them gets no drops.
+- Found that `BlockTagProvider` adds `SLIMY_LOGS` to `BlockTags.LOGS` and `ItemTagProvider` copies it to `ItemTags.LOGS`, but neither generated file was ever shipped. Datagen is inactive in this checkout, and the earlier tag restoration (`8c871ec8`) only covered the `mineable/*` and `needs_*_tool` tags.
+- Added both files to match the provider output. Confirmed the singular `tags/block` and `tags/item` paths are not excluded from the jar in `build.gradle`.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: generated vanilla tag resources only; no Java changes.
+- Owning module/system: world slime wood tags and tool harvest (`IsEffectiveModule`).
+- Existing logic reused or extracted: the existing `modernfoundry:slimy_logs` block and item tags.
+- Net line change: +10 across two new JSON files, plus the required documentation entries.
+- New files: `data/minecraft/tags/block/logs.json`, `data/minecraft/tags/item/logs.json`.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Fixed the missing tag rather than special-casing the Mattock. This also restores other `#minecraft:logs` consumers that were broken for slime wood: `modernfoundry:tree_log`, used by tree-felling tools; vanilla leaf-distance checks; and the `SlimeTreeFeature` log replacement check.
+- `minecraft:logs_that_burn` is left out because no slime wood is registered as burnable, which matches the provider.
+
+**Build / Validation**
+- Production build: after rebasing onto `Neo/1.21.1` (which includes the removal of the orphaned `CrowbarItemTest`), `sh ./gradlew build --console=plain` passed with Temurin 21, including tests. The built jar contains both new tag files.
+- JSON validation: both new files parse with `jq`, and the referenced `modernfoundry:slimy_logs` block and item tags exist.
+- Manual validation: ran `runClient` and loaded a world with no tag-loading errors for `minecraft:logs` or `modernfoundry` tags. The user confirmed in-game that Mattocks now drop slime logs.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.
