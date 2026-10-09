@@ -117,3 +117,13 @@
     * Fixed the axe tag's removal list, which used stale `tconstruct:` IDs, so slime planks stay shovel-mineable only, as intended.
 * Fixed slime wood signs and hanging signs burning as furnace fuel.
     * Greenheart, skyroot, bloodshroom, and enderbark signs and hanging signs are now tagged `minecraft:non_flammable_wood`, matching crimson and warped signs.
+* Restored missing vanilla tags behind several gameplay bugs.
+    * Seared and scorched ladders can be climbed again.
+    * Vanilla bows and crossbows can fire Modern Foundry arrows.
+    * Cobalt, steel, slimesteel, cinderslime, queen's slime, manyullyn, hepatizon, soulsteel, knightmetal, and knightslime blocks work as beacon bases, and their ingots (except soulsteel) work as beacon payment.
+    * Modern Foundry ingots and slime crystals can be used as armor trim materials.
+    * Pickaxes, sledge hammers, vein hammers, and war picks get the full amethyst cluster drop.
+    * Seared walls connect to other walls, and blazewood, nahuatl, and scorched brick fences connect like fences.
+    * Modern Foundry damage types are tagged correctly again: Fire Resistance and fire protection apply to smeltery heat and fire fluids, blast protection applies to Modern Foundry explosions, and piercing, bleeding, and similar damage bypass armor as intended.
+* Fixed seared and scorched faucets not connecting to Ceramics cisterns.
+    * The `ceramics:cistern_connections` tag still used stale `tconstruct:` IDs and failed to load.

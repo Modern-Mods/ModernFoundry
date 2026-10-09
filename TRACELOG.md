@@ -1649,3 +1649,40 @@
 - Production build: `sh ./gradlew build --console=plain` passed in the worktree, including tests.
 - Manual validation: not performed in-game.
 - Tests created or run: no new tests.
+
+## 2026-10-09 - Restore missing vanilla gameplay tags
+
+**Prompt / Task**
+- Review the codebase for other tags like the slime wood ones (declared by the tag providers but never shipped), then fix the ones that cause visible gameplay bugs as the first of two PRs.
+
+**What Changed**
+- Added block tags under `src/generated/resources/data/minecraft/tags/block/`: `climbable`, `walls`, `fences`, `beacon_base_blocks`.
+- Added item tags under `src/generated/resources/data/minecraft/tags/item/`: `arrows`, `beacon_payment_items`, `trim_materials`, `cluster_max_harvestables`.
+- Added damage type tags under `src/generated/resources/data/minecraft/tags/damage_type/`: `is_fire`, `is_explosion`, `is_freezing`, `is_projectile`, `witch_resistant_to`, `bypasses_armor`, `bypasses_effects`, `bypasses_enchantments`, `bypasses_cooldown`, `avoids_guardian_thorns`.
+- Changed `ceramics/tags/block/cistern_connections.json` from `tconstruct:` to `modernfoundry:` faucet IDs.
+
+**Steps Taken**
+- Audited every vanilla and NeoForge tag constant referenced in `common/data/tags/*Provider.java`, resolving IDs from the Minecraft 1.21.1 and NeoForge 21.1.240 sources. Found that almost every `minecraft:` tag the providers write is unshipped, while the `c:` and `modernfoundry:` tags are mostly present.
+- Checked the consuming vanilla/NeoForge code for the gameplay-visible gaps: `IBlockExtension.isLadder` (`BlockTags.CLIMBABLE`), `ProjectileWeaponItem.ARROW_ONLY` (`ItemTags.ARROWS`), `BeaconBlockEntity`/`BeaconMenu`, `WallBlock`, `FenceBlock`, and the amethyst cluster loot table (`#minecraft:cluster_max_harvestables`). Confirmed `ModifiableArrowItem` extends `ArrowItem`, so vanilla bows fire it as a Modern Foundry arrow.
+- Wrote the files from the provider code (`BlockTagProvider`, `ItemTagProvider`, `DamageTypeTagProvider`), keeping provider entry order, using a script that refused to overwrite existing files. Took trim material item IDs from the shipped `trim_material` data and cross-checked them against the provider list.
+- Confirmed all 89 referenced IDs resolve to a blockstate, item model, damage type, or tag file.
+- The cistern error in the earlier `runClient` log came from this file, not from the Ceramics mod as first reported.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: generated tag resources only; no Java changes.
+- Owning module/system: smeltery blocks, materials, tools, and damage types.
+- Existing logic reused or extracted: existing `c:storage_blocks/*` and `c:ingots/*` tags, and existing damage type data.
+- Net line change: 18 new JSON files and 2 changed IDs in the cistern tag.
+- New files: the 18 tag files listed above.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Matched the provider exactly, including its choices (for example, soulsteel blocks are beacon bases but soulsteel ingots are not beacon payment, and beacon tags use the shared `c:` metal tags, so other mods' blocks and ingots of those metals qualify too).
+- The remaining unshipped `minecraft:` tags (tool type tags, slime leaves and saplings, slime grass behaviour, soul glass, piglin tags, `dragon_immune`, `frog_food`, and others) are left for a follow-up PR because they're compatibility or polish fixes.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests. The jar contains all 18 new tag files.
+- JSON validation: all new and changed files parse with `jq`, and all referenced IDs resolve.
+- Manual validation: in `runClient`, the log showed no tag-loading errors (the previous `ceramics:cistern_connections` error is gone). The user confirmed in-game that seared ladders are climbable, seared walls connect to cobblestone walls, a vanilla bow fires Modern Foundry arrows, a cobalt block base activates a beacon, and a cobalt ingot pays for a beacon effect. Armor trims, amethyst cluster drops, and damage type behaviour were not tested in-game.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.
+- Found separately: `ModifiableArrow` keeps an empty vanilla pickup stack, so `AbstractArrow.addAdditionalSaveData` throws "Cannot encode empty ItemStack" and the arrow is dropped on save. This predates this change and isn't fixed here.
