@@ -1618,3 +1618,34 @@
 - JSON validation: all files under `data/minecraft/tags/{block,item}` parse with `jq`, and all referenced IDs resolve.
 - Manual validation: not performed in-game for this change.
 - Tests created or run: no new tests; the existing suite ran as part of `build`.
+
+## 2026-10-09 - Keep slime signs out of furnace fuel
+
+**Prompt / Task**
+- Fix the code review findings on PR #12: slime signs had become furnace fuel, the log entries said otherwise, and the new tag JSON files had no trailing newline.
+
+**What Changed**
+- Added the standing and hanging sign items for all four slime woods to `src/generated/resources/data/minecraft/tags/item/non_flammable_wood.json`.
+- Added `getSign()` and `getHangingSign()` items to `ItemTagProvider.addNonFlammableTag` so the provider matches the shipped tag.
+- Added a trailing newline to the JSON tag files added in this PR, matching existing generated files.
+
+**Steps Taken**
+- Confirmed NeoForge 21.1's `furnace_fuels` data map gives `#minecraft:signs` and `#minecraft:hanging_signs` burn time unless the item is in `#minecraft:non_flammable_wood`, and that `addNonFlammableTag` listed no signs.
+- Inserted the sign entries per wood ahead of its log tag with a one-off script, then checked every changed JSON file with `jq`.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `ItemTagProvider` (datagen source, excluded from compilation) and generated item tags.
+- Owning module/system: world slime wood tags and the vanilla furnace fuel data map.
+- Existing logic reused or extracted: the existing `non_flammable_wood` tag.
+- Net line change: +8 tag entries, +1 provider line, plus trailing newlines.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Vanilla's nether-wood signs are non-flammable, so slime signs, which share every other non-flammable trait, follow them. This keeps the earlier CHANGELOG claim that slime wood can't be used as fuel accurate.
+
+**Build / Validation**
+- JSON validation: every changed JSON file parses with `jq`.
+- Production build: `sh ./gradlew build --console=plain` passed in the worktree, including tests.
+- Manual validation: not performed in-game.
+- Tests created or run: no new tests.

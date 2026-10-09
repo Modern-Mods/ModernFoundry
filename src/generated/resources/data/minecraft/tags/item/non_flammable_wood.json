@@ -9,6 +9,8 @@
     "modernfoundry:greenheart_trapdoor",
     "modernfoundry:greenheart_pressure_plate",
     "modernfoundry:greenheart_button",
+    "modernfoundry:greenheart_sign",
+    "modernfoundry:greenheart_hanging_sign",
     "#modernfoundry:greenheart_logs",
     "modernfoundry:skyroot_planks",
     "modernfoundry:skyroot_planks_slab",
@@ -19,6 +21,8 @@
     "modernfoundry:skyroot_trapdoor",
     "modernfoundry:skyroot_pressure_plate",
     "modernfoundry:skyroot_button",
+    "modernfoundry:skyroot_sign",
+    "modernfoundry:skyroot_hanging_sign",
     "#modernfoundry:skyroot_logs",
     "modernfoundry:bloodshroom_planks",
     "modernfoundry:bloodshroom_planks_slab",
@@ -29,6 +33,8 @@
     "modernfoundry:bloodshroom_trapdoor",
     "modernfoundry:bloodshroom_pressure_plate",
     "modernfoundry:bloodshroom_button",
+    "modernfoundry:bloodshroom_sign",
+    "modernfoundry:bloodshroom_hanging_sign",
     "#modernfoundry:bloodshroom_logs",
     "modernfoundry:enderbark_planks",
     "modernfoundry:enderbark_planks_slab",
@@ -39,6 +45,8 @@
     "modernfoundry:enderbark_trapdoor",
     "modernfoundry:enderbark_pressure_plate",
     "modernfoundry:enderbark_button",
+    "modernfoundry:enderbark_sign",
+    "modernfoundry:enderbark_hanging_sign",
     "#modernfoundry:enderbark_logs"
   ]
 }

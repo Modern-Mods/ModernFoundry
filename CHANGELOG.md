@@ -115,3 +115,5 @@
     * Greenheart, skyroot, bloodshroom, and enderbark planks, slabs, stairs, fences, fence gates, doors, trapdoors, buttons, pressure plates, and signs are back in their `minecraft:` block and item tags, so vanilla recipes and other mods recognize them again.
     * Slime wood items are tagged `minecraft:non_flammable_wood`, so they still can't be used as furnace fuel.
     * Fixed the axe tag's removal list, which used stale `tconstruct:` IDs, so slime planks stay shovel-mineable only, as intended.
+* Fixed slime wood signs and hanging signs burning as furnace fuel.
+    * Greenheart, skyroot, bloodshroom, and enderbark signs and hanging signs are now tagged `minecraft:non_flammable_wood`, matching crimson and warped signs.
