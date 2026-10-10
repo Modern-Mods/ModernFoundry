@@ -53,7 +53,7 @@ FTB Ultimine can use Modern Foundry's primary and stone mining tools when both m
 
 Materials affect the statistics and behavior of the parts they make up. The repository includes materials such as cobalt, steel, slimesteel, amethyst bronze, rose gold, pig iron, cinderslime, Queen's Slime, manyullyn, hepatizon, knightmetal, Knightslime, soulsteel, and additional material families loaded from data.
 
-Modern Foundry metals also work with vanilla systems: the more expensive metals (such as cobalt, manyullyn, and Queen's Slime) build beacon bases and pay for beacon effects, and every Modern Foundry ingot and slime crystal is an armor trim material.
+Modern Foundry metals also work with vanilla systems: the more expensive metals (such as cobalt, manyullyn, and Queen's Slime) build beacon bases and pay for beacon effects, and most Modern Foundry ingots and all four slime crystals are armor trim materials.
 
 The fluid system includes molten metals and alloys alongside material-specific fluids such as slime, blood, venom, magma, soul, and other processing or food-related fluids. Modern Foundry's fluid block-entity and projectile renderers use Minecraft's shader-compatible translucent path so tank contents and fluid effects remain visible with shader packs. Material stats, repair values, traits, tool slots, and modifier effects are kept separate so the combinations can be expanded without hard-coding every tool recipe.
 
