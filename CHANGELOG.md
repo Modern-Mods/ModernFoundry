@@ -129,3 +129,12 @@
     * The `ceramics:cistern_connections` tag still used stale `tconstruct:` IDs and failed to load.
 * Fixed Modern Foundry arrows disappearing when the world saves.
     * Saving an arrow entity threw "Cannot encode empty ItemStack", so arrows stuck in blocks were lost on autosave, chunk unload, or reload.
+* Restored the remaining missing vanilla tags for compatibility.
+    * Modern Foundry pickaxes, sledge hammers, vein hammers, pickadzes, war picks, mattocks, excavators, hand axes, broad axes, kamas, scythes, daggers, swords, cleavers, and swashers are tagged as vanilla tool types for other mods. They are still not enchantable.
+    * Slime leaves and saplings are vanilla leaves and saplings, ichor and blood slime leaves are wart blocks, slime grass and ferns behave like vanilla grass, and potted slime plants count as flower pots.
+    * Soul glass is a soul fire base and speeds up Soul Speed; Modern Foundry glass is impermeable.
+    * Piglins love Modern Foundry gold items and guard gold blocks and cast chests, and avoid zombified piglin heads.
+    * Tinkers' guide books can be placed on lecterns and in chiseled bookshelves.
+    * Frogs eat sky slimes, ender slimes, and terracubes; striders treat magma and blazing blood as warm; obsidian panes are dragon-immune; travelers' gear prevents freezing; endermen can pick up congealed slime, grout, and slime dirt.
+* Added Tree Physics support for slime trees.
+    * Slime soil and enderbark roots count as tree roots, so slime trees fall when chopped. With Tree Physics' default settings, the root block under a felled trunk becomes vanilla dirt, as with vanilla trees.

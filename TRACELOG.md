@@ -1717,3 +1717,39 @@
 - Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests.
 - Manual validation: in `runClient`, fired a Modern Foundry arrow into a block, saved and quit to title, and reloaded the world. The save logged no errors (previously `Cannot encode empty ItemStack`), and the arrow was still stuck in the block after reload.
 - Tests created or run: no new tests; the existing suite ran as part of `build`.
+
+## 2026-10-09 - Restore remaining vanilla tags and add Tree Physics roots
+
+**Prompt / Task**
+- The maintainer asked for all fixes in one PR. Add every remaining tag the providers declare but don't ship, plus the Tree Physics roots tag, to the same branch.
+
+**What Changed**
+- Added block tags under `src/generated/resources/data/minecraft/tags/block/`: `leaves`, `saplings`, `wart_blocks`, `enderman_holdable`, `sword_efficient`, `replaceable`, `replaceable_by_trees`, `azalea_root_replaceable`, `flower_pots`, `guarded_by_piglins`, `piglin_repellents`, `impermeable`, `soul_speed_blocks`, `soul_fire_base_blocks`, `dragon_immune`, `strider_warm_blocks`.
+- Added item tags under `src/generated/resources/data/minecraft/tags/item/`: `leaves`, `saplings`, `soul_fire_base_blocks`, `piglin_loved`, `piglin_repellents`, `lectern_books`, `bookshelf_books`, `pickaxes`, `shovels`, `axes` (with `minotaur_axe` optional, as the provider declares), `hoes`, `swords`, `freeze_immune_wearables`.
+- Added `minecraft/tags/entity_type/frog_food.json`.
+- Added `treephysics/tags/block/roots.json` containing `#modernfoundry:slimy_soil` and `#modernfoundry:enderbark/roots`.
+
+**Steps Taken**
+- Read the provider code for each tag (`BlockTagProvider.addCommon`/`addWorld`/`addSmeltery`/`addFluids`, `ItemTagProvider` tool, armor, piglin, and book sections, `EntityTypeTagProvider`) and expanded enum objects in `FoliageType` and `GlassColor` order.
+- Built a registered-ID list from the `en_us.json` lang keys, because item models don't cover tools. Checked all 144 references against it, blockstates, and shipped tag files.
+- Confirmed `ModifiableItem` overrides `isEnchantable`, `isBookEnchantable`, and `supportsEnchantment` (curses only). Adding tools to the vanilla tool tags, which feed the `enchantable/*` tags, therefore doesn't make them enchantable.
+- Found `ItemTags.FREEZE_IMMUNE_WEARABLES` through `addArmorTags`, which the first audit pass didn't parse. The other `addArmorTags` targets are `modernfoundry:` or `c:` tags that already ship.
+- Re-ran the audit: no remaining vanilla tag that the providers write is unshipped, except `logs_that_burn`, which is empty on purpose.
+- Tree Physics: read its `TreeResult` and `FloodFillUtil`. A log structure counts as a tree only if a log sits on `treephysics:roots`, which vanilla trees get through a `TreeFeature` mixin that Modern Foundry's slime tree features don't hit. `#modernfoundry:slimy_soil` contains only Modern Foundry blocks, so vanilla dirt is unaffected. The tag has no effect without Tree Physics installed.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: generated tag resources only; no Java changes.
+- Owning module/system: world (slime foliage, soil), smeltery (glass, fluids), tools and armor, and the Tree Physics integration.
+- Existing logic reused or extracted: existing `modernfoundry:` tags (`slimy_leaves`, `slimy_saplings`, `slimy_soil`, `enderbark/roots`, `congealed_slime`, `guides`, `casts/gold`).
+- Net line change: 31 new JSON files plus required documentation entries.
+- New files: the 31 tag files listed above.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Tree Physics' default `remove_rooted_dirt` turns the root block under a felled trunk into vanilla dirt, so one slime soil block per felled slime tree becomes dirt. Log structures that players build on slime soil will also count as trees, as builds on rooted dirt do with vanilla trees.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests. The jar contains 91 `minecraft:`/`treephysics:` tag files.
+- JSON validation: all new files parse, and all 144 references resolve.
+- Manual validation: in `runClient`, the world loaded with no tag-loading errors. The user confirmed in-game that piglins pick up a gold item frame, a Tinkers guide book can be placed on a lectern, and frogs eat tiny Modern Foundry slimes. Not tested in-game: tool type tags (only visible to other mods), slime plant tags (`sword_efficient`, `replaceable`, `replaceable_by_trees`, `azalea_root_replaceable`; the plants already break instantly and are replaceable through their block properties, so these only affect vanilla swords, tree growth, and worldgen), glass, strider, dragon, freezing, and enderman tags, and Tree Physics, which isn't in the dev environment.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.
