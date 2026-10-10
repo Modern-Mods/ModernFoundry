@@ -1783,3 +1783,38 @@
 - Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests.
 - Manual validation: after an F3+T reload, the user confirmed the smithing table preview shows the cobalt trim on an iron chestplate instead of a missing texture.
 - Tests created or run: no new tests; the existing suite ran as part of `build`.
+
+## 2026-10-09 - In-game validation of the vanilla tag restoration
+
+**Prompt / Task**
+- Record the in-game testing of the tag, atlas, and arrow changes on `fix/mattock-slime-logs` before review.
+
+**What Changed**
+- Documentation only.
+
+**Steps Taken**
+- Ran `runClient` on the branch. The user tested in-game and shared screenshots, which were reviewed for each result.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: none.
+- Owning module/system: n/a.
+- Existing logic reused or extracted: n/a.
+- Net line change: this entry only.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Recorded as a separate entry so the open PR isn't force-pushed again.
+
+**Build / Validation**
+- Confirmed in-game, in addition to the results recorded in earlier entries:
+  - A Modern Foundry pickaxe drops 4 amethyst shards from a cluster (`cluster_max_harvestables`).
+  - Four skyroot planks craft a crafting table (`planks`).
+  - A greenheart fence connects to an oak fence (`wooden_fences`, `fences`).
+  - Seven greenheart slabs craft a composter (`wooden_slabs`).
+  - A furnace refuses slime wood in the fuel slot (`non_flammable_wood`).
+  - Fire on soul glass burns as soul fire (`soul_fire_base_blocks`).
+  - A decorated pot broken with a Modern Foundry pickaxe shatters, and one broken by hand drops whole (`breaks_decorated_pots` through the tool type tags).
+  - An iron chestplate trimmed with a cobalt ingot shows the trim on the smithing table preview (`trim_materials` and the `armor_trims` atlas).
+- Not tested in-game: damage type behaviour; `impermeable`, `soul_speed_blocks`, `strider_warm_blocks`, `dragon_immune`, `freeze_immune_wearables`, and `enderman_holdable`; slime plant tags; the remaining wood tags (doors, trapdoors, buttons, pressure plates, signs).
+- Tests created or run: none for this entry.
