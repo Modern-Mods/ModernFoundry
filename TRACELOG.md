@@ -1818,3 +1818,30 @@
   - An iron chestplate trimmed with a cobalt ingot shows the trim on the smithing table preview (`trim_materials` and the `armor_trims` atlas).
 - Not tested in-game: damage type behaviour; `impermeable`, `soul_speed_blocks`, `strider_warm_blocks`, `dragon_immune`, `freeze_immune_wearables`, and `enderman_holdable`; slime plant tags; the remaining wood tags (doors, trapdoors, buttons, pressure plates, signs).
 - Tests created or run: none for this entry.
+
+## 2026-10-09 - Verify Tree Physics roots tag in-game
+
+**Prompt / Task**
+- Confirm that `treephysics:roots` actually makes slime trees fall with Tree Physics installed.
+
+**What Changed**
+- Documentation only. No repository files changed for the test setup.
+
+**Steps Taken**
+- Downloaded Tree Physics `neoforge-2.4` and Sable `2.0.5+mc1.21.1` (Tree Physics requires Sable `[2.0.2, 3.0.0)`) from Modrinth into the gitignored `run/mods`, checking both against Modrinth's SHA-512 hashes.
+- Launched `runClient`. Both mods loaded, along with Sable's embedded Veil, Sable Companion, and Rapier library. The only warnings were Tree Physics' optional mixins for absent mods. No tag-loading errors.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: none.
+- Owning module/system: Tree Physics integration.
+- Existing logic reused or extracted: n/a.
+- Net line change: this entry only.
+- New files: none in the repository.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Verified before keeping the tag, because it is the only change in this branch that adds new compatibility rather than restoring a provider-declared tag.
+
+**Build / Validation**
+- Manual validation: the user chopped a bone-mealed oak, which fell (control), and a skyroot tree, which fell with its slime leaves. As expected with Tree Physics' default `remove_rooted_dirt`, the block under the felled skyroot trunk became dirt.
+- Tests created or run: none.
