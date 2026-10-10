@@ -1845,3 +1845,31 @@
 **Build / Validation**
 - Manual validation: the user chopped a bone-mealed oak, which fell (control), and a skyroot tree, which fell with its slime leaves. As expected with Tree Physics' default `remove_rooted_dirt`, the block under the felled skyroot trunk became dirt.
 - Tests created or run: none.
+
+## 2026-10-09 - Remove Tree Physics roots tag from this branch
+
+**Prompt / Task**
+- The user decided Tree Physics support doesn't belong in a PR that restores provider-declared tags, and asked to pull it out.
+
+**What Changed**
+- Deleted `src/generated/resources/data/treephysics/tags/block/roots.json`.
+- Removed the unreleased "Added Tree Physics support for slime trees" changelog entry, which no longer describes anything this branch ships.
+
+**Steps Taken**
+- Removed the file and the changelog entry. The earlier tracelog entries for adding and verifying the tag are kept as history.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: generated data only.
+- Owning module/system: Tree Physics integration (removed).
+- Existing logic reused or extracted: n/a.
+- Net line change: -1 file, -2 changelog lines.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Every other change in this branch restores something the tag and sprite source providers already declare, or fixes a bug. The roots tag was new compatibility for another mod. In-game testing showed it works, so it can be offered separately: as optional entries in Tree Physics' own `roots` tag, as a data-only add-on mod, or as a datapack. The `minecraft:logs` and `minecraft:leaves` tags it relies on stay in this branch.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed, including tests.
+- Manual validation: not needed; the remaining tags were tested earlier.
+- Tests created or run: none.
