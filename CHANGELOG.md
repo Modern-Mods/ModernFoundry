@@ -127,3 +127,5 @@
     * Modern Foundry damage types are tagged correctly again: Fire Resistance and fire protection apply to smeltery heat and fire fluids, blast protection applies to Modern Foundry explosions, and piercing, bleeding, and similar damage bypass armor as intended.
 * Fixed seared and scorched faucets not connecting to Ceramics cisterns.
     * The `ceramics:cistern_connections` tag still used stale `tconstruct:` IDs and failed to load.
+* Fixed Modern Foundry arrows disappearing when the world saves.
+    * Saving an arrow entity threw "Cannot encode empty ItemStack", so arrows stuck in blocks were lost on autosave, chunk unload, or reload.

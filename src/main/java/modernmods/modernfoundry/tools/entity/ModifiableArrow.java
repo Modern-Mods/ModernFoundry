@@ -67,14 +67,16 @@ public class ModifiableArrow extends AbstractArrow implements ToolProjectile, Re
     return stack.copy();
   }
 
+  /** Vanilla always saves its pickup stack and cannot encode an empty one, so this must never be empty */
   @Override
   protected ItemStack getDefaultPickupItem() {
-    return ItemStack.EMPTY;
+    return new ItemStack(TinkerTools.arrow.get());
   }
 
   /** Updates the stack on the arrow */
   private void setStack(ItemStack stack) {
     this.stack = stack;
+    this.setPickupItemStack(stack.copy());
     this.entityData.set(STACK, stack);
     this.reclaim = ModifierUtil.checkVolatileFlag(stack, IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY);
   }

@@ -1686,3 +1686,34 @@
 - Manual validation: in `runClient`, the log showed no tag-loading errors (the previous `ceramics:cistern_connections` error is gone). The user confirmed in-game that seared ladders are climbable, seared walls connect to cobblestone walls, a vanilla bow fires Modern Foundry arrows, a cobalt block base activates a beacon, and a cobalt ingot pays for a beacon effect. Armor trims, amethyst cluster drops, and damage type behaviour were not tested in-game.
 - Tests created or run: no new tests; the existing suite ran as part of `build`.
 - Found separately: `ModifiableArrow` keeps an empty vanilla pickup stack, so `AbstractArrow.addAdditionalSaveData` throws "Cannot encode empty ItemStack" and the arrow is dropped on save. This predates this change and isn't fixed here.
+
+## 2026-10-09 - Fix Modern Foundry arrows failing to save
+
+**Prompt / Task**
+- Fix the `Cannot encode empty ItemStack` error logged for `entity.modernfoundry.arrow` during world saves, found while testing vanilla bows with Modern Foundry arrows.
+
+**What Changed**
+- `ModifiableArrow.setStack` now also sets vanilla's pickup stack via `setPickupItemStack`.
+- `ModifiableArrow.getDefaultPickupItem` returns a Modern Foundry arrow item instead of an empty stack.
+
+**Steps Taken**
+- Traced the stack trace: `AbstractArrow.addAdditionalSaveData` always saves `pickupItemStack`, and 1.21.1's `ItemStack.save` throws on an empty stack. `ModifiableArrow` passed `ItemStack.EMPTY` to both `AbstractArrow` constructors and never set the field, keeping the real item only in its own `stack` field.
+- Checked the other `AbstractArrow` subclasses: `ThrownTool` already calls `setPickupItemStack` alongside its own stack, and the crystalshot entity returns a non-empty default, so only `ModifiableArrow` was affected.
+- Mirrored the `ThrownTool` pattern in `setStack`, which runs on creation (bows, crossbows, dispensers, throwing) and on load. Changed the default so vanilla's field initialiser and load fallback never produce an empty stack, for example on a bare `/summon`.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `tools/entity/ModifiableArrow.java`.
+- Owning module/system: ranged tools, arrow entity persistence.
+- Existing logic reused or extracted: vanilla `AbstractArrow.setPickupItemStack`, as `ThrownTool` already does.
+- Net line change: +3/-1 in `ModifiableArrow.java`, plus required documentation entries.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Pickup behaviour is unchanged: `ModifiableArrow` still overrides `getPickupItem` to return its own stack. Vanilla's field only needs to be valid for saving and its slot access.
+- Arrows lost before this fix can't be recovered, because they were never written to disk.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests.
+- Manual validation: in `runClient`, fired a Modern Foundry arrow into a block, saved and quit to title, and reloaded the world. The save logged no errors (previously `Cannot encode empty ItemStack`), and the arrow was still stuck in the block after reload.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.
