@@ -69,7 +69,7 @@ Modern Foundry extends the foundry theme into the world with slime materials, cr
 
 Nether cobalt ore is a Diamond+ harvest block: diamond and netherite pickaxes can mine it for drops.
 
-Slime wood behaves like vanilla wood: it works in vanilla wooden recipes and connects to vanilla fences, but it does not burn as furnace fuel. With Tree Physics installed, chopped slime trees fall like vanilla trees.
+Slime wood behaves like vanilla wood: it works in vanilla wooden recipes and connects to vanilla fences, but it does not burn as furnace fuel.
 
 ## The core progression
 
