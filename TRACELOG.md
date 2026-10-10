@@ -1753,3 +1753,33 @@
 - JSON validation: all new files parse, and all 144 references resolve.
 - Manual validation: in `runClient`, the world loaded with no tag-loading errors. The user confirmed in-game that piglins pick up a gold item frame, a Tinkers guide book can be placed on a lectern, and frogs eat tiny Modern Foundry slimes. Not tested in-game: tool type tags (only visible to other mods), slime plant tags (`sword_efficient`, `replaceable`, `replaceable_by_trees`, `azalea_root_replaceable`; the plants already break instantly and are replaceable through their block properties, so these only affect vanilla swords, tree growth, and worldgen), glass, strider, dragon, freezing, and enderman tags, and Tree Physics, which isn't in the dev environment.
 - Tests created or run: no new tests; the existing suite ran as part of `build`.
+
+## 2026-10-09 - Restore armor trim texture atlases
+
+**Prompt / Task**
+- While testing the trim materials tag, an iron chestplate trimmed with a cobalt ingot rendered as a magenta and black missing texture on the smithing table preview.
+
+**What Changed**
+- Added `src/main/resources/assets/minecraft/atlases/armor_trims.json`: paletted permutations of the 16 vanilla trim patterns (and `_leggings` variants) for the 16 Modern Foundry trim materials.
+- Replaced `src/main/resources/assets/minecraft/atlases/blocks.json`, previously a 3-source subset, with the full provider output. It adds Modern Foundry trim permutations for the armor item trim textures and the goggles and wings trims, vanilla material permutations for the goggles and wings trims, the `modernfoundry:shield_banner_to_modifier` banner source, and the untinted armor trim fallbacks.
+
+**Steps Taken**
+- Confirmed the trim material data (`asset_name` `modernfoundry_<material>`) and all 16 palette textures already ship, and found no `armor_trims` atlas, which is where vanilla's armor renderer and `TrimArmorTextureSupplier` look up worn trims. The item icon looked correct only because `item_model_index` 0.9 reuses vanilla's lapis icon override.
+- Read `TinkerSpriteSourceProvider.addSources()` (excluded from compilation with the other data providers) and generated both atlas files from it. Confirmed the custom sprite source type is registered in `ToolClientEvents` and that the goggles and wings trim textures exist.
+- Reloaded resources (F3+T) in the running dev client: the `armor_trims` atlas grew from 1024x1024 to 2048x1024, and no sprite source or missing-texture errors were logged.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: client atlas definitions only; no Java changes.
+- Owning module/system: armor trim rendering (vanilla armor layer, `TrimArmorTextureSupplier`, `TrimModifierModel`).
+- Existing logic reused or extracted: existing palette textures and the registered `shield_banner_to_modifier` sprite source.
+- Net line change: one new atlas file and 77 added lines in `blocks.json`, plus required documentation entries.
+- New files: `src/main/resources/assets/minecraft/atlases/armor_trims.json`.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Kept the atlases in `src/main/resources`, where the existing `blocks.json` lived, to avoid shipping two copies of the same path.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests.
+- Manual validation: after an F3+T reload, the user confirmed the smithing table preview shows the cobalt trim on an iron chestplate instead of a missing texture.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.

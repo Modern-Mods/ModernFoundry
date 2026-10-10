@@ -138,3 +138,5 @@
     * Frogs eat sky slimes, ender slimes, and terracubes; striders treat magma and blazing blood as warm; obsidian panes are dragon-immune; travelers' gear prevents freezing; endermen can pick up congealed slime, grout, and slime dirt.
 * Added Tree Physics support for slime trees.
     * Slime soil and enderbark roots count as tree roots, so slime trees fall when chopped. With Tree Physics' default settings, the root block under a felled trunk becomes vanilla dirt, as with vanilla trees.
+* Fixed armor trims made from Modern Foundry materials rendering as missing textures.
+    * Restored the `armor_trims` texture atlas and the trim, banner, and fallback textures in the blocks atlas, so trims in cobalt, slimesteel, slime crystals, and the other Modern Foundry materials render on worn armor and on Modern Foundry armor and shield icons.

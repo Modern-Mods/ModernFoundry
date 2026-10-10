@@ -14,6 +14,83 @@
       "type": "minecraft:directory",
       "source": "gui/tinker_pattern",
       "prefix": "gui/tinker_pattern/"
+    },
+    {
+      "type": "minecraft:paletted_permutations",
+      "textures": [
+        "minecraft:trims/items/helmet_trim",
+        "minecraft:trims/items/chestplate_trim",
+        "minecraft:trims/items/leggings_trim",
+        "minecraft:trims/items/boots_trim",
+        "modernfoundry:item/tool/armor/travelers/goggles/trim",
+        "modernfoundry:item/tool/armor/slime/wings/trim"
+      ],
+      "palette_key": "minecraft:trims/color_palettes/trim_palette",
+      "permutations": {
+        "modernfoundry_slimesteel": "modernfoundry:trims/color_palettes/slimesteel",
+        "modernfoundry_amethyst_bronze": "modernfoundry:trims/color_palettes/amethyst_bronze",
+        "modernfoundry_pig_iron": "modernfoundry:trims/color_palettes/pig_iron",
+        "modernfoundry_rose_gold": "modernfoundry:trims/color_palettes/rose_gold",
+        "modernfoundry_steel": "modernfoundry:trims/color_palettes/steel",
+        "modernfoundry_cobalt": "modernfoundry:trims/color_palettes/cobalt",
+        "modernfoundry_manyullyn": "modernfoundry:trims/color_palettes/manyullyn",
+        "modernfoundry_hepatizon": "modernfoundry:trims/color_palettes/hepatizon",
+        "modernfoundry_cinderslime": "modernfoundry:trims/color_palettes/cinderslime",
+        "modernfoundry_queens_slime": "modernfoundry:trims/color_palettes/queens_slime",
+        "modernfoundry_knightmetal": "modernfoundry:trims/color_palettes/knightmetal",
+        "modernfoundry_knightslime": "modernfoundry:trims/color_palettes/knightslime",
+        "modernfoundry_earthslime": "modernfoundry:trims/color_palettes/earthslime",
+        "modernfoundry_skyslime": "modernfoundry:trims/color_palettes/skyslime",
+        "modernfoundry_ichor": "modernfoundry:trims/color_palettes/ichor",
+        "modernfoundry_enderslime": "modernfoundry:trims/color_palettes/enderslime"
+      }
+    },
+    {
+      "type": "minecraft:paletted_permutations",
+      "textures": [
+        "modernfoundry:item/tool/armor/travelers/goggles/trim",
+        "modernfoundry:item/tool/armor/slime/wings/trim"
+      ],
+      "palette_key": "minecraft:trims/color_palettes/trim_palette",
+      "permutations": {
+        "quartz": "minecraft:trims/color_palettes/quartz",
+        "iron": "minecraft:trims/color_palettes/iron",
+        "netherite": "minecraft:trims/color_palettes/netherite",
+        "redstone": "minecraft:trims/color_palettes/redstone",
+        "copper": "minecraft:trims/color_palettes/copper",
+        "gold": "minecraft:trims/color_palettes/gold",
+        "emerald": "minecraft:trims/color_palettes/emerald",
+        "diamond": "minecraft:trims/color_palettes/diamond",
+        "lapis": "minecraft:trims/color_palettes/lapis",
+        "amethyst": "minecraft:trims/color_palettes/amethyst"
+      }
+    },
+    {
+      "type": "modernfoundry:shield_banner_to_modifier",
+      "crop_x": 2,
+      "crop_y": 2,
+      "crop_width": 10,
+      "crop_height": 20,
+      "destination_prefix": "modernfoundry:item/tool/armor/plate/shield/banner_large/",
+      "offset_x": 11,
+      "offset_y": 8,
+      "output_size": 32
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:trims/items/helmet_trim"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:trims/items/chestplate_trim"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:trims/items/leggings_trim"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "minecraft:trims/items/boots_trim"
     }
   ]
 }
