@@ -1,6 +1,6 @@
 {
   "values": [
-    "tconstruct:seared_faucet",
-    "tconstruct:scorched_faucet"
+    "modernfoundry:seared_faucet",
+    "modernfoundry:scorched_faucet"
   ]
 }

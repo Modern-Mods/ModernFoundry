@@ -1549,3 +1549,327 @@
 - Green regression: `rtk cmd.exe /d /c ".\\gradlew.bat test --tests modernmods.modernfoundry.tables.block.entity.table.CraftingStationBlockEntityTest --console=plain --no-daemon --no-watch-fs"` passed with 1 test and 0 failures; the temporary exclusion only bypassed the unrelated existing missing-Crowbar test.
 - Full test limitation: normal `compileTestJava` remains blocked by the existing `CrowbarItemTest` referencing missing `CrowbarItem`.
 - Manual validation: no live Minecraft client, dedicated server, multiplayer, or Crafting Station gameplay smoke test performed.
+
+## 2026-10-09 - Fix Mattock slime log drops
+
+**Prompt / Task**
+- A Mattock chopping a slime tree is not treated as an axe and drops no logs, although it works on vanilla trees.
+
+**What Changed**
+- Added `src/generated/resources/data/minecraft/tags/block/logs.json` and `src/generated/resources/data/minecraft/tags/item/logs.json`, each containing `#modernfoundry:slimy_logs`.
+
+**Steps Taken**
+- `TASK.md` was empty; scope came from the user report.
+- Traced the Mattock definition in `ToolDefinitionDataProvider`: its effective-block check uses `modernfoundry:mineable/mattock`, which covers axe blocks only through `#minecraft:logs`.
+- Confirmed that slime logs and wood are created with `requiresCorrectToolForDrops()` in `TinkerWorld.createSlimewood`, so a tool that is not effective on them gets no drops.
+- Found that `BlockTagProvider` adds `SLIMY_LOGS` to `BlockTags.LOGS` and `ItemTagProvider` copies it to `ItemTags.LOGS`, but neither generated file was ever shipped. Datagen is inactive in this checkout, and the earlier tag restoration (`8c871ec8`) only covered the `mineable/*` and `needs_*_tool` tags.
+- Added both files to match the provider output. Confirmed the singular `tags/block` and `tags/item` paths are not excluded from the jar in `build.gradle`.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: generated vanilla tag resources only; no Java changes.
+- Owning module/system: world slime wood tags and tool harvest (`IsEffectiveModule`).
+- Existing logic reused or extracted: the existing `modernfoundry:slimy_logs` block and item tags.
+- Net line change: +10 across two new JSON files, plus the required documentation entries.
+- New files: `data/minecraft/tags/block/logs.json`, `data/minecraft/tags/item/logs.json`.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Fixed the missing tag rather than special-casing the Mattock. This also restores other `#minecraft:logs` consumers that were broken for slime wood: `modernfoundry:tree_log`, used by tree-felling tools; vanilla leaf-distance checks; and the `SlimeTreeFeature` log replacement check.
+- `minecraft:logs_that_burn` is left out because no slime wood is registered as burnable, which matches the provider.
+
+**Build / Validation**
+- Production build: after rebasing onto `Neo/1.21.1` (which includes the removal of the orphaned `CrowbarItemTest`), `sh ./gradlew build --console=plain` passed with Temurin 21, including tests. The built jar contains both new tag files.
+- JSON validation: both new files parse with `jq`, and the referenced `modernfoundry:slimy_logs` block and item tags exist.
+- Manual validation: ran `runClient` and loaded a world with no tag-loading errors for `minecraft:logs` or `modernfoundry` tags. The user confirmed in-game that Mattocks now drop slime logs.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.
+
+## 2026-10-09 - Restore remaining vanilla slime wood tags
+
+**Prompt / Task**
+- Restore the other vanilla slime wood tags that the tag providers declare but that were never shipped.
+
+**What Changed**
+- Added 13 block tags under `src/generated/resources/data/minecraft/tags/block/`: `planks`, `wooden_slabs`, `wooden_stairs`, `wooden_fences`, `fence_gates`, `wooden_doors`, `wooden_trapdoors`, `wooden_buttons`, `wooden_pressure_plates`, `standing_signs`, `wall_signs`, `ceiling_hanging_signs`, `wall_hanging_signs`.
+- Added 12 item tags under `src/generated/resources/data/minecraft/tags/item/`: the `ItemTagProvider` copies of the above (`signs` and `hanging_signs` for signs) plus `non_flammable_wood`.
+- Changed the 60 `remove` entries in `minecraft/tags/block/mineable/axe.json` from `tconstruct:` to `modernfoundry:`.
+
+**Steps Taken**
+- Read `BlockTagProvider.addWorld`/`addWoodTags` and `ItemTagProvider` (wood section, `addNonFlammableTag`) to get the exact tag contents.
+- Confirmed the providers are excluded from compilation in `build.gradle`, so datagen cannot produce these files. Wrote them with a one-off script that refused to overwrite existing files, keeping the provider's entry order.
+- Confirmed the `c:fences/wooden` and `c:fence_gates/wooden` tags were already shipped.
+- Found that vanilla `mineable/axe` includes `#minecraft:planks` and the `#minecraft:wooden_*` tags, so adding slime planks would also make them axe-mineable unless the provider's removal list applied. Checked the NeoForge 21.1 `TagLoader`: `remove` entries are applied in file order after earlier entries are resolved, so a corrected removal list does take effect.
+- Checked that every `modernfoundry:` ID and tag referenced from `data/minecraft/tags/{block,item}` resolves to an existing blockstate, item model, or tag file.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: generated tag resources only; no Java changes.
+- Owning module/system: world slime wood tags and tool harvest tags.
+- Existing logic reused or extracted: existing `modernfoundry:slimy_planks` and per-wood `*_logs` tags.
+- Net line change: 25 new JSON tag files; 60 namespace changes in `axe.json`.
+- New files: the 25 tag files listed above.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- `non_flammable_wood` ships together with `planks` and the other wooden tags. Vanilla furnace fuel in 1.21.1 grants burn time to `#minecraft:planks` and the wooden tags unless an item is in `non_flammable_wood`, so without it, slime wood would become fuel.
+- Slime planks joining `#minecraft:planks` lets them craft vanilla planks recipes (sticks, crafting tables, chests, and so on), which matches the provider's intent.
+- Leaves and saplings (`minecraft:leaves`, `minecraft:saplings`) are also declared but unshipped. They were left for a separate change because they aren't wood.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests.
+- JSON validation: all files under `data/minecraft/tags/{block,item}` parse with `jq`, and all referenced IDs resolve.
+- Manual validation: not performed in-game for this change.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.
+
+## 2026-10-09 - Keep slime signs out of furnace fuel
+
+**Prompt / Task**
+- Fix the code review findings on PR #12: slime signs had become furnace fuel, the log entries said otherwise, and the new tag JSON files had no trailing newline.
+
+**What Changed**
+- Added the standing and hanging sign items for all four slime woods to `src/generated/resources/data/minecraft/tags/item/non_flammable_wood.json`.
+- Added `getSign()` and `getHangingSign()` items to `ItemTagProvider.addNonFlammableTag` so the provider matches the shipped tag.
+- Added a trailing newline to the JSON tag files added in this PR, matching existing generated files.
+
+**Steps Taken**
+- Confirmed NeoForge 21.1's `furnace_fuels` data map gives `#minecraft:signs` and `#minecraft:hanging_signs` burn time unless the item is in `#minecraft:non_flammable_wood`, and that `addNonFlammableTag` listed no signs.
+- Inserted the sign entries per wood ahead of its log tag with a one-off script, then checked every changed JSON file with `jq`.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `ItemTagProvider` (datagen source, excluded from compilation) and generated item tags.
+- Owning module/system: world slime wood tags and the vanilla furnace fuel data map.
+- Existing logic reused or extracted: the existing `non_flammable_wood` tag.
+- Net line change: +8 tag entries, +1 provider line, plus trailing newlines.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Vanilla's nether-wood signs are non-flammable, so slime signs, which share every other non-flammable trait, follow them. This keeps the earlier CHANGELOG claim that slime wood can't be used as fuel accurate.
+
+**Build / Validation**
+- JSON validation: every changed JSON file parses with `jq`.
+- Production build: `sh ./gradlew build --console=plain` passed in the worktree, including tests.
+- Manual validation: not performed in-game.
+- Tests created or run: no new tests.
+
+## 2026-10-09 - Restore missing vanilla gameplay tags
+
+**Prompt / Task**
+- Review the codebase for other tags like the slime wood ones (declared by the tag providers but never shipped), then fix the ones that cause visible gameplay bugs as the first of two PRs.
+
+**What Changed**
+- Added block tags under `src/generated/resources/data/minecraft/tags/block/`: `climbable`, `walls`, `fences`, `beacon_base_blocks`.
+- Added item tags under `src/generated/resources/data/minecraft/tags/item/`: `arrows`, `beacon_payment_items`, `trim_materials`, `cluster_max_harvestables`.
+- Added damage type tags under `src/generated/resources/data/minecraft/tags/damage_type/`: `is_fire`, `is_explosion`, `is_freezing`, `is_projectile`, `witch_resistant_to`, `bypasses_armor`, `bypasses_effects`, `bypasses_enchantments`, `bypasses_cooldown`, `avoids_guardian_thorns`.
+- Changed `ceramics/tags/block/cistern_connections.json` from `tconstruct:` to `modernfoundry:` faucet IDs.
+
+**Steps Taken**
+- Audited every vanilla and NeoForge tag constant referenced in `common/data/tags/*Provider.java`, resolving IDs from the Minecraft 1.21.1 and NeoForge 21.1.240 sources. Found that almost every `minecraft:` tag the providers write is unshipped, while the `c:` and `modernfoundry:` tags are mostly present.
+- Checked the consuming vanilla/NeoForge code for the gameplay-visible gaps: `IBlockExtension.isLadder` (`BlockTags.CLIMBABLE`), `ProjectileWeaponItem.ARROW_ONLY` (`ItemTags.ARROWS`), `BeaconBlockEntity`/`BeaconMenu`, `WallBlock`, `FenceBlock`, and the amethyst cluster loot table (`#minecraft:cluster_max_harvestables`). Confirmed `ModifiableArrowItem` extends `ArrowItem`, so vanilla bows fire it as a Modern Foundry arrow.
+- Wrote the files from the provider code (`BlockTagProvider`, `ItemTagProvider`, `DamageTypeTagProvider`), keeping provider entry order, using a script that refused to overwrite existing files. Took trim material item IDs from the shipped `trim_material` data and cross-checked them against the provider list.
+- Confirmed all 89 referenced IDs resolve to a blockstate, item model, damage type, or tag file.
+- The cistern error in the earlier `runClient` log came from this file, not from the Ceramics mod as first reported.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: generated tag resources only; no Java changes.
+- Owning module/system: smeltery blocks, materials, tools, and damage types.
+- Existing logic reused or extracted: existing `c:storage_blocks/*` and `c:ingots/*` tags, and existing damage type data.
+- Net line change: 18 new JSON files and 2 changed IDs in the cistern tag.
+- New files: the 18 tag files listed above.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Matched the provider exactly, including its choices (for example, soulsteel blocks are beacon bases but soulsteel ingots are not beacon payment, and beacon tags use the shared `c:` metal tags, so other mods' blocks and ingots of those metals qualify too).
+- The remaining unshipped `minecraft:` tags (tool type tags, slime leaves and saplings, slime grass behaviour, soul glass, piglin tags, `dragon_immune`, `frog_food`, and others) are left for a follow-up PR because they're compatibility or polish fixes.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests. The jar contains all 18 new tag files.
+- JSON validation: all new and changed files parse with `jq`, and all referenced IDs resolve.
+- Manual validation: in `runClient`, the log showed no tag-loading errors (the previous `ceramics:cistern_connections` error is gone). The user confirmed in-game that seared ladders are climbable, seared walls connect to cobblestone walls, a vanilla bow fires Modern Foundry arrows, a cobalt block base activates a beacon, and a cobalt ingot pays for a beacon effect. Armor trims, amethyst cluster drops, and damage type behaviour were not tested in-game.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.
+- Found separately: `ModifiableArrow` keeps an empty vanilla pickup stack, so `AbstractArrow.addAdditionalSaveData` throws "Cannot encode empty ItemStack" and the arrow is dropped on save. This predates this change and isn't fixed here.
+
+## 2026-10-09 - Fix Modern Foundry arrows failing to save
+
+**Prompt / Task**
+- Fix the `Cannot encode empty ItemStack` error logged for `entity.modernfoundry.arrow` during world saves, found while testing vanilla bows with Modern Foundry arrows.
+
+**What Changed**
+- `ModifiableArrow.setStack` now also sets vanilla's pickup stack via `setPickupItemStack`.
+- `ModifiableArrow.getDefaultPickupItem` returns a Modern Foundry arrow item instead of an empty stack.
+
+**Steps Taken**
+- Traced the stack trace: `AbstractArrow.addAdditionalSaveData` always saves `pickupItemStack`, and 1.21.1's `ItemStack.save` throws on an empty stack. `ModifiableArrow` passed `ItemStack.EMPTY` to both `AbstractArrow` constructors and never set the field, keeping the real item only in its own `stack` field.
+- Checked the other `AbstractArrow` subclasses: `ThrownTool` already calls `setPickupItemStack` alongside its own stack, and the crystalshot entity returns a non-empty default, so only `ModifiableArrow` was affected.
+- Mirrored the `ThrownTool` pattern in `setStack`, which runs on creation (bows, crossbows, dispensers, throwing) and on load. Changed the default so vanilla's field initialiser and load fallback never produce an empty stack, for example on a bare `/summon`.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `tools/entity/ModifiableArrow.java`.
+- Owning module/system: ranged tools, arrow entity persistence.
+- Existing logic reused or extracted: vanilla `AbstractArrow.setPickupItemStack`, as `ThrownTool` already does.
+- Net line change: +3/-1 in `ModifiableArrow.java`, plus required documentation entries.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Pickup behaviour is unchanged: `ModifiableArrow` still overrides `getPickupItem` to return its own stack. Vanilla's field only needs to be valid for saving and its slot access.
+- Arrows lost before this fix can't be recovered, because they were never written to disk.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests.
+- Manual validation: in `runClient`, fired a Modern Foundry arrow into a block, saved and quit to title, and reloaded the world. The save logged no errors (previously `Cannot encode empty ItemStack`), and the arrow was still stuck in the block after reload.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.
+
+## 2026-10-09 - Restore remaining vanilla tags and add Tree Physics roots
+
+**Prompt / Task**
+- The maintainer asked for all fixes in one PR. Add every remaining tag the providers declare but don't ship, plus the Tree Physics roots tag, to the same branch.
+
+**What Changed**
+- Added block tags under `src/generated/resources/data/minecraft/tags/block/`: `leaves`, `saplings`, `wart_blocks`, `enderman_holdable`, `sword_efficient`, `replaceable`, `replaceable_by_trees`, `azalea_root_replaceable`, `flower_pots`, `guarded_by_piglins`, `piglin_repellents`, `impermeable`, `soul_speed_blocks`, `soul_fire_base_blocks`, `dragon_immune`, `strider_warm_blocks`.
+- Added item tags under `src/generated/resources/data/minecraft/tags/item/`: `leaves`, `saplings`, `soul_fire_base_blocks`, `piglin_loved`, `piglin_repellents`, `lectern_books`, `bookshelf_books`, `pickaxes`, `shovels`, `axes` (with `minotaur_axe` optional, as the provider declares), `hoes`, `swords`, `freeze_immune_wearables`.
+- Added `minecraft/tags/entity_type/frog_food.json`.
+- Added `treephysics/tags/block/roots.json` containing `#modernfoundry:slimy_soil` and `#modernfoundry:enderbark/roots`.
+
+**Steps Taken**
+- Read the provider code for each tag (`BlockTagProvider.addCommon`/`addWorld`/`addSmeltery`/`addFluids`, `ItemTagProvider` tool, armor, piglin, and book sections, `EntityTypeTagProvider`) and expanded enum objects in `FoliageType` and `GlassColor` order.
+- Built a registered-ID list from the `en_us.json` lang keys, because item models don't cover tools. Checked all 144 references against it, blockstates, and shipped tag files.
+- Confirmed `ModifiableItem` overrides `isEnchantable`, `isBookEnchantable`, and `supportsEnchantment` (curses only). Adding tools to the vanilla tool tags, which feed the `enchantable/*` tags, therefore doesn't make them enchantable.
+- Found `ItemTags.FREEZE_IMMUNE_WEARABLES` through `addArmorTags`, which the first audit pass didn't parse. The other `addArmorTags` targets are `modernfoundry:` or `c:` tags that already ship.
+- Re-ran the audit: no remaining vanilla tag that the providers write is unshipped, except `logs_that_burn`, which is empty on purpose.
+- Tree Physics: read its `TreeResult` and `FloodFillUtil`. A log structure counts as a tree only if a log sits on `treephysics:roots`, which vanilla trees get through a `TreeFeature` mixin that Modern Foundry's slime tree features don't hit. `#modernfoundry:slimy_soil` contains only Modern Foundry blocks, so vanilla dirt is unaffected. The tag has no effect without Tree Physics installed.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: generated tag resources only; no Java changes.
+- Owning module/system: world (slime foliage, soil), smeltery (glass, fluids), tools and armor, and the Tree Physics integration.
+- Existing logic reused or extracted: existing `modernfoundry:` tags (`slimy_leaves`, `slimy_saplings`, `slimy_soil`, `enderbark/roots`, `congealed_slime`, `guides`, `casts/gold`).
+- Net line change: 31 new JSON files plus required documentation entries.
+- New files: the 31 tag files listed above.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Tree Physics' default `remove_rooted_dirt` turns the root block under a felled trunk into vanilla dirt, so one slime soil block per felled slime tree becomes dirt. Log structures that players build on slime soil will also count as trees, as builds on rooted dirt do with vanilla trees.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests. The jar contains 91 `minecraft:`/`treephysics:` tag files.
+- JSON validation: all new files parse, and all 144 references resolve.
+- Manual validation: in `runClient`, the world loaded with no tag-loading errors. The user confirmed in-game that piglins pick up a gold item frame, a Tinkers guide book can be placed on a lectern, and frogs eat tiny Modern Foundry slimes. Not tested in-game: tool type tags (only visible to other mods), slime plant tags (`sword_efficient`, `replaceable`, `replaceable_by_trees`, `azalea_root_replaceable`; the plants already break instantly and are replaceable through their block properties, so these only affect vanilla swords, tree growth, and worldgen), glass, strider, dragon, freezing, and enderman tags, and Tree Physics, which isn't in the dev environment.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.
+
+## 2026-10-09 - Restore armor trim texture atlases
+
+**Prompt / Task**
+- While testing the trim materials tag, an iron chestplate trimmed with a cobalt ingot rendered as a magenta and black missing texture on the smithing table preview.
+
+**What Changed**
+- Added `src/main/resources/assets/minecraft/atlases/armor_trims.json`: paletted permutations of the 16 vanilla trim patterns (and `_leggings` variants) for the 16 Modern Foundry trim materials.
+- Replaced `src/main/resources/assets/minecraft/atlases/blocks.json`, previously a 3-source subset, with the full provider output. It adds Modern Foundry trim permutations for the armor item trim textures and the goggles and wings trims, vanilla material permutations for the goggles and wings trims, the `modernfoundry:shield_banner_to_modifier` banner source, and the untinted armor trim fallbacks.
+
+**Steps Taken**
+- Confirmed the trim material data (`asset_name` `modernfoundry_<material>`) and all 16 palette textures already ship, and found no `armor_trims` atlas, which is where vanilla's armor renderer and `TrimArmorTextureSupplier` look up worn trims. The item icon looked correct only because `item_model_index` 0.9 reuses vanilla's lapis icon override.
+- Read `TinkerSpriteSourceProvider.addSources()` (excluded from compilation with the other data providers) and generated both atlas files from it. Confirmed the custom sprite source type is registered in `ToolClientEvents` and that the goggles and wings trim textures exist.
+- Reloaded resources (F3+T) in the running dev client: the `armor_trims` atlas grew from 1024x1024 to 2048x1024, and no sprite source or missing-texture errors were logged.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: client atlas definitions only; no Java changes.
+- Owning module/system: armor trim rendering (vanilla armor layer, `TrimArmorTextureSupplier`, `TrimModifierModel`).
+- Existing logic reused or extracted: existing palette textures and the registered `shield_banner_to_modifier` sprite source.
+- Net line change: one new atlas file and 77 added lines in `blocks.json`, plus required documentation entries.
+- New files: `src/main/resources/assets/minecraft/atlases/armor_trims.json`.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Kept the atlases in `src/main/resources`, where the existing `blocks.json` lived, to avoid shipping two copies of the same path.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed with Temurin 21, including tests.
+- Manual validation: after an F3+T reload, the user confirmed the smithing table preview shows the cobalt trim on an iron chestplate instead of a missing texture.
+- Tests created or run: no new tests; the existing suite ran as part of `build`.
+
+## 2026-10-09 - In-game validation of the vanilla tag restoration
+
+**Prompt / Task**
+- Record the in-game testing of the tag, atlas, and arrow changes on `fix/mattock-slime-logs` before review.
+
+**What Changed**
+- Documentation only.
+
+**Steps Taken**
+- Ran `runClient` on the branch. The user tested in-game and shared screenshots, which were reviewed for each result.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: none.
+- Owning module/system: n/a.
+- Existing logic reused or extracted: n/a.
+- Net line change: this entry only.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Recorded as a separate entry so the open PR isn't force-pushed again.
+
+**Build / Validation**
+- Confirmed in-game, in addition to the results recorded in earlier entries:
+  - A Modern Foundry pickaxe drops 4 amethyst shards from a cluster (`cluster_max_harvestables`).
+  - Four skyroot planks craft a crafting table (`planks`).
+  - A greenheart fence connects to an oak fence (`wooden_fences`, `fences`).
+  - Seven greenheart slabs craft a composter (`wooden_slabs`).
+  - A furnace refuses slime wood in the fuel slot (`non_flammable_wood`).
+  - Fire on soul glass burns as soul fire (`soul_fire_base_blocks`).
+  - A decorated pot broken with a Modern Foundry pickaxe shatters, and one broken by hand drops whole (`breaks_decorated_pots` through the tool type tags).
+  - An iron chestplate trimmed with a cobalt ingot shows the trim on the smithing table preview (`trim_materials` and the `armor_trims` atlas).
+- Not tested in-game: damage type behaviour; `impermeable`, `soul_speed_blocks`, `strider_warm_blocks`, `dragon_immune`, `freeze_immune_wearables`, and `enderman_holdable`; slime plant tags; the remaining wood tags (doors, trapdoors, buttons, pressure plates, signs).
+- Tests created or run: none for this entry.
+
+## 2026-10-09 - Verify Tree Physics roots tag in-game
+
+**Prompt / Task**
+- Confirm that `treephysics:roots` actually makes slime trees fall with Tree Physics installed.
+
+**What Changed**
+- Documentation only. No repository files changed for the test setup.
+
+**Steps Taken**
+- Downloaded Tree Physics `neoforge-2.4` and Sable `2.0.5+mc1.21.1` (Tree Physics requires Sable `[2.0.2, 3.0.0)`) from Modrinth into the gitignored `run/mods`, checking both against Modrinth's SHA-512 hashes.
+- Launched `runClient`. Both mods loaded, along with Sable's embedded Veil, Sable Companion, and Rapier library. The only warnings were Tree Physics' optional mixins for absent mods. No tag-loading errors.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: none.
+- Owning module/system: Tree Physics integration.
+- Existing logic reused or extracted: n/a.
+- Net line change: this entry only.
+- New files: none in the repository.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Verified before keeping the tag, because it is the only change in this branch that adds new compatibility rather than restoring a provider-declared tag.
+
+**Build / Validation**
+- Manual validation: the user chopped a bone-mealed oak, which fell (control), and a skyroot tree, which fell with its slime leaves. As expected with Tree Physics' default `remove_rooted_dirt`, the block under the felled skyroot trunk became dirt.
+- Tests created or run: none.
+
+## 2026-10-09 - Remove Tree Physics roots tag from this branch
+
+**Prompt / Task**
+- The user decided Tree Physics support doesn't belong in a PR that restores provider-declared tags, and asked to pull it out.
+
+**What Changed**
+- Deleted `src/generated/resources/data/treephysics/tags/block/roots.json`.
+- Removed the unreleased "Added Tree Physics support for slime trees" changelog entry, which no longer describes anything this branch ships.
+
+**Steps Taken**
+- Removed the file and the changelog entry. The earlier tracelog entries for adding and verifying the tag are kept as history.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: generated data only.
+- Owning module/system: Tree Physics integration (removed).
+- Existing logic reused or extracted: n/a.
+- Net line change: -1 file, -2 changelog lines.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Every other change in this branch restores something the tag and sprite source providers already declare, or fixes a bug. The roots tag was new compatibility for another mod. In-game testing showed it works, so it can be offered separately: as optional entries in Tree Physics' own `roots` tag, as a data-only add-on mod, or as a datapack. The `minecraft:logs` and `minecraft:leaves` tags it relies on stay in this branch.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed, including tests.
+- Manual validation: not needed; the remaining tags were tested earlier.
+- Tests created or run: none.

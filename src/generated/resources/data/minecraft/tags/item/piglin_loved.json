@@ -1,0 +1,11 @@
+{
+  "values": [
+    "modernfoundry:gold_reinforcement",
+    "modernfoundry:gold_item_frame",
+    "modernfoundry:reversed_gold_item_frame",
+    "modernfoundry:molten_gold_bucket",
+    "modernfoundry:gold_bars",
+    "modernfoundry:gold_platform",
+    "#modernfoundry:casts/gold"
+  ]
+}

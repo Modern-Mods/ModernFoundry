@@ -53,6 +53,8 @@ FTB Ultimine can use Modern Foundry's primary and stone mining tools when both m
 
 Materials affect the statistics and behavior of the parts they make up. The repository includes materials such as cobalt, steel, slimesteel, amethyst bronze, rose gold, pig iron, cinderslime, Queen's Slime, manyullyn, hepatizon, knightmetal, Knightslime, soulsteel, and additional material families loaded from data.
 
+Modern Foundry metals also work with vanilla systems: the more expensive metals (such as cobalt, manyullyn, and Queen's Slime) build beacon bases and pay for beacon effects, and most Modern Foundry ingots and all four slime crystals are armor trim materials.
+
 The fluid system includes molten metals and alloys alongside material-specific fluids such as slime, blood, venom, magma, soul, and other processing or food-related fluids. Modern Foundry's fluid block-entity and projectile renderers use Minecraft's shader-compatible translucent path so tank contents and fluid effects remain visible with shader packs. Material stats, repair values, traits, tool slots, and modifier effects are kept separate so the combinations can be expanded without hard-coding every tool recipe.
 
 ### Modifiers and equipment progression
@@ -66,6 +68,8 @@ Tools store their materials, statistics, modifiers, and additional data as part 
 Modern Foundry extends the foundry theme into the world with slime materials, crystals, foliage, trees, grass, vines, blocks, heads, particles, structures, and custom entities. Earth, sky, ender, magma, and other slime-related content connect exploration and world generation back to the materials used in tool construction.
 
 Nether cobalt ore is a Diamond+ harvest block: diamond and netherite pickaxes can mine it for drops.
+
+Slime wood behaves like vanilla wood: it works in vanilla wooden recipes and connects to vanilla fences, but it does not burn as furnace fuel.
 
 ## The core progression
 

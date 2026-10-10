@@ -1,0 +1,14 @@
+{
+  "values": [
+    "modernfoundry:thrown_tool",
+    "modernfoundry:fishing_hook",
+    "modernfoundry:fluid_impact_ranged",
+    "modernfoundry:fluid_fire_ranged",
+    "modernfoundry:fluid_cold_ranged",
+    "modernfoundry:fluid_magic_ranged",
+    "modernfoundry:water_ranged",
+    "modernfoundry:fluid_spike_ranged",
+    "modernfoundry:explosion_ranged",
+    "modernfoundry:mob_explosion_ranged"
+  ]
+}

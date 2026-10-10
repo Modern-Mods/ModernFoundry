@@ -109,3 +109,32 @@
     * Updated blank sand cast, red sand cast, and builder-block recipe inputs.
 * Fixed Crafting Station ingredients remaining after crafting.
     * Positioned recipes now consume items from their actual 3x3 grid slots, preventing material duplication.
+* Fixed Mattocks not dropping slime tree logs.
+    * Restored the vanilla `minecraft:logs` block and item tags for greenheart, skyroot, bloodshroom, and enderbark logs, so Mattocks treat them as effective and the correct tool.
+* Restored the remaining vanilla tags for slime wood.
+    * Greenheart, skyroot, bloodshroom, and enderbark planks, slabs, stairs, fences, fence gates, doors, trapdoors, buttons, pressure plates, and signs are back in their `minecraft:` block and item tags, so vanilla recipes and other mods recognize them again.
+    * Slime wood items are tagged `minecraft:non_flammable_wood`, so they still can't be used as furnace fuel.
+    * Fixed the axe tag's removal list, which used stale `tconstruct:` IDs, so slime planks stay shovel-mineable only, as intended.
+* Fixed slime wood signs and hanging signs burning as furnace fuel.
+    * Greenheart, skyroot, bloodshroom, and enderbark signs and hanging signs are now tagged `minecraft:non_flammable_wood`, matching crimson and warped signs.
+* Restored missing vanilla tags behind several gameplay bugs.
+    * Seared and scorched ladders can be climbed again.
+    * Vanilla bows and crossbows can fire Modern Foundry arrows.
+    * Cobalt, steel, slimesteel, cinderslime, queen's slime, manyullyn, hepatizon, soulsteel, knightmetal, and knightslime blocks work as beacon bases, and their ingots (except soulsteel) work as beacon payment.
+    * Modern Foundry ingots and slime crystals can be used as armor trim materials.
+    * Pickaxes, sledge hammers, vein hammers, and war picks get the full amethyst cluster drop.
+    * Seared walls connect to other walls, and blazewood, nahuatl, and scorched brick fences connect like fences.
+    * Modern Foundry damage types are tagged correctly again: Fire Resistance and fire protection apply to smeltery heat and fire fluids, blast protection applies to Modern Foundry explosions, and piercing, bleeding, and similar damage bypass armor as intended.
+* Fixed seared and scorched faucets not connecting to Ceramics cisterns.
+    * The `ceramics:cistern_connections` tag still used stale `tconstruct:` IDs and failed to load.
+* Fixed Modern Foundry arrows disappearing when the world saves.
+    * Saving an arrow entity threw "Cannot encode empty ItemStack", so arrows stuck in blocks were lost on autosave, chunk unload, or reload.
+* Restored the remaining missing vanilla tags for compatibility.
+    * Modern Foundry pickaxes, sledge hammers, vein hammers, pickadzes, war picks, mattocks, excavators, hand axes, broad axes, kamas, scythes, daggers, swords, cleavers, and swashers are tagged as vanilla tool types for other mods. They are still not enchantable.
+    * Slime leaves and saplings are vanilla leaves and saplings, ichor and blood slime leaves are wart blocks, slime grass and ferns behave like vanilla grass, and potted slime plants count as flower pots.
+    * Soul glass is a soul fire base and speeds up Soul Speed; Modern Foundry glass is impermeable.
+    * Piglins love Modern Foundry gold items and guard gold blocks and cast chests, and avoid zombified piglin heads.
+    * Tinkers' guide books can be placed on lecterns and in chiseled bookshelves.
+    * Frogs eat sky slimes, ender slimes, and terracubes; striders treat magma and blazing blood as warm; obsidian panes are dragon-immune; travelers' gear prevents freezing; endermen can pick up congealed slime, grout, and slime dirt.
+* Fixed armor trims made from Modern Foundry materials rendering as missing textures.
+    * Restored the `armor_trims` texture atlas and the trim, banner, and fallback textures in the blocks atlas, so trims in cobalt, slimesteel, slime crystals, and the other Modern Foundry materials render on worn armor and on Modern Foundry armor and shield icons.

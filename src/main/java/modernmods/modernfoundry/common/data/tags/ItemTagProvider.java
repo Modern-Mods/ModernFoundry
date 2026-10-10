@@ -737,7 +737,8 @@ public class ItemTagProvider extends ItemTagsProvider {
     this.tag(ItemTags.NON_FLAMMABLE_WOOD)
         .add(object.asItem(), object.getSlab().asItem(), object.getStairs().asItem(),
              object.getFence().asItem(), object.getFenceGate().asItem(), object.getDoor().asItem(), object.getTrapdoor().asItem(),
-             object.getPressurePlate().asItem(), object.getButton().asItem())
+             object.getPressurePlate().asItem(), object.getButton().asItem(),
+             object.getSign().asItem(), object.getHangingSign().asItem())
         .addTag(object.getLogItemTag());
   }
 

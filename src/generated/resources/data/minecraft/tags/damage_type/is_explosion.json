@@ -1,0 +1,9 @@
+{
+  "values": [
+    "modernfoundry:self_destruct",
+    "modernfoundry:explosion_melee",
+    "modernfoundry:explosion_ranged",
+    "modernfoundry:mob_explosion_melee",
+    "modernfoundry:mob_explosion_ranged"
+  ]
+}
