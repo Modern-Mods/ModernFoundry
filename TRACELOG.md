@@ -1873,3 +1873,32 @@
 - Production build: `sh ./gradlew build --console=plain` passed, including tests.
 - Manual validation: not needed; the remaining tags were tested earlier.
 - Tests created or run: none.
+
+## 2026-10-10 - Bump to 4.1.8 for the Create: Gears and Gardens beta
+
+**Prompt / Task**
+- Build 4.1.8 and swap it into the Create: Gears and Gardens modpack.
+
+**What Changed**
+- `mod_version` 4.1.7 → 4.1.8 in `gradle.properties`, so the build that carries the 2026-10-09 tag, arrow, and trim fixes doesn't share a version number with the earlier 4.1.7 jar.
+
+**Steps Taken**
+- Bumped `mod_version`, ran the Gradle build, and inspected the jar's `neoforge.mods.toml` version, `data/minecraft` tags, `armor_trims` atlas, and absence of Tree Physics data.
+- Replaced the 4.1.7 jar in the Prism instance and the beta `.mrpack` with the 4.1.8 jar.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: none; version property only.
+- Owning module/system: build configuration.
+- Existing logic reused or extracted: n/a.
+- Net line change: 1 property changed.
+- New files: none.
+- Build files updated: `gradle.properties`.
+
+**Rationale / Tradeoffs**
+- Built from `fix/mattock-slime-logs`, which is not yet merged into `Neo/1.21.1`.
+
+**Build / Validation**
+- Production build: `sh ./gradlew build --console=plain` passed.
+- Exact artifact verified: `build/libs/ModernFoundry-1.21.1-4.1.8-NeoForge.jar`; SHA-256 `dd521e890c39bc1a78b5a4c2fa2878fd6f2ec9f12de9ca63e76e29fdf7470ae9`.
+- Manual validation: none in-game for 4.1.8 itself.
+- Tests created or run: none (`testJunit` reported NO-SOURCE).

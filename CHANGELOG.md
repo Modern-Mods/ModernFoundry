@@ -138,3 +138,5 @@
     * Frogs eat sky slimes, ender slimes, and terracubes; striders treat magma and blazing blood as warm; obsidian panes are dragon-immune; travelers' gear prevents freezing; endermen can pick up congealed slime, grout, and slime dirt.
 * Fixed armor trims made from Modern Foundry materials rendering as missing textures.
     * Restored the `armor_trims` texture atlas and the trim, banner, and fallback textures in the blocks atlas, so trims in cobalt, slimesteel, slime crystals, and the other Modern Foundry materials render on worn armor and on Modern Foundry armor and shield icons.
+* Built and verified the Modern Foundry 1.21.1-4.1.8 NeoForge JAR.
+    * SHA-256: `dd521e890c39bc1a78b5a4c2fa2878fd6f2ec9f12de9ca63e76e29fdf7470ae9`.
