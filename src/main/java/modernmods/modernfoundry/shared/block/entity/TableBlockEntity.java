@@ -38,6 +38,12 @@ public abstract class TableBlockEntity extends InventoryBlockEntity {
     super(tileEntityTypeIn, pos, state, name, false, inventorySize, maxStackSize);
   }
 
+  /** Station tabs reopen the menu on click; the client close would recenter the cursor. */
+  @Override
+  public boolean shouldTriggerClientSideContainerClosingOnOpen() {
+    return false;
+  }
+
   /* Syncing */
 
   @Override

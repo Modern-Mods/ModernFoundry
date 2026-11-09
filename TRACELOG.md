@@ -1902,3 +1902,34 @@
 - Exact artifact verified: `build/libs/ModernFoundry-1.21.1-4.1.8-NeoForge.jar`; SHA-256 `dd521e890c39bc1a78b5a4c2fa2878fd6f2ec9f12de9ca63e76e29fdf7470ae9`.
 - Manual validation: none in-game for 4.1.8 itself.
 - Tests created or run: none (`testJunit` reported NO-SOURCE).
+
+## 2026-11-09 - Keep the cursor in place on station tab switches using the NeoForge hook
+
+**Prompt / Task**
+- Keep the cursor in place when switching station tabs (PR #17).
+
+**What Changed**
+- Overrode `shouldTriggerClientSideContainerClosingOnOpen()` to return `false` on `TableBlockEntity` and `AbstractChestBlockEntity`.
+
+**Steps Taken**
+- Traced `StationTabPacket` to `ServerPlayer.openMenu`, which sends a close packet by default; the client then grabs and releases the mouse, recentering it twice.
+- Confirmed in the 21.1.240 sources that `IMenuProviderExtension` documents this hook for that purpose and that `ServerPlayer.openMenu` honors it.
+- Confirmed every `ITabbedBlock` block entity descends from one of the two base classes and that no tabbed block overrides `getMenuProvider` in Modern Foundry.
+- Confirmed `AbstractContainerScreen.removed()` uses the screen's own menu, so the old screen still tears down without the close packet.
+
+**Architecture / Module Ownership**
+- Relevant class/module change: `TableBlockEntity`, `AbstractChestBlockEntity`.
+- Owning module/system: stations and menus.
+- Existing logic reused or extracted: NeoForge `IMenuProviderExtension` hook.
+- Net line change: +12, excluding these log entries.
+- New files: none.
+- Build files updated: none.
+
+**Rationale / Tradeoffs**
+- Preventing the recenter at the source needs no client-side cursor tracking or access transformers on `MouseHandler`.
+- The override applies to any open of these menus while another non-inventory menu is open; the server still closes the old menu and fires its close event.
+
+**Build / Validation**
+- Production build or compile-only check: `sh ./gradlew build --console=plain` passed.
+- Manual validation: none; the in-game tab click has not been tested.
+- Tests created or run: Gradle `test` task ran as part of the build; no tests were created (`testJunit` reported NO-SOURCE).
