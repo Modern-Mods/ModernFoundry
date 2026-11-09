@@ -51,6 +51,12 @@ public abstract class AbstractChestBlockEntity extends NameableBlockEntity {
     capability.invalidate();
   }
 
+  /** Station tabs reopen the menu on click; the client close would recenter the cursor. */
+  @Override
+  public boolean shouldTriggerClientSideContainerClosingOnOpen() {
+    return false;
+  }
+
   @Nullable
   @Override
   public AbstractContainerMenu createMenu(int menuId, Inventory playerInventory, Player playerEntity) {
