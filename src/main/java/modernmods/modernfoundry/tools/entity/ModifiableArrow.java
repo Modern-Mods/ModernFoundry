@@ -243,7 +243,7 @@ public class ModifiableArrow extends AbstractArrow implements ToolProjectile, Re
   @Override
   public void addAdditionalSaveData(CompoundTag tag) {
     super.addAdditionalSaveData(tag);
-    tag.put(KEY_STACK, TagUtil.saveItem(this.stack, new CompoundTag()));
+    tag.put(KEY_STACK, TagUtil.saveItem(this.stack));
     tag.putFloat(KEY_WATER_INERTIA, this.entityData.get(WATER_INERTIA));
     tag.putBoolean(KEY_DEALT_DAMAGE, dealtDamage);
     if (!this.tasks.isEmpty()) {

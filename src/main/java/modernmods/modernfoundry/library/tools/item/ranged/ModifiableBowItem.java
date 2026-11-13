@@ -1,6 +1,5 @@
 package modernmods.modernfoundry.library.tools.item.ranged;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -132,7 +131,7 @@ public class ModifiableBowItem extends ModifiableLauncherItem {
     // store either ammo or boolean as requested
     if (!ammo.isEmpty()) {
       if (storeDrawingItem) {
-        tool.getPersistentData().put(KEY_DRAWBACK_AMMO, TagUtil.saveItem(ammo, new CompoundTag()));
+        tool.getPersistentData().put(KEY_DRAWBACK_AMMO, TagUtil.saveItem(ammo));
       } else {
         // boolean is enough to get detected by the property override, but won't bother the model
         tool.getPersistentData().putBoolean(KEY_DRAWBACK_AMMO, true);

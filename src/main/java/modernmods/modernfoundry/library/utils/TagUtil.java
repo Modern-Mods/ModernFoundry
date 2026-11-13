@@ -84,8 +84,8 @@ public final class TagUtil {
   }
 
   /** Saves an item stack using the built-in registry lookup. */
-  public static CompoundTag saveItem(ItemStack stack, CompoundTag tag) {
-    return (CompoundTag)stack.save(BUILTIN_LOOKUP, tag);
+  public static CompoundTag saveItem(ItemStack stack) {
+    return (CompoundTag)stack.save(BUILTIN_LOOKUP);
   }
 
   /** Creates a fluid stack and applies the custom data tag if present. */

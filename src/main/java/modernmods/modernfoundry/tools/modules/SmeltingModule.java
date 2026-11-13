@@ -270,6 +270,7 @@ public record SmeltingModule(RecipeType<? extends AbstractCookingRecipe> recipeT
           }
         }
       }
+      data.put(key, list);
     }
   }
 

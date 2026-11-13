@@ -30,6 +30,7 @@ public class ToolDataNBT extends ModDataNBT {
     } else {
       getData().putInt(type.getName(), value);
     }
+    onChanged();
   }
 
   /**

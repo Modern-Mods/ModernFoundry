@@ -12,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
-import org.jetbrains.annotations.ApiStatus.Internal;
 import modernmods.modernfoundry.TConstruct;
 import modernmods.modernfoundry.common.TinkerTags;
 import modernmods.modernfoundry.common.config.Config;
@@ -292,18 +291,6 @@ public class ToolStack implements IToolStackView {
     this.volatileModData = null;
     this.persistentModData = null;
     this.restrictedNBT = null;
-  }
-
-  /** Updates the tool stack instance to match the given item stack */
-  @Internal
-  public void refreshTag(ItemStack stack) {
-    CompoundTag tag = TagUtil.getTag(stack);
-    if (tag == null) {
-      tag = new CompoundTag();
-      TagUtil.setTag(stack, tag);
-    }
-    this.nbt = tag;
-    clearCache();
   }
 
   /** Creates an item stack from this tool stack */
@@ -690,20 +677,25 @@ public class ToolStack implements IToolStackView {
 
   /* Data */
 
+  /** Creates persistent data that writes through to the stack, as the stack only holds a copy of {@link #nbt} */
+  private ToolDataNBT createSyncedData(CompoundTag tag) {
+    return new ToolDataNBT(tag) {
+      @Override
+      protected void onChanged() {
+        syncStack();
+      }
+    };
+  }
+
   @Override
   public ToolDataNBT getPersistentData() {
     refreshStackTag();
     if (persistentModData == null) {
-      // parse if the tag already exists
-      if (nbt.contains(TAG_PERSISTENT_MOD_DATA, Tag.TAG_COMPOUND)) {
-        persistentModData = ToolDataNBT.readFromNBT(nbt.getCompound(TAG_PERSISTENT_MOD_DATA));
-      } else {
-        // if no tag exists, create it
-        CompoundTag tag = new CompoundTag();
-        nbt.put(TAG_PERSISTENT_MOD_DATA, tag);
+      if (!nbt.contains(TAG_PERSISTENT_MOD_DATA, Tag.TAG_COMPOUND)) {
+        nbt.put(TAG_PERSISTENT_MOD_DATA, new CompoundTag());
         syncStack();
-        persistentModData = ToolDataNBT.readFromNBT(tag);
       }
+      persistentModData = createSyncedData(nbt.getCompound(TAG_PERSISTENT_MOD_DATA));
     }
     return persistentModData;
   }

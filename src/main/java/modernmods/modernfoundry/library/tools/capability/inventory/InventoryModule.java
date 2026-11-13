@@ -174,6 +174,7 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
               compound.getAllKeys().clear();
               writeStack(stack, slot, compound);
             }
+            modData.put(key, list);
             return;
           // try to keep the stacks in order by inserting after the last slot smaller than the target
           } else if (listSlot < slot) {
@@ -185,7 +186,6 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
         return;
       } else {
         list = new ListTag();
-        modData.put(key, list);
       }
 
       // list did not contain the slot, so add it
@@ -197,6 +197,7 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
         } else {
           list.add(insertIndex, compound);
         }
+        modData.put(key, list);
       }
     }
   }
@@ -267,7 +268,7 @@ public class InventoryModule implements ModifierModule, InventoryModifierHook, V
    * @return Tag written to, same as {@code compound}.
    */
   public static CompoundTag writeStack(ItemStack stack, int slot, CompoundTag compound) {
-    TagUtil.saveItem(stack, compound);
+    compound.merge(TagUtil.saveItem(stack));
     compound.putInt(TAG_SLOT, slot);
     return compound;
   }
