@@ -1,9 +1,13 @@
 package modernmods.modernfoundry.library.tools.capability;
 
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.Capability;
+import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ForgeCapabilities;
 import modernmods.modernfoundry.compat.neoforged.neoforge.capabilities.ICapabilityProvider;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.util.Lazy;
 import modernmods.modernfoundry.compat.neoforged.neoforge.common.util.LazyOptional;
 import modernmods.modernfoundry.library.tools.nbt.IToolStackView;
@@ -36,9 +40,7 @@ public class ToolCapabilityProvider implements ICapabilityProvider {
   @Nonnull
   @Override
   public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-    // clear the tool cache, as it may have changed since the last time a cap was fetched
     ToolStack toolStack = tool.get();
-    toolStack.refreshTag(stack);
     // return the first successful provider
     for (IToolCapabilityProvider provider : providers) {
       provider.clearCache();
@@ -48,6 +50,18 @@ public class ToolCapabilityProvider implements ICapabilityProvider {
       }
     }
     return LazyOptional.empty();
+  }
+
+  /** Bridges the legacy providers to NeoForge item capabilities; {@code initCapabilities} is never called on NeoForge */
+  public static void registerItemCapabilities(RegisterCapabilitiesEvent event, Item... items) {
+    event.registerItem(Capabilities.ItemHandler.ITEM, (stack, context) -> getCapability(stack, ForgeCapabilities.ITEM_HANDLER), items);
+    event.registerItem(Capabilities.FluidHandler.ITEM, (stack, context) -> getCapability(stack, ForgeCapabilities.FLUID_HANDLER_ITEM), items);
+    event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, context) -> getCapability(stack, ForgeCapabilities.ENERGY), items);
+  }
+
+  @Nullable
+  private static <T> T getCapability(ItemStack stack, Capability<T> cap) {
+    return new ToolCapabilityProvider(stack).getCapability(cap, null).orElse(null);
   }
 
   /** Registers a tool capability provider constructor. Every new tool will call this constructor to create your provider.

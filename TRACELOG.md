@@ -1874,31 +1874,33 @@
 - Manual validation: not needed; the remaining tags were tested earlier.
 - Tests created or run: none.
 
-## 2026-10-10 - Bump to 4.1.8 for the Create: Gears and Gardens beta
+## 2026-11-10 - Save persistent tool data and fix tool inventories
 
 **Prompt / Task**
-- Build 4.1.8 and swap it into the Create: Gears and Gardens modpack.
+- Fix crossbows that use an arrow but never fire, plus the related tool data bugs found while testing.
 
 **What Changed**
-- `mod_version` 4.1.7 → 4.1.8 in `gradle.properties`, so the build that carries the 2026-10-09 tag, arrow, and trim fixes doesn't share a version number with the earlier 4.1.7 jar.
+- `ModDataNBT` calls an `onChanged()` hook on every write, which `ToolStack.getPersistentData()` uses to `syncStack()`. `ToolStack` edits a copy of the item's tag, so these writes never reached the item.
+- `CreativeSlotItem` saves its slot edits, and it and `ModifierCrystalItem` check `containerId == InventoryMenu.CONTAINER_ID` instead of `getType() == null`, which threw in the creative inventory.
+- Tool item handler, fluid and energy capabilities are registered with NeoForge; the `initCapabilities` overrides are never called there.
+- `InventoryModule` and `SmeltingModule` save their slot lists. `TagUtil.saveItem` takes only the stack, as `ItemStack.save` ignored the tag passed in.
 
 **Steps Taken**
-- Bumped `mod_version`, ran the Gradle build, and inspected the jar's `neoforge.mods.toml` version, `data/minecraft` tags, `armor_trims` atlas, and absence of Tree Physics data.
-- Replaced the 4.1.7 jar in the Prism instance and the beta `.mrpack` with the 4.1.8 jar.
+- Traced each bug in code; a temporary debug build (not committed) found the empty `{Slot:N}` inventory entries.
 
 **Architecture / Module Ownership**
-- Relevant class/module change: none; version property only.
-- Owning module/system: build configuration.
-- Existing logic reused or extracted: n/a.
-- Net line change: 1 property changed.
+- Relevant class/module change: tool NBT (`ModDataNBT`, `ToolDataNBT`, `ToolStack`, `TagUtil`), `ToolCapabilityProvider`, `TinkerTools`, `InventoryModule`, `SmeltingModule`, `CreativeSlotItem`, `ModifierCrystalItem`.
+- Owning module/system: tools.
+- Existing logic reused or extracted: `ToolStack.syncStack()`, the existing `IToolCapabilityProvider`s.
+- Net line change: +32, excluding log entries.
 - New files: none.
-- Build files updated: `gradle.properties`.
+- Build files updated: none.
 
 **Rationale / Tradeoffs**
-- Built from `fix/mattock-slime-logs`, which is not yet merged into `Neo/1.21.1`.
+- Syncing in the write path covers every caller; code that edits a nested compound in place must still `put` it back.
+- All but the crossbow bug predate this PR.
 
 **Build / Validation**
-- Production build: `sh ./gradlew build --console=plain` passed.
-- Exact artifact verified: `build/libs/ModernFoundry-1.21.1-4.1.8-NeoForge.jar`; SHA-256 `dd521e890c39bc1a78b5a4c2fa2878fd6f2ec9f12de9ca63e76e29fdf7470ae9`.
-- Manual validation: none in-game for 4.1.8 itself.
-- Tests created or run: none (`testJunit` reported NO-SOURCE).
+- Production build or compile-only check: `sh ./gradlew build --console=plain` passed.
+- Manual validation (NeoForge 1.21.1, Prism): bow and crossbow ammo; arrows and shurikens after rejoining; creative slot items and modifier crystals in Creative, Survival as an operator, and a chest; Bulk Quiver, Pockets and Smelting contents through rejoining; a Tank pickaxe with a Seared Fuel Tank in Survival. Energy and dedicated servers were not tested.
+- Tests created or run: none exist (`testJunit` NO-SOURCE).

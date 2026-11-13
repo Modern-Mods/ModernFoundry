@@ -4,8 +4,12 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import net.minecraft.nbt.ByteTag;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.FloatTag;
+import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 
@@ -29,6 +33,9 @@ public class ModDataNBT implements IModDataView {
   public ModDataNBT() {
     this(new CompoundTag());
   }
+
+  /** Called after the data is changed */
+  protected void onChanged() {}
 
   @Override
   public <T> T get(ResourceLocation name, BiFunction<CompoundTag,String,T> function) {
@@ -58,6 +65,7 @@ public class ModDataNBT implements IModDataView {
    */
   public void put(ResourceLocation name, Tag nbt) {
     data.put(name.toString(), nbt);
+    onChanged();
   }
 
   /**
@@ -66,7 +74,7 @@ public class ModDataNBT implements IModDataView {
    * @param value  Integer value
    */
   public void putInt(ResourceLocation name, int value) {
-    data.putInt(name.toString(), value);
+    put(name, IntTag.valueOf(value));
   }
 
   /**
@@ -75,7 +83,7 @@ public class ModDataNBT implements IModDataView {
    * @param value  Boolean value
    */
   public void putBoolean(ResourceLocation name, boolean value) {
-    data.putBoolean(name.toString(), value);
+    put(name, ByteTag.valueOf(value));
   }
 
   /**
@@ -84,7 +92,7 @@ public class ModDataNBT implements IModDataView {
    * @param value  Float value
    */
   public void putFloat(ResourceLocation name, float value) {
-    data.putFloat(name.toString(), value);
+    put(name, FloatTag.valueOf(value));
   }
 
   /**
@@ -93,7 +101,7 @@ public class ModDataNBT implements IModDataView {
    * @param value  String value
    */
   public void putString(ResourceLocation name, String value) {
-    data.putString(name.toString(), value);
+    put(name, StringTag.valueOf(value));
   }
 
   /**
@@ -102,6 +110,7 @@ public class ModDataNBT implements IModDataView {
    */
   public void remove(ResourceLocation name) {
     data.remove(name.toString());
+    onChanged();
   }
 
 
@@ -119,6 +128,7 @@ public class ModDataNBT implements IModDataView {
   public void copyFrom(CompoundTag data) {
     this.data.getAllKeys().clear();
     this.data.merge(data);
+    onChanged();
   }
 
   /**

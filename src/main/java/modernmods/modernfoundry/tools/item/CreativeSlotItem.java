@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -99,11 +100,16 @@ public class CreativeSlotItem extends Item {
     return player.isCreative() || (Config.COMMON.quickApplyToolModifiersSurvival.get() && player.hasPermissions(HiltCommand.PERMISSION_GAME_COMMANDS));
   }
 
+  /** The client applies only in the player's own or creative inventory, as the server never sees creative inventory clicks */
+  public static boolean canApplyOnSide(Player player) {
+    return !player.level().isClientSide || (player.isCreative() && player.containerMenu.containerId == InventoryMenu.CONTAINER_ID);
+  }
+
   /** Common logic between two stack methods */
   private static boolean handleStackOn(ItemStack stack, ItemStack toolItem, Player player, int amount) {
     SlotType slotType = getSlot(stack);
     if (slotType != null && !toolItem.isEmpty() && toolItem.is(TinkerTags.Items.MODIFIABLE)) {
-      if (!player.level().isClientSide || (player.isCreative() && player.containerMenu.getType() == null)) {
+      if (canApplyOnSide(player)) {
         if (canApply(player)) {
           ToolStack tool = ToolStack.from(toolItem);
           // do nothing if the tool already has 0 slots and we are removing
@@ -129,6 +135,7 @@ public class CreativeSlotItem extends Item {
           } else {
             slots.putInt(name, updated);
           }
+          persistentData.put(CreativeSlotModifier.KEY_SLOTS, slots);
 
           // if no slot remain in the creative modifier, remove it
           ModifierId creative = TinkerModifiers.creativeSlot.getId();

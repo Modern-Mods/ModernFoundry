@@ -140,3 +140,12 @@
     * Restored the `armor_trims` texture atlas and the trim, banner, and fallback textures in the blocks atlas, so trims in cobalt, slimesteel, slime crystals, and the other Modern Foundry materials render on worn armor and on Modern Foundry armor and shield icons.
 * Built and verified the Modern Foundry 1.21.1-4.1.8 NeoForge JAR.
     * SHA-256: `dd521e890c39bc1a78b5a4c2fa2878fd6f2ec9f12de9ca63e76e29fdf7470ae9`.
+
+* Fixed changes to a tool's persistent modifier data not being saved to the item.
+    * Crossbows now keep the arrow they load and can fire it, including after rejoining a world; before, each charge used an arrow and left the crossbow empty.
+    * Draw time and other data modifiers store on a tool are saved the same way.
+* Fixed the creative slot item not changing a tool's slot count.
+* Fixed a crash when using a creative slot item or modifier crystal on a tool in the creative inventory.
+* Fixed tool inventories, tanks, and energy not being reachable through NeoForge item capabilities.
+    * Tools with inventory modifiers open their inventory again, and fluid and energy modifiers are visible to tanks, pipes, and other mods.
+* Fixed items placed in tool inventories (Bulk Quiver, Pockets, and other inventory modifiers) not being saved, and Smelting's cook progress.
